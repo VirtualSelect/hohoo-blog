@@ -1,0 +1,70 @@
+---
+id: about
+title: 关于我
+description: Hohoo的联系方式
+hide_table_of_contents: true
+---
+
+import Comment from '@site/src/components/Comment/comment';
+import { Icon } from '@iconify/react';
+import social from '@site/data/social';
+
+export const Highlight = ({children, color}) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: '2px',
+      color: '#fff',
+      padding: '0.2rem',
+    }}>
+    {children}
+  </span>
+);
+
+### 关于我
+# 👋 你好! 我是Hohoo
+
+🧑 一名Java开发工程师，来自中国苏州
+
+👨‍💻 代码爱好者，编写感兴趣的项目，希望为开源社区做出贡献
+
+🌱 保持学习，希望在有限的时间内，学会无限的可能
+
+💡 我写了很长时间的Java，现在专注于学习，希望可以长期发展。
+
+### 目标
+
+💡 我希望保持专注，不断学习。
+
+> 生活有望穿秋水的等待，也有意想不到的惊喜。
+
+### 兴趣爱好
+
+- **音乐** 戴上耳机状态拉满。
+
+- **美食** 人形火车，喜欢逛吃逛吃。
+
+- **编程开发** 喜欢研究新东西，享受痴迷一整天的乐趣。
+
+
+### 联系方式
+<p style={{ display: 'flex', 'align-items': 'center', gap: '0.5rem' }}>
+  <Icon icon="ri:github-line" width="20" heigth="20" />
+  <a href={social.github.href}>Hohoo</a>
+</p>
+
+<p style={{ display: 'flex', 'align-items': 'center', gap: '0.5rem' }}>
+  <Icon icon="ri:mail-open-line" width="20" heigth="20" />
+  <a href={social.email.href}>huhohoo@163.com</a>
+</p>
+
+<p style={{ display: 'flex', 'align-items': 'center', gap: '0.5rem' }}>
+  <Icon icon="ri:twitter-x-line" width="20" heigth="20" /> <a
+  href={social.twitter.href}>HuHohoo</a>
+</p>
+
+---
+
+> **<Highlight color="#12AFFA">既然都看到这了，不妨留下你的评论。</Highlight>**
+
+<Comment />

@@ -1,0 +1,50 @@
+{
+  "link.title.学习": {
+    "message": "学习",
+    "description": "The title of the footer links column with title=学习 in the footer"
+  },
+  "link.title.社交": {
+    "message": "社交",
+    "description": "The title of the footer links column with title=社交 in the footer"
+  },
+  "link.title.友情链接": {
+    "message": "友情链接",
+    "description": "The title of the footer links column with title=友情链接 in the footer"
+  },
+  "link.item.label.算法入门": {
+    "message": "算法入门",
+    "description": "The label of footer link with label=算法入门 linking to https://www.hello-algo.com/"
+  },
+  "link.item.label.关于我": {
+    "message": "关于我",
+    "description": "The label of footer link with label=关于我 linking to /aboutMe"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/Sunyunn/yn-Wiki"
+  },
+  "link.item.label.博客园": {
+    "message": "博客园",
+    "description": "The label of footer link with label=博客园 linking to https://www.cnblogs.com/synn"
+  },
+  "link.item.label.宇宁": {
+    "message": "宇宁",
+    "description": "The label of footer link with label=宇宁 linking to https://yn-wiki.com"
+  },
+  "link.item.label.峰华前端工程师": {
+    "message": "峰华前端工程师",
+    "description": "The label of footer link with label=峰华前端工程师 linking to https://zxuqian.cn"
+  },
+  "link.item.label.愧怍": {
+    "message": "愧怍",
+    "description": "The label of footer link with label=愧怍 linking to https://kuizuo.cn"
+  },
+  "link.item.label.roc 云原生": {
+    "message": "roc 云原生",
+    "description": "The label of footer link with label=roc 云原生 linking to https://imroc.cc"
+  },
+  "copyright": {
+    "message": "<p>Copyright © 2024 Hohoo, Inc. Built with Docusaurus.</p>\n                <br />本站所有内容遵循 <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans\" \n                style=\"color: hsl(210deg, 100%, 80%)\">CC BY-NC 4.0 协议</a>，转载须注明署名和出处，且不可用于商业用途。\n                若与其他同步平台协议冲突，以本网站为准。",
+    "description": "The footer copyright"
+  }
+}
