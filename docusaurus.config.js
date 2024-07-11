@@ -128,9 +128,7 @@ const config = {
                         title: '网站',
                         items: [
                             { label: 'Vercel', to: 'https://vercel.com' },
-                            { label: '时间戳', to: 'https://tool.lu/timestamp' },
-                            { label: 'JSON', to: 'https://www.json.cn' },
-                            { label: 'Cron表达式', to: 'https://www.pppet.net' },
+                            { label: 'Docusaurus', to: 'https://docusaurus.io/zh-CN/' },
                         ],
                     },
                     {
@@ -150,10 +148,10 @@ const config = {
             },
             // giscus 评论功能
             giscus: {
-                repo: 'VirtualSelect/blog',
-                repoId: 'R_kgDOMFT5Pw',
-                category: 'Announcements',
-                categoryId: 'DIC_kwDOMFT5P84Cf6Pv',
+                repo: 'VirtualSelect/hohoo-blog',
+                repoId: 'R_kgDOMVE0jA',
+                category: 'General',
+                categoryId: 'DIC_kwDOMVE0jM4Cgui_',
                 theme: 'light',
                 darkTheme: 'dark_dimmed',
             },

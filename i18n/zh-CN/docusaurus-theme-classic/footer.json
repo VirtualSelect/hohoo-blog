@@ -21,7 +21,7 @@
   },
   "link.item.label.GitHub": {
     "message": "GitHub",
-    "description": "The label of footer link with label=GitHub linking to https://github.com/Sunyunn/yn-Wiki"
+    "description": "The label of footer link with label=GitHub linking to https://github.com/VirtualSelect"
   },
   "link.item.label.博客园": {
     "message": "博客园",
@@ -46,5 +46,25 @@
   "copyright": {
     "message": "<p>Copyright © 2024 Hohoo, Inc. Built with Docusaurus.</p>\n                <br />本站所有内容遵循 <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans\" \n                style=\"color: hsl(210deg, 100%, 80%)\">CC BY-NC 4.0 协议</a>，转载须注明署名和出处，且不可用于商业用途。\n                若与其他同步平台协议冲突，以本网站为准。",
     "description": "The footer copyright"
+  },
+  "link.title.网站": {
+    "message": "网站",
+    "description": "The title of the footer links column with title=网站 in the footer"
+  },
+  "link.item.label.技术笔记": {
+    "message": "技术笔记",
+    "description": "The label of footer link with label=技术笔记 linking to docs/skill"
+  },
+  "link.item.label.Twitter": {
+    "message": "Twitter",
+    "description": "The label of footer link with label=Twitter linking to https://x.com/HuHohoo1997"
+  },
+  "link.item.label.Vercel": {
+    "message": "Vercel",
+    "description": "The label of footer link with label=Vercel linking to https://vercel.com"
+  },
+  "link.item.label.Docusaurus": {
+    "message": "Docusaurus",
+    "description": "The label of footer link with label=Docusaurus linking to https://docusaurus.io/zh-CN/"
   }
 }

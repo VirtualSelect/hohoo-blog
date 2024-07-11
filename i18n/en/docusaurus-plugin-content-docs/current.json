@@ -14,5 +14,25 @@
   "sidebar.tutorialSidebar.category.Tutorial - Extras": {
     "message": "Tutorial - Extras",
     "description": "The label for category Tutorial - Extras in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.skill": {
+    "message": "skill",
+    "description": "The label for category skill in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Layui": {
+    "message": "Layui",
+    "description": "The label for category Layui in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.MyBatis-Plus-Join": {
+    "message": "MyBatis-Plus-Join",
+    "description": "The label for category MyBatis-Plus-Join in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Npm": {
+    "message": "Npm",
+    "description": "The label for category Npm in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.sundry": {
+    "message": "sundry",
+    "description": "The label for category sundry in sidebar tutorialSidebar"
   }
 }
