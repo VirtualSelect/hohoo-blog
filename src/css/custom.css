@@ -58,4 +58,12 @@
 .menu__link { font-size: .88rem; }
 .table-of-contents { font-size: .8rem; }
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--ifm-color-primary); outline-offset: 4px; }
+/* DocSearch draws its focus indicator around the whole search field. */
+.DocSearch-Form:focus-within {
+  box-shadow: inset 0 0 0 2px var(--ifm-color-primary);
+}
+.DocSearch-Form .DocSearch-Input:focus-visible {
+  outline: none;
+  outline-offset: 0;
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
