@@ -4,12 +4,12 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
-import social from "./data/social";
+import social from "./data/social.ts";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-    title: '你好，我是Hohoo👋',
-    tagline: '在这里我会记录日常和工作及学习过程中所遇到问题与解决方案，忙时学习，闲时读书，希望我的分享对你有所启发。',
+    title: "Hohoo's Blog",
+    tagline: '聚焦 AI 应用开发、LLM 分享与具身智能，记录学习、实验和实践。',
     favicon: 'img/hohoo.ico',
 
     // Set the production url of your site here
@@ -52,14 +52,14 @@ const config = {
                     // Please change this to your repo.
                     // Remove this to remove the "edit this page" links.
                     editUrl:
-                        'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+                        'https://github.com/VirtualSelect/hohoo-blog/edit/main/',
                 },
                 blog: {
                     showReadingTime: true,
                     // Please change this to your repo.
                     // Remove this to remove the "edit this page" links.
                     editUrl:
-                        'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+                        'https://github.com/VirtualSelect/hohoo-blog/edit/main/',
                 },
                 theme: {
                     customCss: './src/css/custom.css',
@@ -78,15 +78,12 @@ const config = {
                 },
                 {
                     name: 'keywords',
-                    content: 'blog, javascript, web, java, mysql, spring',
+                    content: 'AI 应用开发, LLM, 大语言模型, 具身智能, RAG, Agent',
                 },
-                {
-                    name: 'keywords',
-                    content: '后端开发者, Java',
-                },
+
             ],
             // Replace with your project's data card
-            image: 'img/docusaurus-data-card.jpg',
+            image: 'img/hohoo.jpg',
             navbar: {
                 title: "Hohoo's Blog",
                 logo: {
@@ -95,8 +92,10 @@ const config = {
                 },
                 hideOnScroll: true,// 把导航栏样式设置为静态,而不禁用主题切换能力
                 items: [
-                    {to: '/blog/archive', label: '博客', position: 'right'},
-                    {to: '/docs/skill', label: '笔记', position: 'right'},
+                    {to: '/blog', label: '随笔', position: 'right'},
+
+                    {to: '/docs/skill', label: '专题', position: 'right'},
+                    {to: '/aboutMe', label: '关于我', position: 'right'},
                     {
                         type: 'localeDropdown',
                         position: 'right',
@@ -109,11 +108,9 @@ const config = {
                     {
                         title: '学习',
                         items: [
-                            {label: '技术笔记', to: 'docs/skill'},
-                            {
-                                label: '算法入门',
-                                to: 'https://www.hello-algo.com/',
-                            },
+                            {label: 'AI 应用开发', to: '/docs/ai-apps'},
+                            {label: 'LLM 分享', to: '/docs/llm'},
+                            {label: '具身智能', to: '/docs/embodied-ai'},
                         ],
                     },
                     {
@@ -141,9 +138,9 @@ const config = {
                         ],
                     },
                 ],
-                copyright: `<p>Copyright © ${new Date().getFullYear()} Hohoo, Inc. Built with Docusaurus.</p>
-                <br />本站所有内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans" 
-                style="color: hsl(210deg, 100%, 80%)">CC BY-NC 4.0 协议</a>，转载须注明署名和出处，且不可用于商业用途。
+                copyright: `<p>Copyright © ${new Date().getFullYear()} Hohoo Built with Docusaurus.</p>
+                本站所有内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans"
+                >CC BY-NC 4.0 协议</a>，转载须注明署名和出处，且不可用于商业用途。
                 若与其他同步平台协议冲突，以本网站为准。`,
             },
             // giscus 评论功能
@@ -155,9 +152,7 @@ const config = {
                 theme: 'light',
                 darkTheme: 'dark_dimmed',
             },
-            plugins: [
-                'docusaurus-plugin-sass'
-            ],
+
             // Algolia 搜索功能
             algolia: {
                 appId: '69CJV5KUH7',

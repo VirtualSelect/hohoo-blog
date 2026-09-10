@@ -6,7 +6,11 @@ date: 2024-06-26
 authors: syn
 ---
 
-#### 页面静态数据填充
+## 页面静态数据填充
+
+通过 `table.render(options)` 使用 JavaScript 数组渲染表格。示例中的页面 ID 和 `syn.modal` 为业务封装，需要替换；`table.init(filter, options)` 用于转换已有静态表格，不能混用调用形式。
+
+参考：[Layui 表格文档](https://layui.dev/docs/2/table/)。
 ```javascript
 <table lay-filter="testTable" lay-data="{id: 'testTable'}"></table>
 
@@ -46,16 +50,16 @@ layui.use(['jquery','table'], function(){
           ]
       };
 
-      var tableIns = table.init({
+      var tableIns = table.render({
           elem: $view.find('table'),
           data: tableData.data,
-          toolbar: '#toolbarDemo',
+          toolbar: true,
 	      defaultToolbar: ['filter','print'],
 		  even : true,
 		  height: 'full-300',
 	      lineStyle: 'height:auto',
           cols: [[
-              {field: 'username', title: '姓名',align :'center',width : '8%'},
+              {field: 'userName', title: '姓名',align :'center',width : '8%'},
               {field: 'userNO', title: '工号',align :'center',width : '8%'},
               {fixed: 'right', title: '操作',align :'center',width : '10%', toolbar: '#barDemo'}
           ]],

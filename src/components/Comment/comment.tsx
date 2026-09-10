@@ -1,47 +1,29 @@
-// @ts-ignore
-import React from 'react'
-import Giscus, { GiscusProps } from '@giscus/react'
-import { useLocation } from '@docusaurus/router'
-import type { ThemeConfig } from '@docusaurus/preset-classic'
-import { useColorMode, useThemeConfig } from '@docusaurus/theme-common';
+﻿import React from 'react';
+import Giscus, {GiscusProps} from '@giscus/react';
+import {useLocation} from '@docusaurus/router';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {useColorMode, useThemeConfig} from '@docusaurus/theme-common';
 
+type CommentConfig = Pick<GiscusProps, 'repo' | 'repoId' | 'category' | 'categoryId'>;
 
-const defaultConfig: Partial<GiscusProps> = {
-  id: 'comments',
-  mapping: 'specific',
-  reactionsEnabled: '1',
-  emitMetadata: '0',
-  inputPosition: 'top',
-  loading: 'lazy',
-  strict: '1', // 用根据路径标题自动生成的 sha1 值，精确匹配 github discussion，避免路径重叠（比如父和子路径）时评论加载串了
-  lang: 'zh-CN',
-}
+export default function Comment(): JSX.Element | null {
+  const {giscus} = useThemeConfig() as unknown as {giscus?: CommentConfig};
+  const {colorMode} = useColorMode();
+  const {pathname} = useLocation();
+  const {i18n} = useDocusaurusContext();
+  if (!giscus?.repo || !giscus.repoId || !giscus.categoryId) return null;
 
-export default function Comment(): JSX.Element {
-  const themeConfig = useThemeConfig() as ThemeConfig & { giscus: any }
-  // merge default config
-  const giscus = { ...defaultConfig, ...themeConfig.giscus }
+  const segments = pathname.split('/').filter(Boolean);
+  if (i18n.locales.includes(segments[0])) segments.shift();
+  // The existing about page used "index". Preserve its discussion history.
+  const term = segments.join('/') === 'aboutMe' ? 'index' : segments.join('/') || 'home';
 
-  if (!giscus.repo || !giscus.repoId || !giscus.categoryId) {
-    throw new Error(
-      'You must provide `repo`, `repoId`, and `categoryId` to `themeConfig.giscus`.',
-    )
-  }
-
-  const path = useLocation().pathname.replace(/^\/|\/$/g, '');
-  const firstSlashIndex = path.indexOf('/');
-  var subPath: string = ""
-  if (firstSlashIndex !== -1) {
-    subPath = path.substring(firstSlashIndex + 1)
-  } else {
-    subPath = "index"
-  }
-
-  giscus.term = subPath
-  giscus.theme =
-    useColorMode().colorMode === 'dark' ? 'transparent_dark' : 'light'
-
-  return (
-    <Giscus {...giscus} />
-  )
+  return <Giscus
+    repo={giscus.repo} repoId={giscus.repoId}
+    category={giscus.category} categoryId={giscus.categoryId}
+    id="comments" mapping="specific" term={term} strict="1"
+    reactionsEnabled="1" emitMetadata="0" inputPosition="top" loading="lazy"
+    lang={i18n.currentLocale === 'en' ? 'en' : 'zh-CN'}
+    theme={colorMode === 'dark' ? 'transparent_dark' : 'light'}
+  />;
 }

@@ -7,12 +7,10 @@
     "message": "Hohoo's Blog",
     "description": "The alt text of navbar logo"
   },
-  "item.label.博客": {
-    "message": "博客",
-    "description": "Navbar item with label 博客"
+  "item.label.随笔": {
+    "message": "随笔"
   },
-  "item.label.笔记": {
-    "message": "笔记",
-    "description": "Navbar item with label 笔记"
+  "item.label.专题": {
+    "message": "专题"
   }
 }

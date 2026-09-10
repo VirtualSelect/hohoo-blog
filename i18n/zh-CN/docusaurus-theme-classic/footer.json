@@ -11,10 +11,6 @@
     "message": "友情链接",
     "description": "The title of the footer links column with title=友情链接 in the footer"
   },
-  "link.item.label.算法入门": {
-    "message": "算法入门",
-    "description": "The label of footer link with label=算法入门 linking to https://www.hello-algo.com/"
-  },
   "link.item.label.关于我": {
     "message": "关于我",
     "description": "The label of footer link with label=关于我 linking to /aboutMe"
@@ -43,17 +39,9 @@
     "message": "roc 云原生",
     "description": "The label of footer link with label=roc 云原生 linking to https://imroc.cc"
   },
-  "copyright": {
-    "message": "<p>Copyright © 2024 Hohoo, Inc. Built with Docusaurus.</p>\n                <br />本站所有内容遵循 <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans\" \n                style=\"color: hsl(210deg, 100%, 80%)\">CC BY-NC 4.0 协议</a>，转载须注明署名和出处，且不可用于商业用途。\n                若与其他同步平台协议冲突，以本网站为准。",
-    "description": "The footer copyright"
-  },
   "link.title.网站": {
     "message": "网站",
     "description": "The title of the footer links column with title=网站 in the footer"
-  },
-  "link.item.label.技术笔记": {
-    "message": "技术笔记",
-    "description": "The label of footer link with label=技术笔记 linking to docs/skill"
   },
   "link.item.label.Twitter": {
     "message": "Twitter",
@@ -66,5 +54,14 @@
   "link.item.label.Docusaurus": {
     "message": "Docusaurus",
     "description": "The label of footer link with label=Docusaurus linking to https://docusaurus.io/zh-CN/"
+  },
+  "link.item.label.AI 应用开发": {
+    "message": "AI 应用开发"
+  },
+  "link.item.label.LLM 分享": {
+    "message": "LLM 分享"
+  },
+  "link.item.label.具身智能": {
+    "message": "具身智能"
   }
 }

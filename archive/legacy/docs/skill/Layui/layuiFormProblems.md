@@ -6,9 +6,11 @@ date: 2024-06-26
 authors: syn
 ---
 
-#### 监听select的选择事件
+以下片段来自业务项目，表单元素需放在 `layui-form` 容器中。`syn/` 接口、Thymeleaf 模板变量和评分字段需要替换为实际业务数据。
+
+## 监听select的选择事件
 ```javascript
-<select title="相关单位"  id="AAA">
+<select title="相关单位"  id="AAA" lay-filter="AAA">
     <option value=""></option>
 	<option value="1">全部</option>
 	<option value="2">上海</option>
@@ -24,24 +26,24 @@ layui.use(['form'], function(){
 </script>
 ```
 
-#### 获取form表单中字段值的两种方法
-##### 方法1：直接通过 DOM 元素获取值
+## 获取form表单中字段值的两种方法
+### 方法1：直接通过 DOM 元素获取值
 ```javascript
 var validEndDateInput = document.getElementById('validEndDate');
 var endDateValue = validEndDateInput.value;
 console.log(endDateValue); // 输出当前输入框中的日期值
 ```
-##### 方法 2: 使用 jQuery（如果项目中包含 jQuery）
+### 方法 2: 使用 jQuery（如果项目中包含 jQuery）
 ```javascript
 var endDateValue = $('#validEndDate').val();
 console.log(endDateValue); // 输出当前输入框中的日期值
 ```
-#### 两级选择框联动
+## 两级选择框联动
 ```html
-<select title="国家" name="country" id="country">
+<select title="国家" name="country" id="country" lay-filter="country">
  	<option value="">请选择国家</option>
 </select>
-<select title="城市" name="city" id="city">
+<select title="城市" name="city" id="city" lay-filter="city">
  	<option value="">请选择城市</option>
 </select>
 ```
@@ -94,12 +96,12 @@ layui.use([ 'jquery','form'],function() {
 });	
 </script> 
 ```
-#### 三级选择框联动
+## 学号、姓名与班级联动
 ```html
-<select name="stuNo" id="stuNo">
+<select name="stuNo" id="stuNo" lay-filter="stuNo">
 	<option value="">请输入/选择学号</option>
 </select>
-<select name="stuName" id="stuName">
+<select name="stuName" id="stuName" lay-filter="stuName">
 	<option value="">请输入/选择姓名</option>
 </select>
 <select name="deptName" id="deptName">
@@ -118,7 +120,7 @@ layui.use([ 'jquery','form'],function() {
 			method: 'GET',
 			dataType: 'json',
 			success: function(res){
-				var selectElementNo = document.querySelector('select#stuNO');
+				var selectElementNo = document.querySelector('select#stuNo');
 		        var selectElementName = document.querySelector('select#stuName');
 		        var selectElementDeptName = document.querySelector('select#deptName');
 		        
@@ -168,7 +170,7 @@ layui.use([ 'jquery','form'],function() {
 });	
 </script> 
 ```
-#### 自定义验证规则
+## 自定义验证规则
 ```html
 <div class="layui-input-inline">
      <input type="text" name="schoolName" id="schoolName" class="layui-input" lay-verify="rule2">
@@ -189,7 +191,7 @@ form.verify({
 });
 
 ```       
-#### 表单字段后面加提示
+## 表单字段后面加提示
 ```html
 <div class="layui-input-inline">
 	 <select name="stuNO" id="stuNO"  lay-filter="stuNO" lay-verify="required">
