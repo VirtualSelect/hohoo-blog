@@ -10,6 +10,19 @@
   ],
   "sources": [
     {
+      "id": "aihot",
+      "name": "AIHOT",
+      "feed": "https://aihot.news/feed.xml?aihot_actor=5cf901fe-7e2d-4a0c-90b7-54aca6ca94b6",
+      "hosts": [
+        "aihot.news"
+      ],
+      "defaultCategory": "ai-apps",
+      "priority": 100,
+      "dailyLimit": 4,
+      "aggregator": true,
+      "enabled": true
+    },
+    {
       "id": "huggingface",
       "name": "Hugging Face",
       "feed": "https://huggingface.co/blog/feed.xml",

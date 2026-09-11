@@ -1,7 +1,7 @@
 // Conservative editorial rules: a source's name or default category is never evidence.
 export function assessRelevance(item) {
   const text = `${item.title} ${item.originalSummary || item.summary || ''}`;
-  const excluded = /\b(funding|fundrais\w*|acquisition|partnership|appoint\w*|sponsorship|earnings|antimicrobial|genom\w*|weather|climate)\b|融资|收购|人事任命|气象|基因组/i;
+  const excluded = /\b(funding|fundrais\w*|acquisition|partnership|appoint\w*|sponsorship|earnings|antimicrobial|genom\w*|weather|climate)\b|融资|收购|人事任命|气象|基因组|指控|传闻|谣言/i;
   if (excluded.test(text)) return {accepted: false, reason: '泛商业或非本站研究领域'};
   const domains = [
     ['embodied-ai', /\b(robot\w*|embodied|humanoid|locomotion|manipulation|vla|vision.language.action)\b|具身|机器人/i],

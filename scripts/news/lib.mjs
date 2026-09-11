@@ -35,7 +35,8 @@ export async function parseFeed(xml, source, now = new Date(), lookbackDays = 14
       const title = plainText(item.title).slice(0, 240);
       const published = new Date(item.isoDate || item.pubDate || '');
       if (!title || !Number.isFinite(published.getTime()) || published > now || now - published > lookbackDays * 86400000) {skipped++; continue;}
-      const excerpt = plainText(item.contentSnippet || item.summary || item.content || '');
+      const rawExcerpt = source.aggregator ? (item.content || item.summary || item.contentSnippet || '').replace(/<p>\s*(?:🔗|via AIHOT)[\s\S]*?<\/p>/gi,'') : (item.contentSnippet || item.summary || item.content || '');
+      const excerpt = plainText(rawExcerpt);
       // Keep only a short feed excerpt; never fetch or reproduce the full article.
       const summary = excerpt.length > 180 ? excerpt.slice(0, 177) + '…' : excerpt;
       items.push({id: createHash('sha256').update(url).digest('hex').slice(0, 20), title, url,
@@ -54,11 +55,14 @@ export function selectItems(candidates, existing, config, now = new Date()) {
   const selected = [];
   const today = existing.filter(item => item.collectedAt.slice(0, 10) === day);
   const counts = new Map();
+  const sources = new Map((config.sources || []).map(source=>[source.id,source]));
+  const priority = item=>sources.get(item.sourceId)?.priority || 0;
+  const sourceLimit = item=>sources.get(item.sourceId)?.dailyLimit ?? config.perSourceLimit;
   for (const item of today) counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1);
-  for (const item of [...candidates].sort((a,b) => b.publishedAt.localeCompare(a.publishedAt) || a.id.localeCompare(b.id))) {
+  for (const item of [...candidates].sort((a,b) => priority(b)-priority(a) || b.publishedAt.localeCompare(a.publishedAt) || a.id.localeCompare(b.id))) {
     if (selected.length + today.length >= config.dailyLimit) break;
     const titleKey = item.title.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
-    if (seen.has(item.url) || blocked.has(item.url) || titles.has(titleKey) || (counts.get(item.sourceId) || 0) >= config.perSourceLimit) continue;
+    if (seen.has(item.url) || blocked.has(item.url) || titles.has(titleKey) || (counts.get(item.sourceId) || 0) >= sourceLimit(item)) continue;
     seen.add(item.url); titles.add(titleKey); counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1); selected.push(item);
   }
   return selected;

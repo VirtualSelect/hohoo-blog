@@ -21,14 +21,14 @@ export default function News() {
     [item.title,item.titleZh,item.summary,...Object.values(item.translations || {}).flatMap(value => [value.title,value.summary])].join(' ').toLowerCase().includes(query.trim().toLowerCase()));
   const pages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const current = Math.min(page, pages);
-  return <Layout title={t('AI 资讯','AI news')} description={t('来自官方来源的 AI 应用、大语言模型与具身智能资讯，附短摘要与原文入口。','AI news from official sources, with short summaries and original links.')}>
+  return <Layout title={t('AI 资讯','AI news')} description={t('来自精选订阅源的 AI 应用、大语言模型与具身智能资讯，附短摘要与原文入口。','AI news from selected feeds, with short summaries and original links.')}>
     <main className={styles.page}>
       <p className={styles.eyebrow}>AI / NEWS DESK</p>
       <p><Link to="/news/weekly">{t('每周阅读汇总','Weekly reading')}</Link>{' · '}<Link to="/lab">{t('项目实验室','Project lab')}</Link></p>
       <h1>{t('关注变化，也保留出处。','Follow the news. Keep the source.')}</h1>
       <p className={styles.lead}>{t('精选 AI 应用、大语言模型与具身智能资讯。这里整理外部消息，与本站的原创文章和学习记录分开呈现。','Selected news on AI applications, LLMs and embodied intelligence, separate from personal articles and learning notes.')}</p>
       <details className={styles.sources}><summary>{t('来源与整理方式','Sources and editorial approach')}</summary>
-        <p>{t('从官方 RSS 收集，由人工审核后发布。摘要可能是来源摘录或 AI 辅助整理，均在条目中标明；请以原文为准。排序使用原文发布日期，日报使用采集日期（UTC）。','Collected from official RSS feeds and reviewed before publication. Each entry identifies a source excerpt or AI-assisted summary. Original sources take precedence. Entries use source dates; digests use collection dates in UTC.')}</p>
+        <p>{t('优先从 AIHOT 收集中文聚合摘要，其他 RSS 来源补充，由人工审核后发布。摘要可能是来源摘录或 AI 辅助整理，均在条目中标明；请以原文为准。AIHOT 条目链接至聚合阅读页，可继续访问原始出处。排序使用订阅源提供的发布日期，日报使用采集日期（UTC）。','Collected primarily from AIHOT, with other RSS feeds as supplements and reviewed before publication. Each entry identifies a source excerpt or AI-assisted summary. Original sources take precedence. AIHOT links open its aggregation pages, which link to original sources. Entries use feed-provided dates; digests use collection dates in UTC.')}</p>
         <ul>{config.sources.filter(item=>item.enabled).map(item=><li key={item.id}><a href={item.feed} target="_blank" rel="noopener noreferrer">{item.name} RSS ↗</a></li>)}</ul>
       </details>
       <section className={styles.filters} aria-label={t('筛选资讯','Filter news')}>

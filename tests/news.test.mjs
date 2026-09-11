@@ -37,6 +37,25 @@ test('selection enforces per-source limits, daily rerun limits and rejected URLs
  assert.equal(selectItems([item('a')],[],{...config,blockedUrls:['https://example.com/a']},now).length,0);
  assert.equal(selectItems([item('a'),item('b'),item('c')],[],config,now).length,2);
 });
+
+test('primary source wins within limits, with fallback and rerun caps',()=>{
+ const primary={id:'aihot',priority:100,dailyLimit:4};
+ const cfg={...config,sources:[primary]};
+ const main=Array.from({length:5},(_,i)=>item('p'+i,{sourceId:'aihot',publishedAt:'2026-09-09T00:00:00.000Z'}));
+ const secondary=[item('s1'),item('s2')];
+ const selected=selectItems([...secondary,...main],[],cfg,now);
+ assert.equal(selected.length,5);assert.equal(selected.filter(i=>i.sourceId==='aihot').length,4);
+ assert.equal(selected[0].sourceId,'aihot');
+ assert.equal(selectItems(main,selected,cfg,now).length,0);
+ assert.equal(selectItems(secondary,[],cfg,now).length,2);
+});
+
+test('AIHOT feed retains aggregator links without navigation text in excerpts',async()=>{
+ const xml='<rss version="2.0"><channel><title>AIHOT</title><item><title>Agent 评测</title><link>https://aihot.news/items/one</link><pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate><description><![CDATA[<p>工具调用评测。</p><p>🔗 <a href="https://example.com">阅读原文</a></p><p>via AIHOT · link</p>]]></description></item></channel></rss>';
+ const result=await parseFeed(xml,{id:'aihot',name:'AIHOT',hosts:['aihot.news'],aggregator:true},now);
+ assert.equal(result.items[0].url,'https://aihot.news/items/one');
+ assert.equal(result.items[0].summary,'工具调用评测。');
+});
 test('deduplication preserves distinct Chinese titles and rejects same title or URL',()=>{
  const chosen=selectItems([item('a',{title:'机器人学习'}),item('b',{title:'模型推理'}),item('c',{title:'机器人学习',sourceId:'other'})],[],{...config,perSourceLimit:5},now);
  assert.equal(chosen.length,2);

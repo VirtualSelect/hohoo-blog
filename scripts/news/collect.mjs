@@ -12,7 +12,11 @@ const existing = await readJson(path.join(root,'data/news/items.json'));
 for (const key of ['dailyLimit','perSourceLimit','lookbackDays']) if (!Number.isInteger(config[key]) || config[key] < 1 || config[key] > 100) throw new Error('Invalid config: ' + key);
 const sources = config.sources.filter(source => source.enabled);
 if (!sources.length || sources.length > 10) throw new Error('Enable between 1 and 10 sources');
-for (const source of sources) canonicalUrl(source.feed, source.hosts);
+for (const source of sources) {
+  canonicalUrl(source.feed, source.hosts);
+  if(source.priority !== undefined && (!Number.isInteger(source.priority) || source.priority<0 || source.priority>100)) throw new Error('Invalid source priority');
+  if(source.dailyLimit !== undefined && (!Number.isInteger(source.dailyLimit) || source.dailyLimit<1 || source.dailyLimit>config.dailyLimit)) throw new Error('Invalid source daily limit');
+}
 const now = new Date();
 const report = {runAt:now.toISOString(), sources:[], summaryFailures:[], selected:[], mode:process.argv.includes('--write') ? 'pr-files' : 'preview'};
 const candidates = [];
