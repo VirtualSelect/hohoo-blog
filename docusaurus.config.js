@@ -101,6 +101,7 @@ const config = {
                     {to: '/learning', label: '阅读路线', position: 'right'},
                     {label: '探索', position: 'right', items: [
                         {label: '稍后读', to: '/reading'},
+                        {label: '论文阅读', to: '/papers'},
                         {label: '每周阅读', to: '/news/weekly'},
                         {label: '项目实验室', to: '/lab'},
                         {label: '最近在做什么', to: '/now'},

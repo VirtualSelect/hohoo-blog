@@ -8,6 +8,9 @@ test('stored state excludes malformed IDs and duplicates',()=>{
   assert.throws(()=>parseReadingState('broken JSON'));
 });
 test('saving and reading are independent reversible actions',()=>{
+  const mixed=parseReadingState(JSON.stringify({saved:[id,'paper:2005.11401'],read:[]}));
+  assert.equal(mixed.saved.length,2);
+  assert.deepEqual(toggleReadingState(mixed,'saved','paper:2005.11401').saved,[id]);
   const initial={saved:[],read:[]};
   const saved=toggleReadingState(initial,'saved',id);
   const read=toggleReadingState(saved,'read',id);

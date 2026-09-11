@@ -11,8 +11,11 @@ description: 从感知、决策到行动，规划具身智能的阅读与仿真�
 :::
 
 import TopicNews from '@site/src/components/TopicNews';
+import TopicPapers from '@site/src/components/TopicPapers';
 
 <TopicNews category="embodied-ai" />
+
+<TopicPapers category="embodied-ai" />
 
 ## 计划覆盖
 

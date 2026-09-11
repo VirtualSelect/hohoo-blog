@@ -11,8 +11,11 @@ description: 整理大语言模型的学习笔记、论文阅读与可复现的�
 :::
 
 import TopicNews from '@site/src/components/TopicNews';
+import TopicPapers from '@site/src/components/TopicPapers';
 
 <TopicNews category="llm" />
+
+<TopicPapers category="llm" />
 
 ## 计划覆盖
 

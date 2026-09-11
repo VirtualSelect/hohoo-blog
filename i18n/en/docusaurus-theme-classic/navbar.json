@@ -36,5 +36,8 @@
   },
   "item.label.最近在做什么": {
     "message": "Now"
+  },
+  "item.label.论文阅读": {
+    "message": "Paper guides"
   }
 }

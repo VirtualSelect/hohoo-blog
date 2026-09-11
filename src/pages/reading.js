@@ -1,3 +1,4 @@
+import papers from '@site/data/papers.json';
 import React, {useState} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -12,7 +13,8 @@ export default function Reading() {
   const en=locale==='en';
   const state=useNewsReading();
   const [filter,setFilter]=useState('unread');
-  const items=news.filter(item=>state.saved.includes(item.id) && (filter==='all' || (filter==='read')===state.read.includes(item.id)));
+  const paperItems=papers.map(p=>({id:p.id,title:p.title,url:p.url,sourceName:en?'Paper':'论文',publishedAt:String(p.year),translations:{zh:{title:p.title,summary:p.zh.question},en:{title:p.title,summary:p.en.question}}}));
+  const items=[...news,...paperItems].filter(item=>state.saved.includes(item.id) && (filter==='all' || (filter==='read')===state.read.includes(item.id)));
   return <Layout title={en?'Saved reading':'稍后读'}><main className={styles.page}>
     <h1>{en?'Keep a reading queue.':'留下值得继续读的内容。'}</h1>
     <p>{en?'Saved in this browser, shared between language versions. Opening a source does not mark it as read.':'收藏保存在当前浏览器，中英文页面共用。打开原文不会自动标记已读。'}</p>

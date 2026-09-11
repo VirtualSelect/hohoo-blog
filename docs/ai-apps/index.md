@@ -11,8 +11,11 @@ description: 围绕真实使用场景，规划从原型到可用应用的开发�
 :::
 
 import TopicNews from '@site/src/components/TopicNews';
+import TopicPapers from '@site/src/components/TopicPapers';
 
 <TopicNews category="ai-apps" />
+
+<TopicPapers category="ai-apps" />
 
 ## 计划覆盖
 

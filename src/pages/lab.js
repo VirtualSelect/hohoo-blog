@@ -1,3 +1,5 @@
+import Heading from '@theme/Heading';
+import experiments from '@site/data/experiments.json';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -24,6 +26,13 @@ export default function Lab() {
         <Link to="/news">{en ? 'See the output →' : '查看资讯输出 →'}</Link>{' · '}
         <a href="https://github.com/VirtualSelect/hohoo-blog/tree/main/scripts/news" target="_blank" rel="noopener noreferrer">{en ? 'Source code ↗' : '查看源码 ↗'}</a>
       </article>
+      <section><h2>{en?'Experiments to plan':'待开展的实验'}</h2>
+        <p>{en?'Proposals only: no runs, measurements or reproduction results yet.':'以下为实验提案，尚未执行，没有测量结果或复现结论。'}</p>
+        {experiments.map(project=><article key={project.id} className={styles.card}>
+          <small>{en?'Planned':'计划中'}</small><Heading as="h3" id={project.id}>{en?project.en:project.zh}</Heading><p>{en?project.goalEn:project.goalZh}</p>
+          <Link to={'/papers#'+project.paper}>{en?'Read the related paper guide →':'查看关联论文导读 →'}</Link>
+        </article>)}
+      </section>
     </main>
   </Layout>;
 }
