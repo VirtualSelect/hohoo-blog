@@ -1,6 +1,58 @@
-.actions {display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1rem 0;}
-.actions button {font:inherit;padding:.4rem .8rem;border:1px solid var(--ifm-color-emphasis-300);border-radius:8px;background:var(--ifm-background-surface-color);color:var(--ifm-font-color-base);cursor:pointer;}
-.actions button[aria-pressed='true'] {border-color:var(--ifm-color-primary);color:var(--ifm-color-primary);}
-.actions button:focus-visible {outline:2px solid var(--ifm-color-primary);outline-offset:3px;}
-.actions button:disabled {opacity:.5;cursor:wait;}
-.compact{display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0}.compact button{padding:0;border:0;background:transparent;color:var(--blog-muted);font:inherit;cursor:pointer}.compact button[aria-pressed=true]{color:var(--ifm-color-primary)}.compact button:focus-visible{outline:2px solid var(--ifm-color-primary);outline-offset:4px}.compact button:disabled{opacity:.5}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+.actions button {
+  font: inherit;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+}
+.actions button[aria-pressed='true'] {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+.actions button:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 3px;
+}
+.actions button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.compact button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--blog-muted);
+  font: inherit;
+  cursor: pointer;
+}
+.compact button[aria-pressed='true'] {
+  color: var(--ifm-color-primary);
+}
+.compact button:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 4px;
+}
+.compact button:disabled {
+  opacity: 0.5;
+}
+
+.actions button,
+.compact button {
+  min-height: 44px;
+}
