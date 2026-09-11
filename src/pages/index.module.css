@@ -388,3 +388,5 @@
 .note:hover {
   transform: translateY(-2px);
 }
+
+@media(max-width:700px){.profile{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:center;text-align:left;padding:18px}.profileTop,.profile .quote{display:none}.profile .avatar{width:64px;height:64px;margin:0}.profileName{font-size:1.25rem}.profileBottom{grid-column:1/-1;padding-top:10px}.hero{gap:24px}.profileName span{font-size:.72rem}}
