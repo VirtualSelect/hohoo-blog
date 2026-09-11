@@ -1,0 +1,57 @@
+[
+  {
+    "id": "project:hohoo-blog",
+    "number": "001",
+    "slug": "hohoo-blog",
+    "type": "project",
+    "title": "Hohoo’s AI Lab",
+    "description": "公开学习、研究资讯与实践记录共用的个人知识站点。",
+    "descriptionEn": "A personal knowledge site for public learning, research signals and practice.",
+    "domain": "ai-apps",
+    "status": "production",
+    "date": "2026-09-11",
+    "updated": "2026-09-11",
+    "featured": true,
+    "stack": ["Docusaurus", "React", "RSS", "GitHub Actions", "Vercel"],
+    "repo": "https://github.com/VirtualSelect/hohoo-blog",
+    "demo": "https://huhohoo.com/",
+    "related": [],
+    "sections": [
+      {
+        "heading": "Overview",
+        "zh": "本站代码与内容同仓库管理，以静态页面发布。阅读路线、收藏、论文导读和外部资讯围绕三个研究方向组织。",
+        "en": "Code and content share a repository. Static pages connect learning paths, saved reading, paper guides and external signals."
+      },
+      {
+        "heading": "Problem",
+        "zh": "学习记录、未来选题和外部资讯容易混在一起，使真实内容难以发现。",
+        "en": "Published work, planned topics and external news can obscure each other."
+      },
+      {
+        "heading": "Goal",
+        "zh": "让读者快速找到真实内容、代码实现和下一步阅读入口。",
+        "en": "Help readers find real content, inspect code and choose their next reading step."
+      },
+      {
+        "heading": "Architecture",
+        "zh": "RSS → 筛选与去重 → JSON → 构建检查 → 静态站点。Docs / Blog 元数据 → 内容索引 → 首页、专题与学习活动。",
+        "en": "RSS → filtering and deduplication → JSON → build checks → static site. Docs / Blog metadata → content index → home, topics and activity."
+      },
+      {
+        "heading": "Decisions",
+        "zh": "复用 Docusaurus 的路由、目录与代码块；采集在 CI 中执行；个人阅读状态保存在浏览器中。这样页面访问无需等待抓取或模型请求。",
+        "en": "Reuse Docusaurus routing and reading tools. Collect in CI and store personal progress in the browser, keeping page requests independent of fetchers and models."
+      },
+      {
+        "heading": "Challenges",
+        "zh": "来源可能失效或重复；关键词过滤可能漏检；聚合摘录需要保留来源边界。自动翻译目前暂停，缺少译文时保留原文。",
+        "en": "Feeds may fail or duplicate content; keyword filters may miss relevant signals. Source attribution remains essential. Automatic translation is paused."
+      },
+      {
+        "heading": "Lessons",
+        "zh": "当前实现体现的取舍：静态发布降低运行维护成本，但更新依赖构建；本地进度无需账号，但不能跨设备同步。",
+        "en": "Implementation trade-offs: static publishing reduces runtime maintenance but depends on builds; local progress requires no account but cannot sync across devices."
+      }
+    ]
+  }
+]

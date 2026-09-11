@@ -1,0 +1,24 @@
+[
+  {
+    "id": "radar-digest:2026-W37",
+    "week": "2026-W37",
+    "status": "published",
+    "publishedAt": "2026-09-11T12:32:09.332Z",
+    "title": "AI Radar · 2026-W37",
+    "description": "本周来源摘录与链接汇总。",
+    "itemIds": [
+      "075fed980e67c694db46",
+      "8845b08ab7751c9c55e9",
+      "094c7faf707de7f64e58"
+    ]
+  },
+  {
+    "id": "radar-digest:2026-W36",
+    "week": "2026-W36",
+    "status": "published",
+    "publishedAt": "2026-09-11T12:32:09.335Z",
+    "title": "AI Radar · 2026-W36",
+    "description": "本周来源摘录与链接汇总。",
+    "itemIds": ["a139f80b159295ada71d"]
+  }
+]

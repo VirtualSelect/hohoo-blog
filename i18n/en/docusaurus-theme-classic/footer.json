@@ -69,5 +69,41 @@
   },
   "link.item.label.RSS 订阅": {
     "message": "RSS feeds"
+  },
+  "link.item.label.学习": {
+    "message": "Learn"
+  },
+  "link.item.label.构建": {
+    "message": "Build"
+  },
+  "link.item.label.知识": {
+    "message": "Knowledge"
+  },
+  "link.item.label.随笔": {
+    "message": "Blog"
+  },
+  "link.item.label.阅读路线": {
+    "message": "Learning paths"
+  },
+  "link.item.label.研究总览": {
+    "message": "Topics"
+  },
+  "link.item.label.学习活动": {
+    "message": "Activity"
+  },
+  "link.item.label.项目": {
+    "message": "Projects"
+  },
+  "link.item.label.实验": {
+    "message": "Labs"
+  },
+  "link.item.label.短笔记": {
+    "message": "Notes"
+  },
+  "link.item.label.论文阅读": {
+    "message": "Papers"
+  },
+  "link.item.label.关于": {
+    "message": "About"
   }
 }

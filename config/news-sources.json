@@ -20,7 +20,11 @@
       "priority": 100,
       "dailyLimit": 4,
       "aggregator": true,
-      "enabled": true
+      "enabled": true,
+      "type": "media",
+      "trustLevel": "medium",
+      "fetchStrategy": "rss",
+      "parserVersion": "rss-v1"
     },
     {
       "id": "huggingface",
@@ -30,7 +34,11 @@
         "huggingface.co"
       ],
       "defaultCategory": "ai-apps",
-      "enabled": true
+      "enabled": true,
+      "type": "community",
+      "trustLevel": "signal",
+      "fetchStrategy": "rss",
+      "parserVersion": "rss-v1"
     },
     {
       "id": "deepmind",
@@ -42,7 +50,11 @@
         "blog.google"
       ],
       "defaultCategory": "ai-apps",
-      "enabled": true
+      "enabled": true,
+      "type": "official",
+      "trustLevel": "primary",
+      "fetchStrategy": "rss",
+      "parserVersion": "rss-v1"
     },
     {
       "id": "openai",
@@ -53,7 +65,11 @@
         "www.openai.com"
       ],
       "defaultCategory": "llm",
-      "enabled": true
+      "enabled": true,
+      "type": "official",
+      "trustLevel": "primary",
+      "fetchStrategy": "rss",
+      "parserVersion": "rss-v1"
     }
   ]
 }

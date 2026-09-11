@@ -1,0 +1,35 @@
+{
+  "updated": "2026-09-11",
+  "items": [
+    {
+      "kind": "BUILDING",
+      "zh": "维护这个知识站点与 AI Radar 采集流程。",
+      "en": "Maintaining this knowledge site and its AI Radar pipeline.",
+      "to": "/projects/hohoo-blog"
+    },
+    {
+      "kind": "LEARNING",
+      "zh": "从 Java 调用模型开始，梳理结构化输出、工具调用与检索增强。",
+      "en": "Learning model calls from Java, structured output, tool use and retrieval.",
+      "to": "/learning"
+    },
+    {
+      "kind": "READING",
+      "zh": "以 RAG、ReAct 和 RT-2 导读作为论文阅读入口。",
+      "en": "Using the RAG, ReAct and RT-2 guides as paper reading starting points.",
+      "to": "/papers"
+    },
+    {
+      "kind": "EXPLORING",
+      "zh": "具身智能：从感知、动作表示与仿真问题入手。",
+      "en": "Exploring perception, action representation and simulation.",
+      "to": "/docs/embodied-ai"
+    },
+    {
+      "kind": "NEXT",
+      "zh": "写下第一个模型调用的完整过程，再开始检索对照实验。",
+      "en": "Document the first model call, then prepare a retrieval comparison.",
+      "to": "/learning#step-first-call"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "redirects": [
+    {
+      "source": "/aboutMe",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/en/aboutMe",
+      "destination": "/en/about",
+      "permanent": true
+    },
+    {
+      "source": "/blog/a%20new%20milestone",
+      "destination": "/blog/a-new-milestone",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/a%20new%20milestone",
+      "destination": "/en/blog/a-new-milestone",
+      "permanent": true
+    },
+    {
+      "source": "/news",
+      "destination": "/radar",
+      "permanent": true
+    },
+    {
+      "source": "/en/news",
+      "destination": "/en/radar",
+      "permanent": true
+    }
+  ]
+}

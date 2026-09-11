@@ -1,23 +1,23 @@
 {
   "title": {
-    "message": "Hohoo's Blog",
+    "message": "Hohoo.",
     "description": "The title in the navbar"
   },
   "logo.alt": {
-    "message": "Hohoo's Blog",
+    "message": "Hohoo",
     "description": "The alt text of navbar logo"
   },
   "item.label.关于我": {
     "message": "About"
   },
   "item.label.随笔": {
-    "message": "Journal"
+    "message": "Blog"
   },
   "item.label.专题": {
     "message": "Topics"
   },
   "item.label.阅读路线": {
-    "message": "Reading paths"
+    "message": "Learning paths"
   },
   "item.label.AI 资讯": {
     "message": "AI news"
@@ -38,7 +38,7 @@
     "message": "Now"
   },
   "item.label.论文阅读": {
-    "message": "Paper guides"
+    "message": "Papers"
   },
   "item.label.RSS 订阅": {
     "message": "RSS subscriptions"
@@ -54,5 +54,29 @@
   },
   "item.label.关于": {
     "message": "About"
+  },
+  "item.label.学习": {
+    "message": "Learn"
+  },
+  "item.label.构建": {
+    "message": "Build"
+  },
+  "item.label.知识": {
+    "message": "Knowledge"
+  },
+  "item.label.研究总览": {
+    "message": "Topics"
+  },
+  "item.label.学习活动": {
+    "message": "Activity"
+  },
+  "item.label.项目": {
+    "message": "Projects"
+  },
+  "item.label.实验": {
+    "message": "Labs"
+  },
+  "item.label.短笔记": {
+    "message": "Notes"
   }
 }

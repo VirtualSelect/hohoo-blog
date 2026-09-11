@@ -1,5 +1,38 @@
 [
-  {"id":"retrieval-eval","paper":"rag","zh":"检索质量对照实验","en":"Retrieval quality comparison","goalZh":"固定一组问题与资料，记录命中文档、引用与回答正确性；对比无检索和有检索。","goalEn":"Use fixed questions and documents; compare retrieval hits, citations and answer correctness with and without retrieval."},
-  {"id":"tool-eval","paper":"react","zh":"工具调用失败恢复实验","en":"Tool failure recovery experiment","goalZh":"使用可控的只读工具，注入超时与空结果，记录任务完成率和调用次数。","goalEn":"Use controlled read-only tools; inject timeouts and empty results, then record completion and call counts."},
-  {"id":"action-representation","paper":"rt2","zh":"动作表示学习记录","en":"Action representation study","goalZh":"先整理观测、动作与离散表示的对应关系，再设计仿真验证；不将其称为 RT-2 复现。","goalEn":"Map observations, actions and discrete representations before designing a simulation check; this is not an RT-2 reproduction."}
+  {
+    "id": "retrieval-eval",
+    "paper": "rag",
+    "zh": "检索质量对照实验",
+    "en": "Retrieval quality comparison",
+    "goalZh": "固定一组问题与资料，记录命中文档、引用与回答正确性；对比无检索和有检索。",
+    "goalEn": "Use fixed questions and documents; compare retrieval hits, citations and answer correctness with and without retrieval.",
+    "number": "001",
+    "status": "planning",
+    "domain": "ai-apps",
+    "related": ["paper:2005.11401"]
+  },
+  {
+    "id": "tool-eval",
+    "paper": "react",
+    "zh": "工具调用失败恢复实验",
+    "en": "Tool failure recovery experiment",
+    "goalZh": "使用可控的只读工具，注入超时与空结果，记录任务完成率和调用次数。",
+    "goalEn": "Use controlled read-only tools; inject timeouts and empty results, then record completion and call counts.",
+    "number": "002",
+    "status": "planning",
+    "domain": "ai-apps",
+    "related": ["paper:2210.03629"]
+  },
+  {
+    "id": "action-representation",
+    "paper": "rt2",
+    "zh": "动作表示学习记录",
+    "en": "Action representation study",
+    "goalZh": "先整理观测、动作与离散表示的对应关系，再设计仿真验证；不将其称为 RT-2 复现。",
+    "goalEn": "Map observations, actions and discrete representations before designing a simulation check; this is not an RT-2 reproduction.",
+    "number": "003",
+    "status": "planning",
+    "domain": "embodied-ai",
+    "related": ["paper:2307.15818"]
+  }
 ]
