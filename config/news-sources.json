@@ -1,0 +1,41 @@
+{
+  "dailyLimit": 5,
+  "perSourceLimit": 2,
+  "lookbackDays": 14,
+  "blockedUrls": [],
+  "sources": [
+    {
+      "id": "huggingface",
+      "name": "Hugging Face",
+      "feed": "https://huggingface.co/blog/feed.xml",
+      "hosts": [
+        "huggingface.co"
+      ],
+      "defaultCategory": "ai-apps",
+      "enabled": true
+    },
+    {
+      "id": "deepmind",
+      "name": "Google DeepMind",
+      "feed": "https://deepmind.google/blog/rss.xml",
+      "hosts": [
+        "deepmind.google",
+        "www.deepmind.google",
+        "blog.google"
+      ],
+      "defaultCategory": "ai-apps",
+      "enabled": true
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "feed": "https://openai.com/news/rss.xml",
+      "hosts": [
+        "openai.com",
+        "www.openai.com"
+      ],
+      "defaultCategory": "llm",
+      "enabled": true
+    }
+  ]
+}

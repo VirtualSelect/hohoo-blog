@@ -18,5 +18,8 @@
   },
   "item.label.阅读路线": {
     "message": "Reading paths"
+  },
+  "item.label.AI 资讯": {
+    "message": "AI news"
   }
 }

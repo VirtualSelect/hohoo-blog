@@ -1,0 +1,84 @@
+name: Collect AI news for review
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ai-news.yml'
+      - 'scripts/news/**'
+      - 'config/news-sources.json'
+  schedule:
+    - cron: '35 0 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ai-news-collection
+  cancel-in-progress: false
+jobs:
+  collect:
+    if: vars.NEWS_ENABLED != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Preserve the pending review
+        id: pending
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          count=$(gh pr list --head codex/ai-news --state open --json number --jq 'length')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" != "0" ]; then
+            echo 'A news PR is awaiting review. Collection paused to preserve reviewer edits.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.pending.outputs.count == '0'
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        if: steps.pending.outputs.count == '0'
+        run: npm ci --no-audit --no-fund
+      - name: Test collector
+        if: steps.pending.outputs.count == '0'
+        run: npm run test:news
+      - name: Collect a review batch
+        if: steps.pending.outputs.count == '0'
+        env:
+          NEWS_SUMMARIZE: ${{ vars.NEWS_SUMMARIZE }}
+          NEWS_LLM_URL: ${{ vars.NEWS_LLM_URL }}
+          NEWS_LLM_MODEL: ${{ vars.NEWS_LLM_MODEL }}
+          NEWS_LLM_API_KEY: ${{ secrets.NEWS_LLM_API_KEY }}
+        run: node scripts/news/collect.mjs --write
+      - name: Validate news and build both locales
+        if: steps.pending.outputs.count == '0'
+        run: |
+          npm run news:check
+          npm run build
+      - name: Create a draft for human review
+        if: steps.pending.outputs.count == '0'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: codex/ai-news
+          commit-message: 'content: collect AI news for review'
+          title: 'AI 资讯待审核'
+          body-path: .cache-loader/news-pr.md
+          draft: always-true
+          add-paths: |
+            data/news/items.json
+            src/pages/news/daily/*.md
+      - name: Preserve collection diagnostics
+        if: always() && steps.pending.outputs.count == '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: news-run-report
+          path: |
+            .cache-loader/news-report.json
+            .cache-loader/news-pr.md
+          if-no-files-found: ignore
+          retention-days: 30

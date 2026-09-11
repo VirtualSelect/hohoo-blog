@@ -95,6 +95,7 @@ const config = {
                 hideOnScroll: true,// 把导航栏样式设置为静态,而不禁用主题切换能力
                 items: [
                     {to: '/blog', label: '随笔', position: 'right'},
+                    {to: '/news', label: 'AI 资讯', position: 'right'},
 
                     {to: '/docs/skill', label: '专题', position: 'right'},
                     {to: '/learning', label: '阅读路线', position: 'right'},
