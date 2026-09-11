@@ -27,6 +27,7 @@ export default function News(){
       <p>{t('优先收集 AIHOT 聚合摘要，其他来源补充。通过研究主题规则与构建检查后自动发布，不代表独立事实核验。日期按订阅源提供的发布时间（UTC）分组；来源页可继续访问原始出处。','AIHOT summaries are prioritized, with other sources as supplements. Automated topic and build checks are not independent fact verification. Dates use feed publication timestamps in UTC. Aggregation pages link onward to original reporting.')}</p>
     </details>
     <div className={styles.metaBar}><p role="status">{filtered.length} {t('条资讯','entries')} · UTC</p><div className={styles.mode} aria-label={t('时间分组','Date grouping')}>{['day','week'].map(value=><button type="button" key={value} aria-pressed={mode===value} onClick={()=>{setMode(value);setLimit(12);}}>{value==='day'?t('按日','Daily'):t('按周','Weekly')}</button>)}</div></div>
+    <div className={styles.results}>
     {timelineGroups(filtered,limit,mode).map(([date,items])=><section key={date} className={styles.group} aria-label={date}>
       <div className={styles.date}><time dateTime={date}>{date.slice(5).replace('-', ' / ')}</time><small>{date.slice(0,4)}{mode==='week'?t(' · 周起始',' · Week of'):''}</small></div>
       <div className={styles.entries}>{items.map(item=>{const content=localizedNews(item,en?'en':'zh');const aggregator=config.sources.find(s=>s.id===item.sourceId)?.aggregator;return <article className={styles.entry} data-read={reading.read.includes(item.id)} key={item.id}>
@@ -39,5 +40,6 @@ export default function News(){
     </section>)}
     {!filtered.length&&<section className={styles.empty}><p>{t('当前没有匹配的资讯。','No matching entries.')}</p><button type="button" onClick={reset}>{t('清除筛选','Clear filters')}</button></section>}
     {limit<filtered.length&&<button type="button" className={styles.more} onClick={()=>setLimit(v=>v+12)}>{t('加载更多','Load more')} · {Math.min(12,filtered.length-limit)}</button>}
+    </div>
   </main></Layout>;
 }
