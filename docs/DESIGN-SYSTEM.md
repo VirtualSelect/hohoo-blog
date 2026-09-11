@@ -1,0 +1,1049 @@
+# Huhohoo Design System
+
+## 1. Design Direction
+
+huhohoo.com 的视觉目标不是“炫酷 AI 官网”，而是：
+
+> **Editorial · Developer · Minimal · AI Lab**
+
+希望用户感受到：
+
+- 技术理性；
+- 持续学习；
+- 工程实践；
+- 编辑杂志感；
+- 克制、清晰、有秩序。
+
+视觉系统应长期稳定，让内容成为主体。
+
+---
+
+# 2. Brand Language
+
+## 2.1 核心三轨
+
+```text
+01 / BUILD
+AI APPLICATIONS
+
+02 / UNDERSTAND
+LLM
+
+03 / EXPLORE
+EMBODIED AI
+```
+
+## 2.2 内容编号
+
+```text
+PROJECT / 001
+LAB / 001
+NOTE / 001
+PAPER / 001
+RADAR / SIGNAL
+RADAR / WEEKLY
+```
+
+用途：
+
+- Page Hero Eyebrow；
+- Card / List Label；
+- Timeline；
+- Related Content；
+- 首页 Featured Content。
+
+编号应使用 Mono / UI Font，避免用巨大装饰字体抢正文。
+
+---
+
+# 3. Design Tokens
+
+> 如果当前项目已有 Docusaurus/CSS Variables，请基于它们扩展，不要平行创建完全独立体系。
+
+推荐语义变量：
+
+```css
+:root {
+  --hh-bg: var(--ifm-background-color);
+  --hh-surface: var(--ifm-background-surface-color);
+  --hh-surface-subtle: /* derived */;
+
+  --hh-text-primary: var(--ifm-font-color-base);
+  --hh-text-secondary: /* lower contrast */;
+  --hh-text-tertiary: /* metadata */;
+
+  --hh-border: /* subtle border */;
+  --hh-border-strong: /* stronger divider */;
+
+  --hh-accent: /* single accent color */;
+  --hh-code-bg: /* code surface */;
+}
+```
+
+原则：
+
+- 使用**语义变量**而不是 `--gray-300` 到处散落。
+- Light / Dark 使用同一语义名映射不同值。
+- Accent Color 尽量只有一个主色。
+- Status 色只做辅助，不把页面做成彩色仪表盘。
+
+---
+
+# 4. Color
+
+## 4.1 基础比例
+
+建议视觉面积：
+
+```text
+Neutral 85%+
+Accent  10%以内
+Status/semantic 少量
+```
+
+## 4.2 Accent 使用场景
+
+可以用于：
+
+- Current item；
+- Link hover；
+- Focus ring；
+- Progress；
+- 小面积 Status；
+- Active filter。
+
+避免用于：
+
+- 每张卡背景；
+- 大面积 Hero 渐变；
+- 所有标题；
+- 大片按钮矩阵。
+
+---
+
+# 5. Typography
+
+## 5.1 层级
+
+建议语义层级，不强制具体 px；Codex 应结合现有站点字号体系实现。
+
+```text
+Display / Hero
+Page Title / H1
+Section Title / H2
+Content Heading / H2-H3
+Card/List Title
+Body
+Lead
+Metadata
+Eyebrow / Mono
+```
+
+## 5.2 中文阅读
+
+中文正文重点：
+
+- 行高不能太紧；
+- 一行不能过宽；
+- 粗体使用克制；
+- 英文术语与中文之间保持自然排版；
+- 长篇正文和 UI Metadata 要有明显区别。
+
+## 5.3 Mono Font
+
+适合：
+
+```text
+LAB / 001
+SEP 11
+12 MIN
+BUILDING
+AI APPLICATIONS
+```
+
+不适合整个正文。
+
+---
+
+# 6. Layout
+
+## 6.1 Container
+
+推荐：
+
+```text
+Site max width: 1200～1280px
+Reading width: 720～820px
+```
+
+以现有布局变量为准，不强制重复定义。
+
+## 6.2 Section Rhythm
+
+Section 之间用明显留白建立节奏。
+
+优先：
+
+- whitespace；
+- `border-top`；
+- section number；
+- typography。
+
+而不是：
+
+> 每个 section 都放到一块灰色圆角背景里。
+
+---
+
+# 7. Spacing
+
+建议使用固定 spacing scale，而非随机数值。
+
+示意：
+
+```text
+4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96 / 128
+```
+
+使用规则：
+
+- Metadata 内部：小间距；
+- Card/List 内容：16～24；
+- Section：64～128；
+- Hero：根据 viewport 调整。
+
+移动端适当降低，不把 Desktop spacing 原样搬过去。
+
+---
+
+# 8. Border & Radius
+
+## Border
+
+细边框是主要结构语言之一。
+
+```text
+1px subtle
+1px strong (rare)
+```
+
+## Radius
+
+Radius 要克制。
+
+推荐：
+
+- 小型 tag / badge 可较圆；
+- Card 中等圆角；
+- 大内容块避免“每块都胶囊化”。
+
+不要同时出现大量不同 Radius。
+
+---
+
+# 9. Buttons & Links
+
+## Primary CTA
+
+仅用于关键动作，例如：
+
+- Explore Learning
+- View Projects
+- Start Reading
+
+## Secondary
+
+使用：
+
+- Text Link；
+- Border Button；
+- Arrow Link。
+
+## Arrow Behavior
+
+默认：
+
+```text
+View Project →
+```
+
+Hover：
+
+```text
+arrow translateX(4px)
+200～250ms
+```
+
+## External Link
+
+使用 `↗` 或现有项目的 external icon，保持全站一致。
+
+---
+
+# 10. Cards vs Lists
+
+这是设计系统中的重要约束。
+
+## 优先使用 Card
+
+- Featured Project；
+- Project Grid；
+- Lab Overview；
+- 需要明显独立边界的交互对象。
+
+## 优先使用 List / Editorial Row
+
+- Latest；
+- Archive；
+- Timeline；
+- Notes Index；
+- Papers；
+- Resources；
+- Related Content。
+
+典型 Latest：
+
+```text
+01   Spring AI Tool Calling
+     AI APP · 12 MIN                         SEP 08
+──────────────────────────────────────────────────
+02   Understanding Embedding
+     LLM · 8 MIN                            SEP 03
+```
+
+这比 6 张同样大小的 Card 更符合本站风格。
+
+---
+
+# 11. Component Patterns
+
+## 11.1 Page Hero
+
+```text
+EYEBROW / INDEX
+
+Page Title
+
+1～2 行说明。
+
+Optional metadata / CTA
+```
+
+不要每个页面 Hero 高度都占满一屏。
+
+---
+
+## 11.2 Section Header
+
+```text
+LATEST                                    VIEW ALL →
+─────────────────────────────────────────────────
+```
+
+或：
+
+```text
+04 / LATEST
+
+What I published recently.
+```
+
+选择一种和当前页面匹配的模式，不在同一页面混用太多 Header 风格。
+
+---
+
+## 11.3 Status Badge
+
+状态值映射：
+
+```text
+planning
+learning
+building
+experiment
+published
+production
+archived
+```
+
+原则：
+
+- 小；
+- 可读；
+- 颜色低饱和；
+- 不把状态做成主视觉。
+
+---
+
+## 11.4 Empty State
+
+不使用：
+
+```text
+No data.
+```
+
+推荐：
+
+```text
+FIRST EXPERIMENT IN PROGRESS
+
+The lab will document questions, setup,
+evidence and conclusions.
+```
+
+或中文：
+
+```text
+第一组实验正在整理中。
+
+这里会记录问题、环境、证据、结论与复现方式。
+```
+
+Empty State 需要表达“这个区域未来是什么”，但不能伪造已完成内容。
+
+---
+
+# 12. Home Page
+
+目标：
+
+```text
+Personal Homepage
++
+AI Learning Hub
++
+Builder Portfolio
+```
+
+## 12.1 Hero
+
+建议：
+
+```text
+你好，我是 Hohoo.
+
+Developer · AI Builder · Explorer
+
+从 Java 到 AI。
+从模型到应用，再走向真实世界。
+
+Explore Learning →
+View Projects →
+```
+
+背景可出现超低对比 Typography：
+
+```text
+BUILD
+UNDERSTAND
+EXPLORE
+```
+
+要求：
+
+- 不抢标题；
+- 手机端可隐藏；
+- 不使用粒子背景。
+
+## 12.2 Currently
+
+```text
+CURRENTLY
+
+Building       Personal AI Knowledge Assistant
+Learning       LLM Evaluation
+Exploring      Embodied AI
+Updated        SEP 2026
+```
+
+适合列表/网格，不做四张独立 Card。
+
+## 12.3 Learning Tracks
+
+三轨使用一致结构：
+
+```text
+01 / BUILD
+AI APPLICATIONS
+Description...
+Model API · RAG · Agent · Evaluation
+Explore →
+```
+
+没有真实进度时不要显示百分比。
+
+## 12.4 Latest
+
+使用 Editorial List。
+
+## 12.5 AI Radar
+
+首页增加一个轻量外部资讯区块，位置推荐在 `Latest` 与 `Featured Builds` 之间。
+
+关键视觉原则：
+
+```text
+LATEST          = Hohoo 自己的内容
+AI RADAR        = 外部世界的重要信号
+```
+
+Radar 不使用和 Project / Note 完全相同的卡片视觉。推荐 Editorial Row：
+
+```text
+AI RADAR                                      VIEW ALL →
+
+SIGNAL / OFFICIAL                                  2H AGO
+GPT-xxx Released
+一句 AI Summary……
+OpenAI ↗                         MODEL · API
+──────────────────────────────────────────────────────
+PAPER SIGNAL                                      5H AGO
+...
+```
+
+必须显示：
+
+- `SIGNAL / OFFICIAL / PAPER SIGNAL / RELEASE` 等来源属性；
+- 时间；
+- Primary Source；
+- Topic；
+- 必要时显示 `AI SUMMARY` 标识。
+
+避免：
+
+- 新闻门户式密集卡片墙；
+- 大封面图；
+- 夸张“Breaking News”视觉；
+- 用 Radar 抢过 Projects / Labs 的视觉权重。
+
+首页最多 3～5 条高价值 Signal。
+
+## 12.6 Featured Builds
+
+最多 2～3 个。
+
+## 12.7 Latest Lab
+
+最多突出 1 个。
+
+## 12.8 Activity
+
+首页只显示 4～6 条，完整历史去 Timeline。
+
+单条 Radar Signal 默认不进入 Activity；Weekly Digest 或真正转化为 Paper / Note / Lab / Blog 的内容才进入。
+
+---
+
+# 13. Project UI
+
+## Index
+
+```text
+BUILD / PROJECTS
+
+Ideas are useful.
+Shipping makes them real.
+```
+
+重点项目可以用较大 Feature Layout，普通项目进入列表/网格。
+
+## Detail
+
+Hero：
+
+```text
+PROJECT / 001
+
+ASK HOOHOO
+
+Personal AI Knowledge Assistant
+
+RAG · Java · Spring AI
+BUILDING
+```
+
+Architecture / Metrics 等内容区不要每段都做 Card。
+
+Decision 推荐：
+
+```text
+DECISION 01
+Vector Store
+
+PostgreSQL + pgvector
+
+Why
+...
+
+Trade-off
+...
+```
+
+---
+
+# 14. Lab UI
+
+Lab 强调科学记录感。
+
+```text
+LAB / 004
+
+Does reranking really help?
+
+RAG · EVALUATION
+SEP 2026
+```
+
+Result 可以使用：
+
+- Table；
+- 简单 Bar；
+- 小型 Metric。
+
+不要为了“实验室感”变成霓虹 Dashboard。
+
+Observations 与 Conclusion 视觉上要区分。
+
+---
+
+# 15. Notes UI
+
+Notes 是轻量内容。
+
+Index：Editorial list 优先。
+
+```text
+NOTE / 024
+KV Cache
+LLM · INFERENCE · 5 MIN
+一句话说明……
+```
+
+Detail：
+
+```text
+WHAT
+WHY
+HOW
+WHEN IT MATTERS
+RELATED
+```
+
+不需要完整 Docs Sidebar。
+
+---
+
+# 16. Glossary UI
+
+顶部：
+
+```text
+AI GLOSSARY
+
+[ Search concepts... ]
+
+A B C D E ... Z
+```
+
+Term：
+
+```text
+RAG
+Retrieval-Augmented Generation
+检索增强生成。
+LLM / APPLICATION
+Read more →
+```
+
+Glossary 是索引，不复制 Note 的长内容。
+
+---
+
+# 17. Papers UI
+
+使用偏文献目录的列表风格。
+
+```text
+PAPER / 012
+Attention Is All You Need
+Vaswani et al. · 2017
+Transformer · Foundation
+READ
+
+Reading Note →        Paper ↗
+```
+
+避免做成“收藏网站卡片墙”。
+
+---
+
+# 18. Resources UI
+
+Resource Item：
+
+```text
+Spring AI
+FRAMEWORK
+
+适合
+Java / Spring Developer
+
+为什么推荐
+与 Spring 生态整合自然，适合作为 Java 开发者进入 AI 应用开发的入口。
+
+Official ↗     My Notes →
+```
+
+强调推荐理由，不强调 Logo 墙。
+
+---
+
+# 19. Learning Page
+
+它是 Learning Dashboard，但不是 SaaS Dashboard。
+
+推荐：
+
+```text
+LEARNING PATH
+
+CONTINUE LEARNING
+RAG Evaluation →
+
+01 BUILD
+○ Model API
+✓ Structured Output
+◐ RAG
+○ Agent
+
+02 UNDERSTAND
+...
+```
+
+少用彩色图表，多用 Typography + Status + Progress。
+
+---
+
+# 20. Knowledge Map
+
+Desktop：
+
+- 2D；
+- 清晰节点；
+- Hover Highlight；
+- Click Side Detail；
+- Filter Domain。
+
+不要默认：
+
+- 3D；
+- 粒子；
+- 无限缩放；
+- 复杂 physics。
+
+Mobile：
+
+改成：
+
+```text
+RAG
+├── Prerequisite
+│   ├── Embedding
+│   └── Vector Database
+├── Related
+│   └── Reranking
+└── Used by
+    └── Ask Hohoo
+```
+
+---
+
+# 21. Docs / Article Reading
+
+## Reading Width
+
+正文保持约 720～820px 的舒适范围。
+
+## Header
+
+```text
+AI APPLICATIONS / RAG
+
+RAG From Scratch
+
+Description
+
+INTERMEDIATE · 12 MIN · UPDATED SEP 2026
+```
+
+## Learning Context
+
+只展示当前位置上下文：
+
+```text
+PART 03 / 08
+AI APPLICATIONS
+
+02 Structured Output ✓
+03 RAG ← YOU
+04 Agent
+```
+
+不复制整个 Sidebar。
+
+## Related
+
+```text
+KEEP EXPLORING
+
+NOTE / Embedding
+LAB / Chunk Size
+PROJECT / Ask Hohoo
+```
+
+---
+
+---
+
+# 22. AI Radar UI
+
+Radar 的视觉任务是：
+
+> **让用户快速判断“发生了什么、为什么值得看、信息来自哪里”，而不是制造无限滚动的信息焦虑。**
+
+## 22.1 Radar Index
+
+Hero：
+
+```text
+AI RADAR
+
+What's happening at the AI frontier.
+Curated signals, connected to what I'm learning.
+```
+
+顶部控制：
+
+```text
+ALL · MODELS · AGENTS · AI CODING · RAG · MULTIMODAL · EMBODIED · RESEARCH
+```
+
+Filter 如果移动端放不下，使用横向滚动 / Select / Sheet，不挤成多行小按钮墙。
+
+列表优先 Editorial Row，不做瀑布流。
+
+## 22.2 Radar Item
+
+推荐结构：
+
+```text
+RADAR / SIGNAL
+MODEL · OFFICIAL                         SEP 11 · 2H AGO
+
+GPT-xxx Released
+
+AI SUMMARY
+发生了什么……
+
+WHY IT MATTERS
+为什么值得关注……
+
+RELATED KNOWLEDGE
+NOTE / ...
+LAB / ...
+PROJECT / ...
+
+PRIMARY SOURCE
+OpenAI ↗
+
+RELATED COVERAGE
+...
+```
+
+`AI SUMMARY` 必须明确可见。
+
+`HOOHOO'S TAKE` 只有存在真实人工内容时显示，并使用不同 Eyebrow：
+
+```text
+HOOHOO'S TAKE
+```
+
+不要自动生成这个区块。
+
+## 22.3 Radar Cluster
+
+同一事件多来源时，不展示多张同级主卡。
+
+推荐：
+
+```text
+Primary Source   OpenAI
+Coverage         4 sources
+```
+
+点击展开 Related Coverage。
+
+## 22.4 Weekly Digest
+
+页面更像编辑周报，而不是列表：
+
+```text
+RADAR / WEEKLY
+2026 · W37
+SEP 07 — SEP 13
+
+THIS WEEK IN AI
+
+01 MODELS
+02 AGENTS
+03 AI CODING
+04 RESEARCH
+
+WORTH FOLLOWING
+...
+
+SAVED TO KNOWLEDGE
+3 Papers · 2 Notes · 1 Lab Idea
+```
+
+数字只能来自真实数据。
+
+## 22.5 Trend Page
+
+趋势页面使用小型数据可视化即可：
+
+- Signal count；
+- 7d / 30d；
+- Timeline；
+- Related sources；
+- Related knowledge。
+
+不做股票行情式红绿大盘，不制造“涨跌焦虑”。
+
+## 22.6 Mobile
+
+移动端：
+
+- Radar Row 纵向排列 Metadata；
+- Source / Time 保持可见；
+- Why It Matters 默认可读；
+- Related Coverage 可折叠；
+- Topic Filter 不造成多行拥挤；
+- 不使用横向复杂表格作为主阅读方式。
+
+---
+
+# 23. Ask Hohoo UI
+
+## Launcher
+
+```text
+✦ Ask Hohoo
+```
+
+Desktop：Side Panel。
+
+Mobile：Full Screen 或 Bottom Sheet。
+
+## Initial
+
+```text
+ASK HOOHOO
+Ask anything about my published notes.
+
+RAG 应该怎么入门？
+Embedding 和 Reranker 有什么区别？
+```
+
+## Answer
+
+```text
+Answer...
+
+SOURCES
+01 RAG From Scratch
+02 Embedding
+03 RAG Evaluation
+```
+
+Sources 是视觉核心，不允许弱化到不可发现。
+
+如果未来 Ask Hohoo 支持 Radar，UI 必须区分来源范围：
+
+```text
+KNOWLEDGE SOURCE
+RADAR SOURCE · 2H AGO
+```
+
+默认知识问答优先长期 Published Knowledge；只有涉及“最新 / 最近 / 本周”等问题才突出 Radar Freshness。
+
+---
+
+# 24. Motion
+
+统一：
+
+```text
+Entrance: opacity + translateY(12px)
+200～350ms
+```
+
+Hover：
+
+```text
+translateY(-2px)
+arrow translateX(4px)
+```
+
+必须支持：
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* disable non-essential motion */
+}
+```
+
+---
+
+# 25. Responsive
+
+必须检查：
+
+```text
+1440
+1280
+1024
+768
+430
+375
+```
+
+Mobile Rules：
+
+- Hero Typography 背景可隐藏；
+- 两列/三列自然堆叠；
+- Metadata 换行；
+- Table 横向滚动；
+- Code Block 不撑破 viewport；
+- Dropdown / Dialog 支持触控；
+- 重要 CTA 高度满足触控；
+- Knowledge Map 降级。
+
+---
+
+# 26. Visual Review Checklist
+
+Codex 每次视觉任务结束前检查：
+
+- [ ] 页面是否 Card 过多？
+- [ ] 是否存在不必要渐变？
+- [ ] Accent 是否滥用？
+- [ ] Typography 层级是否清楚？
+- [ ] Section 是否有足够呼吸感？
+- [ ] Mono Label 是否一致？
+- [ ] Arrow / Link 行为是否一致？
+- [ ] Light/Dark 都成立？
+- [ ] 375px 是否可阅读？
+- [ ] prefers-reduced-motion 是否成立？
+- [ ] 有没有为了“AI 感”增加低价值装饰？
