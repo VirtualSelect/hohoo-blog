@@ -1,0 +1,20 @@
+.page { max-width: 1050px; width: 100%; margin: 0 auto; padding: 64px 28px; }
+.eyebrow { color: var(--ifm-color-primary); letter-spacing: .13em; font-size: .75rem; }
+.lead { color: var(--blog-muted); max-width: 760px; }
+.tabs { display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0 42px; }
+.tabs a { padding: 9px 18px; border: 1px solid var(--blog-border); border-radius: 8px; }
+.tabs [aria-current='page'] { background: var(--blog-soft); font-weight: 600; }
+.track { margin-top: 42px; }
+.steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.card { background: var(--blog-surface); border: 1px solid var(--blog-border); border-radius: 12px; padding: 25px; }
+.card h3 { font-size: 1.2rem; line-height: 1.6; }
+.meta { display: flex; justify-content: space-between; gap: 15px; color: var(--blog-muted); font-size: .78rem; margin-bottom: 15px; }
+.card dl { font-size: .85rem; }
+.card dt { color: var(--blog-muted); }
+.card dd { margin: 0 0 10px; }
+.card p { font-size: .9rem; color: var(--blog-muted); }
+.empty { padding: 38px; border: 1px dashed var(--blog-border); border-radius: 12px; background: var(--blog-surface); }
+.timeline { list-style: none; padding: 0 0 0 25px; border-left: 2px solid var(--blog-border); }
+.timeline li { margin-bottom: 24px; }
+.timeline time { color: var(--ifm-color-primary); font-size: .85rem; }
+@media (max-width: 650px) { .page { padding: 36px 20px; } .steps { grid-template-columns: 1fr; } .empty { padding: 24px; } }

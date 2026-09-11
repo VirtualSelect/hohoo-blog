@@ -22,8 +22,8 @@ export default function Home() {
           <div>
             <p className={styles.eyebrow}><span className={styles.dot} /> {t('探索 AI，也记录每一步', 'BUILD · UNDERSTAND · EXPLORE')}</p>
             <Heading as="h1" id="home-title" className={styles.title}>{t('你好，我是', 'Hello, I’m ')}<span>Hohoo.</span><br />{t('从模型出发，向真实世界。', 'From models to the real world.')}</Heading>
-            <p className={styles.intro}>{t('一名生活在苏州的开发者。接下来，聚焦 AI 应用开发、LLM 分享与具身智能，把学习中的问题、实验和思考整理在这里。', 'A developer based in Suzhou, exploring AI applications, LLMs and embodied intelligence. A place for questions, experiments and reflections.')}</p>
-            <div className={styles.actions}><Link className={styles.primary} to="/docs/skill">{t('浏览研究方向', 'Explore topics')} ↗</Link><Link className={styles.secondary} to="/aboutMe">{t('认识一下我', 'About me')} →</Link></div>
+            <p className={styles.intro}>{t('平时写 Java，最近在折腾 AI 应用，也开始了解具身智能。这里记录学到的新东西、动手时遇到的问题，以及把想法一点点做出来的过程。', 'I usually write Java. Lately, I’ve been building with AI and learning about embodied intelligence. This is where I share what I learn, the problems I run into, and how my ideas take shape.')}</p>
+            <div className={styles.actions}><Link className={styles.primary} to="/learning">{t('开始阅读路线', 'Explore reading paths')} ↗</Link><Link className={styles.secondary} to="/aboutMe">{t('认识一下我', 'About me')} →</Link></div>
             <div className={styles.topics}><span>AI Applications</span><span>LLM</span><span>{t('具身智能', 'Embodied AI')}</span></div>
           </div>
           <aside className={styles.profile} aria-label={t('个人简介', 'Profile')}>
@@ -31,7 +31,7 @@ export default function Home() {
             <img src={avatar} alt="Hohoo" width="112" height="112" className={styles.avatar} />
             <p className={styles.profileName}>Hohoo<span>Developer · AI Explorer</span></p>
             <p className={styles.quote}>{t('忙时学习，闲时读书。', 'Stay curious. Keep growing.')}<br />{t('在热爱的事情里，慢慢积累。', 'Make room for the things you love.')}</p>
-            <div className={styles.profileBottom}><span>⌖ {t('中国 · 苏州', 'Suzhou, China')}</span><a href={social.github.href}>GitHub ↗</a></div>
+            <div className={styles.profileBottom}><span>{t('学习 · 实践 · 分享', 'Learn · Build · Share')}</span><a href={social.github.href}>GitHub ↗</a></div>
           </aside>
         </section>
         <section className={styles.writing} aria-labelledby="writing-title">

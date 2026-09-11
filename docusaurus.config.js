@@ -42,6 +42,8 @@ const config = {
         },
     },
 
+    plugins: ['./plugins/learning-index.cjs'],
+
     presets: [
         [
             'classic',
@@ -95,6 +97,7 @@ const config = {
                     {to: '/blog', label: '随笔', position: 'right'},
 
                     {to: '/docs/skill', label: '专题', position: 'right'},
+                    {to: '/learning', label: '阅读路线', position: 'right'},
                     {to: '/aboutMe', label: '关于我', position: 'right'},
                     {
                         type: 'localeDropdown',

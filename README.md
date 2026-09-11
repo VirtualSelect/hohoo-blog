@@ -41,3 +41,15 @@ npm run serve -- --no-open
 公开技术内容分为 `docs/ai-apps/`（AI 应用开发）、`docs/llm/`（LLM 分享）与 `docs/embodied-ai/`（具身智能）。每个目录的 `index.md` 是规划页，真实文章按主题放入相应目录，侧栏自动收录。首页专题数据维护在 `data/topics.js`。
 
 技术文章按主要问题只选择一个专题；RAG、Agent、论文阅读等作为辅助标签。`blog/` 保留个人随笔。旧技术笔记迁到 `archive/legacy/`，不参与发布。删除的旧文章地址会返回 404；部署后需重新抓取 Algolia 索引以清除旧结果。
+
+## 阅读路线与时间轴
+
+`data/learning-paths.json` 管理两条路线及稳定的阶段 ID。规划页不进入时间轴。实际文章写入对应 `docs/` 专题目录，在 front matter 增加以下字段，构建时会自动点亮路线入口并按日期加入 `/timeline`：
+
+```yaml
+learning_step: first-call # 对应路线中的唯一阶段 ID
+published_at: "2026-09-11" # 换成真实发布日期，必须加引号
+reading_minutes: 15 # 根据正式文章篇幅估算
+```
+
+不要提前填入虚假的发布日期。草稿使用 `draft: true`，不进入索引；`unlisted: true` 的文章也不会进入路线和时间轴。缺失日期、无效阅读时长、未知或重复阶段 ID 会使构建失败，避免产生错误链接和重复记录。文章的标题、摘要与实际链接由 Docusaurus 提供，无需在时间轴再手动填写。英文站沿用未翻译的中文正文，路线界面有英文说明。

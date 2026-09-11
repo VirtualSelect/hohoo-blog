@@ -1,0 +1,97 @@
+[
+  {
+    "id": "applications",
+    "title": "AI 应用与 LLM",
+    "en": "AI applications & LLMs",
+    "intro": "从已有的编程基础出发，按模型调用、输出控制、知识检索和效果评估的顺序推进。",
+    "english": "Start with programming fundamentals, then explore model calls, output control, retrieval and evaluation.",
+    "steps": [
+      {
+        "id": "first-call",
+        "title": "从 Java 后端到第一个 LLM 应用",
+        "en": "Your first LLM application from Java",
+        "topic": "AI 应用开发",
+        "prerequisite": "Java 与 HTTP 基础",
+        "prerequisiteEn": "Java and HTTP basics",
+        "minutes": 15,
+        "outcome": "规划目标：完成一次模型请求，理解输入、输出与错误处理。",
+        "outcomeEn": "Goal: make a model request and understand inputs, outputs and errors."
+      },
+      {
+        "id": "structured-output",
+        "title": "提示词与结构化输出",
+        "en": "Prompts and structured output",
+        "topic": "LLM 分享",
+        "prerequisite": "完成模型调用阶段",
+        "prerequisiteEn": "Complete the model-call stage",
+        "minutes": 12,
+        "outcome": "规划目标：围绕固定任务比较提示方式，检查输出是否符合约定。",
+        "outcomeEn": "Goal: compare prompts for a fixed task and check output requirements."
+      },
+      {
+        "id": "blog-rag",
+        "title": "给个人博客做一个知识库问答",
+        "en": "Build a Q&A system for this blog",
+        "topic": "AI 应用开发",
+        "prerequisite": "模型调用与输出控制",
+        "prerequisiteEn": "Model calls and output control",
+        "minutes": 20,
+        "outcome": "规划目标：串联文档处理、检索和回答，保留可追溯的来源。",
+        "outcomeEn": "Goal: connect document processing, retrieval and answers with sources."
+      },
+      {
+        "id": "evaluation",
+        "title": "评估效果，记录失败，复盘改进",
+        "en": "Evaluate, record failures and iterate",
+        "topic": "LLM 分享",
+        "prerequisite": "一个可运行的应用原型",
+        "prerequisiteEn": "A working application prototype",
+        "minutes": 15,
+        "outcome": "规划目标：建立固定问题集，记录效果、延迟、成本与局限。",
+        "outcomeEn": "Goal: build a fixed question set and record quality, latency, cost and limits."
+      }
+    ]
+  },
+  {
+    "id": "embodied",
+    "title": "具身智能入门",
+    "en": "Getting started with embodied AI",
+    "intro": "独立于应用开发路线，从概念与阅读开始，再进入仿真；不预设你已经拥有机器人硬件。",
+    "english": "A separate path from concepts and reading to simulation. No robot hardware is assumed.",
+    "steps": [
+      {
+        "id": "embodied-basics",
+        "title": "理解感知、决策与行动",
+        "en": "Understand perception, decisions and actions",
+        "topic": "具身智能",
+        "prerequisite": "基础编程经验",
+        "prerequisiteEn": "Basic programming experience",
+        "minutes": 12,
+        "outcome": "规划目标：梳理任务、观测与动作之间的关系，明确学习问题。",
+        "outcomeEn": "Goal: map tasks, observations and actions and define learning questions."
+      },
+      {
+        "id": "embodied-reading",
+        "title": "带着问题读一篇论文",
+        "en": "Read a paper with a question in mind",
+        "topic": "具身智能",
+        "prerequisite": "了解基本概念",
+        "prerequisiteEn": "Understand the basic concepts",
+        "minutes": 18,
+        "outcome": "规划目标：记录任务设定、方法、实验条件和原文局限。",
+        "outcomeEn": "Goal: record the task, method, experimental conditions and limitations."
+      },
+      {
+        "id": "first-simulation",
+        "title": "第一次仿真实验",
+        "en": "Your first simulation experiment",
+        "topic": "具身智能",
+        "prerequisite": "基础概念与 Python 基础",
+        "prerequisiteEn": "Basic concepts and Python",
+        "minutes": 25,
+        "outcome": "规划目标：完成环境搭建与一个最小任务，记录实际结果。",
+        "outcomeEn": "Goal: set up an environment, run a small task and record the actual result."
+      }
+    ]
+  }
+]

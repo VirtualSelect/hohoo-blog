@@ -12,5 +12,8 @@
   },
   "item.label.专题": {
     "message": "专题"
+  },
+  "item.label.阅读路线": {
+    "message": "阅读路线"
   }
 }

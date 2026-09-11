@@ -15,5 +15,8 @@
   },
   "item.label.专题": {
     "message": "Topics"
+  },
+  "item.label.阅读路线": {
+    "message": "Reading paths"
   }
 }
