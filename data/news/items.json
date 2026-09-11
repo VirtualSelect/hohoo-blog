@@ -23,6 +23,32 @@
     "translationKind": "editorial"
   },
   {
+    "id": "8845b08ab7751c9c55e9",
+    "title": "OpenAI 在 API 中推出全双工语音模型 GPT-Live-1",
+    "url": "https://aihot.news/items/cmtvsgyqs05vkrofbgg06yzsa",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-10T00:00:00.000Z",
+    "collectedAt": "2026-09-11T11:10:50.904Z",
+    "category": "ai-apps",
+    "summary": "OpenAI 在 API 中发布语音模型 GPT-Live-1，可同时听和说，支持将推理和工具调用委派给 GPT-6 Astra 等后端模型，前端语音层定价为每分钟 $0.05。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息"
+  },
+  {
+    "id": "094c7faf707de7f64e58",
+    "title": "GPT-6 Astra推理等级怎么选才最省Token",
+    "url": "https://aihot.news/items/cmttcqkx404pprofp0jwc34zu",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-09T00:09:00.000Z",
+    "collectedAt": "2026-09-11T11:10:50.904Z",
+    "category": "ai-apps",
+    "summary": "卡兹克发文讲解GPT-6 Astra的推理强度等级（Reasoning Effort）含义，指出各档位是同一模型的不同思考预算，Ultra则类似拉起多个智能体协作的专项工作组。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息"
+  },
+  {
     "id": "a139f80b159295ada71d",
     "title": "Fine-tuning a 350M Model for Better Structured Outputs in 100 GRPO Steps",
     "url": "https://huggingface.co/blog/grpo-with-trl-ifstruct",
