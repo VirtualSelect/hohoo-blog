@@ -1,6 +1,6 @@
 import React from 'react';
 import OriginalContent from '@theme-original/DocItem/Content';
-import { useDoc } from '@docusaurus/theme-common/internal';
+import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import DocReadingContext from '@site/src/components/DocReadingContext';
 export default function Content(props) {
   const { frontMatter } = useDoc();

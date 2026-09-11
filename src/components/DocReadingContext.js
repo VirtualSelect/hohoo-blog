@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Link from '@docusaurus/Link';
-import { useDoc } from '@docusaurus/theme-common/internal';
+import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import tracks from '@site/data/learning-paths.json';
 import { Related, useEnglish } from './ContentUI';
