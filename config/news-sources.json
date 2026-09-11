@@ -2,7 +2,12 @@
   "dailyLimit": 5,
   "perSourceLimit": 2,
   "lookbackDays": 14,
-  "blockedUrls": [],
+  "blockedUrls": [
+    "https://openai.com/index/using-codex-chatgpt-to-search-for-new-antimicrobials",
+    "https://openai.com/index/put-data-to-work",
+    "https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series",
+    "https://deepmind.google/blog/alphagenome-atlas-a-predictive-map-of-every-possible-dna-letter-change-in-the-human-genome"
+  ],
   "sources": [
     {
       "id": "huggingface",

@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {canonicalUrl, dailyMarkdown, fetchText, parseFeed, selectItems, summarize} from './lib.mjs';
+import {assessRelevance} from './relevance.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const readJson = async file => JSON.parse((await fs.readFile(file,'utf8')).replace(/^\uFEFF/,''));
@@ -24,7 +25,13 @@ for (const source of sources) {
     report.sources.push({source:source.name,status:'failed',error:error.message});
   }
 }
-let selected = selectItems(candidates, existing, config, now);
+report.rejected = [];
+const relevant = candidates.flatMap(item => {
+  const assessment = assessRelevance(item);
+  if (!assessment.accepted) {report.rejected.push({title:item.title,url:item.url,reason:assessment.reason}); return [];}
+  return [{...item, category:assessment.category, relevanceReason:assessment.reason}];
+});
+let selected = selectItems(relevant, existing, config, now);
 const summarized = [];
 for (const item of selected) {
   try {summarized.push(await summarize(item));}

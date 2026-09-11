@@ -1,5 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import {assessRelevance} from '../scripts/news/relevance.mjs';
+import {localizedNews} from '../src/utils/news-locale.mjs';
 import {canonicalUrl, classify, dailyMarkdown, fetchText, parseFeed, selectItems, summarize} from '../scripts/news/lib.mjs';
 const now = new Date('2026-09-11T08:00:00Z');
 const source = {id:'test',name:'Test',hosts:['example.com'],defaultCategory:'ai-apps'};
@@ -50,14 +52,28 @@ test('summaries are optional, bounded, and invalid responses fail for caller fal
  assert.deepEqual(await summarize(item(),{}),item());
  const env={NEWS_SUMMARIZE:'true',NEWS_LLM_URL:'https://api.example.com/chat/completions',NEWS_LLM_API_KEY:'test-only',NEWS_LLM_MODEL:'test'};
  const response=value=>async()=>new Response(JSON.stringify({choices:[{message:{content:JSON.stringify(value)}}]}));
- const result=await summarize(item(),env,response({titleZh:'中文标题',summary:'中文摘要'}));assert.equal(result.summaryKind,'ai-summary');
+ const result=await summarize(item(),env,response({zh:{title:'中文标题',summary:'中文摘要'},en:{title:'English title',summary:'English summary'}}));assert.equal(result.summaryKind,'ai-summary');
+ assert.equal(result.originalSummary,'Feed excerpt');
+ assert.equal(localizedNews(result,'en').summary,'English summary');
+ assert.equal(localizedNews(result,'zh-CN').summary,'中文摘要');
  await assert.rejects(summarize(item(),env,response({titleZh:'测试',summary:'x'.repeat(181)})));
  await assert.rejects(summarize(item(),{...env,NEWS_LLM_URL:'http://localhost'},response({})));
 });
 test('daily pages escape untrusted Markdown/MDX and retain original attribution',()=>{
  const markdown=dailyMarkdown('2026-09-11',[item('a',{title:'<script>{bad}</script> [link]',summary:'**not executable**'})]);
  assert.ok(!markdown.includes('<script>'));assert.ok(!markdown.includes('{bad}'));
- assert.ok(markdown.includes('https://example.com/a'));assert.ok(markdown.includes('2026-09-10'));assert.ok(markdown.includes('Test'));
+ assert.ok(markdown.includes('NewsDigest'));assert.ok(markdown.includes('2026-09-11'));
+ assert.throws(()=>dailyMarkdown('bad" date',[]));
+});
+
+test('editorial filter requires topic relevance and technical substance, not a famous source',()=>{
+ assert.equal(assessRelevance(item('a',{title:'How AI-native companies turn workflows into operating capability',summary:'Agents transform company workflows.'})).accepted,false);
+ assert.equal(assessRelevance(item('a',{title:'Rebuilding AUTOMATIC1111 with Gradio Workflow',summary:''})).accepted,true);
+ for(const title of ['AlphaGenome Atlas genome map','New partnership for LLM training','Now everyone can put data to work','Weather model benchmark','Introducing a new language model']) assert.equal(assessRelevance(item('a',{title,summary:''})).accepted,false,title);
+ for(const [title,category] of [['RAG retrieval evaluation benchmark','ai-apps'],['LLM quantization inference benchmark','llm'],['Robot policy simulation dataset','embodied-ai']]) {
+  const result=assessRelevance(item('a',{title,summary:''}));assert.equal(result.accepted,true,title);assert.equal(result.category,category);
+ }
+ assert.equal(localizedNews(item(),'zh-CN').fallback,true);
 });
 test('classification prioritizes embodied topics, then application use cases',()=>{
  assert.equal(classify('Robot agent','llm'),'embodied-ai');assert.equal(classify('Codex in production','llm'),'ai-apps');assert.equal(classify('New language model','ai-apps'),'llm');

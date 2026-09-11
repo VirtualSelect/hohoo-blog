@@ -15,6 +15,7 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "news:collect": "node scripts/news/collect.mjs",
     "news:render": "node scripts/news/render.mjs",
+    "news:translate": "node scripts/news/translate.mjs",
     "news:check": "node scripts/news/render.mjs --check",
     "news:reject": "node scripts/news/render.mjs --reject",
     "test:news": "node --test tests/news.test.mjs"

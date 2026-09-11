@@ -1,29 +1,5 @@
 [
   {
-    "id": "39842fa0b34b37cbe3f7",
-    "title": "How a researcher uses Codex and ChatGPT to search for new antimicrobial molecules",
-    "url": "https://openai.com/index/using-codex-chatgpt-to-search-for-new-antimicrobials",
-    "sourceId": "openai",
-    "sourceName": "OpenAI",
-    "publishedAt": "2026-09-10T16:00:00.000Z",
-    "collectedAt": "2026-09-11T09:04:14.138Z",
-    "category": "ai-apps",
-    "summary": "César de la Fuente’s lab uses Codex and ChatGPT to search living and extinct genomes for antimicrobial candidates to fight drug-resistant infections.",
-    "summaryKind": "source-excerpt"
-  },
-  {
-    "id": "6a886414536a09e3da65",
-    "title": "Now everyone can put data to work",
-    "url": "https://openai.com/index/put-data-to-work",
-    "sourceId": "openai",
-    "sourceName": "OpenAI",
-    "publishedAt": "2026-09-10T15:00:00.000Z",
-    "collectedAt": "2026-09-11T09:04:14.138Z",
-    "category": "ai-apps",
-    "summary": "Meet the Data agent in ChatGPT Work. Connect company data, uncover insights, and build interactive dashboards with AI using natural language.",
-    "summaryKind": "source-excerpt"
-  },
-  {
     "id": "075fed980e67c694db46",
     "title": "Rebuilding AUTOMATIC1111 with Gradio Workflow",
     "url": "https://huggingface.co/blog/gradio-workflow-1111",
@@ -33,30 +9,17 @@
     "collectedAt": "2026-09-11T09:04:14.138Z",
     "category": "ai-apps",
     "summary": "",
-    "summaryKind": "link-only"
-  },
-  {
-    "id": "46660cb2ea4362f69cbd",
-    "title": "IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly license",
-    "url": "https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series",
-    "sourceId": "huggingface",
-    "sourceName": "Hugging Face",
-    "publishedAt": "2026-09-09T15:36:24.000Z",
-    "collectedAt": "2026-09-11T09:04:14.138Z",
-    "category": "ai-apps",
-    "summary": "",
-    "summaryKind": "link-only"
-  },
-  {
-    "id": "825546b9e9e150a70467",
-    "title": "AlphaGenome Atlas: A predictive map of every possible DNA letter change in the human genome",
-    "url": "https://deepmind.google/blog/alphagenome-atlas-a-predictive-map-of-every-possible-dna-letter-change-in-the-human-genome",
-    "sourceId": "deepmind",
-    "sourceName": "Google DeepMind",
-    "publishedAt": "2026-09-08T14:00:15.000Z",
-    "collectedAt": "2026-09-11T09:04:14.138Z",
-    "category": "ai-apps",
-    "summary": "AlphaGenome Atlas maps the molecular effects of 9 billion single-letter DNA variants across the human genome.",
-    "summaryKind": "source-excerpt"
+    "summaryKind": "link-only",
+    "translations": {
+      "zh": {
+        "title": "使用 Gradio Workflow 重建 AUTOMATIC1111",
+        "summary": ""
+      },
+      "en": {
+        "title": "Rebuilding AUTOMATIC1111 with Gradio Workflow",
+        "summary": ""
+      }
+    },
+    "translationKind": "editorial"
   }
 ]
