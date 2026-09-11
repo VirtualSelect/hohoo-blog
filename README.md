@@ -1,10 +1,10 @@
 # Hohoo 的个人博客
 
-基于 Docusaurus 3 和 React 18，聚焦 AI 应用开发、LLM 分享、具身智能与个人随笔，支持中文、英文界面和深浅主题。文章正文目前主要为中文；英文站点会回退显示原文。
+基于 Docusaurus 3.10.2 和 React 18，聚焦 AI 应用开发、LLM 分享、具身智能与个人随笔，支持中文、英文界面和深浅主题。文章正文目前主要为中文；英文站点会回退显示原文。
 
 ## 本地开发
 
-需要 Node.js 18 或更高版本。
+需要 Node.js 20 或更高版本；项目 CI 使用 Node.js 22。统一使用 npm 和 `package-lock.json` 安装依赖。
 
 ```sh
 npm ci
@@ -17,10 +17,14 @@ npm start -- --no-open
 
 ```sh
 npm run build
-npm run serve -- --no-open
+npm run preview
 ```
 
 构建会检查站内链接，并生成两个语言版本到 `build/`。部署时发布此目录即可。
+
+`npm start` 使用开发地址 `http://localhost:3000/`；`npm run preview` 使用生产构建预览地址 `http://localhost:4173/`。
+
+升级依赖前先停止开发和预览服务，再执行 `npm ci`，完成后重新启动。不要在同一个 `node_modules` 中交替执行 npm、pnpm 或 Yarn 安装，否则运行中的开发服务可能混用不同依赖副本，导致 React 上下文错误。依赖升级后若遇到此问题，停止服务后执行 `npm run clear`、`npm ci`，再启动；`clear` 会清除 `build/`，使用预览前需重新构建。
 
 ## 内容维护
 
