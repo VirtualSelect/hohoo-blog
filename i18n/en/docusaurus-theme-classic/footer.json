@@ -63,5 +63,8 @@
   },
   "link.item.label.具身智能": {
     "message": "Embodied AI"
+  },
+  "link.item.label.最近在做什么": {
+    "message": "Now"
   }
 }

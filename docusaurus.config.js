@@ -120,6 +120,7 @@ const config = {
                         title: '社交',
                         items: [
                             {label: '关于我', to: '/aboutMe'},
+                            {label: '最近在做什么', to: '/now'},
                             {label: 'GitHub', href: social.github.href},
                             {label: 'Twitter', href: social.twitter.href},
                         ],

@@ -42,7 +42,7 @@ export default function Home() {
           </Link>
         </section>
         <section className={styles.notes} aria-labelledby="notes-title"><div className={styles.sectionHeading}><div><p className={styles.eyebrow}>02 / {t('三个专栏', 'TOPICS')}</p><Heading as="h2" id="notes-title">{t('接下来，关注这些问题', 'Questions to explore next')}</Heading></div><Link to="/docs/skill">{t('专题总览', 'All topics')} ↗</Link></div><div className={styles.noteGrid}>{notes.map((note, index) => <Link key={note.to} to={note.to} className={styles.note}><div className={styles.noteTop}><span>{note.tag}</span><span>0{index + 1}</span></div><Heading as="h3">{en ? note.en : note.title}</Heading><p>{en ? note.english : note.description}</p><span className={styles.noteStatus}>{t('筹备中 · 查看规划', 'In preparation · View roadmap')}</span><span className={styles.noteArrow} aria-hidden="true">↗</span></Link>)}</div></section>
-        <section className={styles.connect}><div><p className={styles.eyebrow}>STAY CURIOUS, KEEP BUILDING.</p><Heading as="h2">{t('很高兴，在这里遇见你。', 'Glad our paths crossed.')}</Heading><p>{t('如果某篇记录对你有用，或你有想交流的想法，欢迎打个招呼。', 'Found something useful, or have an idea to share? Say hello.')}</p></div><a className={styles.secondary} href={social.email.href}>{t('聊一聊', 'Say hello')} ↗</a></section>
+        <section className={styles.connect}><div><p className={styles.eyebrow}>STAY CURIOUS, KEEP BUILDING.</p><Heading as="h2">{t('很高兴，在这里遇见你。', 'Glad our paths crossed.')}</Heading><p>{t('如果某篇记录对你有用，或你有想交流的想法，欢迎打个招呼。', 'Found something useful, or have an idea to share? Say hello.')}</p></div><Link className={styles.secondary} to="/now">{t('最近在做什么', 'What’s on my mind')} ↗</Link></section>
       </main>
     </Layout>
   );
