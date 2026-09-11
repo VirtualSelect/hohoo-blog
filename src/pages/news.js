@@ -1,3 +1,4 @@
+import ReadingActions from '@site/src/components/ReadingActions';
 import {localizedNews} from '@site/src/utils/news-locale.mjs';
 import React, {useState} from 'react';
 import Layout from '@theme/Layout';
@@ -42,7 +43,7 @@ export default function News() {
         {!en && item.titleZh && <p className={styles.original}>{item.title}</p>}
         <p>{localizedNews(item, en ? 'en' : 'zh').summary || t('来源未提供摘要，请阅读原文。','No excerpt was provided. Read the original article.')}</p>
         <div className={styles.bottom}><span>{item.summaryKind === 'ai-summary' ? t('AI 辅助摘要 · 请核对原文','AI-assisted summary · Check the source') : item.summaryKind === 'source-excerpt' ? t('来源短摘录','Source excerpt') : t('原文链接','Source link')}</span><Link to={'/news/daily/'+item.collectedAt.slice(0,10)}>{t('查看当日汇总','Daily digest')} →</Link></div>
-      </article>)}</div> : <section className={styles.empty}><h2>{news.length ? t('没有匹配的资讯','No matching entries') : t('第一期资讯，等待与你见面。','The first edition is on its way.')}</h2><p>{news.length ? t('换个关键词，或清除筛选条件试试。','Try another keyword or clear your filters.') : t('正在准备来源与审核流程。正式内容通过审核后会出现在这里。','Sources and the review process are being prepared. Entries will appear here after review.')}</p>{news.length > 0 && <button type="button" onClick={()=>{setCategory('all');setSource('all');setQuery('');setPage(1);}}>{t('清除筛选','Clear filters')}</button>}</section>}
+      <ReadingActions id={item.id} en={en}/></article>)}</div> : <section className={styles.empty}><h2>{news.length ? t('没有匹配的资讯','No matching entries') : t('第一期资讯，等待与你见面。','The first edition is on its way.')}</h2><p>{news.length ? t('换个关键词，或清除筛选条件试试。','Try another keyword or clear your filters.') : t('正在准备来源与审核流程。正式内容通过审核后会出现在这里。','Sources and the review process are being prepared. Entries will appear here after review.')}</p>{news.length > 0 && <button type="button" onClick={()=>{setCategory('all');setSource('all');setQuery('');setPage(1);}}>{t('清除筛选','Clear filters')}</button>}</section>}
       {pages > 1 && <nav className={styles.pagination} aria-label={t('资讯分页','News pagination')}><button disabled={current===1} onClick={()=>setPage(current-1)}>{t('上一页','Previous')}</button><span>{current} / {pages}</span><button disabled={current===pages} onClick={()=>setPage(current+1)}>{t('下一页','Next')}</button></nav>}
     </main>
   </Layout>;

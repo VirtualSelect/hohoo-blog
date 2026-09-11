@@ -1,3 +1,4 @@
+import ReadingActions from '@site/src/components/ReadingActions';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -18,7 +19,7 @@ export default function NewsDigest({day}) {
         <p>{content.summary}</p>
         <small>{content.fallback ? (en ? 'Original text · Translation unavailable' : '原文内容 · 暂无该语言译文') : (en ? 'AI-assisted translation · Check the source' : 'AI 辅助翻译 · 请核对原文')}</small>
         <p><a href={item.url} target="_blank" rel="noopener noreferrer">{en ? 'Read original ↗' : '阅读原文 ↗'}</a></p>
-      </article>;
+      <ReadingActions id={item.id} en={en}/></article>;
     })}
   </section>;
 }

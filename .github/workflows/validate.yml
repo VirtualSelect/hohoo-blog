@@ -17,5 +17,6 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm run test:news
       - run: node --test tests/learning-index.test.cjs
+      - run: node --test tests/reading-state.test.mjs
       - run: npm run news:check
       - run: npm run build

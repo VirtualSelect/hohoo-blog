@@ -18,5 +18,20 @@
   },
   "item.label.AI 资讯": {
     "message": "AI 资讯"
+  },
+  "item.label.探索": {
+    "message": "探索"
+  },
+  "item.label.稍后读": {
+    "message": "稍后读"
+  },
+  "item.label.每周阅读": {
+    "message": "每周阅读"
+  },
+  "item.label.项目实验室": {
+    "message": "项目实验室"
+  },
+  "item.label.最近在做什么": {
+    "message": "最近在做什么"
   }
 }

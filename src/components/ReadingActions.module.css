@@ -1,0 +1,5 @@
+.actions {display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1rem 0;}
+.actions button {font:inherit;padding:.4rem .8rem;border:1px solid var(--ifm-color-emphasis-300);border-radius:8px;background:var(--ifm-background-surface-color);color:var(--ifm-font-color-base);cursor:pointer;}
+.actions button[aria-pressed='true'] {border-color:var(--ifm-color-primary);color:var(--ifm-color-primary);}
+.actions button:focus-visible {outline:2px solid var(--ifm-color-primary);outline-offset:3px;}
+.actions button:disabled {opacity:.5;cursor:wait;}

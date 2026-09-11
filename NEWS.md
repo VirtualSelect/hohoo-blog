@@ -104,7 +104,11 @@ node scripts/news/render.mjs --reject <资讯id>
 - [create-pull-request 权限与工作流说明](https://github.com/peter-evans/create-pull-request)
 - [RSS Parser](https://github.com/rbren/rss-parser)
 
-## 研究相关性与内容质量
+## 阅读收藏
+
+资讯列表、专题和日报均可“稍后读”和手动标记已读；通过导航栏“探索 → 稍后读”查看未读、全部或已读收藏。状态只存在当前浏览器，不上传服务端，不跨设备同步。中英文页面使用相同资讯 ID；已下架资讯不再出现在清单中。存储失败时退回本次访问内存并提示用户。学习路线的规划选题继续使用原有独立清单。验证命令：`node --test tests/reading-state.test.mjs`。
+
+## 研究筛选规则
 
 采集在数量限制之前执行严格主题筛选（scripts/news/relevance.mjs），要求同时包含 AI 应用工程、LLM 技术或具身智能主题证据，以及实现、训练、评测、数据集、推理或仿真等技术信息。泛商业动态、气象与基因组消息默认排除；不因来源知名就收录，不凑每日数量。每条排除原因保存在运行报告 rejected 中。规则只能检查 RSS 标题和短摘录，可能漏收；人工审核仍负责事实与实际价值。
 

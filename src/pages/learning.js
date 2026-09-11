@@ -69,7 +69,7 @@ export default function Learning() {
           return <li key={step.id} className={styles.card} id={'step-' + step.id}>
             <div className={styles.meta}><span>{en ? 'STAGE' : '阶段'} {tracks.find(item => item.id === track.id).steps.findIndex(item => item.id === step.id) + 1}</span><span>{article ? (en ? 'Published' : '已发布') : (en ? 'Planned' : '规划中')}</span></div>
             <h3>{article ? <Link to={article.permalink}>{article.title}</Link> : (en ? step.en : step.title)}</h3>
-            <dl><dt>{en ? 'Level' : '难度'}</dt><dd>{en ? (tracks.find(item => item.id === track.id).steps.findIndex(item => item.id === step.id) < 2 ? 'Introductory' : 'Practice') : (index < 2 ? '入门' : '实践')}</dd>
+            <dl><dt>{en ? 'Level' : '难度'}</dt><dd>{en ? (tracks.find(item => item.id === track.id).steps.findIndex(item => item.id === step.id) < 2 ? 'Introductory' : 'Practice') : (tracks.find(item => item.id === track.id).steps.findIndex(item => item.id === step.id) < 2 ? '入门' : '实践')}</dd>
               <dt>{en ? 'Prerequisites' : '前置知识'}</dt><dd>{en ? step.prerequisiteEn : step.prerequisite}</dd>
               <dt>{en ? (article ? 'Reading time' : 'Planned reading time') : (article ? '预计阅读时间' : '计划阅读时间')}</dt><dd>{article?.minutes || step.minutes} {en ? 'min' : '分钟'}</dd></dl>
             <p>{en ? step.outcomeEn : step.outcome}</p>
