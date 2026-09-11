@@ -28,9 +28,9 @@ export function useNewsReading() {
   };
   return {...state,ready,error,toggle};
 }
-export default function ReadingActions({id,en}) {
+export default function ReadingActions({id,en,compact=false}) {
   const state=useNewsReading();
-  return <div className={styles.actions}>
+  return <div className={compact ? styles.compact : styles.actions}>
     <button type="button" disabled={!state.ready} aria-pressed={state.saved.includes(id)} onClick={()=>state.toggle('saved',id)}>{state.saved.includes(id) ? (en?'Saved ✓':'已收藏 ✓') : (en?'Save for later':'稍后读')}</button>
     <button type="button" disabled={!state.ready} aria-pressed={state.read.includes(id)} onClick={()=>state.toggle('read',id)}>{state.read.includes(id) ? (en?'Read ✓':'已读 ✓') : (en?'Mark as read':'标记已读')}</button>
     {state.error && <small role="status">{en?'Storage unavailable; kept for this visit only.':'存储不可用，仅在本次访问中保留。'}</small>}

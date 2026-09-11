@@ -20,5 +20,6 @@ jobs:
       - run: node --test tests/reading-state.test.mjs
       - run: node --test tests/papers.test.mjs
       - run: node --test tests/news-feed.test.cjs
+      - run: node --test tests/news-timeline.test.mjs
       - run: npm run news:check
       - run: npm run build

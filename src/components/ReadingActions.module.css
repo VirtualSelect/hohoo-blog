@@ -3,3 +3,4 @@
 .actions button[aria-pressed='true'] {border-color:var(--ifm-color-primary);color:var(--ifm-color-primary);}
 .actions button:focus-visible {outline:2px solid var(--ifm-color-primary);outline-offset:3px;}
 .actions button:disabled {opacity:.5;cursor:wait;}
+.compact{display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0}.compact button{padding:0;border:0;background:transparent;color:var(--blog-muted);font:inherit;cursor:pointer}.compact button[aria-pressed=true]{color:var(--ifm-color-primary)}.compact button:focus-visible{outline:2px solid var(--ifm-color-primary);outline-offset:4px}.compact button:disabled{opacity:.5}

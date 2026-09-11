@@ -4,7 +4,6 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {usePluginData} from '@docusaurus/useGlobalData';
 import tracks from '@site/data/learning-paths.json';
-import LearningNavigation from '@site/src/components/LearningNavigation';
 import styles from './learning.module.css';
 
 export default function Learning() {
@@ -44,7 +43,10 @@ export default function Learning() {
       <p className={styles.eyebrow}>LEARN WITH A DIRECTION</p>
       <h1>{en ? 'A starting point, and a next step.' : '知道从哪里开始，也知道下一步。'}</h1>
       <p className={styles.lead}>{en ? 'Follow the prerequisites at your own pace. Planned titles are not published articles; their reading times are editorial estimates, not practice durations.' : '按前置知识顺序阅读，不设固定完成日期。规划中的选题尚未发布，阅读时长为拟定篇幅的估计，不包含动手实践时间。'}</p>
-      <LearningNavigation active="learning" en={en} />
+      <p><Link to="/research">{en ? '← Research' : '← 研究总览'}</Link>{' · '}<Link to="/reading">{en?'Saved reading':'稍后读'}</Link></p>
+      <details><summary>{en?'Published learning history':'已发布的学习记录'}</summary>
+        {entries.length ? <ul>{entries.map(entry=><li key={entry.stepId}><time dateTime={entry.date}>{entry.date}</time>{' · '}<Link to={entry.permalink}>{entry.title}</Link></li>)}</ul> : <p>{en?'The first learning record is still ahead.':'正式路线文章发布后，会在这里按日期显示。'}</p>}
+      </details>
       <section className={styles.toolbox} aria-label={en ? 'Your reading list' : '我的阅读清单'}>
         <div className={styles.meta}><strong>{en ? 'Your reading list' : '我的阅读清单'}</strong><span>{saved.length} {en ? 'saved' : '个想读'} · {finished}/{entries.length} {en ? 'published articles read' : '篇正式文章已读'}</span></div>
         <p>{storageError ? (en ? 'Browser storage is unavailable. Changes last for this visit only.' : '浏览器存储不可用，本次选择仅在当前页面保留。') : (en ? 'Saved on this browser only. Planned topics can be saved; only published articles can be marked as read.' : '清单只保存在当前浏览器。规划选题可以加入想读，正式发布后才能标记已读。')}</p>

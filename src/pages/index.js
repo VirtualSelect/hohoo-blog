@@ -1,3 +1,4 @@
+import HomeProjects from '@site/src/components/HomeProjects';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -34,15 +35,9 @@ export default function Home() {
             <div className={styles.profileBottom}><span>{t('学习 · 实践 · 分享', 'Learn · Build · Share')}</span><a href={social.github.href}>GitHub ↗</a></div>
           </aside>
         </section>
-        <section className={styles.writing} aria-labelledby="writing-title">
-          <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>01 / {t('内容路线', 'ROADMAP')}</p><Heading as="h2" id="writing-title">{t('三个方向，一起探索', 'Three directions to explore')}</Heading></div><Link to="/docs/skill">{t('专题总览', 'All topics')} ↗</Link></div>
-          <Link to="/docs/skill" className={styles.featured}>
-            <div className={styles.articleArt} aria-hidden="true"><span>LEARN<br />BUILD<span className={styles.artDot}>.</span></span><small>AI · LLM · EMBODIED INTELLIGENCE</small></div>
-            <div className={styles.articleBody}><div className={styles.meta}><span>{t('内容规划', 'CONTENT ROADMAP')}</span><span>{t('专栏筹备中', 'In preparation')}</span></div><Heading as="h3">{t('从应用到智能，再到行动', 'Applications, intelligence and action')}</Heading><p>{t('以 AI 应用开发为实践入口，通过 LLM 分享理解方法，再逐步探索具身智能。专题规划已经整理，正式文章将随学习与实践逐步更新。', 'Build AI applications, understand methods through LLM notes, and explore embodied intelligence. The roadmap is ready; articles will follow actual learning and practice.')}</p><span className={styles.readMore}>{t('查看内容规划与分类方式', 'Read the roadmap and topic boundaries')} <span aria-hidden="true">↗</span></span></div>
-          </Link>
-        </section>
-        <section className={styles.notes} aria-labelledby="notes-title"><div className={styles.sectionHeading}><div><p className={styles.eyebrow}>02 / {t('三个专栏', 'TOPICS')}</p><Heading as="h2" id="notes-title">{t('接下来，关注这些问题', 'Questions to explore next')}</Heading></div><Link to="/docs/skill">{t('专题总览', 'All topics')} ↗</Link></div><div className={styles.noteGrid}>{notes.map((note, index) => <Link key={note.to} to={note.to} className={styles.note}><div className={styles.noteTop}><span>{note.tag}</span><span>0{index + 1}</span></div><Heading as="h3">{en ? note.en : note.title}</Heading><p>{en ? note.english : note.description}</p><span className={styles.noteStatus}>{t('筹备中 · 查看规划', 'In preparation · View roadmap')}</span><span className={styles.noteArrow} aria-hidden="true">↗</span></Link>)}</div></section>
-        <section className={styles.connect}><div><p className={styles.eyebrow}>STAY CURIOUS, KEEP BUILDING.</p><Heading as="h2">{t('很高兴，在这里遇见你。', 'Glad our paths crossed.')}</Heading><p>{t('如果某篇记录对你有用，或你有想交流的想法，欢迎打个招呼。', 'Found something useful, or have an idea to share? Say hello.')}</p></div><Link className={styles.secondary} to="/now">{t('最近在做什么', 'What’s on my mind')} ↗</Link></section>
+        <section className={styles.notes} aria-labelledby="notes-title"><div className={styles.sectionHeading}><div><p className={styles.eyebrow}>01 / {t('三个专栏', 'TOPICS')}</p><Heading as="h2" id="notes-title">{t('接下来，关注这些问题', 'Questions to explore next')}</Heading></div><Link to="/research">{t('研究总览', 'All research')} ↗</Link></div><div className={styles.noteGrid}>{notes.map((note, index) => <Link key={note.to} to={note.to} className={styles.note}><div className={styles.noteTop}><span>{note.tag}</span><span>0{index + 1}</span></div><Heading as="h3">{en ? note.en : note.title}</Heading><p>{en ? note.english : note.description}</p><span className={styles.noteStatus}>{t('论文 · 资讯 · 学习路线', 'Papers · News · Learning paths')}</span><span className={styles.noteArrow} aria-hidden="true">↗</span></Link>)}</div></section>
+        <HomeProjects en={en} />
+        <section className={styles.connect}><div><p className={styles.eyebrow}>STAY CURIOUS, KEEP BUILDING.</p><Heading as="h2">{t('很高兴，在这里遇见你。', 'Glad our paths crossed.')}</Heading><p>{t('如果某篇记录对你有用，或你有想交流的想法，欢迎打个招呼。', 'Found something useful, or have an idea to share? Say hello.')}</p></div><Link className={styles.secondary} to="/aboutMe">{t('关于与近况', 'About & now')} ↗</Link></section>
       </main>
     </Layout>
   );

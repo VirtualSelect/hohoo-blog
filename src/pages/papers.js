@@ -15,6 +15,7 @@ export default function Papers() {
     <p className={styles.eyebrow}>READ / QUESTION / REPRODUCE</p>
     <h1>{en?'Read with a question.':'带着问题读论文。'}</h1>
     <p>{en?'Foundational papers selected for AI engineering and embodied intelligence. These short guides are based on the linked abstracts; they are not full-paper reviews or personal experimental results.':'围绕 AI 工程与具身智能精选基础论文。卡片基于所链接版本的摘要整理，是阅读入口，不是全文精读报告或个人实验结论。'}</p>
+    <p><Link to="/research">{en?'← Research':'← 研究总览'}</Link>{' · '}<Link to="/reading">{en?'Saved reading':'稍后读'}</Link></p>
     <div className={styles.filters}>
       <label>{en?'Topic':'研究方向'}<select value={category} onChange={e=>setCategory(e.target.value)}><option value="all">{en?'All':'全部'}</option><option value="ai-apps">{en?'AI applications':'AI 应用开发'}</option><option value="llm">LLM</option><option value="embodied-ai">{en?'Embodied AI':'具身智能'}</option></select></label>
       <label>{en?'Search':'搜索'}<input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder={en?'RAG, actions, retrieval…':'RAG、动作、检索…'}/></label>

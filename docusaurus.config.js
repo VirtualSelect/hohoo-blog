@@ -94,20 +94,10 @@ const config = {
                 },
                 hideOnScroll: true,// 把导航栏样式设置为静态,而不禁用主题切换能力
                 items: [
-                    {to: '/blog', label: '随笔', position: 'right'},
-                    {to: '/news', label: 'AI 资讯', position: 'right'},
-
-                    {to: '/docs/skill', label: '专题', position: 'right'},
-                    {to: '/learning', label: '阅读路线', position: 'right'},
-                    {label: '探索', position: 'right', items: [
-                        {label: '稍后读', to: '/reading'},
-                        {label: '论文阅读', to: '/papers'},
-                        {label: 'RSS 订阅', to: '/subscribe'},
-                        {label: '每周阅读', to: '/news/weekly'},
-                        {label: '项目实验室', to: '/lab'},
-                        {label: '最近在做什么', to: '/now'},
-                    ]},
-                    {to: '/aboutMe', label: '关于我', position: 'right'},
+                    {to: '/blog', label: '文章', position: 'right'},
+                    {to: '/research', label: '研究', position: 'right'},
+                    {to: '/news', label: '资讯', position: 'right'},
+                    {to: '/aboutMe', label: '关于', position: 'right'},
                     {
                         type: 'localeDropdown',
                         position: 'right',
@@ -137,6 +127,7 @@ const config = {
                     {
                         title: '网站',
                         items: [
+                            {label: 'RSS 订阅', to: '/subscribe'},
                             { label: 'Vercel', to: 'https://vercel.com' },
                             { label: 'Docusaurus', to: 'https://docusaurus.io/zh-CN/' },
                         ],

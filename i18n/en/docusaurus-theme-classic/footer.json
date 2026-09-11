@@ -66,5 +66,8 @@
   },
   "link.item.label.最近在做什么": {
     "message": "Now"
+  },
+  "link.item.label.RSS 订阅": {
+    "message": "RSS feeds"
   }
 }

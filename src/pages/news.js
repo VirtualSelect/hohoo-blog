@@ -1,50 +1,43 @@
-import ReadingActions from '@site/src/components/ReadingActions';
-import {localizedNews} from '@site/src/utils/news-locale.mjs';
 import React, {useState} from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import ReadingActions, {useNewsReading} from '@site/src/components/ReadingActions';
+import {localizedNews} from '@site/src/utils/news-locale.mjs';
+import {timelineGroups} from '@site/src/utils/news-timeline.mjs';
 import news from '@site/data/news/items.json';
 import config from '@site/config/news-sources.json';
-import styles from './news.module.css';
-const names = {'ai-apps':['AI 应用开发','AI applications'],llm:['LLM 分享','LLMs'],'embodied-ai':['具身智能','Embodied AI']};
-const pageSize = 12;
-export default function News() {
-  const en = useDocusaurusContext().i18n.currentLocale === 'en';
-  const t = (zh, english) => en ? english : zh;
-  const [category, setCategory] = useState('all');
-  const [source, setSource] = useState('all');
-  const [query, setQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const filtered = [...news].sort((a,b) => b.publishedAt.localeCompare(a.publishedAt)).filter(item =>
-    (category === 'all' || item.category === category) && (source === 'all' || item.sourceId === source) &&
-    [item.title,item.titleZh,item.summary,...Object.values(item.translations || {}).flatMap(value => [value.title,value.summary])].join(' ').toLowerCase().includes(query.trim().toLowerCase()));
-  const pages = Math.max(1, Math.ceil(filtered.length / pageSize));
-  const current = Math.min(page, pages);
-  return <Layout title={t('AI 资讯','AI news')} description={t('来自精选订阅源的 AI 应用、大语言模型与具身智能资讯，附短摘要与原文入口。','AI news from selected feeds, with short summaries and original links.')}>
-    <main className={styles.page}>
-      <p className={styles.eyebrow}>AI / NEWS DESK</p>
-      <p><Link to="/news/weekly">{t('每周阅读汇总','Weekly reading')}</Link>{' · '}<Link to="/lab">{t('项目实验室','Project lab')}</Link></p>
-      <h1>{t('关注变化，也保留出处。','Follow the news. Keep the source.')}</h1>
-      <p className={styles.lead}>{t('精选 AI 应用、大语言模型与具身智能资讯。这里整理外部消息，与本站的原创文章和学习记录分开呈现。','Selected news on AI applications, LLMs and embodied intelligence, separate from personal articles and learning notes.')}</p>
-      <details className={styles.sources}><summary>{t('来源与整理方式','Sources and editorial approach')}</summary>
-        <p>{t('优先从 AIHOT 收集中文聚合摘要，其他 RSS 来源补充，通过主题规则、数据检查和构建后自动发布；规则检查不等于独立事实核验。摘要可能是来源摘录或 AI 辅助整理，均在条目中标明；请以原文为准。AIHOT 条目链接至聚合阅读页，可继续访问原始出处。排序使用订阅源提供的发布日期，日报使用采集日期（UTC）。','Collected primarily from AIHOT, with other RSS feeds as supplements and automatically published after rule, data and build checks; this is not independent fact verification. Each entry identifies a source excerpt or AI-assisted summary. Original sources take precedence. AIHOT links open its aggregation pages, which link to original sources. Entries use feed-provided dates; digests use collection dates in UTC.')}</p>
-        <ul>{config.sources.filter(item=>item.enabled).map(item=><li key={item.id}><a href={item.feed} target="_blank" rel="noopener noreferrer">{item.name} RSS ↗</a></li>)}</ul>
-      </details>
-      <section className={styles.filters} aria-label={t('筛选资讯','Filter news')}>
-        <label>{t('方向','Topic')}<select value={category} onChange={event=>{setCategory(event.target.value);setPage(1);}}><option value="all">{t('全部方向','All topics')}</option>{Object.entries(names).map(([id,labels])=><option key={id} value={id}>{labels[en?1:0]}</option>)}</select></label>
-        <label>{t('来源','Source')}<select value={source} onChange={event=>{setSource(event.target.value);setPage(1);}}><option value="all">{t('全部来源','All sources')}</option>{config.sources.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</select></label>
-        <label className={styles.search}>{t('关键词','Keyword')}<input type="search" placeholder={t('搜索标题或摘要','Search titles or summaries')} value={query} onChange={event=>{setQuery(event.target.value);setPage(1);}} /></label>
-      </section>
-      <p className={styles.count} role="status">{filtered.length} {t('条资讯','entries')}</p>
-      {filtered.length ? <div className={styles.list}>{filtered.slice((current-1)*pageSize,current*pageSize).map(item=><article className={styles.card} key={item.id}>
-        <div className={styles.meta}><span>{names[item.category][en?1:0]}</span><span>{item.sourceName}</span><time dateTime={item.publishedAt}>{item.publishedAt.slice(0,10)}</time></div>
-        {localizedNews(item, en ? 'en' : 'zh').fallback && <small>{en ? 'Original text · Translation unavailable' : '暂无译文，显示原文'}</small>}<h2><a href={item.url} target="_blank" rel="noopener noreferrer">{localizedNews(item, en ? 'en' : 'zh').title} ↗</a></h2>
-        {!en && item.titleZh && <p className={styles.original}>{item.title}</p>}
-        <p>{localizedNews(item, en ? 'en' : 'zh').summary || t('来源未提供摘要，请阅读原文。','No excerpt was provided. Read the original article.')}</p>
-        <div className={styles.bottom}><span>{item.summaryKind === 'ai-summary' ? t('AI 辅助摘要 · 请核对原文','AI-assisted summary · Check the source') : item.summaryKind === 'source-excerpt' ? t('来源短摘录','Source excerpt') : t('原文链接','Source link')}</span><Link to={'/news/daily/'+item.collectedAt.slice(0,10)}>{t('查看当日汇总','Daily digest')} →</Link></div>
-      <ReadingActions id={item.id} en={en}/></article>)}</div> : <section className={styles.empty}><h2>{news.length ? t('没有匹配的资讯','No matching entries') : t('第一期资讯，等待与你见面。','The first edition is on its way.')}</h2><p>{news.length ? t('换个关键词，或清除筛选条件试试。','Try another keyword or clear your filters.') : t('正在准备来源与自动检查流程。正式内容通过自动检查后会出现在这里。','Sources and the review process are being prepared. Entries will appear here after automated checks.')}</p>{news.length > 0 && <button type="button" onClick={()=>{setCategory('all');setSource('all');setQuery('');setPage(1);}}>{t('清除筛选','Clear filters')}</button>}</section>}
-      {pages > 1 && <nav className={styles.pagination} aria-label={t('资讯分页','News pagination')}><button disabled={current===1} onClick={()=>setPage(current-1)}>{t('上一页','Previous')}</button><span>{current} / {pages}</span><button disabled={current===pages} onClick={()=>setPage(current+1)}>{t('下一页','Next')}</button></nav>}
-    </main>
-  </Layout>;
+import styles from './news-timeline.module.css';
+const names={'ai-apps':['AI 应用','AI apps'],llm:['LLM','LLM'],'embodied-ai':['具身智能','Embodied AI']};
+export default function News(){
+  const en=useDocusaurusContext().i18n.currentLocale==='en';const t=(zh,english)=>en?english:zh;
+  const [category,setCategory]=useState('all');const [source,setSource]=useState('all');const [query,setQuery]=useState('');const [limit,setLimit]=useState(12);const [mode,setMode]=useState('day');
+  const reading=useNewsReading();
+  const filtered=news.filter(item=>(category==='all'||item.category===category)&&(source==='all'||item.sourceId===source)&&[item.title,item.summary,...Object.values(item.translations||{}).flatMap(v=>[v.title,v.summary])].join(' ').toLowerCase().includes(query.trim().toLowerCase()));
+  const reset=()=>{setCategory('all');setSource('all');setQuery('');setLimit(12);};
+  return <Layout title={t('AI 资讯','AI news')} description={t('按时间浏览 AI 应用、LLM 与具身智能的精选资讯摘要。','A timeline of selected AI applications, LLM and embodied intelligence news.')}><main className={styles.page}>
+    <header className={styles.header}><h1>{t('AI 资讯','AI news')}</h1><nav className={styles.tools} aria-label={t('阅读工具','Reading tools')}><Link to="/reading">{t('稍后读','Saved')}</Link><Link to="/subscribe">RSS ↗</Link></nav></header>
+    <p className={styles.lead}>{t('关注值得深入的变化，留下继续阅读的线索。','Follow meaningful changes. Keep a path to the source.')}</p>
+    <section className={styles.filters} aria-label={t('资讯筛选','Filter news')}>
+      {[['all',[t('全部','All'),t('全部','All')]],...Object.entries(names)].map(([id,labels])=><button key={id} type="button" aria-pressed={category===id} onClick={()=>{setCategory(id);setLimit(12);}}>{labels[en?1:0]}</button>)}
+      <label><input aria-label={t('搜索资讯','Search news')} type="search" placeholder={t('搜索标题或摘要…','Search news…')} value={query} onChange={e=>{setQuery(e.target.value);setLimit(12);}}/></label>
+    </section>
+    <details className={styles.extra}><summary>{t('来源筛选与整理说明','Sources and editorial approach')}{source!=='all'?' · '+config.sources.find(s=>s.id===source)?.name:''}</summary>
+      <label>{t('来源','Source')}<select value={source} onChange={e=>{setSource(e.target.value);setLimit(12);}}><option value="all">{t('全部来源','All sources')}</option>{config.sources.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select></label>
+      <p>{t('优先收集 AIHOT 聚合摘要，其他来源补充。通过研究主题规则与构建检查后自动发布，不代表独立事实核验。日期按订阅源提供的发布时间（UTC）分组；来源页可继续访问原始出处。','AIHOT summaries are prioritized, with other sources as supplements. Automated topic and build checks are not independent fact verification. Dates use feed publication timestamps in UTC. Aggregation pages link onward to original reporting.')}</p>
+    </details>
+    <div className={styles.metaBar}><p role="status">{filtered.length} {t('条资讯','entries')} · UTC</p><div className={styles.mode} aria-label={t('时间分组','Date grouping')}>{['day','week'].map(value=><button type="button" key={value} aria-pressed={mode===value} onClick={()=>{setMode(value);setLimit(12);}}>{value==='day'?t('按日','Daily'):t('按周','Weekly')}</button>)}</div></div>
+    {timelineGroups(filtered,limit,mode).map(([date,items])=><section key={date} className={styles.group} aria-label={date}>
+      <div className={styles.date}><time dateTime={date}>{date.slice(5).replace('-', ' / ')}</time><small>{date.slice(0,4)}{mode==='week'?t(' · 周起始',' · Week of'):''}</small></div>
+      <div className={styles.entries}>{items.map(item=>{const content=localizedNews(item,en?'en':'zh');const aggregator=config.sources.find(s=>s.id===item.sourceId)?.aggregator;return <article className={styles.entry} data-read={reading.read.includes(item.id)} key={item.id}>
+        <h2><a href={item.url} target="_blank" rel="noopener noreferrer">{content.title}</a></h2>
+        {content.summary&&<p>{content.summary}</p>}
+        <div className={styles.entryFooter}><span>{item.sourceName} · {names[item.category][en?1:0]}</span>{item.summaryKind==='ai-summary'&&<span>{t('AI 辅助摘要','AI-assisted summary')}</span>}
+          <a href={item.url} target="_blank" rel="noopener noreferrer">{aggregator?t('来源页 ↗','Source page ↗'):t('原文 ↗','Original ↗')}</a><ReadingActions id={item.id} en={en} compact/>
+        </div>
+      </article>;})}</div>
+    </section>)}
+    {!filtered.length&&<section className={styles.empty}><p>{t('当前没有匹配的资讯。','No matching entries.')}</p><button type="button" onClick={reset}>{t('清除筛选','Clear filters')}</button></section>}
+    {limit<filtered.length&&<button type="button" className={styles.more} onClick={()=>setLimit(v=>v+12)}>{t('加载更多','Load more')} · {Math.min(12,filtered.length-limit)}</button>}
+  </main></Layout>;
 }

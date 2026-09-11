@@ -42,5 +42,17 @@
   },
   "item.label.RSS 订阅": {
     "message": "RSS subscriptions"
+  },
+  "item.label.文章": {
+    "message": "Writing"
+  },
+  "item.label.研究": {
+    "message": "Research"
+  },
+  "item.label.资讯": {
+    "message": "News"
+  },
+  "item.label.关于": {
+    "message": "About"
   }
 }
