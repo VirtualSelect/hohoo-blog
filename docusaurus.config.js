@@ -42,7 +42,7 @@ const config = {
         },
     },
 
-    plugins: ['./plugins/learning-index.cjs'],
+    plugins: ['./plugins/learning-index.cjs', './plugins/news-feed.cjs'],
 
     presets: [
         [
@@ -102,6 +102,7 @@ const config = {
                     {label: '探索', position: 'right', items: [
                         {label: '稍后读', to: '/reading'},
                         {label: '论文阅读', to: '/papers'},
+                        {label: 'RSS 订阅', to: '/subscribe'},
                         {label: '每周阅读', to: '/news/weekly'},
                         {label: '项目实验室', to: '/lab'},
                         {label: '最近在做什么', to: '/now'},

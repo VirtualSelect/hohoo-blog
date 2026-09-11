@@ -20,8 +20,8 @@ export default function Weekly() {
   const names = {'ai-apps':en?'AI applications':'AI 应用开发',llm:en?'LLMs':'LLM 分享','embodied-ai':en?'Embodied AI':'具身智能'};
   return <Layout title={en ? 'Weekly reading' : '每周阅读汇总'}><main className={styles.page}>
     <h1>{en ? 'A week of reading, by topic.' : '每周阅读，按方向回顾。'}</h1>
-    <p>{en ? 'Reviewed entries grouped by original publication week (Monday, UTC). A reading index, without generated trend claims.' : '按原文发布周（UTC，周一开始）与研究方向整理已审核资讯，方便回顾。这里只汇总阅读线索，不自动编写趋势结论。'}</p>
-    {!groups.size && <p>{en ? 'No reviewed entries yet.' : '暂无已审核发布的资讯。'}</p>}
+    <p>{en ? 'Published entries grouped by original publication week (Monday, UTC). A reading index, without generated trend claims.' : '按原文发布周（UTC，周一开始）与研究方向整理已发布资讯，方便回顾。这里只汇总阅读线索，不自动编写趋势结论。'}</p>
+    {!groups.size && <p>{en ? 'No published entries yet.' : '暂无已发布的资讯。'}</p>}
     {[...groups].map(([week,items])=><section key={week} className={styles.card}>
       <h2>{week} {en ? '· Week of' : '起的一周'}</h2>
       {Object.entries(names).filter(([category])=>items.some(item=>item.category===category)).map(([category,name])=><div key={category}>

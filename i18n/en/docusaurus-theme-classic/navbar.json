@@ -39,5 +39,8 @@
   },
   "item.label.论文阅读": {
     "message": "Paper guides"
+  },
+  "item.label.RSS 订阅": {
+    "message": "RSS subscriptions"
   }
 }

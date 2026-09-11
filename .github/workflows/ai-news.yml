@@ -1,4 +1,4 @@
-name: Collect AI news for review
+name: Collect and publish AI news
 on:
   push:
     branches: [main]
@@ -21,59 +21,52 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.repository.default_branch }}
-      - name: Preserve the pending review
-        id: pending
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          count=$(gh pr list --head codex/ai-news --state open --json number --jq 'length')
-          echo "count=$count" >> "$GITHUB_OUTPUT"
-          if [ "$count" != "0" ]; then
-            echo 'A news PR is awaiting review. Collection paused to preserve reviewer edits.' >> "$GITHUB_STEP_SUMMARY"
-          fi
       - uses: actions/setup-node@v4
-        if: steps.pending.outputs.count == '0'
         with:
           node-version: '22'
           cache: npm
       - name: Install locked dependencies
-        if: steps.pending.outputs.count == '0'
         run: npm ci --no-audit --no-fund
       - name: Test collector
-        if: steps.pending.outputs.count == '0'
-        run: npm run test:news
-      - name: Collect a review batch
-        if: steps.pending.outputs.count == '0'
+        run: node --test tests/news.test.mjs tests/news-feed.test.cjs
+      - name: Collect a filtered batch
         env:
-          NEWS_SUMMARIZE: ${{ vars.NEWS_SUMMARIZE }}
+          NEWS_SUMMARIZE: 'false'
           NEWS_LLM_URL: ${{ vars.NEWS_LLM_URL }}
           NEWS_LLM_MODEL: ${{ vars.NEWS_LLM_MODEL }}
           NEWS_LLM_API_KEY: ${{ secrets.NEWS_LLM_API_KEY }}
         run: node scripts/news/collect.mjs --write
       - name: Validate news and build both locales
-        if: steps.pending.outputs.count == '0'
         run: |
           npm run news:check
           npm run build
-      - name: Create a draft for human review
-        if: steps.pending.outputs.count == '0'
-        uses: peter-evans/create-pull-request@v8
-        with:
-          branch: codex/ai-news
-          commit-message: 'content: collect AI news for review'
-          title: 'AI 资讯待审核'
-          body-path: .cache-loader/news-pr.md
-          draft: always-true
-          add-paths: |
-            data/news/items.json
-            src/pages/news/daily/*.md
+      - name: Publish only validated content
+        env:
+          TARGET_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          git add -- data/news/items.json
+          if [ -d src/pages/news/daily ]; then git add -- src/pages/news/daily; fi
+          if git diff --cached --quiet; then
+            echo 'No new eligible news.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git diff --cached --name-only | while IFS= read -r file; do
+            case "$file" in
+              data/news/items.json|src/pages/news/daily/*.md) ;;
+              *) echo "Unexpected changed file: $file"; exit 1 ;;
+            esac
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'content: publish automatically checked AI news'
+          git push origin "HEAD:$TARGET_BRANCH"
+          echo 'Rules, content checks and bilingual build passed; content published.' >> "$GITHUB_STEP_SUMMARY"
       - name: Preserve collection diagnostics
-        if: always() && steps.pending.outputs.count == '0'
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: news-run-report

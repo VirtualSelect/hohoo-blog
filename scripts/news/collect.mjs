@@ -53,7 +53,7 @@ if (selected.length || !process.argv.includes('--write')) {
 }
 await save(path.join(root,'.cache-loader/news-report.json'), JSON.stringify(report,null,2) + '\n');
 const successful = report.sources.filter(source => source.status === 'ok').length;
-const body = `## AI 资讯审核\n\n新增 ${selected.length} 条资讯。采集成功 ${successful}/${sources.length} 个来源；摘要回退 ${report.summaryFailures.length} 条。\n\n- 检查原文日期、事实、分类与摘要，尤其是 AI 辅助摘要。\n- 如需剔除某条，运行 \`npm run news:reject -- <id>\`（将加入来源配置的排除列表）。\n- 若直接编辑 items.json，请运行 \`npm run news:render\` 同步日报。\n- 审核完成后将 PR 标记为 Ready，再手动合并；本流程不会自动合并。\n\n来源状态：\n${report.sources.map(source => '- ' + source.source + ': ' + source.status + (source.status === 'failed' ? '（请查看运行报告）' : '')).join('\n')}\n\n详细运行报告在 Actions 的 news-run-report artifact 中。\n`;
+const body = `## AI 资讯自动检查报告\n\n新增 ${selected.length} 条；来源成功 ${successful}/${sources.length}。主题筛选与数据检查后，需双语构建通过才能提交发布。规则不核验原始报道事实。详细原因见 news-report.json。\n`;
 await save(path.join(root,'.cache-loader/news-pr.md'),body);
 console.log(JSON.stringify(report,null,2));
 if (!successful) process.exitCode = 1;

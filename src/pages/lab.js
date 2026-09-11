@@ -15,7 +15,7 @@ export default function Lab() {
       <p>{en ? 'Working code, design decisions and known limitations. More experiments will be added when there is evidence to share.' : '记录可查看的代码、实现选择与已知局限。有可展示的成果后，再加入新的实验。'}</p>
       <article className={styles.card}>
         <h2>{en ? 'Research news collection pipeline' : '研究资讯采集与审核流水线'}</h2>
-        <p>{en ? 'RSS → topic and technical-content filters → deduplication → optional bilingual translation → draft review → static publishing.' : 'RSS 采集 → 主题与技术内容筛选 → 去重 → 可选双语翻译 → 草稿审核 → 静态发布。'}</p>
+        <p>{en ? 'RSS → topic and technical-content filters → deduplication → rule checks → build validation → automatic publishing.' : 'RSS 采集 → 主题与技术内容筛选 → 去重 → 规则检查 → 构建验证 → 自动发布。'}</p>
         <h3>{en ? 'What to examine' : '值得复盘的问题'}</h3>
         <ul>
           <li>{en ? 'How strict filters reduce noise while potentially missing relevant entries.' : '严格筛选如何减少噪声，以及可能漏掉哪些相关内容。'}</li>

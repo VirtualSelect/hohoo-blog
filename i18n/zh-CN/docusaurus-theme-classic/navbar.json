@@ -36,5 +36,8 @@
   },
   "item.label.论文阅读": {
     "message": "论文阅读"
+  },
+  "item.label.RSS 订阅": {
+    "message": "RSS 订阅"
   }
 }

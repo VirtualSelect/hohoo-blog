@@ -9,7 +9,7 @@ export default function NewsDigest({day}) {
   const {i18n: {currentLocale}} = useDocusaurusContext();
   const en = currentLocale === 'en';
   return <section>
-    <p>{en ? 'Reviewed source excerpts, grouped by collection date (UTC).' : '按采集日期（UTC）汇总已审核资讯，原文日期单独标注。'}</p>
+    <p>{en ? 'Published source excerpts, grouped by collection date (UTC).' : '按采集日期（UTC）汇总已发布资讯，原文日期单独标注。'}</p>
     <Link to="/news">{en ? 'All AI news' : '返回资讯列表'}</Link>
     {news.filter(item => item.collectedAt.startsWith(day)).map(item => {
       const content = localizedNews(item, currentLocale);
