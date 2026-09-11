@@ -10,6 +10,10 @@ description: 整理大语言模型的学习笔记、论文阅读与可复现的�
 这里是内容规划页，尚未发布该方向的正式文章。下列条目是待整理主题，并不代表已完成的项目或实验。
 :::
 
+import TopicNews from '@site/src/components/TopicNews';
+
+<TopicNews category="llm" />
+
 ## 计划覆盖
 
 ### 概念与方法

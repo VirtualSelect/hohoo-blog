@@ -10,6 +10,10 @@ description: 围绕真实使用场景，规划从原型到可用应用的开发�
 这里是内容规划页，尚未发布该方向的正式文章。下列条目是待整理主题，并不代表已完成的项目或实验。
 :::
 
+import TopicNews from '@site/src/components/TopicNews';
+
+<TopicNews category="ai-apps" />
+
 ## 计划覆盖
 
 ### 应用原型

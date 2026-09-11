@@ -10,6 +10,10 @@ description: 从感知、决策到行动，规划具身智能的阅读与仿真�
 这里是内容规划页，尚未发布该方向的正式文章。下列条目是待整理主题，并不代表已完成的项目或实验。
 :::
 
+import TopicNews from '@site/src/components/TopicNews';
+
+<TopicNews category="embodied-ai" />
+
 ## 计划覆盖
 
 ### 基础与阅读
