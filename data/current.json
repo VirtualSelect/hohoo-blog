@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11",
+  "updated": "2026-09-12",
   "items": [
     {
       "kind": "BUILDING",
@@ -27,9 +27,9 @@
     },
     {
       "kind": "NEXT",
-      "zh": "写下第一个模型调用的完整过程，再开始检索对照实验。",
-      "en": "Document the first model call, then prepare a retrieval comparison.",
-      "to": "/learning#step-first-call"
+      "zh": "首篇 Java 模型调用实践已整理发布，下一步准备检索对照实验。",
+      "en": "The first Java model-call walkthrough is published; next, prepare a retrieval comparison.",
+      "to": "/docs/ai-apps/java-first-llm"
     }
   ]
 }

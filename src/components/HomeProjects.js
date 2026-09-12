@@ -101,6 +101,34 @@ export default function HomeProjects({ en }) {
           </div>
         </div>
       </article>
+      {entries
+        .filter(
+          (entry) =>
+            entry.type === 'project' &&
+            entry.featured &&
+            entry.id !== project.id &&
+            entry.status !== 'planning',
+        )
+        .map((entry) => (
+          <article className={styles.pipeline} key={entry.id}>
+            <div className={styles.pipelineIcon} aria-hidden="true">
+              ↳
+            </div>
+            <div>
+              <span className={styles.kicker}>PROJECT / {entry.number}</span>{' '}
+              <Status value={entry.status} />
+              <h3>{en ? entry.titleEn || entry.title : entry.title}</h3>
+              <p>
+                {en
+                  ? entry.descriptionEn || entry.description
+                  : entry.description}
+              </p>
+            </div>
+            <Link to={'/projects/' + entry.slug}>
+              {t('查看代码与实践', 'Explore the demos')} →
+            </Link>
+          </article>
+        ))}
       <article className={styles.pipeline}>
         <div className={styles.pipelineIcon} aria-hidden="true">
           ↳

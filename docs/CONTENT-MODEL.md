@@ -1,5 +1,11 @@
 # Huhohoo Content Model
 
+## 实践文章初稿与代码入口
+
+- 实践初稿可使用 `unlisted: true`、`status: learning`：生成可审阅路由，但不进入已发布内容索引、学习路线索引和 sitemap。不填写虚构的发布日期；正式发布时移除 unlisted，补充真实日期、阅读时长与 learning_step。
+- Project 可选 `resources: [{label,labelEn,description,descriptionEn,href}]`，用于稳定版本的 Demo 目录和明确标注初稿的配套文章。正文由文章维护，完整代码由独立仓库维护。
+- `hohoo-ai-lab` 作为一个 building 项目，三个 Demo 是项目内阶段，不拆成三个项目，不标记为 production。
+
 ## 第二阶段实现约定（2026-09-11）
 
 以下是当前实现的增量字段，优先于后文概念示例；不要求回填未知历史值。

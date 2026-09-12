@@ -8,7 +8,7 @@
     "steps": [
       {
         "id": "first-call",
-        "title": "从 Java 后端到第一个 LLM 应用",
+        "title": "Java 8 调用大语言模型：从第一次请求到多轮对话",
         "en": "Your first LLM application from Java",
         "topic": "AI 应用开发",
         "prerequisite": "Java 与 HTTP 基础",
@@ -16,7 +16,7 @@
         "minutes": 15,
         "outcome": "完成一次模型请求，理解输入、输出与错误处理。",
         "outcomeEn": "Goal: make a model request and understand inputs, outputs and errors.",
-        "status": "planning",
+        "status": "published",
         "domain": "ai-apps",
         "area": "application",
         "difficulty": "beginner"

@@ -67,5 +67,89 @@
       "Docusaurus",
       "Vercel"
     ]
+  },
+  {
+    "id": "project:hohoo-ai-lab",
+    "number": "002",
+    "slug": "hohoo-ai-lab",
+    "type": "project",
+    "title": "Java LLM 实践集",
+    "titleEn": "Java LLM Practice",
+    "description": "从首次请求到多轮对话：三个可阅读、可运行的 Java 8 示例。",
+    "descriptionEn": "Three runnable Java 8 examples, from a first request to multi-turn chat.",
+    "domain": "ai-apps",
+    "status": "building",
+    "featured": true,
+    "stack": [
+      "Java 8",
+      "Gson",
+      "HTTP"
+    ],
+    "repo": "https://github.com/VirtualSelect/hohoo-ai-lab",
+    "related": [],
+    "architecture": [
+      "Console input",
+      "Messages history",
+      "JSON / HTTP",
+      "Agnes API",
+      "Parse + display"
+    ],
+    "sections": [
+      {
+        "heading": "Overview",
+        "zh": "hohoo-ai-lab 是与学习文章配套的代码仓库，目前包含首次调用、响应解析与多轮对话三个 Demo。它是持续建设的练习集，不是已上线的 AI 产品。",
+        "en": "A companion code repository with three demos: first request, response parsing and multi-turn chat. This is a growing practice collection, not a deployed AI product."
+      },
+      {
+        "heading": "Problem",
+        "zh": "接口工具里拿到回答之后，还需要弄清 Java 如何发请求、读取字段和维护对话历史。",
+        "en": "After a successful API request, understand how Java sends messages, parses responses and manages history."
+      },
+      {
+        "heading": "Decisions",
+        "zh": "第一个 Demo 只用 JDK 标准库；后两个使用 Gson 处理 JSON。各目录独立，保留每个学习阶段，不急于引入框架。",
+        "en": "The first demo uses only the JDK; the next two use Gson. Separate directories preserve each learning stage without introducing a framework."
+      },
+      {
+        "heading": "Validation",
+        "zh": "作者已在 Java 8 环境完成三个 Demo 的真实调用，多轮版能根据历史回答正在学习 Java。代码侧另完成编译与离线自检。响应内容和 Token 仅是本次记录，不是 Benchmark。",
+        "en": "The author ran all three demos against the API in Java 8, including a history-based reply. Compilation and offline checks were also performed. These observations are not benchmarks."
+      },
+      {
+        "heading": "Limitations",
+        "zh": "历史只在内存中保存；没有流式输出、自动重试、持久化或上下文压缩。读取超时不等于服务端未处理。模型输出仍需核验。",
+        "en": "Memory-only history; no streaming, automatic retries, persistence or context compression. A timeout does not prove the server did not process a request. Outputs still need verification."
+      }
+    ],
+    "resources": [
+      {
+        "label": "01 / 首次调用",
+        "labelEn": "01 / First request",
+        "description": "Java 8 原生 HTTP · 原始 JSON",
+        "descriptionEn": "Native Java 8 HTTP · raw JSON",
+        "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/845fa9f18475b77e761806d14565612680ba6fe1/demos/01-first-llm-call"
+      },
+      {
+        "label": "02 / 解析与输入",
+        "labelEn": "02 / Parse and input",
+        "description": "Gson · 控制台输入 · Token 用量",
+        "descriptionEn": "Gson · console input · token usage",
+        "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/845fa9f18475b77e761806d14565612680ba6fe1/demos/02-parse-llm-response"
+      },
+      {
+        "label": "03 / 多轮对话",
+        "labelEn": "03 / Multi-turn chat",
+        "description": "历史消息 · 失败回退 · exit 退出",
+        "descriptionEn": "Message history · rollback · exit",
+        "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/845fa9f18475b77e761806d14565612680ba6fe1/demos/03-multi-turn-chat"
+      },
+      {
+        "label": "配套实践文章",
+        "labelEn": "Companion article (Chinese)",
+        "description": "Java 8 调用大语言模型：从第一次请求到多轮对话",
+        "descriptionEn": "First request to multi-turn chat",
+        "href": "/docs/ai-apps/java-first-llm"
+      }
+    ]
   }
 ]
