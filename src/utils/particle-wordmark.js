@@ -20,12 +20,12 @@ export function createWordmarkScene(canvas) {
       if (pixels[(y * 1000 + x) * 4 + 3] < 100) continue;
       // Keep outlines denser, with luminous star clusters inside the strokes.
       const edge = [[-3, 0], [3, 0], [0, -3], [0, 3]].some(([dx, dy]) => pixels[((y + dy) * 1000 + x + dx) * 4 + 3] < 100);
-      if (!edge && random() > 0.5) continue;
+      if (!edge && random() > 0.72) continue;
       const light = random();
       points.push({ x: x - 500 + random() * step, y: y - 137 + random() * step,
         z: (random() - 0.5) * 42, sx: 0, sy: 0, vx: 0, vy: 0,
         px: 0, py: 0, light, color: random() < 0.13 ? 2 : random() < 0.35 ? 1 : 0,
-        radius: light > 0.985 ? 2.3 : light > 0.9 ? 1.1 : 0.35 + random() * 0.55 });
+        radius: light > 0.985 ? 2.7 : light > 0.9 ? 1.45 : 0.5 + random() * 0.65 });
     }
   }
   const stars = Array.from({ length: 160 }, () => ({x: random(), y: random(), r: 0.3 + random(), alpha: 0.12 + random() * 0.4}));
@@ -37,7 +37,9 @@ export function createWordmarkScene(canvas) {
     glow.addColorStop(0.17, color + 'a0'); glow.addColorStop(0.4, color + '28'); glow.addColorStop(1, color + '00');
     c.fillStyle = glow; c.fillRect(0, 0, 64, 64); return sprite;
   });
-  const colors = ['#d3ecff', '#58a5d4', '#d69a74'];
+  const darkColors = ['#d3ecff', '#58a5d4', '#d69a74'];
+  const lightColors = ['#183f6d', '#266b91', '#9a6119'];
+  let dark = document.documentElement.dataset.theme === 'dark';
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let width = 1, height = 1, scale = 1, yaw = -0.08, pitch = 0.04;
   let paused = false, visible = true, frame = 0, last = 0, time = 0;
@@ -46,7 +48,8 @@ export function createWordmarkScene(canvas) {
   function draw(advance = false) {
     ctx.clearRect(0, 0, width, height);
     for (const star of stars) {
-      ctx.globalAlpha = star.alpha; ctx.fillStyle = '#a8cde0';
+      const edge = Math.sin(star.x * Math.PI) * Math.sin(star.y * Math.PI);
+      ctx.globalAlpha = star.alpha * edge * 0.65; ctx.fillStyle = dark ? '#a8cde0' : '#557ca0';
       ctx.beginPath(); ctx.arc(star.x * width, star.y * height, star.r, 0, Math.PI * 2); ctx.fill();
     }
     const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
@@ -75,14 +78,15 @@ export function createWordmarkScene(canvas) {
         p.sx += p.vx; p.sy += p.vy;
       }
       p.px = tx + p.sx; p.py = ty + p.sy;
-      const alpha = 0.42 + p.light * 0.52;
+      const shimmer = 0.94 + Math.sin(time * 1.2 + p.x * 0.08 + p.z) * 0.06;
+      const alpha = (0.72 + p.light * 0.28) * shimmer;
       ctx.globalAlpha = alpha;
       const size = p.radius * Math.max(0.68, scale) * perspective;
-      if (p.light > 0.97) {
-        const bloom = size * (10 + Math.sin(time * 0.6 + p.x) * 1.2);
+      if (p.light > 0.95 && dark) {
+        const bloom = size * (12 + Math.sin(time * 0.6 + p.x) * 1.2);
         ctx.drawImage(sprites[p.color], p.px - bloom / 2, p.py - bloom / 2, bloom, bloom);
       } else {
-        ctx.fillStyle = colors[p.color];
+        ctx.fillStyle = (dark ? darkColors : lightColors)[p.color];
         ctx.beginPath(); ctx.arc(p.px, p.py, size, 0, Math.PI * 2); ctx.fill();
       }
     }
@@ -131,6 +135,11 @@ export function createWordmarkScene(canvas) {
     for (const p of points) { const a = random() * Math.PI * 2; p.vx += Math.cos(a) * 18; p.vy += Math.sin(a) * 18; }
   }
   const ro = new ResizeObserver(resize); ro.observe(canvas);
+  const themeObserver = new MutationObserver(() => {
+    dark = document.documentElement.dataset.theme === 'dark';
+    draw();
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   const io = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }); io.observe(canvas);
   const listeners = { pointerdown: down, pointermove: move, pointerup: up, pointercancel: up, lostpointercapture: up, pointerleave: leave };
   for (const [name, listener] of Object.entries(listeners)) canvas.addEventListener(name, listener);
@@ -141,7 +150,7 @@ export function createWordmarkScene(canvas) {
     rotate(x, y) { yaw += x; pitch = Math.max(-1.1, Math.min(1.1, pitch + y)); draw(); },
     reset, scatter,
     destroy() {
-      cancelAnimationFrame(frame); ro.disconnect(); io.disconnect();
+      cancelAnimationFrame(frame); ro.disconnect(); io.disconnect(); themeObserver.disconnect();
       for (const [name, listener] of Object.entries(listeners)) canvas.removeEventListener(name, listener);
       document.removeEventListener('visibilitychange', sync); reduced.removeEventListener('change', sync);
     },

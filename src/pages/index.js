@@ -7,10 +7,8 @@ import React from 'react';
 import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
-import social from '@site/data/social';
 import styles from './index.module.css';
 import topics from '@site/data/topics';
 
@@ -20,7 +18,6 @@ export default function Home() {
   const { i18n } = useDocusaurusContext();
   const en = i18n.currentLocale === 'en';
   const t = (zh, english) => (en ? english : zh);
-  const avatar = useBaseUrl('/img/hohoo.jpg');
   return (
     <Layout
       title="Hohoo's AI Lab · AI Engineering, LLM & Embodied AI"
@@ -35,27 +32,29 @@ export default function Home() {
           content="Hohoo's AI Lab · AI Engineering, LLM & Embodied AI"
         />
       </Head>
-      <ParticleWordmark en={en} />
       <main className={styles.home}>
         <StructuredData person />
         <section className={styles.hero} aria-labelledby="home-title">
           <div>
             <p className={styles.eyebrow}>
               <span className={styles.dot} />{' '}
-              HOOHOO / EXPLORING INTELLIGENCE
+              HOOHOO’S AI LAB / LEARNING IN PUBLIC
             </p>
             <Heading as="h1" id="home-title" className={styles.title}>
-              <span className={styles.greeting}>{t('你好，我是 Hohoo。', 'Hello, I’m Hohoo.')}</span>
-              {t('探索智能，', 'Explore intelligence.')}<br />
+              {t('探索智能，', 'Explore intelligence. ')}
               <span>{t('构建可能。', 'Build possibilities.')}</span>
             </Heading>
-            <p className={styles.eyebrow}>Developer · AI Builder · Explorer</p>
             <p className={styles.intro}>
               {t(
-                '从 Java 到 AI。从模型到应用，再走向真实世界。',
-                'From Java to AI. From models to applications, and into the physical world.',
+                '你好，我是 Hohoo。在这里公开学习、记录实验，把想法做成真实的东西。',
+                'Hello, I’m Hohoo. Learning in public, documenting experiments, and turning ideas into real things.',
               )}
             </p>
+          </div>
+          <div className={styles.observatory}>
+            <ParticleWordmark en={en} />
+          </div>
+          <div className={styles.heroFooter}>
             <div className={styles.actions}>
               <Link className={styles.primary} to="/learning">
                 {t('开始阅读路线', 'Explore reading paths')} ↗
@@ -70,14 +69,6 @@ export default function Home() {
               <span>{t('具身智能', 'Embodied AI')}</span>
             </div>
           </div>
-          <aside className={styles.observatory} aria-label={t('个人 AI 实验室', 'Personal AI laboratory')}>
-            <div className={styles.profile}>
-              <img src={avatar} alt="Hohoo" width="48" height="48" className={styles.avatar} />
-              <div><strong>Hohoo</strong><p>Developer · AI Builder · Explorer</p></div>
-              <a href={social.github.href} aria-label="Hohoo GitHub">↗</a>
-            </div>
-            <p className={styles.visualCaption}>LEARNING IN PUBLIC. BUILDING IN PUBLIC.</p>
-          </aside>
         </section>
         <section className={styles.notes} aria-labelledby="notes-title">
           <div className={styles.sectionHeading}>

@@ -33,7 +33,6 @@ export default function ParticleWordmark({ en }) {
 
   return (
     <section className={styles.scene} aria-label={t('Hohoo 交互粒子星群', 'Hohoo interactive constellation')}>
-      <div className={styles.caption}><span>HOOHOO’S AI LAB</span><span>LEARNING IN PUBLIC · BUILDING IN PUBLIC</span></div>
       <div className={styles.stage}>
         {!ready && <span className={styles.fallback}>Hohoo</span>}
         <canvas ref={canvasRef} className={styles.canvas} tabIndex={0}
@@ -41,14 +40,12 @@ export default function ParticleWordmark({ en }) {
           aria-describedby="wordmark-help" onKeyDown={onKeyDown} />
       </div>
       <div className={styles.controls}>
-        <p id="wordmark-help">{t('掠过拨散 · 按住拖动旋转 · 自动聚回', 'Hover to scatter · Drag to rotate · Returns to form')}<br />
+        <p id="wordmark-help" className={styles.hiddenHelp}>{t('掠过拨散 · 按住拖动旋转 · 自动聚回', 'Hover to scatter · Drag to rotate · Returns to form')}<br />
           <span>{t('触屏横向拖动；键盘方向键旋转，空格拨散，R 复位', 'Touch: drag horizontally. Keyboard: arrows rotate, Space scatters, R resets.')}</span>
         </p>
         <div className={styles.buttons}>
-          <button onClick={() => sceneRef.current?.rotate(-0.22, 0)} disabled={!ready} aria-label={t('向左旋转粒子', 'Rotate particles left')}>←</button>
-          <button onClick={() => sceneRef.current?.rotate(0.22, 0)} disabled={!ready} aria-label={t('向右旋转粒子', 'Rotate particles right')}>→</button>
-          <button onClick={() => sceneRef.current?.scatter()} disabled={!ready || paused}>{t('拨散', 'Scatter')}</button>
-          <button onClick={() => sceneRef.current?.reset()} disabled={!ready}>{t('复位', 'Reset')}</button>
+          <button onClick={() => sceneRef.current?.scatter()} disabled={!ready || paused}><span aria-hidden="true">✧</span> {t('拨散', 'Scatter')}</button>
+          <button onClick={() => sceneRef.current?.reset()} disabled={!ready}><span aria-hidden="true">↺</span> {t('复位', 'Reset')}</button>
         </div>
       </div>
     </section>

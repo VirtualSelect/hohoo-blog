@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { useLocation } from '@docusaurus/router';
 
 export const MotionContext = createContext(false);
 const storageKey = 'huhohoo.motion.v1';
@@ -9,6 +10,8 @@ export function ParticleProvider({ children }) {
   const [reduced, setReduced] = useState(false);
   const { i18n } = useDocusaurusContext();
   const en = i18n.currentLocale === 'en';
+  const { pathname } = useLocation();
+  const isHome = /^\/(?:en\/?)?$/.test(pathname);
   useEffect(() => {
     try { setPaused(localStorage.getItem(storageKey) === 'paused'); } catch {}
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -24,12 +27,11 @@ export function ParticleProvider({ children }) {
   }
   return (
     <MotionContext.Provider value={paused || reduced}>
-      <ParticleField />
       {children}
-      <button className="hh-motion-toggle" onClick={toggle} disabled={reduced} aria-pressed={paused || reduced}>
+      {isHome && <button className="hh-motion-toggle" onClick={toggle} disabled={reduced} aria-pressed={paused || reduced}>
         <span aria-hidden="true">{paused || reduced ? '▷' : 'Ⅱ'}</span>{' '}
         {reduced ? (en ? 'Reduced motion' : '已减少动态效果') : paused ? (en ? 'Resume particles' : '播放粒子') : (en ? 'Pause particles' : '暂停粒子')}
-      </button>
+      </button>}
     </MotionContext.Provider>
   );
 }
