@@ -4,7 +4,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 export default function StructuredData({ entry, person = false }) {
   const { siteConfig, i18n } = useDocusaurusContext();
   const base = siteConfig.url.replace(/\/$/, ''),
-    prefix = i18n.currentLocale === 'en' ? '/en' : '';
+    prefix =
+      i18n.currentLocale === i18n.defaultLocale ? '' : '/' + i18n.currentLocale;
   const data = person
     ? {
         '@context': 'https://schema.org',

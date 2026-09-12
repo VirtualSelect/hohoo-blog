@@ -1,3 +1,4 @@
+import { translate } from '@docusaurus/Translate';
 import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useEnglish } from '@site/src/components/ContentUI';
@@ -43,9 +44,22 @@ export default function SearchBar() {
         className="hh-search-trigger"
         ref={trigger}
         onClick={() => setOpen(true)}
-        aria-label={en ? 'Search site' : '全站搜索'}
+        aria-label={
+          en
+            ? 'Search site'
+            : translate({
+                id: 'ui.97b8039998',
+                message: '\u5168\u7AD9\u641C\u7D22',
+              })
+        }
         aria-haspopup="dialog">
-        {en ? 'Search' : '搜索'} <kbd>⌘ / Ctrl K</kbd>
+        {en
+          ? 'Search'
+          : translate({
+              id: 'ui.f04090805c',
+              message: '\u641C\u7D22',
+            })}{' '}
+        <kbd>⌘ / Ctrl K</kbd>
       </button>
       {open &&
         Dialog &&
@@ -59,12 +73,20 @@ export default function SearchBar() {
                 setOpen(false);
                 setTimeout(() => setOpen(true), 0);
               }}>
-              {en ? 'Retry search' : '重试搜索'}
+              {en
+                ? 'Retry search'
+                : translate({
+                    id: 'ui.623673590a',
+                    message: '\u91CD\u8BD5\u641C\u7D22',
+                  })}
             </button>
           ) : en ? (
             'Loading…'
           ) : (
-            '加载中…'
+            translate({
+              id: 'ui.300ee3dee4',
+              message: '\u52A0\u8F7D\u4E2D\u2026',
+            })
           )}
         </span>
       )}

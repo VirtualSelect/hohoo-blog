@@ -1,3 +1,5 @@
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { translate } from '@docusaurus/Translate';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import ReadingActions from './ReadingActions';
@@ -6,7 +8,7 @@ import { useEnglish, Related } from './ContentUI';
 import ContentProvenance, { Freshness } from './ContentProvenance';
 export default function RadarItem({ item, compact = false }) {
   const en = useEnglish();
-  const c = localizedNews(item, en ? 'en' : 'zh');
+  const c = localizedNews(item, useDocusaurusContext().i18n.currentLocale);
   return (
     <article id={'signal-' + item.id}>
       <p className="hh-eyebrow">
@@ -35,6 +37,12 @@ export default function RadarItem({ item, compact = false }) {
           {c.title} ↗
         </a>
       </h3>
+      {item.originalTitle && item.originalTitle !== c.title && (
+        <p className="hh-meta">ORIGINAL SOURCE TITLE · {item.originalTitle}</p>
+      )}
+      <p className="hh-meta">
+        {c.fallback ? 'SOURCE LANGUAGE' : 'AI TRANSLATED'}
+      </p>
       {c.summary && (
         <>
           <ContentProvenance
@@ -59,10 +67,16 @@ export default function RadarItem({ item, compact = false }) {
           {item.sourceType === 'media'
             ? en
               ? 'Source page'
-              : '来源页'
+              : translate({
+                  id: 'ui.05b0e77f21',
+                  message: '\u6765\u6E90\u9875',
+                })
             : en
               ? 'Source'
-              : '来源'}{' '}
+              : translate({
+                  id: 'ui.c63f79e636',
+                  message: '\u6765\u6E90',
+                })}{' '}
           ↗
         </a>
         {!compact && <ReadingActions id={item.id} en={en} compact />}
@@ -73,7 +87,14 @@ export default function RadarItem({ item, compact = false }) {
           item.verificationStatus,
         ) && (
           <details>
-            <summary>{en ? 'Verification evidence' : '核验依据'}</summary>
+            <summary>
+              {en
+                ? 'Verification evidence'
+                : translate({
+                    id: 'ui.8215f33a20',
+                    message: '\u6838\u9A8C\u4F9D\u636E',
+                  })}
+            </summary>
             <ul>
               {item.verification.evidence.map((e) => (
                 <li key={e.url}>
@@ -88,7 +109,13 @@ export default function RadarItem({ item, compact = false }) {
       {!!item.coverage?.length && (
         <details>
           <summary>
-            {en ? 'Related coverage' : '相关报道'} · {item.coverage.length}
+            {en
+              ? 'Related coverage'
+              : translate({
+                  id: 'ui.6b698bddf4',
+                  message: '\u76F8\u5173\u62A5\u9053',
+                })}{' '}
+            · {item.coverage.length}
           </summary>
           <ul>
             {item.coverage.map((i) => (

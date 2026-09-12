@@ -1,3 +1,4 @@
+import { translate } from '@docusaurus/Translate';
 import React, { useEffect, useState } from 'react';
 import {
   parseInbox,
@@ -8,7 +9,6 @@ import {
 } from '@site/src/utils/reading-inbox.mjs';
 import { learningSymbols } from '@site/src/utils/learning-progress.mjs';
 import styles from './ReadingActions.module.css';
-
 let memory = emptyInbox();
 let volatileStorage = false;
 const eventName = 'hohoo-news-reading-change';
@@ -38,11 +38,15 @@ export function useNewsReading() {
         volatileStorage = true;
         setError(true);
       }
-      setState({ ...memory });
+      setState({
+        ...memory,
+      });
       setReady(true);
     };
     const local = () => {
-      setState({ ...memory });
+      setState({
+        ...memory,
+      });
       setError(volatileStorage);
     };
     refresh();
@@ -74,7 +78,12 @@ export function useNewsReading() {
     }
     window.dispatchEvent(new Event(eventName));
   };
-  return { ...state, ready, error, toggle };
+  return {
+    ...state,
+    ready,
+    error,
+    toggle,
+  };
 }
 export default function ReadingActions({ id, en, compact = false }) {
   const state = useNewsReading();
@@ -89,10 +98,16 @@ export default function ReadingActions({ id, en, compact = false }) {
         {state.saved.includes(id)
           ? en
             ? 'Saved'
-            : '已收藏'
+            : translate({
+                id: 'ui.2d2cdabf29',
+                message: '\u5DF2\u6536\u85CF',
+              })
           : en
             ? 'Save for later'
-            : '稍后读'}
+            : translate({
+                id: 'ui.a89b395637',
+                message: '\u7A0D\u540E\u8BFB',
+              })}
       </button>
       <button
         type="button"
@@ -103,10 +118,16 @@ export default function ReadingActions({ id, en, compact = false }) {
         {state.read.includes(id)
           ? en
             ? 'Read'
-            : '已读'
+            : translate({
+                id: 'ui.642ec8b596',
+                message: '\u5DF2\u8BFB',
+              })
           : en
             ? 'Mark as read'
-            : '标记已读'}
+            : translate({
+                id: 'ui.504ecf732d',
+                message: '\u6807\u8BB0\u5DF2\u8BFB',
+              })}
       </button>
       {!compact && (
         <button
@@ -118,17 +139,27 @@ export default function ReadingActions({ id, en, compact = false }) {
           {state.reading.includes(id)
             ? en
               ? 'Reading'
-              : '阅读中'
+              : translate({
+                  id: 'ui.120875d028',
+                  message: '\u9605\u8BFB\u4E2D',
+                })
             : en
               ? 'Start reading'
-              : '开始阅读'}
+              : translate({
+                  id: 'ui.f3be3e4b09',
+                  message: '\u5F00\u59CB\u9605\u8BFB',
+                })}
         </button>
       )}
       {state.error && (
         <small role="status">
           {en
             ? 'Storage unavailable; kept for this visit only.'
-            : '存储不可用，仅在本次访问中保留。'}
+            : translate({
+                id: 'ui.e33095f165',
+                message:
+                  '\u5B58\u50A8\u4E0D\u53EF\u7528\uFF0C\u4EC5\u5728\u672C\u6B21\u8BBF\u95EE\u4E2D\u4FDD\u7559\u3002',
+              })}
         </small>
       )}
     </div>

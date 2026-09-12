@@ -664,3 +664,108 @@ input:focus-visible {
 .hh-motion-toggle { position: fixed; bottom: 14px; right: 18px; z-index: 20; border: 1px solid var(--blog-border); background: var(--ifm-background-color); color: var(--blog-muted); border-radius: 4px; padding: 10px 14px; min-height: 44px; font-size: .7rem; cursor: pointer; }
 .hh-motion-toggle:disabled { cursor: default; }
 @media(max-width:700px) { .hh-page { padding-top: 36px; } .hh-section { padding-block: 32px; } .hh-motion-toggle { right: 12px; bottom: 10px; } }
+
+/* Editorial discovery: real writing leads; proposals remain quiet. */
+.hh-writing-list h2 {
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.55;
+  margin: 0 0 8px;
+}
+.hh-writing-list .hh-eyebrow {
+  margin-bottom: 10px;
+}
+.hh-writing-list p:last-child {
+  margin-bottom: 0;
+  color: var(--blog-muted);
+}
+.hh-roadmap {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+.hh-roadmap > li {
+  border-top: 1px solid var(--blog-border);
+  padding: 14px 0;
+}
+.hh-roadmap .hh-step {
+  padding: 24px 0;
+}
+.hh-step h3 {
+  font-size: 1.3rem;
+  line-height: 1.55;
+  max-width: 46rem;
+}
+.hh-planned {
+  color: var(--blog-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.9rem;
+}
+.hh-planned button,
+.hh-step button {
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  border: 1px solid var(--blog-border);
+  border-radius: 3px;
+  min-height: 44px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.hh-step button + button {
+  margin-left: 12px;
+}
+.hh-page > details > summary {
+  min-height: 44px;
+  padding-block: 12px;
+  cursor: pointer;
+}
+.hh-foundations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 48px;
+  padding: 0;
+  list-style: none;
+}
+.hh-foundations small {
+  display: block;
+  color: var(--blog-muted);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  margin-top: 6px;
+}
+.hh-translation {
+  border-block: 1px solid var(--blog-border);
+  padding: 16px 0;
+  margin: 24px 0;
+  font-size: 0.85rem;
+  color: var(--blog-muted);
+}
+.hh-translation p {
+  margin: 8px 0 0;
+}
+.hh-section-heading {
+  flex-wrap: wrap;
+}
+.hh-controls input {
+  max-width: 100%;
+  min-width: 0;
+}
+@media (max-width: 430px) {
+  .hh-planned {
+    align-items: start;
+  }
+  .hh-writing-list h2 {
+    overflow-wrap: anywhere;
+  }
+}
+.hh-mobile-search {
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  text-align: start;
+  font: inherit;
+  cursor: pointer;
+}

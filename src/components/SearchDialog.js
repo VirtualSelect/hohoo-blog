@@ -1,3 +1,4 @@
+import { translate } from '@docusaurus/Translate';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from '@docusaurus/Link';
 import index from '@generated/search-index/default/index.json';
@@ -37,19 +38,35 @@ export default function SearchDialog({ onClose }) {
       <div className="hh-search-inner">
         <header>
           <h2 id="site-search-title">
-            {en ? 'Search the Lab' : '搜索 AI Lab'}
+            {en
+              ? 'Search the Lab'
+              : translate({
+                  id: 'ui.dd90256c10',
+                  message: '\u641C\u7D22 AI Lab',
+                })}
           </h2>
           <button
             type="button"
             onClick={onClose}
-            aria-label={en ? 'Close search' : '关闭搜索'}>
+            aria-label={
+              en
+                ? 'Close search'
+                : translate({
+                    id: 'ui.e40a06c88b',
+                    message: '\u5173\u95ED\u641C\u7D22',
+                  })
+            }>
             Esc ×
           </button>
         </header>
         <label htmlFor="site-search" className="hh-meta">
           {en
             ? 'Title, summary, type:paper or topic:embodied'
-            : '标题、摘要，或 type:paper / topic:embodied'}
+            : translate({
+                id: 'ui.f7918b483b',
+                message:
+                  '\u6807\u9898\u3001\u6458\u8981\uFF0C\u6216 type:paper / topic:embodied',
+              })}
         </label>
         <input
           ref={input}
@@ -61,26 +78,47 @@ export default function SearchDialog({ onClose }) {
         />
         <p role="status" className="hh-meta">
           {query.trim()
-            ? `${results.length} ${en ? 'results' : '条结果'}`
+            ? `${results.length} ${
+                en
+                  ? 'results'
+                  : translate({
+                      id: 'ui.1e302c4ffd',
+                      message: '\u6761\u7ED3\u679C',
+                    })
+              }`
             : en
               ? 'QUICK NAVIGATION'
-              : '快捷导航'}
+              : translate({
+                  id: 'ui.84fd7b2484',
+                  message: '\u5FEB\u6377\u5BFC\u822A',
+                })}
         </p>
         {!query.trim() ? (
           <nav
             className="hh-quick-nav"
-            aria-label={en ? 'Quick navigation' : '快捷导航'}>
+            aria-label={
+              en
+                ? 'Quick navigation'
+                : translate({
+                    id: 'ui.84fd7b2484',
+                    message: '\u5FEB\u6377\u5BFC\u822A',
+                  })
+            }>
             {Object.entries(navigation.links)
-              .filter(([id]) => id !== 'rss')
+              .filter(([id]) =>
+                ['articles', 'learning', 'build', 'radar', 'about'].includes(
+                  id,
+                ),
+              )
               .map(([id, l]) => (
                 <Link key={id} to={l.to} onClick={onClose}>
-                  {en ? l.en : l.label} →
+                  {translate({ id: 'nav.' + id, message: l.label })} →
                 </Link>
               ))}
           </nav>
         ) : results.length ? (
           <div>
-            {['KNOWLEDGE', 'BUILD', 'DISCOVER', 'SHARE'].map((g) => {
+            {['WRITING', 'BUILD', 'DISCOVER'].map((g) => {
               const rows = results.filter((e) => searchGroup(e.type) === g);
               return rows.length ? (
                 <section key={g}>
@@ -106,13 +144,21 @@ export default function SearchDialog({ onClose }) {
           <p className="hh-empty">
             {en
               ? 'No results. Try another term or remove filters.'
-              : '没有匹配内容。试试其他关键词或移除筛选条件。'}
+              : translate({
+                  id: 'ui.65a937e71a',
+                  message:
+                    '\u6CA1\u6709\u5339\u914D\u5185\u5BB9\u3002\u8BD5\u8BD5\u5176\u4ED6\u5173\u952E\u8BCD\u6216\u79FB\u9664\u7B5B\u9009\u6761\u4EF6\u3002',
+                })}
           </p>
         )}
         <p className="hh-meta">
           {en
             ? 'Searches titles and summaries. Tab to navigate, Enter to open, Esc to close.'
-            : '搜索标题与摘要。Tab 切换，Enter 打开，Esc 关闭。'}
+            : translate({
+                id: 'ui.db35da5bf4',
+                message:
+                  '\u641C\u7D22\u6807\u9898\u4E0E\u6458\u8981\u3002Tab \u5207\u6362\uFF0CEnter \u6253\u5F00\uFF0CEsc \u5173\u95ED\u3002',
+              })}
         </p>
       </div>
     </dialog>

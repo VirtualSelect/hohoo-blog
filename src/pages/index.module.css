@@ -5,7 +5,7 @@
 .title{font-size:clamp(2.4rem,3.8vw,3.6rem);line-height:1.28;letter-spacing:-.05em;margin-bottom:24px}
 .title>span{color:var(--ifm-color-primary)}
 .intro{color:var(--blog-muted);max-width:650px;line-height:1.9;margin:0 auto}
-.actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;margin-top:0}
+.actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:center;margin-top:24px}
 .primary,.secondary{display:inline-flex;align-items:center;justify-content:center;gap:16px;font-size:.83rem;font-weight:500;padding:11px 18px;min-height:44px;border-radius:4px}
 .primary{background:var(--ifm-color-primary);color:var(--ifm-background-color);border:1px solid var(--ifm-color-primary)}
 .primary:hover{color:var(--ifm-background-color);text-decoration:none;opacity:.85}

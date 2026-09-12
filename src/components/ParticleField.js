@@ -11,7 +11,7 @@ export function ParticleProvider({ children }) {
   const { i18n } = useDocusaurusContext();
   const en = i18n.currentLocale === 'en';
   const { pathname } = useLocation();
-  const isHome = /^\/(?:en\/?)?$/.test(pathname);
+  const isHome = /^\/(?:en\/|zh-TW\/)?about\/?$/.test(pathname);
   useEffect(() => {
     try { setPaused(localStorage.getItem(storageKey) === 'paused'); } catch {}
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');

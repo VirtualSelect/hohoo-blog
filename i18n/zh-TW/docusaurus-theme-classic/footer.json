@@ -1,0 +1,50 @@
+{
+  "link.item.label.文章": {
+    "message": "文章"
+  },
+  "link.item.label.实践": {
+    "message": "實踐"
+  },
+  "link.item.label.学习": {
+    "message": "學習"
+  },
+  "link.item.label.关于": {
+    "message": "關於"
+  },
+  "link.item.label.阅读路线": {
+    "message": "學習路線"
+  },
+  "link.item.label.项目": {
+    "message": "專案"
+  },
+  "link.item.label.实验": {
+    "message": "實驗"
+  },
+  "link.item.label.短笔记": {
+    "message": "短筆記"
+  },
+  "link.item.label.论文阅读": {
+    "message": "論文閱讀"
+  },
+  "link.item.label.阅读清单": {
+    "message": "閱讀清單"
+  },
+  "link.item.label.研究总览": {
+    "message": "研究總覽"
+  },
+  "link.item.label.随笔": {
+    "message": "隨筆"
+  },
+  "link.item.label.近况": {
+    "message": "近況"
+  },
+  "link.item.label.学习活动": {
+    "message": "學習活動"
+  },
+  "link.item.label.更新记录": {
+    "message": "更新紀錄"
+  },
+  "copyright": {
+    "message": "<div class=\"hh-footer-signoff\"><div class=\"hh-footer-brand\"><strong>Hohoo.</strong><span>Learning in public. Building in public.</span></div><div class=\"hh-footer-meta\"><span>© 2026 Hohoo</span><span>Built with Docusaurus</span></div></div>\n                <p class=\"hh-footer-license\">本站內容採用 <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\">CC BY-NC 4.0</a> 授權。轉載須註明作者與來源，僅供非商業使用。</p>"
+  }
+}

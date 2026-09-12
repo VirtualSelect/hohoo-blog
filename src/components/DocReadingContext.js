@@ -1,3 +1,4 @@
+import { translate } from '@docusaurus/Translate';
 import ContentProvenance, { Freshness } from './ContentProvenance';
 import React, { useEffect, useRef } from 'react';
 import Link from '@docusaurus/Link';
@@ -49,7 +50,11 @@ export default function DocReadingContext({ position }) {
         <Freshness entry={f} />
         <Related
           ids={f.prerequisites || []}
-          title={en ? 'Prerequisites' : '前置知识'}
+          title={
+            en
+              ? 'Prerequisites'
+              : translate({ id: 'ui.24e94830a2', message: '前置知识' })
+          }
         />
       </div>
     );
@@ -58,7 +63,11 @@ export default function DocReadingContext({ position }) {
     <>
       {track && (
         <section className="hh-reading-context">
-          <h2>{en ? 'You are here' : '当前学习位置'}</h2>
+          <h2>
+            {en
+              ? 'You are here'
+              : translate({ id: 'ui.55d22ed084', message: '当前学习位置' })}
+          </h2>
           <p className="hh-eyebrow">
             {track.brand} / {en ? track.en : track.title}
           </p>
@@ -98,13 +107,19 @@ export default function DocReadingContext({ position }) {
                   : 'completed',
               )
             }>
-            ✓ {en ? 'Completed' : '已完成'}
+            ✓{' '}
+            {en
+              ? 'Completed'
+              : translate({ id: 'ui.e99b48a29b', message: '已完成' })}
           </button>
           {state.error && (
             <p role="status">
               {en
                 ? 'Storage unavailable; this visit only.'
-                : '存储不可用，仅本次访问保留。'}
+                : translate({
+                    id: 'ui.1d61990f22',
+                    message: '存储不可用，仅本次访问保留。',
+                  })}
             </p>
           )}
         </section>

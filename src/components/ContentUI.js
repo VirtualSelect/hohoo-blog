@@ -1,3 +1,4 @@
+import { translate } from '@docusaurus/Translate';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import { usePluginData } from '@docusaurus/useGlobalData';
@@ -15,12 +16,48 @@ export function Status({ value }) {
     planned: ['PLANNED', 'PLANNED'],
     inconclusive: ['INCONCLUSIVE', 'INCONCLUSIVE'],
     archived: ['ARCHIVED', 'ARCHIVED'],
-    production: ['已上线', 'Live'],
-    building: ['构建中', 'Building'],
-    completed: ['已完成', 'Completed'],
-    running: ['实验中', 'Running'],
-    'to-read': ['阅读入口', 'Reading guide'],
-    published: ['已发布', 'Published'],
+    production: [
+      translate({
+        id: 'ui.fa30c2b4cb',
+        message: '\u5DF2\u4E0A\u7EBF',
+      }),
+      'Live',
+    ],
+    building: [
+      translate({
+        id: 'ui.556441e259',
+        message: '\u6784\u5EFA\u4E2D',
+      }),
+      'Building',
+    ],
+    completed: [
+      translate({
+        id: 'ui.e99b48a29b',
+        message: '\u5DF2\u5B8C\u6210',
+      }),
+      'Completed',
+    ],
+    running: [
+      translate({
+        id: 'ui.22133c81a1',
+        message: '\u5B9E\u9A8C\u4E2D',
+      }),
+      'Running',
+    ],
+    'to-read': [
+      translate({
+        id: 'ui.204508c457',
+        message: '\u9605\u8BFB\u5165\u53E3',
+      }),
+      'Reading guide',
+    ],
+    published: [
+      translate({
+        id: 'ui.176a2eb4eb',
+        message: '\u5DF2\u53D1\u5E03',
+      }),
+      'Published',
+    ],
   };
   return (
     <span className="hh-meta">
@@ -46,7 +83,13 @@ export function Section({ label, title, to, children }) {
     </section>
   );
 }
-export function ContentRows({ items, empty = '暂无已发布内容。' }) {
+export function ContentRows({
+  items,
+  empty = translate({
+    id: 'ui.2935251044',
+    message: '\u6682\u65E0\u5DF2\u53D1\u5E03\u5185\u5BB9\u3002',
+  }),
+}) {
   const en = useEnglish();
   return items.length ? (
     <ol className="hh-rows">
@@ -88,7 +131,15 @@ export function Related({ ids = [], title }) {
   return items.length ? (
     <Section
       label="KEEP EXPLORING"
-      title={title || (en ? 'Related content' : '继续探索')}>
+      title={
+        title ||
+        (en
+          ? 'Related content'
+          : translate({
+              id: 'ui.47206b4f17',
+              message: '\u7EE7\u7EED\u63A2\u7D22',
+            }))
+      }>
       <ContentRows items={items} />
     </Section>
   ) : null;

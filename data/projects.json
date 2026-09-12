@@ -66,7 +66,10 @@
       "Review + JSON",
       "Docusaurus",
       "Vercel"
-    ]
+    ],
+    "titleTw": "Hohoo’s AI Lab",
+    "descriptionTw": "公開學習、研究資訊與實作紀錄共用的個人知識網站。",
+    "sourceLocale": "zh-CN"
   },
   {
     "id": "project:hohoo-ai-lab",
@@ -150,6 +153,9 @@
         "descriptionEn": "First request to multi-turn chat",
         "href": "/docs/ai-apps/java-first-llm"
       }
-    ]
+    ],
+    "titleTw": "Java LLM 實作集",
+    "descriptionTw": "從首次請求到多輪對話：三個可閱讀、可執行的 Java 8 範例。",
+    "sourceLocale": "zh-CN"
   }
 ]

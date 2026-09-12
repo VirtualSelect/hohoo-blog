@@ -1,3 +1,6 @@
+import { translate } from '@docusaurus/Translate';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import TranslationNotice from './TranslationNotice';
 import StructuredData from './StructuredData';
 import ProjectEvidence from './ProjectEvidence';
 import ReadingActions from './ReadingActions';
@@ -9,20 +12,44 @@ import ContentProvenance, { Freshness } from './ContentProvenance';
 import { Related, Status, useEnglish } from './ContentUI';
 export default function ContentDetail({ entry: e }) {
   const en = useEnglish();
+  const locale = useDocusaurusContext().i18n.currentLocale;
+  const tw = locale === 'zh-TW';
   const lab = e.type === 'lab';
-  const title = en ? e.titleEn || e.title : e.title;
+  const title = en ? e.titleEn || e.title : tw ? e.titleTw || e.title : e.title;
   return (
     <Layout
       title={title}
-      description={en ? e.descriptionEn || e.description : e.description}>
+      description={
+        en
+          ? e.descriptionEn || e.description
+          : tw
+            ? e.descriptionTw || e.description
+            : e.description
+      }>
       <main className="hh-page hh-reading">
-        {e.type === 'project' && <StructuredData entry={e} />}
+        {e.type === 'project' && (
+          <StructuredData
+            entry={{
+              ...e,
+              title,
+              description: en
+                ? e.descriptionEn || e.description
+                : tw
+                  ? e.descriptionTw || e.description
+                  : e.description,
+            }}
+          />
+        )}
         <p className="hh-eyebrow">
           {e.type.toUpperCase()} / {e.number}
         </p>
         <h1>{title}</h1>
         <p className="hh-lead">
-          {en ? e.descriptionEn || e.description : e.description}
+          {en
+            ? e.descriptionEn || e.description
+            : tw
+              ? e.descriptionTw || e.description
+              : e.description}
         </p>
         <div className="hh-meta">
           <Status value={e.status} />
@@ -48,7 +75,12 @@ export default function ContentDetail({ entry: e }) {
             {e.demo && <a href={e.demo}>Website ↗</a>}
           </p>
         )}
-        {lab ? (
+        {locale !== 'zh-CN' ? (
+          <TranslationNotice
+            id={e.id}
+            original={e.href.replace(/^\/(en|zh-TW)(?=\/)/, '')}
+          />
+        ) : lab ? (
           <>
             <section className="hh-section">
               <h2 className="hh-eyebrow">01 / QUESTION</h2>
@@ -83,7 +115,7 @@ export default function ContentDetail({ entry: e }) {
             </section>
           ))
         )}
-        {!!e.experimentLog?.length && (
+        {locale === 'zh-CN' && !!e.experimentLog?.length && (
           <section className="hh-section">
             <h2>EXPERIMENT LOG</h2>
             <ol>
@@ -95,12 +127,16 @@ export default function ContentDetail({ entry: e }) {
             </ol>
           </section>
         )}
-        {e.type === 'project' && <ProjectEvidence entry={e} />}
+        {locale === 'zh-CN' && e.type === 'project' && (
+          <ProjectEvidence entry={e} />
+        )}
         {e.type === 'note' && <ReadingActions id={e.id} en={en} />}
         <Related ids={e.related} />
         <p>
           <Link to={lab ? '/labs' : e.type === 'note' ? '/notes' : '/projects'}>
-            {en ? '← Back to index' : '← 返回目录'}
+            {en
+              ? '← Back to index'
+              : translate({ id: 'ui.0bb6b912b5', message: '← 返回目录' })}
           </Link>
         </p>
       </main>

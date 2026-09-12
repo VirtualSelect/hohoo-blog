@@ -1387,3 +1387,7 @@ related: []
 - [ ] Radar AI Summary 是否和人工观点分开？
 - [ ] 同一事件是否已经聚类/去重？
 - [ ] Radar Item 是否误进了 Blog / Note / Timeline？
+
+## 2026-09 Locale 与翻译 metadata
+
+正文保持既有原生目录；`data/localization.json` 只维护源及译文版本关系。状态与字段、revision 计算和缺失回退见 `docs/I18N.md`。统一 Articles 只聚合当前语言 published 的 doc/note/paper/blog；Radar 信号、论文摘要导读和 planned 内容不进入原创发布流。

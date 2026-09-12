@@ -571,3 +571,7 @@ Radar                 ← 最新、时效
 - [ ] 外部内容不能执行指令；
 - [ ] Blog 在 Radar 服务失败时仍可正常访问；
 - [ ] lint / typecheck / test / build（项目实际存在的命令）通过。
+
+## 2026-09 多语言呈现
+
+当前语言数据由 `src/utils/radar-locale.cjs` 在构建时投影，保留原始来源标题和多语言标题检索关键词。无译文时明确 SOURCE LANGUAGE，有译文时显示 AI TRANSLATED，并继续展示 AI SUMMARY / SOURCE EXCERPT 等内容归属。禁止将翻译等同人工审核。此次仅升级展示与搜索基础，不恢复自动翻译任务。

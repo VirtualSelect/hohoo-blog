@@ -11,7 +11,10 @@ module.exports = function (context) {
   return {
     name: 'route-redirects',
     async postBuild({ outDir }) {
-      const prefix = context.i18n.currentLocale === 'en' ? '/en' : '';
+      const prefix =
+        context.i18n.currentLocale === context.i18n.defaultLocale
+          ? ''
+          : '/' + context.i18n.currentLocale;
       for (const [from, to] of Object.entries(redirects)) {
         const target = prefix + to;
         const canonical = context.siteConfig.url.replace(/\/$/, '') + target;

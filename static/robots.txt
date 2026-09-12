@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://huhohoo.com/sitemap.xml
+Sitemap: https://huhohoo.com/zh-TW/sitemap.xml
+Sitemap: https://huhohoo.com/en/sitemap.xml

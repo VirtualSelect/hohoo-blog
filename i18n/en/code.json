@@ -416,5 +416,149 @@
   "theme.unlistedContent.message": {
     "message": "This page is unlisted. Search engines will not index it, and only users having a direct link can access it.",
     "description": "The unlisted content banner message"
+  },
+  "home.intro": {
+    "message": "From Java to AI. Learn, experiment, build."
+  },
+  "home.hello": {
+    "message": "Hello, I’m Hohoo."
+  },
+  "home.read": {
+    "message": "Read the latest writing"
+  },
+  "home.learn": {
+    "message": "Explore learning paths"
+  },
+  "filter.all": {
+    "message": "All"
+  },
+  "filter.doc": {
+    "message": "Technical articles"
+  },
+  "filter.paper": {
+    "message": "Papers"
+  },
+  "filter.blog": {
+    "message": "Blog"
+  },
+  "articles.description": {
+    "message": "What I am learning, understanding and building."
+  },
+  "nav.articles": {
+    "message": "Articles"
+  },
+  "articles.filters": {
+    "message": "Filter by content type"
+  },
+  "nav.build": {
+    "message": "Build"
+  },
+  "build.description": {
+    "message": "What I built. What I tested."
+  },
+  "build.projects": {
+    "message": "All projects"
+  },
+  "build.proposals": {
+    "message": "Experiment proposals"
+  },
+  "build.labs": {
+    "message": "All experiments"
+  },
+  "learning.beginner": {
+    "message": "Beginner"
+  },
+  "learning.completed": {
+    "message": "Completed"
+  },
+  "learning.save": {
+    "message": "Save"
+  },
+  "nav.learning": {
+    "message": "Learning"
+  },
+  "learning.description": {
+    "message": "Start with the current path. Learn at your own pace."
+  },
+  "learning.none": {
+    "message": "No published route articles yet."
+  },
+  "learning.local": {
+    "message": "Progress is stored in this browser only."
+  },
+  "learning.full": {
+    "message": "View full roadmap"
+  },
+  "learning.search": {
+    "message": "Search topics"
+  },
+  "learning.saved": {
+    "message": "Saved only"
+  },
+  "learning.random": {
+    "message": "Random explore"
+  },
+  "writing.empty": {
+    "message": "No matching published writing in this language."
+  },
+  "learning.research": {
+    "message": "Research overview"
+  },
+  "learning.inbox": {
+    "message": "Reading inbox"
+  },
+  "ui.b9171eebbb": {
+    "message": "External AI signals with traceable sources and provenance."
+  },
+  "ui.e99b48a29b": {
+    "message": "Completed"
+  },
+  "ui.2935251044": {
+    "message": "No published entries yet."
+  },
+  "translation.label": {
+    "message": "Content language"
+  },
+  "translation.missing": {
+    "message": "This content is currently available in Simplified Chinese only."
+  },
+  "translation.original": {
+    "message": "Read the original"
+  },
+  "translation.ai": {
+    "message": "AI translated from Simplified Chinese; the translation has not been human-reviewed."
+  },
+  "translation.outdated": {
+    "message": "The source has changed; this translation needs updating."
+  },
+  "ui.24e94830a2": {
+    "message": "Prerequisites"
+  },
+  "ui.55d22ed084": {
+    "message": "You are here"
+  },
+  "ui.1d61990f22": {
+    "message": "Storage unavailable; this visit only."
+  },
+  "ui.d045120de1": {
+    "message": "Blog navigation"
+  },
+  "ui.78da4c85f9": {
+    "message": "Blog"
+  },
+  "ui.ae0a7afece": {
+    "message": "Tags"
+  },
+  "ui.ddfde75bec": {
+    "message": "Archive"
+  },
+  "ui.0bb6b912b5": {
+    "message": "← Back to index"
+  },
+  "nav.radar": {
+    "message": "Radar"
+  },
+  "nav.about": {
+    "message": "About"
   }
 }

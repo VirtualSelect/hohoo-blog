@@ -1,6 +1,8 @@
 // Shared by the Docusaurus navbar, footer and quick navigation.
 const links = {
-  learning: { label: '阅读路线', en: 'Learning', to: '/learning' },
+  articles: { label: '文章', en: 'Articles', to: '/articles' },
+  build: { label: '实践', en: 'Build', to: '/build' },
+  learning: { label: '学习', en: 'Learning', to: '/learning' },
   research: { label: '研究总览', en: 'Research', to: '/research' },
   radar: { label: 'AI Radar', en: 'AI Radar', to: '/radar' },
   timeline: { label: '学习活动', en: 'Activity', to: '/timeline' },
@@ -26,19 +28,24 @@ const item = (id) => {
 module.exports = {
   links,
   navbar: [
-    ...groups.map(({ label, ids }) => ({
-      label,
+    ...['articles', 'learning', 'build', 'radar', 'about'].map((id) => ({
+      ...item(id),
+      label:
+        id === 'learning' ? '学习' : id === 'radar' ? 'Radar' : links[id].label,
       position: 'right',
-      items: ids.map(item),
     })),
-    { ...item('blog'), position: 'right' },
+    { type: 'search', position: 'right' },
     { type: 'localeDropdown', position: 'right' },
   ],
   footer: [
     {
-      title: 'EXPLORE',
-      items: ['learning', 'projects', 'labs', 'radar'].map(item),
+      title: 'READ',
+      items: ['articles', 'learning', 'blog'].map(item),
     },
-    { title: 'KNOWLEDGE', items: ['notes', 'papers', 'blog'].map(item) },
+    { title: 'BUILD', items: ['build', 'projects', 'labs'].map(item) },
+    {
+      title: 'DISCOVER',
+      items: ['radar', 'research', 'papers', 'reading'].map(item),
+    },
   ],
 };

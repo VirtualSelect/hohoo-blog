@@ -1,3 +1,4 @@
+const { projectSignal } = require('../src/utils/radar-locale.cjs');
 const news = require('../data/news/items.json');
 const config = require('../config/news-sources.json');
 const { isoWeek, signals } = require('../src/utils/radar.cjs');
@@ -6,7 +7,9 @@ module.exports = function (context) {
     name: 'radar-pages',
     async loadContent() {
       const grouped = new Map();
-      for (const item of signals(news, config)) {
+      for (const item of signals(news, config).map((i) =>
+        projectSignal(i, context.i18n.currentLocale),
+      )) {
         const week = isoWeek(item.publishedAt);
         if (!grouped.has(week)) grouped.set(week, []);
         grouped.get(week).push(item);
@@ -14,8 +17,20 @@ module.exports = function (context) {
       return [...grouped].map(([week, items]) => ({ week, items }));
     },
     async contentLoaded({ content, actions }) {
-      const prefix = context.i18n.currentLocale === 'en' ? '/en' : '';
+      const prefix =
+        context.i18n.currentLocale === context.i18n.defaultLocale
+          ? ''
+          : '/' + context.i18n.currentLocale;
+      await actions.createData(
+        'items.json',
+        JSON.stringify(
+          signals(news, config).map((i) =>
+            projectSignal(i, context.i18n.currentLocale),
+          ),
+        ),
+      );
       const preview = signals(news, config)
+        .map((i) => projectSignal(i, context.i18n.currentLocale))
         .slice(0, 3)
         .map(
           ({
@@ -27,7 +42,9 @@ module.exports = function (context) {
             publishedAt,
             summary,
             summaryKind,
-            translations,
+            originalTitle,
+            translationStatus,
+            locale,
             sourceType,
             domain,
             verificationStatus,
@@ -40,7 +57,9 @@ module.exports = function (context) {
             publishedAt,
             summary,
             summaryKind,
-            translations,
+            originalTitle,
+            translationStatus,
+            locale,
             sourceType,
             domain,
             verificationStatus,

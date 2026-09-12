@@ -30,7 +30,7 @@ export function searchGroup(type) {
     ? 'BUILD'
     : ['radar', 'radar-digest'].includes(type)
       ? 'DISCOVER'
-      : type === 'blog'
-        ? 'SHARE'
-        : 'KNOWLEDGE';
+      : type === 'learning'
+        ? 'DISCOVER'
+        : 'WRITING';
 }

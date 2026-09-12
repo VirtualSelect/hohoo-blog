@@ -38,7 +38,10 @@
         "risks": "Leakage, label bias, generation randomness and small samples. Analyze missing-evidence questions separately."
       }
     },
-    "experimentLog": []
+    "experimentLog": [],
+    "titleTw": "檢索品質對照實驗",
+    "descriptionTw": "固定一組問題與資料，記錄命中文件、引用與回答正確性，比較有無檢索的差異。",
+    "sourceLocale": "zh-CN"
   },
   {
     "id": "tool-eval",
@@ -79,7 +82,10 @@
         "risks": "Retries cannot fix unrecoverable errors. Randomness and inconsistent fault injection confound comparisons."
       }
     },
-    "experimentLog": []
+    "experimentLog": [],
+    "titleTw": "工具呼叫失敗復原實驗",
+    "descriptionTw": "使用可控制的唯讀工具，注入逾時與空結果，記錄任務完成率和呼叫次數。",
+    "sourceLocale": "zh-CN"
   },
   {
     "id": "action-representation",
@@ -120,6 +126,9 @@
         "risks": "Representation error is not task performance; simulation does not establish real-robot performance or reproduce RT-2."
       }
     },
-    "experimentLog": []
+    "experimentLog": [],
+    "titleTw": "動作表示學習紀錄",
+    "descriptionTw": "先整理觀測、動作與離散表示的對應關係，再設計模擬驗證；不將其稱為 RT-2 重現。",
+    "sourceLocale": "zh-CN"
   }
 ]

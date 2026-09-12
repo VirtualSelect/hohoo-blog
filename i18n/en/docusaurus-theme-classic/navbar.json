@@ -17,7 +17,7 @@
     "message": "Topics"
   },
   "item.label.阅读路线": {
-    "message": "Learning paths"
+    "message": "Learning"
   },
   "item.label.AI 资讯": {
     "message": "AI news"
@@ -44,7 +44,7 @@
     "message": "RSS subscriptions"
   },
   "item.label.文章": {
-    "message": "Writing"
+    "message": "Articles"
   },
   "item.label.研究": {
     "message": "Research"
@@ -56,7 +56,7 @@
     "message": "About"
   },
   "item.label.学习": {
-    "message": "Learn"
+    "message": "Learning"
   },
   "item.label.构建": {
     "message": "Build"
@@ -65,7 +65,7 @@
     "message": "Knowledge"
   },
   "item.label.研究总览": {
-    "message": "Topics"
+    "message": "Research"
   },
   "item.label.学习活动": {
     "message": "Activity"
@@ -78,5 +78,17 @@
   },
   "item.label.短笔记": {
     "message": "Notes"
+  },
+  "item.label.实践": {
+    "message": "Build"
+  },
+  "item.label.阅读清单": {
+    "message": "Reading Inbox"
+  },
+  "item.label.近况": {
+    "message": "Now"
+  },
+  "item.label.更新记录": {
+    "message": "Changelog"
   }
 }

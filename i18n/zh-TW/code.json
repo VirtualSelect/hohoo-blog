@@ -1,0 +1,359 @@
+{
+  "home.intro": {
+    "message": "從 Java 到 AI。邊學、邊實驗、邊實作。"
+  },
+  "home.hello": {
+    "message": "你好，我是 Hohoo."
+  },
+  "home.read": {
+    "message": "閱讀最新文章"
+  },
+  "home.learn": {
+    "message": "查看學習路線"
+  },
+  "filter.all": {
+    "message": "全部"
+  },
+  "filter.doc": {
+    "message": "技術文章"
+  },
+  "filter.paper": {
+    "message": "論文"
+  },
+  "filter.blog": {
+    "message": "隨筆"
+  },
+  "articles.description": {
+    "message": "我最近在學習、理解與實作的事。"
+  },
+  "nav.articles": {
+    "message": "文章"
+  },
+  "articles.filters": {
+    "message": "依內容類型篩選"
+  },
+  "nav.build": {
+    "message": "實踐"
+  },
+  "build.description": {
+    "message": "做出了什麼，驗證了什麼。"
+  },
+  "build.projects": {
+    "message": "所有專案"
+  },
+  "build.proposals": {
+    "message": "實驗提案"
+  },
+  "build.labs": {
+    "message": "所有實驗"
+  },
+  "learning.beginner": {
+    "message": "入門"
+  },
+  "learning.completed": {
+    "message": "已完成"
+  },
+  "learning.save": {
+    "message": "想讀"
+  },
+  "nav.learning": {
+    "message": "學習"
+  },
+  "learning.description": {
+    "message": "從目前的路線開始，按照自己的步調深入。"
+  },
+  "learning.none": {
+    "message": "正式路線文章尚未發布"
+  },
+  "learning.local": {
+    "message": "進度僅儲存在目前的瀏覽器。"
+  },
+  "learning.full": {
+    "message": "查看完整路線"
+  },
+  "learning.search": {
+    "message": "搜尋主題"
+  },
+  "learning.saved": {
+    "message": "只看想讀"
+  },
+  "learning.random": {
+    "message": "隨機探索"
+  },
+  "writing.empty": {
+    "message": "目前語言沒有符合條件的已發布內容。"
+  },
+  "learning.research": {
+    "message": "研究總覽"
+  },
+  "learning.inbox": {
+    "message": "閱讀清單"
+  },
+  "ui.a3910125df": {
+    "message": "關於 Hohoo"
+  },
+  "ui.b2830b25e0": {
+    "message": "Hohoo：從 Java 到 AI，公開學習、實驗與實作。"
+  },
+  "ui.d22f242c15": {
+    "message": "你好，我是 Hohoo。"
+  },
+  "ui.6aba6b62c2": {
+    "message": "平常主要寫 Java，喜歡把感興趣的想法做出來。最近更關注 AI 應用，也開始閱讀大型語言模型與具身智慧的資料。"
+  },
+  "ui.9282b6e323": {
+    "message": "這裡記錄遇到的問題、查閱的資料和嘗試的方法。區分資料、計畫與已驗證的結論，也保留尚未解答的問題。"
+  },
+  "ui.986c64be2d": {
+    "message": "可以打開看看的作品"
+  },
+  "ui.83da62e1e4": {
+    "message": "學習、實驗、實作、記錄。"
+  },
+  "ui.51d0291ad7": {
+    "message": "從具體問題出發，保留來源，用小型實驗驗證，再整理成可重複使用的紀錄。"
+  },
+  "ui.f07f7fbc5f": {
+    "message": "手邊的工具"
+  },
+  "ui.84eb68552f": {
+    "message": "程式之外"
+  },
+  "ui.27250fc8fe": {
+    "message": "喜歡聽音樂、尋找美食，也享受安靜閱讀的時間。認真做事，也為生活留白。"
+  },
+  "ui.6c155ab779": {
+    "message": "更多關於 Hohoo"
+  },
+  "ui.b9171eebbb": {
+    "message": "連結學習與實作的外部 AI 訊息，保留來源及內容歸屬。"
+  },
+  "ui.b0dfdeacae": {
+    "message": "閱讀工具"
+  },
+  "ui.a89b395637": {
+    "message": "稍後閱讀"
+  },
+  "ui.aca5221c11": {
+    "message": "發現 AI 世界的變化，連結正在研究的問題。"
+  },
+  "ui.e848ddd482": {
+    "message": "主題"
+  },
+  "ui.55322770d4": {
+    "message": "搜尋資訊"
+  },
+  "ui.3a63568a36": {
+    "message": "搜尋標題或摘要…"
+  },
+  "ui.c2f3a6365a": {
+    "message": "來源篩選與整理說明"
+  },
+  "ui.c63f79e636": {
+    "message": "來源"
+  },
+  "ui.f8d22fd22e": {
+    "message": "所有來源"
+  },
+  "ui.ac9d14e1a1": {
+    "message": "AIHOT 是主要彙整來源。來源摘錄不代表本站觀點或獨立事實查核；自動翻譯暫停。時間依 UTC 分組。"
+  },
+  "ui.fe8f7b1f08": {
+    "message": "則訊息"
+  },
+  "ui.5bbcddbccd": {
+    "message": "依日"
+  },
+  "ui.6ccceba5c4": {
+    "message": "依週"
+  },
+  "ui.96c787d5aa": {
+    "message": "每週彙整"
+  },
+  "ui.d9822ceebd": {
+    "message": "週起始"
+  },
+  "ui.2ca8f5e005": {
+    "message": "目前沒有符合條件的資訊。"
+  },
+  "ui.4bbc4e5fd9": {
+    "message": "清除篩選"
+  },
+  "ui.3a0fab4978": {
+    "message": "載入更多"
+  },
+  "ui.fa30c2b4cb": {
+    "message": "已上線"
+  },
+  "ui.556441e259": {
+    "message": "開發中"
+  },
+  "ui.e99b48a29b": {
+    "message": "已完成"
+  },
+  "ui.22133c81a1": {
+    "message": "實驗中"
+  },
+  "ui.204508c457": {
+    "message": "閱讀入口"
+  },
+  "ui.176a2eb4eb": {
+    "message": "已發布"
+  },
+  "ui.2935251044": {
+    "message": "尚無已發布內容。"
+  },
+  "ui.47206b4f17": {
+    "message": "繼續探索"
+  },
+  "ui.dd90256c10": {
+    "message": "搜尋 AI Lab"
+  },
+  "ui.e40a06c88b": {
+    "message": "關閉搜尋"
+  },
+  "ui.f7918b483b": {
+    "message": "標題、摘要，或 type:paper / topic:embodied"
+  },
+  "ui.1e302c4ffd": {
+    "message": "筆結果"
+  },
+  "ui.84fd7b2484": {
+    "message": "快速導覽"
+  },
+  "ui.65a937e71a": {
+    "message": "沒有符合的內容。請嘗試其他關鍵字或移除篩選條件。"
+  },
+  "ui.db35da5bf4": {
+    "message": "搜尋標題與摘要。Tab 切換，Enter 開啟，Esc 關閉。"
+  },
+  "ui.97b8039998": {
+    "message": "全站搜尋"
+  },
+  "ui.f04090805c": {
+    "message": "搜尋"
+  },
+  "ui.623673590a": {
+    "message": "重試搜尋"
+  },
+  "ui.300ee3dee4": {
+    "message": "載入中…"
+  },
+  "ui.aede70ae3f": {
+    "message": "這個連結似乎離開了知識圖譜。"
+  },
+  "ui.b3ec0ae3b7": {
+    "message": "試著搜尋關鍵字，或沿著學習路線繼續探索。"
+  },
+  "ui.2d2cdabf29": {
+    "message": "已收藏"
+  },
+  "ui.642ec8b596": {
+    "message": "已讀"
+  },
+  "ui.504ecf732d": {
+    "message": "標記為已讀"
+  },
+  "ui.120875d028": {
+    "message": "閱讀中"
+  },
+  "ui.f3be3e4b09": {
+    "message": "開始閱讀"
+  },
+  "ui.e33095f165": {
+    "message": "儲存空間無法使用，僅在本次瀏覽期間保留。"
+  },
+  "ui.a548e12420": {
+    "message": "完整近況 →"
+  },
+  "ui.05b0e77f21": {
+    "message": "來源頁面"
+  },
+  "ui.8215f33a20": {
+    "message": "查核依據"
+  },
+  "ui.6b698bddf4": {
+    "message": "相關報導"
+  },
+  "translation.label": {
+    "message": "內容語言"
+  },
+  "translation.missing": {
+    "message": "此內容目前僅提供簡體中文。"
+  },
+  "translation.original": {
+    "message": "閱讀原文"
+  },
+  "translation.ai": {
+    "message": "譯自簡體中文，由 AI 翻譯，尚未經人工審閱譯文。"
+  },
+  "translation.outdated": {
+    "message": "原文已更新，譯文待同步。"
+  },
+  "ui.c67dfe0378": {
+    "message": "Hohoo 粒子星群"
+  },
+  "ui.f62aab6ed9": {
+    "message": "由五條立體粒子星臂組成的 Hohoo"
+  },
+  "ui.21ed5cda95": {
+    "message": "拖曳或以方向鍵旋轉，空白鍵撥散，R 重設。"
+  },
+  "ui.31c778eb3b": {
+    "message": "從 Java 到 AI，把好奇心變成實作。"
+  },
+  "ui.e28092170e": {
+    "message": "撥散"
+  },
+  "ui.52a5c38f0e": {
+    "message": "重設"
+  },
+  "ui.58a67dbe6f": {
+    "message": "已減少動態效果"
+  },
+  "ui.21925350de": {
+    "message": "播放"
+  },
+  "ui.130448bce6": {
+    "message": "暫停"
+  },
+  "ui.bbc9b4405e": {
+    "message": "視覺效果暫時無法使用，仍可閱讀正文。"
+  },
+  "ui.e2d53a6d3a": {
+    "message": "重試"
+  },
+  "ui.67e90169b8": {
+    "message": "認識我"
+  },
+  "ui.24e94830a2": {
+    "message": "先備知識"
+  },
+  "ui.55d22ed084": {
+    "message": "目前學習位置"
+  },
+  "ui.1d61990f22": {
+    "message": "儲存空間無法使用，僅保留本次瀏覽的進度。"
+  },
+  "ui.d045120de1": {
+    "message": "隨筆導覽"
+  },
+  "ui.78da4c85f9": {
+    "message": "隨筆"
+  },
+  "ui.ae0a7afece": {
+    "message": "標籤"
+  },
+  "ui.ddfde75bec": {
+    "message": "封存"
+  },
+  "ui.0bb6b912b5": {
+    "message": "← 返回目錄"
+  },
+  "nav.radar": {
+    "message": "Radar"
+  },
+  "nav.about": {
+    "message": "關於"
+  }
+}

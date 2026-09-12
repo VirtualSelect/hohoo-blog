@@ -36,19 +36,26 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'zh-CN',
-    locales: ['en', 'zh-CN'],
+    locales: ['zh-CN', 'zh-TW', 'en'],
     localeConfigs: {
       en: {
-        htmlLang: 'en-GB',
+        label: 'English',
+        htmlLang: 'en',
       },
       'zh-CN': {
+        label: '简体中文',
         htmlLang: 'zh-CN',
+      },
+      'zh-TW': {
+        label: '繁體中文',
+        htmlLang: 'zh-TW',
       },
     },
   },
 
   plugins: [
     './plugins/astra-shaders.cjs',
+    './plugins/translation-check.cjs',
     './plugins/learning-index.cjs',
     './plugins/news-feed.cjs',
     './plugins/content-index.cjs',
@@ -82,6 +89,7 @@ const config = {
             '**/CONTENT-MODEL.md',
             '**/AI-RADAR.md',
             '**/templates/**',
+            '**/I18N.md',
           ],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -130,10 +138,13 @@ const config = {
         links: [
           ...navigation.footer,
           {
-            title: 'ELSEWHERE',
+            title: 'ABOUT',
             items: [
               { label: 'GitHub', href: social.github.href },
               { label: 'X', href: social.twitter.href },
+              { label: '近况', to: '/now' },
+              { label: '学习活动', to: '/timeline' },
+              { label: '更新记录', to: '/changelog' },
               {
                 label: navigation.links.rss.label,
                 to: navigation.links.rss.to,

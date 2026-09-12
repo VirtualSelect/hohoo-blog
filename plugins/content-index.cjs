@@ -1,3 +1,5 @@
+const manifest = require('../scripts/i18n/check.cjs').resolveManifest();
+const { translationStatus } = require('../src/utils/localization.cjs');
 const digests = require('../data/radar-digests.json');
 const projects = require('../data/projects.json');
 const experiments = require('../data/experiments.json');
@@ -44,7 +46,31 @@ function customEntries(prefix = '') {
   ];
 }
 function collectContent(allContent, prefix = '') {
-  const entries = customEntries(prefix);
+  const locale = prefix.slice(1) || 'zh-CN';
+  const entries = customEntries(prefix).map((e) => {
+    const title =
+      locale === 'en'
+        ? e.titleEn || (e.type === 'lab' ? e.en : e.title)
+        : locale === 'zh-TW'
+          ? e.titleTw || e.title
+          : e.title;
+    const description =
+      locale === 'en'
+        ? e.descriptionEn || e.description
+        : locale === 'zh-TW'
+          ? e.descriptionTw || e.description
+          : e.description;
+    return {
+      ...e,
+      title,
+      description,
+      locale,
+      sourceLocale: 'zh-CN',
+      ...(e.type === 'note'
+        ? { translationStatus: translationStatus(manifest[e.id], locale) }
+        : {}),
+    };
+  });
   for (const content of Object.values(
     allContent['docusaurus-plugin-content-docs'] || {},
   )) {
@@ -62,12 +88,19 @@ function collectContent(allContent, prefix = '') {
           continue;
         entries.push({
           id: 'doc:' + doc.id,
+          locale,
+          sourceLocale: 'zh-CN',
+          localization: manifest['doc:' + doc.id],
+          translationStatus: translationStatus(
+            manifest['doc:' + doc.id],
+            locale,
+          ),
           type: 'doc',
           title: doc.title,
           description: doc.description,
           href: doc.permalink,
           domain: f.domain,
-          status: 'published',
+          status: f.status || 'published',
           date: dateOnly(f.published_at || f.date),
           updated: dateOnly(f.updated),
           minutes: f.reading_minutes,
@@ -86,6 +119,14 @@ function collectContent(allContent, prefix = '') {
       if (f.draft || f.unlisted) continue;
       entries.push({
         id: 'blog:' + (f.slug || m.permalink.split('/').filter(Boolean).pop()),
+        locale,
+        sourceLocale: 'zh-CN',
+        translationStatus: translationStatus(
+          manifest[
+            'blog:' + (f.slug || m.permalink.split('/').filter(Boolean).pop())
+          ],
+          locale,
+        ),
         type: 'blog',
         title: m.title,
         description: m.description,
@@ -168,7 +209,10 @@ function activity(entries) {
     .sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
 }
 module.exports = function (context) {
-  const prefix = context.i18n.currentLocale === 'en' ? '/en' : '';
+  const prefix =
+    context.i18n.currentLocale === context.i18n.defaultLocale
+      ? ''
+      : '/' + context.i18n.currentLocale;
   return {
     name: 'content-index',
     async loadContent() {
@@ -207,7 +251,12 @@ module.exports = function (context) {
           ...entry
         }) => entry,
       );
-      actions.setGlobalData({ entries: compact, activity: activity(compact) });
+      actions.setGlobalData({
+        entries: compact,
+        activity: activity(
+          compact.filter((e) => e.translationStatus !== 'MISSING'),
+        ),
+      });
     },
   };
 };

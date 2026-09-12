@@ -20,7 +20,9 @@
     "news:translate": "node scripts/news/translate.mjs",
     "news:check": "node scripts/news/render.mjs --check",
     "news:reject": "node scripts/news/render.mjs --reject",
-    "test:news": "node --test tests/news.test.mjs"
+    "test:news": "node --test tests/news.test.mjs",
+    "i18n:check": "node scripts/i18n/check.cjs",
+    "start:tw": "docusaurus start --locale zh-TW"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",

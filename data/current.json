@@ -5,31 +5,36 @@
       "kind": "BUILDING",
       "zh": "维护这个知识站点与 AI Radar 采集流程。",
       "en": "Maintaining this knowledge site and its AI Radar pipeline.",
-      "to": "/projects/hohoo-blog"
+      "to": "/projects/hohoo-blog",
+      "tw": "維護這個知識站點與 AI Radar 蒐集流程。"
     },
     {
       "kind": "LEARNING",
       "zh": "从 Java 调用模型开始，梳理结构化输出、工具调用与检索增强。",
       "en": "Learning model calls from Java, structured output, tool use and retrieval.",
-      "to": "/learning"
+      "to": "/learning",
+      "tw": "從 Java 呼叫模型開始，梳理結構化輸出、工具呼叫與檢索增強。"
     },
     {
       "kind": "READING",
       "zh": "以 RAG、ReAct 和 RT-2 导读作为论文阅读入口。",
       "en": "Using the RAG, ReAct and RT-2 guides as paper reading starting points.",
-      "to": "/papers"
+      "to": "/papers",
+      "tw": "以 RAG、ReAct 和 RT-2 導讀作為論文閱讀入口。"
     },
     {
       "kind": "EXPLORING",
       "zh": "具身智能：从感知、动作表示与仿真问题入手。",
       "en": "Exploring perception, action representation and simulation.",
-      "to": "/docs/embodied-ai"
+      "to": "/docs/embodied-ai",
+      "tw": "具身智慧：從感知、動作表示與模擬問題入手。"
     },
     {
       "kind": "NEXT",
       "zh": "首篇 Java 模型调用实践已整理发布，下一步准备检索对照实验。",
       "en": "The first Java model-call walkthrough is published; next, prepare a retrieval comparison.",
-      "to": "/docs/ai-apps/java-first-llm"
+      "to": "/docs/ai-apps/java-first-llm",
+      "tw": "首篇 Java 模型呼叫實作已整理發布，下一步準備檢索對照實驗。"
     }
   ]
 }
