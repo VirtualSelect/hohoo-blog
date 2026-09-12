@@ -1,5 +1,20 @@
 [
   {
+    "id": "f3b865b551fe6c42cedd",
+    "title": "Anthropic 威胁报告披露 Claude 被用于间谍软件、导弹与无人机研发，中国实验室大规模蒸馏提取数据",
+    "url": "https://aihot.news/items/cmtx0v3dg030mroedwvkdfyvw",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-11T13:50:28.000Z",
+    "collectedAt": "2026-09-12T03:40:47.691Z",
+    "category": "llm",
+    "summary": "Anthropic 发布威胁情报报告，记录 2025 年 12 月至 2026 年 8 月间 Claude 被滥用的七类行为。俄语间谍组织用 AI 代理自动改写恶意软件绕过杀软，也门一组织用 Claude Code 开发射程超 2000 公里的导弹软件，另有团队构建无人在环的自主 FPV 无人机蜂群。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-9186770a",
+    "coverage": []
+  },
+  {
     "id": "075fed980e67c694db46",
     "title": "Rebuilding AUTOMATIC1111 with Gradio Workflow",
     "url": "https://huggingface.co/blog/gradio-workflow-1111",
@@ -20,7 +35,9 @@
         "summary": ""
       }
     },
-    "translationKind": "editorial"
+    "translationKind": "editorial",
+    "eventId": "event-eb9c418b",
+    "coverage": []
   },
   {
     "id": "8845b08ab7751c9c55e9",
@@ -33,7 +50,9 @@
     "category": "ai-apps",
     "summary": "OpenAI 在 API 中发布语音模型 GPT-Live-1，可同时听和说，支持将推理和工具调用委派给 GPT-6 Astra 等后端模型，前端语音层定价为每分钟 $0.05。",
     "summaryKind": "source-excerpt",
-    "relevanceReason": "研究主题匹配且包含技术信息"
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d75f8c34",
+    "coverage": []
   },
   {
     "id": "094c7faf707de7f64e58",
@@ -46,7 +65,9 @@
     "category": "ai-apps",
     "summary": "卡兹克发文讲解GPT-6 Astra的推理强度等级（Reasoning Effort）含义，指出各档位是同一模型的不同思考预算，Ultra则类似拉起多个智能体协作的专项工作组。",
     "summaryKind": "source-excerpt",
-    "relevanceReason": "研究主题匹配且包含技术信息"
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-fae3e1f",
+    "coverage": []
   },
   {
     "id": "a139f80b159295ada71d",
@@ -59,6 +80,23 @@
     "category": "llm",
     "summary": "",
     "summaryKind": "link-only",
-    "relevanceReason": "研究主题匹配且包含技术信息"
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-886e834c",
+    "coverage": []
+  },
+  {
+    "id": "ad90e6779ea3045b3b9f",
+    "title": "BenchMIRT: What are LLM benchmarks actually measuring?",
+    "url": "https://huggingface.co/blog/allenai/benchmirt",
+    "sourceId": "huggingface",
+    "sourceName": "Hugging Face",
+    "publishedAt": "2026-09-01T21:39:07.000Z",
+    "collectedAt": "2026-09-12T03:40:47.691Z",
+    "category": "llm",
+    "summary": "",
+    "summaryKind": "link-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-11f17a3",
+    "coverage": []
   }
 ]
