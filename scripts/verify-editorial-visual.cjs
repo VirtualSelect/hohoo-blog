@@ -21,6 +21,12 @@ fs.mkdirSync(out, { recursive: true });
         }
         await page.setViewportSize({ width: 1440, height: 1000 });
         if (['/', '/learning', '/docs/llm'].includes(route)) await page.screenshot({ path: path.join(out, `${route.replaceAll('/', '-') || 'home'}-${theme}.png`) });
+        if (route === '/') {
+          await page.locator('footer').scrollIntoViewIfNeeded();
+          await page.screenshot({ path: path.join(out, `footer-${theme}.png`) });
+          assert.equal(await page.locator('footer').evaluate(el => getComputedStyle(el).backgroundColor), await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor));
+          await page.evaluate(() => scrollTo(0, 0));
+        }
       }
       assert.equal(await page.locator('.hh-particle-background').count(), 0);
       assert.equal(await page.locator('.hh-motion-toggle').count(), ['/', '/en/'].includes(route) ? 1 : 0);

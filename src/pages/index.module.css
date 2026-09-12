@@ -24,7 +24,7 @@
 .noteTop{display:flex;justify-content:space-between;font-family:var(--ifm-font-family-monospace);color:var(--blog-muted);font-size:.63rem;letter-spacing:.08em;margin-bottom:22px}
 .note h3{font-size:1.15rem;line-height:1.5}.note p{font-size:.85rem;color:var(--blog-muted);line-height:1.85}
 .noteStatus{font-size:.68rem;color:var(--blog-muted);margin-top:auto}.noteArrow{align-self:flex-end;color:var(--blog-muted)}
-.connect{display:flex;justify-content:space-between;align-items:center;gap:30px;border-top:1px solid var(--blog-border);padding:56px 0 80px}
-.connect h2{font-size:1.4rem}.connect p:last-child{color:var(--blog-muted);font-size:.85rem;margin:0}.connect>a{white-space:nowrap}
+.connect{display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;padding:64px 0 56px}
+.connect h2{font-size:clamp(1.65rem,3vw,2.2rem);font-weight:550;letter-spacing:-.035em;margin-bottom:16px}.connect p:last-child{color:var(--blog-muted);font-size:.9rem;margin:0 auto;max-width:560px}.connect>a{white-space:nowrap;border-radius:24px;padding-inline:24px}
 @media(max-width:996px){.hero{padding:48px 0;gap:0}.title{font-size:2.6rem}}
-@media(max-width:700px){.home{padding:0 20px}.hero{padding:36px 0;gap:0}.title{font-size:clamp(1.9rem,7vw,2.7rem)}.noteGrid{grid-template-columns:1fr;gap:16px}.sectionHeading{align-items:start}.sectionHeading h2{font-size:1.3rem}.connect{align-items:flex-start;flex-direction:column;gap:20px}}
+@media(max-width:700px){.home{padding:0 20px}.hero{padding:36px 0;gap:0}.title{font-size:clamp(1.9rem,7vw,2.7rem)}.noteGrid{grid-template-columns:1fr;gap:16px}.sectionHeading{align-items:start}.sectionHeading h2{font-size:1.3rem}.connect{padding:44px 0;gap:20px}}

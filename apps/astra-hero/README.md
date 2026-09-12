@@ -17,7 +17,7 @@ npm start
 
 ## 实现结构
 
-所有视觉模块位于 `components/AstraParticleHero/`：
+React 页面组件位于 `components/AstraParticleHero/`；场景、粒子、路径、模拟与 shaders 的唯一实现已提取到仓库 `src/components/AstraParticleHero/`，本应用通过转导出复用，博客 `/about` 也使用这套实现。独立启动前还需在仓库根目录执行 `npm ci`，提供共享模块的 Three.js 与类型依赖。
 
 - `index.tsx`：SSR 静态品牌、客户端按需加载、键盘/按钮控制、暂停偏好和失败重试。
 - `pathTexture.ts`：读取 `public/hohoo.svg`，对每条笔画分别按弧长采样为 Float DataTexture；RG 保存坐标，BA 保存切线。笔画分行储存，避免跨笔画产生连接线。

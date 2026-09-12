@@ -11,17 +11,20 @@ import {
   ContentRows,
 } from '@site/src/components/ContentUI';
 import social from '@site/data/social';
+import AstraParticleHero from '@site/src/components/AstraParticleHero';
 export default function About() {
   const en = useEnglish();
   const { entries } = useContent();
   return (
     <Layout
       title={en ? 'About' : '关于 Hohoo'}
-      description="Hohoo：从 Java 到 AI，公开学习、实验与构建。">
-      <main className="hh-page hh-reading">
+      description={en ? 'Hohoo: learning, experimenting and building, from Java to AI.' : 'Hohoo：从 Java 到 AI，公开学习、实验与构建。'}>
+      <main>
+        <AstraParticleHero en={en} />
+        <div id="about-content" className="hh-page hh-reading" style={{ scrollMarginTop: 88 }}>
         <StructuredData person />
         <p className="hh-eyebrow">ABOUT / HOOHOO</p>
-        <h1>{en ? 'Hello, I’m Hohoo.' : '你好，我是 Hohoo。'}</h1>
+        <h2>{en ? 'Hello, I’m Hohoo.' : '你好，我是 Hohoo。'}</h2>
         <p className="hh-lead">
           {en
             ? 'I usually write Java. I enjoy turning ideas into small projects, and am exploring AI applications and embodied intelligence.'
@@ -68,6 +71,7 @@ export default function About() {
           </div>
         </Section>
         <Comment />
+        </div>
       </main>
     </Layout>
   );
