@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@lab/runtime/Link';
 import styles from '@site/src/pages/learning.module.css';
 export default function LearningNavigation({active, en}) {
   return <nav className={styles.tabs} aria-label={en ? 'Learning navigation' : '学习导航'}>

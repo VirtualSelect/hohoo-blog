@@ -1,7 +1,7 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
-import Link from '@docusaurus/Link';
-import { translate } from '@docusaurus/Translate';
+import Link from '@lab/runtime/Link';
+import { translate } from '@lab/runtime/Translate';
 export default function WritingList({ items }) {
   return items.length ? (
     <ol className="hh-rows hh-writing-list">

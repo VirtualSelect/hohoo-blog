@@ -22,3 +22,4 @@ yarn-error.log*
 
 # Keep the independent GPU app ignore rules in version control.
 !/apps/astra-hero/.gitignore
+!/apps/web/.gitignore

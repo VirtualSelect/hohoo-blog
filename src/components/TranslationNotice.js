@@ -1,12 +1,12 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
-import Link from '@docusaurus/Link';
-import { translate } from '@docusaurus/Translate';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import manifest from '@generated/translation-check/default/manifest.json';
+import Link from '@lab/runtime/Link';
+import { translate } from '@lab/runtime/Translate';
+import useSiteConfig from '@lab/runtime/context';
+import manifest from '@lab/generated/manifest.json';
 import { translationStatus } from '../utils/localization.cjs';
 export default function TranslationNotice({ id, original }) {
-  const { i18n } = useDocusaurusContext();
+  const { i18n } = useSiteConfig();
   const meta = manifest[id];
   const status = translationStatus(meta, i18n.currentLocale);
   return (

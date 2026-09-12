@@ -1,8 +1,8 @@
 import React from 'react';
-import Head from '@docusaurus/Head';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Head from '@lab/runtime/Head';
+import useSiteConfig from '@lab/runtime/context';
 export default function StructuredData({ entry, person = false }) {
-  const { siteConfig, i18n } = useDocusaurusContext();
+  const { siteConfig, i18n } = useSiteConfig();
   const base = siteConfig.url.replace(/\/$/, ''),
     prefix =
       i18n.currentLocale === i18n.defaultLocale ? '' : '/' + i18n.currentLocale;

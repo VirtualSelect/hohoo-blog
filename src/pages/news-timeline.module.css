@@ -49,7 +49,7 @@
 .filters button[aria-pressed='true'],
 .mode button[aria-pressed='true'] {
   background: var(--blog-soft);
-  color: var(--ifm-color-primary);
+  color: var(--hh-base-color-primary);
 }
 .filters label {
   margin-left: auto;
@@ -103,7 +103,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   padding-top: 22px;
-  color: var(--ifm-color-primary);
+  color: var(--hh-base-color-primary);
 }
 .date small {
   display: block;
@@ -129,8 +129,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ifm-color-primary);
-  box-shadow: 0 0 0 5px var(--ifm-background-color);
+  background: var(--hh-base-color-primary);
+  box-shadow: 0 0 0 5px var(--hh-base-background-color);
 }
 .entry h2 {
   overflow-wrap: anywhere;
@@ -140,7 +140,7 @@
   font-weight: 600;
 }
 .entry h2 a {
-  color: var(--ifm-font-color-base);
+  color: var(--hh-base-font-color-base);
 }
 .entry p {
   font-size: 0.87rem;
@@ -199,7 +199,7 @@
   border: 1px solid var(--blog-border);
   border-radius: 6px;
   background: var(--blog-surface);
-  color: var(--ifm-color-primary);
+  color: var(--hh-base-color-primary);
   font: inherit;
   font-size: 0.85rem;
   padding: 8px 18px;
@@ -210,7 +210,7 @@
 }
 .page button:focus-visible,
 .page input:focus-visible {
-  outline: 2px solid var(--ifm-color-primary);
+  outline: 2px solid var(--hh-base-color-primary);
   outline-offset: 3px;
 }
 @media (max-width: 650px) {

@@ -4,17 +4,11 @@
   "private": true,
   "packageManager": "npm@12.0.2",
   "scripts": {
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "start:en": "docusaurus start --locale en",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "preview": "docusaurus serve --port 4173 --host localhost --no-open",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
+    "start": "npm run dev --prefix apps/web",
+    "start:en": "npm run dev --prefix apps/web",
+    "build": "npm run build --prefix apps/web",
+    "serve": "npm run start --prefix apps/web",
+    "preview": "npm run start --prefix apps/web",
     "news:collect": "node scripts/news/collect.mjs",
     "news:render": "node scripts/news/render.mjs",
     "news:translate": "node scripts/news/translate.mjs",
@@ -22,24 +16,15 @@
     "news:reject": "node scripts/news/render.mjs --reject",
     "test:news": "node --test tests/news.test.mjs",
     "i18n:check": "node scripts/i18n/check.cjs",
-    "start:tw": "docusaurus start --locale zh-TW"
+    "start:tw": "npm run dev --prefix apps/web",
+    "test:web": "npm run prepare:content --prefix apps/web && npm test --prefix apps/web"
   },
   "dependencies": {
-    "@docusaurus/core": "3.10.2",
-    "@docusaurus/preset-classic": "3.10.2",
-    "@giscus/react": "^3.0.0",
-    "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
-    "prism-react-renderer": "^2.3.0",
-    "punycode": "^2.3.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
     "rss-parser": "3.13.0",
     "three": "0.186.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.10.2",
-    "@docusaurus/types": "3.10.2",
     "@iconify/react": "^5.0.1",
     "@types/three": "0.186.0"
   },
@@ -57,9 +42,5 @@
   },
   "engines": {
     "node": ">=22.22.2"
-  },
-  "overrides": {
-    "webpack": "5.105.4",
-    "@docsearch/react": "3.9.0"
   }
 }

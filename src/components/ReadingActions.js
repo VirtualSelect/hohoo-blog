@@ -1,4 +1,4 @@
-import { translate } from '@docusaurus/Translate';
+import { translate } from '@lab/runtime/Translate';
 import React, { useEffect, useState } from 'react';
 import {
   parseInbox,

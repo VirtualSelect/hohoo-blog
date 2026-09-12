@@ -1,12 +1,12 @@
 import ReadingActions from '@site/src/components/ReadingActions';
 import { localizedNews } from '@site/src/utils/news-locale.mjs';
 import React from 'react';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Link from '@lab/runtime/Link';
+import useSiteConfig from '@lab/runtime/context';
 import news from '@site/data/news/items.json';
 
 export default function TopicNews({ category }) {
-  const en = useDocusaurusContext().i18n.currentLocale === 'en';
+  const en = useSiteConfig().i18n.currentLocale === 'en';
   const items = news
     .filter((item) => item.category === category)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
@@ -24,7 +24,7 @@ export default function TopicNews({ category }) {
           <article
             key={item.id}
             style={{
-              borderBottom: '1px solid var(--ifm-color-emphasis-200)',
+              borderBottom: '1px solid var(--hh-base-color-emphasis-200)',
               padding: '1rem 0',
             }}>
             <small>

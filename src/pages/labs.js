@@ -1,7 +1,7 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React, { useEffect } from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
+import Layout from '@lab/runtime/Layout';
+import Link from '@lab/runtime/Link';
 import {
   useContent,
   useEnglish,

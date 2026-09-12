@@ -1,14 +1,14 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@lab/runtime/Layout';
+import Link from '@lab/runtime/Link';
+import useSiteConfig from '@lab/runtime/context';
 import topics from '@site/data/topics';
 import papers from '@site/data/papers.json';
 import styles from './research.module.css';
 
 export default function Research() {
-  const en = useDocusaurusContext().i18n.currentLocale === 'en';
+  const en = useSiteConfig().i18n.currentLocale === 'en';
   return (
     <Layout
       title={en ? 'Research' : '研究'}

@@ -1,19 +1,19 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
-import { translate } from '@docusaurus/Translate';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { translate } from '@lab/runtime/Translate';
+import useSiteConfig from '@lab/runtime/context';
 import TranslationNotice from './TranslationNotice';
 import StructuredData from './StructuredData';
 import ProjectEvidence from './ProjectEvidence';
 import ReadingActions from './ReadingActions';
 import React from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
+import Layout from '@lab/runtime/Layout';
+import Link from '@lab/runtime/Link';
 import ExperimentDesign from './ExperimentDesign';
 import ContentProvenance, { Freshness } from './ContentProvenance';
 import { Related, Status, useEnglish } from './ContentUI';
 export default function ContentDetail({ entry: e }) {
   const en = useEnglish();
-  const locale = useDocusaurusContext().i18n.currentLocale;
+  const locale = useSiteConfig().i18n.currentLocale;
   const tw = locale === 'zh-TW';
   const lab = e.type === 'lab';
   const title = en ? e.titleEn || e.title : tw ? e.titleTw || e.title : e.title;

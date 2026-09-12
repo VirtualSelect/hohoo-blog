@@ -54,8 +54,8 @@ Radar 是“外部输入”，Docs / Notes / Labs / Projects / Blog 是“本站
 
 - `package.json`
 - lock 文件
-- `docusaurus.config.*`
-- `sidebars.*`
+- `apps/web/next.config.mjs`
+- `apps/web/app/` 与 `apps/web/runtime/`
 - `tsconfig.json`
 - `src/`
 - `src/pages/`
@@ -75,7 +75,7 @@ Radar 是“外部输入”，Docs / Notes / Labs / Projects / Blog 是“本站
 
 禁止：
 
-- 无理由推翻 Docusaurus 架构；
+- 无理由推翻现有 Next.js App Router 架构；
 - 无理由更换主题系统；
 - 无理由切换包管理器；
 - 无理由引入新的 CSS Framework；
@@ -92,7 +92,7 @@ Radar 是“外部输入”，Docs / Notes / Labs / Projects / Blog 是“本站
 新增依赖前必须回答：
 
 1. 现有依赖是否已经能完成？
-2. 原生 React / CSS / Docusaurus 能否低成本完成？
+2. 原生 React / CSS / Next.js 能否低成本完成？
 3. 新依赖对 bundle、SSR、维护成本有什么影响？
 4. 是否真的会被多个页面长期使用？
 
@@ -205,7 +205,7 @@ RADAR / WEEKLY
 
 ### 7.1 优先复用
 
-优先复用现有组件、CSS 变量和 Docusaurus Theme 能力。
+优先复用现有组件、CSS 变量和 Next.js 路由能力。
 
 同一 UI 模式出现 2～3 次以上时，再考虑抽象。
 
@@ -361,7 +361,7 @@ RAG Doc
 
 - 正确 `title`；
 - `description`；
-- canonical（由现有 Docusaurus 配置统一处理时不得重复造轮子）；
+- canonical（由现有 Next.js metadata 统一处理，不重复添加）；
 - Open Graph 基础信息；
 - 正确 H1/H2/H3；
 - semantic HTML；
@@ -475,7 +475,7 @@ read
 
 ## 15. 搜索、筛选与 URL
 
-- 搜索优先基于现有 Docusaurus/部署方案扩展。
+- 搜索优先基于现有构建期索引与站点搜索组件扩展。
 - 不因个人博客搜索需求自建复杂搜索后台。
 - Filter 状态如果对分享有价值，优先同步到 query string。
 - 搜索、筛选和排序的移动端体验必须可用。

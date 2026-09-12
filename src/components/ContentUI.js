@@ -1,14 +1,14 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
-import { translate } from '@docusaurus/Translate';
+import { translate } from '@lab/runtime/Translate';
 import React from 'react';
-import Link from '@docusaurus/Link';
-import { usePluginData } from '@docusaurus/useGlobalData';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Link from '@lab/runtime/Link';
+import { useContentData } from '@lab/runtime/data';
+import useSiteConfig from '@lab/runtime/context';
 export function useContent() {
-  return usePluginData('content-index');
+  return useContentData('content-index');
 }
 export function useEnglish() {
-  return useDocusaurusContext().i18n.currentLocale === 'en';
+  return useSiteConfig().i18n.currentLocale === 'en';
 }
 export function Status({ value }) {
   const en = useEnglish();

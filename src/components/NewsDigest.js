@@ -1,14 +1,14 @@
 import ReadingActions from '@site/src/components/ReadingActions';
 import React from 'react';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Link from '@lab/runtime/Link';
+import useSiteConfig from '@lab/runtime/context';
 import news from '@site/data/news/items.json';
 import { localizedNews } from '@site/src/utils/news-locale.mjs';
 
 export default function NewsDigest({ day }) {
   const {
     i18n: { currentLocale },
-  } = useDocusaurusContext();
+  } = useSiteConfig();
   const en = currentLocale === 'en';
   return (
     <section>

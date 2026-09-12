@@ -1,6 +1,6 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
-const {renderFeed}=require('../plugins/news-feed.cjs');
+const {renderFeed}=require('../lib/content/news-feed.cjs');
 const Parser=require('rss-parser');
 test('RSS escapes source text, preserves stable IDs and uses locale links',async()=>{
  const item={id:'a',title:'A & <B>',summary:'<script>text</script>',sourceName:'Source',url:'https://example.com/?a=1&b=2',category:'llm',publishedAt:'2026-09-11T00:00:00Z',translations:{zh:{title:'中文标题',summary:'摘要'}}};

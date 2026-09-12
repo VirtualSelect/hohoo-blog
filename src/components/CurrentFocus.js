@@ -1,13 +1,13 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { translate } from '@docusaurus/Translate';
+import useSiteConfig from '@lab/runtime/context';
+import { translate } from '@lab/runtime/Translate';
 import React from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@lab/runtime/Link';
 import current from '@site/data/current.json';
 import { useEnglish } from './ContentUI';
 export default function CurrentFocus({ full = false }) {
   const en = useEnglish();
-  const tw = useDocusaurusContext().i18n.currentLocale === 'zh-TW';
+  const tw = useSiteConfig().i18n.currentLocale === 'zh-TW';
   const items = current.items.filter(
     (i) => full || ['BUILDING', 'LEARNING', 'EXPLORING'].includes(i.kind),
   );

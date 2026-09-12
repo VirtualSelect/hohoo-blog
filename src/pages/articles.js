@@ -1,7 +1,7 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React, { useEffect, useState } from 'react';
-import Layout from '@theme/Layout';
-import { translate } from '@docusaurus/Translate';
+import Layout from '@lab/runtime/Layout';
+import { translate } from '@lab/runtime/Translate';
 import { useContent } from '../components/ContentUI';
 import WritingList from '../components/WritingList';
 import { writingEntries } from '../utils/localization.cjs';

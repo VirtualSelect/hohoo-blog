@@ -1,25 +1,25 @@
 .page { max-width: 1050px; margin: auto; width: 100%; padding: 60px 28px; }
-.eyebrow { font-size: .75rem; letter-spacing: .14em; color: var(--ifm-color-primary); }
+.eyebrow { font-size: .75rem; letter-spacing: .14em; color: var(--hh-base-color-primary); }
 .lead { color: var(--blog-muted); max-width: 760px; }
 .sources { margin: 26px 0; border-block: 1px solid var(--blog-border); padding: 16px 0; font-size: .85rem; }
 .sources summary { cursor: pointer; font-weight: 600; }
 .sources p { margin-top: 16px; }
 .filters { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 28px; }
 .filters label { display: flex; flex-direction: column; gap: 6px; font-size: .8rem; flex: 1; min-width: 150px; }
-.filters input,.filters select { background: var(--blog-surface); border: 1px solid var(--blog-border); padding: 11px; color: var(--ifm-font-color-base); font: inherit; border-radius: 7px; width: 100%; }
+.filters input,.filters select { background: var(--blog-surface); border: 1px solid var(--blog-border); padding: 11px; color: var(--hh-base-font-color-base); font: inherit; border-radius: 7px; width: 100%; }
 .filters .search { flex: 2; }
 .count { font-size: .8rem; color: var(--blog-muted); margin-top: 20px; }
 .list { display: grid; gap: 18px; }
 .card { padding: 28px; border: 1px solid var(--blog-border); background: var(--blog-surface); border-radius: 12px; }
 .card h2 { font-size: 1.3rem; line-height: 1.6; margin-top: 16px; }
-.card h2 a { color: var(--ifm-font-color-base); }
+.card h2 a { color: var(--hh-base-font-color-base); }
 .card p { font-size: .95rem; line-height: 1.85; overflow-wrap: anywhere; }
 .meta,.bottom { display: flex; flex-wrap: wrap; gap: 15px; color: var(--blog-muted); font-size: .75rem; }
-.meta span:first-child { color: var(--ifm-color-primary); }
+.meta span:first-child { color: var(--hh-base-color-primary); }
 .original { color: var(--blog-muted); }
 .bottom { justify-content: space-between; margin-top: 24px; }
 .empty { border: 1px dashed var(--blog-border); border-radius: 12px; padding: 36px; }
 .pagination { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 28px; }
-.page button { border: 1px solid var(--blog-border); border-radius: 7px; padding: 8px 14px; color: var(--ifm-font-color-base); background: var(--blog-surface); cursor: pointer; }
+.page button { border: 1px solid var(--blog-border); border-radius: 7px; padding: 8px 14px; color: var(--hh-base-font-color-base); background: var(--blog-surface); cursor: pointer; }
 .page button:disabled { opacity: .5; cursor: not-allowed; }
 @media(max-width:650px) { .page { padding: 36px 20px; } .card,.empty { padding: 22px; } .filters .search { flex-basis:100%; } }

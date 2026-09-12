@@ -1,6 +1,6 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@lab/runtime/Link';
 import { useContent, useEnglish } from './ContentUI';
 import { useNewsReading } from './ReadingActions';
 export default function LearningOverview({ entries, progress }) {

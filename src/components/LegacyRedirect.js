@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import Layout from '@theme/Layout';
-import Head from '@docusaurus/Head';
-import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import Layout from '@lab/runtime/Layout';
+import Head from '@lab/runtime/Head';
+import Link from '@lab/runtime/Link';
+import useBaseUrl from '@lab/runtime/base-url';
 export default function LegacyRedirect({ to }) {
   const href = useBaseUrl(to);
   useEffect(() => {

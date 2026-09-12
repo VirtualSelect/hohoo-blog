@@ -1,10 +1,10 @@
 import React from 'react';
-import Layout from '@theme/Layout';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@lab/runtime/Layout';
+import useSiteConfig from '@lab/runtime/context';
 import styles from './news.module.css';
 
 export default function Subscribe() {
-  const en = useDocusaurusContext().i18n.currentLocale === 'en';
+  const en = useSiteConfig().i18n.currentLocale === 'en';
   const prefix = en ? '/en' : '';
   return (
     <Layout

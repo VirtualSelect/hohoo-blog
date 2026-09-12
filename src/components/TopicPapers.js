@@ -1,10 +1,10 @@
 import React from 'react';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Link from '@lab/runtime/Link';
+import useSiteConfig from '@lab/runtime/context';
 import papers from '@site/data/papers.json';
 
 export default function TopicPapers({category}) {
-  const en=useDocusaurusContext().i18n.currentLocale==='en';
+  const en=useSiteConfig().i18n.currentLocale==='en';
   return <section><h2>{en?'Paper reading guides':'论文阅读入口'}</h2>
     <ul>{papers.filter(p=>p.categories.includes(category)).map(p=><li key={p.id}><Link to={'/papers#'+p.slug}>{p.short} · {p[en?'en':'zh'].question}</Link></li>)}</ul>
   </section>;

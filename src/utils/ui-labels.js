@@ -1,4 +1,4 @@
-import { translate } from '@docusaurus/Translate';
+import { translate } from '@lab/runtime/Translate';
 const labels = {
 "VALIDATION": () => translate({id:"label.category_validation",message:"验证"}),
 "RESEARCH": () => translate({id:"label.category_research",message:"研究"}),

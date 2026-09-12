@@ -68,7 +68,7 @@ radar-digest
 
 所有新内容尽量支持以下公共字段。
 
-> 实际字段需结合 Docusaurus 当前内容插件能力；旧内容不要求一次迁移。
+> 实际字段需结合 `lib/content` 与 Next.js 内容加载器；旧内容不要求一次迁移。
 
 ```yaml
 title: string
@@ -1220,7 +1220,7 @@ content/
 └── radar/ # only if radar is file-backed; DB/API-backed is also acceptable
 ```
 
-或者继续使用 Docusaurus docs plugin 的多实例能力/现有数据层。
+或者继续使用现有内容数据层，按内容类型聚合。
 
 **不要仅因为本文件示意而立即重构目录。**
 
@@ -1391,3 +1391,7 @@ related: []
 ## 2026-09 Locale 与翻译 metadata
 
 正文保持既有原生目录；`data/localization.json` 只维护源及译文版本关系。状态与字段、revision 计算和缺失回退见 `docs/I18N.md`。统一 Articles 只聚合当前语言 published 的 doc/note/paper/blog；Radar 信号、论文摘要导读和 planned 内容不进入原创发布流。
+
+## Next.js 内容适配（2026-09-12）
+
+apps/web/scripts/content.mjs 从同一内容源生成三语言路由、文章 HTML/目录、内容与学习索引、Radar 和 RSS。复用原内容校验、翻译清单和 Radar 来源/去重规则，不改变内容状态或自动生成文章。正文 HTML 经白名单清理，仓库现有 TopicLanding / NewsDigest 显式映射为组件；外部 RSS 不作为 MDX 执行。

@@ -1,7 +1,7 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
+import Layout from '@lab/runtime/Layout';
+import Link from '@lab/runtime/Link';
 import news from '@site/data/news/items.json';
 import config from '@site/config/news-sources.json';
 import { isoWeek, signals } from '@site/src/utils/radar.cjs';

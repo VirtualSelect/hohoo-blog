@@ -10,14 +10,14 @@
         "translatedAt": "2026-09-12",
         "sourceRevision": "5d9caf714f8e6978b8140c51a76634e7ff4313549acab78308182c14d593b820",
         "translationRevision": "0f3c3c944ec272a625c30437b04bf7020a12a0a9fc21d90f4dbb4286966a080e",
-        "file": "i18n/en/docusaurus-plugin-content-docs/current/ai-apps/java-first-llm.md"
+        "file": "i18n/en/docs/ai-apps/java-first-llm.md"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-12",
         "sourceRevision": "5d9caf714f8e6978b8140c51a76634e7ff4313549acab78308182c14d593b820",
         "translationRevision": "78eda756c641d01a5210e1f91139973761352805285939838bd86d21e74d00f9",
-        "file": "i18n/zh-TW/docusaurus-plugin-content-docs/current/ai-apps/java-first-llm.md"
+        "file": "i18n/zh-TW/docs/ai-apps/java-first-llm.md"
       }
     }
   }

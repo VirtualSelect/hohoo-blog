@@ -1,6 +1,6 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
-import Layout from '@theme/Layout';
+import Layout from '@lab/runtime/Layout';
 import logs from '@site/data/build-log.json';
 import projects from '@site/data/projects.json';
 import { useEnglish } from '@site/src/components/ContentUI';

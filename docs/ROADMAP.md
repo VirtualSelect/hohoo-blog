@@ -1,5 +1,11 @@
 # Huhohoo.com Roadmap
 
+## 用户授权的 Next.js 重构（2026-09-12）
+
+本分支 `codex/nextjs-redesign` 按用户明确要求采用 Next.js App Router。新版位于 `apps/web`，根目录 start/build/preview 指向新版；Docusaurus 依赖、配置、主题覆盖与 legacy 命令已移除，旧版本通过 Git 保留。原 Markdown、JSON、采集流程、本地阅读状态继续共用。共享组件直接使用 `apps/web/runtime`；纯内容索引位于 `lib/content`；翻译使用 `i18n/{locale}/docs` 与 `blog`。没有发布或切换线上部署。
+
+运行与迁移边界见 `apps/web/README.md`；验收见 `reports/NEXTJS-MIGRATION.md`。
+
 ## 已规划：沉浸式个人介绍页
 
 状态：已实现，待用户审阅。独立 Next.js 预览（本地 4180）的 GPU 粒子视觉已接入 `/about` 及 `/en/about`；原有正文和内容来源保留。

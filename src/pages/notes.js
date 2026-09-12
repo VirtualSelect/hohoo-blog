@@ -1,6 +1,6 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React, { useState } from 'react';
-import Layout from '@theme/Layout';
+import Layout from '@lab/runtime/Layout';
 import {
   useContent,
   useEnglish,

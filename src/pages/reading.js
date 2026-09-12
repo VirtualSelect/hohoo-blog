@@ -1,7 +1,7 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React, { useState } from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
+import Layout from '@lab/runtime/Layout';
+import Link from '@lab/runtime/Link';
 import papers from '@site/data/papers.json';
 import news from '@site/data/news/items.json';
 import tracks from '@site/data/learning-paths.json';

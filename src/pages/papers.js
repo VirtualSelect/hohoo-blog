@@ -1,16 +1,16 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import PaperMetadata, { PaperNotes } from '@site/src/components/PaperMetadata';
-import Heading from '@theme/Heading';
+import Heading from '@lab/runtime/Heading';
 import React, { useState } from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@lab/runtime/Layout';
+import Link from '@lab/runtime/Link';
+import useSiteConfig from '@lab/runtime/context';
 import papers from '@site/data/papers.json';
 import ReadingActions from '@site/src/components/ReadingActions';
 import styles from './news.module.css';
 
 export default function Papers() {
-  const en = useDocusaurusContext().i18n.currentLocale === 'en';
+  const en = useSiteConfig().i18n.currentLocale === 'en';
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
   const visible = papers.filter(

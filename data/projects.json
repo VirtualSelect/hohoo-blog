@@ -13,7 +13,7 @@
     "updated": "2026-09-11",
     "featured": true,
     "stack": [
-      "Docusaurus",
+      "Next.js",
       "React",
       "RSS",
       "GitHub Actions",
@@ -25,8 +25,8 @@
     "sections": [
       {
         "heading": "Overview",
-        "zh": "本站代码与内容同仓库管理，以静态页面发布。阅读路线、收藏、论文导读和外部资讯围绕三个研究方向组织。",
-        "en": "Code and content share a repository. Static pages connect learning paths, saved reading, paper guides and external signals."
+        "zh": "本站代码与内容同仓库管理。当前重构分支使用 Next.js，阅读路线、收藏、论文导读和外部资讯围绕三个研究方向组织；生产域名切换另行发布。",
+        "en": "Code and content share a repository. The redesign branch uses Next.js to connect learning, saved reading and research signals; production migration is a separate release."
       },
       {
         "heading": "Problem",
@@ -45,8 +45,8 @@
       },
       {
         "heading": "Decisions",
-        "zh": "复用 Docusaurus 的路由、目录与代码块；采集在 CI 中执行；个人阅读状态保存在浏览器中。这样页面访问无需等待抓取或模型请求。",
-        "en": "Reuse Docusaurus routing and reading tools. Collect in CI and store personal progress in the browser, keeping page requests independent of fetchers and models."
+        "zh": "使用 Next.js App Router 与独立内容索引；采集在 CI 中执行，页面读取构建时整理的结果；个人阅读状态保存在浏览器中。",
+        "en": "Use Next.js App Router and independent content indexes. Collect in CI, read prepared content, and keep learning progress in the browser."
       },
       {
         "heading": "Challenges",
@@ -64,7 +64,7 @@
       "Fetch + Normalize",
       "Filter + Deduplicate",
       "Review + JSON",
-      "Docusaurus",
+      "Next.js",
       "Vercel"
     ],
     "titleTw": "Hohoo’s AI Lab",

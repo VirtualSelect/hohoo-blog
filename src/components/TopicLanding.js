@@ -1,6 +1,6 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@lab/runtime/Link';
 import tracks from '@site/data/learning-paths.json';
 import topics from '@site/data/topics';
 import { Section, ContentRows, useContent, useEnglish } from './ContentUI';

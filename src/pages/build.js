@@ -1,8 +1,8 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import { translate } from '@docusaurus/Translate';
+import Layout from '@lab/runtime/Layout';
+import Link from '@lab/runtime/Link';
+import { translate } from '@lab/runtime/Translate';
 import { useContent, ContentRows } from '../components/ContentUI';
 export default function Build() {
   const { entries } = useContent();

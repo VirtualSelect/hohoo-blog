@@ -40,7 +40,7 @@ const days=new Set(items.map(item=>item.collectedAt.slice(0,10)));
 if(!process.argv.includes('--check')) await fs.mkdir(dir,{recursive:true});
 for(const day of days){
   const file=path.join(dir,day+'.md');const markdown=dailyMarkdown(day,items.filter(item=>item.collectedAt.startsWith(day)));
-  if(process.argv.includes('--check')){if(await fs.readFile(file,'utf8')!==markdown) throw new Error('Run npm run news:render to sync '+day);}
+  if(process.argv.includes('--check')){if((await fs.readFile(file,'utf8')).replace(/\r\n/g,'\n')!==markdown.replace(/\r\n/g,'\n')) throw new Error('Run npm run news:render to sync '+day);}
   else await fs.writeFile(file,markdown);
 }
 for(const name of await fs.readdir(dir).catch(()=>[])){

@@ -1,6 +1,6 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@lab/runtime/Link';
 import ArchitectureDiagram from './ArchitectureDiagram';
 import { useEnglish } from './ContentUI';
 import history from '@site/data/build-log.json';

@@ -1,19 +1,15 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
-import useBrokenLinks from '@docusaurus/useBrokenLinks';
 import React, { useEffect, useState } from 'react';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import { translate } from '@docusaurus/Translate';
-import { usePluginData } from '@docusaurus/useGlobalData';
+import Layout from '@lab/runtime/Layout';
+import Link from '@lab/runtime/Link';
+import { translate } from '@lab/runtime/Translate';
+import { useContentData } from '@lab/runtime/data';
 import tracks from '@site/data/learning-paths.json';
 import useLearningProgress from '../components/useLearningProgress';
 import { useEnglish } from '../components/ContentUI';
 export default function Learning() {
   const en = useEnglish();
-  const { collectAnchor } = useBrokenLinks();
-  collectAnchor('engineering');
-  tracks.forEach((t) => t.steps.forEach((s) => collectAnchor('step-' + s.id)));
-  const { entries } = usePluginData('learning-index');
+  const { entries } = useContentData('learning-index');
   const progress = useLearningProgress();
   const [full, setFull] = useState(false),
     [query, setQuery] = useState(''),

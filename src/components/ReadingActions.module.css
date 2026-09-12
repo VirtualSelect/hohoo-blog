@@ -8,18 +8,18 @@
 .actions button {
   font: inherit;
   padding: 0.4rem 0.8rem;
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: 1px solid var(--hh-base-color-emphasis-300);
   border-radius: 8px;
-  background: var(--ifm-background-surface-color);
-  color: var(--ifm-font-color-base);
+  background: var(--hh-base-background-surface-color);
+  color: var(--hh-base-font-color-base);
   cursor: pointer;
 }
 .actions button[aria-pressed='true'] {
-  border-color: var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
+  border-color: var(--hh-base-color-primary);
+  color: var(--hh-base-color-primary);
 }
 .actions button:focus-visible {
-  outline: 2px solid var(--ifm-color-primary);
+  outline: 2px solid var(--hh-base-color-primary);
   outline-offset: 3px;
 }
 .actions button:disabled {
@@ -42,10 +42,10 @@
   cursor: pointer;
 }
 .compact button[aria-pressed='true'] {
-  color: var(--ifm-color-primary);
+  color: var(--hh-base-color-primary);
 }
 .compact button:focus-visible {
-  outline: 2px solid var(--ifm-color-primary);
+  outline: 2px solid var(--hh-base-color-primary);
   outline-offset: 4px;
 }
 .compact button:disabled {

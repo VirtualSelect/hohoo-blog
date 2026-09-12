@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '@theme/Layout';
+import Layout from '@lab/runtime/Layout';
 import CurrentFocus from '@site/src/components/CurrentFocus';
 import { useEnglish } from '@site/src/components/ContentUI';
 import current from '@site/data/current.json';

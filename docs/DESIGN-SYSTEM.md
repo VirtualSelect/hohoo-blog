@@ -1080,3 +1080,11 @@ Codex 每次视觉任务结束前检查：
 ## 2026-09 发现入口精简
 
 首页顺序：Hero → Latest Writing → Currently → Featured Build → AI Radar → Footer。Hero 不再使用粒子展示；About 的既有视觉保留。Articles 使用编号、标题、摘要、日期组成的编辑式列表。Planned 仅显示轻量标题，Full Roadmap / Experiment Proposals 使用原生 details 折叠。翻译状态用细分割线和 metadata 表达，不额外包大卡片。
+
+## Next.js 分支视觉（2026-09-12）
+
+apps/web 使用暖白 / 深绿黑中性色与低饱和绿色 Accent。首页采用左侧文字 Hero + 右侧 Currently、文章编号列表、双列真实项目、三轨入口、轻量 Radar。正文采用独立目录、限定阅读宽度、语法高亮与复制按钮。保留既有 hh-* 语义组件，覆盖底层 token，不新增 CSS 框架。手机导航使用可展开菜单，所有隐藏辅助标签必须不影响布局宽度。
+
+## 关于页个人名片（Next.js）
+
+首页保留简洁文字介绍与右侧近况，沿用暖白、深绿和绿色强调色。参考图中的错层个人名片放在关于页粒子效果下方，与个人介绍并列，使用 static/img/hohoo.jpg 原有头像。名片轻微倾斜，hover/focus 回正，减少动效时保持静止；手机纵向排列。桌面搜索提示统一 Ctrl + K，保留 Ctrl/Meta 两种键盘触发。

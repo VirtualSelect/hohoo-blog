@@ -1,10 +1,10 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
-import { translate } from '@docusaurus/Translate';
+import { translate } from '@lab/runtime/Translate';
 import ContentProvenance, { Freshness } from './ContentProvenance';
 import React, { useEffect, useRef } from 'react';
-import Link from '@docusaurus/Link';
-import { useDoc } from '@docusaurus/plugin-content-docs/client';
-import { usePluginData } from '@docusaurus/useGlobalData';
+import Link from '@lab/runtime/Link';
+import { useDoc } from '@lab/runtime/doc';
+import { useContentData } from '@lab/runtime/data';
 import tracks from '@site/data/learning-paths.json';
 import { Related, useEnglish } from './ContentUI';
 import useLearningProgress from './useLearningProgress';
@@ -12,7 +12,7 @@ import { learningSymbols } from '@site/src/utils/learning-progress.mjs';
 export default function DocReadingContext({ position }) {
   const { metadata, frontMatter: f } = useDoc();
   const en = useEnglish();
-  const { entries } = usePluginData('learning-index');
+  const { entries } = useContentData('learning-index');
   const state = useLearningProgress();
   const recorded = useRef(null);
   const step = f.learning_step;

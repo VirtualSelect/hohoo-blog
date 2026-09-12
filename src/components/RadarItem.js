@@ -1,15 +1,15 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { translate } from '@docusaurus/Translate';
+import useSiteConfig from '@lab/runtime/context';
+import { translate } from '@lab/runtime/Translate';
 import React from 'react';
-import Link from '@docusaurus/Link';
+import Link from '@lab/runtime/Link';
 import ReadingActions from './ReadingActions';
 import { localizedNews } from '@site/src/utils/news-locale.mjs';
 import { useEnglish, Related } from './ContentUI';
 import ContentProvenance, { Freshness } from './ContentProvenance';
 export default function RadarItem({ item, compact = false }) {
   const en = useEnglish();
-  const c = localizedNews(item, useDocusaurusContext().i18n.currentLocale);
+  const c = localizedNews(item, useSiteConfig().i18n.currentLocale);
   return (
     <article id={'signal-' + item.id}>
       <p className="hh-eyebrow">

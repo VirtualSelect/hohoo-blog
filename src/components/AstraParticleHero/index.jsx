@@ -1,7 +1,7 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
-import { translate } from "@docusaurus/Translate";
+import { translate } from "@lab/runtime/Translate";
 import React, { useEffect, useRef, useState } from 'react';
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import useBaseUrl from '@lab/runtime/base-url';
 import styles from './styles.module.css';
 export default function AstraParticleHero({
   en = false

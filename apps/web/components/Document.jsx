@@ -1,0 +1,104 @@
+"use client";
+import { useEffect, useRef } from "react";
+import { useSite } from "../runtime/context";
+import { useText } from "./Shell";
+import Link from "../runtime/Link";
+import DocReadingContext from "@site/src/components/DocReadingContext";
+import TranslationNotice from "@site/src/components/TranslationNotice";
+export default function Document() {
+  const { document: d } = useSite(),
+    t = useText(),
+    ref = useRef(null);
+  useEffect(() => {
+    const buttons = [];
+    for (const pre of ref.current?.querySelectorAll("pre") || []) {
+      const b = window.document.createElement("button");
+      b.className = "copy-code";
+      b.textContent = t("复制", "Copy", "複製");
+      b.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(
+            pre.querySelector("code")?.textContent || "",
+          );
+          b.textContent = t("已复制", "Copied", "已複製");
+        } catch {
+          b.textContent = t("复制失败", "Copy failed", "複製失敗");
+        }
+      };
+      pre.append(b);
+      buttons.push(b);
+    }
+    return () => buttons.forEach((b) => b.remove());
+  }, [d, t]);
+  return (
+    <main className="document-layout">
+      <aside className="document-nav">
+        <Link to="/learning">
+          ← {t("学习路线", "Learning path", "學習路線")}
+        </Link>
+        <Link to="/docs/ai-apps">
+          {t("AI 应用开发", "AI Applications", "AI 應用開發")}
+        </Link>
+        <Link to="/docs/llm">LLM</Link>
+        <Link to="/docs/embodied-ai">
+          {t("具身智能", "Embodied AI", "具身智慧")}
+        </Link>
+      </aside>
+      <article className="document-body">
+        <header>
+          <p className="eyebrow">
+            {d.kind === "blog"
+              ? t("随笔", "Journal", "隨筆")
+              : t("学习 / 实践", "Learn / Practice", "學習 / 實作")}
+          </p>
+          <h1>{d.metadata.title}</h1>
+          <TranslationNotice
+            id={(d.kind === "blog" ? "blog:" : "doc:") + d.metadata.id}
+            original={"/" + d.route}
+          />
+          {d.kind === "docs" ? (
+            <DocReadingContext position="header" />
+          ) : (
+            <p className="hh-meta">
+              {String(d.frontMatter.date).slice(0, 10)} · Hohoo
+            </p>
+          )}
+          {d.sourceFallback && (
+            <p className="translation-notice">
+              {t(
+                "当前显示原文。",
+                "Showing the original text; this translation is not available.",
+                "目前顯示原文，譯文尚未提供。",
+              )}
+            </p>
+          )}
+        </header>
+        <div
+          ref={ref}
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: d.html }}
+        />
+        {d.kind === "docs" && <DocReadingContext position="footer" />}
+        <div className="article-end">
+          <Link to="/articles">
+            ← {t("全部文章", "All writing", "全部文章")}
+          </Link>
+        </div>
+      </article>
+      <aside className="document-toc">
+        <p className="eyebrow">{t("本文目录", "On this page", "本文目錄")}</p>
+        <nav aria-label={t("文章目录", "Table of contents", "文章目錄")}>
+          {d.headings.map((h) => (
+            <a
+              key={h.id}
+              href={"#" + h.id}
+              className={h.depth === 3 ? "subheading" : ""}
+            >
+              {h.text}
+            </a>
+          ))}
+        </nav>
+      </aside>
+    </main>
+  );
+}
