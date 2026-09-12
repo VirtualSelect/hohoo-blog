@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" fill="none" stroke="white" stroke-width="2" aria-label="Hohoo">
+  <path d="M45 35 L45 185" />
+  <path d="M140 35 L140 185" />
+  <path d="M45 110 L140 110" />
+  <path d="M270 137 C270 70 180 70 180 137 C180 204 270 204 270 137 Z" />
+  <path d="M312 35 L312 185" />
+  <path d="M312 133 C312 73 402 69 402 136 L402 185" />
+  <path d="M538 137 C538 70 448 70 448 137 C448 204 538 204 538 137 Z" />
+  <path d="M677 137 C677 70 587 70 587 137 C587 204 677 204 677 137 Z" />
+</svg>

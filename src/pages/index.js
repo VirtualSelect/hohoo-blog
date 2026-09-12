@@ -1,3 +1,4 @@
+import ParticleWordmark from '@site/src/components/ParticleWordmark';
 import StructuredData from '@site/src/components/StructuredData';
 import HomeProjects from '@site/src/components/HomeProjects';
 import CurrentFocus from '@site/src/components/CurrentFocus';
@@ -34,17 +35,19 @@ export default function Home() {
           content="Hohoo's AI Lab · AI Engineering, LLM & Embodied AI"
         />
       </Head>
+      <ParticleWordmark en={en} />
       <main className={styles.home}>
         <StructuredData person />
         <section className={styles.hero} aria-labelledby="home-title">
           <div>
             <p className={styles.eyebrow}>
               <span className={styles.dot} />{' '}
-              {t('探索 AI，也记录每一步', 'BUILD · UNDERSTAND · EXPLORE')}
+              HOOHOO / EXPLORING INTELLIGENCE
             </p>
             <Heading as="h1" id="home-title" className={styles.title}>
-              {t('你好，我是 ', 'Hello, I’m ')}
-              <span>Hohoo.</span>
+              <span className={styles.greeting}>{t('你好，我是 Hohoo。', 'Hello, I’m Hohoo.')}</span>
+              {t('探索智能，', 'Explore intelligence.')}<br />
+              <span>{t('构建可能。', 'Build possibilities.')}</span>
             </Heading>
             <p className={styles.eyebrow}>Developer · AI Builder · Explorer</p>
             <p className={styles.intro}>
@@ -57,8 +60,8 @@ export default function Home() {
               <Link className={styles.primary} to="/learning">
                 {t('开始阅读路线', 'Explore reading paths')} ↗
               </Link>
-              <Link className={styles.secondary} to="/about">
-                {t('认识一下我', 'About me')} →
+              <Link className={styles.secondary} to="/projects">
+                {t('探索项目', 'Explore projects')} →
               </Link>
             </div>
             <div className={styles.topics}>
@@ -67,42 +70,19 @@ export default function Home() {
               <span>{t('具身智能', 'Embodied AI')}</span>
             </div>
           </div>
-          <aside
-            className={styles.profile}
-            aria-label={t('个人简介', 'Profile')}>
-            <div className={styles.profileTop}>
-              <span>HELLO, WORLD_</span>
-              <span aria-hidden="true">↗</span>
+          <aside className={styles.observatory} aria-label={t('个人 AI 实验室', 'Personal AI laboratory')}>
+            <div className={styles.profile}>
+              <img src={avatar} alt="Hohoo" width="48" height="48" className={styles.avatar} />
+              <div><strong>Hohoo</strong><p>Developer · AI Builder · Explorer</p></div>
+              <a href={social.github.href} aria-label="Hohoo GitHub">↗</a>
             </div>
-            <img
-              src={avatar}
-              alt="Hohoo"
-              width="112"
-              height="112"
-              className={styles.avatar}
-            />
-            <p className={styles.profileName}>
-              Hohoo<span>Developer · AI Explorer</span>
-            </p>
-            <p className={styles.quote}>
-              {t('忙时学习，闲时读书。', 'Stay curious. Keep growing.')}
-              <br />
-              {t(
-                '在热爱的事情里，慢慢积累。',
-                'Make room for the things you love.',
-              )}
-            </p>
-            <div className={styles.profileBottom}>
-              <span>{t('学习 · 实践 · 分享', 'Learn · Build · Share')}</span>
-              <a href={social.github.href}>GitHub ↗</a>
-            </div>
+            <p className={styles.visualCaption}>LEARNING IN PUBLIC. BUILDING IN PUBLIC.</p>
           </aside>
         </section>
-        <CurrentFocus />
         <section className={styles.notes} aria-labelledby="notes-title">
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>01 / {t('三个专栏', 'TOPICS')}</p>
+              <p className={styles.eyebrow}>01 / LEARNING COORDINATES</p>
               <Heading as="h2" id="notes-title">
                 {t('三条主线，持续深入', 'Three tracks to explore')}
               </Heading>
@@ -131,8 +111,9 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <HomeUpdates position="latest" />
+        <CurrentFocus />
         <HomeProjects en={en} />
+        <HomeUpdates position="latest" />
         <HomeUpdates position="activity" />
         <section className={styles.connect}>
           <div>

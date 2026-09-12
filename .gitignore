@@ -19,3 +19,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .gitignore
+
+# Keep the independent GPU app ignore rules in version control.
+!/apps/astra-hero/.gitignore

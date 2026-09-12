@@ -1,0 +1,29 @@
+.scrollSection { height: 165svh; min-height: 920px; background: #050505; position: relative; }
+.sticky { position: sticky; top: 64px; height: calc(100svh - 64px); min-height: 540px; overflow: hidden; display: flex; flex-direction: column; }
+.eyebrow { display: flex; justify-content: space-between; gap: 24px; padding: 30px 4vw 0; font-family: var(--mono); font-size: .64rem; letter-spacing: .14em; color: #8b949e; z-index: 1; }
+.canvasWrap { position: relative; flex: 1; min-height: 280px; }
+.canvas { display: block; width: 100%; height: 100%; position: absolute; inset: 0; cursor: grab; touch-action: pan-y; }
+.canvas[data-dragging] { cursor: grabbing; }
+.canvas:focus-visible { outline: 1px solid #97c5da; outline-offset: -8px; }
+.fallback { position: absolute; inset: 0; display: grid; place-items: center; font-size: clamp(4.5rem, 18vw, 17rem); font-weight: 400; letter-spacing: -.07em; pointer-events: none; }
+.bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 4vw; }
+.help { color: #b8c0c9; font-size: .77rem; margin: 0 0 6px; }
+.keyboard { color: #78858f; font-size: .62rem; margin: 0; }
+.controls { display: flex; gap: 8px; flex-shrink: 0; }
+.controls button, .error button { min-width: 44px; min-height: 44px; border: 1px solid #34404a; border-radius: 24px; padding: 8px 14px; background: #0b1016; color: #d0d8df; font-size: .72rem; cursor: pointer; }
+.controls button:hover, .error button:hover { background: #19232d; border-color: #7e9aa9; }
+.controls button:disabled { opacity: .4; cursor: default; }
+.scrollLink { align-self: center; padding: 18px 24px; font-size: .67rem; color: #929ea8; text-decoration: none; letter-spacing: .08em; }
+.scrollLink span { margin-left: 10px; }
+.error { text-align: center; color: #b0bac3; font-size: .8rem; margin: 8px 20px; }
+.scrollSection[data-reduced='true'] { height: auto; min-height: 0; }
+@media (max-width: 700px) {
+  .scrollSection { height: 145svh; min-height: 760px; }
+  .sticky { min-height: 540px; }
+  .eyebrow { padding: 22px 22px 0; }
+  .eyebrow span:last-child { display: none; }
+  .bottom { padding: 0 22px; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .controls { gap: 6px; }
+  .controls button { padding: 8px 11px; }
+}
+@media (prefers-reduced-motion: reduce) { .scrollSection { height: auto; min-height: 0; } }

@@ -1,5 +1,9 @@
 # Huhohoo.com Roadmap
 
+## 科幻视觉分支
+
+分支：`codex/sci-fi-particle-lab`。保留内容数据、URL 与 Docusaurus 架构；更新全站主题与首页信息层级，加入可暂停、可静态降级的交互 Hohoo 粒子字形（悬停拨散、拖动三维旋转、自动归位）。验收包含双语言构建、响应式、深浅色、键盘、动效开关与控制台检查。
+
 ## 当前增量：第二阶段精修
 
 本轮聚焦统一品牌导航、修复历史入口、真实数据复用、实验设计、Radar 来源信任/事件基础、周报层级、项目证据、轻量全站搜索、阅读 Inbox 和 SEO 基础。详细审计与范围见 `reports/PHASE-2-AUDIT.md`，验收见 `reports/PHASE-2-ACCEPTANCE.md`。
@@ -762,6 +766,14 @@ KEEP BUILDING.
 ```
 
 ---
+
+# 独立 GPU Hero 实验（2026-09-12）
+
+- 已在 `apps/astra-hero` 实现 Next.js + TypeScript + Three.js 独立视觉应用，保留现有博客。
+- 已完成 SVG 路径纹理、五条星臂、Vertex Shader 形态及第二阶段 FBO ping-pong 交互。
+- 已通过生产构建、桌面/手机模拟交互验证；GTX 1660 Ti 短时桌面实测约 60 FPS。
+- 实体手机长时间性能与真实标签页后台切换仍待验证。未部署至正式博客。
+- 验收记录：`reports/ASTRA-GPU-ACCEPTANCE.md`。
 
 # 7. Release Gate
 
