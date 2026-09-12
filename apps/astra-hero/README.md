@@ -29,7 +29,11 @@ React 页面组件位于 `components/AstraParticleHero/`；场景、粒子、路
 
 悬停排斥在投影空间检测，在局部坐标中积分并缓慢恢复。滚动仅驱动 `uScatterProgress`、`uShapeProgress`、`uRotationProgress`，形态通过 shader 中的 `mix()` 混合。拖拽旋转独立于滚动。
 
-## 性能与降级
+## Vercel 部署配置
+
+项目 `astra-hero` 的 Root Directory 为 `apps/astra-hero`，开启 Include source files outside of the Root Directory，Node.js 使用 24.x。应用内 `vercel.json` 安装根目录与本应用的两份依赖。共享粒子源码位于 `src/components/AstraParticleHero`，其 `three` 从仓库根目录解析，因此不能只安装本应用依赖。构建命令为 `npm run build`，输出 `.next`。
+
+## 性能与降级参数
 
 | 初始配置 | 桌面 | 手机/粗指针 |
 | --- | --- | --- |

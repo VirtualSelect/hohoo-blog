@@ -22,6 +22,8 @@ App Router 管理路由、metadata、404、旧地址跳转、sitemap、robots。
 
 ## 部署
 
+Vercel 项目 `hohoo-blog` 的 Root Directory 必须为 `apps/web`，并开启 Include source files outside of the Root Directory。应用内 `vercel.json` 固定安装根目录与应用的两份依赖，并使用 Next.js 构建输出。Node.js 选择 Vercel 支持的 24.x。不要从仓库根目录直接构建该 Vercel 项目，否则不会读取应用内配置。
+
 此分支尚未部署，不修改线上项目设置。新建 Vercel 预览或迁移已有项目时：Root Directory 选择 `apps/web`，启用读取 Root Directory 外的源文件；安装命令使用 `cd ../.. && npm ci && npm ci --prefix apps/web`，构建命令 `npm run build`（在 apps/web 内），框架 Next.js，输出默认 `.next`。发布前先验证预览部署与现有域名跳转，再切生产。
 
 现有 RSS 管线从根目录继续运行。Docusaurus 依赖、插件生命周期、主题覆盖与旧版构建命令已移除；历史版本通过 Git 保留。
