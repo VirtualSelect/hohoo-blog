@@ -123,7 +123,7 @@ export default function Radar() {
               </button>
             ))}
           </div>
-          <Link to="/news/weekly">{en ? 'Weekly archive' : '周汇总'} →</Link>
+          <Link to="/radar/weekly">{en ? 'Weekly archive' : '周汇总'} →</Link>
         </div>
         <div className={styles.results}>
           {timelineGroups(filtered, limit, mode).map(([date, rows]) => (

@@ -1,5 +1,13 @@
 # Huhohoo Design System
 
+## 第二阶段统一约定
+
+品牌使用 Hohoo.；产品名 Hohoo's AI Lab；标语 Learning in public. Building in public.。
+继续复用原生 Docusaurus Layout/Footer，不新增平行页面外壳。内容来源与核验状态使用轻量 Eyebrow / Metadata，不使用彩色权威勋章。
+全站搜索采用原生 dialog 和延迟加载，Tab / Enter / Esc 可操作；空结果保留对话框宽度。架构图使用可换行的语义有序列表，不引入图形库。
+`static/img/og-template.svg` 是 1200×630 的分享图模板，尚未替换站点现有 OG 图片；后续导出 PNG/JPEG 后再用于社交平台，避免假设平台支持 SVG。
+
+
 ## 1. Design Direction
 
 huhohoo.com 的视觉目标不是“炫酷 AI 官网”，而是：

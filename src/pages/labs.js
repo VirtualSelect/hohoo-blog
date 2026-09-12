@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import {
@@ -11,10 +11,13 @@ export default function Labs() {
   const en = useEnglish();
   const { entries } = useContent();
   const labs = entries.filter((e) => e.type === 'lab');
+  useEffect(() => {
+    const slug = window.location.hash.slice(1);
+    const entry = labs.find((e) => e.slug === slug);
+    if (entry) window.location.replace(entry.href + window.location.search);
+  }, []);
   return (
-    <Layout
-      title={en ? 'Labs' : '实验'}
-      description="以问题、方法和证据为中心的实验记录。">
+    <Layout title="Labs" description="以问题、方法和证据为中心的实验记录。">
       <main className="hh-page">
         <p className="hh-eyebrow">EXPERIMENT / LABS</p>
         <h1>

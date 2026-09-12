@@ -1,3 +1,4 @@
+import ContentProvenance, { Freshness } from './ContentProvenance';
 import React, { useEffect, useRef } from 'react';
 import Link from '@docusaurus/Link';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
@@ -44,6 +45,8 @@ export default function DocReadingContext({ position }) {
           {f.updated && ' · UPDATED ' + f.updated}
           {track && ' · PART ' + (index + 1) + ' / ' + track.steps.length}
         </p>
+        <ContentProvenance kind={f.provenance} />
+        <Freshness entry={f} />
         <Related
           ids={f.prerequisites || []}
           title={en ? 'Prerequisites' : '前置知识'}

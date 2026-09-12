@@ -4,6 +4,8 @@ const redirects = {
   '/aboutMe': '/about',
   '/blog/a new milestone': '/blog/a-new-milestone',
   '/news': '/radar',
+  '/news/weekly': '/radar/weekly',
+  '/lab': '/labs',
 };
 module.exports = function (context) {
   return {

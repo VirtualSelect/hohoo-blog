@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">Hohoo's AI Lab — social image template</title><desc id="desc">Editorial social image template, with a content label, title and site signature.</desc>
+<rect width="1200" height="630" fill="#f7f8f5"/><path d="M72 132H1128M72 518H1128" stroke="#ccd2c9"/>
+<text x="72" y="91" font-family="monospace" font-size="24" fill="#456a51">PROJECT / 001</text>
+<text x="72" y="287" font-family="sans-serif" font-weight="600" font-size="72" fill="#202820">Hohoo's AI Lab</text>
+<text x="72" y="362" font-family="sans-serif" font-size="32" fill="#5d685f">Learning in public. Building in public.</text>
+<text x="72" y="574" font-family="sans-serif" font-size="30" fill="#202820">Hohoo.</text><text x="1128" y="574" text-anchor="end" font-family="monospace" font-size="22" fill="#5d685f">huhohoo.com</text>
+</svg>

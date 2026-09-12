@@ -1,7 +1,9 @@
+import StructuredData from '@site/src/components/StructuredData';
 import HomeProjects from '@site/src/components/HomeProjects';
 import CurrentFocus from '@site/src/components/CurrentFocus';
 import HomeUpdates from '@site/src/components/HomeUpdates';
 import React from 'react';
+import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -20,15 +22,20 @@ export default function Home() {
   const avatar = useBaseUrl('/img/hohoo.jpg');
   return (
     <Layout
-      title={t(
-        '首页 · AI 应用、LLM 与具身智能',
-        'Home · AI, LLMs & Embodied Intelligence',
-      )}
+      title="Hohoo's AI Lab · AI Engineering, LLM & Embodied AI"
       description={t(
-        'Hohoo 的个人博客，聚焦 AI 应用开发、LLM 分享与具身智能，记录学习、实验和实践。',
+        'Hohoo 的 AI Lab：公开学习 AI 工程、LLM 与具身智能，展示真实项目与实验。',
         'Hohoo’s learning journal on AI applications, LLMs and embodied intelligence.',
       )}>
+      <Head>
+        <title>Hohoo's AI Lab · AI Engineering, LLM &amp; Embodied AI</title>
+        <meta
+          property="og:title"
+          content="Hohoo's AI Lab · AI Engineering, LLM & Embodied AI"
+        />
+      </Head>
       <main className={styles.home}>
+        <StructuredData person />
         <section className={styles.hero} aria-labelledby="home-title">
           <div>
             <p className={styles.eyebrow}>
@@ -140,7 +147,7 @@ export default function Home() {
               )}
             </p>
           </div>
-          <Link className={styles.secondary} to="/aboutMe">
+          <Link className={styles.secondary} to="/about">
             {t('关于与近况', 'About & now')} ↗
           </Link>
         </section>

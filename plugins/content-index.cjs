@@ -127,6 +127,8 @@ function validate(entries) {
     if (
       ![
         'planning',
+        'planned',
+        'inconclusive',
         'learning',
         'building',
         'experiment',
@@ -190,7 +192,22 @@ module.exports = function (context) {
     },
     allContentLoaded({ allContent, actions }) {
       const entries = collectContent(allContent, prefix);
-      actions.setGlobalData({ entries, activity: activity(entries) });
+      // Detail bodies stay in route chunks, not every page's global data.
+      const compact = entries.map(
+        ({
+          sections,
+          design,
+          experimentLog,
+          architecture,
+          screenshots,
+          decisions,
+          metrics,
+          zh,
+          en,
+          ...entry
+        }) => entry,
+      );
+      actions.setGlobalData({ entries: compact, activity: activity(compact) });
     },
   };
 };

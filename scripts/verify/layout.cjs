@@ -66,7 +66,7 @@ const base = process.env.VERIFY_BASE_URL || 'http://localhost:4173';
     await send('Page.navigate', { url: base + route });
     for (let i = 0; i < 80; i++) {
       await sleep(80);
-      if (await evaluate('document.readyState === "complete"')) break;
+      if (await evaluate('document.readyState === "complete" && document.documentElement.dataset.hasHydrated === "true"')) break;
     }
     await sleep(120);
   };
@@ -105,6 +105,18 @@ const base = process.env.VERIFY_BASE_URL || 'http://localhost:4173';
     '/radar/weekly/2026-W37',
     '/notes',
     '/papers',
+    '/reading',
+    '/radar/weekly',
+    '/labs/tool-eval',
+    '/labs/action-representation',
+    '/changelog',
+    '/404.html',
+    '/en/',
+    '/en/reading',
+    '/en/papers',
+    '/en/projects/hohoo-blog',
+    '/en/labs/retrieval-eval',
+    '/en/radar/weekly',
   ];
   const results = [];
   for (const theme of ['light', 'dark']) {
@@ -168,6 +180,11 @@ const base = process.env.VERIFY_BASE_URL || 'http://localhost:4173';
     '/en/aboutMe',
     '/news',
     '/en/news',
+    '/news/weekly',
+    '/en/news/weekly',
+    '/lab',
+    '/en/lab',
+    '/lab#retrieval-eval',
     '/blog/a%20new%20milestone',
     '/en/blog/a%20new%20milestone',
   ]) {

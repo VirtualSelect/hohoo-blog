@@ -1,3 +1,4 @@
+import LearningOverview from '@site/src/components/LearningOverview';
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -32,7 +33,7 @@ export default function Learning() {
   const pool = visible.flatMap((t) => t.steps);
   return (
     <Layout
-      title={en ? 'Learning paths' : '阅读路线'}
+      title="Learning Path"
       description="BUILD / UNDERSTAND / EXPLORE：三个方向的学习路径与本地阅读状态。">
       <main className="hh-page">
         <p className="hh-eyebrow">LEARNING PATH</p>
@@ -46,6 +47,7 @@ export default function Learning() {
             ? 'Follow prerequisites at your pace. Planned topics are marked; reading-time estimates for plans are not completed learning time.'
             : '按前置知识循序推进。选题标注 Planned；计划阅读时间是篇幅估计，不代表实际学习时长。'}
         </p>
+        <LearningOverview entries={entries} progress={progress} />
         <section className="hh-section">
           <h2 className="hh-eyebrow">CONTINUE LEARNING</h2>
           {resume ? (

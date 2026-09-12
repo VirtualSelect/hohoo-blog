@@ -9,7 +9,36 @@
     "number": "001",
     "status": "planning",
     "domain": "ai-apps",
-    "related": ["paper:2005.11401"]
+    "related": [
+      "paper:2005.11401"
+    ],
+    "design": {
+      "zh": {
+        "hypothesis": "在资料确实包含答案的问题上，固定生成模型后，加入检索可能改善可追溯回答；资料缺失时不一定改善。",
+        "variables": {
+          "independent": "是否检索；检索参数作为后续单独对照，首轮不同时改变。",
+          "controlled": "问题集、资料快照、生成模型版本、提示词、采样参数与评分规则。",
+          "dependent": "命中文档、引用支持程度、回答正确性与耗时。"
+        },
+        "baseline": "同一模型不使用检索，使用相同问题与输出格式。",
+        "metrics": "计划记录 Recall@k（需相关性标注）、引用支持率、人工评分以及每题耗时；保留逐题原始记录。",
+        "successCriteria": "在相同问题上比较成对结果与不确定性；仅当改善稳定且引用确有支撑时支持假设。先确定样本量与判定阈值，再运行。",
+        "risks": "数据泄漏、相关性标注偏差、生成随机性和小样本会影响结论；资料缺失题单独分析。"
+      },
+      "en": {
+        "hypothesis": "Retrieval may improve grounded answers when the corpus contains the answer; it may not help missing-evidence questions.",
+        "variables": {
+          "independent": "Retrieval on/off; tune retrieval parameters in separate comparisons.",
+          "controlled": "Questions, corpus snapshot, model version, prompt, sampling and rubric.",
+          "dependent": "Document hits, citation support, correctness and elapsed time."
+        },
+        "baseline": "The same model without retrieval, using identical questions and output format.",
+        "metrics": "Planned: Recall@k with relevance labels, supported citations, manual scores and per-question time.",
+        "successCriteria": "Compare paired outcomes and uncertainty. Define sample size and thresholds before running; require consistent improvement with supported citations.",
+        "risks": "Leakage, label bias, generation randomness and small samples. Analyze missing-evidence questions separately."
+      }
+    },
+    "experimentLog": []
   },
   {
     "id": "tool-eval",
@@ -21,7 +50,36 @@
     "number": "002",
     "status": "planning",
     "domain": "ai-apps",
-    "related": ["paper:2210.03629"]
+    "related": [
+      "paper:2210.03629"
+    ],
+    "design": {
+      "zh": {
+        "hypothesis": "有限重试和明确的工具错误结构可能改善可恢复故障下的任务完成情况，但会增加调用成本。",
+        "variables": {
+          "independent": "错误处理策略：不重试、有限重试、显式错误反馈；分别注入超时和空结果。",
+          "controlled": "只读工具、固定任务、模型与提示词、注入故障序列、最大调用预算。",
+          "dependent": "任务完成、失败类型、工具调用数、耗时、是否遵守调用预算。"
+        },
+        "baseline": "遇到错误即停止，不做重试或恢复。",
+        "metrics": "计划记录完成任务数/总任务数、每任务调用次数与耗时、预算违规次数；不把空结果当成功。",
+        "successCriteria": "在同一故障序列下比较策略；成功必须满足任务断言且没有越过预算。运行前约定可接受的成本上限。",
+        "risks": "不可恢复故障不能靠重试解决；随机输出与不一致故障序列会影响比较。只读工具避免副作用。"
+      },
+      "en": {
+        "hypothesis": "Bounded retries and explicit tool errors may improve recoverable-task completion at increased cost.",
+        "variables": {
+          "independent": "No retry, bounded retry or explicit error feedback; timeout and empty-result injections.",
+          "controlled": "Read-only tools, tasks, model, prompts, fault sequence and call budget.",
+          "dependent": "Completion, failure type, calls, elapsed time and budget compliance."
+        },
+        "baseline": "Stop on tool error without recovery.",
+        "metrics": "Completed/total tasks, calls and time per task, and budget violations; empty results are not successes.",
+        "successCriteria": "Compare identical fault sequences; require task assertions and budget compliance. Specify a cost ceiling before execution.",
+        "risks": "Retries cannot fix unrecoverable errors. Randomness and inconsistent fault injection confound comparisons."
+      }
+    },
+    "experimentLog": []
   },
   {
     "id": "action-representation",
@@ -33,6 +91,35 @@
     "number": "003",
     "status": "planning",
     "domain": "embodied-ai",
-    "related": ["paper:2307.15818"]
+    "related": [
+      "paper:2307.15818"
+    ],
+    "design": {
+      "zh": {
+        "hypothesis": "在固定动作范围的仿真任务中，离散表示的粒度会影响表示误差与可达动作的精度。",
+        "variables": {
+          "independent": "动作离散化粒度。",
+          "controlled": "动作空间、采样动作、仿真任务、初始状态、控制频率与评价方法。",
+          "dependent": "编码/解码误差、越界动作、任务成功条件与执行稳定性。"
+        },
+        "baseline": "在相同动作范围内使用连续表示；先验证编码往返测试，再尝试仿真。",
+        "metrics": "计划记录逐维重建误差、越界次数及仿真任务指标；尚未选定环境，不报告机器人效果。",
+        "successCriteria": "通过边界与往返测试后，在固定任务中比较误差和任务表现；若只有表示测试，只得出表示层结论。",
+        "risks": "表示误差不等于任务性能；仿真结果不能直接外推真实机器人，也不构成 RT-2 复现。"
+      },
+      "en": {
+        "hypothesis": "Discretization granularity may affect representation error and action precision in a fixed simulation task.",
+        "variables": {
+          "independent": "Action discretization granularity.",
+          "controlled": "Action bounds, samples, task, initial state, control frequency and evaluation method.",
+          "dependent": "Encode/decode error, out-of-range actions, task outcomes and stability."
+        },
+        "baseline": "Continuous representation over the same bounds; test round trips before simulation.",
+        "metrics": "Planned: per-dimension error, out-of-range counts and task-specific outcomes. Environment not selected.",
+        "successCriteria": "Pass boundary and round-trip tests before task comparisons. Representation-only tests support representation-only conclusions.",
+        "risks": "Representation error is not task performance; simulation does not establish real-robot performance or reproduce RT-2."
+      }
+    },
+    "experimentLog": []
   }
 ]

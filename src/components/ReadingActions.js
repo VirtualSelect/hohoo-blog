@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import {
-  parseReadingState,
+  parseInbox,
+  emptyInbox,
+  legacyKey,
   readingKey,
-  toggleReadingState,
-} from '@site/src/utils/reading-state.mjs';
+  toggleInbox,
+} from '@site/src/utils/reading-inbox.mjs';
 import { learningSymbols } from '@site/src/utils/learning-progress.mjs';
 import styles from './ReadingActions.module.css';
 
-let memory = { saved: [], read: [] };
+let memory = emptyInbox();
 let volatileStorage = false;
 const eventName = 'hohoo-news-reading-change';
 export function useNewsReading() {
-  const [state, setState] = useState({ saved: [], read: [] });
+  const [state, setState] = useState(emptyInbox);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
@@ -23,8 +25,14 @@ export function useNewsReading() {
       )
         return;
       try {
-        if (!volatileStorage)
-          memory = parseReadingState(localStorage.getItem(readingKey));
+        if (!volatileStorage) {
+          memory = parseInbox(
+            localStorage.getItem(readingKey),
+            localStorage.getItem(legacyKey),
+          );
+          if (localStorage.getItem(readingKey) === null)
+            localStorage.setItem(readingKey, JSON.stringify(memory));
+        }
         setError(volatileStorage);
       } catch {
         volatileStorage = true;
@@ -48,12 +56,15 @@ export function useNewsReading() {
   const toggle = (field, id) => {
     try {
       if (!volatileStorage)
-        memory = parseReadingState(localStorage.getItem(readingKey));
+        memory = parseInbox(
+          localStorage.getItem(readingKey),
+          localStorage.getItem(legacyKey),
+        );
     } catch {
       volatileStorage = true;
       setError(true);
     }
-    memory = toggleReadingState(memory, field, id);
+    memory = toggleInbox(memory, field, id);
     try {
       if (!volatileStorage)
         localStorage.setItem(readingKey, JSON.stringify(memory));
@@ -97,6 +108,22 @@ export default function ReadingActions({ id, en, compact = false }) {
             ? 'Mark as read'
             : '标记已读'}
       </button>
+      {!compact && (
+        <button
+          type="button"
+          disabled={!state.ready}
+          aria-pressed={state.reading.includes(id)}
+          onClick={() => state.toggle('reading', id)}>
+          ◐{' '}
+          {state.reading.includes(id)
+            ? en
+              ? 'Reading'
+              : '阅读中'
+            : en
+              ? 'Start reading'
+              : '开始阅读'}
+        </button>
+      )}
       {state.error && (
         <small role="status">
           {en

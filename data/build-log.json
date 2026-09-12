@@ -1,0 +1,32 @@
+[
+  {
+    "project": "project:hohoo-blog",
+    "commit": "64fbc8247924434f71ca838f507847e36bce46b3",
+    "date": "2026-09-11",
+    "title": "feat:版本升级"
+  },
+  {
+    "project": "project:hohoo-blog",
+    "commit": "436f096ff551019b72a3a68ad304668c3c381e9f",
+    "date": "2026-09-11",
+    "title": "test: 补齐响应式交互验收与升级维护报告"
+  },
+  {
+    "project": "project:hohoo-blog",
+    "commit": "6b45da1f6aae23f05ab8ee12e7da751516a75b6f",
+    "date": "2026-09-11",
+    "title": "feat: 完善三轨学习进度与原生阅读上下文"
+  },
+  {
+    "project": "project:hohoo-blog",
+    "commit": "b243befe76ca3105b0313a0680b012bc73c067c9",
+    "date": "2026-09-11",
+    "title": "feat: 用近况真实更新与专题入口重组首页"
+  },
+  {
+    "project": "project:hohoo-blog",
+    "commit": "41a93e979902ea04a7bbcc89f6f67498b1ca2bd8",
+    "date": "2026-09-11",
+    "title": "feat: 建立真实内容索引与项目实验和 Radar 路由"
+  }
+]

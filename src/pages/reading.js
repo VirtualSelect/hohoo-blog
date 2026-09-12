@@ -1,104 +1,214 @@
-import papers from '@site/data/papers.json';
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import papers from '@site/data/papers.json';
 import news from '@site/data/news/items.json';
+import tracks from '@site/data/learning-paths.json';
 import { localizedNews } from '@site/src/utils/news-locale.mjs';
 import ReadingActions, {
   useNewsReading,
 } from '@site/src/components/ReadingActions';
-import styles from './news.module.css';
-
+import useLearningProgress from '@site/src/components/useLearningProgress';
+import { useEnglish, useContent } from '@site/src/components/ContentUI';
 export default function Reading() {
-  const locale = useDocusaurusContext().i18n.currentLocale;
-  const en = locale === 'en';
-  const state = useNewsReading();
-  const [filter, setFilter] = useState('unread');
-  const paperItems = papers.map((p) => ({
-    id: p.id,
-    title: p.title,
-    url: p.url,
-    sourceName: en ? 'Paper' : '论文',
-    publishedAt: String(p.year),
-    translations: {
-      zh: { title: p.title, summary: p.zh.question },
-      en: { title: p.title, summary: p.en.question },
-    },
-  }));
-  const items = [...news, ...paperItems].filter(
-    (item) =>
-      state.saved.includes(item.id) &&
-      (filter === 'all' ||
-        (filter === 'read') === state.read.includes(item.id)),
+  const en = useEnglish(),
+    state = useNewsReading(),
+    learning = useLearningProgress(),
+    { entries } = useContent();
+  const [status, setStatus] = useState('inbox'),
+    [sort, setSort] = useState('newest'),
+    [type, setType] = useState('all'),
+    [topic, setTopic] = useState('all');
+  const catalog = [
+    ...news.map((i) => ({
+      ...i,
+      type: 'radar',
+      topic: i.category,
+      href: '/radar#signal-' + i.id,
+      ...localizedNews(i, en ? 'en' : 'zh'),
+    })),
+    ...papers.map((p) => ({
+      id: p.id,
+      type: 'paper',
+      title: p.title,
+      description: p[en ? 'en' : 'zh'].question,
+      href: '/papers#' + p.slug,
+      topics: p.categories,
+    })),
+    ...entries
+      .filter((e) => e.type === 'note')
+      .map((e) => ({
+        ...e,
+        title: en ? e.titleEn || e.title : e.title,
+        topic: e.domain,
+      })),
+  ]
+    .filter((e) => state.saved.includes(e.id))
+    .map((e) => ({
+      ...e,
+      savedAt: state.savedAt[e.id],
+      stage: state.read.includes(e.id)
+        ? 'done'
+        : state.reading.includes(e.id)
+          ? 'reading'
+          : 'inbox',
+    }));
+  const plans = tracks.flatMap((t) =>
+    t.steps
+      .filter((s) => learning.saved.includes(s.id))
+      .map((s) => {
+        const doc = entries.find((e) => e.stepId === s.id);
+        return {
+          id: s.id,
+          type: 'learning',
+          topic: t.id,
+          title: en ? s.en : s.title,
+          href: doc?.href || '/learning#step-' + s.id,
+          minutes: doc?.minutes,
+          planned: !doc,
+          stage:
+            learning.items[s.id]?.status === 'completed'
+              ? 'done'
+              : learning.items[s.id]?.status === 'reading'
+                ? 'reading'
+                : 'inbox',
+        };
+      }),
   );
+  const rows = [...catalog, ...plans]
+    .filter(
+      (e) =>
+        (status === 'all' || e.stage === status) &&
+        (type === 'all' || e.type === type) &&
+        (topic === 'all' || e.topic === topic || e.topics?.includes(topic)),
+    )
+    .sort((a, b) =>
+      sort === 'shortest'
+        ? (a.minutes || Infinity) - (b.minutes || Infinity) ||
+          a.title.localeCompare(b.title)
+        : !a.savedAt
+          ? !b.savedAt
+            ? a.title.localeCompare(b.title)
+            : 1
+          : !b.savedAt
+            ? -1
+            : sort === 'oldest'
+              ? a.savedAt.localeCompare(b.savedAt)
+              : b.savedAt.localeCompare(a.savedAt),
+    );
   return (
-    <Layout title={en ? 'Saved reading' : '稍后读'}>
-      <main className={styles.page}>
-        <h1>{en ? 'Keep a reading queue.' : '留下值得继续读的内容。'}</h1>
-        <p>
+    <Layout
+      title="Reading Inbox"
+      description={
+        en
+          ? 'Your local reading inbox for knowledge and signals.'
+          : '知识与资讯的本地阅读清单。'
+      }>
+      <main className="hh-page">
+        <p className="hh-eyebrow">READING INBOX</p>
+        <h1>
+          {en ? 'Keep the next question close.' : '把下一次阅读，留在这里。'}
+        </h1>
+        <p className="hh-lead">
           {en
-            ? 'Saved in this browser, shared between language versions. Opening a source does not mark it as read.'
-            : '收藏保存在当前浏览器，中英文页面共用。打开原文不会自动标记已读。'}
+            ? 'Saved in this browser. Migrated entries without a save date follow dated entries.'
+            : '保存在当前浏览器。旧收藏没有保存日期时排在有日期的记录之后，不补造时间。'}
         </p>
-        <p>
-          <Link to="/learning">
-            {en ? 'Planned learning topics →' : '查看学习选题清单 →'}
-          </Link>
+        <div className="hh-controls">
+          <label>
+            {en ? 'Status' : '状态'}{' '}
+            <select value={status} onChange={(e) => setStatus(e.target.value)}>
+              {['inbox', 'reading', 'done', 'all'].map((s) => (
+                <option key={s} value={s}>
+                  {s.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            {en ? 'Type' : '类型'}{' '}
+            <select value={type} onChange={(e) => setType(e.target.value)}>
+              {['all', 'radar', 'paper', 'learning', 'note'].map((s) => (
+                <option key={s}>{s}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            {en ? 'Topic' : '主题'}{' '}
+            <select value={topic} onChange={(e) => setTopic(e.target.value)}>
+              <option value="all">ALL</option>
+              {tracks.map((t) => (
+                <option key={t.id} value={t.id}>
+                  {en ? t.en : t.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            {en ? 'Sort' : '排序'}{' '}
+            <select value={sort} onChange={(e) => setSort(e.target.value)}>
+              <option value="newest">{en ? 'Newest saved' : '最近收藏'}</option>
+              <option value="oldest">{en ? 'Oldest saved' : '最早收藏'}</option>
+              <option value="shortest">
+                {en ? 'Shortest read' : '阅读时长最短'}
+              </option>
+            </select>
+          </label>
+        </div>
+        <p className="hh-meta">
+          {en
+            ? 'Entries without reading-time metadata follow timed entries.'
+            : '没有阅读时长的内容排在有时长的内容之后。'}
         </p>
-        <label>
-          {en ? 'Show' : '查看'}{' '}
-          <select
-            value={filter}
-            onChange={(event) => setFilter(event.target.value)}>
-            <option value="unread">
-              {en ? 'Unread saved entries' : '未读收藏'}
-            </option>
-            <option value="all">{en ? 'All saved entries' : '全部收藏'}</option>
-            <option value="read">
-              {en ? 'Read saved entries' : '已读收藏'}
-            </option>
-          </select>
-        </label>
         <p role="status">
-          {state.ready
-            ? `${items.length} ${en ? 'entries' : '条内容'}`
+          {state.ready && learning.ready
+            ? `${rows.length} ${en ? 'entries' : '条内容'}`
             : en
-              ? 'Loading saved entries…'
-              : '正在读取收藏…'}
+              ? 'Loading…'
+              : '正在读取…'}
         </p>
-        {state.error && (
+        {(state.error || learning.error) && (
           <p role="status">
             {en
-              ? 'Browser storage is unavailable. Your selections may not survive a reload.'
-              : '浏览器存储不可用，刷新后可能无法保留选择。'}
+              ? 'Storage unavailable; this visit only.'
+              : '存储不可用，仅本次访问保留。'}
           </p>
         )}
-        {state.ready && !items.length && (
-          <section className={styles.empty}>
-            <h2>{en ? 'Nothing here yet.' : '当前清单暂无内容。'}</h2>
-            <Link to="/radar">
-              {en ? 'Find something to read →' : '去资讯板块挑选内容 →'}
-            </Link>
+        {state.ready && learning.ready && !rows.length && (
+          <section className="hh-empty">
+            <h2>{en ? 'Nothing in this view yet.' : '当前清单暂无内容。'}</h2>
+            <Link to="/radar">AI Radar →</Link>
+            {' · '}
+            <Link to="/learning">{en ? 'Learning Path' : '阅读路线'} →</Link>
           </section>
         )}
-        {items.map((item) => {
-          const content = localizedNews(item, locale);
-          return (
-            <article key={item.id} className={styles.card}>
-              <small>
-                {item.sourceName} · {item.publishedAt.slice(0, 10)}
-              </small>
-              <h2>
-                <a href={item.url} target="_blank" rel="noopener noreferrer">
-                  {content.title} ↗
-                </a>
-              </h2>
-              <p>{content.summary}</p>
-              <ReadingActions id={item.id} en={en} />
-            </article>
-          );
-        })}
+        <ol className="hh-rows">
+          {rows.map((e) => (
+            <li key={e.id}>
+              <div>
+                <p className="hh-eyebrow">
+                  {e.type.toUpperCase()} · {e.stage.toUpperCase()}
+                  {e.planned ? ' · PLANNED' : ''}
+                </p>
+                <h2>
+                  <Link to={e.href}>{e.title}</Link>
+                </h2>
+                {e.description && <p>{e.description}</p>}
+                {e.type === 'learning' ? (
+                  <div className="hh-controls">
+                    <button
+                      type="button"
+                      onClick={() => learning.update(e.id, 'saved')}>
+                      {en ? 'Remove from saved' : '取消想读'}
+                    </button>
+                  </div>
+                ) : (
+                  <ReadingActions id={e.id} en={en} />
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
       </main>
     </Layout>
   );

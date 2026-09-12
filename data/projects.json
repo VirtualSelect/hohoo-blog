@@ -12,7 +12,13 @@
     "date": "2026-09-11",
     "updated": "2026-09-11",
     "featured": true,
-    "stack": ["Docusaurus", "React", "RSS", "GitHub Actions", "Vercel"],
+    "stack": [
+      "Docusaurus",
+      "React",
+      "RSS",
+      "GitHub Actions",
+      "Vercel"
+    ],
     "repo": "https://github.com/VirtualSelect/hohoo-blog",
     "demo": "https://huhohoo.com/",
     "related": [],
@@ -52,6 +58,14 @@
         "zh": "当前实现体现的取舍：静态发布降低运行维护成本，但更新依赖构建；本地进度无需账号，但不能跨设备同步。",
         "en": "Implementation trade-offs: static publishing reduces runtime maintenance but depends on builds; local progress requires no account but cannot sync across devices."
       }
+    ],
+    "architecture": [
+      "RSS Sources",
+      "Fetch + Normalize",
+      "Filter + Deduplicate",
+      "Review + JSON",
+      "Docusaurus",
+      "Vercel"
     ]
   }
 ]

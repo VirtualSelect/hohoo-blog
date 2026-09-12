@@ -1,12 +1,11 @@
 import React from 'react';
 import { Section, ContentRows, useContent, useEnglish } from './ContentUI';
-import news from '@site/data/news/items.json';
-import config from '@site/config/news-sources.json';
-import { signals } from '@site/src/utils/radar.cjs';
+import { usePluginData } from '@docusaurus/useGlobalData';
 import RadarItem from './RadarItem';
 export default function HomeUpdates({ position }) {
   const en = useEnglish();
   const { entries, activity } = useContent();
+  const { preview } = usePluginData('radar-pages');
   if (position === 'activity')
     return (
       <>
@@ -44,11 +43,9 @@ export default function HomeUpdates({ position }) {
         title={en ? 'Beyond this notebook' : '来自外部世界的线索'}
         to="/radar">
         <div className="hh-radar">
-          {signals(news, config)
-            .slice(0, 3)
-            .map((item) => (
-              <RadarItem key={item.id} item={item} compact />
-            ))}
+          {preview.map((item) => (
+            <RadarItem key={item.id} item={item} compact />
+          ))}
         </div>
       </Section>
     </>

@@ -29,6 +29,26 @@
       "source": "/en/news",
       "destination": "/en/radar",
       "permanent": true
+    },
+    {
+      "source": "/news/weekly",
+      "destination": "/radar/weekly",
+      "permanent": true
+    },
+    {
+      "source": "/lab",
+      "destination": "/labs",
+      "permanent": true
+    },
+    {
+      "source": "/en/news/weekly",
+      "destination": "/en/radar/weekly",
+      "permanent": true
+    },
+    {
+      "source": "/en/lab",
+      "destination": "/en/labs",
+      "permanent": true
     }
   ]
 }

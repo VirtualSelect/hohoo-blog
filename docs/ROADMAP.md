@@ -1,5 +1,11 @@
 # Huhohoo.com Roadmap
 
+## 当前增量：第二阶段精修
+
+本轮聚焦统一品牌导航、修复历史入口、真实数据复用、实验设计、Radar 来源信任/事件基础、周报层级、项目证据、轻量全站搜索、阅读 Inbox 和 SEO 基础。详细审计与范围见 `reports/PHASE-2-AUDIT.md`，验收见 `reports/PHASE-2-ACCEPTANCE.md`。
+不自动进入下一阶段；后续优先执行真实实验、补充作者 Notes、人工核验 Radar，而不是新增空模块。
+
+
 ## 1. 目标
 
 将 huhohoo.com 从“有清晰 AI 学习规划的个人技术博客”逐步升级为：

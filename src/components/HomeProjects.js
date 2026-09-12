@@ -1,12 +1,18 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
-import papers from '@site/data/papers.json';
-import projects from '@site/data/projects.json';
+import topics from '@site/data/topics';
+import { Status, useContent } from './ContentUI';
 import styles from './HomeProjects.module.css';
 
 export default function HomeProjects({ en }) {
   const t = (zh, english) => (en ? english : zh);
+  const { entries } = useContent();
+  const papers = entries.filter((e) => e.type === 'paper');
+  const project = entries.find(
+    (p) => p.type === 'project' && p.featured && p.status !== 'planning',
+  );
+  if (!project) return null;
   return (
     <section className={styles.section} aria-labelledby="projects-title">
       <div className={styles.heading}>
@@ -62,19 +68,18 @@ export default function HomeProjects({ en }) {
         </div>
         <div className={styles.body}>
           <div className={styles.badges}>
-            <span>{t('持续维护', 'Maintained')}</span>
-            <span>{t('开源', 'Open source')}</span>
+            <Status value={project.status} />
+            <span>{project.stack.join(' · ')}</span>
           </div>
-          <h3>{projects[0].title}</h3>
+          <h3>{project.title}</h3>
           <p>
-            {t(
-              '一个持续生长的个人知识站点。把学习记录、论文线索与精选资讯放在一起，也让值得再读的内容有处可留。',
-              'A personal knowledge site that grows with practice. Writing, paper guides and curated news, with room to save what deserves another read.',
-            )}
+            {en
+              ? project.descriptionEn || project.description
+              : project.description}
           </p>
           <dl>
             <div>
-              <dt>03</dt>
+              <dt>{String(topics.length).padStart(2, '0')}</dt>
               <dd>{t('研究方向', 'Research topics')}</dd>
             </div>
             <div>
@@ -87,13 +92,10 @@ export default function HomeProjects({ en }) {
             </div>
           </dl>
           <div className={styles.links}>
-            <Link to="/projects/hohoo-blog">
+            <Link to={'/projects/' + project.slug}>
               {t('查看项目', 'View project')} →
             </Link>
-            <a
-              href="https://github.com/VirtualSelect/hohoo-blog"
-              target="_blank"
-              rel="noopener noreferrer">
+            <a href={project.repo} target="_blank" rel="noopener noreferrer">
               GitHub ↗
             </a>
           </div>
@@ -104,7 +106,8 @@ export default function HomeProjects({ en }) {
           ↳
         </div>
         <div>
-          <span className={styles.kicker}>INSIDE THE BLOG</span>
+          <span className={styles.kicker}>BEHIND THE LAB</span>{' '}
+          <Link to="/changelog">Changelog →</Link>
           <h3>{t('研究资讯采集流水线', 'Research news pipeline')}</h3>
           <p>
             {t(

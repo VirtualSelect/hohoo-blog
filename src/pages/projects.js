@@ -10,9 +10,7 @@ export default function Projects() {
   const en = useEnglish();
   const { entries } = useContent();
   return (
-    <Layout
-      title={en ? 'Projects' : '项目'}
-      description="真实项目、实现选择与代码入口。">
+    <Layout title="Projects" description="真实项目、实现选择与代码入口。">
       <main className="hh-page">
         <p className="hh-eyebrow">BUILD / PROJECTS</p>
         <h1>{en ? 'Ideas, made useful.' : '把想法做成能用的东西。'}</h1>

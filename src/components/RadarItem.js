@@ -3,16 +3,33 @@ import Link from '@docusaurus/Link';
 import ReadingActions from './ReadingActions';
 import { localizedNews } from '@site/src/utils/news-locale.mjs';
 import { useEnglish, Related } from './ContentUI';
+import ContentProvenance, { Freshness } from './ContentProvenance';
 export default function RadarItem({ item, compact = false }) {
   const en = useEnglish();
   const c = localizedNews(item, en ? 'en' : 'zh');
   return (
-    <article>
+    <article id={'signal-' + item.id}>
       <p className="hh-eyebrow">
         RADAR / SIGNAL · {item.domain.toUpperCase()} ·{' '}
         {item.sourceType.toUpperCase()} ·{' '}
         <time dateTime={item.publishedAt}>{item.publishedAt.slice(0, 10)}</time>
       </p>
+      <p className="hh-meta">
+        SOURCE STATUS ·{' '}
+        {(item.verificationStatus || 'unverified')
+          .replaceAll('-', ' ')
+          .toUpperCase()}
+      </p>
+      <Freshness
+        entry={{
+          ...item,
+          lastVerified: ['primary-confirmed', 'cross-checked'].includes(
+            item.verificationStatus,
+          )
+            ? item.verification?.checkedAt
+            : undefined,
+        }}
+      />
       <h3>
         <a href={item.url} target="_blank" rel="noopener noreferrer">
           {c.title} ↗
@@ -20,13 +37,13 @@ export default function RadarItem({ item, compact = false }) {
       </h3>
       {c.summary && (
         <>
-          <p className="hh-eyebrow">
-            {item.summaryKind === 'ai-summary'
-              ? 'AI SUMMARY'
-              : en
-                ? 'SOURCE EXCERPT'
-                : '来源摘录'}
-          </p>
+          <ContentProvenance
+            kind={
+              item.summaryKind === 'ai-summary'
+                ? 'ai-summary'
+                : 'source-excerpt'
+            }
+          />
           <p>{c.summary}</p>
         </>
       )}
@@ -51,6 +68,23 @@ export default function RadarItem({ item, compact = false }) {
         {!compact && <ReadingActions id={item.id} en={en} compact />}
       </div>
       {!compact && <Related ids={item.related || []} />}{' '}
+      {!compact &&
+        ['primary-confirmed', 'cross-checked'].includes(
+          item.verificationStatus,
+        ) && (
+          <details>
+            <summary>{en ? 'Verification evidence' : '核验依据'}</summary>
+            <ul>
+              {item.verification.evidence.map((e) => (
+                <li key={e.url}>
+                  <a href={e.url} target="_blank" rel="noopener noreferrer">
+                    {e.note} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
       {!!item.coverage?.length && (
         <details>
           <summary>

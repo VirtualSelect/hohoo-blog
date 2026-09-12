@@ -69,3 +69,11 @@ reading_minutes: 15 # 根据正式文章篇幅估算
 ## 页面层级
 
 主导航仅保留文章、研究、资讯、关于。研究 /research 汇集专题、论文、路线和实验；/news 按来源发布日期（UTC）提供日/周分组和渐进加载。旧 /timeline、/news/weekly、/now 等路径保留。首页三个专题下展示博客功能总览与真实采集流水线，不使用虚构项目或动态 GitHub 数字。
+# 第二阶段精修维护
+
+- 全站导航目录：`data/navigation.cjs`。Navbar/Footer 仍使用 Docusaurus 原生组件。
+- 全站搜索在构建时生成标题/摘要索引，打开搜索才加载；支持 `type:paper` 和 `topic:embodied`。不依赖 Algolia 远端索引及时更新。
+- 实验设计、来源核验、阅读 Inbox 的新增字段见 `docs/CONTENT-MODEL.md` 和 `docs/AI-RADAR.md`。
+- 先停止开发服务再运行完整双语 `npm run build`；完成后再启动 `npm start`。两者共用 `.docusaurus`，同时运行可能让开发服务读到另一语言的生成缓存。
+- 项目构建日志只记录已存在的 Git 提交，维护于 `data/build-log.json`；不要将提交时间当作部署时间。
+- 第二阶段审计及验收见 `reports/PHASE-2-AUDIT.md`、`reports/PHASE-2-ACCEPTANCE.md`。

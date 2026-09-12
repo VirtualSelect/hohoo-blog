@@ -34,13 +34,14 @@ export default function Research() {
                 </Link>
               </h2>
               <p>{en ? topic.english : topic.description}</p>
+              <p className="hh-eyebrow">PROBLEM / CONCEPT PATH</p>
               <ul>
                 {papers
                   .filter((p) => p.categories.includes(topic.id))
                   .map((p) => (
                     <li key={p.id}>
                       <Link to={'/papers#' + p.slug}>
-                        {p.short} · {en ? 'Reading guide' : '论文导读'}
+                        {(p.concepts || []).join(' / ')} · {p.short} →
                       </Link>
                     </li>
                   ))}

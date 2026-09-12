@@ -66,7 +66,7 @@ const base = process.env.VERIFY_BASE_URL || 'http://localhost:4173';
     await send('Page.navigate', { url: base + route });
     for (let i = 0; i < 80; i++) {
       await sleep(80);
-      if (await evaluate('document.readyState === "complete"')) break;
+      if (await evaluate('document.readyState === "complete" && document.documentElement.dataset.hasHydrated === "true"')) break;
     }
     await sleep(120);
   };

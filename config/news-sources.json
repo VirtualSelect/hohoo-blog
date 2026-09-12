@@ -21,7 +21,7 @@
       "dailyLimit": 4,
       "aggregator": true,
       "enabled": true,
-      "type": "media",
+      "type": "aggregator",
       "trustLevel": "medium",
       "fetchStrategy": "rss",
       "parserVersion": "rss-v1"

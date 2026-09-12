@@ -15,6 +15,38 @@ module.exports = function (context) {
     },
     async contentLoaded({ content, actions }) {
       const prefix = context.i18n.currentLocale === 'en' ? '/en' : '';
+      const preview = signals(news, config)
+        .slice(0, 3)
+        .map(
+          ({
+            id,
+            title,
+            url,
+            sourceId,
+            sourceName,
+            publishedAt,
+            summary,
+            summaryKind,
+            translations,
+            sourceType,
+            domain,
+            verificationStatus,
+          }) => ({
+            id,
+            title,
+            url,
+            sourceId,
+            sourceName,
+            publishedAt,
+            summary,
+            summaryKind,
+            translations,
+            sourceType,
+            domain,
+            verificationStatus,
+          }),
+        );
+      actions.setGlobalData({ preview });
       for (const group of content) {
         const data = await actions.createData(
           group.week + '.json',

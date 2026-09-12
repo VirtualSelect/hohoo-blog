@@ -11,7 +11,10 @@ export function useEnglish() {
 export function Status({ value }) {
   const en = useEnglish();
   const labels = {
-    planning: ['规划', 'Planned'],
+    planning: ['PLANNED', 'PLANNED'],
+    planned: ['PLANNED', 'PLANNED'],
+    inconclusive: ['INCONCLUSIVE', 'INCONCLUSIVE'],
+    archived: ['ARCHIVED', 'ARCHIVED'],
     production: ['已上线', 'Live'],
     building: ['构建中', 'Building'],
     completed: ['已完成', 'Completed'],

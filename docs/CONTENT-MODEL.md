@@ -1,5 +1,22 @@
 # Huhohoo Content Model
 
+## 第二阶段实现约定（2026-09-11）
+
+以下是当前实现的增量字段，优先于后文概念示例；不要求回填未知历史值。
+
+- 导航目录：`data/navigation.cjs`；页面入口、Navbar/Footer、搜索快捷导航共用。
+- 通用可选字段：`provenance`（author / ai-summary / source-excerpt / paper-abstract / auto-translation / experiment-result）、`lastVerified`、`contentStatus`（current / may-be-outdated / historical）。缺失时隐藏，更新时间不等于核验时间。
+- 实验：沿用既有 `planning` 存储值，UI 显示 PLANNED；支持 running / completed / inconclusive / archived。`design.zh/en` 包含 hypothesis、variables.independent/controlled/dependent、dataset、baseline、metrics、successCriteria、risks、reproduce。设计是提案，不是实验结论。
+- `experimentLog: [{date,title}]` 仅保存实际发生的执行记录。result / observations / conclusion / limitations 分开；没有结果就不填。
+- Project：`architecture: string[]` 使用 CSS 图；可选 screenshots（src/alt/width/height）、decisions（id/title/decision/context/alternatives/why/tradeoffs）、metrics（label/value/evidence）。没有真实证据则不显示。
+- `data/build-log.json` 从真实 Git 提交整理：project / commit / date / title。供 Project 与 Changelog 复用；不是部署日志，不编造版本号。
+- Paper：number、version（当前从已存 URL 的版本读取）、authors、venue、code、projectPage、readingStatus。`comparison` 可保存 method / task / architecture / retrieval / training / evaluation / code；未实现复杂比较界面。
+- Paper 的 `myNotes` 仅供人工填写：author 必须为 Hohoo，readingStatus 必须为 read；learned / surprised / disagree / openQuestions 可选。访客的本地已读状态不能让作者笔记自动出现。
+- Reading Inbox：`huhohoo.reading.v2`，`{version:2,saved,read,reading,savedAt}`。从 `hohoo-news-reading-v1` 迁移，保留旧键；没有历史 savedAt 不补造。学习状态仍使用 `huhohoo.learning.v1`，Inbox 通过适配器合并展示。选题尚未发布不能在 Inbox 冒充已读文章。
+- Search：构建时生成精简 title/description/type/topic/tags/href/status 索引，打开对话框才下载。支持 type:paper / type:lab / topic:embodied（embodied-ai 别名）。搜索只覆盖标题和摘要，不宣称全文检索。
+- Notes 仍仅发布 status=published 的真实内容。草稿使用现有 `docs/templates/note.md`，不自动创建 Hohoo 已发布笔记。
+
+
 ## 1. Purpose
 
 本文件定义 huhohoo.com 的长期内容类型、Metadata、Front Matter 与内容关系规范。

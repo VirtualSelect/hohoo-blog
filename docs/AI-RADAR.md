@@ -1,5 +1,20 @@
 # Huhohoo AI Radar
 
+## 第二阶段信任与事件模型（2026-09-11）
+
+当前实现 `src/utils/radar.cjs` 使用 primary / official / paper / media / aggregator / community 六类来源。AIHOT 继续作为主要发现订阅，但标记 AGGREGATOR，不代表一手权威；官方来源优先成为同一事件的展示主来源。未知来源 ID 报错，已知来源的 URL 不属于登记域名时降为社区信号。
+
+`verificationStatus` 与发布审核完全独立。默认 SINGLE SOURCE，社区为 COMMUNITY SIGNAL；没有证据不生成“官方确认”。PRIMARY CONFIRMED / CROSS-CHECKED 必须有手工核验记录 `verification: {status,checkedBy,checkedAt,evidence:[{url,note,kind}]}`。一手确认要求 primary 证据；交叉核验要求至少两个不同域名的记录，但域名数量本身不会自动产生该状态。记录编辑者仍需确认独立性与内容一致性。
+
+采集不自动写 verification、lastVerified 或 hohoosTake。当前四条信号均未补造核验记录。
+
+事件去重支持 URL 规范化（移除跟踪参数）、72 小时窗口内规范化标题完全一致 / 已有 contentHash，以及显式 eventId / clusterId。返回一个事件和 coverage；不根据模糊近似标题贸然合并不同版本或事件。语义向量、实体推断尚未实现。
+
+`attachCoverage` 让后续发现的同事件官方报道保留到已选记录的 coverage，保留原收藏 ID，并为已记录事件保存 eventId。AIHOT 的发现优先级仍保留，事件展示来源按 primary → official → paper → media → aggregator → community 排序。相关报道不会冒充独立核验，也不逐条进入 Timeline。
+
+周报是 RULE-BASED DIGEST：真实信号/主题/来源数量、已有相关度分数与发布时间排序、分主题来源摘录、待核验线索、显式 Related 内容。不自动生成 Hohoo 的个人判断；若后续接入生成式周摘要，须另存生成来源与 AI-GENERATED WEEKLY SUMMARY 标签。当前自动翻译仍暂停。
+
+
 ## 1. 定位
 
 AI Radar 是 huhohoo.com 的外部信息输入层。

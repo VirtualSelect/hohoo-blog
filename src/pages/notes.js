@@ -11,9 +11,7 @@ export default function Notes() {
   const [query, setQuery] = useState('');
   const notes = entries.filter((e) => e.type === 'note');
   return (
-    <Layout
-      title={en ? 'Notes' : '短笔记'}
-      description="围绕一个概念或问题的短笔记。">
+    <Layout title="Notes" description="围绕一个概念或问题的短笔记。">
       <main className="hh-page">
         <p className="hh-eyebrow">KNOWLEDGE / NOTES</p>
         <h1>{en ? 'One concept, one note.' : '一个概念，一篇短笔记。'}</h1>

@@ -1,59 +1,98 @@
 [
   {
-    "id":"paper:2005.11401", "slug":"rag", "short":"RAG", "year":2020,
-    "title":"Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
-    "url":"https://arxiv.org/abs/2005.11401v4", "categories":["ai-apps","llm"], "project":"retrieval-eval",
-    "zh":{
-      "question":"生成模型如何利用外部知识？",
-      "method":"结合序列生成模型与稠密检索索引，比较整段生成共享检索内容和逐 token 使用不同内容的方式。",
-      "evidence":"作者在开放域问答和生成任务中报告了相对基线的提升。",
-      "boundary":"摘要中的结果限于论文任务与基线，不表示任意知识库接入后都能提高准确率。",
-      "prompt":"阅读时检查：检索失败如何影响生成？知识来源能否追溯？"
+    "id": "paper:2005.11401",
+    "slug": "rag",
+    "short": "RAG",
+    "year": 2020,
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "url": "https://arxiv.org/abs/2005.11401v4",
+    "categories": [
+      "ai-apps",
+      "llm"
+    ],
+    "project": "retrieval-eval",
+    "zh": {
+      "question": "生成模型如何利用外部知识？",
+      "method": "结合序列生成模型与稠密检索索引，比较整段生成共享检索内容和逐 token 使用不同内容的方式。",
+      "evidence": "作者在开放域问答和生成任务中报告了相对基线的提升。",
+      "boundary": "摘要中的结果限于论文任务与基线，不表示任意知识库接入后都能提高准确率。",
+      "prompt": "阅读时检查：检索失败如何影响生成？知识来源能否追溯？"
     },
-    "en":{
-      "question":"How can generation use external knowledge?",
-      "method":"Combine a sequence generator with dense retrieval; compare shared passages per sequence with passages that can change per token.",
-      "evidence":"The authors report improvements on open-domain QA and generation tasks.",
-      "boundary":"Results concern the paper's tasks and baselines, not every knowledge-base integration.",
-      "prompt":"Reading questions: how do retrieval failures affect output, and can evidence be traced?"
-    }
+    "en": {
+      "question": "How can generation use external knowledge?",
+      "method": "Combine a sequence generator with dense retrieval; compare shared passages per sequence with passages that can change per token.",
+      "evidence": "The authors report improvements on open-domain QA and generation tasks.",
+      "boundary": "Results concern the paper's tasks and baselines, not every knowledge-base integration.",
+      "prompt": "Reading questions: how do retrieval failures affect output, and can evidence be traced?"
+    },
+    "number": "001",
+    "version": "v4",
+    "concepts": [
+      "Retrieval"
+    ]
   },
   {
-    "id":"paper:2210.03629", "slug":"react", "short":"ReAct", "year":2022,
-    "title":"ReAct: Synergizing Reasoning and Acting in Language Models",
-    "url":"https://arxiv.org/abs/2210.03629v3", "categories":["ai-apps","llm"], "project":"tool-eval",
-    "zh":{
-      "question":"语言模型如何结合推理与环境交互？",
-      "method":"交替生成推理轨迹和任务动作，通过外部信息更新行动计划。",
-      "evidence":"作者在问答、事实核查与交互决策基准上报告实验结果。",
-      "boundary":"特定基准表现不等于真实工具调用可靠，也不能将生成的解释视为正确性的证明。",
-      "prompt":"阅读时检查：动作失败如何恢复？是否与不使用工具的基线公平比较？"
+    "id": "paper:2210.03629",
+    "slug": "react",
+    "short": "ReAct",
+    "year": 2022,
+    "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+    "url": "https://arxiv.org/abs/2210.03629v3",
+    "categories": [
+      "ai-apps",
+      "llm"
+    ],
+    "project": "tool-eval",
+    "zh": {
+      "question": "语言模型如何结合推理与环境交互？",
+      "method": "交替生成推理轨迹和任务动作，通过外部信息更新行动计划。",
+      "evidence": "作者在问答、事实核查与交互决策基准上报告实验结果。",
+      "boundary": "特定基准表现不等于真实工具调用可靠，也不能将生成的解释视为正确性的证明。",
+      "prompt": "阅读时检查：动作失败如何恢复？是否与不使用工具的基线公平比较？"
     },
-    "en":{
-      "question":"How can a language model combine reasoning with interaction?",
-      "method":"Interleave reasoning traces and task actions, using external information to update plans.",
-      "evidence":"The authors report evaluations on QA, fact verification and interactive decision-making benchmarks.",
-      "boundary":"Benchmark performance does not establish reliable real-world tool use; explanations are not proof of correctness.",
-      "prompt":"Reading questions: how are failed actions handled, and are no-tool baselines comparable?"
-    }
+    "en": {
+      "question": "How can a language model combine reasoning with interaction?",
+      "method": "Interleave reasoning traces and task actions, using external information to update plans.",
+      "evidence": "The authors report evaluations on QA, fact verification and interactive decision-making benchmarks.",
+      "boundary": "Benchmark performance does not establish reliable real-world tool use; explanations are not proof of correctness.",
+      "prompt": "Reading questions: how are failed actions handled, and are no-tool baselines comparable?"
+    },
+    "number": "002",
+    "version": "v3",
+    "concepts": [
+      "Agents",
+      "Reasoning"
+    ]
   },
   {
-    "id":"paper:2307.15818", "slug":"rt2", "short":"RT-2", "year":2023,
-    "title":"RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control",
-    "url":"https://arxiv.org/abs/2307.15818v1", "categories":["embodied-ai"], "project":"action-representation",
-    "zh":{
-      "question":"视觉语言知识如何用于机器人控制？",
-      "method":"将动作表示为文本 token，并用机器人轨迹和视觉语言任务共同微调。",
-      "evidence":"作者报告了机器人评估中新对象与新指令相关的泛化能力。",
-      "boundary":"不应据此推断对任意硬件或环境都能泛化；本站尚未复现该模型。",
-      "prompt":"阅读时检查：动作表示、数据分布与执行系统分别承担什么作用？"
+    "id": "paper:2307.15818",
+    "slug": "rt2",
+    "short": "RT-2",
+    "year": 2023,
+    "title": "RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control",
+    "url": "https://arxiv.org/abs/2307.15818v1",
+    "categories": [
+      "embodied-ai"
+    ],
+    "project": "action-representation",
+    "zh": {
+      "question": "视觉语言知识如何用于机器人控制？",
+      "method": "将动作表示为文本 token，并用机器人轨迹和视觉语言任务共同微调。",
+      "evidence": "作者报告了机器人评估中新对象与新指令相关的泛化能力。",
+      "boundary": "不应据此推断对任意硬件或环境都能泛化；本站尚未复现该模型。",
+      "prompt": "阅读时检查：动作表示、数据分布与执行系统分别承担什么作用？"
     },
-    "en":{
-      "question":"How can visual-language knowledge support robotic control?",
-      "method":"Represent actions as text tokens and co-fine-tune on robot trajectories and vision-language tasks.",
-      "evidence":"The authors report generalization involving new objects and instructions in robotic evaluations.",
-      "boundary":"This does not imply generalization to arbitrary hardware or environments. No reproduction has been performed here.",
-      "prompt":"Reading questions: what roles do action representation, data distribution and execution play?"
-    }
+    "en": {
+      "question": "How can visual-language knowledge support robotic control?",
+      "method": "Represent actions as text tokens and co-fine-tune on robot trajectories and vision-language tasks.",
+      "evidence": "The authors report generalization involving new objects and instructions in robotic evaluations.",
+      "boundary": "This does not imply generalization to arbitrary hardware or environments. No reproduction has been performed here.",
+      "prompt": "Reading questions: what roles do action representation, data distribution and execution play?"
+    },
+    "number": "003",
+    "version": "v1",
+    "concepts": [
+      "Action Representation"
+    ]
   }
 ]

@@ -1,3 +1,4 @@
+import StructuredData from '@site/src/components/StructuredData';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -18,6 +19,7 @@ export default function About() {
       title={en ? 'About' : '关于 Hohoo'}
       description="Hohoo：从 Java 到 AI，公开学习、实验与构建。">
       <main className="hh-page hh-reading">
+        <StructuredData person />
         <p className="hh-eyebrow">ABOUT / HOOHOO</p>
         <h1>{en ? 'Hello, I’m Hohoo.' : '你好，我是 Hohoo。'}</h1>
         <p className="hh-lead">

@@ -5,11 +5,12 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import social from './data/social.ts';
+import navigation from './data/navigation.cjs';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Hohoo's AI Lab",
-  tagline: '聚焦 AI 应用开发、LLM 分享与具身智能，记录学习、实验和实践。',
+  tagline: 'Learning in public. Building in public.',
   favicon: 'img/hohoo.ico',
 
   // Set the production url of your site here
@@ -20,8 +21,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Hohoo', // Usually your GitHub org/user name.
-  projectName: "Hohoo's Blog", // Usually your repo name.
+  organizationName: 'VirtualSelect', // Usually your GitHub org/user name.
+  projectName: 'hohoo-blog', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   markdown: {
@@ -50,6 +51,7 @@ const config = {
     './plugins/learning-index.cjs',
     './plugins/news-feed.cjs',
     './plugins/content-index.cjs',
+    './plugins/search-index.cjs',
     './plugins/route-redirects.cjs',
     './plugins/radar-pages.cjs',
   ],
@@ -60,7 +62,16 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         sitemap: {
-          ignorePatterns: ['/aboutMe', '/en/aboutMe', '/news', '/en/news'],
+          ignorePatterns: [
+            '/aboutMe',
+            '/en/aboutMe',
+            '/news',
+            '/en/news',
+            '/lab',
+            '/en/lab',
+            '/news/weekly',
+            '/en/news/weekly',
+          ],
         },
         docs: {
           sidebarPath: './sidebars.js',
@@ -110,67 +121,25 @@ const config = {
           src: 'img/hohoo.ico',
         },
         hideOnScroll: true, // 把导航栏样式设置为静态,而不禁用主题切换能力
-        items: [
-          {
-            label: '学习',
-            position: 'right',
-            items: [
-              { label: '阅读路线', to: '/learning' },
-              { label: '研究总览', to: '/research' },
-              { label: 'AI Radar', to: '/radar' },
-              { label: '学习活动', to: '/timeline' },
-            ],
-          },
-          {
-            label: '构建',
-            position: 'right',
-            items: [
-              { label: '项目', to: '/projects' },
-              { label: '实验', to: '/labs' },
-            ],
-          },
-          {
-            label: '知识',
-            position: 'right',
-            items: [
-              { label: '短笔记', to: '/notes' },
-              { label: '论文阅读', to: '/papers' },
-            ],
-          },
-          { label: '随笔', to: '/blog', position: 'right' },
-          {
-            type: 'localeDropdown',
-            position: 'right',
-          },
-        ],
+        items: navigation.navbar,
       },
       footer: {
         style: 'light',
         links: [
-          {
-            title: 'EXPLORE',
-            items: [
-              { label: '阅读路线', to: '/learning' },
-              { label: '项目', to: '/projects' },
-              { label: '实验', to: '/labs' },
-              { label: 'AI Radar', to: '/radar' },
-            ],
-          },
-          {
-            title: 'KNOWLEDGE',
-            items: [
-              { label: '短笔记', to: '/notes' },
-              { label: '论文阅读', to: '/papers' },
-              { label: '随笔', to: '/blog' },
-            ],
-          },
+          ...navigation.footer,
           {
             title: 'ELSEWHERE',
             items: [
               { label: 'GitHub', href: social.github.href },
               { label: 'X', href: social.twitter.href },
-              { label: 'RSS', to: '/subscribe' },
-              { label: '关于', to: '/about' },
+              {
+                label: navigation.links.rss.label,
+                to: navigation.links.rss.to,
+              },
+              {
+                label: navigation.links.about.label,
+                to: navigation.links.about.to,
+              },
             ],
           },
         ],
