@@ -127,7 +127,7 @@ function Frame({ children }) {
     ["about", t("关于", "About", "關於")],
   ];
   return (
-    <>
+    <div className="site-shell">
       <a className="skip" href="#main-content">
         {t("跳转到内容", "Skip to content", "跳至內容")}
       </a>
@@ -241,7 +241,7 @@ function Frame({ children }) {
           }}
         />
       )}
-    </>
+    </div>
   );
 }
 export default function Shell({ value, children }) {

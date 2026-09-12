@@ -15,7 +15,7 @@ const themeScript =
 export default async function RootLayout({ children }) {
   const locale = (await headers()).get("x-lab-locale") || "zh-CN";
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
