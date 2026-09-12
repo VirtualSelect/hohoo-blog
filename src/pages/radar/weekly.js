@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -15,7 +16,7 @@ export default function Weekly() {
       title={en ? 'Radar weekly archive' : 'Radar 周汇总'}
       description="按周回看外部 AI 信号。">
       <main className="hh-page">
-        <p className="hh-eyebrow">RADAR / WEEKLY</p>
+        <p className="hh-eyebrow">{uiLabel("RADAR / WEEKLY")}</p>
         <h1>{en ? 'Weekly archive' : '按周回看'}</h1>
         <ul className="hh-rows">
           {weeks.map((w) => (

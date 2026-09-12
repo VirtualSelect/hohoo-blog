@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 const labels = {
   author: 'AUTHOR / HOOHOO',
@@ -9,7 +10,7 @@ const labels = {
 };
 export default function ContentProvenance({ kind }) {
   return labels[kind] ? (
-    <p className="hh-eyebrow hh-provenance">{labels[kind]}</p>
+    <p className="hh-eyebrow hh-provenance">{uiLabel(labels[kind])}</p>
   ) : null;
 }
 export function Freshness({ entry }) {
@@ -22,14 +23,14 @@ export function Freshness({ entry }) {
     <div className="hh-meta hh-freshness">
       {entry.lastVerified && (
         <span>
-          LAST VERIFIED{' '}
+          {uiLabel('LAST VERIFIED')}{' '}
           <time dateTime={entry.lastVerified}>
             {entry.lastVerified.slice(0, 10)}
           </time>
         </span>
       )}
       {states[entry.contentStatus] && (
-        <span>{states[entry.contentStatus]}</span>
+        <span>{uiLabel(states[entry.contentStatus])}</span>
       )}
     </div>
   );

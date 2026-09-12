@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import { useContent, useEnglish } from './ContentUI';
@@ -12,7 +13,7 @@ export default function LearningOverview({ entries, progress }) {
   ).length;
   return (
     <section className="hh-section">
-      <h2 className="hh-eyebrow">LEARNING PROGRESS</h2>
+      <h2 className="hh-eyebrow">{uiLabel("LEARNING PROGRESS")}</h2>
       <dl className="hh-overview">
         <div>
           <dt>{en ? 'Route articles' : '路线文章'}</dt>

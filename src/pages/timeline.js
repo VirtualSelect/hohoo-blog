@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Layout from '@theme/Layout';
 import {
@@ -13,7 +14,7 @@ export default function Timeline() {
       title={en ? 'Learning activity' : '学习活动'}
       description="真实发布的文章、笔记、实验、项目与周汇总。">
       <main className="hh-page">
-        <p className="hh-eyebrow">LEARNING ACTIVITY</p>
+        <p className="hh-eyebrow">{uiLabel("LEARNING ACTIVITY")}</p>
         <h1>
           {en
             ? 'A record of learning and building.'

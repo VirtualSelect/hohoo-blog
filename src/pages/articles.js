@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React, { useEffect, useState } from 'react';
 import Layout from '@theme/Layout';
 import { translate } from '@docusaurus/Translate';
@@ -26,7 +27,7 @@ export default function Articles() {
       id: 'filter.doc',
       message: '技术文章',
     }),
-    'Notes',
+    uiLabel('Notes'),
     translate({
       id: 'filter.paper',
       message: '论文',
@@ -48,7 +49,7 @@ export default function Articles() {
       })}
       description={description}>
       <main className="hh-page">
-        <p className="hh-eyebrow">ARTICLES</p>
+        <p className="hh-eyebrow">{uiLabel("ARTICLES")}</p>
         <h1>{description}</h1>
         <div
           className="hh-controls"

@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -105,7 +106,7 @@ export default function Reading() {
           : '知识与资讯的本地阅读清单。'
       }>
       <main className="hh-page">
-        <p className="hh-eyebrow">READING INBOX</p>
+        <p className="hh-eyebrow">{uiLabel("READING INBOX")}</p>
         <h1>
           {en ? 'Keep the next question close.' : '把下一次阅读，留在这里。'}
         </h1>
@@ -136,7 +137,7 @@ export default function Reading() {
           <label>
             {en ? 'Topic' : '主题'}{' '}
             <select value={topic} onChange={(e) => setTopic(e.target.value)}>
-              <option value="all">ALL</option>
+              <option value="all">{uiLabel("ALL")}</option>
               {tracks.map((t) => (
                 <option key={t.id} value={t.id}>
                   {en ? t.en : t.title}
@@ -187,8 +188,8 @@ export default function Reading() {
             <li key={e.id}>
               <div>
                 <p className="hh-eyebrow">
-                  {e.type.toUpperCase()} · {e.stage.toUpperCase()}
-                  {e.planned ? ' · PLANNED' : ''}
+                  {uiLabel(e.type)} · {uiLabel(e.stage)}
+                  {e.planned ? ' · ' + uiLabel('PLANNED') : ''}
                 </p>
                 <h2>
                   <Link to={e.href}>{e.title}</Link>

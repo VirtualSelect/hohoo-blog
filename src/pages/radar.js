@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import { translate } from '@docusaurus/Translate';
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
@@ -28,7 +29,7 @@ export default function Radar() {
   );
   return (
     <Layout
-      title="AI Radar"
+      title={uiLabel("AI RADAR")}
       description={translate({
         id: 'ui.b9171eebbb',
         message:
@@ -81,10 +82,10 @@ export default function Radar() {
                 setDomain(e.target.value);
                 setLimit(12);
               }}>
-              <option value="all">ALL</option>
+              <option value="all">{uiLabel("ALL")}</option>
               {domains.map((d) => (
                 <option key={d} value={d}>
-                  {d.toUpperCase()}
+                  {uiLabel(d)}
                 </option>
               ))}
             </select>

@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import {
@@ -13,7 +14,7 @@ export default function Notes() {
   return (
     <Layout title="Notes" description="围绕一个概念或问题的短笔记。">
       <main className="hh-page">
-        <p className="hh-eyebrow">KNOWLEDGE / NOTES</p>
+        <p className="hh-eyebrow">{uiLabel("KNOWLEDGE / NOTES")}</p>
         <h1>{en ? 'One concept, one note.' : '一个概念，一篇短笔记。'}</h1>
         <p className="hh-lead">
           {en

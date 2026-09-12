@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import PaperMetadata, { PaperNotes } from '@site/src/components/PaperMetadata';
 import Heading from '@theme/Heading';
 import React, { useState } from 'react';
@@ -28,7 +29,7 @@ export default function Papers() {
           : '论文的研究问题、方法与证据边界。'
       }>
       <main className={styles.page}>
-        <p className={styles.eyebrow}>READ / QUESTION / REPRODUCE</p>
+        <p className={styles.eyebrow}>{uiLabel("READ / QUESTION / REPRODUCE")}</p>
         <h1>{en ? 'Read with a question.' : '带着问题读论文。'}</h1>
         <p>
           {en

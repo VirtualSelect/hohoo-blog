@@ -90,5 +90,8 @@
   },
   "item.label.更新记录": {
     "message": "Changelog"
+  },
+  "item.label.Radar": {
+    "message": "Radar"
   }
 }

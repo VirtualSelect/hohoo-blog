@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import { translate } from '@docusaurus/Translate';
@@ -15,7 +16,7 @@ export default function TranslationNotice({ id, original }) {
         id: 'translation.label',
         message: '内容语言',
       })}>
-      <span className="hh-eyebrow">{status.replace('_', ' ')}</span>
+      <span className="hh-eyebrow">{uiLabel(status.replace('_', ' '))}</span>
       {status === 'MISSING' ? (
         <p>
           {translate({
@@ -33,7 +34,7 @@ export default function TranslationNotice({ id, original }) {
       ) : status !== 'ORIGINAL' ? (
         <p>
           {status === 'REVIEWED'
-            ? 'REVIEWED · '
+            ? uiLabel('REVIEWED') + ' · '
             : translate({
                 id: 'translation.ai',
                 message: '译自简体中文，AI 翻译，尚未经过人工译文审阅。',

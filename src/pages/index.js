@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -23,7 +24,7 @@ export default function Home() {
         <StructuredData person />
         <section className={styles.hero}>
           <p className={styles.eyebrow}>
-            AI Builder · Software Engineer · Explorer
+            {uiLabel("AI Builder · Software Engineer · Explorer")}
           </p>
           <h1 className={styles.title}>
             {translate({
@@ -51,16 +52,16 @@ export default function Home() {
         </section>
         <section className="hh-section">
           <div className="hh-section-heading">
-            <h2 className="hh-eyebrow">LATEST WRITING</h2>
-            <Link to="/articles">ALL ARTICLES →</Link>
+            <h2 className="hh-eyebrow">{uiLabel("LATEST WRITING")}</h2>
+            <Link to="/articles">{uiLabel("ALL ARTICLES")} →</Link>
           </div>
           <WritingList items={writingEntries(entries).slice(0, 4)} />
         </section>
         <CurrentFocus />
         <section className="hh-section">
           <div className="hh-section-heading">
-            <h2 className="hh-eyebrow">FEATURED BUILD</h2>
-            <Link to="/build">BUILD →</Link>
+            <h2 className="hh-eyebrow">{uiLabel("FEATURED BUILD")}</h2>
+            <Link to="/build">{uiLabel("BUILD")} →</Link>
           </div>
           <ContentRows
             items={entries
@@ -73,8 +74,8 @@ export default function Home() {
         </section>
         <section className="hh-section">
           <div className="hh-section-heading">
-            <h2 className="hh-eyebrow">AI RADAR</h2>
-            <Link to="/radar">RADAR →</Link>
+            <h2 className="hh-eyebrow">{uiLabel("AI RADAR")}</h2>
+            <Link to="/radar">{uiLabel("RADAR")} →</Link>
           </div>
           <div className="hh-radar">
             {preview.slice(0, 3).map((item) => (

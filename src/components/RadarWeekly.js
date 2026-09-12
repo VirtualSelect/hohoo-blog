@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -25,7 +26,7 @@ export default function RadarWeekly({ digest }) {
       title={'AI Radar · ' + digest.week}
       description="按原始发布时间汇总的外部 AI 资讯。">
       <main className="hh-page">
-        <p className="hh-eyebrow">RADAR / WEEKLY</p>
+        <p className="hh-eyebrow">{uiLabel("RADAR / WEEKLY")}</p>
         <h1>{digest.week}</h1>
         <p className="hh-lead">
           {en
@@ -33,7 +34,7 @@ export default function RadarWeekly({ digest }) {
             : '按原始发布周整理来源摘录与阅读线索，不自动生成个人观点或趋势结论。'}
         </p>
         <section className="hh-section">
-          <h2 className="hh-eyebrow">THIS WEEK AT A GLANCE</h2>
+          <h2 className="hh-eyebrow">{uiLabel("THIS WEEK AT A GLANCE")}</h2>
           <dl className="hh-overview">
             <div>
               <dt>{en ? 'Signals' : '信号'}</dt>
@@ -55,7 +56,7 @@ export default function RadarWeekly({ digest }) {
           </p>
         </section>
         <Section
-          label="TOP SIGNALS"
+          label={uiLabel("TOP SIGNALS")}
           title={en ? 'Start with these signals' : '先看这些信号'}>
           <p className="hh-meta">
             {en
@@ -66,7 +67,7 @@ export default function RadarWeekly({ digest }) {
             {top.map((i) => (
               <li key={i.id}>
                 <a href={'#signal-' + i.id}>{i.title} →</a>
-                <span className="hh-meta">{i.sourceType.toUpperCase()}</span>
+                <span className="hh-meta">{uiLabel(i.sourceType)}</span>
               </li>
             ))}
           </ol>
@@ -74,8 +75,8 @@ export default function RadarWeekly({ digest }) {
         {domains.map((d) => (
           <Section
             key={d}
-            label="WHAT CHANGED / SOURCE SIGNALS"
-            title={d.toUpperCase()}>
+            label={uiLabel("WHAT CHANGED / SOURCE SIGNALS")}
+            title={uiLabel(d)}>
             <div className="hh-radar">
               {digest.items
                 .filter((i) => i.domain === d)
@@ -86,7 +87,7 @@ export default function RadarWeekly({ digest }) {
           </Section>
         ))}
         <Section
-          label="WORTH FOLLOWING"
+          label={uiLabel("WORTH FOLLOWING")}
           title={en ? 'Questions still open' : '继续跟踪'}>
           <ul>
             {digest.items
@@ -108,7 +109,7 @@ export default function RadarWeekly({ digest }) {
         </Section>
         {!!related.length && (
           <Section
-            label="RELATED TO MY LEARNING"
+            label={uiLabel("RELATED TO MY LEARNING")}
             title={en ? 'Connected knowledge' : '关联知识'}>
             <ContentRows
               items={entries.filter((e) => related.includes(e.id))}

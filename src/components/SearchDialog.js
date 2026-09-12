@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import { translate } from '@docusaurus/Translate';
 import React, { useEffect, useRef, useState } from 'react';
 import Link from '@docusaurus/Link';
@@ -122,13 +123,13 @@ export default function SearchDialog({ onClose }) {
               const rows = results.filter((e) => searchGroup(e.type) === g);
               return rows.length ? (
                 <section key={g}>
-                  <h3 className="hh-eyebrow">{g}</h3>
+                  <h3 className="hh-eyebrow">{uiLabel(g)}</h3>
                   <ul className="hh-search-results">
                     {rows.map((r) => (
                       <li key={r.id}>
                         <Link to={r.href} onClick={onClose}>
                           <small>
-                            {r.type.toUpperCase()} · {r.status?.toUpperCase()}
+                            {uiLabel(r.type)} · {uiLabel(r.status)}
                           </small>
                           <strong>{r.title}</strong>
                           <span>{r.description}</span>

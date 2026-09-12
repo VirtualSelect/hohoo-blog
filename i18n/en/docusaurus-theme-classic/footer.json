@@ -46,5 +46,17 @@
   },
   "copyright": {
     "message": "<div class=\"hh-footer-signoff\"><div class=\"hh-footer-brand\"><strong>Hohoo.</strong><span>Learning in public. Building in public.</span></div><div class=\"hh-footer-meta\"><span>© 2026 Hohoo</span><span>Built with Docusaurus</span></div></div>\n                <p class=\"hh-footer-license\">Content is licensed under <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\">CC BY-NC 4.0</a>. Attribute the author and source; non-commercial use only.</p>"
+  },
+  "link.title.READ": {
+    "message": "READ"
+  },
+  "link.title.BUILD": {
+    "message": "BUILD"
+  },
+  "link.title.DISCOVER": {
+    "message": "DISCOVER"
+  },
+  "link.item.label.AI Radar": {
+    "message": "AI Radar"
   }
 }

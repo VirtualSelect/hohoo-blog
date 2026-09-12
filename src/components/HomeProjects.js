@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import Heading from '@theme/Heading';
@@ -17,7 +18,7 @@ export default function HomeProjects({ en }) {
     <section className={styles.section} aria-labelledby="projects-title">
       <div className={styles.heading}>
         <div>
-          <p className={styles.kicker}>FEATURED BUILDS</p>
+          <p className={styles.kicker}>{uiLabel("FEATURED BUILDS")}</p>
           <Heading as="h2" id="projects-title">
             {t('把想法，做成看得见的东西。', 'Ideas, made tangible.')}
           </Heading>
@@ -38,7 +39,7 @@ export default function HomeProjects({ en }) {
             <span>↗</span>
           </div>
           <div className={styles.canvas}>
-            <small>HOHOO / DIGITAL GARDEN</small>
+            <small>{uiLabel("HOHOO / DIGITAL GARDEN")}</small>
             <strong>
               {t('学习有迹，实践有形。', 'Notes into knowledge.')}
             </strong>
@@ -134,7 +135,7 @@ export default function HomeProjects({ en }) {
           ↳
         </div>
         <div>
-          <span className={styles.kicker}>BEHIND THE LAB</span>{' '}
+          <span className={styles.kicker}>{uiLabel("BEHIND THE LAB")}</span>{' '}
           <Link to="/changelog">Changelog →</Link>
           <h3>{t('研究资讯采集流水线', 'Research news pipeline')}</h3>
           <p>

@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import { translate } from "@docusaurus/Translate";
 import React, { useEffect, useRef, useState } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -102,7 +103,7 @@ export default function AstraParticleHero({
     message: "Hohoo \u7C92\u5B50\u661F\u7FA4"
   }), 'Hohoo particle galaxy')}>
     <div className={styles.sticky}>
-      <div className={styles.eyebrow}><span>ABOUT / HOOHOO</span><span>LEARNING IN PUBLIC. BUILDING IN PUBLIC.</span></div>
+      <div className={styles.eyebrow}><span>{uiLabel("ABOUT / HOOHOO")}</span><span>{uiLabel("LEARNING IN PUBLIC. BUILDING IN PUBLIC.")}</span></div>
       <h1 className={styles.hidden}>{t(translate({
           id: "ui.a3910125df",
           message: "\u5173\u4E8E Hohoo"

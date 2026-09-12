@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -17,7 +18,7 @@ export default function Build() {
         message: '做出了什么，验证了什么。',
       })}>
       <main className="hh-page">
-        <p className="hh-eyebrow">BUILD</p>
+        <p className="hh-eyebrow">{uiLabel("BUILD")}</p>
         <h1>
           {translate({
             id: 'build.description',
@@ -25,7 +26,7 @@ export default function Build() {
           })}
         </h1>
         <section className="hh-section">
-          <h2>PROJECTS</h2>
+          <h2>{uiLabel("PROJECTS")}</h2>
           <ContentRows items={entries.filter((e) => e.type === 'project')} />
           <Link to="/projects">
             {translate({
@@ -36,7 +37,7 @@ export default function Build() {
           </Link>
         </section>
         <section className="hh-section">
-          <h2>EXPERIMENTS</h2>
+          <h2>{uiLabel("EXPERIMENTS")}</h2>
           <ContentRows
             items={labs.filter(
               (e) => !['planning', 'planned'].includes(e.status),

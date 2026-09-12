@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import { translate } from '@docusaurus/Translate';
@@ -9,13 +10,13 @@ export default function WritingList({ items }) {
           <div>
             <p className="hh-eyebrow">
               {String(index + 1).padStart(2, '0')} /{' '}
-              {item.type === 'doc'
+              {uiLabel(item.type === 'doc'
                 ? {
                     'ai-apps': 'BUILD',
                     llm: 'UNDERSTAND',
                     'embodied-ai': 'EXPLORE',
                   }[item.domain] || 'DOC'
-                : item.type.toUpperCase()}
+                : item.type.toUpperCase())}
             </p>
             <h2>
               <Link to={item.href}>{item.title}</Link>
@@ -24,9 +25,9 @@ export default function WritingList({ items }) {
           </div>
           <div className="hh-row-meta">
             {item.date && <time dateTime={item.date}>{item.date}</time>}
-            {item.minutes && <span>{item.minutes} MIN</span>}
+            {item.minutes && <span>{item.minutes} {uiLabel("MIN")}</span>}
             {item.translationStatus === 'AI_TRANSLATED' && (
-              <span>AI TRANSLATED</span>
+              <span>{uiLabel("AI TRANSLATED")}</span>
             )}
           </div>
         </li>

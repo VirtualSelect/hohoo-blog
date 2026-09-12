@@ -51,5 +51,8 @@
   },
   "item.label.关于": {
     "message": "关于"
+  },
+  "item.label.Radar": {
+    "message": "AI 雷达"
   }
 }

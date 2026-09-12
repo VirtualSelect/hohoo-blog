@@ -45,6 +45,21 @@
     "message": "更新紀錄"
   },
   "copyright": {
-    "message": "<div class=\"hh-footer-signoff\"><div class=\"hh-footer-brand\"><strong>Hohoo.</strong><span>Learning in public. Building in public.</span></div><div class=\"hh-footer-meta\"><span>© 2026 Hohoo</span><span>Built with Docusaurus</span></div></div>\n                <p class=\"hh-footer-license\">本站內容採用 <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\">CC BY-NC 4.0</a> 授權。轉載須註明作者與來源，僅供非商業使用。</p>"
+    "message": "<div class=\"hh-footer-signoff\"><div class=\"hh-footer-brand\"><strong>Hohoo.</strong><span>公開學習，公開構建。</span></div><div class=\"hh-footer-meta\"><span>© 2026 Hohoo</span><span>使用 Docusaurus 構建</span></div></div>\n                <p class=\"hh-footer-license\">本站內容採用 <a rel=\"license\" href=\"https://creativecommons.org/licenses/by-nc/4.0/\">CC BY-NC 4.0</a> 授權。轉載須註明作者與來源，僅供非商業使用。</p>"
+  },
+  "link.title.READ": {
+    "message": "閱讀"
+  },
+  "link.title.BUILD": {
+    "message": "實踐"
+  },
+  "link.title.DISCOVER": {
+    "message": "探索"
+  },
+  "link.item.label.AI Radar": {
+    "message": "AI 雷達"
+  },
+  "link.title.ABOUT": {
+    "message": "關於"
   }
 }

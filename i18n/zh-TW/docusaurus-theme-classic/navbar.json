@@ -43,5 +43,8 @@
   },
   "item.label.更新记录": {
     "message": "更新紀錄"
+  },
+  "item.label.Radar": {
+    "message": "AI 雷達"
   }
 }

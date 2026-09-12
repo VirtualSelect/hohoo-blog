@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -15,7 +16,7 @@ export default function Research() {
         en ? 'Three connected research tracks.' : '三条主线的内容与研究入口。'
       }>
       <main className={styles.page}>
-        <p className={styles.kicker}>LEARN / BUILD / UNDERSTAND</p>
+        <p className={styles.kicker}>{uiLabel("LEARN / BUILD / UNDERSTAND")}</p>
         <h1>{en ? 'Follow a question.' : '从一个问题，深入一点。'}</h1>
         <p className={styles.lead}>
           {en
@@ -34,7 +35,7 @@ export default function Research() {
                 </Link>
               </h2>
               <p>{en ? topic.english : topic.description}</p>
-              <p className="hh-eyebrow">PROBLEM / CONCEPT PATH</p>
+              <p className="hh-eyebrow">{uiLabel("PROBLEM / CONCEPT PATH")}</p>
               <ul>
                 {papers
                   .filter((p) => p.categories.includes(topic.id))

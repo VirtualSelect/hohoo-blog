@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import { Section, ContentRows, useContent, useEnglish } from './ContentUI';
 import { usePluginData } from '@docusaurus/useGlobalData';
@@ -10,7 +11,7 @@ export default function HomeUpdates({ position }) {
     return (
       <>
         <Section
-          label="LATEST LAB"
+          label={uiLabel("LATEST LAB")}
           title={en ? 'From question to evidence' : '从问题，到证据'}
           to="/labs">
           <ContentRows
@@ -19,7 +20,7 @@ export default function HomeUpdates({ position }) {
           />
         </Section>
         <Section
-          label="LEARNING ACTIVITY"
+          label={uiLabel("LEARNING ACTIVITY")}
           title={en ? 'A record of making' : '留下真实的足迹'}
           to="/timeline">
           <ContentRows items={activity.slice(0, 4)} />
@@ -29,7 +30,7 @@ export default function HomeUpdates({ position }) {
   return (
     <>
       <Section
-        label="LATEST / FROM HOOHOO"
+        label={uiLabel("LATEST / FROM HOOHOO")}
         title={en ? 'Recently published' : '最近发布'}
         to="/blog">
         <ContentRows
@@ -39,7 +40,7 @@ export default function HomeUpdates({ position }) {
         />
       </Section>
       <Section
-        label="AI RADAR / EXTERNAL SIGNALS"
+        label={uiLabel("AI RADAR / EXTERNAL SIGNALS")}
         title={en ? 'Beyond this notebook' : '来自外部世界的线索'}
         to="/radar">
         <div className="hh-radar">

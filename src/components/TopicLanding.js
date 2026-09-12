@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import tracks from '@site/data/learning-paths.json';
@@ -25,7 +26,7 @@ export default function TopicLanding({ category }) {
       </p>
       <p className="hh-lead">{en ? topic.english : topic.description}</p>
       <Section
-        label="START HERE"
+        label={uiLabel("START HERE")}
         title={en ? 'Choose a starting point' : '从这里开始'}>
         <ol className="hh-concepts">
           {track.steps.slice(0, 7).map((s) => {
@@ -35,7 +36,7 @@ export default function TopicLanding({ category }) {
                 <Link to={article?.href || '/learning#step-' + s.id}>
                   {en ? s.en : s.title}
                 </Link>
-                {!article && <small className="hh-meta"> · PLANNED</small>}
+                {!article && <small className="hh-meta"> · {uiLabel('PLANNED')}</small>}
               </li>
             );
           })}
@@ -43,7 +44,7 @@ export default function TopicLanding({ category }) {
       </Section>
       {category === 'ai-apps' && (
         <Section
-          label="AI ENGINEERING"
+          label={uiLabel("AI ENGINEERING")}
           title={
             en ? 'From application to delivery' : '从应用实现，到工程交付'
           }>
@@ -73,11 +74,11 @@ export default function TopicLanding({ category }) {
           </Link>
         </Section>
       )}
-      <Section label="LATEST" title={en ? 'Published knowledge' : '已发布内容'}>
+      <Section label={uiLabel("LATEST")} title={en ? 'Published knowledge' : '已发布内容'}>
         <ContentRows items={docs} />
       </Section>
       {entries.some((e) => e.domain === category && e.type === 'project') && (
-        <Section label="PROJECTS" title={en ? 'Working builds' : '相关项目'}>
+        <Section label={uiLabel("PROJECTS")} title={en ? 'Working builds' : '相关项目'}>
           <ContentRows
             items={entries.filter(
               (e) => e.domain === category && e.type === 'project',

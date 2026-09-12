@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import ArchitectureDiagram from './ArchitectureDiagram';
@@ -35,7 +36,7 @@ export default function ProjectEvidence({ entry }) {
       <ArchitectureDiagram steps={entry.architecture} />
       {!!entry.screenshots?.length && (
         <section className="hh-section">
-          <h2>PRODUCT EVIDENCE</h2>
+          <h2>{uiLabel("PRODUCT EVIDENCE")}</h2>
           {entry.screenshots.map((s) => (
             <figure key={s.src}>
               <img
@@ -52,7 +53,7 @@ export default function ProjectEvidence({ entry }) {
       )}
       {!!entry.decisions?.length && (
         <section className="hh-section">
-          <h2>DECISION LOG</h2>
+          <h2>{uiLabel("DECISION LOG")}</h2>
           {entry.decisions.map((d) => (
             <article key={d.id}>
               <p className="hh-eyebrow">ADR / {d.id}</p>
@@ -62,7 +63,7 @@ export default function ProjectEvidence({ entry }) {
                   .filter((k) => d[k])
                   .map((k) => (
                     <React.Fragment key={k}>
-                      <dt>{k.toUpperCase()}</dt>
+                      <dt>{uiLabel(k)}</dt>
                       <dd>{d[k]}</dd>
                     </React.Fragment>
                   ))}
@@ -73,7 +74,7 @@ export default function ProjectEvidence({ entry }) {
       )}
       {!!logs.length && (
         <section className="hh-section">
-          <h2>BUILD LOG</h2>
+          <h2>{uiLabel("BUILD LOG")}</h2>
           <p className="hh-meta">
             {en
               ? 'Repository commits; not deployment dates or release versions.'
@@ -101,7 +102,7 @@ export default function ProjectEvidence({ entry }) {
       )}
       {!!entry.metrics?.length && (
         <section className="hh-section">
-          <h2>MEASURED RESULTS</h2>
+          <h2>{uiLabel("MEASURED RESULTS")}</h2>
           <dl className="hh-definition">
             {entry.metrics
               .filter((m) => m.evidence)

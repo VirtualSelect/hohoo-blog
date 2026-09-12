@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import { translate } from '@docusaurus/Translate';
 import ContentProvenance, { Freshness } from './ContentProvenance';
 import React, { useEffect, useRef } from 'react';
@@ -36,15 +37,15 @@ export default function DocReadingContext({ position }) {
     return (
       <div className="hh-reading-context">
         <p className="hh-eyebrow">
-          {f.domain || track?.domain}
-          {track && ' / ' + track.brand}
+          {uiLabel(f.domain || track?.domain)}
+          {track && ' / ' + uiLabel(track.brand)}
         </p>
         {metadata.description && <p>{metadata.description}</p>}
         <p className="hh-meta">
-          {f.difficulty}
-          {f.reading_minutes && ' · ' + f.reading_minutes + ' MIN'}
-          {f.updated && ' · UPDATED ' + f.updated}
-          {track && ' · PART ' + (index + 1) + ' / ' + track.steps.length}
+          {uiLabel(f.difficulty)}
+          {f.reading_minutes && ' · ' + f.reading_minutes + ' ' + uiLabel('MIN')}
+          {f.updated && ' · ' + uiLabel('UPDATED') + ' ' + f.updated}
+          {track && ' · ' + uiLabel('PART') + ' ' + (index + 1) + ' / ' + track.steps.length}
         </p>
         <ContentProvenance kind={f.provenance} />
         <Freshness entry={f} />
@@ -69,7 +70,7 @@ export default function DocReadingContext({ position }) {
               : translate({ id: 'ui.55d22ed084', message: '当前学习位置' })}
           </h2>
           <p className="hh-eyebrow">
-            {track.brand} / {en ? track.en : track.title}
+            {uiLabel(track.brand)} / {en ? track.en : track.title}
           </p>
           <ol start={Math.max(0, index - 1) + 1}>
             {track.steps.slice(Math.max(0, index - 1), index + 2).map((s) => {
@@ -90,7 +91,7 @@ export default function DocReadingContext({ position }) {
                       {en ? s.en : s.title}
                     </Link>
                   )}
-                  {!article && ' · PLANNED'}
+                  {!article && ' · ' + uiLabel('PLANNED')}
                 </li>
               );
             })}

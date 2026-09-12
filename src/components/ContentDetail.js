@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import { translate } from '@docusaurus/Translate';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import TranslationNotice from './TranslationNotice';
@@ -41,7 +42,7 @@ export default function ContentDetail({ entry: e }) {
           />
         )}
         <p className="hh-eyebrow">
-          {e.type.toUpperCase()} / {e.number}
+          {uiLabel(e.type)} / {e.number}
         </p>
         <h1>{title}</h1>
         <p className="hh-lead">
@@ -59,7 +60,7 @@ export default function ContentDetail({ entry: e }) {
               · <time dateTime={e.date}>{e.date}</time>
             </>
           )}
-          {e.updated && <> · UPDATED {e.updated}</>}
+          {e.updated && <> · {uiLabel('UPDATED')} {e.updated}</>}
         </div>
         <ContentProvenance kind={e.provenance} />
         <Freshness entry={e} />
@@ -72,7 +73,7 @@ export default function ContentDetail({ entry: e }) {
               </a>
             )}
             {e.repo && e.demo && ' · '}
-            {e.demo && <a href={e.demo}>Website ↗</a>}
+            {e.demo && <a href={e.demo}>{uiLabel("Website")} ↗</a>}
           </p>
         )}
         {locale !== 'zh-CN' ? (
@@ -83,7 +84,7 @@ export default function ContentDetail({ entry: e }) {
         ) : lab ? (
           <>
             <section className="hh-section">
-              <h2 className="hh-eyebrow">01 / QUESTION</h2>
+              <h2 className="hh-eyebrow">01 / {uiLabel('QUESTION')}</h2>
               <p>{en ? e.goalEn : e.goalZh}</p>
             </section>
             <ExperimentDesign entry={e} />
@@ -102,7 +103,7 @@ export default function ContentDetail({ entry: e }) {
                   .filter((key) => e[key])
                   .map((key) => (
                     <section className="hh-section" key={key}>
-                      <h2>{key.toUpperCase()}</h2>
+                      <h2>{uiLabel(key)}</h2>
                       <p>{e[key]}</p>
                     </section>
                   ))}
@@ -117,7 +118,7 @@ export default function ContentDetail({ entry: e }) {
         )}
         {locale === 'zh-CN' && !!e.experimentLog?.length && (
           <section className="hh-section">
-            <h2>EXPERIMENT LOG</h2>
+            <h2>{uiLabel("EXPERIMENT LOG")}</h2>
             <ol>
               {e.experimentLog.map((log) => (
                 <li key={log.date + log.title}>

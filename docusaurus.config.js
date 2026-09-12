@@ -10,7 +10,7 @@ import navigation from './data/navigation.cjs';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Hohoo's AI Lab",
-  tagline: 'Learning in public. Building in public.',
+  tagline: '公开学习，公开构建。',
   favicon: 'img/hohoo.ico',
 
   // Set the production url of your site here
@@ -90,6 +90,7 @@ const config = {
             '**/AI-RADAR.md',
             '**/templates/**',
             '**/I18N.md',
+            '**/NODE-RUNTIME.md',
           ],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -156,7 +157,7 @@ const config = {
             ],
           },
         ],
-        copyright: `<div class="hh-footer-signoff"><div class="hh-footer-brand"><strong>Hohoo.</strong><span>Learning in public. Building in public.</span></div><div class="hh-footer-meta"><span>© ${new Date().getFullYear()} Hohoo</span><span>Built with Docusaurus</span></div></div>
+        copyright: `<div class="hh-footer-signoff"><div class="hh-footer-brand"><strong>Hohoo.</strong><span>公开学习，公开构建。</span></div><div class="hh-footer-meta"><span>© ${new Date().getFullYear()} Hohoo</span><span>使用 Docusaurus 构建</span></div></div>
                 <p class="hh-footer-license">本站所有内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-Hans"
                 >CC BY-NC 4.0 协议</a>，转载须注明署名和出处，且不可用于商业用途。
                 若与其他同步平台协议冲突，以本网站为准。</p>`,

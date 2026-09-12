@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import Layout from '@theme/Layout';
 import logs from '@site/data/build-log.json';
@@ -8,7 +9,7 @@ export default function Changelog() {
   return (
     <Layout title="Changelog" description="可追溯到代码提交的站点演进记录。">
       <main className="hh-page">
-        <p className="hh-eyebrow">BEHIND THE LAB</p>
+        <p className="hh-eyebrow">{uiLabel("BEHIND THE LAB")}</p>
         <h1>Changelog</h1>
         <p className="hh-lead">
           {en

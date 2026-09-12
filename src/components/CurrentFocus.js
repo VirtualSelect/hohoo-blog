@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { translate } from '@docusaurus/Translate';
 import React from 'react';
@@ -13,15 +14,15 @@ export default function CurrentFocus({ full = false }) {
   return (
     <section className="hh-section">
       <div className="hh-section-heading">
-        <p className="hh-eyebrow">{full ? 'NOW' : 'CURRENTLY'}</p>
+        <p className="hh-eyebrow">{uiLabel(full ? 'NOW' : 'CURRENTLY')}</p>
         <span className="hh-meta">
-          UPDATED <time dateTime={current.updated}>{current.updated}</time>
+          {uiLabel("UPDATED")} <time dateTime={current.updated}>{current.updated}</time>
         </span>
       </div>
       <dl className={full ? 'hh-current-full' : 'hh-current'}>
         {items.map((i) => (
           <div key={i.kind}>
-            <dt className="hh-eyebrow">{i.kind}</dt>
+            <dt className="hh-eyebrow">{uiLabel(i.kind)}</dt>
             <dd>
               <Link to={i.to}>{en ? i.en : tw ? i.tw : i.zh}</Link>
             </dd>

@@ -1,10 +1,11 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 export default function ArchitectureDiagram({ steps, caption }) {
   if (!steps?.length) return null;
   return (
     <figure className="hh-architecture">
       <figcaption className="hh-eyebrow">
-        {caption || 'SYSTEM ARCHITECTURE'}
+        {caption || uiLabel('ARCHITECTURE')}
       </figcaption>
       <ol>
         {steps.map((step, i) => (

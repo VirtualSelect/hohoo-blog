@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { translate } from '@docusaurus/Translate';
 import React from 'react';
@@ -12,15 +13,15 @@ export default function RadarItem({ item, compact = false }) {
   return (
     <article id={'signal-' + item.id}>
       <p className="hh-eyebrow">
-        RADAR / SIGNAL · {item.domain.toUpperCase()} ·{' '}
-        {item.sourceType.toUpperCase()} ·{' '}
+        {uiLabel('RADAR / SIGNAL')} · {uiLabel(item.domain)} ·{' '}
+        {uiLabel(item.sourceType)} ·{' '}
         <time dateTime={item.publishedAt}>{item.publishedAt.slice(0, 10)}</time>
       </p>
       <p className="hh-meta">
-        SOURCE STATUS ·{' '}
-        {(item.verificationStatus || 'unverified')
+        {uiLabel('SOURCE STATUS')} ·{' '}
+        {uiLabel((item.verificationStatus || 'unverified')
           .replaceAll('-', ' ')
-          .toUpperCase()}
+          .toUpperCase())}
       </p>
       <Freshness
         entry={{
@@ -38,10 +39,10 @@ export default function RadarItem({ item, compact = false }) {
         </a>
       </h3>
       {item.originalTitle && item.originalTitle !== c.title && (
-        <p className="hh-meta">ORIGINAL SOURCE TITLE · {item.originalTitle}</p>
+        <p className="hh-meta">{uiLabel('ORIGINAL SOURCE TITLE')} · {item.originalTitle}</p>
       )}
       <p className="hh-meta">
-        {c.fallback ? 'SOURCE LANGUAGE' : 'AI TRANSLATED'}
+        {uiLabel(c.fallback ? 'SOURCE LANGUAGE' : 'AI TRANSLATED')}
       </p>
       {c.summary && (
         <>
@@ -57,7 +58,7 @@ export default function RadarItem({ item, compact = false }) {
       )}
       {!compact && item.whyItMatters && (
         <>
-          <p className="hh-eyebrow">WHY IT MATTERS</p>
+          <p className="hh-eyebrow">{uiLabel("WHY IT MATTERS")}</p>
           <p>{item.whyItMatters}</p>
         </>
       )}

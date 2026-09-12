@@ -560,5 +560,485 @@
   },
   "nav.about": {
     "message": "About"
+  },
+  "label.latest_writing": {
+    "message": "LATEST WRITING"
+  },
+  "label.all_articles": {
+    "message": "ALL ARTICLES"
+  },
+  "label.featured_build": {
+    "message": "FEATURED BUILD"
+  },
+  "label.build": {
+    "message": "BUILD"
+  },
+  "label.understand": {
+    "message": "UNDERSTAND"
+  },
+  "label.explore": {
+    "message": "EXPLORE"
+  },
+  "label.blog": {
+    "message": "BLOG"
+  },
+  "label.doc": {
+    "message": "DOC"
+  },
+  "label.note": {
+    "message": "NOTE"
+  },
+  "label.paper": {
+    "message": "PAPER"
+  },
+  "label.project": {
+    "message": "PROJECT"
+  },
+  "label.lab": {
+    "message": "LAB"
+  },
+  "label.min": {
+    "message": "MIN"
+  },
+  "label.ai_translated": {
+    "message": "AI TRANSLATED"
+  },
+  "label.currently": {
+    "message": "CURRENTLY"
+  },
+  "label.now": {
+    "message": "NOW"
+  },
+  "label.updated": {
+    "message": "UPDATED"
+  },
+  "label.building": {
+    "message": "BUILDING"
+  },
+  "label.learning": {
+    "message": "LEARNING"
+  },
+  "label.exploring": {
+    "message": "EXPLORING"
+  },
+  "label.reading": {
+    "message": "READING"
+  },
+  "label.next": {
+    "message": "NEXT"
+  },
+  "label.articles": {
+    "message": "ARTICLES"
+  },
+  "label.projects": {
+    "message": "PROJECTS"
+  },
+  "label.experiments": {
+    "message": "EXPERIMENTS"
+  },
+  "label.keep_exploring": {
+    "message": "KEEP EXPLORING"
+  },
+  "label.planned": {
+    "message": "PLANNED"
+  },
+  "label.inconclusive": {
+    "message": "INCONCLUSIVE"
+  },
+  "label.archived": {
+    "message": "ARCHIVED"
+  },
+  "label.current_path": {
+    "message": "CURRENT PATH"
+  },
+  "label.engineering_foundations": {
+    "message": "ENGINEERING FOUNDATIONS"
+  },
+  "label.primary_stack": {
+    "message": "PRIMARY STACK"
+  },
+  "label.learning_progress": {
+    "message": "LEARNING PROGRESS"
+  },
+  "label.continue_learning": {
+    "message": "CONTINUE LEARNING"
+  },
+  "label.ai_applications": {
+    "message": "AI APPLICATIONS"
+  },
+  "label.ai_engineering": {
+    "message": "AI ENGINEERING"
+  },
+  "label.embodied_ai": {
+    "message": "EMBODIED AI"
+  },
+  "label.about_hoohoo": {
+    "message": "ABOUT / HOOHOO"
+  },
+  "label.ai_builder_software_engineer_explorer": {
+    "message": "AI Builder · Software Engineer · Explorer"
+  },
+  "label.learning_in_public_building_in_public_": {
+    "message": "LEARNING IN PUBLIC. BUILDING IN PUBLIC."
+  },
+  "label.behind_the_lab": {
+    "message": "BEHIND THE LAB"
+  },
+  "label.experiment_labs": {
+    "message": "EXPERIMENT / LABS"
+  },
+  "label.knowledge_notes": {
+    "message": "KNOWLEDGE / NOTES"
+  },
+  "label.build_projects": {
+    "message": "BUILD / PROJECTS"
+  },
+  "label.read_question_reproduce": {
+    "message": "READ / QUESTION / REPRODUCE"
+  },
+  "label.learn_build_understand": {
+    "message": "LEARN / BUILD / UNDERSTAND"
+  },
+  "label.problem_concept_path": {
+    "message": "PROBLEM / CONCEPT PATH"
+  },
+  "label.reading_inbox": {
+    "message": "READING INBOX"
+  },
+  "label.learning_activity": {
+    "message": "LEARNING ACTIVITY"
+  },
+  "label.all": {
+    "message": "ALL"
+  },
+  "label.radar_weekly": {
+    "message": "RADAR / WEEKLY"
+  },
+  "label.radar_signal": {
+    "message": "RADAR / SIGNAL"
+  },
+  "label.radar": {
+    "message": "RADAR"
+  },
+  "label.ai_radar": {
+    "message": "AI RADAR"
+  },
+  "label.why_it_matters": {
+    "message": "WHY IT MATTERS"
+  },
+  "label.source_status": {
+    "message": "SOURCE STATUS"
+  },
+  "label.original_source_title": {
+    "message": "ORIGINAL SOURCE TITLE"
+  },
+  "label.source_language": {
+    "message": "SOURCE LANGUAGE"
+  },
+  "label.author_hoohoo": {
+    "message": "AUTHOR / HOOHOO"
+  },
+  "label.ai_summary": {
+    "message": "AI SUMMARY"
+  },
+  "label.source_excerpt": {
+    "message": "SOURCE EXCERPT"
+  },
+  "label.paper_abstract": {
+    "message": "PAPER ABSTRACT"
+  },
+  "label.auto_translation": {
+    "message": "AUTO TRANSLATION"
+  },
+  "label.experiment_result": {
+    "message": "EXPERIMENT RESULT"
+  },
+  "label.current": {
+    "message": "CURRENT"
+  },
+  "label.may_be_outdated": {
+    "message": "MAY BE OUTDATED"
+  },
+  "label.historical": {
+    "message": "HISTORICAL"
+  },
+  "label.last_verified": {
+    "message": "LAST VERIFIED"
+  },
+  "label.this_week_at_a_glance": {
+    "message": "THIS WEEK AT A GLANCE"
+  },
+  "label.top_signals": {
+    "message": "TOP SIGNALS"
+  },
+  "label.what_changed_source_signals": {
+    "message": "WHAT CHANGED / SOURCE SIGNALS"
+  },
+  "label.worth_following": {
+    "message": "WORTH FOLLOWING"
+  },
+  "label.saved_to_knowledge": {
+    "message": "SAVED TO KNOWLEDGE"
+  },
+  "label.start_here": {
+    "message": "START HERE"
+  },
+  "label.latest": {
+    "message": "LATEST"
+  },
+  "label.my_notes": {
+    "message": "MY NOTES"
+  },
+  "label.experiment_log": {
+    "message": "EXPERIMENT LOG"
+  },
+  "label.product_evidence": {
+    "message": "PRODUCT EVIDENCE"
+  },
+  "label.decision_log": {
+    "message": "DECISION LOG"
+  },
+  "label.build_log": {
+    "message": "BUILD LOG"
+  },
+  "label.measured_results": {
+    "message": "MEASURED RESULTS"
+  },
+  "label.writing": {
+    "message": "WRITING"
+  },
+  "label.discover": {
+    "message": "DISCOVER"
+  },
+  "label.original": {
+    "message": "ORIGINAL"
+  },
+  "label.reviewed": {
+    "message": "REVIEWED"
+  },
+  "label.missing": {
+    "message": "MISSING"
+  },
+  "label.outdated": {
+    "message": "OUTDATED"
+  },
+  "label.part": {
+    "message": "PART"
+  },
+  "label.beginner": {
+    "message": "BEGINNER"
+  },
+  "label.intermediate": {
+    "message": "INTERMEDIATE"
+  },
+  "label.advanced": {
+    "message": "ADVANCED"
+  },
+  "label.ai_apps": {
+    "message": "AI-APPS"
+  },
+  "label.primary": {
+    "message": "PRIMARY"
+  },
+  "label.official": {
+    "message": "OFFICIAL"
+  },
+  "label.media": {
+    "message": "MEDIA"
+  },
+  "label.aggregator": {
+    "message": "AGGREGATOR"
+  },
+  "label.community": {
+    "message": "COMMUNITY"
+  },
+  "label.single_source": {
+    "message": "SINGLE SOURCE"
+  },
+  "label.community_signal": {
+    "message": "COMMUNITY SIGNAL"
+  },
+  "label.primary_confirmed": {
+    "message": "PRIMARY CONFIRMED"
+  },
+  "label.cross_checked": {
+    "message": "CROSS CHECKED"
+  },
+  "label.unverified": {
+    "message": "UNVERIFIED"
+  },
+  "label.overview": {
+    "message": "OVERVIEW"
+  },
+  "label.problem": {
+    "message": "PROBLEM"
+  },
+  "label.goal": {
+    "message": "GOAL"
+  },
+  "label.architecture": {
+    "message": "ARCHITECTURE"
+  },
+  "label.stack": {
+    "message": "STACK"
+  },
+  "label.decisions": {
+    "message": "DECISIONS"
+  },
+  "label.challenges": {
+    "message": "CHALLENGES"
+  },
+  "label.metrics": {
+    "message": "METRICS"
+  },
+  "label.lessons": {
+    "message": "LESSONS"
+  },
+  "label.related": {
+    "message": "RELATED"
+  },
+  "label.question": {
+    "message": "QUESTION"
+  },
+  "label.hypothesis": {
+    "message": "HYPOTHESIS"
+  },
+  "label.setup": {
+    "message": "SETUP"
+  },
+  "label.method": {
+    "message": "METHOD"
+  },
+  "label.result": {
+    "message": "RESULT"
+  },
+  "label.observations": {
+    "message": "OBSERVATIONS"
+  },
+  "label.conclusion": {
+    "message": "CONCLUSION"
+  },
+  "label.limitations": {
+    "message": "LIMITATIONS"
+  },
+  "label.reproduce": {
+    "message": "REPRODUCE"
+  },
+  "label.notes": {
+    "message": "Notes"
+  },
+  "label.website": {
+    "message": "Website"
+  },
+  "label.frontend": {
+    "message": "Frontend"
+  },
+  "label.testing": {
+    "message": "Testing"
+  },
+  "label.evals": {
+    "message": "Evals"
+  },
+  "label.observability": {
+    "message": "Observability"
+  },
+  "label.production": {
+    "message": "Production"
+  },
+  "label.performance": {
+    "message": "Performance"
+  },
+  "label.extra_selected_builds": {
+    "message": "SELECTED BUILDS"
+  },
+  "label.extra_how_i_work": {
+    "message": "HOW I WORK"
+  },
+  "label.extra_tech": {
+    "message": "TECH"
+  },
+  "label.extra_elsewhere": {
+    "message": "ELSEWHERE"
+  },
+  "label.extra_current_01_build": {
+    "message": "CURRENT / 01 BUILD"
+  },
+  "label.extra_latest_lab": {
+    "message": "LATEST LAB"
+  },
+  "label.extra_featured_builds": {
+    "message": "FEATURED BUILDS"
+  },
+  "label.extra_hohoo_digital_garden": {
+    "message": "HOHOO / DIGITAL GARDEN"
+  },
+  "label.extra_latest_from_hoohoo": {
+    "message": "LATEST / FROM HOOHOO"
+  },
+  "label.extra_ai_radar_external_signals": {
+    "message": "AI RADAR / EXTERNAL SIGNALS"
+  },
+  "label.extra_related_to_my_learning": {
+    "message": "RELATED TO MY LEARNING"
+  },
+  "label.extra_embodied_ai": {
+    "message": "EMBODIED-AI"
+  },
+  "label.extra_ai_translated": {
+    "message": "AI_TRANSLATED"
+  },
+  "label.extra_not_started": {
+    "message": "NOT-STARTED"
+  },
+  "label.extra_completed": {
+    "message": "COMPLETED"
+  },
+  "label.extra_saved": {
+    "message": "SAVED"
+  },
+  "label.extra_published": {
+    "message": "PUBLISHED"
+  },
+  "label.extra_planning": {
+    "message": "PLANNING"
+  },
+  "label.extra_production": {
+    "message": "PRODUCTION"
+  },
+  "label.extra_next": {
+    "message": "NEXT"
+  },
+  "label.extra_context": {
+    "message": "CONTEXT"
+  },
+  "label.extra_decision": {
+    "message": "DECISION"
+  },
+  "label.extra_consequence": {
+    "message": "CONSEQUENCE"
+  },
+  "label.category_models": {
+    "message": "MODELS"
+  },
+  "label.category_infra": {
+    "message": "INFRA"
+  },
+  "label.category_agents": {
+    "message": "AGENTS"
+  },
+  "label.category_ai_coding": {
+    "message": "AI-CODING"
+  },
+  "label.category_multimodal": {
+    "message": "MULTIMODAL"
+  },
+  "label.category_embodied": {
+    "message": "EMBODIED"
+  },
+  "label.category_research": {
+    "message": "RESEARCH"
+  },
+  "label.category_validation": {
+    "message": "VALIDATION"
   }
 }

@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
 import React, { useEffect, useState } from 'react';
 import Layout from '@theme/Layout';
@@ -45,7 +46,7 @@ export default function Learning() {
         className={article ? 'hh-step' : 'hh-planned'}>
         {article ? (
           <>
-            <p className="hh-eyebrow">CURRENT / 01 BUILD</p>
+            <p className="hh-eyebrow">{uiLabel("CURRENT / 01 BUILD")}</p>
             <h3>
               <Link
                 to={article.permalink}
@@ -57,7 +58,7 @@ export default function Learning() {
               </Link>
             </h3>
             <p className="hh-meta">
-              {article.minutes} MIN ·{' '}
+              {article.minutes} {uiLabel("MIN")} ·{' '}
               {translate({
                 id: 'learning.beginner',
                 message: '入门',
@@ -112,7 +113,7 @@ export default function Learning() {
         message: '从当前路线开始，按自己的节奏逐步深入。',
       })}>
       <main className="hh-page">
-        <p className="hh-eyebrow">LEARNING</p>
+        <p className="hh-eyebrow">{uiLabel("LEARNING")}</p>
         <h1>
           {translate({
             id: 'learning.description',
@@ -134,13 +135,13 @@ export default function Learning() {
         </p>
         {resume && (
           <p>
-            CONTINUE LEARNING ·{' '}
+            {uiLabel('CONTINUE LEARNING')} ·{' '}
             <Link to={resume.permalink}>{resume.title} →</Link>
           </p>
         )}
         <section className="hh-section">
-          <h2>CURRENT PATH</h2>
-          <p className="hh-eyebrow">01 / BUILD · AI APPLICATIONS</p>
+          <h2>{uiLabel("CURRENT PATH")}</h2>
+          <p className="hh-eyebrow">01 / {uiLabel('BUILD')} · {uiLabel('AI APPLICATIONS')}</p>
           {!full && (
             <ol className="hh-roadmap">
               {tracks[0].steps.slice(0, 7).map((s) => render(s, true))}
@@ -205,7 +206,7 @@ export default function Learning() {
           {tracks.map((t) => (
             <section className="hh-section" key={t.id}>
               <h2>
-                {t.brand} · {en ? t.en : t.title}
+                {uiLabel(t.brand)} · {en ? t.en : t.title}
               </h2>
               <ol className="hh-roadmap">
                 {t.steps
@@ -216,16 +217,16 @@ export default function Learning() {
           ))}
         </details>
         <section id="engineering" className="hh-section">
-          <h2>ENGINEERING FOUNDATIONS</h2>
+          <h2>{uiLabel("ENGINEERING FOUNDATIONS")}</h2>
           <ul className="hh-foundations">
             <li>
-              Java <small>PRIMARY STACK</small>
+              Java <small>{uiLabel("PRIMARY STACK")}</small>
             </li>
             <li>
-              Python <small>LEARNING</small>
+              Python <small>{uiLabel("LEARNING")}</small>
             </li>
             <li>
-              Frontend <small>LEARNING</small>
+              {uiLabel('Frontend')} <small>{uiLabel("LEARNING")}</small>
             </li>
           </ul>
         </section>

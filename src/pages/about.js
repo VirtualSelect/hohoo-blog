@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import { translate } from '@docusaurus/Translate';
 import StructuredData from '@site/src/components/StructuredData';
 import React from 'react';
@@ -44,7 +45,7 @@ export default function About() {
             scrollMarginTop: 88,
           }}>
           <StructuredData person />
-          <p className="hh-eyebrow">ABOUT / HOOHOO</p>
+          <p className="hh-eyebrow">{uiLabel("ABOUT / HOOHOO")}</p>
           <h2>
             {en
               ? 'Hello, I’m Hohoo.'
@@ -73,7 +74,7 @@ export default function About() {
           </p>
           <CurrentFocus />
           <Section
-            label="SELECTED BUILDS"
+            label={uiLabel("SELECTED BUILDS")}
             title={
               en
                 ? 'Things you can inspect'
@@ -88,7 +89,7 @@ export default function About() {
             />
           </Section>
           <Section
-            label="HOW I WORK"
+            label={uiLabel("HOW I WORK")}
             title={
               en
                 ? 'Learn. Experiment. Build. Write.'
@@ -109,7 +110,7 @@ export default function About() {
             </p>
           </Section>
           <Section
-            label="TECH"
+            label={uiLabel("TECH")}
             title={
               en
                 ? 'Tools at hand'
@@ -121,7 +122,7 @@ export default function About() {
             <p>Java · React · Docusaurus · GitHub Actions</p>
           </Section>
           <Section
-            label="ELSEWHERE"
+            label={uiLabel("ELSEWHERE")}
             title={
               en
                 ? 'Beyond the code'

@@ -355,5 +355,497 @@
   },
   "nav.about": {
     "message": "關於"
+  },
+  "label.latest_writing": {
+    "message": "最新文章"
+  },
+  "label.all_articles": {
+    "message": "全部文章"
+  },
+  "label.featured_build": {
+    "message": "精選專案"
+  },
+  "label.build": {
+    "message": "構建"
+  },
+  "label.understand": {
+    "message": "理解"
+  },
+  "label.explore": {
+    "message": "探索"
+  },
+  "label.blog": {
+    "message": "隨筆"
+  },
+  "label.doc": {
+    "message": "教學"
+  },
+  "label.note": {
+    "message": "筆記"
+  },
+  "label.paper": {
+    "message": "論文"
+  },
+  "label.project": {
+    "message": "專案"
+  },
+  "label.lab": {
+    "message": "實驗"
+  },
+  "label.min": {
+    "message": "分鐘"
+  },
+  "label.ai_translated": {
+    "message": "AI 翻譯"
+  },
+  "label.currently": {
+    "message": "最近在做"
+  },
+  "label.now": {
+    "message": "近況"
+  },
+  "label.updated": {
+    "message": "更新於"
+  },
+  "label.building": {
+    "message": "構建中"
+  },
+  "label.learning": {
+    "message": "學習中"
+  },
+  "label.exploring": {
+    "message": "探索中"
+  },
+  "label.reading": {
+    "message": "閱讀中"
+  },
+  "label.next": {
+    "message": "下一步"
+  },
+  "label.articles": {
+    "message": "文章"
+  },
+  "label.projects": {
+    "message": "專案"
+  },
+  "label.experiments": {
+    "message": "實驗"
+  },
+  "label.keep_exploring": {
+    "message": "繼續探索"
+  },
+  "label.planned": {
+    "message": "已規劃"
+  },
+  "label.inconclusive": {
+    "message": "尚無定論"
+  },
+  "label.archived": {
+    "message": "已封存"
+  },
+  "label.current_path": {
+    "message": "目前路線"
+  },
+  "label.engineering_foundations": {
+    "message": "工程基礎"
+  },
+  "label.primary_stack": {
+    "message": "主要技術組合"
+  },
+  "label.learning_progress": {
+    "message": "學習進度"
+  },
+  "label.continue_learning": {
+    "message": "繼續學習"
+  },
+  "label.ai_applications": {
+    "message": "AI 應用"
+  },
+  "label.ai_engineering": {
+    "message": "AI 工程"
+  },
+  "label.embodied_ai": {
+    "message": "具身智慧"
+  },
+  "label.about_hoohoo": {
+    "message": "關於 / Hohoo"
+  },
+  "label.ai_builder_software_engineer_explorer": {
+    "message": "AI 開發者 · 軟體工程師 · 探索者"
+  },
+  "label.learning_in_public_building_in_public_": {
+    "message": "公開學習，公開構建。"
+  },
+  "label.behind_the_lab": {
+    "message": "網站建設紀錄"
+  },
+  "label.experiment_labs": {
+    "message": "探索 / 實驗"
+  },
+  "label.knowledge_notes": {
+    "message": "知識 / 筆記"
+  },
+  "label.build_projects": {
+    "message": "構建 / 專案"
+  },
+  "label.read_question_reproduce": {
+    "message": "閱讀 / 提問 / 重現"
+  },
+  "label.learn_build_understand": {
+    "message": "學習 / 構建 / 理解"
+  },
+  "label.problem_concept_path": {
+    "message": "問題 / 概念路線"
+  },
+  "label.reading_inbox": {
+    "message": "閱讀清單"
+  },
+  "label.learning_activity": {
+    "message": "學習活動"
+  },
+  "label.all": {
+    "message": "全部"
+  },
+  "label.radar_weekly": {
+    "message": "AI 雷達 / 週報"
+  },
+  "label.radar_signal": {
+    "message": "AI 雷達 / 訊號"
+  },
+  "label.radar": {
+    "message": "AI 雷達"
+  },
+  "label.ai_radar": {
+    "message": "AI 雷達"
+  },
+  "label.why_it_matters": {
+    "message": "為何值得關注"
+  },
+  "label.source_status": {
+    "message": "來源查核狀態"
+  },
+  "label.original_source_title": {
+    "message": "原始標題"
+  },
+  "label.source_language": {
+    "message": "原文語言"
+  },
+  "label.author_hoohoo": {
+    "message": "作者 / Hohoo"
+  },
+  "label.ai_summary": {
+    "message": "AI 摘要"
+  },
+  "label.source_excerpt": {
+    "message": "來源摘錄"
+  },
+  "label.paper_abstract": {
+    "message": "論文摘要"
+  },
+  "label.auto_translation": {
+    "message": "自動翻譯"
+  },
+  "label.experiment_result": {
+    "message": "實驗結果"
+  },
+  "label.current": {
+    "message": "目前有效"
+  },
+  "label.may_be_outdated": {
+    "message": "可能已過時"
+  },
+  "label.historical": {
+    "message": "歷史紀錄"
+  },
+  "label.last_verified": {
+    "message": "最近查核"
+  },
+  "label.this_week_at_a_glance": {
+    "message": "本週概覽"
+  },
+  "label.top_signals": {
+    "message": "重點訊號"
+  },
+  "label.what_changed_source_signals": {
+    "message": "本週動態 / 來源訊號"
+  },
+  "label.worth_following": {
+    "message": "值得追蹤"
+  },
+  "label.saved_to_knowledge": {
+    "message": "關聯知識"
+  },
+  "label.start_here": {
+    "message": "從這裡開始"
+  },
+  "label.latest": {
+    "message": "最新內容"
+  },
+  "label.my_notes": {
+    "message": "我的筆記"
+  },
+  "label.experiment_log": {
+    "message": "實驗紀錄"
+  },
+  "label.product_evidence": {
+    "message": "專案成果"
+  },
+  "label.decision_log": {
+    "message": "決策紀錄"
+  },
+  "label.build_log": {
+    "message": "構建紀錄"
+  },
+  "label.measured_results": {
+    "message": "實測結果"
+  },
+  "label.writing": {
+    "message": "文章"
+  },
+  "label.discover": {
+    "message": "探索"
+  },
+  "label.original": {
+    "message": "原文"
+  },
+  "label.reviewed": {
+    "message": "已人工審閱"
+  },
+  "label.missing": {
+    "message": "暫無譯文"
+  },
+  "label.outdated": {
+    "message": "譯文待更新"
+  },
+  "label.part": {
+    "message": "步驟"
+  },
+  "label.beginner": {
+    "message": "入門"
+  },
+  "label.intermediate": {
+    "message": "進階"
+  },
+  "label.advanced": {
+    "message": "深入"
+  },
+  "label.ai_apps": {
+    "message": "AI 應用"
+  },
+  "label.primary": {
+    "message": "第一手來源"
+  },
+  "label.official": {
+    "message": "官方"
+  },
+  "label.media": {
+    "message": "媒體"
+  },
+  "label.aggregator": {
+    "message": "彙整來源"
+  },
+  "label.community": {
+    "message": "社群"
+  },
+  "label.single_source": {
+    "message": "單一來源"
+  },
+  "label.community_signal": {
+    "message": "社群訊號"
+  },
+  "label.primary_confirmed": {
+    "message": "第一手查核"
+  },
+  "label.cross_checked": {
+    "message": "交叉查核"
+  },
+  "label.unverified": {
+    "message": "待查核"
+  },
+  "label.overview": {
+    "message": "概覽"
+  },
+  "label.problem": {
+    "message": "問題"
+  },
+  "label.goal": {
+    "message": "目標"
+  },
+  "label.architecture": {
+    "message": "架構"
+  },
+  "label.stack": {
+    "message": "技術組合"
+  },
+  "label.decisions": {
+    "message": "決策"
+  },
+  "label.challenges": {
+    "message": "挑戰"
+  },
+  "label.metrics": {
+    "message": "指標"
+  },
+  "label.lessons": {
+    "message": "經驗"
+  },
+  "label.related": {
+    "message": "關聯內容"
+  },
+  "label.question": {
+    "message": "問題"
+  },
+  "label.hypothesis": {
+    "message": "假設"
+  },
+  "label.setup": {
+    "message": "環境"
+  },
+  "label.method": {
+    "message": "方法"
+  },
+  "label.result": {
+    "message": "結果"
+  },
+  "label.observations": {
+    "message": "觀察"
+  },
+  "label.conclusion": {
+    "message": "結論"
+  },
+  "label.limitations": {
+    "message": "限制"
+  },
+  "label.reproduce": {
+    "message": "重現"
+  },
+  "label.notes": {
+    "message": "筆記"
+  },
+  "label.website": {
+    "message": "網站"
+  },
+  "label.frontend": {
+    "message": "前端"
+  },
+  "label.testing": {
+    "message": "測試"
+  },
+  "label.evals": {
+    "message": "評估"
+  },
+  "label.observability": {
+    "message": "可觀測性"
+  },
+  "label.production": {
+    "message": "正式環境部署"
+  },
+  "label.performance": {
+    "message": "效能"
+  },
+  "label.extra_selected_builds": {
+    "message": "精選專案"
+  },
+  "label.extra_how_i_work": {
+    "message": "我的工作方式"
+  },
+  "label.extra_tech": {
+    "message": "技術組合"
+  },
+  "label.extra_elsewhere": {
+    "message": "其他平台"
+  },
+  "label.extra_current_01_build": {
+    "message": "目前 / 01 構建"
+  },
+  "label.extra_latest_lab": {
+    "message": "最近實驗"
+  },
+  "label.extra_featured_builds": {
+    "message": "精選專案"
+  },
+  "label.extra_hohoo_digital_garden": {
+    "message": "Hohoo / 數位花園"
+  },
+  "label.extra_latest_from_hoohoo": {
+    "message": "最新內容 / Hohoo"
+  },
+  "label.extra_ai_radar_external_signals": {
+    "message": "AI 雷達 / 外部訊號"
+  },
+  "label.extra_related_to_my_learning": {
+    "message": "與我的學習相關"
+  },
+  "label.extra_embodied_ai": {
+    "message": "具身智慧"
+  },
+  "label.extra_ai_translated": {
+    "message": "AI 翻譯"
+  },
+  "label.extra_not_started": {
+    "message": "未開始"
+  },
+  "label.extra_completed": {
+    "message": "已完成"
+  },
+  "label.extra_saved": {
+    "message": "已收藏"
+  },
+  "label.extra_published": {
+    "message": "已發布"
+  },
+  "label.extra_planning": {
+    "message": "已規劃"
+  },
+  "label.extra_production": {
+    "message": "已上線"
+  },
+  "label.extra_next": {
+    "message": "下一步"
+  },
+  "label.extra_context": {
+    "message": "背景"
+  },
+  "label.extra_decision": {
+    "message": "決策"
+  },
+  "label.extra_consequence": {
+    "message": "影響"
+  },
+  "label.category_models": {
+    "message": "模型"
+  },
+  "label.category_infra": {
+    "message": "基礎設施"
+  },
+  "label.category_agents": {
+    "message": "智慧代理"
+  },
+  "label.category_ai_coding": {
+    "message": "AI 程式設計"
+  },
+  "label.category_multimodal": {
+    "message": "多模態"
+  },
+  "label.category_embodied": {
+    "message": "具身智慧"
+  },
+  "label.category_research": {
+    "message": "研究"
+  },
+  "label.category_validation": {
+    "message": "驗證"
+  },
+  "theme.colorToggle.ariaLabel.mode.system": {
+    "message": "跟隨系統"
+  },
+  "theme.navbar.mobileDropdown.collapseButton.expandAriaLabel": {
+    "message": "展開下拉選單"
+  },
+  "theme.navbar.mobileDropdown.collapseButton.collapseAriaLabel": {
+    "message": "收合下拉選單"
+  },
+  "theme.IconExternalLink.ariaLabel": {
+    "message": "（在新分頁開啟）"
   }
 }

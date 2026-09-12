@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React from 'react';
 import ContentProvenance, { Freshness } from './ContentProvenance';
 import { useEnglish } from './ContentUI';
@@ -42,7 +43,7 @@ export function PaperNotes({ paper: p }) {
   if (!keys.some((k) => p.myNotes[k])) return null;
   return (
     <section className="hh-section">
-      <h3>MY NOTES</h3>
+      <h3>{uiLabel("MY NOTES")}</h3>
       <ContentProvenance kind="author" />
       <dl className="hh-definition">
         {keys

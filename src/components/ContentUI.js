@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import { translate } from '@docusaurus/Translate';
 import React from 'react';
 import Link from '@docusaurus/Link';
@@ -12,10 +13,10 @@ export function useEnglish() {
 export function Status({ value }) {
   const en = useEnglish();
   const labels = {
-    planning: ['PLANNED', 'PLANNED'],
-    planned: ['PLANNED', 'PLANNED'],
-    inconclusive: ['INCONCLUSIVE', 'INCONCLUSIVE'],
-    archived: ['ARCHIVED', 'ARCHIVED'],
+    planning: [uiLabel('PLANNED'), 'PLANNED'],
+    planned: [uiLabel('PLANNED'), 'PLANNED'],
+    inconclusive: [uiLabel('INCONCLUSIVE'), 'INCONCLUSIVE'],
+    archived: [uiLabel('ARCHIVED'), 'ARCHIVED'],
     production: [
       translate({
         id: 'ui.fa30c2b4cb',
@@ -70,7 +71,7 @@ export function Section({ label, title, to, children }) {
     <section className="hh-section">
       <div className="hh-section-heading">
         <div>
-          <p className="hh-eyebrow">{label}</p>
+          <p className="hh-eyebrow">{uiLabel(label)}</p>
           <h2>{title}</h2>
         </div>
         {to && (
@@ -97,7 +98,7 @@ export function ContentRows({
         <li key={item.id}>
           <div>
             <span className="hh-eyebrow">
-              {item.type.toUpperCase()} {item.number && '/ ' + item.number}
+              {uiLabel(item.type)} {item.number && '/ ' + item.number}
             </span>
             <h3>
               <Link to={item.href}>
@@ -112,7 +113,7 @@ export function ContentRows({
           </div>
           <div className="hh-row-meta">
             {item.date && <time dateTime={item.date}>{item.date}</time>}
-            {item.minutes && <span>{item.minutes} MIN</span>}
+            {item.minutes && <span>{item.minutes} {uiLabel("MIN")}</span>}
             <Status value={item.status} />
           </div>
         </li>
@@ -130,7 +131,7 @@ export function Related({ ids = [], title }) {
     .filter(Boolean);
   return items.length ? (
     <Section
-      label="KEEP EXPLORING"
+      label={uiLabel("KEEP EXPLORING")}
       title={
         title ||
         (en

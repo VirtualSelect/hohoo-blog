@@ -1,3 +1,4 @@
+import { uiLabel } from '@site/src/utils/ui-labels';
 import React, { useEffect } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -19,7 +20,7 @@ export default function Labs() {
   return (
     <Layout title="Labs" description="以问题、方法和证据为中心的实验记录。">
       <main className="hh-page">
-        <p className="hh-eyebrow">EXPERIMENT / LABS</p>
+        <p className="hh-eyebrow">{uiLabel("EXPERIMENT / LABS")}</p>
         <h1>
           {en ? 'A question. A method. Evidence.' : '让判断，有证据可循。'}
         </h1>
