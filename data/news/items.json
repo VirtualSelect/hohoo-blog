@@ -15,6 +15,21 @@
     "coverage": []
   },
   {
+    "id": "c9b103306b1708b7ab3b",
+    "title": "Together AI 扩展微调服务：新增模型、实验跟踪与更细训练控制",
+    "url": "https://aihot.news/items/cmtym21vu0002ro2bjdpq1vvy",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-11T00:00:00.000Z",
+    "collectedAt": "2026-09-13T05:57:21.372Z",
+    "category": "llm",
+    "summary": "Together AI 扩展 Together Fine-Tuning 服务，新增对 GLM-5.3、Kimi K2.7、Qwen 3.5 系列等最新开源权重模型的支持，并上线实时实验跟踪、数据集预览验证等能力。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-48d8b33",
+    "coverage": []
+  },
+  {
     "id": "075fed980e67c694db46",
     "title": "Rebuilding AUTOMATIC1111 with Gradio Workflow",
     "url": "https://huggingface.co/blog/gradio-workflow-1111",
