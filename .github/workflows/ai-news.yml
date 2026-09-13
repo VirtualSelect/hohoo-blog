@@ -6,6 +6,12 @@ on:
       - '.github/workflows/ai-news.yml'
       - 'scripts/news/**'
       - 'config/news-sources.json'
+      - '.npmrc'
+      - '.node-version'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'apps/web/package.json'
+      - 'apps/web/package-lock.json'
   schedule:
     - cron: '35 0 * * *'
   workflow_dispatch:
@@ -43,7 +49,7 @@ jobs:
           NEWS_LLM_MODEL: ${{ vars.NEWS_LLM_MODEL }}
           NEWS_LLM_API_KEY: ${{ secrets.NEWS_LLM_API_KEY }}
         run: node scripts/news/collect.mjs --write
-      - name: Validate news and build both locales
+      - name: Validate news and build all locales
         run: |
           npm run news:check
           npm run build
@@ -67,7 +73,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'content: publish automatically checked AI news'
           git push origin "HEAD:$TARGET_BRANCH"
-          echo 'Rules, content checks and bilingual build passed; content published.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Rules, content checks and all-locale build passed; content published.' >> "$GITHUB_STEP_SUMMARY"
       - name: Preserve collection diagnostics
         if: always()
         uses: actions/upload-artifact@v4
