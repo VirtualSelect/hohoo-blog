@@ -1,5 +1,20 @@
 [
   {
+    "id": "4b896cf54743c9382644",
+    "title": "小红书 AllSpark 开源 Search Agent 模型 Iris，35B 与 397B 版本同量级成绩领先",
+    "url": "https://aihot.news/items/cmu12ocst0b6nro2nypi25zyq",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-14T09:59:00.000Z",
+    "collectedAt": "2026-09-14T15:13:40.151Z",
+    "category": "ai-apps",
+    "summary": "小红书 AllSpark 团队发布并开源 Search Agent 模型 Iris，权重和评测代码已公开，数据与训练配方将陆续公布。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-dec5f011",
+    "coverage": []
+  },
+  {
     "id": "1107d5888b8cf4ac6d73",
     "title": "LatentMD: Benchmarking Markdown Boundary Failures in LLM-Generated Text",
     "url": "https://arxiv.org/abs/2609.06993",
@@ -157,6 +172,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-d75f8c34",
+    "coverage": []
+  },
+  {
+    "id": "cd0b0dec038e93287551",
+    "title": "Hugging Face 用 LoRA 与 Storage Bucket 在 HF Jobs 上跑异步 GRPO，免 NCCL 并提速 3.9 倍",
+    "url": "https://aihot.news/items/cmu10mxhc08m6ro2nafd8smam",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-10T00:00:00.000Z",
+    "collectedAt": "2026-09-14T15:13:40.151Z",
+    "category": "ai-apps",
+    "summary": "Hugging Face 在 TRL v1.14 的 AsyncGRPOTrainer 中支持只训练和同步 LoRA adapter，配合 Storage Bucket 挂载与代理路由，让训练 Job 和 vLLM 推理 Job 在不同机器上运行而无需 NCCL。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6473a672",
     "coverage": []
   },
   {
