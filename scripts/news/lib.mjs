@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import Parser from 'rss-parser';
+import {researchPriority} from './relevance.mjs';
 
 export const categories = ['ai-apps', 'llm', 'embodied-ai'];
 export function plainText(value = '') {
@@ -59,7 +60,8 @@ export function selectItems(candidates, existing, config, now = new Date()) {
   const priority = item=>sources.get(item.sourceId)?.priority || 0;
   const sourceLimit = item=>sources.get(item.sourceId)?.dailyLimit ?? config.perSourceLimit;
   for (const item of today) counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1);
-  for (const item of [...candidates].sort((a,b) => priority(b)-priority(a) || b.publishedAt.localeCompare(a.publishedAt) || a.id.localeCompare(b.id))) {
+  const relevance = new Map(candidates.map(item => [item, researchPriority(item)]));
+  for (const item of [...candidates].sort((a,b) => relevance.get(b)-relevance.get(a) || priority(b)-priority(a) || b.publishedAt.localeCompare(a.publishedAt) || a.id.localeCompare(b.id))) {
     if (selected.length + today.length >= config.dailyLimit) break;
     const titleKey = item.title.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
     if (seen.has(item.url) || blocked.has(item.url) || titles.has(titleKey) || (counts.get(item.sourceId) || 0) >= sourceLimit(item)) continue;

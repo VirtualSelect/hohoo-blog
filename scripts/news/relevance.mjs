@@ -1,4 +1,11 @@
 // Conservative editorial rules: a source's name or default category is never evidence.
+// Editorial ordering only; not a claim about research quality or factual accuracy.
+export function researchPriority(item) {
+  if (!assessRelevance(item).accepted) return 0;
+  const text = `${item.title} ${item.originalSummary || item.summary || ''}`;
+  const focus = /\b(rag|tool.call\w*|mcp|harness|eval\w*|observability|vla|manipulation|locomotion|attention|embedding\w*)\b|上下文工程|结构化输出|工具调用|检索增强|可观测|评测|注意力|仿真|动作表示/i;
+  return focus.test(text) ? 2 : 1;
+}
 export function assessRelevance(item) {
   const text = `${item.title} ${item.originalSummary || item.summary || ''}`;
   const excluded = /\b(funding|fundrais\w*|acquisition|partnership|appoint\w*|sponsorship|earnings|antimicrobial|genom\w*|weather|climate)\b|融资|收购|人事任命|气象|基因组|指控|传闻|谣言/i;

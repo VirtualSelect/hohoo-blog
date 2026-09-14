@@ -13,8 +13,8 @@ on:
       - 'apps/web/package.json'
       - 'apps/web/package-lock.json'
   schedule:
-    # Beijing time: 08:35, 12:35, 16:35, 20:35. Existing daily caps still apply.
-    - cron: '35 0,4,8,12 * * *'
+    # Every two hours, at minute 35; daily caps are shared across all runs.
+    - cron: '35 */2 * * *'
   workflow_dispatch:
 permissions:
   contents: read

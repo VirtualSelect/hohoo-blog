@@ -50,6 +50,21 @@ test('primary source wins within limits, with fallback and rerun caps',()=>{
  assert.equal(selectItems(secondary,[],cfg,now).length,2);
 });
 
+test('ten daily slots and six AIHOT slots are shared by repeat runs',()=>{
+ const cfg={dailyLimit:10,perSourceLimit:2,sources:[{id:'aihot',priority:100,dailyLimit:6}]};
+ const candidates=Array.from({length:18},(_,i)=>item('cap'+i,{sourceId:i<8?'aihot':i<13?'other-a':'other-b'}));
+ const first=selectItems(candidates,[],cfg,now);
+ assert.equal(first.length,10);assert.equal(first.filter(i=>i.sourceId==='aihot').length,6);
+ assert.equal(selectItems(candidates,first,cfg,now).length,0);
+ const nextDay=new Date('2026-09-12T08:00:00Z');
+ assert.ok(selectItems([item('fresh',{sourceId:'aihot',collectedAt:nextDay.toISOString()})],first,cfg,nextDay).length===1);
+});
+test('research fit outranks source priority and recency within daily caps',()=>{
+ const cfg={dailyLimit:1,perSourceLimit:2,sources:[{id:'aihot',priority:100,dailyLimit:1}]};
+ const broad=item('new',{sourceId:'aihot',title:'LLM training update',summary:''});
+ const focus=item('focus',{title:'RAG retrieval evaluation benchmark',summary:'',publishedAt:'2026-09-09T00:00:00.000Z'});
+ assert.equal(selectItems([broad,focus],[],cfg,now)[0].id,'focus');
+});
 test('AIHOT feed retains aggregator links without navigation text in excerpts',async()=>{
  const xml='<rss version="2.0"><channel><title>AIHOT</title><item><title>Agent 评测</title><link>https://aihot.news/items/one</link><pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate><description><![CDATA[<p>工具调用评测。</p><p>🔗 <a href="https://example.com">阅读原文</a></p><p>via AIHOT · link</p>]]></description></item></channel></rss>';
  const result=await parseFeed(xml,{id:'aihot',name:'AIHOT',hosts:['aihot.news'],aggregator:true},now);
