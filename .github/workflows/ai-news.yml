@@ -13,7 +13,8 @@ on:
       - 'apps/web/package.json'
       - 'apps/web/package-lock.json'
   schedule:
-    - cron: '35 0 * * *'
+    # Beijing time: 08:35, 12:35, 16:35, 20:35. Existing daily caps still apply.
+    - cron: '35 0,4,8,12 * * *'
   workflow_dispatch:
 permissions:
   contents: read
@@ -74,11 +75,28 @@ jobs:
           git commit -m 'content: publish automatically checked AI news'
           git push origin "HEAD:$TARGET_BRANCH"
           echo 'Rules, content checks and all-locale build passed; content published.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Summarize collection outcome
+        if: always()
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const file = '.cache-loader/news-report.json';
+          if (!fs.existsSync(file)) {
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '\nCollection report unavailable; check the preceding setup/install steps.\n');
+          } else {
+            const report = JSON.parse(fs.readFileSync(file, 'utf8'));
+            const lines = ['\n## Collection outcome', `Run: ${report.runAt}`, `Selected: ${report.selected.length}`, `Rejected by relevance rules: ${report.rejected?.length || 0}`];
+            for (const source of report.sources) lines.push(`- ${source.source}: ${source.status}; eligible before relevance/deduplication: ${source.eligible ?? 0}`);
+            if (!report.selected.length) lines.push('No new eligible items after filtering, deduplication and daily limits. This does not mean the feed is empty.');
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
+          }
+          NODE
       - name: Preserve collection diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: news-run-report
+          include-hidden-files: true
           path: |
             .cache-loader/news-report.json
             .cache-loader/news-pr.md
