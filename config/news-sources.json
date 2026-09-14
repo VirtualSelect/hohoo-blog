@@ -70,6 +70,64 @@
       "trustLevel": "primary",
       "fetchStrategy": "rss",
       "parserVersion": "rss-v1"
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA Technical Blog",
+      "feed": "https://developer.nvidia.com/blog/feed/",
+      "hosts": [
+        "developer.nvidia.com"
+      ],
+      "defaultCategory": "ai-apps",
+      "type": "official",
+      "trustLevel": "primary",
+      "enabled": true,
+      "fetchStrategy": "rss",
+      "parserVersion": "rss-v1"
+    },
+    {
+      "id": "arxiv-ro",
+      "name": "arXiv cs.RO",
+      "feed": "https://rss.arxiv.org/rss/cs.RO",
+      "hosts": [
+        "rss.arxiv.org",
+        "arxiv.org"
+      ],
+      "defaultCategory": "embodied-ai",
+      "type": "paper",
+      "trustLevel": "signal",
+      "enabled": true,
+      "fetchStrategy": "rss",
+      "parserVersion": "arxiv-rss-v1"
+    },
+    {
+      "id": "simon-willison",
+      "name": "Simon Willison",
+      "feed": "https://simonwillison.net/atom/everything/",
+      "hosts": [
+        "simonwillison.net"
+      ],
+      "defaultCategory": "ai-apps",
+      "type": "community",
+      "trustLevel": "signal",
+      "enabled": true,
+      "fetchStrategy": "rss",
+      "parserVersion": "rss-v1"
+    },
+    {
+      "id": "arxiv-cl",
+      "name": "arXiv cs.CL",
+      "feed": "https://rss.arxiv.org/rss/cs.CL",
+      "hosts": [
+        "rss.arxiv.org",
+        "arxiv.org"
+      ],
+      "defaultCategory": "llm",
+      "type": "paper",
+      "trustLevel": "signal",
+      "enabled": true,
+      "fetchStrategy": "rss",
+      "parserVersion": "arxiv-rss-v1"
     }
   ]
 }

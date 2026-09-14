@@ -12,6 +12,12 @@ Actions 摘要显示运行时间、各来源读取状态、筛选前候选数、
 
 工程方法也作为技术证据：上下文工程／harness 必须同时有预算、卸载、压缩等具体机制；OCR 必须同时有分步解析方法及检索或按相关页面处理的证据。仅出现 Agent 或产品名称不会放行。页面按来源原始发布时间排序，补采时间不替换发布日期。
 
+## 已接入来源
+
+共 8 个：AIHOT、Hugging Face、Google DeepMind、OpenAI、NVIDIA Technical Blog、arXiv cs.RO、Simon Willison、arXiv cs.CL。新增来源均使用公开 RSS/Atom，不抓取原文全文。NVIDIA 为官方来源；arXiv 为论文来源，不代表已经同行评审或结论已验证；Simon Willison 为个人技术来源。
+
+arXiv 使用 RSS 公告日期作为来源时间，移除摘要前的公告编号前缀；按论文 URL 去重跨分类条目。已入库同 URL 的版本更新不会自动覆盖旧摘要。每个新增来源每日最多 2 条，仍受总额度约束，不保证每次各有新内容入库。
+
 ## 发布与暂停
 
 工作流名为 Collect and publish AI news。默认启用，设置仓库变量 NEWS_ENABLED=false 可暂停。修改采集脚本、来源配置或工作流并推送 main 时也会触发一次。

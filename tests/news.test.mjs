@@ -30,6 +30,17 @@ test('Atom feeds and short excerpts are supported',async()=>{
  const xml=`<feed xmlns="http://www.w3.org/2005/Atom"><title>Test</title><entry><title>LLM</title><link href="https://example.com/llm"/><id>test</id><updated>2026-09-10T00:00:00Z</updated><summary>${'word '.repeat(100)}</summary></entry></feed>`;
  const result=await parseFeed(xml,source,now);assert.equal(result.items.length,1);assert.ok(result.items[0].summary.length<=180);
 });
+test('arXiv feeds preserve announcement dates and deduplicate cross-listed papers',async()=>{
+ const paperSource={id:'arxiv-ro',name:'arXiv cs.RO',hosts:['rss.arxiv.org','arxiv.org'],parserVersion:'arxiv-rss-v1',defaultCategory:'embodied-ai'};
+ const xml='<rss version="2.0"><channel><title>arXiv</title><item><title>Robot policy evaluation</title><link>https://arxiv.org/abs/2609.12345</link><pubDate>Thu, 10 Sep 2026 00:00:00 -0400</pubDate><description>arXiv:2609.12345v1 Announce Type: new Abstract: Robot policy evaluation in simulation.</description></item></channel></rss>';
+ const ro=(await parseFeed(xml,paperSource,now)).items[0];
+ const cl=(await parseFeed(xml,{...paperSource,id:'arxiv-cl',name:'arXiv cs.CL'},now)).items[0];
+ assert.equal(ro.summary,'Robot policy evaluation in simulation.');
+ assert.equal(ro.publishedAt,'2026-09-10T04:00:00.000Z');
+ assert.equal(ro.id,cl.id);
+ assert.equal(selectItems([ro,cl],[],config,now).length,1);
+ assert.throws(()=>canonicalUrl('https://evil.test/abs/2609.12345',paperSource.hosts));
+});
 test('selection enforces per-source limits, daily rerun limits and rejected URLs',()=>{
  const candidates=Array.from({length:8},(_,i)=>item(String(i),{sourceId:'s'+(i%3)}));
  const chosen=selectItems(candidates,[],config,now);assert.equal(chosen.length,5);
@@ -123,6 +134,12 @@ test('engineering methods are accepted without admitting generic announcements',
   ['Agent 上下文工程融资','预算与压缩机制'],
   ['办公预算压缩','节省成本'],
  ]) assert.equal(assessRelevance(item('a',{title,summary})).accepted,false,title);
+});
+test('new research sources exclude clinical use cases and quotation-only posts',()=>{
+ for(const title of ['LLM differential diagnosis evaluation','Robot cognitive behavioral therapy benchmark'])
+  assert.equal(assessRelevance(item('a',{title,summary:''})).accepted,false);
+ assert.equal(assessRelevance(item('a',{sourceId:'simon-willison',title:'Quoting security.txt',summary:'AI agents code benchmark on GitHub'})).accepted,false);
+ assert.equal(assessRelevance(item('a',{title:'VLA robot policy pretraining evaluation',summary:''})).accepted,true);
 });
 test('classification prioritizes embodied topics, then application use cases',()=>{
  assert.equal(classify('Robot agent','llm'),'embodied-ai');assert.equal(classify('Codex in production','llm'),'ai-apps');assert.equal(classify('New language model','ai-apps'),'llm');

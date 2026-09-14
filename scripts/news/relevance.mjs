@@ -7,6 +7,10 @@ export function researchPriority(item) {
   return focus.test(text) ? 2 : 1;
 }
 export function assessRelevance(item) {
+  if (item.sourceId === 'simon-willison' && /^Quoting\s/i.test(item.title))
+    return {accepted: false, reason: '引用短条目，不作为独立技术文章收录'};
+  if (/\b(differential diagnosis|clinical diagnosis|cognitive behavioral therapy)\b|临床诊断|心理治疗/i.test(item.title))
+    return {accepted: false, reason: '临床应用论文偏离本站当前研究主线'};
   const text = `${item.title} ${item.originalSummary || item.summary || ''}`;
   const excluded = /\b(funding|fundrais\w*|acquisition|partnership|appoint\w*|sponsorship|earnings|antimicrobial|genom\w*|weather|climate)\b|融资|收购|人事任命|气象|基因组|指控|传闻|谣言/i;
   if (excluded.test(text)) return {accepted: false, reason: '泛商业或非本站研究领域'};

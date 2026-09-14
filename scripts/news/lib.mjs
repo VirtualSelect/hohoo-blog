@@ -37,7 +37,9 @@ export async function parseFeed(xml, source, now = new Date(), lookbackDays = 14
       const published = new Date(item.isoDate || item.pubDate || '');
       if (!title || !Number.isFinite(published.getTime()) || published > now || now - published > lookbackDays * 86400000) {skipped++; continue;}
       const rawExcerpt = source.aggregator ? (item.content || item.summary || item.contentSnippet || '').replace(/<p>\s*(?:🔗|via AIHOT)[\s\S]*?<\/p>/gi,'') : (item.contentSnippet || item.summary || item.content || '');
-      const excerpt = plainText(rawExcerpt);
+      let excerpt = plainText(rawExcerpt);
+      if (source.parserVersion === 'arxiv-rss-v1')
+        excerpt = excerpt.replace(/^arXiv:\S+\s+Announce Type:\s*(?:new|replace|cross|replace-cross)\s+Abstract:\s*/i, '');
       // Keep only a short feed excerpt; never fetch or reproduce the full article.
       const summary = excerpt.length > 180 ? excerpt.slice(0, 177) + '…' : excerpt;
       items.push({id: createHash('sha256').update(url).digest('hex').slice(0, 20), title, url,
