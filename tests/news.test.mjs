@@ -94,6 +94,21 @@ test('editorial filter requires topic relevance and technical substance, not a f
  }
  assert.equal(localizedNews(item(),'zh-CN').fallback,true);
 });
+test('engineering methods are accepted without admitting generic announcements',()=>{
+ for (const [title,summary] of [
+  ['Agent 长任务上下文工程解析','上下文预算与卸载、压缩、todo-state 复述和跨会话记忆。'],
+  ['LlamaIndex 解析 just-in-time Agentic OCR','先用解析器粗读全部文件供检索，再仅对相关页面调用 VLM 做 OCR。'],
+ ]) {
+  const result=assessRelevance(item('a',{title,summary}));
+  assert.equal(result.accepted,true,title);assert.equal(result.category,'ai-apps');
+ }
+ for (const [title,summary] of [
+  ['Agent 上下文工程新品发布','欢迎试用我们的产品'],
+  ['Agent OCR 工具上线','提高文档处理效率'],
+  ['Agent 上下文工程融资','预算与压缩机制'],
+  ['办公预算压缩','节省成本'],
+ ]) assert.equal(assessRelevance(item('a',{title,summary})).accepted,false,title);
+});
 test('classification prioritizes embodied topics, then application use cases',()=>{
  assert.equal(classify('Robot agent','llm'),'embodied-ai');assert.equal(classify('Codex in production','llm'),'ai-apps');assert.equal(classify('New language model','ai-apps'),'llm');
 });

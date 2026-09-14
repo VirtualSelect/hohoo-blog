@@ -1,5 +1,20 @@
 [
   {
+    "id": "9b25072becff83a3ab2b",
+    "title": "Agent 长任务上下文工程解析：用预算控制、压缩、todo-state 和记忆对抗上下文溢出与目标丢失",
+    "url": "https://aihot.news/items/cmtzezuk0077wrowyi7a4qy7v",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-13T05:56:03.000Z",
+    "collectedAt": "2026-09-14T04:12:15.539Z",
+    "category": "ai-apps",
+    "summary": "文章解析 Agent harness 层应对长任务中上下文溢出与目标丢失的四类机制：上下文预算与卸载、压缩、todo-state 复述和跨会话记忆。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d9eb0044",
+    "coverage": []
+  },
+  {
     "id": "f3b865b551fe6c42cedd",
     "title": "Anthropic 威胁报告披露 Claude 被用于间谍软件、导弹与无人机研发，中国实验室大规模蒸馏提取数据",
     "url": "https://aihot.news/items/cmtx0v3dg030mroedwvkdfyvw",
@@ -27,6 +42,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-48d8b33",
+    "coverage": []
+  },
+  {
+    "id": "bee6c1f36efa49e60c4d",
+    "title": "LlamaIndex 解析 just-in-time Agentic OCR：两遍式文档处理如何平衡成本与精度",
+    "url": "https://aihot.news/items/cmtym2c3q0003rob0w6kxvnn3",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-10T16:00:00.000Z",
+    "collectedAt": "2026-09-14T04:12:15.539Z",
+    "category": "ai-apps",
+    "summary": "LlamaIndex 博客提出 just-in-time Agentic OCR 模式：先用 LiteParse 等免费解析器粗读全部文件供检索，再仅对相关页面调用 VLM 做 OCR。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-79ff8ee5",
     "coverage": []
   },
   {
