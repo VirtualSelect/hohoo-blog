@@ -1,5 +1,20 @@
 [
   {
+    "id": "232935f965ab8b79e6d8",
+    "title": "Perplexity 自研 CobbleDB 替代 AWS DynamoDB，每年最多可节省一亿美元",
+    "url": "https://aihot.news/items/cmu352k2908t9rosaotpsx42c",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-15T20:23:34.000Z",
+    "collectedAt": "2026-09-15T21:43:28.820Z",
+    "category": "ai-apps",
+    "summary": "Perplexity CEO Aravind Srinivas 宣布自研键值数据库 CobbleDB，替代 AWS DynamoDB 用于快速网页内容抓取，迁移后每年最多可节省一亿美元。该项目由两名工程师和数百个持续运行的 Computer 智能体在两个月内完成核心基础设施，官方研究称热存储批次读取延迟较 DynamoDB 全分布下降约 5 倍（P50…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-1a3aafb9",
+    "coverage": []
+  },
+  {
     "id": "dafb3b7ae841440c451c",
     "title": "Trail of Bits 批评 1Password 的 AI 补丁基准存在误导，并发布两个补丁验证 Agent 技能",
     "url": "https://aihot.news/items/cmu2lqodj08k0rovqocv9r3z3",
