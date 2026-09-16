@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "engines": [
+    {
+      "id": "mujoco",
+      "name": "MuJoCo"
+    },
+    {
+      "id": "gazebo",
+      "name": "Gazebo + ROS2"
+    },
+    {
+      "id": "maniskill",
+      "name": "ManiSkill"
+    },
+    {
+      "id": "isaac",
+      "name": "Isaac Sim / Isaac Lab"
+    }
+  ],
+  "labs": [
+    {
+      "id": "VL01",
+      "slug": "mujoco-pick-place",
+      "engine": "mujoco",
+      "order": 1,
+      "titleKey": "journey.lab.VL01.title",
+      "descriptionKey": "journey.lab.VL01.description",
+      "robotKey": "journey.lab.VL01.robot",
+      "environmentKey": "journey.lab.VL01.environment",
+      "milestones": [
+        "M4",
+        "M5"
+      ],
+      "status": "planning",
+      "topics": [
+        "Joint",
+        "Link",
+        "DOF",
+        "Pose",
+        "Coordinate Frame",
+        "Joint Space",
+        "Cartesian Space",
+        "FK",
+        "IK",
+        "Trajectory",
+        "Gripper",
+        "Controller"
+      ],
+      "skills": [
+        "Joint",
+        "Link",
+        "DOF",
+        "Pose",
+        "Coordinate Frame",
+        "Joint Space",
+        "Cartesian Space",
+        "FK",
+        "IK",
+        "Trajectory",
+        "Gripper",
+        "Controller"
+      ],
+      "project": "hohoo-embodied-agent",
+      "steps": [
+        "journey.lab.VL01.step1",
+        "journey.lab.VL01.step2",
+        "journey.lab.VL01.step3",
+        "journey.lab.VL01.step4",
+        "journey.lab.VL01.step5"
+      ],
+      "articles": [],
+      "demos": [],
+      "github": [],
+      "evidence": [],
+      "result": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    {
+      "id": "VL02",
+      "slug": "gazebo-ros2",
+      "engine": "gazebo",
+      "order": 2,
+      "titleKey": "journey.lab.VL02.title",
+      "descriptionKey": "journey.lab.VL02.description",
+      "robotKey": "journey.lab.VL02.robot",
+      "environmentKey": "journey.lab.VL02.environment",
+      "milestones": [
+        "M3",
+        "M4",
+        "M8"
+      ],
+      "status": "planning",
+      "topics": [
+        "Node",
+        "Topic",
+        "Publisher",
+        "Subscriber",
+        "Service",
+        "Action",
+        "Message",
+        "Parameter",
+        "Launch",
+        "rosbag2",
+        "TF2",
+        "URDF"
+      ],
+      "skills": [
+        "Node",
+        "Topic",
+        "Publisher",
+        "Subscriber",
+        "Service",
+        "Action",
+        "Message",
+        "Parameter",
+        "Launch",
+        "rosbag2",
+        "TF2",
+        "URDF"
+      ],
+      "project": "hohoo-embodied-agent",
+      "steps": [
+        "journey.lab.VL02.step1",
+        "journey.lab.VL02.step2",
+        "journey.lab.VL02.step3",
+        "journey.lab.VL02.step4",
+        "journey.lab.VL02.step5",
+        "journey.lab.VL02.step6"
+      ],
+      "articles": [],
+      "demos": [],
+      "github": [],
+      "evidence": [],
+      "result": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    {
+      "id": "VL03",
+      "slug": "maniskill-learning",
+      "engine": "maniskill",
+      "order": 3,
+      "titleKey": "journey.lab.VL03.title",
+      "descriptionKey": "journey.lab.VL03.description",
+      "robotKey": "journey.lab.VL03.robot",
+      "environmentKey": "journey.lab.VL03.environment",
+      "milestones": [
+        "M6",
+        "M9",
+        "M10"
+      ],
+      "status": "planning",
+      "topics": [
+        "PyTorch",
+        "Behavior Cloning",
+        "Imitation Learning",
+        "ACT",
+        "Diffusion Policy",
+        "RL",
+        "Policy Evaluation",
+        "VLA Evaluation"
+      ],
+      "skills": [
+        "PyTorch",
+        "Behavior Cloning",
+        "Imitation Learning",
+        "ACT",
+        "Diffusion Policy",
+        "RL",
+        "Policy Evaluation",
+        "VLA Evaluation"
+      ],
+      "project": "hohoo-embodied-agent",
+      "steps": [
+        "journey.lab.VL03.step1",
+        "journey.lab.VL03.step2",
+        "journey.lab.VL03.step3",
+        "journey.lab.VL03.step4"
+      ],
+      "articles": [],
+      "demos": [],
+      "github": [],
+      "evidence": [],
+      "result": null,
+      "startedAt": null,
+      "completedAt": null
+    },
+    {
+      "id": "VL04",
+      "slug": "isaac-physical-ai",
+      "engine": "isaac",
+      "order": 4,
+      "titleKey": "journey.lab.VL04.title",
+      "descriptionKey": "journey.lab.VL04.description",
+      "robotKey": "journey.lab.VL04.robot",
+      "environmentKey": "journey.lab.VL04.environment",
+      "milestones": [
+        "M10"
+      ],
+      "status": "future",
+      "topics": [
+        "Isaac Sim",
+        "Isaac Lab",
+        "Synthetic Data",
+        "GPU Parallel Simulation",
+        "Domain Randomization",
+        "Sim2Real"
+      ],
+      "skills": [
+        "Isaac Sim",
+        "Isaac Lab",
+        "Synthetic Data",
+        "GPU Parallel Simulation",
+        "Domain Randomization",
+        "Sim2Real"
+      ],
+      "project": "hohoo-embodied-agent",
+      "steps": [
+        "journey.lab.VL04.step1",
+        "journey.lab.VL04.step2",
+        "journey.lab.VL04.step3",
+        "journey.lab.VL04.step4"
+      ],
+      "articles": [],
+      "demos": [],
+      "github": [],
+      "evidence": [],
+      "result": null,
+      "startedAt": null,
+      "completedAt": null
+    }
+  ]
+}

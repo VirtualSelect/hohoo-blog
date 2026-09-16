@@ -428,5 +428,572 @@
   },
   "theme.IconExternalLink.ariaLabel": {
     "message": "（在新标签页打开）"
+  },
+  "journey.title": {
+    "message": "Hohoo 的 AI 学习之旅"
+  },
+  "journey.intro": {
+    "message": "从软件工程，到 AI 与具身智能。围绕一个长期项目，在虚拟世界中学习、验证与构建。"
+  },
+  "journey.focus": {
+    "message": "下一步，从一个明确的任务开始"
+  },
+  "journey.focusBody": {
+    "message": "先把自然语言转成可校验的机器人任务，用模拟工具验证 Agent，再逐步接入 ROS2 和虚拟机器人。"
+  },
+  "journey.roadmap": {
+    "message": "三条主线，一条实践路径"
+  },
+  "journey.roadmapLabel": {
+    "message": "路线图"
+  },
+  "journey.milestones": {
+    "message": "里程碑"
+  },
+  "journey.schedule": {
+    "message": "建议节奏"
+  },
+  "journey.scheduleNote": {
+    "message": "8 周是可调整的学习安排，不是完成承诺；尚未设置开始日期。"
+  },
+  "journey.allocation": {
+    "message": "计划投入比重，非完成进度"
+  },
+  "journey.learning": {
+    "message": "原有学习路线与阅读记录"
+  },
+  "journey.foundation": {
+    "message": "已有基础参考"
+  },
+  "journey.article": {
+    "message": "Java 8 调用大语言模型：从第一次请求到多轮对话"
+  },
+  "journey.foundationNote": {
+    "message": "这篇已发布教程可复习请求、响应解析与会话历史；它不代表机器人任务里程碑已完成。"
+  },
+  "journey.target": {
+    "message": "长期目标"
+  },
+  "journey.targetNote": {
+    "message": "以仿真优先连接 Agent、视觉、机器人数据与策略学习。目标架构仍在规划中。"
+  },
+  "journey.dependencies": {
+    "message": "依赖"
+  },
+  "journey.goal": {
+    "message": "验证目标"
+  },
+  "journey.knowledge": {
+    "message": "知识与工具"
+  },
+  "journey.next": {
+    "message": "下一阶段"
+  },
+  "journey.noDependency": {
+    "message": "从这里开始"
+  },
+  "journey.pending": {
+    "message": "尚无实践记录；完成验证后补充代码、问题与结果。"
+  },
+  "journey.result": {
+    "message": "结果"
+  },
+  "journey.issues": {
+    "message": "问题记录"
+  },
+  "journey.evidence": {
+    "message": "实践证据"
+  },
+  "journey.started": {
+    "message": "开始"
+  },
+  "journey.finished": {
+    "message": "完成"
+  },
+  "journey.week": {
+    "message": "第 {number} 周"
+  },
+  "journey.later": {
+    "message": "以后再探索"
+  },
+  "journey.laterNote": {
+    "message": "先完成一条端到端链路，再根据实际问题扩展。"
+  },
+  "journey.status.not-started": {
+    "message": "未开始"
+  },
+  "journey.status.learning": {
+    "message": "学习中"
+  },
+  "journey.status.building": {
+    "message": "实践中"
+  },
+  "journey.status.completed": {
+    "message": "已完成"
+  },
+  "journey.track.application": {
+    "message": "AI 应用工程"
+  },
+  "journey.track.llm": {
+    "message": "LLM 与多模态"
+  },
+  "journey.track.embodied": {
+    "message": "具身智能与机器人"
+  },
+  "journey.converge": {
+    "message": "应用能力与视觉理解，汇入机器人的感知、决策和行动。"
+  },
+  "journey.M1.title": {
+    "message": "自然语言 → 机器人任务"
+  },
+  "journey.M1.goal": {
+    "message": "把“红色方块放进蓝色盒子”转成结构化任务，校验 JSON Schema、动作与参数，拒绝无效任务。"
+  },
+  "journey.M2.title": {
+    "message": "机器人 Agent 与模拟工具"
+  },
+  "journey.M2.goal": {
+    "message": "用模拟工具验证 Agent Loop，记录调用、工具失败和停止条件；此阶段不控制真实机器人。"
+  },
+  "journey.M3.title": {
+    "message": "Agent 接入 ROS2"
+  },
+  "journey.M3.goal": {
+    "message": "逐步把 Python 模拟工具替换为 ROS2 工具或机器人桥接层，验证调用、反馈与取消。"
+  },
+  "journey.M4.title": {
+    "message": "ROS2 → 虚拟机器人"
+  },
+  "journey.M4.goal": {
+    "message": "优先连接 MuJoCo，之后按需加入 Gazebo，验证 Agent → ROS2 → 虚拟机器人的控制与观测链路。"
+  },
+  "journey.M5.title": {
+    "message": "虚拟抓取与放置"
+  },
+  "journey.M5.goal": {
+    "message": "在 MuJoCo 中用虚拟机械臂把红色方块放进蓝色盒子，记录轨迹、控制与失败情况。"
+  },
+  "journey.M6.title": {
+    "message": "机器人数据平台"
+  },
+  "journey.M6.goal": {
+    "message": "采集 RGB、机器人与关节状态、动作、时间戳、任务与成功标记；构建 Episode，验证同步、编码、存储和数据质量。"
+  },
+  "journey.M7.title": {
+    "message": "机器人知识助手"
+  },
+  "journey.M7.goal": {
+    "message": "从机器人手册、ROS2 文档、错误码与操作记录检索依据，辅助诊断并展示来源；测试无依据的问题。"
+  },
+  "journey.M8.title": {
+    "message": "虚拟视觉与 VLM"
+  },
+  "journey.M8.goal": {
+    "message": "从人工提供场景 JSON 演进到虚拟相机 RGB / Depth 输入，对照真实场景配置验证视觉判断，并记录局限。"
+  },
+  "journey.M9.title": {
+    "message": "机器人策略学习"
+  },
+  "journey.M9.goal": {
+    "message": "用机器人数据、LeRobot、PyTorch 与 ACT 训练或复现策略，记录动作分块在虚拟机器人中的执行与评估。"
+  },
+  "journey.M10.title": {
+    "message": "VLA 虚拟机器人"
+  },
+  "journey.M10.goal": {
+    "message": "在条件允许时选择 SmolVLA 或适合的轻量 VLA，将视觉、语言与机器人状态映射为动作；先在虚拟环境中验证。"
+  },
+  "journey.nav": {
+    "message": "AI 学习之旅"
+  },
+  "journey.virtual.title": {
+    "message": "虚拟具身实验室"
+  },
+  "journey.virtual.intro": {
+    "message": "不用真实机器人，也能开始具身智能实验。先建立可验证的软件链路，再逐步探索仿真、数据与策略。"
+  },
+  "journey.virtual.nav": {
+    "message": "虚拟实验室"
+  },
+  "journey.simulation.title": {
+    "message": "仿真优先，从虚拟世界开始"
+  },
+  "journey.simulation.intro": {
+    "message": "前期不购买机器人或专用硬件。按学习阶段选择环境，不要求一次安装四种模拟器；硬件与算力条件在实际实验前单独确认。"
+  },
+  "journey.status.planning": {
+    "message": "计划中"
+  },
+  "journey.status.future": {
+    "message": "未来阶段"
+  },
+  "journey.virtual.engine": {
+    "message": "仿真引擎"
+  },
+  "journey.virtual.robot": {
+    "message": "机器人对象"
+  },
+  "journey.virtual.environment": {
+    "message": "实验环境"
+  },
+  "journey.virtual.technology": {
+    "message": "技术与技能"
+  },
+  "journey.virtual.flow": {
+    "message": "实验步骤（计划）"
+  },
+  "journey.virtual.goal": {
+    "message": "要验证的问题"
+  },
+  "journey.virtual.project": {
+    "message": "关联主项目"
+  },
+  "journey.virtual.milestones": {
+    "message": "关联里程碑"
+  },
+  "journey.virtual.empty": {
+    "message": "尚未执行实验；结果、代码、视频和数据集将在实际验证后补充。"
+  },
+  "journey.virtual.futureNote": {
+    "message": "仅作为后续路线节点，本轮不安装或集成 Isaac。"
+  },
+  "journey.virtual.details": {
+    "message": "查看实验计划"
+  },
+  "journey.virtual.back": {
+    "message": "返回学习之旅"
+  },
+  "journey.virtual.recommended": {
+    "message": "下一项虚拟实验"
+  },
+  "journey.virtual.current": {
+    "message": "当前虚拟实验"
+  },
+  "journey.virtual.noCurrent": {
+    "message": "尚未开始虚拟实验"
+  },
+  "journey.schedule.current": {
+    "message": "当前周次"
+  },
+  "journey.schedule.notStarted": {
+    "message": "尚未开始计时；建议从第 1 周起步。"
+  },
+  "journey.architecture.title": {
+    "message": "主项目目标架构"
+  },
+  "journey.architecture.note": {
+    "message": "以下是待实现的演进关系，不代表已运行系统。各模拟器按阶段接入，暂不统一适配接口。"
+  },
+  "journey.architecture.request": {
+    "message": "目标任务：把桌上的红色方块放进蓝色盒子。"
+  },
+  "journey.loop.title": {
+    "message": "运行与学习，两个闭环"
+  },
+  "journey.loop.control": {
+    "message": "机器人运行闭环"
+  },
+  "journey.loop.training": {
+    "message": "数据与策略迭代"
+  },
+  "journey.loop.note": {
+    "message": "行动改变环境，新的观测进入下一轮；执行记录形成 Episode，经过数据整理与训练后得到新的策略。"
+  },
+  "journey.future.title": {
+    "message": "之后，再走向真实世界"
+  },
+  "journey.future.gap": {
+    "message": "仿真与真实环境存在差异：光照、纹理、摩擦、相机位姿、传感器噪声、物体位置及机器人动力学都可能影响迁移。后续再研究领域随机化与真实环境评估。"
+  },
+  "journey.future.hardware": {
+    "message": "真实硬件只属于后期验证，不是当前学习前置条件。"
+  },
+  "journey.virtual.sources": {
+    "message": "相关资料"
+  },
+  "journey.convergenceLine": {
+    "message": "Agent + VLM + 机器人数据 → 具身智能体 → VLA"
+  },
+  "journey.node.user": {
+    "message": "用户"
+  },
+  "journey.node.chat": {
+    "message": "对话界面"
+  },
+  "journey.node.llm": {
+    "message": "LLM"
+  },
+  "journey.node.agent": {
+    "message": "AI Agent"
+  },
+  "journey.node.planner": {
+    "message": "任务规划"
+  },
+  "journey.node.vlm": {
+    "message": "VLM"
+  },
+  "journey.node.tools": {
+    "message": "机器人工具"
+  },
+  "journey.node.ros": {
+    "message": "ROS2"
+  },
+  "journey.node.policy": {
+    "message": "策略"
+  },
+  "journey.node.engine": {
+    "message": "仿真引擎"
+  },
+  "journey.node.robot": {
+    "message": "虚拟机器人"
+  },
+  "journey.node.observation": {
+    "message": "观测"
+  },
+  "journey.node.platform": {
+    "message": "机器人数据平台"
+  },
+  "journey.node.dataset": {
+    "message": "数据集"
+  },
+  "journey.node.lerobot": {
+    "message": "LeRobot Dataset"
+  },
+  "journey.node.training": {
+    "message": "训练"
+  },
+  "journey.node.environment": {
+    "message": "环境"
+  },
+  "journey.node.perception": {
+    "message": "感知"
+  },
+  "journey.node.planning": {
+    "message": "推理与规划"
+  },
+  "journey.node.action": {
+    "message": "行动"
+  },
+  "journey.node.episode": {
+    "message": "Episode"
+  },
+  "journey.node.newPolicy": {
+    "message": "新策略"
+  },
+  "journey.node.evaluation": {
+    "message": "评估"
+  },
+  "journey.node.randomization": {
+    "message": "领域随机化"
+  },
+  "journey.node.robust": {
+    "message": "鲁棒策略"
+  },
+  "journey.node.real": {
+    "message": "真实机器人"
+  },
+  "journey.node.collector": {
+    "message": "数据采集"
+  },
+  "journey.node.synchronizer": {
+    "message": "时间同步"
+  },
+  "journey.node.builder": {
+    "message": "Episode 构建"
+  },
+  "journey.node.encoding": {
+    "message": "MP4 + Parquet"
+  },
+  "journey.node.quality": {
+    "message": "数据质量检查"
+  },
+  "journey.lab.VL01.title": {
+    "message": "MuJoCo 抓取与放置"
+  },
+  "journey.lab.VL01.description": {
+    "message": "能否把红色方块从初始位置移动到蓝色盒子，并记录每一步控制和失败原因？"
+  },
+  "journey.lab.VL01.robot": {
+    "message": "虚拟机械臂与夹爪；型号待实验选定"
+  },
+  "journey.lab.VL01.environment": {
+    "message": "桌面、红色方块、蓝色盒子；场景待搭建"
+  },
+  "journey.lab.VL01.step1": {
+    "message": "定位方块"
+  },
+  "journey.lab.VL01.step2": {
+    "message": "移动末端"
+  },
+  "journey.lab.VL01.step3": {
+    "message": "抓取"
+  },
+  "journey.lab.VL01.step4": {
+    "message": "移动"
+  },
+  "journey.lab.VL01.step5": {
+    "message": "放置"
+  },
+  "journey.lab.VL02.title": {
+    "message": "ROS2 与 Gazebo 机器人系统"
+  },
+  "journey.lab.VL02.description": {
+    "message": "能否让虚拟传感器通过 ROS2 发布观测，并连接感知、规划和控制节点？"
+  },
+  "journey.lab.VL02.robot": {
+    "message": "虚拟机器人；底盘或机械臂待选定"
+  },
+  "journey.lab.VL02.environment": {
+    "message": "虚拟相机、IMU、LiDAR 与关节状态；配置待验证"
+  },
+  "journey.lab.VL02.step1": {
+    "message": "虚拟传感器"
+  },
+  "journey.lab.VL02.step2": {
+    "message": "ROS2"
+  },
+  "journey.lab.VL02.step3": {
+    "message": "感知节点"
+  },
+  "journey.lab.VL02.step4": {
+    "message": "规划节点"
+  },
+  "journey.lab.VL02.step5": {
+    "message": "控制器"
+  },
+  "journey.lab.VL02.step6": {
+    "message": "虚拟机器人"
+  },
+  "journey.lab.VL03.title": {
+    "message": "ManiSkill 机器人学习"
+  },
+  "journey.lab.VL03.description": {
+    "message": "能否从机器人数据学习操作策略，并在虚拟任务中评估动作与失败情况？"
+  },
+  "journey.lab.VL03.robot": {
+    "message": "虚拟操作机械臂；模型待选定"
+  },
+  "journey.lab.VL03.environment": {
+    "message": "以 PickCube、抓取与放置任务为候选；尚未运行"
+  },
+  "journey.lab.VL03.step1": {
+    "message": "观测"
+  },
+  "journey.lab.VL03.step2": {
+    "message": "策略"
+  },
+  "journey.lab.VL03.step3": {
+    "message": "行动"
+  },
+  "journey.lab.VL03.step4": {
+    "message": "环境"
+  },
+  "journey.lab.VL04.title": {
+    "message": "Isaac 物理 AI 实验"
+  },
+  "journey.lab.VL04.description": {
+    "message": "后续研究合成数据、并行仿真与领域随机化，评估策略跨环境迁移的边界。"
+  },
+  "journey.lab.VL04.robot": {
+    "message": "机械臂、移动机器人或人形机器人；仅为候选方向"
+  },
+  "journey.lab.VL04.environment": {
+    "message": "Isaac Sim / Isaac Lab；尚未安装，硬件与算力待评估"
+  },
+  "journey.lab.VL04.step1": {
+    "message": "合成数据"
+  },
+  "journey.lab.VL04.step2": {
+    "message": "并行仿真"
+  },
+  "journey.lab.VL04.step3": {
+    "message": "领域随机化"
+  },
+  "journey.lab.VL04.step4": {
+    "message": "迁移评估"
+  },
+  "journey.phase2.title": {
+    "message": "第二阶段：高级仿真与迁移"
+  },
+  "journey.phase3.title": {
+    "message": "第三阶段：真实机器人验证"
+  },
+  "journey.term.Robot Data": {
+    "message": "机器人数据"
+  },
+  "journey.term.Robot Deployment": {
+    "message": "机器人部署"
+  },
+  "journey.term.Robot Arm": {
+    "message": "机械臂"
+  },
+  "journey.term.Camera": {
+    "message": "相机"
+  },
+  "journey.term.Teleoperation": {
+    "message": "遥操作"
+  },
+  "journey.term.Dataset Collection": {
+    "message": "数据集采集"
+  },
+  "journey.term.ACT Deployment": {
+    "message": "ACT 部署"
+  },
+  "journey.term.VLA Deployment": {
+    "message": "VLA 部署"
+  },
+  "journey.term.Sim2Real Evaluation": {
+    "message": "Sim2Real 评估"
+  },
+  "journey.term.Synthetic Data": {
+    "message": "合成数据"
+  },
+  "journey.term.Domain Randomization": {
+    "message": "领域随机化"
+  },
+  "journey.term.Parallel Simulation": {
+    "message": "并行仿真"
+  },
+  "journey.term.GPU Parallel Simulation": {
+    "message": "GPU 并行仿真"
+  },
+  "journey.term.Advanced Dynamics": {
+    "message": "高级动力学"
+  },
+  "journey.term.Humanoid Locomotion": {
+    "message": "人形机器人运动"
+  },
+  "journey.term.Distributed VLA Training": {
+    "message": "分布式 VLA 训练"
+  },
+  "journey.term.World Model Training": {
+    "message": "世界模型训练"
+  },
+  "journey.term.Advanced RL": {
+    "message": "高级强化学习"
+  },
+  "journey.term.Real Robot Hardware": {
+    "message": "真实机器人硬件"
+  },
+  "journey.term.Isaac Sim Optimization": {
+    "message": "Isaac Sim 深度优化"
+  },
+  "journey.term.Isaac Lab Large-scale Training": {
+    "message": "Isaac Lab 大规模训练"
+  },
+  "journey.term.TensorRT Optimization": {
+    "message": "TensorRT 深度优化"
+  },
+  "journey.term.Object Storage": {
+    "message": "对象存储"
+  },
+  "journey.term.Data Quality": {
+    "message": "数据质量"
+  },
+  "journey.node.signals": {
+    "message": "RGB / Depth / 机器人状态 / 关节状态 / 动作"
+  },
+  "journey.repository": {
+    "message": "查看 GitHub 仓库"
   }
 }

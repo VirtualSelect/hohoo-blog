@@ -847,5 +847,572 @@
   },
   "theme.IconExternalLink.ariaLabel": {
     "message": "（在新分頁開啟）"
+  },
+  "journey.title": {
+    "message": "Hohoo 的 AI 學習之旅"
+  },
+  "journey.intro": {
+    "message": "從軟體工程，到 AI 與具身智慧。圍繞一個長期專案，在虛擬世界中學習、驗證與構建。"
+  },
+  "journey.focus": {
+    "message": "下一步，從一個明確的任務開始"
+  },
+  "journey.focusBody": {
+    "message": "先把自然語言轉成可驗證的機器人任務，用模擬工具驗證 Agent，再逐步接入 ROS2 與虛擬機器人。"
+  },
+  "journey.roadmap": {
+    "message": "三條主線，一條實作路徑"
+  },
+  "journey.roadmapLabel": {
+    "message": "路線圖"
+  },
+  "journey.milestones": {
+    "message": "里程碑"
+  },
+  "journey.schedule": {
+    "message": "建議節奏"
+  },
+  "journey.scheduleNote": {
+    "message": "8 週是可調整的學習安排，不是完成承諾；尚未設定開始日期。"
+  },
+  "journey.allocation": {
+    "message": "計畫投入比重，非完成進度"
+  },
+  "journey.learning": {
+    "message": "原有學習路線與閱讀紀錄"
+  },
+  "journey.foundation": {
+    "message": "已有基礎參考"
+  },
+  "journey.article": {
+    "message": "Java 8 呼叫大型語言模型：從第一次請求到多輪對話"
+  },
+  "journey.foundationNote": {
+    "message": "這篇已發佈教學可複習請求、回應解析與對話歷史；它不代表機器人任務里程碑已完成。"
+  },
+  "journey.target": {
+    "message": "長期目標"
+  },
+  "journey.targetNote": {
+    "message": "以模擬優先連接 Agent、視覺、機器人資料與策略學習。目標架構仍在規劃中。"
+  },
+  "journey.dependencies": {
+    "message": "相依項目"
+  },
+  "journey.goal": {
+    "message": "驗證目標"
+  },
+  "journey.knowledge": {
+    "message": "知識與工具"
+  },
+  "journey.next": {
+    "message": "下一階段"
+  },
+  "journey.noDependency": {
+    "message": "從這裡開始"
+  },
+  "journey.pending": {
+    "message": "尚無實作紀錄；完成驗證後補充程式碼、問題與結果。"
+  },
+  "journey.result": {
+    "message": "結果"
+  },
+  "journey.issues": {
+    "message": "問題紀錄"
+  },
+  "journey.evidence": {
+    "message": "實作證據"
+  },
+  "journey.started": {
+    "message": "開始"
+  },
+  "journey.finished": {
+    "message": "完成"
+  },
+  "journey.week": {
+    "message": "第 {number} 週"
+  },
+  "journey.later": {
+    "message": "以後再探索"
+  },
+  "journey.laterNote": {
+    "message": "先完成一條端到端鏈路，再依據實際問題擴展。"
+  },
+  "journey.status.not-started": {
+    "message": "未開始"
+  },
+  "journey.status.learning": {
+    "message": "學習中"
+  },
+  "journey.status.building": {
+    "message": "實作中"
+  },
+  "journey.status.completed": {
+    "message": "已完成"
+  },
+  "journey.track.application": {
+    "message": "AI 應用工程"
+  },
+  "journey.track.llm": {
+    "message": "LLM 與多模態"
+  },
+  "journey.track.embodied": {
+    "message": "具身智慧與機器人"
+  },
+  "journey.converge": {
+    "message": "應用能力與視覺理解，匯入機器人的感知、決策和行動。"
+  },
+  "journey.M1.title": {
+    "message": "自然語言 → 機器人任務"
+  },
+  "journey.M1.goal": {
+    "message": "把「紅色方塊放進藍色盒子」轉成結構化任務，驗證 JSON Schema、動作與參數，拒絕無效任務。"
+  },
+  "journey.M2.title": {
+    "message": "機器人 Agent 與模擬工具"
+  },
+  "journey.M2.goal": {
+    "message": "用模擬工具驗證 Agent Loop，記錄呼叫、工具失敗與停止條件；此階段不控制真實機器人。"
+  },
+  "journey.M3.title": {
+    "message": "Agent 接入 ROS2"
+  },
+  "journey.M3.goal": {
+    "message": "逐步將 Python 模擬工具替換為 ROS2 工具或機器人橋接層，驗證呼叫、回饋與取消。"
+  },
+  "journey.M4.title": {
+    "message": "ROS2 → 虛擬機器人"
+  },
+  "journey.M4.goal": {
+    "message": "優先連接 MuJoCo，之後依需求加入 Gazebo，驗證 Agent → ROS2 → 虛擬機器人的控制與觀測鏈路。"
+  },
+  "journey.M5.title": {
+    "message": "虛擬抓取與放置"
+  },
+  "journey.M5.goal": {
+    "message": "在 MuJoCo 中用虛擬機械臂把紅色方塊放進藍色盒子，記錄軌跡、控制與失敗情況。"
+  },
+  "journey.M6.title": {
+    "message": "機器人資料平台"
+  },
+  "journey.M6.goal": {
+    "message": "採集 RGB、機器人與關節狀態、動作、時間戳記、任務與成功標記；建立 Episode，驗證同步、編碼、儲存與資料品質。"
+  },
+  "journey.M7.title": {
+    "message": "機器人知識助手"
+  },
+  "journey.M7.goal": {
+    "message": "從機器人手冊、ROS2 文件、錯誤碼與操作紀錄檢索依據，輔助診斷並顯示來源；測試無依據的問題。"
+  },
+  "journey.M8.title": {
+    "message": "虛擬視覺與 VLM"
+  },
+  "journey.M8.goal": {
+    "message": "從人工提供場景 JSON 演進到虛擬相機 RGB / Depth 輸入，對照實際場景設定驗證視覺判斷，並記錄限制。"
+  },
+  "journey.M9.title": {
+    "message": "機器人策略學習"
+  },
+  "journey.M9.goal": {
+    "message": "用機器人資料、LeRobot、PyTorch 與 ACT 訓練或重現策略，記錄動作區塊在虛擬機器人中的執行與評估。"
+  },
+  "journey.M10.title": {
+    "message": "VLA 虛擬機器人"
+  },
+  "journey.M10.goal": {
+    "message": "在條件允許時選擇 SmolVLA 或適合的輕量 VLA，將視覺、語言與機器人狀態映射為動作；先在虛擬環境中驗證。"
+  },
+  "journey.nav": {
+    "message": "AI 學習之旅"
+  },
+  "journey.virtual.title": {
+    "message": "虛擬具身實驗室"
+  },
+  "journey.virtual.intro": {
+    "message": "不用真實機器人，也能開始具身智慧實驗。先建立可驗證的軟體鏈路，再逐步探索模擬、資料與策略。"
+  },
+  "journey.virtual.nav": {
+    "message": "虛擬實驗室"
+  },
+  "journey.simulation.title": {
+    "message": "模擬優先，從虛擬世界開始"
+  },
+  "journey.simulation.intro": {
+    "message": "前期不購買機器人或專用硬體。依學習階段選擇環境，不要求一次安裝四種模擬器；硬體與運算資源在實際實驗前個別確認。"
+  },
+  "journey.status.planning": {
+    "message": "計畫中"
+  },
+  "journey.status.future": {
+    "message": "未來階段"
+  },
+  "journey.virtual.engine": {
+    "message": "模擬引擎"
+  },
+  "journey.virtual.robot": {
+    "message": "機器人對象"
+  },
+  "journey.virtual.environment": {
+    "message": "實驗環境"
+  },
+  "journey.virtual.technology": {
+    "message": "技術與技能"
+  },
+  "journey.virtual.flow": {
+    "message": "實驗步驟（計畫）"
+  },
+  "journey.virtual.goal": {
+    "message": "要驗證的問題"
+  },
+  "journey.virtual.project": {
+    "message": "關聯主專案"
+  },
+  "journey.virtual.milestones": {
+    "message": "關聯里程碑"
+  },
+  "journey.virtual.empty": {
+    "message": "尚未執行實驗；結果、程式碼、影片與資料集將在實際驗證後補充。"
+  },
+  "journey.virtual.futureNote": {
+    "message": "僅作為後續路線節點，本輪不安裝或整合 Isaac。"
+  },
+  "journey.virtual.details": {
+    "message": "查看實驗計畫"
+  },
+  "journey.virtual.back": {
+    "message": "返回學習之旅"
+  },
+  "journey.virtual.recommended": {
+    "message": "下一項虛擬實驗"
+  },
+  "journey.virtual.current": {
+    "message": "目前虛擬實驗"
+  },
+  "journey.virtual.noCurrent": {
+    "message": "尚未開始虛擬實驗"
+  },
+  "journey.schedule.current": {
+    "message": "目前週次"
+  },
+  "journey.schedule.notStarted": {
+    "message": "尚未開始計時；建議從第 1 週起步。"
+  },
+  "journey.architecture.title": {
+    "message": "主專案目標架構"
+  },
+  "journey.architecture.note": {
+    "message": "以下是待實現的演進關係，不代表已運行系統。各模擬器依階段接入，暫不統一介面。"
+  },
+  "journey.architecture.request": {
+    "message": "目標任務：把桌上的紅色方塊放進藍色盒子。"
+  },
+  "journey.loop.title": {
+    "message": "運行與學習，兩個閉環"
+  },
+  "journey.loop.control": {
+    "message": "機器人運行閉環"
+  },
+  "journey.loop.training": {
+    "message": "資料與策略迭代"
+  },
+  "journey.loop.note": {
+    "message": "行動改變環境，新的觀測進入下一輪；執行紀錄形成 Episode，經資料整理與訓練後得到新的策略。"
+  },
+  "journey.future.title": {
+    "message": "之後，再走向真實世界"
+  },
+  "journey.future.gap": {
+    "message": "模擬與真實環境存在差異：光照、紋理、摩擦、相機位姿、感測器雜訊、物體位置及機器人動力學都可能影響遷移。後續再研究領域隨機化與真實環境評估。"
+  },
+  "journey.future.hardware": {
+    "message": "真實硬體只屬於後期驗證，不是目前學習的前置條件。"
+  },
+  "journey.virtual.sources": {
+    "message": "相關資料"
+  },
+  "journey.convergenceLine": {
+    "message": "Agent + VLM + 機器人資料 → 具身智慧代理 → VLA"
+  },
+  "journey.node.user": {
+    "message": "使用者"
+  },
+  "journey.node.chat": {
+    "message": "對話介面"
+  },
+  "journey.node.llm": {
+    "message": "LLM"
+  },
+  "journey.node.agent": {
+    "message": "AI Agent"
+  },
+  "journey.node.planner": {
+    "message": "任務規劃"
+  },
+  "journey.node.vlm": {
+    "message": "VLM"
+  },
+  "journey.node.tools": {
+    "message": "機器人工具"
+  },
+  "journey.node.ros": {
+    "message": "ROS2"
+  },
+  "journey.node.policy": {
+    "message": "策略"
+  },
+  "journey.node.engine": {
+    "message": "模擬引擎"
+  },
+  "journey.node.robot": {
+    "message": "虛擬機器人"
+  },
+  "journey.node.observation": {
+    "message": "觀測"
+  },
+  "journey.node.platform": {
+    "message": "機器人資料平台"
+  },
+  "journey.node.dataset": {
+    "message": "資料集"
+  },
+  "journey.node.lerobot": {
+    "message": "LeRobot Dataset"
+  },
+  "journey.node.training": {
+    "message": "訓練"
+  },
+  "journey.node.environment": {
+    "message": "環境"
+  },
+  "journey.node.perception": {
+    "message": "感知"
+  },
+  "journey.node.planning": {
+    "message": "推理與規劃"
+  },
+  "journey.node.action": {
+    "message": "行動"
+  },
+  "journey.node.episode": {
+    "message": "Episode"
+  },
+  "journey.node.newPolicy": {
+    "message": "新策略"
+  },
+  "journey.node.evaluation": {
+    "message": "評估"
+  },
+  "journey.node.randomization": {
+    "message": "領域隨機化"
+  },
+  "journey.node.robust": {
+    "message": "穩健策略"
+  },
+  "journey.node.real": {
+    "message": "真實機器人"
+  },
+  "journey.node.collector": {
+    "message": "資料採集"
+  },
+  "journey.node.synchronizer": {
+    "message": "時間同步"
+  },
+  "journey.node.builder": {
+    "message": "Episode 建立"
+  },
+  "journey.node.encoding": {
+    "message": "MP4 + Parquet"
+  },
+  "journey.node.quality": {
+    "message": "資料品質檢查"
+  },
+  "journey.lab.VL01.title": {
+    "message": "MuJoCo 抓取與放置"
+  },
+  "journey.lab.VL01.description": {
+    "message": "能否把紅色方塊從初始位置移動到藍色盒子，並記錄每一步控制與失敗原因？"
+  },
+  "journey.lab.VL01.robot": {
+    "message": "虛擬機械臂與夾爪；型號待實驗選定"
+  },
+  "journey.lab.VL01.environment": {
+    "message": "桌面、紅色方塊、藍色盒子；場景待搭建"
+  },
+  "journey.lab.VL01.step1": {
+    "message": "定位方塊"
+  },
+  "journey.lab.VL01.step2": {
+    "message": "移動末端"
+  },
+  "journey.lab.VL01.step3": {
+    "message": "抓取"
+  },
+  "journey.lab.VL01.step4": {
+    "message": "移動"
+  },
+  "journey.lab.VL01.step5": {
+    "message": "放置"
+  },
+  "journey.lab.VL02.title": {
+    "message": "ROS2 與 Gazebo 機器人系統"
+  },
+  "journey.lab.VL02.description": {
+    "message": "能否讓虛擬感測器透過 ROS2 發佈觀測，並連接感知、規劃與控制節點？"
+  },
+  "journey.lab.VL02.robot": {
+    "message": "虛擬機器人；底盤或機械臂待選定"
+  },
+  "journey.lab.VL02.environment": {
+    "message": "虛擬相機、IMU、LiDAR 與關節狀態；設定待驗證"
+  },
+  "journey.lab.VL02.step1": {
+    "message": "虛擬感測器"
+  },
+  "journey.lab.VL02.step2": {
+    "message": "ROS2"
+  },
+  "journey.lab.VL02.step3": {
+    "message": "感知節點"
+  },
+  "journey.lab.VL02.step4": {
+    "message": "規劃節點"
+  },
+  "journey.lab.VL02.step5": {
+    "message": "控制器"
+  },
+  "journey.lab.VL02.step6": {
+    "message": "虛擬機器人"
+  },
+  "journey.lab.VL03.title": {
+    "message": "ManiSkill 機器人學習"
+  },
+  "journey.lab.VL03.description": {
+    "message": "能否從機器人資料學習操作策略，並在虛擬任務中評估動作與失敗情況？"
+  },
+  "journey.lab.VL03.robot": {
+    "message": "虛擬操作機械臂；模型待選定"
+  },
+  "journey.lab.VL03.environment": {
+    "message": "以 PickCube、抓取與放置任務為候選；尚未運行"
+  },
+  "journey.lab.VL03.step1": {
+    "message": "觀測"
+  },
+  "journey.lab.VL03.step2": {
+    "message": "策略"
+  },
+  "journey.lab.VL03.step3": {
+    "message": "行動"
+  },
+  "journey.lab.VL03.step4": {
+    "message": "環境"
+  },
+  "journey.lab.VL04.title": {
+    "message": "Isaac 物理 AI 實驗"
+  },
+  "journey.lab.VL04.description": {
+    "message": "後續研究合成資料、平行模擬與領域隨機化，評估策略跨環境遷移的邊界。"
+  },
+  "journey.lab.VL04.robot": {
+    "message": "機械臂、移動機器人或人形機器人；僅為候選方向"
+  },
+  "journey.lab.VL04.environment": {
+    "message": "Isaac Sim / Isaac Lab；尚未安裝，硬體與運算資源待評估"
+  },
+  "journey.lab.VL04.step1": {
+    "message": "合成資料"
+  },
+  "journey.lab.VL04.step2": {
+    "message": "平行模擬"
+  },
+  "journey.lab.VL04.step3": {
+    "message": "領域隨機化"
+  },
+  "journey.lab.VL04.step4": {
+    "message": "遷移評估"
+  },
+  "journey.phase2.title": {
+    "message": "第二階段：進階模擬與遷移"
+  },
+  "journey.phase3.title": {
+    "message": "第三階段：真實機器人驗證"
+  },
+  "journey.term.Robot Data": {
+    "message": "機器人資料"
+  },
+  "journey.term.Robot Deployment": {
+    "message": "機器人部署"
+  },
+  "journey.term.Robot Arm": {
+    "message": "機械臂"
+  },
+  "journey.term.Camera": {
+    "message": "相機"
+  },
+  "journey.term.Teleoperation": {
+    "message": "遙操作"
+  },
+  "journey.term.Dataset Collection": {
+    "message": "資料集採集"
+  },
+  "journey.term.ACT Deployment": {
+    "message": "ACT 部署"
+  },
+  "journey.term.VLA Deployment": {
+    "message": "VLA 部署"
+  },
+  "journey.term.Sim2Real Evaluation": {
+    "message": "Sim2Real 評估"
+  },
+  "journey.term.Synthetic Data": {
+    "message": "合成資料"
+  },
+  "journey.term.Domain Randomization": {
+    "message": "領域隨機化"
+  },
+  "journey.term.Parallel Simulation": {
+    "message": "平行模擬"
+  },
+  "journey.term.GPU Parallel Simulation": {
+    "message": "GPU 平行模擬"
+  },
+  "journey.term.Advanced Dynamics": {
+    "message": "進階動力學"
+  },
+  "journey.term.Humanoid Locomotion": {
+    "message": "人形機器人運動"
+  },
+  "journey.term.Distributed VLA Training": {
+    "message": "分散式 VLA 訓練"
+  },
+  "journey.term.World Model Training": {
+    "message": "世界模型訓練"
+  },
+  "journey.term.Advanced RL": {
+    "message": "進階強化學習"
+  },
+  "journey.term.Real Robot Hardware": {
+    "message": "真實機器人硬體"
+  },
+  "journey.term.Isaac Sim Optimization": {
+    "message": "Isaac Sim 深度最佳化"
+  },
+  "journey.term.Isaac Lab Large-scale Training": {
+    "message": "Isaac Lab 大規模訓練"
+  },
+  "journey.term.TensorRT Optimization": {
+    "message": "TensorRT 深度最佳化"
+  },
+  "journey.term.Object Storage": {
+    "message": "物件儲存"
+  },
+  "journey.term.Data Quality": {
+    "message": "資料品質"
+  },
+  "journey.node.signals": {
+    "message": "RGB / Depth / 機器人狀態 / 關節狀態 / 動作"
+  },
+  "journey.repository": {
+    "message": "查看 GitHub 儲存庫"
   }
 }

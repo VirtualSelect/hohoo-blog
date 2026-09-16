@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { validateJourney, validateVirtualLabs } from "../lib/journey.mjs";
 import matter from "gray-matter";
 import { marked } from "marked";
 import sanitize from "sanitize-html";
@@ -31,7 +32,14 @@ const output = path.join(here, "generated");
 fs.mkdirSync(output, { recursive: true });
 const put = (p, v) => fs.writeFileSync(path.join(output, p), JSON.stringify(v));
 put("manifest.json", resolveManifest());
+const journey = validateJourney(json("data/journey.json"));
+const virtualLabs = validateVirtualLabs(
+  json("data/journey-labs.json"),
+  journey,
+);
 const basePages = [
+  "journey",
+  "journey/virtual-lab",
   "",
   "articles",
   "learning",
@@ -207,6 +215,25 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
       tags: e.tags || [],
       status: e.status,
     }));
+  const journeyMessages = json(`i18n/${locale}/code.json`);
+  search.push({
+    id: "virtual-lab",
+    title: journeyMessages["journey.virtual.title"].message,
+    description: journeyMessages["journey.virtual.intro"].message,
+    type: "learning",
+    href: prefix + "/journey/virtual-lab",
+    status: "planning",
+    tags: virtualLabs.engines.map((e) => e.name),
+  });
+  search.push({
+    id: "journey",
+    title: journeyMessages["journey.title"].message,
+    description: journeyMessages["journey.intro"].message,
+    type: "learning",
+    href: prefix + "/journey",
+    tags: ["ROS2", "VLA", "Agent", "MuJoCo"],
+    status: "planning",
+  });
   search.push(
     ...items.map((e) => ({
       id: e.id,

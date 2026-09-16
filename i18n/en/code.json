@@ -1040,5 +1040,572 @@
   },
   "label.category_validation": {
     "message": "VALIDATION"
+  },
+  "journey.title": {
+    "message": "Hohoo AI Journey"
+  },
+  "journey.intro": {
+    "message": "From software engineering to AI and embodied intelligence. Learn, validate and build in a virtual world around one long-term project."
+  },
+  "journey.focus": {
+    "message": "Next: start with one concrete task"
+  },
+  "journey.focusBody": {
+    "message": "Start with validated robot tasks and test the agent with fake tools, then connect ROS2 and a virtual robot."
+  },
+  "journey.roadmap": {
+    "message": "Three tracks, one practice path"
+  },
+  "journey.roadmapLabel": {
+    "message": "Roadmap"
+  },
+  "journey.milestones": {
+    "message": "Milestones"
+  },
+  "journey.schedule": {
+    "message": "Suggested pace"
+  },
+  "journey.scheduleNote": {
+    "message": "An adjustable eight-week plan, not a completion promise. No start date is set."
+  },
+  "journey.allocation": {
+    "message": "Planned effort, not completion"
+  },
+  "journey.learning": {
+    "message": "Existing learning path & reading history"
+  },
+  "journey.foundation": {
+    "message": "Existing foundation"
+  },
+  "journey.article": {
+    "message": "Calling an LLM with Java 8: from a first request to multi-turn chat"
+  },
+  "journey.foundationNote": {
+    "message": "Review requests, response parsing and chat history in the published tutorial. It does not establish completion of a robot milestone."
+  },
+  "journey.target": {
+    "message": "Long-term target"
+  },
+  "journey.targetNote": {
+    "message": "Connect agents, vision, robot data and policy learning through simulation first. The target architecture is planned."
+  },
+  "journey.dependencies": {
+    "message": "Prerequisites"
+  },
+  "journey.goal": {
+    "message": "Validation goal"
+  },
+  "journey.knowledge": {
+    "message": "Knowledge & tools"
+  },
+  "journey.next": {
+    "message": "Next stage"
+  },
+  "journey.noDependency": {
+    "message": "Start here"
+  },
+  "journey.pending": {
+    "message": "No practice record yet. Add code, issues and results after validation."
+  },
+  "journey.result": {
+    "message": "Result"
+  },
+  "journey.issues": {
+    "message": "Issues"
+  },
+  "journey.evidence": {
+    "message": "Evidence"
+  },
+  "journey.started": {
+    "message": "Started"
+  },
+  "journey.finished": {
+    "message": "Completed"
+  },
+  "journey.week": {
+    "message": "Week {number}"
+  },
+  "journey.later": {
+    "message": "Explore later"
+  },
+  "journey.laterNote": {
+    "message": "Build an end-to-end path first, then expand around concrete problems."
+  },
+  "journey.status.not-started": {
+    "message": "Not started"
+  },
+  "journey.status.learning": {
+    "message": "Learning"
+  },
+  "journey.status.building": {
+    "message": "Building"
+  },
+  "journey.status.completed": {
+    "message": "Completed"
+  },
+  "journey.track.application": {
+    "message": "AI Application Engineering"
+  },
+  "journey.track.llm": {
+    "message": "LLM & Multimodal"
+  },
+  "journey.track.embodied": {
+    "message": "Embodied AI & Robotics"
+  },
+  "journey.converge": {
+    "message": "Application skills and visual understanding converge in robot perception, decisions and actions."
+  },
+  "journey.M1.title": {
+    "message": "Natural language → robot task"
+  },
+  "journey.M1.goal": {
+    "message": "Convert “put the red cube into the blue box” to a structured task, validate its schema and reject invalid actions or parameters."
+  },
+  "journey.M2.title": {
+    "message": "Robot agent & fake tools"
+  },
+  "journey.M2.goal": {
+    "message": "Validate the agent loop with fake tools, recording calls, failures and stop conditions; no physical robot control."
+  },
+  "journey.M3.title": {
+    "message": "Agent → ROS2"
+  },
+  "journey.M3.goal": {
+    "message": "Replace Python fake tools incrementally with ROS2 tools or a robot bridge; verify calls, feedback and cancellation."
+  },
+  "journey.M4.title": {
+    "message": "ROS2 → virtual robot"
+  },
+  "journey.M4.goal": {
+    "message": "Connect MuJoCo first, adding Gazebo later as needed; verify control and observation from agent through ROS2 to a virtual robot."
+  },
+  "journey.M5.title": {
+    "message": "Virtual pick & place"
+  },
+  "journey.M5.goal": {
+    "message": "Use a simulated arm in MuJoCo to place the red cube in the blue box, recording trajectories, controls and failures."
+  },
+  "journey.M6.title": {
+    "message": "Robot data platform"
+  },
+  "journey.M6.goal": {
+    "message": "Collect RGB, robot and joint states, actions, timestamps, tasks and success labels; build episodes and validate synchronization, encoding, storage and quality."
+  },
+  "journey.M7.title": {
+    "message": "Robot Copilot"
+  },
+  "journey.M7.goal": {
+    "message": "Retrieve evidence from robot manuals, ROS2 docs, error codes and operation logs for grounded diagnosis; cite sources and test unsupported questions."
+  },
+  "journey.M8.title": {
+    "message": "Virtual vision & VLM"
+  },
+  "journey.M8.goal": {
+    "message": "Move from manually supplied scene JSON to virtual camera RGB/depth input; compare visual judgments against scene configuration and record limits."
+  },
+  "journey.M9.title": {
+    "message": "Robot learning"
+  },
+  "journey.M9.goal": {
+    "message": "Train or reproduce a policy using robot data, LeRobot, PyTorch and ACT; record action-chunk execution and evaluation in a virtual robot."
+  },
+  "journey.M10.title": {
+    "message": "VLA virtual robot"
+  },
+  "journey.M10.goal": {
+    "message": "When resources permit, select SmolVLA or a suitable lightweight VLA to map vision, language and robot state to actions; validate in simulation first."
+  },
+  "journey.nav": {
+    "message": "AI Journey"
+  },
+  "journey.virtual.title": {
+    "message": "Virtual Embodied Lab"
+  },
+  "journey.virtual.intro": {
+    "message": "Start embodied AI experiments without a physical robot. Build a verifiable software path, then explore simulation, data and policies."
+  },
+  "journey.virtual.nav": {
+    "message": "Virtual labs"
+  },
+  "journey.simulation.title": {
+    "message": "Simulation first, starting in a virtual world"
+  },
+  "journey.simulation.intro": {
+    "message": "No robot or dedicated hardware purchases to get started. Choose environments by learning stage rather than installing every simulator. Check hardware and compute requirements before each experiment."
+  },
+  "journey.status.planning": {
+    "message": "Planned"
+  },
+  "journey.status.future": {
+    "message": "Future"
+  },
+  "journey.virtual.engine": {
+    "message": "Simulation engine"
+  },
+  "journey.virtual.robot": {
+    "message": "Robot"
+  },
+  "journey.virtual.environment": {
+    "message": "Environment"
+  },
+  "journey.virtual.technology": {
+    "message": "Technology & skills"
+  },
+  "journey.virtual.flow": {
+    "message": "Experiment steps (planned)"
+  },
+  "journey.virtual.goal": {
+    "message": "Question to validate"
+  },
+  "journey.virtual.project": {
+    "message": "Main project"
+  },
+  "journey.virtual.milestones": {
+    "message": "Linked milestones"
+  },
+  "journey.virtual.empty": {
+    "message": "Not executed yet. Results, code, videos and datasets will be added after real validation."
+  },
+  "journey.virtual.futureNote": {
+    "message": "A future roadmap node only. Isaac is not installed or integrated in this sprint."
+  },
+  "journey.virtual.details": {
+    "message": "View experiment plan"
+  },
+  "journey.virtual.back": {
+    "message": "Back to AI Journey"
+  },
+  "journey.virtual.recommended": {
+    "message": "Next virtual experiment"
+  },
+  "journey.virtual.current": {
+    "message": "Current virtual experiment"
+  },
+  "journey.virtual.noCurrent": {
+    "message": "No virtual experiment started"
+  },
+  "journey.schedule.current": {
+    "message": "Current week"
+  },
+  "journey.schedule.notStarted": {
+    "message": "No start date set; begin with week 1."
+  },
+  "journey.architecture.title": {
+    "message": "Target project architecture"
+  },
+  "journey.architecture.note": {
+    "message": "These are planned relationships, not a running system. Integrate simulators by stage; no shared simulator abstraction yet."
+  },
+  "journey.architecture.request": {
+    "message": "Target task: put the red cube on the table into the blue box."
+  },
+  "journey.loop.title": {
+    "message": "Two loops: acting and learning"
+  },
+  "journey.loop.control": {
+    "message": "Robot execution loop"
+  },
+  "journey.loop.training": {
+    "message": "Data and policy iteration"
+  },
+  "journey.loop.note": {
+    "message": "Actions change the environment and new observations start the next cycle. Execution records form episodes, which feed dataset preparation and training for a new policy."
+  },
+  "journey.future.title": {
+    "message": "Later, towards the real world"
+  },
+  "journey.future.gap": {
+    "message": "The reality gap includes lighting, textures, friction, camera pose, sensor noise, object positions and robot dynamics. Study domain randomization and real-world evaluation later."
+  },
+  "journey.future.hardware": {
+    "message": "Physical hardware belongs to later validation; it is not a prerequisite for starting."
+  },
+  "journey.virtual.sources": {
+    "message": "Related resources"
+  },
+  "journey.convergenceLine": {
+    "message": "Agent + VLM + Robot Data → Embodied Agent → VLA"
+  },
+  "journey.node.user": {
+    "message": "User"
+  },
+  "journey.node.chat": {
+    "message": "Chat UI"
+  },
+  "journey.node.llm": {
+    "message": "LLM"
+  },
+  "journey.node.agent": {
+    "message": "AI Agent"
+  },
+  "journey.node.planner": {
+    "message": "Task planner"
+  },
+  "journey.node.vlm": {
+    "message": "VLM"
+  },
+  "journey.node.tools": {
+    "message": "Robot tools"
+  },
+  "journey.node.ros": {
+    "message": "ROS2"
+  },
+  "journey.node.policy": {
+    "message": "Policy"
+  },
+  "journey.node.engine": {
+    "message": "Simulation engine"
+  },
+  "journey.node.robot": {
+    "message": "Virtual robot"
+  },
+  "journey.node.observation": {
+    "message": "Observation"
+  },
+  "journey.node.platform": {
+    "message": "Robot data platform"
+  },
+  "journey.node.dataset": {
+    "message": "Dataset"
+  },
+  "journey.node.lerobot": {
+    "message": "LeRobot Dataset"
+  },
+  "journey.node.training": {
+    "message": "Training"
+  },
+  "journey.node.environment": {
+    "message": "Environment"
+  },
+  "journey.node.perception": {
+    "message": "Perception"
+  },
+  "journey.node.planning": {
+    "message": "Reasoning & planning"
+  },
+  "journey.node.action": {
+    "message": "Action"
+  },
+  "journey.node.episode": {
+    "message": "Episode"
+  },
+  "journey.node.newPolicy": {
+    "message": "New policy"
+  },
+  "journey.node.evaluation": {
+    "message": "Evaluation"
+  },
+  "journey.node.randomization": {
+    "message": "Domain randomization"
+  },
+  "journey.node.robust": {
+    "message": "Robust policy"
+  },
+  "journey.node.real": {
+    "message": "Real robot"
+  },
+  "journey.node.collector": {
+    "message": "Data collector"
+  },
+  "journey.node.synchronizer": {
+    "message": "Time synchronizer"
+  },
+  "journey.node.builder": {
+    "message": "Episode builder"
+  },
+  "journey.node.encoding": {
+    "message": "MP4 + Parquet"
+  },
+  "journey.node.quality": {
+    "message": "Data quality check"
+  },
+  "journey.lab.VL01.title": {
+    "message": "MuJoCo pick & place"
+  },
+  "journey.lab.VL01.description": {
+    "message": "Can the arm move the red cube into the blue box while recording control steps and failure causes?"
+  },
+  "journey.lab.VL01.robot": {
+    "message": "Virtual arm and gripper; model to be selected"
+  },
+  "journey.lab.VL01.environment": {
+    "message": "Tabletop, red cube and blue box; scene to be built"
+  },
+  "journey.lab.VL01.step1": {
+    "message": "Find cube"
+  },
+  "journey.lab.VL01.step2": {
+    "message": "Move end effector"
+  },
+  "journey.lab.VL01.step3": {
+    "message": "Grasp"
+  },
+  "journey.lab.VL01.step4": {
+    "message": "Move"
+  },
+  "journey.lab.VL01.step5": {
+    "message": "Place"
+  },
+  "journey.lab.VL02.title": {
+    "message": "ROS2 & Gazebo robot system"
+  },
+  "journey.lab.VL02.description": {
+    "message": "Can virtual sensors publish observations through ROS2 and connect perception, planning and control nodes?"
+  },
+  "journey.lab.VL02.robot": {
+    "message": "Virtual robot; base or arm to be selected"
+  },
+  "journey.lab.VL02.environment": {
+    "message": "Virtual camera, IMU, LiDAR and joint state; configuration to be validated"
+  },
+  "journey.lab.VL02.step1": {
+    "message": "Virtual sensor"
+  },
+  "journey.lab.VL02.step2": {
+    "message": "ROS2"
+  },
+  "journey.lab.VL02.step3": {
+    "message": "Perception node"
+  },
+  "journey.lab.VL02.step4": {
+    "message": "Planner node"
+  },
+  "journey.lab.VL02.step5": {
+    "message": "Controller"
+  },
+  "journey.lab.VL02.step6": {
+    "message": "Virtual robot"
+  },
+  "journey.lab.VL03.title": {
+    "message": "ManiSkill robot learning"
+  },
+  "journey.lab.VL03.description": {
+    "message": "Can a manipulation policy learn from robot data and be evaluated for actions and failures in virtual tasks?"
+  },
+  "journey.lab.VL03.robot": {
+    "message": "Virtual manipulation arm; model to be selected"
+  },
+  "journey.lab.VL03.environment": {
+    "message": "Candidate tasks: PickCube and pick & place; not run yet"
+  },
+  "journey.lab.VL03.step1": {
+    "message": "Observation"
+  },
+  "journey.lab.VL03.step2": {
+    "message": "Policy"
+  },
+  "journey.lab.VL03.step3": {
+    "message": "Action"
+  },
+  "journey.lab.VL03.step4": {
+    "message": "Environment"
+  },
+  "journey.lab.VL04.title": {
+    "message": "Isaac Physical AI lab"
+  },
+  "journey.lab.VL04.description": {
+    "message": "Later, study synthetic data, parallel simulation and domain randomization to evaluate policy transfer limits."
+  },
+  "journey.lab.VL04.robot": {
+    "message": "Arms, mobile robots or humanoids; candidate directions only"
+  },
+  "journey.lab.VL04.environment": {
+    "message": "Isaac Sim / Isaac Lab; not installed, hardware and compute to be assessed"
+  },
+  "journey.lab.VL04.step1": {
+    "message": "Synthetic data"
+  },
+  "journey.lab.VL04.step2": {
+    "message": "Parallel simulation"
+  },
+  "journey.lab.VL04.step3": {
+    "message": "Domain randomization"
+  },
+  "journey.lab.VL04.step4": {
+    "message": "Transfer evaluation"
+  },
+  "journey.phase2.title": {
+    "message": "Phase 2: advanced simulation & transfer"
+  },
+  "journey.phase3.title": {
+    "message": "Phase 3: real robot validation"
+  },
+  "journey.term.Robot Data": {
+    "message": "Robot Data"
+  },
+  "journey.term.Robot Deployment": {
+    "message": "Robot Deployment"
+  },
+  "journey.term.Robot Arm": {
+    "message": "Robot Arm"
+  },
+  "journey.term.Camera": {
+    "message": "Camera"
+  },
+  "journey.term.Teleoperation": {
+    "message": "Teleoperation"
+  },
+  "journey.term.Dataset Collection": {
+    "message": "Dataset Collection"
+  },
+  "journey.term.ACT Deployment": {
+    "message": "ACT Deployment"
+  },
+  "journey.term.VLA Deployment": {
+    "message": "VLA Deployment"
+  },
+  "journey.term.Sim2Real Evaluation": {
+    "message": "Sim2Real Evaluation"
+  },
+  "journey.term.Synthetic Data": {
+    "message": "Synthetic Data"
+  },
+  "journey.term.Domain Randomization": {
+    "message": "Domain Randomization"
+  },
+  "journey.term.Parallel Simulation": {
+    "message": "Parallel Simulation"
+  },
+  "journey.term.GPU Parallel Simulation": {
+    "message": "GPU Parallel Simulation"
+  },
+  "journey.term.Advanced Dynamics": {
+    "message": "Advanced Dynamics"
+  },
+  "journey.term.Humanoid Locomotion": {
+    "message": "Humanoid Locomotion"
+  },
+  "journey.term.Distributed VLA Training": {
+    "message": "Distributed VLA Training"
+  },
+  "journey.term.World Model Training": {
+    "message": "World Model Training"
+  },
+  "journey.term.Advanced RL": {
+    "message": "Advanced RL"
+  },
+  "journey.term.Real Robot Hardware": {
+    "message": "Real Robot Hardware"
+  },
+  "journey.term.Isaac Sim Optimization": {
+    "message": "Isaac Sim Optimization"
+  },
+  "journey.term.Isaac Lab Large-scale Training": {
+    "message": "Isaac Lab Large-scale Training"
+  },
+  "journey.term.TensorRT Optimization": {
+    "message": "TensorRT Optimization"
+  },
+  "journey.term.Object Storage": {
+    "message": "Object Storage"
+  },
+  "journey.term.Data Quality": {
+    "message": "Data Quality"
+  },
+  "journey.node.signals": {
+    "message": "RGB / Depth / Robot state / Joint state / Action"
+  },
+  "journey.repository": {
+    "message": "View GitHub repository"
   }
 }

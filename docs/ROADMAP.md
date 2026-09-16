@@ -1,5 +1,12 @@
 # Huhohoo.com Roadmap
 
+## Hohoo AI Journey · Sprint 1
+
+仿真优先升级：在已有 Journey 基础上增加 `/journey/virtual-lab`、四个关联实验计划、运行/训练闭环、主项目目标架构、新版十个里程碑与八周安排。Isaac、Sim2Real 和真实机器人属于未来阶段。本轮不实现真实机器人数据管线、ACT、VLA、Isaac 集成或 Dashboard。最新结构与后续 Sprint 见 [JOURNEY.md](JOURNEY.md)。
+
+新增 `/journey`：三轨路线、十个里程碑、状态与八周建议节奏。保留旧学习路线和本地阅读状态；不创建虚假成果。数据与后续 Sprint 边界见 [JOURNEY.md](JOURNEY.md)。本轮完成后等待下一步指令。
+
+
 ## 当前体验优化（2026-09-16）
 
 网站已使用 Next.js App Router，历史迁移阶段说明保留在下文。当前分支改善已有内容的发现与阅读：Radar 可分享筛选、来源和收录说明，搜索起始入口，移动文章目录、复制反馈，以及首页真实教程与配套 Demo 的阅读指引。范围、风险与验收见 `reports/EXPERIENCE-POLISH-20260916.md`。继续保留三个学习方向、本地进度、收藏和现有 URL；新增原创文章与实验结果依赖真实写作和执行。

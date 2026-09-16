@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Translate from "../runtime/Translate";
 import ThemeToggle from "./ThemeToggle";
 import { SiteContext, useSite } from "../runtime/context";
 import Link from "../runtime/Link";
@@ -78,8 +79,8 @@ function Search({ onClose }) {
               {t("从这里开始", "Start here", "從這裡開始")}
             </p>
             <div className="inline-links">
-              <Link to="/learning" onClick={closeSearch}>
-                {t("学习路线", "Learning path", "學習路線")} →
+              <Link to="/journey" onClick={closeSearch}>
+                <Translate id="journey.nav" /> →
               </Link>
               <Link to="/build" onClick={closeSearch}>
                 {t("项目与实验", "Projects & labs", "專案與實驗")} →
@@ -119,7 +120,13 @@ function Search({ onClose }) {
                 key={e.id}
                 to={e.href}
               >
-                <span className="eyebrow">{uiLabel(e.type.toUpperCase())}</span>
+                <span className="eyebrow">
+                  {e.type === "learning" ? (
+                    <Translate id="journey.roadmapLabel" />
+                  ) : (
+                    uiLabel(e.type.toUpperCase())
+                  )}
+                </span>
                 <strong>{e.title}</strong>
                 <small>{e.description}</small>
               </Link>
@@ -154,7 +161,7 @@ function Frame({ children }) {
   }, [route, locale]);
   const nav = [
     ["articles", t("文章", "Writing", "文章")],
-    ["learning", t("学习", "Learning", "學習")],
+    ["journey", <Translate key="journey" id="journey.nav" />],
     ["build", t("实践", "Build", "實作")],
     ["radar", t("AI 雷达", "AI Radar", "AI 雷達")],
     ["about", t("关于", "About", "關於")],

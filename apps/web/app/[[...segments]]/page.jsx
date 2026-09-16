@@ -5,6 +5,8 @@ import {
   resolveSegments,
   locales,
 } from "../../lib/content";
+import VirtualLab from "../../components/VirtualLab";
+import Journey from "../../components/Journey";
 import Shell from "../../components/Shell";
 import Views from "../../components/Views";
 const aliases = {
@@ -37,6 +39,10 @@ export async function generateMetadata({ params }) {
   const doc = data.documents.find((d) => d.route === route);
   const titles = {
     articles: ["文章", "Writing", "文章"],
+    journey: Array(3).fill(getMessages(locale)["journey.title"].message),
+    "journey/virtual-lab": Array(3).fill(
+      getMessages(locale)["journey.virtual.title"].message,
+    ),
     learning: ["学习路线", "Learning", "學習路線"],
     build: ["实践", "Build", "實作"],
     radar: ["AI 雷达", "AI Radar", "AI 雷達"],
@@ -59,6 +65,12 @@ export async function generateMetadata({ params }) {
     titles[route]?.[locale === "en" ? 1 : locale === "zh-TW" ? 2 : 0] ||
     (route ? route : "Hohoo's AI Lab");
   const description =
+    (route === "journey/virtual-lab"
+      ? getMessages(locale)["journey.virtual.intro"].message
+      : null) ||
+    (route === "journey"
+      ? getMessages(locale)["journey.intro"].message
+      : null) ||
     doc?.metadata.description ||
     entry?.description ||
     (locale === "en"
@@ -112,7 +124,13 @@ export default async function Page({ params }) {
         document,
       }}
     >
-      <Views />
+      {route === "journey" ? (
+        <Journey locale={locale} />
+      ) : route === "journey/virtual-lab" ? (
+        <VirtualLab locale={locale} />
+      ) : (
+        <Views />
+      )}
     </Shell>
   );
 }

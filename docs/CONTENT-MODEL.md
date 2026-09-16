@@ -1,5 +1,12 @@
 # Huhohoo Content Model
 
+## Journey 计划模型
+
+虚拟实验注册表位于 `data/journey-labs.json`，通过 engine / milestones / project 关联，不复制成正式 Lab 成果。状态 planning / learning / completed / future；completed 要求真实日期、result 与 evidence，规划状态不允许成果字段。模型类型与验证位于 `apps/web/lib/journey.mjs`，显示文案使用 journey.* 翻译键。主项目目标架构和实验闭环保存在 Journey 模型，未知当前周和当前实验为 null。
+
+`data/journey.json` 为独立的作者学习计划，schema version 1；模型字段及维护流程见 [JOURNEY.md](JOURNEY.md)。计划不进入原创文章索引或 Timeline；已有文章通过引用关联。作者状态和访客本地阅读状态保持独立。
+
+
 ## 实践文章初稿与代码入口
 
 - 实践初稿可使用 `unlisted: true`、`status: learning`：生成可审阅路由，但不进入已发布内容索引、学习路线索引和 sitemap。不填写虚构的发布日期；正式发布时移除 unlisted，补充真实日期、阅读时长与 learning_step。

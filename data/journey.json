@@ -1,0 +1,705 @@
+{
+  "version": 1,
+  "currentMilestone": "M1",
+  "targetProject": {
+    "name": "hohoo-embodied-agent",
+    "repository": "https://github.com/VirtualSelect/hohoo-embodied-agent",
+    "status": "planning",
+    "architecture": [
+      "journey.node.user",
+      "journey.node.chat",
+      "journey.node.llm",
+      "journey.node.agent",
+      "journey.node.planner",
+      "journey.node.vlm",
+      "journey.node.tools",
+      "journey.node.ros",
+      "journey.node.policy",
+      "journey.node.engine",
+      "journey.node.robot",
+      "journey.node.observation",
+      "journey.node.platform",
+      "journey.node.dataset",
+      "journey.node.lerobot",
+      "journey.node.training"
+    ]
+  },
+  "tracks": [
+    {
+      "id": "application",
+      "number": "01",
+      "plannedWeight": 25,
+      "nodes": [
+        "LLM API / Prompt",
+        "Structured Output / JSON Schema",
+        "Tool Calling / Agent Loop",
+        "RAG / Memory",
+        "Evaluation / Observability"
+      ],
+      "milestones": [
+        "M1",
+        "M2",
+        "M7"
+      ]
+    },
+    {
+      "id": "llm",
+      "number": "02",
+      "plannedWeight": 15,
+      "nodes": [
+        "Tokenizer / Token",
+        "Embedding",
+        "Transformer / Self Attention",
+        "Context Window / Inference",
+        "Multimodal / Vision Encoder",
+        "VLM / VLA"
+      ],
+      "milestones": [
+        "M7",
+        "M8"
+      ]
+    },
+    {
+      "id": "embodied",
+      "number": "03",
+      "plannedWeight": 60,
+      "nodes": [
+        "Python / Linux / C++17",
+        "ROS2",
+        "MuJoCo / Gazebo",
+        "Robot Data",
+        "ManiSkill / ACT",
+        "VLA / Sim2Real"
+      ],
+      "milestones": [
+        "M3",
+        "M4",
+        "M5",
+        "M6",
+        "M9",
+        "M10"
+      ]
+    }
+  ],
+  "milestones": [
+    {
+      "id": "M1",
+      "titleKey": "journey.M1.title",
+      "goalKey": "journey.M1.goal",
+      "tracks": [
+        "application"
+      ],
+      "prerequisites": [],
+      "knowledge": [
+        "LLM API",
+        "Prompt",
+        "System Prompt",
+        "Streaming",
+        "Structured Output",
+        "JSON Schema"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [
+        "/docs/ai-apps/java-first-llm"
+      ],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": [
+        "M2"
+      ]
+    },
+    {
+      "id": "M2",
+      "titleKey": "journey.M2.title",
+      "goalKey": "journey.M2.goal",
+      "tracks": [
+        "application"
+      ],
+      "prerequisites": [
+        "M1"
+      ],
+      "knowledge": [
+        "Tool Calling",
+        "Agent Loop",
+        "get_scene",
+        "find_object",
+        "move_to",
+        "grasp",
+        "place",
+        "get_robot_state"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": [
+        "M3"
+      ]
+    },
+    {
+      "id": "M3",
+      "titleKey": "journey.M3.title",
+      "goalKey": "journey.M3.goal",
+      "tracks": [
+        "application",
+        "embodied"
+      ],
+      "prerequisites": [
+        "M2"
+      ],
+      "knowledge": [
+        "Linux",
+        "Python",
+        "C++17",
+        "CMake",
+        "GDB",
+        "Docker",
+        "ROS2",
+        "Node",
+        "Topic",
+        "Service",
+        "Action",
+        "Launch"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": [
+        "M4"
+      ]
+    },
+    {
+      "id": "M4",
+      "titleKey": "journey.M4.title",
+      "goalKey": "journey.M4.goal",
+      "tracks": [
+        "embodied"
+      ],
+      "prerequisites": [
+        "M3"
+      ],
+      "knowledge": [
+        "MuJoCo",
+        "Gazebo",
+        "ROS2",
+        "Robot Bridge"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": [
+        "M5"
+      ]
+    },
+    {
+      "id": "M5",
+      "titleKey": "journey.M5.title",
+      "goalKey": "journey.M5.goal",
+      "tracks": [
+        "embodied"
+      ],
+      "prerequisites": [
+        "M4"
+      ],
+      "knowledge": [
+        "Joint",
+        "Link",
+        "DOF",
+        "Pose",
+        "Coordinate Frame",
+        "Joint Space",
+        "Cartesian Space",
+        "FK",
+        "IK",
+        "Jacobian",
+        "Trajectory",
+        "Controller"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": [
+        "M6"
+      ]
+    },
+    {
+      "id": "M6",
+      "titleKey": "journey.M6.title",
+      "goalKey": "journey.M6.goal",
+      "tracks": [
+        "embodied"
+      ],
+      "prerequisites": [
+        "M5"
+      ],
+      "knowledge": [
+        "Observation",
+        "Action",
+        "State",
+        "Frame",
+        "Episode",
+        "Trajectory",
+        "Dataset",
+        "Timestamp",
+        "FFmpeg",
+        "MP4",
+        "Parquet",
+        "PyArrow",
+        "MCAP",
+        "Object Storage",
+        "Data Quality",
+        "LeRobot Dataset"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": [
+        "M7"
+      ]
+    },
+    {
+      "id": "M7",
+      "titleKey": "journey.M7.title",
+      "goalKey": "journey.M7.goal",
+      "tracks": [
+        "application",
+        "llm",
+        "embodied"
+      ],
+      "prerequisites": [
+        "M2",
+        "M6"
+      ],
+      "knowledge": [
+        "Embedding",
+        "RAG",
+        "Vector Database",
+        "Agent Memory",
+        "Context Engineering",
+        "Evaluation",
+        "Observability"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": [
+        "M8"
+      ]
+    },
+    {
+      "id": "M8",
+      "titleKey": "journey.M8.title",
+      "goalKey": "journey.M8.goal",
+      "tracks": [
+        "llm",
+        "embodied"
+      ],
+      "prerequisites": [
+        "M6"
+      ],
+      "knowledge": [
+        "Camera",
+        "RGB",
+        "Depth",
+        "Tokenizer",
+        "Token",
+        "Transformer",
+        "Self Attention",
+        "Context Window",
+        "Inference",
+        "Multimodal",
+        "Vision Encoder",
+        "VLM"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": [
+        "M9"
+      ]
+    },
+    {
+      "id": "M9",
+      "titleKey": "journey.M9.title",
+      "goalKey": "journey.M9.goal",
+      "tracks": [
+        "embodied"
+      ],
+      "prerequisites": [
+        "M6",
+        "M8"
+      ],
+      "knowledge": [
+        "PyTorch",
+        "Behavior Cloning",
+        "Imitation Learning",
+        "LeRobot",
+        "ACT",
+        "ManiSkill",
+        "Diffusion Policy"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": [
+        "M10"
+      ]
+    },
+    {
+      "id": "M10",
+      "titleKey": "journey.M10.title",
+      "goalKey": "journey.M10.goal",
+      "tracks": [
+        "application",
+        "llm",
+        "embodied"
+      ],
+      "prerequisites": [
+        "M7",
+        "M8",
+        "M9"
+      ],
+      "knowledge": [
+        "RT-1",
+        "RT-2",
+        "Octo",
+        "OpenVLA",
+        "SmolVLA",
+        "π0",
+        "π0.5",
+        "GR00T",
+        "VLA"
+      ],
+      "status": "not-started",
+      "startedAt": null,
+      "completedAt": null,
+      "articles": [],
+      "code": [],
+      "demos": [],
+      "evidence": [],
+      "issues": [],
+      "result": null,
+      "next": []
+    }
+  ],
+  "weeks": [
+    {
+      "number": 1,
+      "milestones": [
+        "M1",
+        "M2"
+      ],
+      "knowledge": [
+        "Python",
+        "LLM API",
+        "Prompt",
+        "System Prompt",
+        "Streaming",
+        "Structured Output",
+        "JSON Schema",
+        "Tool Calling",
+        "Agent Loop",
+        "get_scene",
+        "find_object",
+        "move_to",
+        "grasp",
+        "place",
+        "get_robot_state"
+      ],
+      "labs": []
+    },
+    {
+      "number": 2,
+      "milestones": [
+        "M3"
+      ],
+      "knowledge": [
+        "Linux",
+        "Python",
+        "C++17",
+        "CMake",
+        "GDB",
+        "Docker",
+        "ROS2",
+        "Node",
+        "Topic",
+        "Service",
+        "Action",
+        "Launch"
+      ],
+      "labs": []
+    },
+    {
+      "number": 3,
+      "milestones": [
+        "M4",
+        "M5"
+      ],
+      "knowledge": [
+        "MuJoCo",
+        "Gazebo",
+        "ROS2",
+        "Robot Bridge",
+        "Joint",
+        "Link",
+        "DOF",
+        "Pose",
+        "Coordinate Frame",
+        "Joint Space",
+        "Cartesian Space",
+        "FK",
+        "IK",
+        "Jacobian",
+        "Trajectory",
+        "Controller"
+      ],
+      "labs": [
+        "VL01"
+      ]
+    },
+    {
+      "number": 4,
+      "milestones": [
+        "M6"
+      ],
+      "knowledge": [
+        "Observation",
+        "Action",
+        "State",
+        "Frame",
+        "Episode",
+        "Trajectory",
+        "Dataset",
+        "Timestamp",
+        "FFmpeg",
+        "MP4",
+        "Parquet",
+        "PyArrow",
+        "MCAP",
+        "Object Storage",
+        "Data Quality",
+        "LeRobot Dataset"
+      ],
+      "labs": []
+    },
+    {
+      "number": 5,
+      "milestones": [
+        "M7"
+      ],
+      "knowledge": [
+        "Embedding",
+        "RAG",
+        "Vector Database",
+        "Agent Memory",
+        "Context Engineering",
+        "Evaluation",
+        "Observability"
+      ],
+      "labs": []
+    },
+    {
+      "number": 6,
+      "milestones": [
+        "M8"
+      ],
+      "knowledge": [
+        "Camera",
+        "RGB",
+        "Depth",
+        "Tokenizer",
+        "Token",
+        "Transformer",
+        "Self Attention",
+        "Context Window",
+        "Inference",
+        "Multimodal",
+        "Vision Encoder",
+        "VLM"
+      ],
+      "labs": [
+        "VL02"
+      ]
+    },
+    {
+      "number": 7,
+      "milestones": [
+        "M9"
+      ],
+      "knowledge": [
+        "PyTorch",
+        "Behavior Cloning",
+        "Imitation Learning",
+        "LeRobot",
+        "ACT",
+        "ManiSkill",
+        "Diffusion Policy"
+      ],
+      "labs": [
+        "VL03"
+      ]
+    },
+    {
+      "number": 8,
+      "milestones": [
+        "M10"
+      ],
+      "knowledge": [
+        "RT-1",
+        "RT-2",
+        "Octo",
+        "OpenVLA",
+        "SmolVLA",
+        "π0",
+        "π0.5",
+        "GR00T",
+        "VLA"
+      ],
+      "labs": []
+    }
+  ],
+  "later": [
+    "SLAM",
+    "MPC",
+    "WBC",
+    "Advanced Dynamics",
+    "Humanoid Locomotion",
+    "CUDA Kernel",
+    "Distributed VLA Training",
+    "World Model Training",
+    "Advanced RL",
+    "Real Robot Hardware",
+    "Isaac Sim Optimization",
+    "Isaac Lab Large-scale Training",
+    "TensorRT Optimization"
+  ],
+  "currentWeek": null,
+  "currentLab": null,
+  "recommendedLab": "VL01",
+  "simulation": {
+    "labOrder": [
+      "VL01",
+      "VL02",
+      "VL03",
+      "VL04"
+    ],
+    "executionLoop": [
+      "journey.node.environment",
+      "journey.node.observation",
+      "journey.node.perception",
+      "journey.node.planning",
+      "journey.node.policy",
+      "journey.node.action",
+      "journey.node.environment"
+    ],
+    "trainingLoop": [
+      "journey.node.episode",
+      "journey.node.dataset",
+      "journey.node.training",
+      "journey.node.newPolicy"
+    ],
+    "dataArchitecture": [
+      "journey.node.robot",
+      "journey.node.signals",
+      "journey.node.collector",
+      "journey.node.synchronizer",
+      "journey.node.builder",
+      "journey.node.encoding",
+      "journey.node.dataset",
+      "journey.node.quality",
+      "journey.node.lerobot"
+    ],
+    "sim2real": [
+      "journey.node.engine",
+      "journey.node.training",
+      "journey.node.evaluation",
+      "journey.node.randomization",
+      "journey.node.robust",
+      "journey.node.real"
+    ],
+    "futurePhases": [
+      {
+        "id": "phase-2",
+        "titleKey": "journey.phase2.title",
+        "status": "future",
+        "topics": [
+          "Isaac Sim",
+          "Isaac Lab",
+          "Synthetic Data",
+          "Domain Randomization",
+          "Parallel Simulation",
+          "Sim2Real",
+          "TensorRT",
+          "Jetson",
+          "Robot Deployment"
+        ]
+      },
+      {
+        "id": "phase-3",
+        "titleKey": "journey.phase3.title",
+        "status": "future",
+        "topics": [
+          "Robot Arm",
+          "Camera",
+          "Teleoperation",
+          "Dataset Collection",
+          "ACT Deployment",
+          "VLA Deployment",
+          "Sim2Real Evaluation"
+        ]
+      }
+    ]
+  }
+}
