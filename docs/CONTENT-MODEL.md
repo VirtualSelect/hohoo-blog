@@ -19,7 +19,8 @@
 - Paper：number、version（当前从已存 URL 的版本读取）、authors、venue、code、projectPage、readingStatus。`comparison` 可保存 method / task / architecture / retrieval / training / evaluation / code；未实现复杂比较界面。
 - Paper 的 `myNotes` 仅供人工填写：author 必须为 Hohoo，readingStatus 必须为 read；learned / surprised / disagree / openQuestions 可选。访客的本地已读状态不能让作者笔记自动出现。
 - Reading Inbox：`huhohoo.reading.v2`，`{version:2,saved,read,reading,savedAt}`。从 `hohoo-news-reading-v1` 迁移，保留旧键；没有历史 savedAt 不补造。学习状态仍使用 `huhohoo.learning.v1`，Inbox 通过适配器合并展示。选题尚未发布不能在 Inbox 冒充已读文章。
-- Search：构建时生成精简 title/description/type/topic/tags/href/status 索引，打开对话框才下载。支持 type:paper / type:lab / topic:embodied（embodied-ai 别名）。搜索只覆盖标题和摘要，不宣称全文检索。
+- Search：构建时生成精简 title/description/type/topic/tags/href/status 索引，当前 Next.js 页面通过 SiteContext 提供给搜索组件。支持 type:paper / type:lab / topic:embodied（embodied-ai 别名）。搜索覆盖标题、摘要与标签，不宣称全文检索。空查询的最近文章与首页复用 writingEntries，只展示真实已发布内容。
+- Radar 页面状态使用 q / domain / source URL 参数；未知筛选值回退到全部。列表来源最近收录时间取真实 collectedAt，时间轴仍使用 publishedAt，不冒充工作流运行时间。
 - Notes 仍仅发布 status=published 的真实内容。草稿使用现有 `docs/templates/note.md`，不自动创建 Hohoo 已发布笔记。
 
 

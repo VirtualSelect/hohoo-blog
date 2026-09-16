@@ -5,11 +5,19 @@ import { useText } from "./Shell";
 import Link from "../runtime/Link";
 import Home from "./Home";
 import ProfileCard from "./ProfileCard";
-import Document from "./Document";
-import Radar from "./Radar";
 import CurrentFocus from "@site/src/components/CurrentFocus";
 import { ContentRows } from "@site/src/components/ContentUI";
 import { isoWeek } from "@site/src/utils/radar.cjs";
+const Document = dynamic(() => import("./Document"), { loading: PageLoading });
+const Radar = dynamic(() => import("./Radar"), { loading: PageLoading });
+function PageLoading() {
+  const t = useText();
+  return (
+    <p className="hh-page" role="status">
+      {t("正在打开内容…", "Opening content…", "正在開啟內容…")}
+    </p>
+  );
+}
 const pages = {
   articles: dynamic(() => import("@site/src/pages/articles")),
   learning: dynamic(() => import("@site/src/pages/learning")),

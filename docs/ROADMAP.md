@@ -1,5 +1,9 @@
 # Huhohoo.com Roadmap
 
+## 当前体验优化（2026-09-16）
+
+网站已使用 Next.js App Router，历史迁移阶段说明保留在下文。当前分支改善已有内容的发现与阅读：Radar 可分享筛选、来源和收录说明，搜索起始入口，移动文章目录、复制反馈，以及首页真实教程与配套 Demo 的阅读指引。范围、风险与验收见 `reports/EXPERIENCE-POLISH-20260916.md`。继续保留三个学习方向、本地进度、收藏和现有 URL；新增原创文章与实验结果依赖真实写作和执行。
+
 ## 用户授权的 Next.js 重构（2026-09-12）
 
 本分支 `codex/nextjs-redesign` 按用户明确要求采用 Next.js App Router。新版位于 `apps/web`，根目录 start/build/preview 指向新版；Docusaurus 依赖、配置、主题覆盖与 legacy 命令已移除，旧版本通过 Git 保留。原 Markdown、JSON、采集流程、本地阅读状态继续共用。共享组件直接使用 `apps/web/runtime`；纯内容索引位于 `lib/content`；翻译使用 `i18n/{locale}/docs` 与 `blog`。没有发布或切换线上部署。

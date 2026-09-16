@@ -11,7 +11,7 @@ export const metadata = {
   },
 };
 const themeScript =
-  "try{document.documentElement.dataset.theme=localStorage.getItem('huhohoo.theme.v1')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch{}";
+  "(()=>{let t;try{t=localStorage.getItem('huhohoo.theme.v1')}catch{}document.documentElement.dataset.theme=t==='dark'||t==='light'?t:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'})()";
 export default async function RootLayout({ children }) {
   const locale = (await headers()).get("x-lab-locale") || "zh-CN";
   return (

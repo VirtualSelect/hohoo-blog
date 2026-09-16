@@ -16,8 +16,12 @@
 ## 第二阶段统一约定
 
 品牌使用 Hohoo.；产品名 Hohoo's AI Lab；标语 Learning in public. Building in public.。
-继续复用原生 Docusaurus Layout/Footer，不新增平行页面外壳。内容来源与核验状态使用轻量 Eyebrow / Metadata，不使用彩色权威勋章。
-全站搜索采用原生 dialog 和延迟加载，Tab / Enter / Esc 可操作；空结果保留对话框宽度。架构图使用可换行的语义有序列表，不引入图形库。
+当前外壳为 Next.js 的 `apps/web/components/Shell.jsx`，复用统一导航与页脚，不新增平行页面外壳。内容来源与核验状态使用轻量 Eyebrow / Metadata，不使用彩色权威勋章。
+全站搜索采用原生 dialog 与构建期索引，Tab / Enter / Esc 可操作；空查询展示真实文章与常用入口，空结果保留对话框宽度。架构图使用可换行的语义有序列表，不引入图形库。
+
+2026-09-16 阅读体验约定：移动端目录使用原生 details，桌面目录避让顶部导航并标识当前章节；Radar 以紧凑元数据、细线时间轴和独立结果统计展示。来源发布时间与最近收录时间分开，不能把收录时间当作采集成功时间。首页阅读指引只关联已存在的教程和项目。沿用当前暖白 / 深绿底色与绿色 Accent。
+
+交互入口约定：主题使用“护眼 / 夜间”文字与 SVG 图标，保留 `huhohoo.theme.v1` 的 `light / dark` 值，按钮至少 44px 高宽；刷新、路由切换及同源多标签页保持一致。站内链接在等待路由响应时显示不拦截点击的状态提示。About 粒子限制约 30fps、DPR 不超过 1.5，继续保留暂停、减少动态效果与离屏停止。
 `static/img/og-template.svg` 是 1200×630 的分享图模板，尚未替换站点现有 OG 图片；后续导出 PNG/JPEG 后再用于社交平台，避免假设平台支持 SVG。
 
 

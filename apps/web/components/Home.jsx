@@ -5,6 +5,7 @@ import { useText } from "./Shell";
 import current from "@site/data/current.json";
 import { writingEntries } from "@site/src/utils/localization.cjs";
 import { Status } from "@site/src/components/ContentUI";
+import { uiLabel } from "@site/src/utils/ui-labels";
 
 export default function Home() {
   const { locale, globalData, items } = useSite(),
@@ -12,6 +13,12 @@ export default function Home() {
   const entries = globalData["content-index"].entries;
   const latest = writingEntries(entries).slice(0, 4),
     projects = entries.filter((e) => e.type === "project").slice(0, 2);
+  const firstTutorial = entries.find((e) =>
+    e.href.endsWith("/docs/ai-apps/java-first-llm"),
+  );
+  const demoProject = entries.find((e) =>
+    e.href.endsWith("/projects/hohoo-ai-lab"),
+  );
   return (
     <main className="home">
       <section className="home-hero">
@@ -100,11 +107,7 @@ export default function Home() {
             <Link className="writing-row" key={e.id} to={e.href}>
               <span className="row-number">0{i + 1}</span>
               <div>
-                <small>
-                  {e.type === "doc"
-                    ? t("AI 应用开发", "AI Applications", "AI 應用開發")
-                    : t("随笔", "Journal", "隨筆")}
-                </small>
+                <small>{uiLabel(e.type.toUpperCase())}</small>
                 <h3>{e.title}</h3>
                 <p>{e.description}</p>
               </div>
@@ -120,6 +123,37 @@ export default function Home() {
             </Link>
           ))}
         </div>
+        {firstTutorial && demoProject && (
+          <aside className="reading-guide">
+            <div>
+              <p className="eyebrow">
+                {t("第一次来？", "New here?", "第一次來？")}
+              </p>
+              <h3>
+                {t(
+                  "从一次模型请求开始",
+                  "Start with one model request",
+                  "從一次模型請求開始",
+                )}
+              </h3>
+              <p>
+                {t(
+                  "先读请求与响应，再运行配套示例，最后理解多轮对话为什么要带上历史消息。",
+                  "Read the request and response, run the examples, then explore why a conversation needs its message history.",
+                  "先讀請求與回應，再執行配套範例，最後理解多輪對話為什麼要帶上歷史訊息。",
+                )}
+              </p>
+            </div>
+            <div className="inline-links">
+              <Link to={firstTutorial.href}>
+                {t("阅读教程", "Read the tutorial", "閱讀教學")} →
+              </Link>
+              <Link to={demoProject.href}>
+                {t("配套 Demo", "Companion demos", "配套 Demo")} ↗
+              </Link>
+            </div>
+          </aside>
+        )}
       </section>
       <section className="home-section">
         <div className="section-top">
@@ -130,14 +164,22 @@ export default function Home() {
           <Link to="/build">{t("全部实践", "All builds", "全部實作")} →</Link>
         </div>
         <div className="build-grid">
-          {projects.map((p, i) => (
+          {projects.map((p) => (
             <article className="build-feature" key={p.id}>
               <div className="build-visual" aria-hidden="true">
-                <span>{i === 0 ? "Hohoo." : "{ Java → AI }"}</span>
+                <span>
+                  {p.href.endsWith("/hohoo-blog")
+                    ? "Hohoo."
+                    : p.href.endsWith("/hohoo-ai-lab")
+                      ? "{ Java → AI }"
+                      : p.title}
+                </span>
                 <div className="visual-path">
-                  {i === 0
+                  {p.href.endsWith("/hohoo-blog")
                     ? "Discover → Learn → Build"
-                    : "HTTP → JSON → Conversation"}
+                    : p.href.endsWith("/hohoo-ai-lab")
+                      ? "HTTP → JSON → Conversation"
+                      : p.stack?.join(" · ")}
                 </div>
               </div>
               <div className="section-top">

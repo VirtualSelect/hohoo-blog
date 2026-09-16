@@ -5,17 +5,22 @@ import { useText } from "./Shell";
 import Link from "../runtime/Link";
 import DocReadingContext from "@site/src/components/DocReadingContext";
 import TranslationNotice from "@site/src/components/TranslationNotice";
+import ArticleContents from "./ArticleContents";
 export default function Document() {
   const { document: d } = useSite(),
     t = useText(),
     ref = useRef(null);
   useEffect(() => {
     const buttons = [];
+    const timers = new Set();
     for (const pre of ref.current?.querySelectorAll("pre") || []) {
       const b = window.document.createElement("button");
       b.className = "copy-code";
+      b.type = "button";
+      b.setAttribute("aria-live", "polite");
       b.textContent = t("复制", "Copy", "複製");
       b.onclick = async () => {
+        b.disabled = true;
         try {
           await navigator.clipboard.writeText(
             pre.querySelector("code")?.textContent || "",
@@ -24,25 +29,49 @@ export default function Document() {
         } catch {
           b.textContent = t("复制失败", "Copy failed", "複製失敗");
         }
+        if (!b.isConnected) return;
+        const timer = setTimeout(() => {
+          b.textContent = t("复制", "Copy", "複製");
+          b.disabled = false;
+          timers.delete(timer);
+        }, 1800);
+        timers.add(timer);
       };
       pre.append(b);
       buttons.push(b);
     }
-    return () => buttons.forEach((b) => b.remove());
+    return () => {
+      timers.forEach(clearTimeout);
+      buttons.forEach((b) => b.remove());
+    };
   }, [d, t]);
   return (
     <main className="document-layout">
       <aside className="document-nav">
-        <Link to="/learning">
-          ← {t("学习路线", "Learning path", "學習路線")}
-        </Link>
-        <Link to="/docs/ai-apps">
-          {t("AI 应用开发", "AI Applications", "AI 應用開發")}
-        </Link>
-        <Link to="/docs/llm">LLM</Link>
-        <Link to="/docs/embodied-ai">
-          {t("具身智能", "Embodied AI", "具身智慧")}
-        </Link>
+        {d.kind === "blog" ? (
+          <>
+            <Link to="/articles">
+              ← {t("全部文章", "All writing", "全部文章")}
+            </Link>
+            <Link to="/blog">{t("随笔", "Journal", "隨筆")}</Link>
+            <Link to="/timeline">
+              {t("学习活动", "Learning activity", "學習活動")}
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to="/learning">
+              ← {t("学习路线", "Learning path", "學習路線")}
+            </Link>
+            <Link to="/docs/ai-apps">
+              {t("AI 应用开发", "AI Applications", "AI 應用開發")}
+            </Link>
+            <Link to="/docs/llm">LLM</Link>
+            <Link to="/docs/embodied-ai">
+              {t("具身智能", "Embodied AI", "具身智慧")}
+            </Link>
+          </>
+        )}
       </aside>
       <article className="document-body">
         <header>
@@ -73,6 +102,7 @@ export default function Document() {
             </p>
           )}
         </header>
+        <ArticleContents headings={d.headings} mobile />
         <div
           ref={ref}
           className="prose"
@@ -85,20 +115,7 @@ export default function Document() {
           </Link>
         </div>
       </article>
-      <aside className="document-toc">
-        <p className="eyebrow">{t("本文目录", "On this page", "本文目錄")}</p>
-        <nav aria-label={t("文章目录", "Table of contents", "文章目錄")}>
-          {d.headings.map((h) => (
-            <a
-              key={h.id}
-              href={"#" + h.id}
-              className={h.depth === 3 ? "subheading" : ""}
-            >
-              {h.text}
-            </a>
-          ))}
-        </nav>
-      </aside>
+      <ArticleContents headings={d.headings} />
     </main>
   );
 }

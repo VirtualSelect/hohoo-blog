@@ -6,8 +6,10 @@ import topics from '@site/data/topics';
 import { Section, ContentRows, useContent, useEnglish } from './ContentUI';
 import TopicPapers from './TopicPapers';
 import TopicNews from './TopicNews';
+import { useText } from '@lab/components/Shell';
 export default function TopicLanding({ category }) {
   const en = useEnglish();
+  const t = useText();
   const { entries } = useContent();
   const topic = topics.find((t) => t.id === category);
   const track =
@@ -22,29 +24,23 @@ export default function TopicLanding({ category }) {
   return (
     <>
       <p className="hh-eyebrow">
-        0{topics.indexOf(topic) + 1} / {topic.tag}
+        0{topics.indexOf(topic) + 1} / {uiLabel(topic.tag)}
       </p>
       <p className="hh-lead">{en ? topic.english : topic.description}</p>
-      <Section
-        label={uiLabel("START HERE")}
-        title={en ? 'Choose a starting point' : '从这里开始'}>
-        <ol className="hh-concepts">
-          {track.steps.slice(0, 7).map((s) => {
-            const article = docs.find((d) => d.stepId === s.id);
-            return (
-              <li key={s.id}>
-                <Link to={article?.href || '/learning#step-' + s.id}>
-                  {en ? s.en : s.title}
-                </Link>
-                {!article && <small className="hh-meta"> · {uiLabel('PLANNED')}</small>}
-              </li>
-            );
-          })}
-        </ol>
-      </Section>
+      {docs.length > 0 && (
+        <Section
+          label={uiLabel('START HERE')}
+          title={t(
+            '先读一篇，再动手试试',
+            'Read, then try it yourself',
+            '先讀一篇，再動手試試',
+          )}>
+          <ContentRows items={docs} />
+        </Section>
+      )}
       {category === 'ai-apps' && (
         <Section
-          label={uiLabel("AI ENGINEERING")}
+          label={uiLabel('AI ENGINEERING')}
           title={
             en ? 'From application to delivery' : '从应用实现，到工程交付'
           }>
@@ -66,7 +62,7 @@ export default function TopicLanding({ category }) {
               'Production',
               'Performance',
             ].map((s) => (
-              <li key={s}>{s}</li>
+              <li key={s}>{uiLabel(s)}</li>
             ))}
           </ul>
           <Link to="/learning#engineering">
@@ -74,11 +70,10 @@ export default function TopicLanding({ category }) {
           </Link>
         </Section>
       )}
-      <Section label={uiLabel("LATEST")} title={en ? 'Published knowledge' : '已发布内容'}>
-        <ContentRows items={docs} />
-      </Section>
       {entries.some((e) => e.domain === category && e.type === 'project') && (
-        <Section label={uiLabel("PROJECTS")} title={en ? 'Working builds' : '相关项目'}>
+        <Section
+          label={uiLabel('PROJECTS')}
+          title={en ? 'Working builds' : '相关项目'}>
           <ContentRows
             items={entries.filter(
               (e) => e.domain === category && e.type === 'project',
@@ -86,16 +81,48 @@ export default function TopicLanding({ category }) {
           />
         </Section>
       )}
-      <details>
-        <summary>{en ? 'Related experiments' : '相关实验'}</summary>
-        <ContentRows
-          items={entries.filter(
-            (e) => e.domain === category && e.type === 'lab',
-          )}
-        />
-      </details>
+      {entries.some(
+        (e) =>
+          e.domain === category && e.type === 'lab' && e.status !== 'planning',
+      ) && (
+        <details>
+          <summary>{t('相关实验', 'Related experiments', '相關實驗')}</summary>
+          <ContentRows
+            items={entries.filter(
+              (e) =>
+                e.domain === category &&
+                e.type === 'lab' &&
+                e.status !== 'planning',
+            )}
+          />
+        </details>
+      )}
       <TopicPapers category={category} />
       <TopicNews category={category} />
+      <details className="topic-plans">
+        <summary>
+          {t(
+            '学习路线与后续选题',
+            'Learning path & planned topics',
+            '學習路線與後續選題',
+          )}
+        </summary>
+        <ol className="hh-concepts">
+          {track.steps.slice(0, 7).map((s) => {
+            const article = docs.find((d) => d.stepId === s.id);
+            return (
+              <li key={s.id}>
+                <Link to={article?.href || '/learning#step-' + s.id}>
+                  {article?.title || (en ? s.en : s.title)}
+                </Link>
+                {!article && (
+                  <small className="hh-meta"> · {uiLabel('PLANNED')}</small>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </details>
       <p>
         <Link to="/learning">
           {en ? 'Continue along a learning path →' : '继续系统学习 →'}

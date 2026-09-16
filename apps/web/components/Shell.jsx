@@ -1,25 +1,37 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import NextLink from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 import { SiteContext, useSite } from "../runtime/context";
 import Link from "../runtime/Link";
 import { searchEntries } from "@site/src/utils/search.mjs";
+import { writingEntries } from "@site/src/utils/localization.cjs";
+import { uiLabel } from "@site/src/utils/ui-labels";
 export function useText() {
   const { locale } = useSite();
-  return (zh, en, tw = zh) =>
-    locale === "en" ? en : locale === "zh-TW" ? tw : zh;
+  return useCallback(
+    (zh, en, tw = zh) => (locale === "en" ? en : locale === "zh-TW" ? tw : zh),
+    [locale],
+  );
 }
 function Search({ onClose }) {
-  const { search } = useSite(),
+  const { search, globalData } = useSite(),
     t = useText(),
     ref = useRef(null),
     [query, setQuery] = useState("");
   useEffect(() => {
     const d = ref.current;
     d.showModal();
+    d.querySelector("input")?.focus({ preventScroll: true });
     return () => d.close();
   }, []);
-  const results = query.trim() ? searchEntries(search, query).slice(0, 18) : [];
+  const hasQuery = Boolean(query.trim());
+  const results = hasQuery
+    ? searchEntries(search, query).slice(0, 18)
+    : writingEntries(globalData["content-index"].entries).slice(0, 3);
+  function closeSearch() {
+    ref.current?.close();
+    onClose();
+  }
   return (
     <dialog
       ref={ref}
@@ -27,10 +39,10 @@ function Search({ onClose }) {
       aria-labelledby="search-title"
       onCancel={(e) => {
         e.preventDefault();
-        onClose();
+        closeSearch();
       }}
       onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+        if (e.target === e.currentTarget) closeSearch();
       }}
     >
       <div>
@@ -38,7 +50,7 @@ function Search({ onClose }) {
           <h2 id="search-title">
             {t("搜索知识与实践", "Search the Lab", "搜尋知識與實作")}
           </h2>
-          <button onClick={onClose} aria-label={t("关闭", "Close", "關閉")}>
+          <button onClick={closeSearch} aria-label={t("关闭", "Close", "關閉")}>
             Esc ×
           </button>
         </header>
@@ -60,8 +72,38 @@ function Search({ onClose }) {
             "想瞭解什麼？",
           )}
         />
-        <div aria-live="polite">
-          {query && !results.length ? (
+        {!hasQuery && (
+          <div className="search-start">
+            <p className="eyebrow">
+              {t("从这里开始", "Start here", "從這裡開始")}
+            </p>
+            <div className="inline-links">
+              <Link to="/learning" onClick={closeSearch}>
+                {t("学习路线", "Learning path", "學習路線")} →
+              </Link>
+              <Link to="/build" onClick={closeSearch}>
+                {t("项目与实验", "Projects & labs", "專案與實驗")} →
+              </Link>
+              <Link to="/radar" onClick={closeSearch}>
+                {t("AI 雷达", "AI Radar", "AI 雷達")} →
+              </Link>
+            </div>
+            <p className="eyebrow">
+              {t("最近发布", "Recent writing", "最近發佈")}
+            </p>
+          </div>
+        )}
+        <p className="hh-meta" role="status">
+          {hasQuery
+            ? t(
+                `显示 ${results.length} 条结果（最多 18 条）`,
+                `Showing ${results.length} results (up to 18)`,
+                `顯示 ${results.length} 條結果（最多 18 條）`,
+              )
+            : ""}
+        </p>
+        <div>
+          {hasQuery && !results.length ? (
             <p className="empty">
               {t(
                 "没有匹配的内容，试试其他关键词。",
@@ -72,11 +114,12 @@ function Search({ onClose }) {
           ) : (
             results.map((e) => (
               <Link
-                onClick={onClose}
+                onClick={closeSearch}
                 className="search-result"
                 key={e.id}
                 to={e.href}
               >
+                <span className="eyebrow">{uiLabel(e.type.toUpperCase())}</span>
                 <strong>{e.title}</strong>
                 <small>{e.description}</small>
               </Link>
@@ -91,11 +134,9 @@ function Frame({ children }) {
   const { locale, route } = useSite(),
     t = useText(),
     [menu, setMenu] = useState(false),
-    [search, setSearch] = useState(false),
-    [theme, setTheme] = useState("light");
+    [search, setSearch] = useState(false);
   const trigger = useRef(null);
   useEffect(() => {
-    setTheme(document.documentElement.dataset.theme || "light");
     const key = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
@@ -111,14 +152,6 @@ function Frame({ children }) {
     setSearch(false);
     document.documentElement.lang = locale;
   }, [route, locale]);
-  function toggleTheme() {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem("huhohoo.theme.v1", next);
-    } catch {}
-  }
   const nav = [
     ["articles", t("文章", "Writing", "文章")],
     ["learning", t("学习", "Learning", "學習")],
@@ -182,12 +215,7 @@ function Frame({ children }) {
             <option value="zh-TW">繁體</option>
             <option value="en">EN</option>
           </select>
-          <button
-            onClick={toggleTheme}
-            aria-label={t("切换明暗主题", "Toggle theme", "切換明暗主題")}
-          >
-            {theme === "dark" ? "☾" : "☼"}
-          </button>
+          <ThemeToggle />
           <button
             className="menu-toggle"
             aria-expanded={menu}
@@ -237,7 +265,7 @@ function Frame({ children }) {
         <Search
           onClose={() => {
             setSearch(false);
-            trigger.current?.focus();
+            trigger.current?.focus({ preventScroll: true });
           }}
         />
       )}

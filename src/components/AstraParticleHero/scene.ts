@@ -98,7 +98,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     particleCount = Math.max(2048, Math.floor(base / (2 ** quality)));
     particles.geometry.setDrawRange(0, particleCount);
     if (simulation) simulation.uniforms.uCount.value = particleCount;
-    dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2, quality === 2 ? 1 : quality === 1 ? 1.25 : 2);
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5, quality === 2 ? 1 : quality === 1 ? 1.25 : 1.5);
     dpr = Math.min(dpr, renderer.capabilities.maxTextureSize / Math.max(width, height));
     bloomScale = (mobile ? 0.35 : 0.7) / (quality === 2 ? 1.5 : 1);
     renderer.setPixelRatio(dpr); renderer.setSize(width, height, false);
@@ -114,6 +114,8 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
   function tick(now: number) {
     if (!active()) { frame = 0; return; }
     const elapsed = now - last;
+    // Keep the decorative scene at 30fps, including on 120/144Hz displays.
+    if (elapsed < 1000 / 30 - 0.5) { frame = requestAnimationFrame(tick); return; }
     const delta = Math.min(elapsed / 1000, 1 / 30); last = now;
     const start = performance.now();
     shared.uTime.value += delta;
@@ -128,7 +130,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     draw(delta);
     cpuMs = performance.now() - start;
     intervals[sampleCount % intervals.length] = elapsed; sampleCount++;
-    slowFrames = elapsed > 23 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
+    slowFrames = elapsed > 50 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
     if (slowFrames > 120 && quality < 2 && !qualityTimer) qualityTimer = window.setTimeout(degrade, 0);
     frame = requestAnimationFrame(tick);
   }

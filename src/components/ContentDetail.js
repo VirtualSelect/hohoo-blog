@@ -111,7 +111,7 @@ export default function ContentDetail({ entry: e }) {
         ) : (
           e.sections?.map((s) => (
             <section className="hh-section" key={s.heading}>
-              <h2>{s.heading}</h2>
+              <h2>{uiLabel(s.heading)}</h2>
               <p>{en ? s.en : s.zh}</p>
             </section>
           ))

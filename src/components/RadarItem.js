@@ -12,17 +12,23 @@ export default function RadarItem({ item, compact = false }) {
   const c = localizedNews(item, useSiteConfig().i18n.currentLocale);
   return (
     <article id={'signal-' + item.id}>
-      <p className="hh-eyebrow">
-        {uiLabel('RADAR / SIGNAL')} · {uiLabel(item.domain)} ·{' '}
-        {uiLabel(item.sourceType)} ·{' '}
-        <time dateTime={item.publishedAt}>{item.publishedAt.slice(0, 10)}</time>
-      </p>
-      <p className="hh-meta">
-        {uiLabel('SOURCE STATUS')} ·{' '}
-        {uiLabel((item.verificationStatus || 'unverified')
-          .replaceAll('-', ' ')
-          .toUpperCase())}
-      </p>
+      <div className="radar-item-meta">
+        <p className="hh-eyebrow">
+          {uiLabel('RADAR / SIGNAL')} · {uiLabel(item.domain)} ·{' '}
+          {uiLabel(item.sourceType)} ·{' '}
+          <time dateTime={item.publishedAt}>
+            {item.publishedAt.slice(0, 10)}
+          </time>
+        </p>
+        <p className="hh-meta">
+          {uiLabel('SOURCE STATUS')} ·{' '}
+          {uiLabel(
+            (item.verificationStatus || 'unverified')
+              .replaceAll('-', ' ')
+              .toUpperCase(),
+          )}
+        </p>
+      </div>
       <Freshness
         entry={{
           ...item,
@@ -39,13 +45,15 @@ export default function RadarItem({ item, compact = false }) {
         </a>
       </h3>
       {item.originalTitle && item.originalTitle !== c.title && (
-        <p className="hh-meta">{uiLabel('ORIGINAL SOURCE TITLE')} · {item.originalTitle}</p>
+        <p className="hh-meta">
+          {uiLabel('ORIGINAL SOURCE TITLE')} · {item.originalTitle}
+        </p>
       )}
-      <p className="hh-meta">
-        {uiLabel(c.fallback ? 'SOURCE LANGUAGE' : 'AI TRANSLATED')}
-      </p>
-      {c.summary && (
-        <>
+      <div className="radar-summary-meta">
+        <p className="hh-meta">
+          {uiLabel(c.fallback ? 'SOURCE LANGUAGE' : 'AI TRANSLATED')}
+        </p>
+        {c.summary && (
           <ContentProvenance
             kind={
               item.summaryKind === 'ai-summary'
@@ -53,12 +61,12 @@ export default function RadarItem({ item, compact = false }) {
                 : 'source-excerpt'
             }
           />
-          <p>{c.summary}</p>
-        </>
-      )}
+        )}
+      </div>
+      {c.summary && <p>{c.summary}</p>}
       {!compact && item.whyItMatters && (
         <>
-          <p className="hh-eyebrow">{uiLabel("WHY IT MATTERS")}</p>
+          <p className="hh-eyebrow">{uiLabel('WHY IT MATTERS')}</p>
           <p>{item.whyItMatters}</p>
         </>
       )}

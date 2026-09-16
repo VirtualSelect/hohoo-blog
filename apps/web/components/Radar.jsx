@@ -1,5 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  readRadarFilters,
+  filterRadarItems,
+  radarFilterUrl,
+} from "../lib/radar-filters.mjs";
 import { useSite } from "../runtime/context";
 import Link from "../runtime/Link";
 import { useText } from "./Shell";
@@ -9,17 +14,70 @@ import { uiLabel } from "@site/src/utils/ui-labels";
 export default function Radar() {
   const { items } = useSite(),
     t = useText(),
-    [query, setQuery] = useState(""),
-    [domain, setDomain] = useState("all"),
+    [filters, setFilters] = useState({
+      query: "",
+      domain: "all",
+      source: "all",
+    }),
     [limit, setLimit] = useState(12);
-  const filtered = items.filter(
-    (i) =>
-      (domain === "all" || i.domain === domain) &&
-      [i.title, i.summary, i.searchText]
-        .join(" ")
-        .toLowerCase()
-        .includes(query.toLowerCase().trim()),
-  );
+  const pendingFocus = useRef(null);
+  const { query, domain, source } = filters;
+  const sources = [
+    ...new Map(items.map((item) => [item.sourceId, item.sourceName])),
+  ];
+  const filtered = filterRadarItems(items, filters);
+  const lastCollected = items
+    .map((item) => item.collectedAt)
+    .filter(Boolean)
+    .sort()
+    .at(-1);
+  useEffect(() => {
+    const restore = () => {
+      const next = readRadarFilters(
+        window.location.search,
+        domains,
+        items.map((item) => item.sourceId),
+      );
+      setFilters(next);
+      const index = filterRadarItems(items, next).findIndex(
+        (item) => "#signal-" + item.id === window.location.hash,
+      );
+      setLimit(Math.max(12, index + 1));
+    };
+    restore();
+    window.addEventListener("popstate", restore);
+    window.addEventListener("hashchange", restore);
+    return () => {
+      window.removeEventListener("popstate", restore);
+      window.removeEventListener("hashchange", restore);
+    };
+  }, [items]);
+  useEffect(() => {
+    if (pendingFocus.current) {
+      document
+        .getElementById(pendingFocus.current)
+        ?.querySelector("h3 a")
+        ?.focus();
+      pendingFocus.current = null;
+      return;
+    }
+    if (!window.location.hash.startsWith("#signal-")) return;
+    const frame = requestAnimationFrame(() =>
+      document.getElementById(window.location.hash.slice(1))?.scrollIntoView(),
+    );
+    return () => cancelAnimationFrame(frame);
+  }, [limit, filters]);
+  function update(next) {
+    const value = { ...filters, ...next };
+    setFilters(value);
+    setLimit(12);
+    window.history.replaceState(
+      window.history.state,
+      "",
+      radarFilterUrl(window.location.href, value),
+    );
+  }
+  const active = query || domain !== "all" || source !== "all";
   return (
     <main className="hh-page radar-page">
       <header className="page-intro">
@@ -45,6 +103,20 @@ export default function Radar() {
           </Link>
           <Link to="/subscribe">RSS ↗</Link>
         </div>
+        {lastCollected && (
+          <p className="radar-intake hh-meta">
+            {t("最近收录", "Latest addition", "最近收錄")} ·{" "}
+            <time dateTime={lastCollected}>
+              {lastCollected.slice(0, 16).replace("T", " ")} UTC
+            </time>
+            <br />
+            {t(
+              "时间轴按来源发布时间排列；收录时间不代表采集任务的最后运行时间。",
+              "The timeline follows source publication dates. Latest addition is not the last crawler run.",
+              "時間軸按來源發佈時間排列；收錄時間不代表採集任務的最後執行時間。",
+            )}
+          </p>
+        )}
       </header>
       <div className="filter-bar">
         <label htmlFor="radar-query">
@@ -54,8 +126,7 @@ export default function Radar() {
           id="radar-query"
           value={query}
           onChange={(e) => {
-            setQuery(e.target.value);
-            setLimit(12);
+            update({ query: e.target.value });
           }}
           placeholder={t(
             "标题、摘要、关键词…",
@@ -70,8 +141,7 @@ export default function Radar() {
           id="radar-domain"
           value={domain}
           onChange={(e) => {
-            setDomain(e.target.value);
-            setLimit(12);
+            update({ domain: e.target.value });
           }}
         >
           <option value="all">{t("全部方向", "All topics", "全部方向")}</option>
@@ -81,8 +151,41 @@ export default function Radar() {
             </option>
           ))}
         </select>
+        <label className="sr-only" htmlFor="radar-source">
+          {t("来源", "Source", "來源")}
+        </label>
+        <select
+          id="radar-source"
+          value={source}
+          onChange={(e) => update({ source: e.target.value })}
+        >
+          <option value="all">
+            {t("全部来源", "All sources", "全部來源")}
+          </option>
+          {sources.map(([id, name]) => (
+            <option key={id} value={id}>
+              {name}
+            </option>
+          ))}
+        </select>
       </div>
-      <div className="radar-stream" aria-live="polite">
+      <div className="results-toolbar">
+        <p role="status">
+          {t(
+            `找到 ${filtered.length} 条资讯 · 显示 ${Math.min(limit, filtered.length)} 条`,
+            `${filtered.length} signals · ${Math.min(limit, filtered.length)} shown`,
+            `找到 ${filtered.length} 條資訊 · 顯示 ${Math.min(limit, filtered.length)} 條`,
+          )}
+        </p>
+        {active && (
+          <button
+            onClick={() => update({ query: "", domain: "all", source: "all" })}
+          >
+            {t("清除筛选", "Clear filters", "清除篩選")}
+          </button>
+        )}
+      </div>
+      <div className="radar-stream">
         {!filtered.length ? (
           <div className="empty">
             <h2>
@@ -97,8 +200,7 @@ export default function Radar() {
             </p>
             <button
               onClick={() => {
-                setQuery("");
-                setDomain("all");
+                update({ query: "", domain: "all", source: "all" });
               }}
             >
               {t("清除筛选", "Clear filters", "清除篩選")}
@@ -111,7 +213,9 @@ export default function Radar() {
                 {index === 0 ||
                 filtered[index - 1].publishedAt.slice(0, 10) !==
                   i.publishedAt.slice(0, 10) ? (
-                  <time>{i.publishedAt.slice(0, 10)}</time>
+                  <time dateTime={i.publishedAt}>
+                    {i.publishedAt.slice(0, 10)}
+                  </time>
                 ) : null}
               </div>
               <RadarItem item={i} />
@@ -120,7 +224,12 @@ export default function Radar() {
         )}
       </div>
       {filtered.length > limit && (
-        <button onClick={() => setLimit(limit + 12)}>
+        <button
+          onClick={() => {
+            pendingFocus.current = "signal-" + filtered[limit].id;
+            setLimit(limit + 12);
+          }}
+        >
           {t("加载更多", "Load more", "載入更多")}
         </button>
       )}

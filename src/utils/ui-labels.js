@@ -160,4 +160,9 @@ const labels = {
 "Production": () => translate({id:"label.production",message:"生产部署"}),
 "Performance": () => translate({id:"label.performance",message:"性能"}),
 };
-export function uiLabel(value) { const text = String(value || ''); return (labels[text] || labels[text.toUpperCase()])?.() ?? text; }
+export function uiLabel(value) {
+  const text = String(value || '');
+  if (text.toUpperCase() === 'RAG') return 'RAG';
+  const key = text.toLowerCase() === 'radar-digest' ? 'RADAR / WEEKLY' : text;
+  return (labels[key] || labels[key.toUpperCase()])?.() ?? text;
+}
