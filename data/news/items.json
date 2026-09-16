@@ -1,5 +1,20 @@
 [
   {
+    "id": "995842a0246984c921f7",
+    "title": "TensorRT Edge-LLM Completes the MLPerf Edge Agentic Benchmark 6.4x Faster on Jetson AGX Thor",
+    "url": "https://developer.nvidia.com/blog/tensorrt-edge-llm-completes-the-mlperf-edge-agentic-benchmark-6-4x-faster-on-jetson-agx-thor",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-09-16T20:37:07.000Z",
+    "collectedAt": "2026-09-16T21:40:13.515Z",
+    "category": "embodied-ai",
+    "summary": "AI agents are moving from cloud data centers to vehicles, robots, and other edge devices. Unlike a chatbot that answers a single prompt, an agent works through... AI agents are …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-8d7a7114",
+    "coverage": []
+  },
+  {
     "id": "232935f965ab8b79e6d8",
     "title": "Perplexity 自研 CobbleDB 替代 AWS DynamoDB，每年最多可节省一亿美元",
     "url": "https://aihot.news/items/cmu352k2908t9rosaotpsx42c",
