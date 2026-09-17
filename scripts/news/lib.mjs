@@ -40,15 +40,21 @@ export async function parseFeed(xml, source, now = new Date(), lookbackDays = 14
       let excerpt = plainText(rawExcerpt);
       if (source.parserVersion === 'arxiv-rss-v1')
         excerpt = excerpt.replace(/^arXiv:\S+\s+Announce Type:\s*(?:new|replace|cross|replace-cross)\s+Abstract:\s*/i, '');
-      // Keep only a short feed excerpt; never fetch or reproduce the full article.
+      // Full feed text is transient evidence for filtering, never public content.
+      const fullText = plainText(String(item['content:encoded'] || '').replace(/<p>\s*(?:🔗|via AIHOT)[\s\S]*?<\/p>/gi, ''));
+      const relevanceText = fullText || excerpt;
+      if (!excerpt) excerpt = relevanceText;
       const summary = excerpt.length > 180 ? excerpt.slice(0, 177) + '…' : excerpt;
       items.push({id: createHash('sha256').update(url).digest('hex').slice(0, 20), title, url,
         sourceId: source.id, sourceName: source.name, publishedAt: published.toISOString(),
         collectedAt: now.toISOString(), category: classify(title + ' ' + summary, source.defaultCategory),
-        summary, summaryKind: summary ? 'source-excerpt' : 'link-only'});
+        summary, summaryKind: summary ? 'source-excerpt' : 'link-only', relevanceText});
     } catch {skipped++;}
   }
   return {items, skipped};
+}
+export function publicNewsItem({relevanceText, ...item}) {
+  return item;
 }
 export function selectItems(candidates, existing, config, now = new Date()) {
   const day = now.toISOString().slice(0, 10);

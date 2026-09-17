@@ -6,6 +6,7 @@ import {
   dailyMarkdown,
   fetchText,
   parseFeed,
+  publicNewsItem,
   selectItems,
   summarize,
 } from './lib.mjs';
@@ -98,7 +99,7 @@ const relevant = candidates.flatMap((item) => {
     },
   ];
 });
-let selected = selectItems(relevant, existing, config, now);
+let selected = selectItems(relevant, existing, config, now).map(publicNewsItem);
 const summarized = [];
 for (const item of selected) {
   try {
@@ -125,7 +126,7 @@ const outputRoot = process.argv.includes('--write')
   ? root
   : path.join(root, '.cache-loader/news-preview');
 const all = radar
-  .attachCoverage([...existing, ...selected], relevant, config)
+  .attachCoverage([...existing, ...selected], relevant.map(publicNewsItem), config)
   .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 if (
   selected.length ||

@@ -12,7 +12,7 @@
     {
       "id": "aihot",
       "name": "AIHOT",
-      "feed": "https://aihot.news/feed.xml?aihot_actor=5cf901fe-7e2d-4a0c-90b7-54aca6ca94b6",
+      "feed": "https://aihot.news/feed/full.xml?aihot_actor=5a162b13-b63a-47c5-8257-ce3b0d9bc878",
       "hosts": [
         "aihot.news"
       ],
@@ -24,7 +24,7 @@
       "type": "aggregator",
       "trustLevel": "medium",
       "fetchStrategy": "rss",
-      "parserVersion": "rss-v1"
+      "parserVersion": "aihot-full-v2"
     },
     {
       "id": "huggingface",

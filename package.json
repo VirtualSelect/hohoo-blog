@@ -14,7 +14,7 @@
     "news:translate": "node scripts/news/translate.mjs",
     "news:check": "node scripts/news/render.mjs --check",
     "news:reject": "node scripts/news/render.mjs --reject",
-    "test:news": "node --test tests/news.test.mjs",
+    "test:news": "node --test tests/news.test.mjs tests/news-full-feed.test.mjs tests/news-feed.test.cjs",
     "i18n:check": "node scripts/i18n/check.cjs",
     "start:tw": "npm run dev --prefix apps/web",
     "test:web": "npm run prepare:content --prefix apps/web && npm test --prefix apps/web"

@@ -6,6 +6,8 @@ on:
       - '.github/workflows/ai-news.yml'
       - 'scripts/news/**'
       - 'config/news-sources.json'
+      - 'tests/news*.mjs'
+      - 'tests/news*.cjs'
       - '.npmrc'
       - '.node-version'
       - 'package.json'
@@ -42,7 +44,7 @@ jobs:
       - name: Install Next.js dependencies
         run: npm ci --prefix apps/web --no-audit --no-fund
       - name: Test collector
-        run: node --test tests/news.test.mjs tests/news-feed.test.cjs
+        run: node --test tests/news.test.mjs tests/news-full-feed.test.mjs tests/news-feed.test.cjs
       - name: Collect a filtered batch
         env:
           NEWS_SUMMARIZE: 'false'
