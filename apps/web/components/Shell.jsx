@@ -7,6 +7,7 @@ import Link from "../runtime/Link";
 import { searchEntries } from "@site/src/utils/search.mjs";
 import { writingEntries } from "@site/src/utils/localization.cjs";
 import { uiLabel } from "@site/src/utils/ui-labels";
+import { languageUrl } from "../lib/navigation.mjs";
 export function useText() {
   const { locale } = useSite();
   return useCallback(
@@ -207,14 +208,8 @@ function Frame({ children }) {
             id="language"
             value={locale}
             onChange={(e) => {
-              const prefix =
-                e.target.value === "zh-CN" ? "" : "/" + e.target.value;
               window.location.assign(
-                prefix +
-                  "/" +
-                  route +
-                  window.location.search +
-                  window.location.hash,
+                languageUrl(e.target.value, route, window.location.href),
               );
             }}
           >
