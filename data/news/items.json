@@ -1,5 +1,20 @@
 [
   {
+    "id": "956b39e232e952cc93a7",
+    "title": "GitHub 用 Copilot 智能体将 Copilot 运行时从 TypeScript 迁移到 83 万行 Rust",
+    "url": "https://aihot.news/items/cmu4tu41w07ufrokck6s0p0cp",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-17T00:26:43.000Z",
+    "collectedAt": "2026-09-17T07:18:15.524Z",
+    "category": "ai-apps",
+    "summary": "GitHub 工程师 Stephen Toub 复盘用 Copilot 智能体在约 14.5 周内将 Copilot agent runtime 从 TypeScript/Node.js 全量重写为 832，378 行生产 Rust，AI 智能体完成大部分代码，共 128 个 PR 增量合入 main 并持续发布。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-12dabac2",
+    "coverage": []
+  },
+  {
     "id": "51fbb827c73d2159f9c6",
     "title": "用 MCP 插件让 GPT-6 Pro 分担 Codex 规划任务，节省 Pro 会员周额度",
     "url": "https://aihot.news/items/cmu4s9jrn0683rokccdfqwbux",
@@ -102,6 +117,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-6c024315",
+    "coverage": []
+  },
+  {
+    "id": "81a758bbb59286845a55",
+    "title": "Grok Build 推出记忆功能，可跨会话保留项目约定与决策",
+    "url": "https://aihot.news/items/cmu4hic050r8kro4wzayakuhu",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-16T00:00:00.000Z",
+    "collectedAt": "2026-09-17T07:18:15.524Z",
+    "category": "ai-apps",
+    "summary": "xAI 宣布 Grok Build 上线记忆功能，会在每轮对话结束后于后台记录项目约定、决策及事实，供后续会话读取。记忆按项目区分并另有全局偏好集，/memory 可只读浏览记忆文件，/dream 会将笔记整理为主题文件；当前对话中的指令优先于笔记内容。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-3fa0bddf",
     "coverage": []
   },
   {
@@ -285,6 +315,21 @@
     "coverage": []
   },
   {
+    "id": "a0f382a7db6105950636",
+    "title": "硅基流动上线开源模型 Hy4 preview，770B 总参数、1M 上下文",
+    "url": "https://aihot.news/items/cmu1gt8gn097trocnxxvdhxli",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-14T16:32:25.000Z",
+    "collectedAt": "2026-09-17T07:18:15.524Z",
+    "category": "ai-apps",
+    "summary": "硅基流动（SiliconFlow）宣布开源模型 Hy4 preview 上线其平台。该模型总参数 770B、每 token 激活 49B、支持 1M 上下文，采用 Apache 2.0 协议，面向编码、分析、研究和复杂实际工作。用户可将其接入 Claude Code、Codex、Cursor 等已有工具；图片显示定价为每 1M tokens 输入 $0…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-4e248404",
+    "coverage": []
+  },
+  {
     "id": "7f82d995c515e5ba429e",
     "title": "How Fyxer built an AI executive assistant people trust",
     "url": "https://openai.com/index/fyxer",
@@ -387,6 +432,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-d9eb0044",
+    "coverage": []
+  },
+  {
+    "id": "74dd248a162fbddeb952",
+    "title": "GitHub 日韩营销负责人如何用 GitHub Copilot 把活动运营自动化",
+    "url": "https://aihot.news/items/cmtxbm8dp037xrouueja171wr",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-11T18:26:10.000Z",
+    "collectedAt": "2026-09-17T07:18:15.524Z",
+    "category": "ai-apps",
+    "summary": "GitHub 日韩地区营销负责人 Tomoko Tanaka 分享如何不写代码，把活动运营交给 GitHub Copilot 自动化。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-2290dbcf",
     "coverage": []
   },
   {
