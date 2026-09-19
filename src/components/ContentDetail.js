@@ -11,7 +11,7 @@ import Link from '@lab/runtime/Link';
 import ExperimentDesign from './ExperimentDesign';
 import ContentProvenance, { Freshness } from './ContentProvenance';
 import { Related, Status, useEnglish } from './ContentUI';
-export default function ContentDetail({ entry: e }) {
+export default function ContentDetail({ entry: e, children }) {
   const en = useEnglish();
   const locale = useSiteConfig().i18n.currentLocale;
   const tw = locale === 'zh-TW';
@@ -132,6 +132,7 @@ export default function ContentDetail({ entry: e }) {
           <ProjectEvidence entry={e} />
         )}
         {e.type === 'note' && <ReadingActions id={e.id} en={en} />}
+        {children}
         <Related ids={e.related} />
         <p>
           <Link to={lab ? '/labs' : e.type === 'note' ? '/notes' : '/projects'}>

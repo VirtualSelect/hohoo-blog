@@ -36,6 +36,10 @@ const pages = {
 };
 const Detail = dynamic(() => import("@site/src/components/ContentDetail"));
 const Topic = dynamic(() => import("@site/src/components/TopicLanding"));
+const BlogTimeMachine = dynamic(() => import("./BlogTimeMachine"));
+const ContextSuitcase = dynamic(() => import("./ContextSuitcase"));
+const RetrievalDrawer = dynamic(() => import("./RetrievalDrawer"));
+const AgentPermissionQuiz = dynamic(() => import("./AgentPermissionQuiz"));
 const Weekly = dynamic(() => import("@site/src/components/RadarWeekly"));
 const Daily = dynamic(() => import("@site/src/components/NewsDigest"));
 const AstraParticleHero = dynamic(
@@ -123,6 +127,13 @@ export default function Views() {
         <main className="hh-page">
           <h1>{document.metadata.title}</h1>
           <Topic category={route.split("/")[1]} />
+          {route === "docs/llm" && <ContextSuitcase />}
+          {route === "docs/ai-apps" && (
+            <>
+              <RetrievalDrawer />
+              <AgentPermissionQuiz />
+            </>
+          )}
         </main>
       );
     return <Document />;
@@ -134,7 +145,16 @@ export default function Views() {
   const entry = globalData["content-index"].entries.find(
     (e) => e.href === (locale === "zh-CN" ? "" : "/" + locale) + "/" + route,
   );
-  if (entry) return <Detail entry={entry} />;
+  if (entry)
+    return (
+      <Detail entry={entry}>
+        {entry.id === "project:hohoo-blog" && (
+          <BlogTimeMachine
+            repo={entry.repo || "https://github.com/VirtualSelect/hohoo-blog"}
+          />
+        )}
+      </Detail>
+    );
   if (route.startsWith("radar/weekly/"))
     return (
       <Weekly

@@ -1,0 +1,96 @@
+.journey {
+  border-top: 1px solid var(--hh-border);
+  margin-top: 3rem;
+  padding-top: 2rem;
+}
+.note {
+  color: var(--blog-muted);
+  font-size: 0.85rem;
+}
+.scenarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+  border: 0;
+  margin-block: 1.5rem;
+}
+.scenarios legend {
+  margin-bottom: 0.5rem;
+}
+.scenarios label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  min-height: 44px;
+}
+.scenarios input {
+  accent-color: var(--hh-accent);
+  width: 18px;
+  height: 18px;
+}
+.path {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  list-style: none;
+  padding: 0;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+.path li {
+  border-top: 2px solid var(--hh-border);
+  padding-top: 0.5rem;
+  color: var(--blog-muted);
+  overflow-wrap: anywhere;
+}
+.path li[aria-current] {
+  border-color: var(--hh-accent);
+  color: var(--hh-text-primary);
+  font-weight: 700;
+}
+.path span {
+  display: block;
+  font-family: var(--hh-base-font-family-monospace);
+}
+.stage {
+  min-height: 265px;
+  padding-block: 1rem;
+}
+.stage h3 {
+  font-size: 1.3rem;
+}
+.stage pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: var(--blog-soft);
+  padding: 1rem;
+  font-size: 0.85rem;
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.controls span {
+  color: var(--blog-muted);
+  font-size: 0.8rem;
+}
+.controls button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.journey :focus-visible {
+  outline: 2px solid var(--hh-accent);
+  outline-offset: 3px;
+}
+@media (max-width: 430px) {
+  .path {
+    gap: 0.25rem;
+    font-size: 0.72rem;
+  }
+  .controls button {
+    padding-inline: 0.65rem;
+  }
+}

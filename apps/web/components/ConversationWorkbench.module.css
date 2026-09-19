@@ -1,0 +1,90 @@
+.workbench {
+  margin-block: 3rem;
+  padding-block: 2rem;
+  border-block: 1px solid var(--hh-border);
+  scroll-margin-top: 7rem;
+}
+.workbench h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.4;
+}
+.caption,
+.message small,
+.question small {
+  color: var(--blog-muted);
+  font-size: 0.85rem;
+}
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-block: 1.5rem;
+}
+.columns > * {
+  min-width: 0;
+}
+.history {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.history legend {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-block: 1rem;
+  border-top: 1px solid var(--hh-border);
+  cursor: pointer;
+}
+.message input {
+  width: 20px;
+  height: 20px;
+  margin: 0.35rem 0 0;
+  accent-color: var(--hh-accent);
+  flex: 0 0 auto;
+}
+.message span span,
+.message small {
+  display: block;
+}
+.question {
+  border-left: 2px solid var(--hh-accent);
+  padding-left: 1rem;
+  margin-block: 1rem;
+}
+.question p {
+  margin-top: 0.25rem;
+}
+.request pre {
+  max-width: 100%;
+  max-height: 32rem;
+  overflow: auto;
+  padding: 1rem;
+  background: var(--blog-soft);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.evidence {
+  border-top: 1px solid var(--hh-border);
+  padding-top: 1.25rem;
+}
+.evidence p {
+  color: var(--blog-muted);
+  font-size: 0.9rem;
+}
+.workbench :focus-visible {
+  outline: 2px solid var(--hh-accent);
+  outline-offset: 4px;
+}
+@media (max-width: 768px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}

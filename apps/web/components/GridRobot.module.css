@@ -1,0 +1,88 @@
+.lab {
+  padding-block: 2rem;
+  margin-block: 2rem;
+  border-block: 1px solid var(--hh-border);
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 340px) minmax(0, 1fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+}
+.cell {
+  min-width: 0;
+  min-height: 44px;
+  aspect-ratio: 1;
+  padding: 0;
+  border-radius: 0;
+  background: var(--blog-soft);
+  font-size: 1.65rem;
+  color: var(--hh-accent);
+}
+.cell[data-wall] {
+  background: var(--blog-muted);
+  color: var(--hh-bg);
+}
+.cell[data-robot] {
+  background: var(--hh-accent);
+  color: var(--hh-bg);
+}
+.cell:disabled {
+  cursor: default;
+  opacity: 1;
+}
+.legend,
+.note {
+  color: var(--blog-muted);
+  font-size: 0.85rem;
+}
+.preview {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+}
+.preview input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--hh-accent);
+}
+.status {
+  border-left: 2px solid var(--hh-accent);
+  padding-left: 1rem;
+}
+.status h3 {
+  margin-top: 0;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-block: 1.5rem;
+}
+.controls button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.lab :focus-visible {
+  outline: 2px solid var(--hh-accent);
+  outline-offset: 3px;
+}
+.lab summary {
+  min-height: 44px;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .grid {
+    max-width: 340px;
+  }
+}

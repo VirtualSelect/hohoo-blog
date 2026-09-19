@@ -1,0 +1,92 @@
+.reflection {
+  margin-block: 2rem;
+  border-block: 1px solid var(--hh-border);
+}
+.reflection summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0.25rem;
+  cursor: pointer;
+  list-style: none;
+}
+.reflection summary::-webkit-details-marker {
+  display: none;
+}
+.reflection summary strong,
+.reflection summary small {
+  display: block;
+}
+.reflection summary strong {
+  font-size: 1.2rem;
+}
+.reflection summary small,
+.hint,
+.footer p {
+  color: var(--blog-muted);
+  font-size: 0.85rem;
+}
+.stamp {
+  font-size: 2rem;
+  color: var(--hh-accent);
+}
+.plus {
+  margin-left: auto;
+  transition: transform 200ms ease;
+}
+.reflection[open] .plus {
+  transform: rotate(45deg);
+}
+.body {
+  padding: 0 0.25rem 1.5rem;
+}
+.field {
+  margin-block: 1.5rem;
+}
+.field label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.field label span {
+  color: var(--hh-accent);
+  font-family: var(--hh-base-font-family-monospace);
+  margin-right: 0.5rem;
+}
+.field textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  padding: 0.75rem;
+  border: 1px solid var(--hh-border);
+  border-radius: 0;
+  background: var(--blog-soft);
+  color: var(--hh-text-primary);
+  font: inherit;
+  line-height: 1.8;
+}
+.reflection :focus-visible {
+  outline: 2px solid var(--hh-accent);
+  outline-offset: 3px;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.footer button {
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plus {
+    transition: none;
+  }
+}

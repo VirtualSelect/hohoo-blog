@@ -6,6 +6,7 @@ import current from "@site/data/current.json";
 import { writingEntries } from "@site/src/utils/localization.cjs";
 import { Status } from "@site/src/components/ContentUI";
 import { uiLabel } from "@site/src/utils/ui-labels";
+import DiscoveryCompass from "./DiscoveryCompass";
 
 export default function Home() {
   const { locale, globalData, items } = useSite(),
@@ -151,6 +152,14 @@ export default function Home() {
               <Link to={demoProject.href}>
                 {t("配套 Demo", "Companion demos", "配套 Demo")} ↗
               </Link>
+              <a href={`${firstTutorial.href}#conversation-workbench`}>
+                {t(
+                  "动手拆解对话记忆",
+                  "Explore conversation memory",
+                  "動手拆解對話記憶",
+                )}{" "}
+                →
+              </a>
             </div>
           </aside>
         )}
@@ -197,6 +206,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <DiscoveryCompass />
       <section className="home-section tracks-section">
         <div>
           <p className="eyebrow">

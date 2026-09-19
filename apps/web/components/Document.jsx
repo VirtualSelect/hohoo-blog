@@ -6,6 +6,9 @@ import Link from "../runtime/Link";
 import DocReadingContext from "@site/src/components/DocReadingContext";
 import TranslationNotice from "@site/src/components/TranslationNotice";
 import ArticleContents from "./ArticleContents";
+import ConversationWorkbench from "./ConversationWorkbench";
+import ReadingReflection from "./ReadingReflection";
+import RequestJourney from "./RequestJourney";
 export default function Document() {
   const { document: d } = useSite(),
     t = useText(),
@@ -107,6 +110,17 @@ export default function Document() {
           ref={ref}
           className="prose"
           dangerouslySetInnerHTML={{ __html: d.html }}
+        />
+        {d.route === "docs/ai-apps/java-first-llm" && (
+          <>
+            <RequestJourney />
+            <ConversationWorkbench />
+          </>
+        )}
+        <ReadingReflection
+          key={d.route}
+          route={d.route}
+          title={d.metadata.title}
         />
         {d.kind === "docs" && <DocReadingContext position="footer" />}
         <div className="article-end">

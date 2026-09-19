@@ -6,6 +6,7 @@ import {
   JourneyRepository,
 } from "./JourneyShared";
 import styles from "./Journey.module.css";
+import GridRobot from "./GridRobot";
 
 export default function VirtualLab({ locale }) {
   const { journey, registry, t, text, href, term } = journeyView(locale);
@@ -23,6 +24,7 @@ export default function VirtualLab({ locale }) {
         </div>
       </header>
       <p className={styles.metadata}>{t("simulation.intro")}</p>
+      <GridRobot locale={locale} />
       <nav className={styles.links} aria-label={t("virtual.nav")}>
         {registry.labs.map((lab) => (
           <a key={lab.id} href={"#" + lab.slug}>
