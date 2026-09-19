@@ -7,6 +7,9 @@ import {
 } from "./JourneyShared";
 import styles from "./Journey.module.css";
 import GridRobot from "./GridRobot";
+import RobotProgram from "./RobotProgram";
+import RobotPrediction from "./RobotPrediction";
+import TryIt from "./TryIt";
 
 export default function VirtualLab({ locale }) {
   const { journey, registry, t, text, href, term } = journeyView(locale);
@@ -24,7 +27,31 @@ export default function VirtualLab({ locale }) {
         </div>
       </header>
       <p className={styles.metadata}>{t("simulation.intro")}</p>
-      <GridRobot locale={locale} />
+      <TryIt
+        id="grid-exercise"
+        title={
+          locale === "en"
+            ? "Grid planning"
+            : locale === "zh-TW"
+              ? "網格規劃"
+              : "网格规划"
+        }
+      >
+        <GridRobot locale={locale} />
+      </TryIt>
+      <TryIt
+        id="robot-exercise"
+        title={
+          locale === "en"
+            ? "Robot instructions"
+            : locale === "zh-TW"
+              ? "機器人指令"
+              : "机器人指令"
+        }
+      >
+        <RobotProgram locale={locale} />
+        <RobotPrediction />
+      </TryIt>
       <nav className={styles.links} aria-label={t("virtual.nav")}>
         {registry.labs.map((lab) => (
           <a key={lab.id} href={"#" + lab.slug}>

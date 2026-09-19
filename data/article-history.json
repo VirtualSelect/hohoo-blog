@@ -1,0 +1,9 @@
+{
+  "docs/ai-apps/java-first-llm": [
+    {
+      "date": "2026-09-12",
+      "commit": "35a395153c3645cdc1f9e1e4e4e82e0961e213af",
+      "summary": ["首次发布：从请求、解析到多轮对话，关联已验证的 Demo 提交。", "First publication: requests, parsing and multi-turn conversation, linked to the verified demo commit.", "首次發佈：從請求、解析到多輪對話，關聯已驗證的 Demo 提交。"]
+    }
+  ]
+}

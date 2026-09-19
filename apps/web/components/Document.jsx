@@ -9,6 +9,11 @@ import ArticleContents from "./ArticleContents";
 import ConversationWorkbench from "./ConversationWorkbench";
 import ReadingReflection from "./ReadingReflection";
 import RequestJourney from "./RequestJourney";
+import ReadingFork from "./ReadingFork";
+import TryIt from "./TryIt";
+import ErrorClinic from "./ErrorClinic";
+import PracticeCompanion from "./PracticeCompanion";
+import ArticleHistory from "./ArticleHistory";
 export default function Document() {
   const { document: d } = useSite(),
     t = useText(),
@@ -113,8 +118,29 @@ export default function Document() {
         />
         {d.route === "docs/ai-apps/java-first-llm" && (
           <>
-            <RequestJourney />
-            <ConversationWorkbench />
+            <TryIt
+              id="request-exercise"
+              title={t(
+                "请求与错误排查",
+                "Requests and troubleshooting",
+                "請求與錯誤排查",
+              )}
+            >
+              <RequestJourney />
+              <ErrorClinic />
+            </TryIt>
+            <TryIt
+              id="memory-exercise"
+              title={t("对话记忆", "Conversation memory", "對話記憶")}
+            >
+              <ConversationWorkbench />
+            </TryIt>
+            <TryIt
+              id="practice-checklist"
+              title={t("实践自检", "Practice checklist", "實作自檢")}
+            >
+              <PracticeCompanion />
+            </TryIt>
           </>
         )}
         <ReadingReflection
@@ -123,6 +149,8 @@ export default function Document() {
           title={d.metadata.title}
         />
         {d.kind === "docs" && <DocReadingContext position="footer" />}
+        <ReadingFork key={d.route} />
+        <ArticleHistory route={d.route} />
         <div className="article-end">
           <Link to="/articles">
             ← {t("全部文章", "All writing", "全部文章")}

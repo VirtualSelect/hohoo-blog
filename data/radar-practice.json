@@ -1,0 +1,20 @@
+[
+  {
+    "signalId": "a1668928fd43d0c6cf05",
+    "question": ["比较推理性能前，是否固定了输入长度、输出长度、并发数和硬件？先从原文中找齐这些条件。", "Before comparing inference performance, are input/output length, concurrency and hardware controlled? Locate these conditions in the source first.", "比較推理效能前，是否固定了輸入長度、輸出長度、並行數和硬體？先從原文中找齊這些條件。"],
+    "href": "/docs/llm",
+    "label": ["回到 LLM 学习入口", "Explore the LLM learning hub", "回到 LLM 學習入口"]
+  },
+  {
+    "signalId": "00f50a290d71e4858a3e",
+    "question": ["原文中的智能体能够观察什么、执行什么动作？先列出输入与动作空间，再与本站局部视野网格比较；网格不能验证论文效果。", "What can the agent observe and which actions can it take? List inputs and actions, then compare with the local-vision grid. The grid cannot validate the paper’s results.", "原文中的智慧體能夠觀察什麼、執行什麼動作？先列出輸入與動作空間，再與本站局部視野網格比較；網格不能驗證論文效果。"],
+    "href": "/journey/virtual-lab#grid-exercise",
+    "label": ["探索局部视野教学地图", "Explore the local-vision teaching grid", "探索局部視野教學地圖"]
+  },
+  {
+    "signalId": "04949df4567047f5f68e",
+    "question": ["记忆保存了哪些信息，又会遗忘什么？阅读原文的记忆设计与消融条件，再在对话演示里观察移除历史会丢失哪些依据。两者不是相同系统。", "What does the memory retain or discard? Read the memory design and ablation conditions, then inspect missing evidence when removing chat history. These are different systems.", "記憶保存了哪些資訊，又會遺忘什麼？閱讀原文的記憶設計與消融條件，再在對話演示裡觀察移除歷史會丟失哪些依據。兩者不是相同系統。"],
+    "href": "/docs/ai-apps/java-first-llm#conversation-workbench",
+    "label": ["对话记忆演示", "Conversation memory demo", "對話記憶演示"]
+  }
+]

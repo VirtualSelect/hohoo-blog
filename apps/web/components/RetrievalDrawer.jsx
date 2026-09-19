@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useText } from "./Shell";
 import styles from "./LearningExercises.module.css";
+import RetrievalRanking from "./RetrievalRanking";
 
 export default function RetrievalDrawer() {
   const t = useText();
@@ -153,6 +154,7 @@ export default function RetrievalDrawer() {
           </p>
         </div>
       )}
+      <RetrievalRanking docs={docs} />
     </section>
   );
 }

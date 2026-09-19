@@ -14,6 +14,7 @@ export default function ConversationWorkbench() {
     return () => cancelAnimationFrame(frame);
   }, []);
   const [included, setIncluded] = useState([true, true]);
+  const [summary, setSummary] = useState(false);
   const history = [
     {
       role: "user",
@@ -40,7 +41,20 @@ export default function ConversationWorkbench() {
       "我正在學習什麼？你建議從哪裡開始？",
     ),
   };
-  const messages = [...history.filter((_, i) => included[i]), question];
+  const selected = history.filter((_, i) => included[i]);
+  const messages = [
+    ...(summary && selected.length
+      ? [
+          {
+            role: "user",
+            content:
+              t("历史摘要：", "History summary: ", "歷史摘要：") +
+              selected.map((m) => m.content).join(" "),
+          },
+        ]
+      : selected),
+    question,
+  ];
   return (
     <section
       id="conversation-workbench"
@@ -78,6 +92,28 @@ export default function ConversationWorkbench() {
       </p>
       <div className={styles.columns}>
         <div>
+          <h3>
+            {t("对话记忆侦探", "Conversation memory detective", "對話記憶偵探")}
+          </h3>
+          <label className={styles.message}>
+            <input
+              type="checkbox"
+              checked={summary}
+              onChange={(e) => setSummary(e.target.checked)}
+            />
+            {t(
+              "把选中历史改为摘要",
+              "Summarize selected history",
+              "把選中歷史改為摘要",
+            )}
+          </label>
+          <p className={styles.caption}>
+            {t(
+              "摘要只保留勾选的事实，不会找回已移除的信息。这里用固定规则拼接，不由模型生成。",
+              "The summary keeps selected facts only; removed information cannot be recovered. This is a rule-based summary, not model output.",
+              "摘要只保留勾選的事實，不會找回已移除的資訊。這裡用固定規則串接，不由模型生成。",
+            )}
+          </p>
           <fieldset className={styles.history}>
             <legend>
               {t(
@@ -128,7 +164,13 @@ export default function ConversationWorkbench() {
             </small>
             <p>{question.content}</p>
           </div>
-          <button type="button" onClick={() => setIncluded([true, true])}>
+          <button
+            type="button"
+            onClick={() => {
+              setIncluded([true, true]);
+              setSummary(false);
+            }}
+          >
             {t("恢复完整上下文", "Restore full context", "恢復完整上下文")}
           </button>
         </div>

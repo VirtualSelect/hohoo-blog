@@ -1,4 +1,5 @@
 import { uiLabel } from '@site/src/utils/ui-labels';
+import LearningBackpack from '@lab/components/LearningBackpack';
 import React, { useState } from 'react';
 import Layout from '@lab/runtime/Layout';
 import Link from '@lab/runtime/Link';
@@ -115,6 +116,7 @@ export default function Reading() {
             ? 'Saved in this browser. Migrated entries without a save date follow dated entries.'
             : '保存在当前浏览器。旧收藏没有保存日期时排在有日期的记录之后，不补造时间。'}
         </p>
+        <LearningBackpack />
         <div className="hh-controls">
           <label>
             {en ? 'Status' : '状态'}{' '}

@@ -1,5 +1,13 @@
 # Huhohoo Content Model
 
+## 本地学习背包与证据入口（2026-09-19）
+
+- `huhohoo.practice.v1:docs/ai-apps/java-first-llm`：`{version:1,completed:string[]}`，仅 environment/request/parse/history 四项访客自检，不是作者进度或自动验证。
+- 背包文件：`{version:1,kind:"huhohoo-backpack",records:{[storageKey]:rawJsonString}}`，最大 2 MB / 1000 份记录。白名单仅 reading.v2 / learning.v1 / reflection.v1 与上述 practice.v1。未知版本、字段和非法记录拒绝导入，不静默降级。已有阅读和学习旧键迁移沿用原 hook；备份格式未来升级须新增显式迁移。
+- 导入冲突按整份记录处理，默认保留本地；覆盖为读者显式选择。执行前再次校验预览快照。存储失败尝试回滚，回滚失败明确提示；不宣称浏览器存储具有事务保证或跨设备自动同步。
+- `data/article-history.json`：以无语言前缀 route 为键，记录真实 date / commit / 三语言 summary。当前仅核实 Java 首篇发布提交。日期不是部署时间或再次核验时间，无记录的文章隐藏此模块。
+- `data/radar-practice.json`：显式 signalId / 三语言 question / 本站 href / 三语言 label。它是维护者可编辑的阅读问题，不是 HOOHOO'S TAKE、论文复现结果或自动生成的结论；来源记录不改动。
+
 ## Journey 计划模型
 
 虚拟实验注册表位于 `data/journey-labs.json`，通过 engine / milestones / project 关联，不复制成正式 Lab 成果。状态 planning / learning / completed / future；completed 要求真实日期、result 与 evidence，规划状态不允许成果字段。模型类型与验证位于 `apps/web/lib/journey.mjs`，显示文案使用 journey.* 翻译键。主项目目标架构和实验闭环保存在 Journey 模型，未知当前周和当前实验为 null。

@@ -7,6 +7,7 @@ import ReadingActions from './ReadingActions';
 import { localizedNews } from '@site/src/utils/news-locale.mjs';
 import { useEnglish, Related } from './ContentUI';
 import ContentProvenance, { Freshness } from './ContentProvenance';
+import RadarPractice from '@lab/components/RadarPractice';
 export default function RadarItem({ item, compact = false }) {
   const en = useEnglish();
   const c = localizedNews(item, useSiteConfig().i18n.currentLocale);
@@ -91,6 +92,7 @@ export default function RadarItem({ item, compact = false }) {
         {!compact && <ReadingActions id={item.id} en={en} compact />}
       </div>
       {!compact && <Related ids={item.related || []} />}{' '}
+      {!compact && <RadarPractice id={item.id} />}
       {!compact &&
         ['primary-confirmed', 'cross-checked'].includes(
           item.verificationStatus,
