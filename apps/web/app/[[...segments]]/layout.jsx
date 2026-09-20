@@ -1,6 +1,8 @@
 import "../globals.css";
+import "../editorial.css";
 import { resolveSegments } from "../../lib/content";
 import VisitAnalytics from "../../components/VisitAnalytics";
+import { themeScript } from "../../lib/theme-init.mjs";
 export const metadata = {
   metadataBase: new URL("https://huhohoo.com"),
   title: { default: "Hohoo's AI Lab", template: "%s · Hohoo" },
@@ -11,8 +13,6 @@ export const metadata = {
     apple: "/img/hohoo.jpg",
   },
 };
-const themeScript =
-  "(()=>{let t;try{t=localStorage.getItem('huhohoo.theme.v1')}catch{}document.documentElement.dataset.theme=t==='dark'||t==='light'?t:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'})()";
 export default async function RootLayout({ children, params }) {
   const { locale } = resolveSegments((await params).segments);
   return (

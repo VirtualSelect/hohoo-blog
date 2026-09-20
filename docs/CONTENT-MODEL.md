@@ -1411,3 +1411,9 @@ related: []
 ## Next.js 内容适配（2026-09-12）
 
 apps/web/scripts/content.mjs 从同一内容源生成三语言路由、文章 HTML/目录、内容与学习索引、Radar 和 RSS。复用原内容校验、翻译清单和 Radar 来源/去重规则，不改变内容状态或自动生成文章。正文 HTML 经白名单清理，仓库现有 TopicLanding / NewsDigest 显式映射为组件；外部 RSS 不作为 MDX 执行。
+
+## 阅读偏好与证据展示（2026-09-20）
+
+本机阅读宽度保存于 `huhohoo.reader.v1`：`{version:1,width:"standard"|"wide"}`。无记录、损坏或未知版本回退标准宽度；存储失败仅在本次访问生效。该偏好不进入作者内容、统计或跨设备同步。
+
+项目界面预览不产生新的内容记录；运行摘录、首页摘句、教程实践对照复用已发布 Java 教程中的真实记录，不能独立标为新实验或新结论。项目过程导航来自既有 sections，截图仅从既有 screenshots 元数据生成。

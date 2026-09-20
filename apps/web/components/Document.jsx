@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useSite } from "../runtime/context";
 import { useText } from "./Shell";
@@ -16,12 +16,44 @@ const ErrorClinic = dynamic(() => import("./ErrorClinic"));
 const PracticeCompanion = dynamic(() => import("./PracticeCompanion"));
 import ArticleHistory from "./ArticleHistory";
 import VisitorStats from "./VisitorStats";
+import TutorialGuide from "./TutorialGuide";
+import PracticeEvidence from "./PracticeEvidence";
+import {
+  readerSettingsKey,
+  parseReaderSettings,
+} from "../lib/reader-settings.mjs";
 export default function Document({ children }) {
   const { document: d } = useSite(),
     t = useText(),
     ref = useRef(null);
+  const [readerWidth, setReaderWidth] = useState("standard");
+  const [storageError, setStorageError] = useState(false);
+  const imageDialog = useRef(null);
+  const imageTrigger = useRef(null);
+  const [zoomImage, setZoomImage] = useState(null);
+  useEffect(() => {
+    try {
+      setReaderWidth(
+        parseReaderSettings(localStorage.getItem(readerSettingsKey)).width,
+      );
+    } catch {}
+  }, []);
+  function toggleWidth() {
+    const width = readerWidth === "wide" ? "standard" : "wide";
+    setReaderWidth(width);
+    try {
+      localStorage.setItem(
+        readerSettingsKey,
+        JSON.stringify({ version: 1, width }),
+      );
+      setStorageError(false);
+    } catch {
+      setStorageError(true);
+    }
+  }
   useEffect(() => {
     const buttons = [];
+    const cleanups = [];
     const timers = new Set();
     for (const pre of ref.current?.querySelectorAll("pre") || []) {
       const b = window.document.createElement("button");
@@ -49,14 +81,57 @@ export default function Document({ children }) {
       };
       pre.append(b);
       buttons.push(b);
+      if (
+        (pre.querySelector("code")?.textContent || "").split("\n").length > 12
+      ) {
+        const expand = window.document.createElement("button");
+        expand.type = "button";
+        expand.className = "code-expand";
+        pre.classList.add("code-collapsed");
+        expand.setAttribute("aria-expanded", "false");
+        expand.textContent = t(
+          "展开完整代码",
+          "Show full code",
+          "展開完整程式碼",
+        );
+        expand.onclick = () => {
+          const collapsed = pre.classList.toggle("code-collapsed");
+          expand.setAttribute("aria-expanded", String(!collapsed));
+          expand.textContent = collapsed
+            ? t("展开完整代码", "Show full code", "展開完整程式碼")
+            : t("收起代码", "Collapse code", "收起程式碼");
+        };
+        pre.after(expand);
+        buttons.push(expand);
+        cleanups.push(() => pre.classList.remove("code-collapsed"));
+      }
+    }
+    for (const img of ref.current?.querySelectorAll(".prose img") || []) {
+      const zoom = window.document.createElement("button");
+      zoom.type = "button";
+      zoom.className = "image-zoom";
+      zoom.textContent = t("放大图片", "Enlarge image", "放大圖片");
+      zoom.onclick = () => {
+        imageTrigger.current = zoom;
+        setZoomImage({ src: img.currentSrc || img.src, alt: img.alt });
+        imageDialog.current.showModal();
+      };
+      img.after(zoom);
+      buttons.push(zoom);
     }
     return () => {
       timers.forEach(clearTimeout);
       buttons.forEach((b) => b.remove());
+      cleanups.forEach((cleanup) => cleanup());
     };
   }, [d, t]);
   return (
-    <main className="document-layout">
+    <main
+      className="document-layout"
+      data-domain={d.frontMatter.domain}
+      data-reader-width={readerWidth}
+      id="article-top"
+    >
       <aside className="document-nav">
         {d.kind === "blog" ? (
           <>
@@ -91,6 +166,19 @@ export default function Document({ children }) {
               : t("学习 / 实践", "Learn / Practice", "學習 / 實作")}
           </p>
           <h1>{d.metadata.title}</h1>
+          {d.kind === "blog" && (
+            <div className="journal-cover">
+              <span>Hohoo.</span>
+              <p>
+                {d.metadata.description ||
+                  t(
+                    "写下经历，也留下思考。",
+                    "Experiences and reflections.",
+                    "寫下經歷，也留下思考。",
+                  )}
+              </p>
+            </div>
+          )}
           <TranslationNotice
             id={(d.kind === "blog" ? "blog:" : "doc:") + d.metadata.id}
             original={"/" + d.route}
@@ -114,7 +202,51 @@ export default function Document({ children }) {
           <VisitorStats variant="article" path={d.route} />
         </header>
         <ArticleContents headings={d.headings} mobile />
-        <div ref={ref}>{children}</div>
+        <nav
+          className="mobile-reading-tools"
+          aria-label={t("阅读工具", "Reading tools", "閱讀工具")}
+        >
+          <a
+            href="#article-toc"
+            onClick={() => {
+              const toc = window.document.getElementById("article-toc");
+              if (toc) toc.open = true;
+            }}
+          >
+            {t("目录", "Contents", "目錄")}
+          </a>
+          <a href="#article-top">
+            {t("回到顶部", "Back to top", "回到頂部")} ↑
+          </a>
+        </nav>
+        <div className="reader-toolbar">
+          <button
+            type="button"
+            aria-pressed={readerWidth === "wide"}
+            onClick={toggleWidth}
+          >
+            {t("宽屏阅读", "Wide reading", "寬螢幕閱讀")}
+          </button>
+          <a href="#reading-content">
+            {t("跳到正文", "Skip to article", "跳至正文")} ↓
+          </a>
+          {storageError && (
+            <small role="status">
+              {t(
+                "偏好仅本次有效",
+                "Preference applies for this visit",
+                "偏好僅本次有效",
+              )}
+            </small>
+          )}
+        </div>
+        {d.route === "docs/ai-apps/java-first-llm" && (
+          <TutorialGuide headings={d.headings} />
+        )}
+        <div id="reading-content" ref={ref}>
+          {children}
+        </div>
+        {d.route === "docs/ai-apps/java-first-llm" && <PracticeEvidence />}
         {d.route === "docs/ai-apps/java-first-llm" && (
           <>
             <TryIt
@@ -156,6 +288,20 @@ export default function Document({ children }) {
           </Link>
         </div>
       </article>
+      <dialog
+        ref={imageDialog}
+        className="figure-dialog"
+        aria-label={t("图片查看", "Image viewer", "圖片檢視")}
+        onClose={() => {
+          setZoomImage(null);
+          imageTrigger.current?.focus({ preventScroll: true });
+        }}
+      >
+        <button onClick={() => imageDialog.current.close()}>
+          {t("关闭", "Close", "關閉")} ×
+        </button>
+        {zoomImage && <img src={zoomImage.src} alt={zoomImage.alt} />}
+      </dialog>
       <ArticleContents headings={d.headings} />
     </main>
   );

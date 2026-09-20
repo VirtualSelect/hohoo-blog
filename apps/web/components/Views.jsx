@@ -74,7 +74,7 @@ function About() {
           <ProfileCard />
         </div>
         <CurrentFocus />
-        <section className="hh-section">
+        <section className="hh-section about-work-note">
           <h2>{t("我怎样学习与构建", "How I work", "我怎樣學習與構建")}</h2>
           <p>
             {t(

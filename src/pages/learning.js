@@ -13,6 +13,7 @@ export default function Learning() {
   const text = useText();
   const { entries } = useContentData("learning-index");
   const progress = useLearningProgress();
+  const [targetStep, setTargetStep] = useState("");
   const [full, setFull] = useState(false),
     [query, setQuery] = useState(""),
     [saved, setSaved] = useState(false),
@@ -20,6 +21,7 @@ export default function Learning() {
   useEffect(() => {
     const openHash = () => {
       if (location.hash) setFull(true);
+      setTargetStep(location.hash.replace(/^#step-/, ""));
     };
     openHash();
     window.addEventListener("hashchange", openHash);
@@ -64,6 +66,18 @@ export default function Learning() {
                 message: "入门",
               })}
             </p>
+            {article.stepId === "first-call" && (
+              <p className="learning-deliverable">
+                <Link to="/projects/hohoo-ai-lab">
+                  {text(
+                    "配套成果：三个 Java Demo",
+                    "Companion work: three Java demos",
+                    "配套成果：三個 Java Demo",
+                  )}{" "}
+                  →
+                </Link>
+              </p>
+            )}
             <button
               type="button"
               disabled={!progress.ready}
@@ -213,16 +227,26 @@ export default function Learning() {
             </p>
           )}
           {tracks.map((t) => (
-            <section className="hh-section" key={t.id}>
-              <h2>
+            <details
+              className="hh-section learning-track"
+              data-domain={t.domain}
+              key={t.id}
+              open={
+                t.domain === "ai-apps" ||
+                Boolean(query) ||
+                saved ||
+                t.steps.some((s) => targetStep === s.id)
+              }
+            >
+              <summary>
                 {uiLabel(t.brand)} · {en ? t.en : t.title}
-              </h2>
+              </summary>
               <ol className="hh-roadmap">
                 {t.steps
                   .filter((s) => visible.includes(s))
                   .map((s) => render(s))}
               </ol>
-            </section>
+            </details>
           ))}
         </details>
         <section id="engineering" className="hh-section">

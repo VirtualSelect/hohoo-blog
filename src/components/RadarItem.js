@@ -1,25 +1,40 @@
 import { uiLabel } from "@site/src/utils/ui-labels";
 import useSiteConfig from "@lab/runtime/context";
 import { translate } from "@lab/runtime/Translate";
-import React from "react";
+import React, { useState } from "react";
+import { useText } from "@lab/components/Shell";
 import Link from "@lab/runtime/Link";
 import ReadingActions from "./ReadingActions";
 import { localizedNews } from "@site/src/utils/news-locale.mjs";
 import { useEnglish, Related } from "./ContentUI";
 import ContentProvenance, { Freshness } from "./ContentProvenance";
 import RadarPractice from "@lab/components/RadarPractice";
-export default function RadarItem({ item, compact = false }) {
+export default function RadarItem({ item, compact = false, showDate = true }) {
   const en = useEnglish();
+  const t = useText();
+  const [expanded, setExpanded] = useState(false);
   const c = localizedNews(item, useSiteConfig().i18n.currentLocale);
+  const summary = Array.from(c.summary || "");
   return (
-    <article id={"signal-" + item.id}>
+    <article
+      id={"signal-" + item.id}
+      className="radar-signal"
+      data-category={item.domain}
+    >
       <div className="radar-item-meta">
         <p className="hh-eyebrow">
-          {uiLabel("RADAR / SIGNAL")} · {uiLabel(item.domain)} ·{" "}
-          {uiLabel(item.sourceType)} ·{" "}
-          <time dateTime={item.publishedAt}>
-            {item.publishedAt.slice(0, 10)}
-          </time>
+          {uiLabel("RADAR / SIGNAL")} ·{" "}
+          <span className="signal-category">{uiLabel(item.domain)}</span> ·{" "}
+          {uiLabel(item.sourceType)}{" "}
+          {showDate && (
+            <>
+              {" "}
+              ·{" "}
+              <time dateTime={item.publishedAt}>
+                {item.publishedAt.slice(0, 10)}
+              </time>
+            </>
+          )}
         </p>
         <p className="hh-meta">
           {uiLabel("SOURCE STATUS")} ·{" "}
@@ -64,7 +79,25 @@ export default function RadarItem({ item, compact = false }) {
           />
         )}
       </div>
-      {c.summary && <p>{c.summary}</p>}
+      {c.summary && (
+        <p id={`summary-${item.id}`} className="signal-summary">
+          {!expanded && summary.length > 240
+            ? summary.slice(0, 180).join("") + "…"
+            : c.summary}
+        </p>
+      )}
+      {summary.length > 240 && (
+        <button
+          className="summary-expand"
+          aria-expanded={expanded}
+          aria-controls={`summary-${item.id}`}
+          onClick={() => setExpanded(!expanded)}
+        >
+          {expanded
+            ? t("收起摘要", "Collapse summary", "收起摘要")
+            : t("展开摘要", "Expand summary", "展開摘要")}
+        </button>
+      )}
       {!compact && item.whyItMatters && (
         <>
           <p className="hh-eyebrow">{uiLabel("WHY IT MATTERS")}</p>

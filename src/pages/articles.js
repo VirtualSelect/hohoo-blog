@@ -5,8 +5,13 @@ import { translate } from "@lab/runtime/Translate";
 import { useContent } from "../components/ContentUI";
 import WritingList from "../components/WritingList";
 import { writingEntries } from "../utils/localization.cjs";
+import { useText } from "../../apps/web/components/Shell";
+import LabSketch from "../../apps/web/components/LabSketch";
+import Link from "@lab/runtime/Link";
 export default function Articles() {
   const { entries } = useContent();
+  const t = useText();
+  const writing = writingEntries(entries);
   const [type, setType] = useState("all");
   const types = ["all", "doc", "note", "paper", "blog"];
   useEffect(() => {
@@ -49,7 +54,7 @@ export default function Articles() {
       })}
       description={description}
     >
-      <main className="hh-page">
+      <main className="hh-page editorial-articles">
         <p className="hh-eyebrow">{uiLabel("ARTICLES")}</p>
         <h1>{description}</h1>
         <div
@@ -74,15 +79,66 @@ export default function Articles() {
                 history.replaceState(history.state, "", url);
               }}
             >
-              {labels[i]}
+              {labels[i]}{" "}
+              <span className="filter-count">
+                {
+                  writing.filter((e) => value === "all" || e.type === value)
+                    .length
+                }
+              </span>
             </button>
           ))}
         </div>
-        <WritingList
-          items={writingEntries(entries).filter(
-            (e) => type === "all" || e.type === type,
-          )}
-        />
+        {type === "all" && writing[0] && (
+          <article
+            className="article-spotlight"
+            data-domain={writing[0].domain}
+          >
+            <div>
+              <p className="eyebrow">
+                {t("最近发布", "Latest writing", "最近發布")}
+              </p>
+              <h2>
+                <Link to={writing[0].href}>{writing[0].title}</Link>
+              </h2>
+              <p>{writing[0].description}</p>
+              <div className="spotlight-meta">
+                <time dateTime={writing[0].date}>{writing[0].date}</time>
+                {writing[0].minutes && (
+                  <span>
+                    {writing[0].minutes} {t("分钟阅读", "min read", "分鐘閱讀")}
+                  </span>
+                )}
+              </div>
+              <Link className="featured-action" to={writing[0].href}>
+                <span>{t("开始阅读", "Start reading", "開始閱讀")}</span>
+                <span className="action-arrow" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            </div>
+            <div className="article-sketch" aria-hidden="true">
+              <LabSketch
+                kind={
+                  writing[0].domain === "llm"
+                    ? "model"
+                    : writing[0].domain === "embodied-ai"
+                      ? "embodied"
+                      : "application"
+                }
+              />
+            </div>
+          </article>
+        )}
+        {(type !== "all" || writing.length !== 1) && (
+          <WritingList
+            items={
+              type === "all"
+                ? writing.slice(1)
+                : writing.filter((e) => e.type === type)
+            }
+          />
+        )}
       </main>
     </Layout>
   );

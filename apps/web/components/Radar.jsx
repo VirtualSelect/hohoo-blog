@@ -251,7 +251,7 @@ export default function Radar() {
                   </time>
                 ) : null}
               </div>
-              <RadarItem item={i} />
+              <RadarItem item={i} showDate={false} />
             </div>
           ))
         )}
