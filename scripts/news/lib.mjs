@@ -28,7 +28,7 @@ export function classify(text, fallback) {
 export async function parseFeed(xml, source, now = new Date(), lookbackDays = 14) {
   if (/<!DOCTYPE|<!ENTITY/i.test(xml)) throw new Error('DTD/entity declarations are not supported');
   const feed = await new Parser().parseString(xml);
-  if (!Array.isArray(feed.items) || !feed.items.length) throw new Error('Feed has no items; check source format');
+  if (!Array.isArray(feed.items)) throw new Error('Invalid feed format');
   const items = []; let skipped = 0;
   for (const item of feed.items.slice(0, 200)) {
     try {
@@ -56,7 +56,7 @@ export async function parseFeed(xml, source, now = new Date(), lookbackDays = 14
 export function publicNewsItem({relevanceText, ...item}) {
   return item;
 }
-export function selectItems(candidates, existing, config, now = new Date()) {
+export function selectItems(candidates, existing, config, now = new Date(), diagnostics = []) {
   const day = now.toISOString().slice(0, 10);
   const seen = new Set(existing.map(item => item.url));
   const titles = new Set(existing.map(item => item.title.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '')));
@@ -70,9 +70,15 @@ export function selectItems(candidates, existing, config, now = new Date()) {
   for (const item of today) counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1);
   const relevance = new Map(candidates.map(item => [item, researchPriority(item)]));
   for (const item of [...candidates].sort((a,b) => relevance.get(b)-relevance.get(a) || priority(b)-priority(a) || b.publishedAt.localeCompare(a.publishedAt) || a.id.localeCompare(b.id))) {
-    if (selected.length + today.length >= config.dailyLimit) break;
     const titleKey = item.title.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
-    if (seen.has(item.url) || blocked.has(item.url) || titles.has(titleKey) || (counts.get(item.sourceId) || 0) >= sourceLimit(item)) continue;
+    const age = now - new Date(item.publishedAt);
+    const reason = !Number.isFinite(age) || age < 0 ? 'invalid-date'
+      : config.windowHours && age > config.windowHours * 3600000 ? 'outside-window'
+      : blocked.has(item.url) ? 'blocked'
+      : seen.has(item.url) || titles.has(titleKey) ? 'duplicate'
+      : selected.length + today.length >= config.dailyLimit ? 'daily-limit'
+      : (counts.get(item.sourceId) || 0) >= sourceLimit(item) ? 'source-limit' : null;
+    if (reason) { diagnostics.push({id:item.id, sourceId:item.sourceId, publishedAt:item.publishedAt, reason}); continue; }
     seen.add(item.url); titles.add(titleKey); counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1); selected.push(item);
   }
   return selected;

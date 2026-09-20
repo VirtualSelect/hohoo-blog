@@ -144,3 +144,32 @@ test('new research sources exclude clinical use cases and quotation-only posts',
 test('classification prioritizes embodied topics, then application use cases',()=>{
  assert.equal(classify('Robot agent','llm'),'embodied-ai');assert.equal(classify('Codex in production','llm'),'ai-apps');assert.equal(classify('New language model','ai-apps'),'llm');
 });
+
+test('empty valid RSS is a successful no-update response',async()=>{
+ const result=await parseFeed('<rss version="2.0"><channel><title>Weekend</title></channel></rss>',source,now);
+ assert.deepEqual(result,{items:[],skipped:0});
+ await assert.rejects(parseFeed('<not-rss>broken',source,now));
+});
+test('recent window prevents old backlog consuming daily quota and explains exclusions',()=>{
+ const reasons=[];
+ const old=item('old',{publishedAt:'2026-09-07T00:00:00Z',title:'RAG evaluation benchmark'});
+ const fresh=item('fresh');
+ const chosen=selectItems([old,fresh,item('duplicate')],[item('duplicate',{collectedAt:'2026-09-01T00:00:00Z'})],{...config,windowHours:48},now,reasons);
+ assert.deepEqual(chosen.map(i=>i.id),['fresh']);
+ assert.ok(reasons.some(i=>i.reason==='outside-window'));assert.ok(reasons.some(i=>i.reason==='duplicate'));
+ assert.equal(selectItems([old],[],{...config,windowHours:336},now).length,1);
+});
+test('Chinese technical mechanisms survive filtering without admitting unrelated links',()=>{
+ for(const [title,summary] of [
+ ['Agent 审计工具','静态分析引擎、反编译器和 Lean 形式化证明发现单元测试未捕获的问题。'],
+ ['Qwen 实时同传模型','音频与文本交织的流式架构，提供说话人分离。'],
+ ['AI 编程 ZCode 逆向分析','工作区 Git 历史加密上传的行为分析。'],
+ ['稀疏 MoE 模型','总参数与激活参数分离的稀疏 MoE 架构。']
+ ]) assert.equal(assessRelevance(item('x',{title,summary})).accepted,true,title);
+ for(const [title,summary] of [
+ ['Plugin release','GitHub login plugin for agent.datasette.io'],
+ ['版权诉讼披露','Agent LLM training code'],
+ ['AI 模型榜单','大模型排名登顶'],
+ ['新智能体发布','立即购买']
+ ]) assert.equal(assessRelevance(item('x',{title,summary})).accepted,false,title);
+});

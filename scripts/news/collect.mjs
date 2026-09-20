@@ -49,8 +49,13 @@ for (const source of sources) {
     throw new Error('Invalid source daily limit');
 }
 const now = new Date();
+const windowHours = Number(process.env.NEWS_WINDOW_HOURS || 48);
+if (!Number.isInteger(windowHours) || windowHours < 1 || windowHours > config.lookbackDays * 24)
+  throw new Error('NEWS_WINDOW_HOURS must be between 1 and lookbackDays * 24');
 const report = {
   runAt: now.toISOString(),
+  windowHours,
+  since: new Date(now.getTime() - windowHours * 3600000).toISOString(),
   sources: [],
   summaryFailures: [],
   selected: [],
@@ -71,6 +76,8 @@ for (const source of sources) {
       status: 'ok',
       eligible: result.items.length,
       skipped: result.skipped,
+      newestPublishedAt: result.items.map(item => item.publishedAt).sort().at(-1) || null,
+      inWindow: result.items.filter(item => now - new Date(item.publishedAt) <= windowHours * 3600000).length,
     });
   } catch (error) {
     report.sources.push({
@@ -87,6 +94,8 @@ const relevant = candidates.flatMap((item) => {
     report.rejected.push({
       title: item.title,
       url: item.url,
+      sourceId: item.sourceId,
+      publishedAt: item.publishedAt,
       reason: assessment.reason,
     });
     return [];
@@ -99,7 +108,8 @@ const relevant = candidates.flatMap((item) => {
     },
   ];
 });
-let selected = selectItems(relevant, existing, config, now).map(publicNewsItem);
+report.notSelected = [];
+let selected = selectItems(relevant, existing, {...config, windowHours}, now, report.notSelected).map(publicNewsItem);
 const summarized = [];
 for (const item of selected) {
   try {
@@ -115,12 +125,14 @@ for (const item of selected) {
   }
 }
 selected = summarized;
-report.selected = selected.map(({ id, title, url, category, summaryKind }) => ({
+report.selected = selected.map(({ id, title, url, category, summaryKind, sourceId, publishedAt }) => ({
   id,
   title,
   url,
   category,
   summaryKind,
+  sourceId,
+  publishedAt,
 }));
 const outputRoot = process.argv.includes('--write')
   ? root

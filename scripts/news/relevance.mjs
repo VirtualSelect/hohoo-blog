@@ -1,6 +1,6 @@
 // Conservative editorial rules: a source's name or default category is never evidence.
 // Editorial ordering only; not a claim about research quality or factual accuracy.
-const evidenceText = item => `${item.title} ${item.relevanceText || item.originalSummary || item.summary || ''}`;
+const evidenceText = item => `${item.title} ${item.relevanceText || item.originalSummary || item.summary || ''}`.replace(/https?:\/\/\S+|\b[\w.-]+\.(?:com|org|net|io|cn|ai|news|dev)\b(?:\/\S*)?/gi, ' ');
 const coding = /\b(ai.coding|codex|copilot|claude.code|grok.build|coding.agent\w*|harness|context.engineering)\b|AI\s*编程|智能编程|编码智能体|上下文工程/i;
 const robotics = /\b(ros\s?2|mujoco|gazebo|maniskill|isaac(?:.sim|.lab)?|lerobot|robot\w*|embodied|humanoid|locomotion|manipulation|vla|vision.language.action)\b|具身|机器人|机械臂/i;
 function mechanisms(text) {
@@ -15,7 +15,14 @@ function mechanisms(text) {
   const document = /\bocr\b/i.test(text)
     && /two.pass|just.in.time|两遍|解析器|粗读/i.test(text)
     && /retriev|检索|相关页面/i.test(text);
-  return context || memory || code || robot || document;
+  const audit = /\bagents?\b|AI\s*编程|智能体/i.test(text)
+    && /静态分析|形式化证明|单元测试|反编译|static.analysis|formal.verification/i.test(text);
+  const multimodal = /多模态|同声传译|同传|multimodal/i.test(text)
+    && /音频.*文本|说话人分离|交织|流式|interleave|streaming/i.test(text);
+  const security = /AI\s*编程|coding.agent/i.test(text)
+    && /逆向|工作区|workspace/i.test(text) && /加密|上传|encrypt|upload/i.test(text);
+  const architecture = /\bmoe\b/i.test(text) && /稀疏|sparse/i.test(text) && /激活|active.parameter/i.test(text);
+  return context || memory || code || robot || document || audit || multimodal || security || architecture;
 }
 export function researchPriority(item) {
   if (!assessRelevance(item).accepted) return 0;
@@ -24,6 +31,8 @@ export function researchPriority(item) {
   return focus.test(text) || coding.test(text) || robotics.test(text) || mechanisms(text) ? 2 : 1;
 }
 export function assessRelevance(item) {
+  if (/诉讼|版权.*披露|劳动力?盗|劳动.*窃取|lawsuit|copyright litigation/i.test(item.title))
+    return {accepted: false, reason: '法律争议报道，不是技术实践内容'};
   if (/\b(missile|warfare)\b|导弹|军事冲突|战争/i.test(item.title))
     return {accepted: false, reason: '军事事件报道偏离本站研究实践主线'};
   if (item.sourceId === 'simon-willison' && /^Quoting\s/i.test(item.title))
@@ -35,8 +44,8 @@ export function assessRelevance(item) {
   if (excluded.test(text)) return {accepted: false, reason: '泛商业或非本站研究领域'};
   const domains = [
     ['embodied-ai', robotics],
-    ['ai-apps', /\b(rag|retrieval.augmented|agent\w*|tool.call\w*|mcp|llm.application\w*|gradio|vllm|sglang|ai.coding|codex|copilot|claude.code|grok.build|harness|context.engineering)\b|智能体|检索增强|工具调用|AI\s*编程|智能编程|编码智能体|上下文工程/i],
-    ['llm', /\b(llm\w*|language.model\w*|transformer\w*|tokeniz\w*|fine.tun\w*|lora|quantiz\w*|distill\w*)\b|语言模型|微调|量化|蒸馏/i],
+    ['ai-apps', /\b(rag|retrieval.augmented|agents?|agentic|tool.call\w*|mcp|llm.application\w*|gradio|vllm|sglang|ai.coding|codex|copilot|claude.code|grok.build|harness|context.engineering)\b|智能体|检索增强|工具调用|AI\s*编程|智能编程|编码智能体|上下文工程/i],
+    ['llm', /\b(llm\w*|language.model\w*|transformer\w*|tokeniz\w*|fine.tun\w*|lora|quantiz\w*|distill\w*|moe|multimodal)\b|语言模型|大模型|多模态|同声传译|同传模型|微调|量化|蒸馏/i],
   ];
   const domain = domains.find(([, pattern]) => pattern.test(text));
   if (!domain) return {accepted: false, reason: '缺少明确研究主题证据'};

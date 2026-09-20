@@ -18,6 +18,11 @@ on:
     # Every two hours, at minute 35; daily caps are shared across all runs.
     - cron: '35 */2 * * *'
   workflow_dispatch:
+    inputs:
+      window_hours:
+        description: 'Publication lookback hours (1–336); daily limits still apply'
+        default: '48'
+        type: string
 permissions:
   contents: read
 concurrency:
@@ -48,6 +53,7 @@ jobs:
       - name: Collect a filtered batch
         env:
           NEWS_SUMMARIZE: 'false'
+          NEWS_WINDOW_HOURS: ${{ inputs.window_hours || '48' }}
           NEWS_LLM_URL: ${{ vars.NEWS_LLM_URL }}
           NEWS_LLM_MODEL: ${{ vars.NEWS_LLM_MODEL }}
           NEWS_LLM_API_KEY: ${{ secrets.NEWS_LLM_API_KEY }}
@@ -88,7 +94,12 @@ jobs:
           } else {
             const report = JSON.parse(fs.readFileSync(file, 'utf8'));
             const lines = ['\n## Collection outcome', `Run: ${report.runAt}`, `Selected: ${report.selected.length}`, `Rejected by relevance rules: ${report.rejected?.length || 0}`];
-            for (const source of report.sources) lines.push(`- ${source.source}: ${source.status}; eligible before relevance/deduplication: ${source.eligible ?? 0}`);
+            lines.push(`Publication window: ${report.since} → ${report.runAt}`);
+            for (const source of report.sources) lines.push(`- ${source.source}: ${source.status}; in window: ${source.inWindow ?? 0}; newest: ${source.newestPublishedAt || 'none'}; ${source.error || ''}`);
+            const reasons = {};
+            for (const item of report.notSelected || []) reasons[item.reason] = (reasons[item.reason] || 0) + 1;
+            for (const [reason, count] of Object.entries(reasons)) lines.push(`- ${reason}: ${count}`);
+            for (const source of report.sources.filter(s => s.status === 'failed')) console.log(`::warning::News source failed: ${source.source}`);
             if (!report.selected.length) lines.push('No new eligible items after filtering, deduplication and daily limits. This does not mean the feed is empty.');
             fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
           }
