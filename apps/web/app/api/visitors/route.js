@@ -24,7 +24,37 @@ const readAnalytics = unstable_cache(
         signal: AbortSignal.timeout(6000),
       },
     );
-    if (!response.ok) throw new Error(`upstream_${response.status}`);
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({}));
+      const message = String(body.error?.message || body.message || "");
+      // Log only fixed diagnostic categories, never the response body or credentials.
+      console.warn("visitor_query_failed", {
+        endpoint,
+        status: response.status,
+        fields: [
+          "projectId",
+          "teamId",
+          "since",
+          "until",
+          "by",
+          "limit",
+          "filter",
+        ].filter((field) => message.includes(field)),
+        code: [
+          "bad_request",
+          "invalid_request",
+          "validation_error",
+          "forbidden",
+          "not_found",
+        ].includes(body.error?.code)
+          ? body.error.code
+          : "other",
+        missing: /required|missing/i.test(message),
+        range: /maximum|minimum|greater|less|range/i.test(message),
+        parameter: new URLSearchParams(params).get("by") || "totals",
+      });
+      throw new Error(`upstream_${response.status}`);
+    }
     return (await response.json()).data;
   },
   ["visitor-analytics-v1"],
@@ -48,7 +78,7 @@ export async function GET() {
   try {
     const [totals, paths, countries] = await Promise.all([
       query("count"),
-      query("aggregate", { since, until, by: "requestPath", limit: "1000" }),
+      query("aggregate", { since, until, by: "requestPath", limit: "100" }),
       query("aggregate", { since, until, by: "country", limit: "100" }),
     ]);
     if (
