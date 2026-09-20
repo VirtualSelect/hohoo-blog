@@ -627,10 +627,18 @@ small {
   min-width: 0;
   color: var(--blog-muted);
 }
-.radar-source-link span:last-child { flex-shrink: 0; }
-.radar-source-link:hover span:first-child { text-decoration: underline; text-underline-offset: 4px; }
+.radar-source-link span:last-child {
+  flex-shrink: 0;
+}
+.radar-source-link:hover span:first-child {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 @media (max-width: 600px) {
-  .radar-item-actions { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .radar-item-actions {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
 }
 .radar-item-meta p,
 .radar-summary-meta p {
@@ -807,7 +815,9 @@ small {
   font-size: 13px;
   color: var(--blog-muted);
 }
-.results-toolbar > p { margin: 0; }
+.results-toolbar > p {
+  margin: 0;
+}
 .radar-page .page-intro > p.radar-intake {
   font-size: 12px;
   line-height: 1.8;
@@ -923,9 +933,15 @@ small {
   padding: 18px 0;
   border-bottom: 1px solid var(--hh-border);
 }
-.search-result strong { line-height: 1.5; }
-.search-result:hover { background: var(--blog-soft); }
-.search-result .eyebrow { font-size: 11px; }
+.search-result strong {
+  line-height: 1.5;
+}
+.search-result:hover {
+  background: var(--blog-soft);
+}
+.search-result .eyebrow {
+  font-size: 11px;
+}
 .search-result small {
   display: block;
 }
@@ -1487,5 +1503,57 @@ html[data-theme="dark"] .token.class-name {
   }
   .about-intro-grid .page-intro h2 {
     font-size: 36px;
+  }
+}
+
+/* Anonymous analytics: quiet, theme-aware lists rather than dashboard cards. */
+.visitor-stats {
+  border-top: 1px solid var(--hh-border);
+  padding-block: 2rem;
+  margin-top: 2rem;
+}
+.visitor-stats .section-top {
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.visitor-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+.visitor-columns ul,
+.visitor-columns ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.visitor-columns li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  border-top: 1px solid var(--hh-border);
+  padding-block: 0.75rem;
+}
+.visitor-columns li > :first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.visitor-columns li > :last-child {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+.visitor-count {
+  min-height: 1.5rem;
+  color: var(--blog-muted);
+  font-size: 0.85rem;
+}
+.visitor-stats details {
+  margin-top: 1.5rem;
+}
+@media (max-width: 768px) {
+  .visitor-columns {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }

@@ -7,6 +7,7 @@ import { writingEntries } from "@site/src/utils/localization.cjs";
 import { Status } from "@site/src/components/ContentUI";
 import { uiLabel } from "@site/src/utils/ui-labels";
 import DiscoveryCompass from "./DiscoveryCompass";
+import VisitorStats from "./VisitorStats";
 
 export default function Home() {
   const { locale, globalData, items } = useSite(),
@@ -276,6 +277,7 @@ export default function Home() {
           </article>
         ))}
       </section>
+      <VisitorStats />
     </main>
   );
 }

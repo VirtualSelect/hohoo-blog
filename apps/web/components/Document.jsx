@@ -15,6 +15,7 @@ import TryIt from "./TryIt";
 const ErrorClinic = dynamic(() => import("./ErrorClinic"));
 const PracticeCompanion = dynamic(() => import("./PracticeCompanion"));
 import ArticleHistory from "./ArticleHistory";
+import VisitorStats from "./VisitorStats";
 export default function Document({ children }) {
   const { document: d } = useSite(),
     t = useText(),
@@ -110,6 +111,7 @@ export default function Document({ children }) {
               )}
             </p>
           )}
+          <VisitorStats variant="article" path={d.route} />
         </header>
         <ArticleContents headings={d.headings} mobile />
         <div ref={ref}>{children}</div>
