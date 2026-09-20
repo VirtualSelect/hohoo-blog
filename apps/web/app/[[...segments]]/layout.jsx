@@ -1,5 +1,6 @@
 import "../globals.css";
 import { resolveSegments } from "../../lib/content";
+import { Analytics } from "@vercel/analytics/next";
 export const metadata = {
   metadataBase: new URL("https://huhohoo.com"),
   title: { default: "Hohoo's AI Lab", template: "%s · Hohoo" },
@@ -19,7 +20,10 @@ export default async function RootLayout({ children, params }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
