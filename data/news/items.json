@@ -57,7 +57,22 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-ddab7083",
-    "coverage": []
+    "coverage": [
+      {
+        "id": "2f98284fa563676f2d83",
+        "title": "逆向分析指 ZCode 登录后静默打包 Git 历史并加密上传至 Aliyun OSS",
+        "url": "https://aihot.news/items/cmu6y9sjz0jbyrowkh7tus28l",
+        "sourceId": "aihot",
+        "sourceName": "AIHOT",
+        "publishedAt": "2026-09-18T10:35:28.000Z",
+        "collectedAt": "2026-09-20T03:00:55.184Z",
+        "category": "ai-apps",
+        "summary": "开发者 ferstar 逆向 Z.ai 的 AI 编程桌面应用 ZCode，发现其登录后会静默把整个工作区打包（含完整 .git 历史、LFS 缓存、reflogs 和全局配置）加密上传至 Aliyun OSS，实测一次快照为 42，411 个文件、313MB，且 .git 目录占载荷的 86.6%。",
+        "summaryKind": "source-excerpt",
+        "relevanceReason": "研究主题匹配且包含技术信息",
+        "eventId": "event-ddab7083"
+      }
+    ]
   },
   {
     "id": "db52bd16dfeb0fb0ec1c",
@@ -87,7 +102,22 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-ddab7083",
-    "coverage": []
+    "coverage": [
+      {
+        "id": "c8f8824f004a8407dfeb",
+        "title": "ZCode 被曝登录后会打包上传完整 Git 历史",
+        "url": "https://aihot.news/items/cmu72r58y0o5xrowk1txg8msk",
+        "sourceId": "aihot",
+        "sourceName": "AIHOT",
+        "publishedAt": "2026-09-18T14:22:51.000Z",
+        "collectedAt": "2026-09-20T03:00:55.184Z",
+        "category": "ai-apps",
+        "summary": "作者称，智谱 AI 编程应用 ZCode 在登录后会将工作区打包加密并上传至阿里云 OSS，内容包括完整 Git 历史、LFS 缓存和全局配置。调查记录中的单个加密快照为 313MB；私钥只存于云端，用户及客户端无法解密本地密文。",
+        "summaryKind": "source-excerpt",
+        "relevanceReason": "研究主题匹配且包含技术信息",
+        "eventId": "event-ddab7083"
+      }
+    ]
   },
   {
     "id": "97f82d647a4c648004c4",
