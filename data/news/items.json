@@ -735,6 +735,21 @@
     "coverage": []
   },
   {
+    "id": "e43099daf165333901f4",
+    "title": "Feeling sad about AI",
+    "url": "https://simonwillison.net/2026/Sep/11/feeling-sad-about-ai",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-09-11T17:28:37.000Z",
+    "collectedAt": "2026-09-20T00:21:06.738Z",
+    "category": "ai-apps",
+    "summary": "My comment on Feeling sad about AI &mdash; Hacker News. I'm not sure how useful it is to say this, but I think a lot of people (myself included, a few years ago now) have been t…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-5554a601",
+    "coverage": []
+  },
+  {
     "id": "f3b865b551fe6c42cedd",
     "title": "Anthropic 威胁报告披露 Claude 被用于间谍软件、导弹与无人机研发，中国实验室大规模蒸馏提取数据",
     "url": "https://aihot.news/items/cmtx0v3dg030mroedwvkdfyvw",
@@ -747,6 +762,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-9186770a",
+    "coverage": []
+  },
+  {
+    "id": "2608dc383dd79ca4b3a0",
+    "title": "Datasette 1.0a39 and 0.65.4 security releases",
+    "url": "https://simonwillison.net/2026/Sep/11/datasette-security",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-09-11T03:27:16.000Z",
+    "collectedAt": "2026-09-20T00:21:06.738Z",
+    "category": "ai-apps",
+    "summary": "Datasette 1.0a39 and 0.65.4 security releases Today we're releasing two new security patch versions of Datasette: 1.0a39 and 0.65.4 - one for the current alpha series and one fo…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e7bbe55a",
     "coverage": []
   },
   {
@@ -835,6 +865,21 @@
     "coverage": []
   },
   {
+    "id": "778743892f0688c6227e",
+    "title": "When to Use Encode-Prefill-Decode Disaggregation to Accelerate Multimodal Model Serving",
+    "url": "https://developer.nvidia.com/blog/when-to-use-encode-prefill-decode-disaggregation-to-accelerate-multimodal-model-serving",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-09-09T20:31:04.000Z",
+    "collectedAt": "2026-09-20T00:21:06.738Z",
+    "category": "llm",
+    "summary": "Encode-prefill-decode (EPD) disaggregation is an inference optimization technique for multimodal models that separates the vision encoder stage from the prefill... Encode-prefil…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-1bd45c9f",
+    "coverage": []
+  },
+  {
     "id": "094c7faf707de7f64e58",
     "title": "GPT-6 Astra推理等级怎么选才最省Token",
     "url": "https://aihot.news/items/cmttcqkx404pprofp0jwc34zu",
@@ -847,6 +892,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-fae3e1f",
+    "coverage": []
+  },
+  {
+    "id": "a97d132c2500d2b3d417",
+    "title": "Introducing CUDA Rust: Two Tracks for Writing GPU Kernels",
+    "url": "https://developer.nvidia.com/blog/introducing-cuda-rust-two-tracks-for-writing-gpu-kernels",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-09-08T12:00:00.000Z",
+    "collectedAt": "2026-09-20T00:21:06.738Z",
+    "category": "ai-apps",
+    "summary": "In September 2026, NVIDIA announced it is leaning into native GPU programming in Rust. CUDA C++ and CUDA Python are mature, enterprise-grade toolchains, and... In September 2026…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-a62f8417",
     "coverage": []
   },
   {
