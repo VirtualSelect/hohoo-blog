@@ -1,10 +1,29 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useText } from "./Shell";
+import { useSite } from "../runtime/context";
 
 export default function ThemeToggle() {
   const t = useText();
   const [theme, setTheme] = useState("light");
+  const { route, locale } = useSite();
+  useLayoutEffect(() => {
+    // A static root segment can replace html attributes during navigation.
+    // Restore the preference before paint, including when the new page hydrates.
+    let saved;
+    try {
+      saved = localStorage.getItem("huhohoo.theme.v1");
+    } catch {}
+    const next =
+      saved === "dark" || saved === "light"
+        ? saved
+        : document.documentElement.dataset.theme ||
+          (matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+    document.documentElement.dataset.theme = next;
+    setTheme(next);
+  }, [route, locale]);
   useEffect(() => {
     const sync = () =>
       setTheme(

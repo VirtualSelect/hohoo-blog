@@ -1,16 +1,25 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useText } from "./Shell";
 import styles from "./LearningExercises.module.css";
 export default function TryIt({ id, title, children }) {
   const t = useText(),
     ref = useRef(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    // Mount before resolving nested deep links; ordinary visits stay lightweight.
+    if (window.location.hash) setMounted(true);
+  }, []);
   useEffect(() => {
     const reveal = () => {
       let hash;
       try {
         hash = decodeURIComponent(window.location.hash.slice(1));
       } catch {
+        return;
+      }
+      if (hash && !mounted) {
+        setMounted(true);
         return;
       }
       const target = hash && document.getElementById(hash);
@@ -29,9 +38,16 @@ export default function TryIt({ id, title, children }) {
     reveal();
     window.addEventListener("hashchange", reveal);
     return () => window.removeEventListener("hashchange", reveal);
-  }, []);
+  }, [mounted]);
   return (
-    <details id={id} ref={ref} className={styles.exercise}>
+    <details
+      id={id}
+      ref={ref}
+      className={styles.exercise}
+      onToggle={(event) => {
+        if (event.currentTarget.open) setMounted(true);
+      }}
+    >
       <summary>
         {t("动手试试", "Try it", "動手試試")} · {title}
       </summary>
@@ -45,7 +61,7 @@ export default function TryIt({ id, title, children }) {
           {t("直达此实验", "Link to this exercise", "直達此實驗")} ↗
         </a>
       </p>
-      {children}
+      {mounted ? children : null}
     </details>
   );
 }

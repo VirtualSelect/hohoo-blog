@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
@@ -265,6 +266,10 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
     "learning-index": { entries: collectEntries(allContent) },
     "radar-pages": { preview: items.slice(0, 3) },
   };
+  const searchJSON = JSON.stringify(search);
+  const searchName = `${locale}-${createHash("sha256").update(searchJSON).digest("hex").slice(0, 16)}.json`;
+  fs.mkdirSync(path.join(here, "public", "search"), { recursive: true });
+  fs.writeFileSync(path.join(here, "public", "search", searchName), searchJSON);
   put(locale + ".json", {
     locale,
     routes,
@@ -272,6 +277,7 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
     globalData,
     items,
     search,
+    searchUrl: "/search/" + searchName,
     weeks,
   });
   const escape = (s) =>

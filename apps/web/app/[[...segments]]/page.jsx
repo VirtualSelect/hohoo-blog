@@ -118,8 +118,13 @@ export default async function Page({ params }) {
         locale,
         route,
         globalData: data.globalData,
-        items: data.items,
-        search: data.search,
+        items:
+          route === "radar" || route.startsWith("radar/weekly/")
+            ? data.items
+            : route === ""
+              ? data.items.slice(0, 10)
+              : [],
+        searchUrl: data.searchUrl,
         messages: getMessages(locale),
         document,
       }}

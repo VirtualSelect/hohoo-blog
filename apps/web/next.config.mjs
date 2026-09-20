@@ -5,6 +5,7 @@ const root = path.resolve(here, "../..");
 const aliases = { "@site": root, "@lab": here };
 export default {
   poweredByHeader: false,
+  experimental: { globalNotFound: true },
   async redirects() {
     return ["", "/en", "/zh-TW"].map((prefix) => ({
       source: prefix + "/blog/a%20new%20milestone",
