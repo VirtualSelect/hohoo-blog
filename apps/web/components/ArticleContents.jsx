@@ -6,24 +6,33 @@ export default function ArticleContents({ headings, mobile = false }) {
   const t = useText();
   const [active, setActive] = useState("");
   useEffect(() => {
-    let frame;
+    const elements = headings
+      .map((h) => document.getElementById(h.id))
+      .filter(Boolean);
+    if (!elements.length) return;
     const update = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        let current = headings[0]?.id || "";
-        for (const heading of headings) {
-          const element = document.getElementById(heading.id);
-          if (element && element.getBoundingClientRect().top <= 150)
-            current = heading.id;
-        }
-        setActive(current);
-      });
+      const current = elements
+        .filter((el) => el.getBoundingClientRect().top <= 150)
+        .at(-1);
+      setActive(current?.id || headings[0]?.id || "");
     };
     update();
-    window.addEventListener("scroll", update, { passive: true });
+    const observer = new IntersectionObserver(update, {
+      rootMargin: "-150px 0px 0px 0px",
+      threshold: 0,
+    });
+    elements.forEach((el) => observer.observe(el));
+    // A large anchor jump can skip intersection boundaries entirely.
+    let timer;
+    const settled = () => {
+      clearTimeout(timer);
+      timer = setTimeout(update, 120);
+    };
+    window.addEventListener("scroll", settled, { passive: true });
     return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", update);
+      observer.disconnect();
+      clearTimeout(timer);
+      window.removeEventListener("scroll", settled);
     };
   }, [headings]);
   if (!headings.length) return null;

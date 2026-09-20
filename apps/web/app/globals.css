@@ -16,6 +16,8 @@
   --hh-base-code-background: #eff0e9;
   --hh-base-link-color: var(--hh-base-color-primary);
   --hh-base-color-emphasis-200: var(--blog-border);
+  --hh-base-color-emphasis-300: var(--blog-border);
+  --hh-base-color-emphasis-600: var(--blog-muted);
   --hh-bg: var(--hh-base-background-color);
   --hh-text-primary: var(--hh-base-font-color-base);
   --hh-text-secondary: var(--blog-muted);
@@ -84,6 +86,36 @@ select {
 }
 button:hover {
   background: var(--blog-soft);
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+button[aria-pressed="true"] {
+  border-color: var(--hh-accent);
+  color: var(--hh-accent);
+  background: var(--blog-soft);
+}
+textarea {
+  font: inherit;
+  color: inherit;
+  background: var(--blog-surface);
+  border: 1px solid var(--hh-border);
+  border-radius: 3px;
+  max-width: 100%;
+}
+/* Text metadata is prose, not a flex container of individual text nodes. */
+p.hh-meta {
+  display: block;
+}
+.hh-controls {
+  align-items: center;
+}
+.hh-page details > summary,
+.document-body details > summary {
+  cursor: pointer;
+  padding-block: 10px;
+  min-height: 44px;
 }
 :focus-visible {
   outline: 2px solid var(--hh-accent);
@@ -576,6 +608,30 @@ small {
   align-items: baseline;
   column-gap: 16px;
 }
+.radar-item-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px 24px;
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.radar-source-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+  gap: 8px;
+  justify-self: start;
+  min-width: 0;
+  color: var(--blog-muted);
+}
+.radar-source-link span:last-child { flex-shrink: 0; }
+.radar-source-link:hover span:first-child { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 600px) {
+  .radar-item-actions { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+}
 .radar-item-meta p,
 .radar-summary-meta p {
   margin: 4px 0;
@@ -751,6 +807,7 @@ small {
   font-size: 13px;
   color: var(--blog-muted);
 }
+.results-toolbar > p { margin: 0; }
 .radar-page .page-intro > p.radar-intake {
   font-size: 12px;
   line-height: 1.8;
@@ -861,10 +918,14 @@ small {
   margin-top: 10px;
 }
 .search-result {
-  display: block;
+  display: grid;
+  gap: 6px;
   padding: 18px 0;
   border-bottom: 1px solid var(--hh-border);
 }
+.search-result strong { line-height: 1.5; }
+.search-result:hover { background: var(--blog-soft); }
+.search-result .eyebrow { font-size: 11px; }
 .search-result small {
   display: block;
 }

@@ -1,18 +1,20 @@
-import { uiLabel } from '@site/src/utils/ui-labels';
-import React, { useEffect, useState } from 'react';
-import Layout from '@lab/runtime/Layout';
-import Link from '@lab/runtime/Link';
-import { translate } from '@lab/runtime/Translate';
-import { useContentData } from '@lab/runtime/data';
-import tracks from '@site/data/learning-paths.json';
-import useLearningProgress from '../components/useLearningProgress';
-import { useEnglish } from '../components/ContentUI';
+import { uiLabel } from "@site/src/utils/ui-labels";
+import React, { useEffect, useState } from "react";
+import Layout from "@lab/runtime/Layout";
+import Link from "@lab/runtime/Link";
+import { translate } from "@lab/runtime/Translate";
+import { useContentData } from "@lab/runtime/data";
+import tracks from "@site/data/learning-paths.json";
+import useLearningProgress from "../components/useLearningProgress";
+import { useEnglish } from "../components/ContentUI";
+import { useText } from "@lab/components/Shell";
 export default function Learning() {
   const en = useEnglish();
-  const { entries } = useContentData('learning-index');
+  const text = useText();
+  const { entries } = useContentData("learning-index");
   const progress = useLearningProgress();
   const [full, setFull] = useState(false),
-    [query, setQuery] = useState(''),
+    [query, setQuery] = useState(""),
     [saved, setSaved] = useState(false),
     [suggestion, setSuggestion] = useState(null);
   useEffect(() => {
@@ -20,8 +22,8 @@ export default function Learning() {
       if (location.hash) setFull(true);
     };
     openHash();
-    window.addEventListener('hashchange', openHash);
-    return () => window.removeEventListener('hashchange', openHash);
+    window.addEventListener("hashchange", openHash);
+    return () => window.removeEventListener("hashchange", openHash);
   }, []);
   const available = new Map(entries.map((e) => [e.stepId, e]));
   const resume = available.get(progress.lastOpened);
@@ -30,16 +32,17 @@ export default function Learning() {
     .filter(
       (s) =>
         (!saved || progress.saved.includes(s.id)) &&
-        [s.title, s.en].join(' ').toLowerCase().includes(query.toLowerCase()),
+        [s.title, s.en].join(" ").toLowerCase().includes(query.toLowerCase()),
     );
   const label = (s) => available.get(s.id)?.title || (en ? s.en : s.title);
   const render = (s, compact = false) => {
     const article = available.get(s.id);
     return (
       <li
-        id={compact ? undefined : 'step-' + s.id}
+        id={compact ? undefined : "step-" + s.id}
         key={s.id}
-        className={article ? 'hh-step' : 'hh-planned'}>
+        className={article ? "hh-step" : "hh-planned"}
+      >
         {article ? (
           <>
             <p className="hh-eyebrow">{uiLabel("CURRENT / 01 BUILD")}</p>
@@ -47,36 +50,40 @@ export default function Learning() {
               <Link
                 to={article.permalink}
                 onClick={() =>
-                  progress.items[s.id]?.status !== 'completed' &&
-                  progress.update(s.id, 'reading')
-                }>
+                  progress.items[s.id]?.status !== "completed" &&
+                  progress.update(s.id, "reading")
+                }
+              >
                 {article.title} →
               </Link>
             </h3>
             <p className="hh-meta">
-              {article.minutes} {uiLabel("MIN")} ·{' '}
+              {article.minutes} {uiLabel("MIN")} ·{" "}
               {translate({
-                id: 'learning.beginner',
-                message: '入门',
+                id: "learning.beginner",
+                message: "入门",
               })}
             </p>
             <button
               type="button"
               disabled={!progress.ready}
-              aria-pressed={progress.items[s.id]?.status === 'completed'}
+              aria-pressed={progress.items[s.id]?.status === "completed"}
               onClick={() =>
                 progress.update(
                   s.id,
-                  progress.items[s.id]?.status === 'completed'
-                    ? 'reading'
-                    : 'completed',
+                  progress.items[s.id]?.status === "completed"
+                    ? "reading"
+                    : "completed",
                 )
-              }>
-              ✓{' '}
-              {translate({
-                id: 'learning.completed',
-                message: '已完成',
-              })}
+              }
+            >
+              {progress.items[s.id]?.status === "completed" ? "✓ " : "○ "}
+              {progress.items[s.id]?.status === "completed"
+                ? translate({
+                    id: "learning.completed",
+                    message: "已完成",
+                  })
+                : text("标记完成", "Mark complete", "標記完成")}
             </button>
           </>
         ) : (
@@ -87,11 +94,12 @@ export default function Learning() {
             type="button"
             disabled={!progress.ready}
             aria-pressed={progress.saved.includes(s.id)}
-            onClick={() => progress.update(s.id, 'saved')}>
-            ☆{' '}
+            onClick={() => progress.update(s.id, "saved")}
+          >
+            ☆{" "}
             {translate({
-              id: 'learning.save',
-              message: '想读',
+              id: "learning.save",
+              message: "想读",
             })}
           </button>
         )}
@@ -101,43 +109,46 @@ export default function Learning() {
   return (
     <Layout
       title={translate({
-        id: 'nav.learning',
-        message: '学习',
+        id: "nav.learning",
+        message: "学习",
       })}
       description={translate({
-        id: 'learning.description',
-        message: '从当前路线开始，按自己的节奏逐步深入。',
-      })}>
+        id: "learning.description",
+        message: "从当前路线开始，按自己的节奏逐步深入。",
+      })}
+    >
       <main className="hh-page">
         <p className="hh-eyebrow">{uiLabel("LEARNING")}</p>
         <h1>
           {translate({
-            id: 'learning.description',
-            message: '从当前路线开始，按自己的节奏逐步深入。',
+            id: "learning.description",
+            message: "从当前路线开始，按自己的节奏逐步深入。",
           })}
         </h1>
         <p className="hh-meta">
           {entries.length
-            ? `${entries.filter((e) => progress.items[e.stepId]?.status === 'completed').length} / ${entries.length}`
+            ? `${entries.filter((e) => progress.items[e.stepId]?.status === "completed").length} / ${entries.length}`
             : translate({
-                id: 'learning.none',
-                message: '正式路线文章尚未发布',
-              })}{' '}
-          ·{' '}
+                id: "learning.none",
+                message: "正式路线文章尚未发布",
+              })}{" "}
+          ·{" "}
           {translate({
-            id: 'learning.local',
-            message: '进度仅保存在当前浏览器。',
+            id: "learning.local",
+            message: "进度仅保存在当前浏览器。",
           })}
         </p>
         {resume && (
           <p>
-            {uiLabel('CONTINUE LEARNING')} ·{' '}
+            {uiLabel("CONTINUE LEARNING")} ·{" "}
             <Link to={resume.permalink}>{resume.title} →</Link>
           </p>
         )}
         <section className="hh-section">
           <h2>{uiLabel("CURRENT PATH")}</h2>
-          <p className="hh-eyebrow">01 / {uiLabel('BUILD')} · {uiLabel('AI APPLICATIONS')}</p>
+          <p className="hh-eyebrow">
+            01 / {uiLabel("BUILD")} · {uiLabel("AI APPLICATIONS")}
+          </p>
           {!full && (
             <ol className="hh-roadmap">
               {tracks[0].steps.slice(0, 7).map((s) => render(s, true))}
@@ -147,17 +158,17 @@ export default function Learning() {
         <details open={full} onToggle={(e) => setFull(e.currentTarget.open)}>
           <summary>
             {translate({
-              id: 'learning.full',
-              message: '查看完整路线',
-            })}{' '}
+              id: "learning.full",
+              message: "查看完整路线",
+            })}{" "}
             →
           </summary>
           <div className="hh-controls">
             <input
               type="search"
               aria-label={translate({
-                id: 'learning.search',
-                message: '查找选题',
+                id: "learning.search",
+                message: "查找选题",
               })}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -165,11 +176,12 @@ export default function Learning() {
             <button
               type="button"
               aria-pressed={saved}
-              onClick={() => setSaved(!saved)}>
-              ☆{' '}
+              onClick={() => setSaved(!saved)}
+            >
+              ☆{" "}
               {translate({
-                id: 'learning.saved',
-                message: '只看想读',
+                id: "learning.saved",
+                message: "只看想读",
               })}
             </button>
             <button
@@ -179,23 +191,24 @@ export default function Learning() {
                 setSuggestion(
                   visible[Math.floor(Math.random() * visible.length)],
                 )
-              }>
+              }
+            >
               {translate({
-                id: 'learning.random',
-                message: '随机探索',
+                id: "learning.random",
+                message: "随机探索",
               })}
             </button>
           </div>
           {suggestion && (
             <p role="status">
-              <a href={'#step-' + suggestion.id}>{label(suggestion)} →</a>
+              <a href={"#step-" + suggestion.id}>{label(suggestion)} →</a>
             </p>
           )}
           {!visible.length && (
             <p role="status">
               {translate({
-                id: 'writing.empty',
-                message: '当前语言暂无匹配的已发布内容。',
+                id: "writing.empty",
+                message: "当前语言暂无匹配的已发布内容。",
               })}
             </p>
           )}
@@ -222,24 +235,24 @@ export default function Learning() {
               Python <small>{uiLabel("LEARNING")}</small>
             </li>
             <li>
-              {uiLabel('Frontend')} <small>{uiLabel("LEARNING")}</small>
+              {uiLabel("Frontend")} <small>{uiLabel("LEARNING")}</small>
             </li>
           </ul>
         </section>
         <p>
           <Link to="/research">
             {translate({
-              id: 'learning.research',
-              message: '研究总览',
-            })}{' '}
+              id: "learning.research",
+              message: "研究总览",
+            })}{" "}
             →
-          </Link>{' '}
-          ·{' '}
+          </Link>{" "}
+          ·{" "}
           <Link to="/reading">
             {translate({
-              id: 'learning.inbox',
-              message: '阅读清单',
-            })}{' '}
+              id: "learning.inbox",
+              message: "阅读清单",
+            })}{" "}
             →
           </Link>
         </p>

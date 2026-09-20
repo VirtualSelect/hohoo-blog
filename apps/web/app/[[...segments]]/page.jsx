@@ -9,6 +9,7 @@ import VirtualLab from "../../components/VirtualLab";
 import Journey from "../../components/Journey";
 import Shell from "../../components/Shell";
 import Views from "../../components/Views";
+import Document from "../../components/Document";
 const aliases = {
   aboutMe: "about",
   news: "radar",
@@ -118,18 +119,29 @@ export default async function Page({ params }) {
         locale,
         route,
         globalData: data.globalData,
-        items:
-          route === "radar" || route.startsWith("radar/weekly/")
-            ? data.items
+        items: route.startsWith("radar/weekly/")
+          ? data.items
+          : route === "radar"
+            ? data.items.slice(0, 12)
             : route === ""
               ? data.items.slice(0, 10)
               : [],
         searchUrl: data.searchUrl,
+        radarArchive: route === "radar" ? data.radarArchive : null,
         messages: getMessages(locale),
-        document,
+        document: document ? { ...document, html: undefined } : null,
       }}
     >
-      {route === "journey" ? (
+      {document &&
+      !document.frontMatter.landing &&
+      ["docs", "blog"].includes(document.kind) ? (
+        <Document>
+          <div
+            className="prose"
+            dangerouslySetInnerHTML={{ __html: document.html }}
+          />
+        </Document>
+      ) : route === "journey" ? (
         <Journey locale={locale} />
       ) : route === "journey/virtual-lab" ? (
         <VirtualLab locale={locale} />

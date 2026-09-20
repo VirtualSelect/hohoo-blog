@@ -20,13 +20,19 @@ function Frame({ children }) {
     [menu, setMenu] = useState(false),
     [search, setSearch] = useState(false);
   const trigger = useRef(null);
+  const menuTrigger = useRef(null);
   useEffect(() => {
     const key = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setSearch(true);
       }
-      if (e.key === "Escape") setMenu(false);
+      if (e.key === "Escape") {
+        setMenu((open) => {
+          if (open) menuTrigger.current?.focus();
+          return false;
+        });
+      }
     };
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
@@ -61,7 +67,15 @@ function Frame({ children }) {
             <Link
               key={p}
               to={"/" + p}
-              aria-current={route === p ? "page" : undefined}
+              aria-current={
+                route === p ||
+                route.startsWith(p + "/") ||
+                (p === "journey" && ["learning", "research"].includes(route)) ||
+                (p === "build" && /^(projects|labs)(\/|$)/.test(route)) ||
+                (p === "articles" && /^(blog|docs)(\/|$)/.test(route))
+                  ? "page"
+                  : undefined
+              }
             >
               {label}
             </Link>
@@ -95,6 +109,7 @@ function Frame({ children }) {
           </select>
           <ThemeToggle />
           <button
+            ref={menuTrigger}
             className="menu-toggle"
             aria-expanded={menu}
             aria-controls="main-nav"

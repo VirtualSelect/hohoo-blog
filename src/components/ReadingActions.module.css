@@ -14,7 +14,7 @@
   color: var(--hh-base-font-color-base);
   cursor: pointer;
 }
-.actions button[aria-pressed='true'] {
+.actions button[aria-pressed="true"] {
   border-color: var(--hh-base-color-primary);
   color: var(--hh-base-color-primary);
 }
@@ -27,22 +27,30 @@
   cursor: wait;
 }
 .compact {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
   margin: 0;
 }
 .compact button {
-  padding: 0;
-  border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--hh-border);
+  border-radius: 6px;
   background: transparent;
   color: var(--blog-muted);
   font: inherit;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: nowrap;
   cursor: pointer;
 }
-.compact button[aria-pressed='true'] {
+.compact button[aria-pressed="true"] {
   color: var(--hh-base-color-primary);
+  border-color: currentColor;
 }
 .compact button:focus-visible {
   outline: 2px solid var(--hh-base-color-primary);

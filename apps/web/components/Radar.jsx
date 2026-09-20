@@ -11,8 +11,9 @@ import { useText } from "./Shell";
 import RadarItem from "@site/src/components/RadarItem";
 import { domains } from "@site/src/utils/radar.cjs";
 import { uiLabel } from "@site/src/utils/ui-labels";
+import useRadarArchive from "./useRadarArchive";
 export default function Radar() {
-  const { items } = useSite(),
+  const { items: initial, radarArchive } = useSite(),
     t = useText(),
     [filters, setFilters] = useState({
       query: "",
@@ -21,28 +22,37 @@ export default function Radar() {
     }),
     [limit, setLimit] = useState(12);
   const pendingFocus = useRef(null);
+  const { items, status, load, complete } = useRadarArchive(
+    initial,
+    radarArchive,
+  );
   const { query, domain, source } = filters;
-  const sources = [
-    ...new Map(items.map((item) => [item.sourceId, item.sourceName])),
-  ];
+  const sources = radarArchive.sources;
   const filtered = filterRadarItems(items, filters);
-  const lastCollected = items
-    .map((item) => item.collectedAt)
-    .filter(Boolean)
-    .sort()
-    .at(-1);
+  const lastCollected = radarArchive.lastCollected;
+  useEffect(() => {
+    if (
+      (query ||
+        domain !== "all" ||
+        source !== "all" ||
+        window.location.hash.startsWith("#signal-")) &&
+      !complete &&
+      status === "idle"
+    )
+      void load(true);
+  }, [query, domain, source, complete, status, load]);
   useEffect(() => {
     const restore = () => {
       const next = readRadarFilters(
         window.location.search,
         domains,
-        items.map((item) => item.sourceId),
+        sources.map(([id]) => id),
       );
       setFilters(next);
       const index = filterRadarItems(items, next).findIndex(
         (item) => "#signal-" + item.id === window.location.hash,
       );
-      setLimit(Math.max(12, index + 1));
+      setLimit((value) => Math.max(value, 12, index + 1));
     };
     restore();
     window.addEventListener("popstate", restore);
@@ -78,6 +88,7 @@ export default function Radar() {
     );
   }
   const active = query || domain !== "all" || source !== "all";
+  const resultCount = active ? filtered.length : radarArchive.total;
   return (
     <main className="hh-page radar-page">
       <header className="page-intro">
@@ -171,11 +182,23 @@ export default function Radar() {
       </div>
       <div className="results-toolbar">
         <p role="status">
-          {t(
-            `找到 ${filtered.length} 条资讯 · 显示 ${Math.min(limit, filtered.length)} 条`,
-            `${filtered.length} signals · ${Math.min(limit, filtered.length)} shown`,
-            `找到 ${filtered.length} 條資訊 · 顯示 ${Math.min(limit, filtered.length)} 條`,
-          )}
+          {!complete && active
+            ? t(
+                status === "error"
+                  ? "历史资讯加载失败，请重试。"
+                  : "正在筛选历史资讯…",
+                status === "error"
+                  ? "Archive loading failed. Please retry."
+                  : "Filtering the archive…",
+                status === "error"
+                  ? "歷史資訊載入失敗，請重試。"
+                  : "正在篩選歷史資訊…",
+              )
+            : t(
+                `找到 ${resultCount} 条资讯 · 显示 ${Math.min(limit, filtered.length)} 条`,
+                `${resultCount} signals · ${Math.min(limit, filtered.length)} shown`,
+                `找到 ${resultCount} 條資訊 · 顯示 ${Math.min(limit, filtered.length)} 條`,
+              )}
         </p>
         {active && (
           <button
@@ -186,7 +209,17 @@ export default function Radar() {
         )}
       </div>
       <div className="radar-stream">
-        {!filtered.length ? (
+        {!complete && active ? (
+          status !== "error" && (
+            <p role="status">
+              {t(
+                "正在读取历史资讯，筛选结果将在加载完成后显示。",
+                "Loading the archive before showing complete results.",
+                "正在讀取歷史資訊，篩選結果將在載入完成後顯示。",
+              )}
+            </p>
+          )
+        ) : !filtered.length ? (
           <div className="empty">
             <h2>
               {t("没有匹配的资讯", "No matching signals", "沒有符合的資訊")}
@@ -223,16 +256,40 @@ export default function Radar() {
           ))
         )}
       </div>
-      {filtered.length > limit && (
-        <button
-          onClick={() => {
-            pendingFocus.current = "signal-" + filtered[limit].id;
-            setLimit(limit + 12);
-          }}
-        >
-          {t("加载更多", "Load more", "載入更多")}
-        </button>
+      {status === "error" && (
+        <p role="status">
+          <button
+            onClick={() =>
+              load(
+                Boolean(active) || window.location.hash.startsWith("#signal-"),
+              )
+            }
+          >
+            {t(
+              "历史资讯加载失败，点击重试",
+              "Archive unavailable. Retry",
+              "歷史資訊載入失敗，點擊重試",
+            )}
+          </button>
+        </p>
       )}
+      {status !== "error" &&
+        !(active && !complete) &&
+        (filtered.length > limit || !complete) && (
+          <button
+            disabled={status === "loading"}
+            onClick={async () => {
+              if (filtered[limit])
+                pendingFocus.current = "signal-" + filtered[limit].id;
+              if (filtered.length <= limit && !complete) await load(false);
+              setLimit((value) => value + 12);
+            }}
+          >
+            {status === "loading"
+              ? t("正在加载…", "Loading…", "正在載入…")
+              : t("加载更多", "Load more", "載入更多")}
+          </button>
+        )}
     </main>
   );
 }

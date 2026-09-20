@@ -270,12 +270,29 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
   const searchName = `${locale}-${createHash("sha256").update(searchJSON).digest("hex").slice(0, 16)}.json`;
   fs.mkdirSync(path.join(here, "public", "search"), { recursive: true });
   fs.writeFileSync(path.join(here, "public", "search", searchName), searchJSON);
+  const radarChunks = [];
+  fs.mkdirSync(path.join(here, "public", "radar-data"), { recursive: true });
+  for (let offset = 12; offset < items.length; offset += 24) {
+    const json = JSON.stringify(items.slice(offset, offset + 24));
+    const name = `${locale}-${createHash("sha256").update(json).digest("hex").slice(0, 16)}.json`;
+    fs.writeFileSync(path.join(here, "public", "radar-data", name), json);
+    radarChunks.push("/radar-data/" + name);
+  }
   put(locale + ".json", {
     locale,
     routes,
     documents,
     globalData,
     items,
+    radarArchive: {
+      chunks: radarChunks,
+      total: items.length,
+      sources: [...new Map(items.map((i) => [i.sourceId, i.sourceName]))],
+      lastCollected: items
+        .map((i) => i.collectedAt)
+        .sort()
+        .at(-1),
+    },
     search,
     searchUrl: "/search/" + searchName,
     weeks,

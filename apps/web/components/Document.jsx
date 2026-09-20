@@ -1,20 +1,21 @@
 "use client";
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import { useSite } from "../runtime/context";
 import { useText } from "./Shell";
 import Link from "../runtime/Link";
 import DocReadingContext from "@site/src/components/DocReadingContext";
 import TranslationNotice from "@site/src/components/TranslationNotice";
 import ArticleContents from "./ArticleContents";
-import ConversationWorkbench from "./ConversationWorkbench";
+const ConversationWorkbench = dynamic(() => import("./ConversationWorkbench"));
 import ReadingReflection from "./ReadingReflection";
-import RequestJourney from "./RequestJourney";
+const RequestJourney = dynamic(() => import("./RequestJourney"));
 import ReadingFork from "./ReadingFork";
 import TryIt from "./TryIt";
-import ErrorClinic from "./ErrorClinic";
-import PracticeCompanion from "./PracticeCompanion";
+const ErrorClinic = dynamic(() => import("./ErrorClinic"));
+const PracticeCompanion = dynamic(() => import("./PracticeCompanion"));
 import ArticleHistory from "./ArticleHistory";
-export default function Document() {
+export default function Document({ children }) {
   const { document: d } = useSite(),
     t = useText(),
     ref = useRef(null);
@@ -111,11 +112,7 @@ export default function Document() {
           )}
         </header>
         <ArticleContents headings={d.headings} mobile />
-        <div
-          ref={ref}
-          className="prose"
-          dangerouslySetInnerHTML={{ __html: d.html }}
-        />
+        <div ref={ref}>{children}</div>
         {d.route === "docs/ai-apps/java-first-llm" && (
           <>
             <TryIt
