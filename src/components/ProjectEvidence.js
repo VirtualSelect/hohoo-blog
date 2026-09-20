@@ -1,9 +1,10 @@
-import { uiLabel } from '@site/src/utils/ui-labels';
-import React from 'react';
-import Link from '@lab/runtime/Link';
-import ArchitectureDiagram from './ArchitectureDiagram';
-import { useEnglish } from './ContentUI';
-import history from '@site/data/build-log.json';
+import { uiLabel } from "@site/src/utils/ui-labels";
+import React from "react";
+import Link from "@lab/runtime/Link";
+import ArchitectureDiagram from "./ArchitectureDiagram";
+import { useEnglish } from "./ContentUI";
+import history from "@site/data/build-log.json";
+import ExpandableFigure from "@lab/components/ExpandableFigure";
 export default function ProjectEvidence({ entry }) {
   const en = useEnglish();
   const logs = history.filter((log) => log.project === entry.id);
@@ -11,14 +12,14 @@ export default function ProjectEvidence({ entry }) {
     <>
       {!!entry.resources?.length && (
         <section className="hh-section">
-          <h2>{en ? 'CODE & READING' : '代码与配套阅读'}</h2>
+          <h2>{en ? "CODE & READING" : "代码与配套阅读"}</h2>
           <ul className="hh-rows">
             {entry.resources.map((resource) => (
               <li key={resource.href}>
                 <div>
                   <h3>
                     <Link to={resource.href}>
-                      {en ? resource.labelEn || resource.label : resource.label}{' '}
+                      {en ? resource.labelEn || resource.label : resource.label}{" "}
                       →
                     </Link>
                   </h3>
@@ -38,7 +39,7 @@ export default function ProjectEvidence({ entry }) {
         <section className="hh-section">
           <h2>{uiLabel("PRODUCT EVIDENCE")}</h2>
           {entry.screenshots.map((s) => (
-            <figure key={s.src}>
+            <ExpandableFigure key={s.src} title={s.alt}>
               <img
                 src={s.src}
                 alt={s.alt}
@@ -46,8 +47,7 @@ export default function ProjectEvidence({ entry }) {
                 height={s.height}
                 loading="lazy"
               />
-              <figcaption>{s.alt}</figcaption>
-            </figure>
+            </ExpandableFigure>
           ))}
         </section>
       )}
@@ -59,7 +59,7 @@ export default function ProjectEvidence({ entry }) {
               <p className="hh-eyebrow">ADR / {d.id}</p>
               <h3>{d.title}</h3>
               <dl className="hh-definition">
-                {['decision', 'context', 'alternatives', 'why', 'tradeoffs']
+                {["decision", "context", "alternatives", "why", "tradeoffs"]
                   .filter((k) => d[k])
                   .map((k) => (
                     <React.Fragment key={k}>
@@ -77,8 +77,8 @@ export default function ProjectEvidence({ entry }) {
           <h2>{uiLabel("BUILD LOG")}</h2>
           <p className="hh-meta">
             {en
-              ? 'Repository commits; not deployment dates or release versions.'
-              : '来自仓库提交记录，不代表部署时间或发行版本。'}
+              ? "Repository commits; not deployment dates or release versions."
+              : "来自仓库提交记录，不代表部署时间或发行版本。"}
           </p>
           <ol className="hh-rows">
             {logs.map((l) => (
@@ -87,9 +87,10 @@ export default function ProjectEvidence({ entry }) {
                   <time dateTime={l.date}>{l.date}</time>
                   <h3>
                     <a
-                      href={entry.repo + '/commit/' + l.commit}
+                      href={entry.repo + "/commit/" + l.commit}
                       target="_blank"
-                      rel="noopener noreferrer">
+                      rel="noopener noreferrer"
+                    >
                       {l.title} ↗
                     </a>
                   </h3>

@@ -8,6 +8,8 @@ import { Status } from "@site/src/components/ContentUI";
 import { uiLabel } from "@site/src/utils/ui-labels";
 import DiscoveryCompass from "./DiscoveryCompass";
 import VisitorStats from "./VisitorStats";
+import LabSketch from "./LabSketch";
+import ProjectShowcase from "./ProjectShowcase";
 
 export default function Home() {
   const { locale, globalData, items } = useSite(),
@@ -22,7 +24,7 @@ export default function Home() {
     e.href.endsWith("/projects/hohoo-ai-lab"),
   );
   return (
-    <main className="home">
+    <main className="home editorial-home">
       <section className="home-hero">
         <div>
           <p className="eyebrow">
@@ -94,76 +96,133 @@ export default function Home() {
           </p>
         </aside>
       </section>
+      {firstTutorial && (
+        <aside className="editorial-quote">
+          <p className="eyebrow">
+            {t(
+              "从一次实践里留下的理解",
+              "An observation from practice",
+              "從一次實作裡留下的理解",
+            )}
+          </p>
+          <blockquote>
+            {t(
+              "每次对话带上之前对话的记忆，包括问题及回答。",
+              "Carry the previous conversation into each request, including questions and answers.",
+              "每次對話帶上之前對話的記憶，包括問題及回答。",
+            )}
+          </blockquote>
+          <Link to={firstTutorial.href}>
+            {t(
+              "出自 Java 多轮对话实践",
+              "From the Java conversation tutorial",
+              "出自 Java 多輪對話實作",
+            )}{" "}
+            →
+          </Link>
+        </aside>
+      )}
       <section className="home-section">
         <div className="section-top">
           <div>
             <p className="eyebrow">01 / {t("文字", "Writing", "文字")}</p>
-            <h2>{t("最近写下的", "Latest writing", "最近寫下的")}</h2>
+            <h2>{t("精选与近作", "Selected writing", "精選與近作")}</h2>
           </div>
           <Link to="/articles">
             {t("全部文章", "All writing", "全部文章")} →
           </Link>
         </div>
-        <div className="writing-list">
-          {latest.map((e, i) => (
-            <Link className="writing-row" key={e.id} to={e.href}>
-              <span className="row-number">0{i + 1}</span>
-              <div>
-                <small>{uiLabel(e.type.toUpperCase())}</small>
-                <h3>{e.title}</h3>
-                <p>{e.description}</p>
-              </div>
-              <div className="row-meta">
-                <time>{e.date}</time>
-                {e.minutes && (
-                  <small>
-                    {e.minutes} {t("分钟", "min", "分鐘")}
-                  </small>
-                )}
-                <span>↗</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-        {firstTutorial && demoProject && (
-          <aside className="reading-guide">
-            <div>
+        {firstTutorial && (
+          <article
+            className="featured-writing"
+            data-domain={firstTutorial.domain}
+          >
+            <div className="featured-copy">
               <p className="eyebrow">
-                {t("第一次来？", "New here?", "第一次來？")}
+                {t(
+                  "从这里开始 / 实践教程",
+                  "Start here / Practical tutorial",
+                  "從這裡開始 / 實作教學",
+                )}
               </p>
               <h3>
-                {t(
-                  "从一次模型请求开始",
-                  "Start with one model request",
-                  "從一次模型請求開始",
-                )}
+                <Link to={firstTutorial.href}>{firstTutorial.title}</Link>
               </h3>
+              <p>{firstTutorial.description}</p>
+              <p className="featured-meta">
+                <time>{firstTutorial.date}</time>
+                {firstTutorial.minutes && (
+                  <span>
+                    {firstTutorial.minutes}{" "}
+                    {t("分钟阅读", "min read", "分鐘閱讀")}
+                  </span>
+                )}
+              </p>
+              <div className="featured-actions">
+                <Link
+                  className="featured-action featured-action-primary"
+                  to={firstTutorial.href}
+                >
+                  <span>{t("阅读全文", "Read the story", "閱讀全文")}</span>
+                  <span className="action-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
+                {demoProject && (
+                  <Link className="featured-action" to={demoProject.href}>
+                    <span>
+                      {t("查看配套 Demo", "Explore the demos", "查看配套 Demo")}
+                    </span>
+                    <span className="action-arrow" aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
+                )}
+              </div>
+            </div>
+            <div className="request-cover">
+              <span className="eyebrow">
+                {t("一次对话的起点", "A conversation begins", "一次對話的起點")}
+              </span>
+              <LabSketch />
+              <div className="cover-labels">
+                <span>Java</span>
+                <span>HTTP / JSON</span>
+                <span>LLM</span>
+              </div>
               <p>
                 {t(
-                  "先读请求与响应，再运行配套示例，最后理解多轮对话为什么要带上历史消息。",
-                  "Read the request and response, run the examples, then explore why a conversation needs its message history.",
-                  "先讀請求與回應，再執行配套範例，最後理解多輪對話為什麼要帶上歷史訊息。",
+                  "从“发出请求”到“接上前文”。",
+                  "From one request to a conversation.",
+                  "從「發出請求」到「接上前文」。",
                 )}
               </p>
             </div>
-            <div className="inline-links">
-              <Link to={firstTutorial.href}>
-                {t("阅读教程", "Read the tutorial", "閱讀教學")} →
-              </Link>
-              <Link to={demoProject.href}>
-                {t("配套 Demo", "Companion demos", "配套 Demo")} ↗
-              </Link>
-              <a href={`${firstTutorial.href}#conversation-workbench`}>
-                {t(
-                  "动手拆解对话记忆",
-                  "Explore conversation memory",
-                  "動手拆解對話記憶",
-                )}{" "}
-                →
-              </a>
-            </div>
-          </aside>
+          </article>
         )}
+        <div className="writing-list">
+          {latest
+            .filter((e) => e.id !== firstTutorial?.id)
+            .map((e, i) => (
+              <Link className="writing-row" key={e.id} to={e.href}>
+                <span className="row-number">0{i + 1}</span>
+                <div>
+                  <small>{uiLabel(e.type.toUpperCase())}</small>
+                  <h3>{e.title}</h3>
+                  <p>{e.description}</p>
+                </div>
+                <div className="row-meta">
+                  <time>{e.date}</time>
+                  {e.minutes && (
+                    <small>
+                      {e.minutes} {t("分钟", "min", "分鐘")}
+                    </small>
+                  )}
+                  <span>↗</span>
+                </div>
+              </Link>
+            ))}
+        </div>
       </section>
       <section className="home-section">
         <div className="section-top">
@@ -176,22 +235,41 @@ export default function Home() {
         <div className="build-grid">
           {projects.map((p) => (
             <article className="build-feature" key={p.id}>
-              <div className="build-visual" aria-hidden="true">
-                <span>
-                  {p.href.endsWith("/hohoo-blog")
-                    ? "Hohoo."
-                    : p.href.endsWith("/hohoo-ai-lab")
-                      ? "{ Java → AI }"
-                      : p.title}
+              <div
+                className="project-schematic"
+                data-tone={p.href.endsWith("/hohoo-blog") ? "lavender" : "blue"}
+              >
+                <p className="eyebrow">
+                  {t(
+                    "项目结构 / 简图",
+                    "Project structure / Schematic",
+                    "專案結構 / 簡圖",
+                  )}
+                </p>
+                <span className="project-wordmark">
+                  {p.href.endsWith("/hohoo-blog") ? "Hohoo." : "Java → AI"}
                 </span>
-                <div className="visual-path">
-                  {p.href.endsWith("/hohoo-blog")
-                    ? "Discover → Learn → Build"
-                    : p.href.endsWith("/hohoo-ai-lab")
-                      ? "HTTP → JSON → Conversation"
-                      : p.stack?.join(" · ")}
-                </div>
+                <ol>
+                  {(p.href.endsWith("/hohoo-blog")
+                    ? [
+                        t("发现资讯", "Discover", "發現資訊"),
+                        t("沉淀知识", "Learn", "沉澱知識"),
+                        t("动手实践", "Build", "動手實作"),
+                      ]
+                    : [
+                        t("发送请求", "Request", "傳送請求"),
+                        t("解析响应", "Parse", "解析回應"),
+                        t("多轮对话", "Conversation", "多輪對話"),
+                      ]
+                  ).map((label, i) => (
+                    <li key={label}>
+                      <span>0{i + 1}</span>
+                      {label}
+                    </li>
+                  ))}
+                </ol>
               </div>
+              <ProjectShowcase id={p.id} />
               <div className="section-top">
                 <small>
                   {t("项目", "Project", "專案")} / {p.number}
@@ -207,7 +285,25 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <DiscoveryCompass />
+      <details className="home-discovery">
+        <summary>
+          <span>
+            {t(
+              "想换个方向看看？",
+              "Take a different path?",
+              "想換個方向看看？",
+            )}
+          </span>
+          <span className="eyebrow">
+            {t(
+              "打开好奇心指南针",
+              "Open curiosity compass",
+              "開啟好奇心指南針",
+            )}
+          </span>
+        </summary>
+        <DiscoveryCompass />
+      </details>
       <section className="home-section tracks-section">
         <div>
           <p className="eyebrow">
@@ -235,7 +331,8 @@ export default function Home() {
               t("具身智能", "Embodied AI", "具身智慧"),
             ],
           ].map(([id, verb, title], i) => (
-            <Link key={id} to={"/docs/" + id}>
+            <Link key={id} to={"/docs/" + id} data-track={id}>
+              <LabSketch kind={["application", "model", "embodied"][i]} />
               <small>
                 0{i + 1} / {verb}
               </small>
@@ -278,6 +375,42 @@ export default function Home() {
         ))}
       </section>
       <VisitorStats />
+      <nav
+        className="home-exits"
+        aria-label={t("继续探索", "Keep exploring", "繼續探索")}
+      >
+        {[
+          [
+            "/articles",
+            t("读一篇", "Read", "讀一篇"),
+            t("带走一个新的理解", "Find a new idea", "帶走一個新的理解"),
+          ],
+          [
+            "/projects",
+            t("看代码", "Build", "看程式碼"),
+            t(
+              "看看想法怎样落地",
+              "See how ideas become code",
+              "看看想法怎樣落地",
+            ),
+          ],
+          [
+            "/about",
+            t("认识我", "Meet Hohoo", "認識我"),
+            t(
+              "了解这个站点背后的人",
+              "Meet the person behind the site",
+              "了解這個站點背後的人",
+            ),
+          ],
+        ].map(([href, label, description], i) => (
+          <Link key={href} to={href}>
+            <span className="eyebrow">0{i + 1}</span>
+            <strong>{label} →</strong>
+            <small>{description}</small>
+          </Link>
+        ))}
+      </nav>
     </main>
   );
 }

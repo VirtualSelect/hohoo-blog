@@ -51,7 +51,7 @@ export default function ArticleContents({ headings, mobile = false }) {
     </nav>
   );
   return mobile ? (
-    <details className="mobile-toc">
+    <details className="mobile-toc" id="article-toc">
       <summary>
         {t("本文目录", "On this page", "本文目錄")}{" "}
         <span>{headings.length}</span>
