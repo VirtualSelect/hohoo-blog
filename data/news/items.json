@@ -60,6 +60,21 @@
     "coverage": []
   },
   {
+    "id": "76fec386ed6440f314b1",
+    "title": "MCP was always a bad idea?",
+    "url": "https://simonwillison.net/2026/Sep/20/hn-49779718",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-09-20T20:24:41.000Z",
+    "collectedAt": "2026-09-21T19:42:54.415Z",
+    "category": "ai-apps",
+    "summary": "My comment on MCP was always a bad idea? &mdash; Hacker News. This article entirely misses the value that MCP brings today. Sure, there's almost no reason to use MCPs if you are…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-2a20ee5d",
+    "coverage": []
+  },
+  {
     "id": "44a79d124abd213340fc",
     "title": "阶跃星辰发布旗舰模型 Step 5 Preview，10 月 15 日开源权重",
     "url": "https://aihot.news/items/cmu96vqg8035srodqu63q13w4",
