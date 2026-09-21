@@ -1,0 +1,194 @@
+.workbench {
+  margin-block: 4rem;
+  scroll-margin-top: 6rem;
+}
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  border-top: 1px solid var(--hh-border);
+  padding-top: 2rem;
+}
+.header h2 {
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+.header p {
+  color: var(--blog-muted);
+}
+.instruments > div {
+  --instrument: var(--lab-blue);
+  --wash: var(--lab-blue-soft);
+  position: relative;
+  border-left: 3px solid var(--instrument);
+  padding: 0 1.5rem;
+  margin-top: 1rem;
+  background: var(--wash);
+}
+.instruments > div[data-tone="violet"] {
+  --instrument: var(--lab-lavender);
+  --wash: var(--lab-lavender-soft);
+}
+.instruments > div[data-tone="apricot"] {
+  --instrument: var(--lab-apricot);
+  --wash: var(--lab-apricot-soft);
+}
+.instruments details {
+  margin: 0;
+  border: 0;
+  padding-block: 1.4rem;
+}
+.instruments summary {
+  padding-right: 5rem;
+}
+.number {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.6rem;
+  color: var(--instrument);
+  font-family: monospace;
+  pointer-events: none;
+}
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.controls {
+  border: 1px solid var(--hh-border);
+  min-width: 0;
+  padding: 1rem;
+}
+.controls label {
+  display: block;
+  padding: 0.5rem 0;
+}
+.controls input[type="range"] {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  accent-color: var(--instrument);
+}
+.controls input[type="checkbox"] {
+  margin-right: 0.65rem;
+  accent-color: var(--instrument);
+  width: 18px;
+  height: 18px;
+  min-height: 18px;
+  flex: 0 0 18px;
+}
+.controls label:has(input[type="checkbox"]) {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+}
+.controls output {
+  float: right;
+  font-variant-numeric: tabular-nums;
+}
+.result {
+  padding: 1.5rem;
+  background: var(--blog-surface);
+  border-top: 3px solid var(--instrument);
+}
+.result h3 {
+  color: var(--instrument);
+  font-size: 1.5rem;
+}
+.meter {
+  position: relative;
+  height: 10px;
+  margin-block: 2rem;
+  background: var(--wash);
+}
+.meter span {
+  display: block;
+  height: 100%;
+  background: var(--instrument);
+}
+.meter i {
+  position: absolute;
+  top: -5px;
+  height: 20px;
+  border-left: 2px solid var(--hh-text-primary);
+  transform: translateX(-1px);
+}
+.note {
+  font-size: 0.9rem;
+  color: var(--blog-muted);
+  margin-top: 1.5rem;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-block: 1rem;
+}
+.actions button {
+  min-height: 44px;
+  border: 1px solid var(--instrument);
+  background: var(--blog-surface);
+  color: var(--hh-text-primary);
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.actions button[aria-pressed="true"] {
+  outline: 2px solid var(--instrument);
+  outline-offset: 2px;
+}
+.workbench :is(button, input, textarea):focus-visible {
+  outline: 2px solid var(--instrument);
+  outline-offset: 3px;
+}
+.excerpt {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border-left: 2px solid var(--instrument);
+  background: var(--blog-surface);
+}
+.feedback {
+  min-height: 4rem;
+}
+.editor {
+  display: block;
+}
+.editor textarea {
+  display: block;
+  min-height: 200px;
+  font-family: monospace;
+  margin-top: 0.5rem;
+}
+.table {
+  max-height: 360px;
+  overflow: auto;
+}
+.table table {
+  width: 100%;
+  table-layout: fixed;
+}
+.table th,
+.table td {
+  padding: 0.65rem;
+  border-bottom: 1px solid var(--hh-border);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.table th:first-child {
+  width: 75%;
+}
+.table code {
+  white-space: pre-wrap;
+}
+@media (max-width: 768px) {
+  .header,
+  .columns {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .instruments > div {
+    padding-inline: 1rem;
+  }
+  .number {
+    right: 1rem;
+  }
+}

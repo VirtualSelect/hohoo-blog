@@ -1,4 +1,45 @@
 /* Editorial polish: static diagrams and typographic hierarchy, no runtime animation. */
+.editorial-home .home-hero {
+  grid-template-columns: 0.8fr 1.2fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding-block: 3rem 4rem;
+}
+.editorial-home .home-hero h1 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+}
+.home-current-summary {
+  padding-block: 2rem;
+  border-top: 1px solid var(--hh-border);
+}
+.home-current-summary .current-panel {
+  max-width: none;
+}
+.home-current-summary .current-panel > a {
+  display: inline-flex;
+  width: 32%;
+  vertical-align: top;
+  padding: 1rem;
+}
+.manual-extras {
+  margin-block: 2rem;
+  border-block: 1px solid var(--hh-border);
+  padding: 1rem;
+}
+.manual-extras > summary {
+  min-height: 44px;
+  cursor: pointer;
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .editorial-home .home-hero {
+    grid-template-columns: 1fr;
+  }
+  .home-current-summary .current-panel > a {
+    display: flex;
+    width: 100%;
+  }
+}
 :root {
   --lab-blue: #4c6b82;
   --lab-blue-soft: #eaf0f4;
