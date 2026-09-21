@@ -16,8 +16,7 @@ const ErrorClinic = dynamic(() => import("./ErrorClinic"));
 const PracticeCompanion = dynamic(() => import("./PracticeCompanion"));
 import ArticleHistory from "./ArticleHistory";
 import VisitorStats from "./VisitorStats";
-import TutorialGuide from "./TutorialGuide";
-import PracticeEvidence from "./PracticeEvidence";
+import FlagshipExperience from "./FlagshipExperience";
 import {
   readerSettingsKey,
   parseReaderSettings,
@@ -241,14 +240,20 @@ export default function Document({ children }) {
           )}
         </div>
         {d.route === "docs/ai-apps/java-first-llm" && (
-          <TutorialGuide headings={d.headings} />
+          <FlagshipExperience headings={d.headings} />
         )}
         <div id="reading-content" ref={ref}>
           {children}
         </div>
-        {d.route === "docs/ai-apps/java-first-llm" && <PracticeEvidence />}
         {d.route === "docs/ai-apps/java-first-llm" && (
-          <>
+          <details className="manual-extras">
+            <summary>
+              {t(
+                "进阶练习与实践自检",
+                "Optional exercises and self-check",
+                "進階練習與實作自檢",
+              )}
+            </summary>
             <TryIt
               id="request-exercise"
               title={t(
@@ -272,7 +277,7 @@ export default function Document({ children }) {
             >
               <PracticeCompanion />
             </TryIt>
-          </>
+          </details>
         )}
         <ReadingReflection
           key={d.route}

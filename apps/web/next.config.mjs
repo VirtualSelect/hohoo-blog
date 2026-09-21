@@ -6,6 +6,22 @@ const aliases = { "@site": root, "@lab": here };
 export default {
   poweredByHeader: false,
   experimental: { globalNotFound: true },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return ["", "/en", "/zh-TW"].map((prefix) => ({
       source: prefix + "/blog/a%20new%20milestone",

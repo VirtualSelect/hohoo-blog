@@ -12,6 +12,7 @@ import ExperimentDesign from "./ExperimentDesign";
 import ContentProvenance, { Freshness } from "./ContentProvenance";
 import { Related, Status, useEnglish } from "./ContentUI";
 import ProjectShowcase from "@lab/components/ProjectShowcase";
+import FlagshipExperience from "@lab/components/FlagshipExperience";
 export default function ContentDetail({ entry: e, children }) {
   const en = useEnglish();
   const locale = useSiteConfig().i18n.currentLocale;
@@ -92,7 +93,11 @@ export default function ContentDetail({ entry: e, children }) {
             {e.demo && <a href={e.demo}>{uiLabel("Website")} ↗</a>}
           </p>
         )}
-        {e.type === "project" && <ProjectShowcase id={e.id} />}
+        {e.id === "project:hohoo-ai-lab" ? (
+          <FlagshipExperience mode="project" />
+        ) : (
+          e.type === "project" && <ProjectShowcase id={e.id} />
+        )}
         {e.type === "project" &&
           locale === "zh-CN" &&
           e.sections?.length > 0 && (

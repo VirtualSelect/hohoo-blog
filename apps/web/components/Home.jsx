@@ -10,6 +10,7 @@ import DiscoveryCompass from "./DiscoveryCompass";
 import VisitorStats from "./VisitorStats";
 import LabSketch from "./LabSketch";
 import ProjectShowcase from "./ProjectShowcase";
+import FlagshipExperience from "./FlagshipExperience";
 
 export default function Home() {
   const { locale, globalData, items } = useSite(),
@@ -19,9 +20,6 @@ export default function Home() {
     projects = entries.filter((e) => e.type === "project").slice(0, 2);
   const firstTutorial = entries.find((e) =>
     e.href.endsWith("/docs/ai-apps/java-first-llm"),
-  );
-  const demoProject = entries.find((e) =>
-    e.href.endsWith("/projects/hohoo-ai-lab"),
   );
   return (
     <main className="home editorial-home">
@@ -48,182 +46,52 @@ export default function Home() {
             )}
           </p>
           <div className="hero-links">
-            <Link className="primary-link" to="/articles">
-              {t("开始阅读", "Start reading", "開始閱讀")} ↗
+            <Link className="primary-link" to="/docs/ai-apps/java-first-llm">
+              {t("从 Java 实践开始", "Start with Java", "從 Java 實作開始")} ↗
             </Link>
             <Link to="/about">
               {t("认识一下我", "Meet Hohoo", "認識一下我")} →
             </Link>
           </div>
         </div>
-        <aside className="current-panel">
+        {firstTutorial && <FlagshipExperience mode="cover" />}
+      </section>
+      {latest.some((e) => e.id !== firstTutorial?.id) && (
+        <section className="home-section">
           <div className="section-top">
-            <span className="eyebrow">
-              {t("最近在做", "Currently", "最近在做")}
-            </span>
-            <small>{current.updated}</small>
+            <div>
+              <p className="eyebrow">01 / {t("文字", "Writing", "文字")}</p>
+              <h2>{t("精选与近作", "Selected writing", "精選與近作")}</h2>
+            </div>
+            <Link to="/articles">
+              {t("全部文章", "All writing", "全部文章")} →
+            </Link>
           </div>
-          {current.items
-            .filter((i) =>
-              ["BUILDING", "LEARNING", "EXPLORING"].includes(i.kind),
-            )
-            .map((i, index) => (
-              <Link key={i.kind} to={i.to}>
-                <span className="current-number">0{index + 1}</span>
-                <div>
-                  <small>
-                    {
-                      [
-                        t("构建", "Building", "構建"),
-                        t("学习", "Learning", "學習"),
-                        t("探索", "Exploring", "探索"),
-                      ][index]
-                    }
-                  </small>
-                  <p>
-                    {locale === "en" ? i.en : locale === "zh-TW" ? i.tw : i.zh}
-                  </p>
-                </div>
-                <span>↗</span>
-              </Link>
-            ))}
-          <p className="panel-note">
-            {t(
-              "持续记录真实的问题、实验与进展。",
-              "A living record of questions, experiments and progress.",
-              "持續記錄真實的問題、實驗與進展。",
-            )}
-          </p>
-        </aside>
-      </section>
-      {firstTutorial && (
-        <aside className="editorial-quote">
-          <p className="eyebrow">
-            {t(
-              "从一次实践里留下的理解",
-              "An observation from practice",
-              "從一次實作裡留下的理解",
-            )}
-          </p>
-          <blockquote>
-            {t(
-              "每次对话带上之前对话的记忆，包括问题及回答。",
-              "Carry the previous conversation into each request, including questions and answers.",
-              "每次對話帶上之前對話的記憶，包括問題及回答。",
-            )}
-          </blockquote>
-          <Link to={firstTutorial.href}>
-            {t(
-              "出自 Java 多轮对话实践",
-              "From the Java conversation tutorial",
-              "出自 Java 多輪對話實作",
-            )}{" "}
-            →
-          </Link>
-        </aside>
-      )}
-      <section className="home-section">
-        <div className="section-top">
-          <div>
-            <p className="eyebrow">01 / {t("文字", "Writing", "文字")}</p>
-            <h2>{t("精选与近作", "Selected writing", "精選與近作")}</h2>
-          </div>
-          <Link to="/articles">
-            {t("全部文章", "All writing", "全部文章")} →
-          </Link>
-        </div>
-        {firstTutorial && (
-          <article
-            className="featured-writing"
-            data-domain={firstTutorial.domain}
-          >
-            <div className="featured-copy">
-              <p className="eyebrow">
-                {t(
-                  "从这里开始 / 实践教程",
-                  "Start here / Practical tutorial",
-                  "從這裡開始 / 實作教學",
-                )}
-              </p>
-              <h3>
-                <Link to={firstTutorial.href}>{firstTutorial.title}</Link>
-              </h3>
-              <p>{firstTutorial.description}</p>
-              <p className="featured-meta">
-                <time>{firstTutorial.date}</time>
-                {firstTutorial.minutes && (
-                  <span>
-                    {firstTutorial.minutes}{" "}
-                    {t("分钟阅读", "min read", "分鐘閱讀")}
-                  </span>
-                )}
-              </p>
-              <div className="featured-actions">
-                <Link
-                  className="featured-action featured-action-primary"
-                  to={firstTutorial.href}
-                >
-                  <span>{t("阅读全文", "Read the story", "閱讀全文")}</span>
-                  <span className="action-arrow" aria-hidden="true">
-                    →
-                  </span>
+          <div className="writing-list">
+            {latest
+              .filter((e) => e.id !== firstTutorial?.id)
+              .map((e, i) => (
+                <Link className="writing-row" key={e.id} to={e.href}>
+                  <span className="row-number">0{i + 1}</span>
+                  <div>
+                    <small>{uiLabel(e.type.toUpperCase())}</small>
+                    <h3>{e.title}</h3>
+                    <p>{e.description}</p>
+                  </div>
+                  <div className="row-meta">
+                    <time>{e.date}</time>
+                    {e.minutes && (
+                      <small>
+                        {e.minutes} {t("分钟", "min", "分鐘")}
+                      </small>
+                    )}
+                    <span>↗</span>
+                  </div>
                 </Link>
-                {demoProject && (
-                  <Link className="featured-action" to={demoProject.href}>
-                    <span>
-                      {t("查看配套 Demo", "Explore the demos", "查看配套 Demo")}
-                    </span>
-                    <span className="action-arrow" aria-hidden="true">
-                      →
-                    </span>
-                  </Link>
-                )}
-              </div>
-            </div>
-            <div className="request-cover">
-              <span className="eyebrow">
-                {t("一次对话的起点", "A conversation begins", "一次對話的起點")}
-              </span>
-              <LabSketch />
-              <div className="cover-labels">
-                <span>Java</span>
-                <span>HTTP / JSON</span>
-                <span>LLM</span>
-              </div>
-              <p>
-                {t(
-                  "从“发出请求”到“接上前文”。",
-                  "From one request to a conversation.",
-                  "從「發出請求」到「接上前文」。",
-                )}
-              </p>
-            </div>
-          </article>
-        )}
-        <div className="writing-list">
-          {latest
-            .filter((e) => e.id !== firstTutorial?.id)
-            .map((e, i) => (
-              <Link className="writing-row" key={e.id} to={e.href}>
-                <span className="row-number">0{i + 1}</span>
-                <div>
-                  <small>{uiLabel(e.type.toUpperCase())}</small>
-                  <h3>{e.title}</h3>
-                  <p>{e.description}</p>
-                </div>
-                <div className="row-meta">
-                  <time>{e.date}</time>
-                  {e.minutes && (
-                    <small>
-                      {e.minutes} {t("分钟", "min", "分鐘")}
-                    </small>
-                  )}
-                  <span>↗</span>
-                </div>
-              </Link>
-            ))}
-        </div>
-      </section>
+              ))}
+          </div>
+        </section>
+      )}
       <section className="home-section">
         <div className="section-top">
           <div>
@@ -374,6 +242,47 @@ export default function Home() {
           </article>
         ))}
       </section>
+      <section className="home-current-summary">
+        <aside className="current-panel">
+          <div className="section-top">
+            <span className="eyebrow">
+              {t("最近在做", "Currently", "最近在做")}
+            </span>
+            <small>{current.updated}</small>
+          </div>
+          {current.items
+            .filter((i) =>
+              ["BUILDING", "LEARNING", "EXPLORING"].includes(i.kind),
+            )
+            .map((i, index) => (
+              <Link key={i.kind} to={i.to}>
+                <span className="current-number">0{index + 1}</span>
+                <div>
+                  <small>
+                    {
+                      [
+                        t("构建", "Building", "構建"),
+                        t("学习", "Learning", "學習"),
+                        t("探索", "Exploring", "探索"),
+                      ][index]
+                    }
+                  </small>
+                  <p>
+                    {locale === "en" ? i.en : locale === "zh-TW" ? i.tw : i.zh}
+                  </p>
+                </div>
+                <span>↗</span>
+              </Link>
+            ))}
+          <p className="panel-note">
+            {t(
+              "持续记录真实的问题、实验与进展。",
+              "A living record of questions, experiments and progress.",
+              "持續記錄真實的問題、實驗與進展。",
+            )}
+          </p>
+        </aside>
+      </section>
       <VisitorStats />
       <nav
         className="home-exits"
@@ -386,12 +295,12 @@ export default function Home() {
             t("带走一个新的理解", "Find a new idea", "帶走一個新的理解"),
           ],
           [
-            "/projects",
-            t("看代码", "Build", "看程式碼"),
+            "/build#workbench",
+            t("动手玩", "Experiment", "動手玩"),
             t(
-              "看看想法怎样落地",
-              "See how ideas become code",
-              "看看想法怎樣落地",
+              "在创意工坊拨动一个想法",
+              "Try an idea at the workbench",
+              "在創意工坊撥動一個想法",
             ),
           ],
           [

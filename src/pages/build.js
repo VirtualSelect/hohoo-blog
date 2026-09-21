@@ -4,6 +4,7 @@ import Layout from '@lab/runtime/Layout';
 import Link from '@lab/runtime/Link';
 import { translate } from '@lab/runtime/Translate';
 import { useContent, ContentRows } from '../components/ContentUI';
+import CreativeWorkbench from '@lab/components/CreativeWorkbench';
 export default function Build() {
   const { entries } = useContent();
   const labs = entries.filter((e) => e.type === 'lab');
@@ -68,6 +69,7 @@ export default function Build() {
             →
           </Link>
         </section>
+        <CreativeWorkbench />
       </main>
     </Layout>
   );
