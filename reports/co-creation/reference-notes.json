@@ -1,0 +1,215 @@
+[
+  {
+    "id": "note:conversation-is-not-memory",
+    "slug": "conversation-is-not-memory",
+    "number": "001",
+    "domain": "llm",
+    "title": "它记住了 Java，是因为哪条消息？",
+    "titleEn": "Which message made it remember Java?",
+    "titleTw": "它記住了 Java，是因為哪條訊息？",
+    "description": "区分聊天记录、请求上下文和长期记忆，识别助手回答里残留的事实。",
+    "descriptionEn": "Separate the chat transcript, request context and persistent memory; inspect facts repeated by the assistant.",
+    "descriptionTw": "區分聊天紀錄、請求上下文和長期記憶，辨識助手回答裡殘留的事實。",
+    "related": [
+      "doc:ai-apps/java-first-llm",
+      "project:hohoo-ai-lab"
+    ],
+    "sources": [
+      {
+        "label": "本站 Java 实践原始记录",
+        "href": "/docs/ai-apps/java-first-llm",
+        "labelEn": "Recorded Java practice",
+        "labelTw": "本站 Java 實作原始紀錄"
+      },
+      {
+        "label": "对话记忆实验室",
+        "href": "/projects/hohoo-ai-lab#conversation-workbench",
+        "labelEn": "Memory lab",
+        "labelTw": "對話記憶實驗室"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "先看一个反直觉的情况",
+        "headingEn": "A counterintuitive case",
+        "headingTw": "先看一個反直覺的情況",
+        "zh": "用户说“我正在学习 Java”，助手回答“Java 是一门实用的语言”。下一轮，把用户那句话删除，只保留助手回答，再问“我正在学习什么”。此时请求里仍然出现 Java。即使模型答对，也不能证明它读到了已经删除的历史；线索可能来自助手的复述。判断信息是否消失，要检查整个 messages 列表，而不只是用户消息。",
+        "en": "A user says they are learning Java, and the assistant mentions Java in its reply. Remove the user message but keep the reply: Java is still present. A correct follow-up answer would not prove access to deleted history. Inspect every message, including assistant replies.",
+        "tw": "使用者說「我正在學習 Java」，助手回答「Java 是一門實用的語言」。下一輪刪除使用者那句話，只保留助手回答，再問「我正在學習什麼」。此時請求仍包含 Java。即使答對，也不能證明模型讀到了已刪除的歷史；線索可能來自助手的複述。判斷資訊是否消失，要檢查整個 messages 列表。"
+      },
+      {
+        "heading": "三种容易混淆的东西",
+        "headingEn": "Three different things",
+        "headingTw": "三種容易混淆的東西",
+        "zh": "聊天记录是界面或程序保存的数据；请求上下文是这一次真正发送给模型的消息；长期记忆则需要应用在后续会话中保存、选择并重新提供信息。本站 Java Demo 将历史放在进程内存中，退出后不会保留。它通过再次发送旧消息衔接对话，没有因此修改模型参数，也没有实现跨设备记忆。",
+        "en": "A transcript is data kept by the interface or program. Request context is the material sent for this call. Persistent application memory needs storage, selection and reuse across sessions. The Java demo keeps history in process memory; exiting loses it. Resending messages does not update model parameters or provide cross-device memory.",
+        "tw": "聊天紀錄是介面或程式保存的資料；請求上下文是這次真正傳給模型的訊息；長期記憶需要應用在後續會話中保存、選擇並重新提供資訊。本站 Java Demo 把歷史放在程序記憶體中，退出後不保留。重新傳送舊訊息沒有修改模型參數，也沒有實作跨裝置記憶。"
+      },
+      {
+        "heading": "怎样做一个干净的对照",
+        "headingEn": "Design a clean comparison",
+        "headingTw": "怎樣做一個乾淨的對照",
+        "zh": "固定最后的问题，比较完整历史、最近一轮和无历史三种输入。先逐条检查目标事实是否仍在请求中，再保存真实响应；不能把成功运行的旧答案套在裁剪后的请求上。一次答对只是一条观察，不是稳定能力的证明。若要比较策略，还需固定模型与参数、提前约定评分和重复次数，并记录错误与失败。",
+        "en": "Keep the final question fixed and compare full history, the last turn and no history. Check where the target fact remains before recording real responses. Never attach an old successful response to an edited request. A single correct answer is an observation, not evidence of reliable performance. Fix the model and parameters and define scoring and repeats before comparison.",
+        "tw": "固定最後的問題，比較完整歷史、最近一輪和無歷史。先檢查目標事實是否仍在請求中，再保存真實回應；不能把舊答案套在裁剪後的請求上。一次答對只是觀察，不是穩定能力的證明。比較策略需固定模型與參數、事先約定評分和重複次數，並記錄錯誤與失敗。"
+      },
+      {
+        "heading": "现在可以动手做什么",
+        "headingEn": "Try it now",
+        "headingTw": "現在可以動手做什麼",
+        "zh": "进入对话记忆实验室，分别取消用户与助手的 Java 消息，观察事实提示和 JSON。这个交互检查的是输入，不调用模型。下一步的真实对照已经写入共创待办，尚未执行；因此这里没有准确率曲线或成本结论。",
+        "en": "In the memory lab, remove the Java user message and assistant reply separately. Inspect the evidence indicator and JSON. This checks inputs without calling a model. Real comparisons remain on the co-creation backlog, so no accuracy chart or cost conclusion is claimed.",
+        "tw": "進入對話記憶實驗室，分別取消使用者與助手的 Java 訊息，觀察事實提示和 JSON。互動檢查的是輸入，不呼叫模型。真實對照已寫入共創待辦但尚未執行，因此沒有準確率曲線或成本結論。"
+      }
+    ],
+    "status": "planning",
+    "date": "2026-09-22",
+    "updated": "2026-09-22",
+    "sourceLocale": "zh-CN",
+    "editorialOrigin": "ai-assisted-reference",
+    "minutes": 4,
+    "publicationBlocked": true
+  },
+  {
+    "id": "note:read-timeout-evidence",
+    "slug": "read-timeout-evidence",
+    "number": "002",
+    "domain": "ai-apps",
+    "title": "Read timed out：等待结束，不等于服务端没做",
+    "titleEn": "Read timed out: waiting ended, execution may not have",
+    "titleTw": "Read timed out：等待結束，不等於伺服器沒做",
+    "description": "从一次真实超时记录出发，建立观察、假设与重试之间的边界。",
+    "descriptionEn": "Use a real timeout record to separate observation, hypotheses and retry decisions.",
+    "descriptionTw": "從一次真實逾時紀錄出發，建立觀察、假設與重試之間的邊界。",
+    "related": [
+      "doc:ai-apps/java-first-llm",
+      "project:hohoo-ai-lab",
+      "lab:tool-eval"
+    ],
+    "sources": [
+      {
+        "label": "Java 8 URLConnection · setReadTimeout",
+        "href": "https://docs.oracle.com/javase/8/docs/api/java/net/URLConnection.html#setReadTimeout-int-",
+        "labelEn": "Java 8 URLConnection · setReadTimeout",
+        "labelTw": "Java 8 URLConnection · setReadTimeout"
+      },
+      {
+        "label": "本站原始错误与后续运行记录",
+        "href": "/docs/ai-apps/java-first-llm",
+        "labelEn": "Original Java practice record",
+        "labelTw": "本站原始錯誤與後續執行紀錄"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "这次实际发生了什么",
+        "headingEn": "What actually happened",
+        "headingTw": "這次實際發生了什麼",
+        "zh": "已有 Java 实践中，输入带双引号的接口问题后，程序出现 Read timed out。调整读取等待设置后，后续调用返回 HTTP 200，并得到回答。两件事都是真实观察，但它们不足以证明“引号导致超时”，也不足以证明“模型一定需要更长时间”。缺少同条件重复和服务端记录时，原因应保持未确认。",
+        "en": "The recorded Java practice hit Read timed out after a question containing quotation marks. A later call, after adjusting the read timeout, returned HTTP 200 and an answer. These observations do not establish that quotes caused the timeout or that model generation was the cause. Without controlled repeats and server evidence, the cause remains uncertain.",
+        "tw": "既有 Java 實作中，輸入帶雙引號的介面問題後出現 Read timed out。調整讀取等待設定後，後續呼叫回傳 HTTP 200 並得到回答。這些觀察不足以證明「引號導致逾時」或「模型一定需要更長時間」。缺少同條件重複和伺服器紀錄時，原因應保持未確認。"
+      },
+      {
+        "heading": "先分清两种等待",
+        "headingEn": "Distinguish the waits",
+        "headingTw": "先分清兩種等待",
+        "zh": "Java 8 URLConnection 将连接超时与读取超时分别设置，单位都是毫秒。连接阶段与从输入流等待数据不是同一件事。读取超时值也不是整个业务请求的总时限。因此，日志只写“请求失败”太笼统；最好保留异常类型、发生阶段、当时的配置以及是否已经收到状态码。",
+        "en": "Java 8 URLConnection configures connection and read timeouts separately, in milliseconds. Establishing a connection and waiting for data are different stages. A read timeout is not a total business-operation deadline. Record the exception type, stage, configured values and whether a status code was received.",
+        "tw": "Java 8 URLConnection 分別設定連線逾時與讀取逾時，單位都是毫秒。建立連線與等待輸入流資料不是同一階段，讀取逾時也不是整個業務請求的總時限。應記錄例外類型、階段、設定值，以及是否已收到狀態碼。"
+      },
+      {
+        "heading": "重试前需要问什么",
+        "headingEn": "Before retrying",
+        "headingTw": "重試前需要問什麼",
+        "zh": "客户端停止等待时，请求可能已经到达服务端。不要把没有收到回答当作没有执行的证据。对只读问答，可以先限定重试次数与总预算；如果调用会发消息、创建订单或写数据，就先确认操作是否支持幂等和结果查询。否则一次“再试一次”可能变成重复执行。这里是工程处理建议，不是对 Agnes 平台计费或重试协议的断言。",
+        "en": "The request may have reached the server before the client stopped waiting. No answer is not proof of no execution. Bound retries and budgets for read-only queries. For side effects such as messages, orders or writes, check idempotency and result lookup first. This is an engineering recommendation, not a claim about Agnes billing or retry guarantees.",
+        "tw": "用戶端停止等待時，請求可能已到達伺服器。沒有收到回答，不是沒有執行的證據。唯讀問答應限制重試次數與總預算；發訊息、建立訂單或寫資料的操作，先確認冪等與結果查詢能力。這是工程建議，不是對 Agnes 計費或重試協議的斷言。"
+      },
+      {
+        "heading": "留下一份能继续排查的记录",
+        "headingEn": "Keep a useful incident record",
+        "headingTw": "留下一份能繼續排查的紀錄",
+        "zh": "记录代码版本、模型名称、脱敏后的问题长度、超时配置、起止时间、异常信息和可用请求 ID。不要保存 Authorization、API Key 或完整私人对话。一次只改变一个条件，再比较结果。最终复盘把“看到了什么”“尝试了什么”“仍不知道什么”分开写，比一句“改成 90 秒解决”更有复用价值。",
+        "en": "Keep the code revision, model name, redacted input size, timeout settings, timestamps, exception and available request ID. Exclude credentials and private conversations. Change one condition at a time. Separate observations, attempted changes and unresolved questions instead of claiming that a 90-second setting proved the cause.",
+        "tw": "記錄程式版本、模型名稱、脫敏問題長度、逾時設定、起止時間、例外和可用請求 ID。不要保存憑證或私人對話。一次改變一個條件。復盤分開寫觀察、嘗試與未知事項，比一句「改成 90 秒解決」更有價值。"
+      }
+    ],
+    "status": "planning",
+    "date": "2026-09-22",
+    "updated": "2026-09-22",
+    "sourceLocale": "zh-CN",
+    "editorialOrigin": "ai-assisted-reference",
+    "minutes": 4,
+    "publicationBlocked": true
+  },
+  {
+    "id": "note:state-observation-action",
+    "slug": "state-observation-action",
+    "number": "003",
+    "domain": "embodied-ai",
+    "title": "机器人“看见”的，不一定是世界的全部",
+    "titleEn": "What a robot observes is not the whole world",
+    "titleTw": "機器人「看見」的，不一定是世界的全部",
+    "description": "用抓取任务区分状态、观测、动作与成功条件，为第一轮仿真实验做好准备。",
+    "descriptionEn": "Separate state, observation, action and success criteria before a grasping experiment.",
+    "descriptionTw": "用抓取任務區分狀態、觀測、動作與成功條件，為第一輪模擬實驗做準備。",
+    "related": [
+      "lab:action-representation"
+    ],
+    "sources": [
+      {
+        "label": "MuJoCo 官方概览",
+        "href": "https://mujoco.readthedocs.io/en/stable/overview.html",
+        "labelEn": "Official overview",
+        "labelTw": "MuJoCo 官方概覽"
+      },
+      {
+        "label": "本站虚拟实验室计划",
+        "href": "/journey/virtual-lab",
+        "labelEn": "Virtual lab plan",
+        "labelTw": "本站虛擬實驗室計畫"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "先把任务说具体",
+        "headingEn": "Make the task concrete",
+        "headingTw": "先把任務說具體",
+        "zh": "“让机器人拿起杯子”听起来简单，却还没有形成可验证的任务。杯子在哪里？机器人能获取摄像头图像、关节位置，还是完整世界坐标？动作是关节目标、力矩，还是夹爪开合？这些约定不同，即使都显示一段抓取动画，也不能直接比较方法好坏。下面用假设任务解释概念，不是本站已经完成的实验。",
+        "en": "“Pick up the cup” is not yet a verifiable task. Specify the cup location, available inputs and action interface. Camera images, joint readings and full world coordinates provide different information. Joint targets, torques and gripper commands are different actions. This hypothetical task explains concepts; it is not a completed experiment.",
+        "tw": "「讓機器人拿起杯子」還不是可驗證的任務。杯子位置、可取得的攝影機影像、關節位置或完整世界座標，以及關節目標、力矩或夾爪指令，都要先約定。不同資訊與動作介面不能直接比較。以下是假設任務，不是本站已完成的實驗。"
+      },
+      {
+        "heading": "状态、观测、动作",
+        "headingEn": "State, observation, action",
+        "headingTw": "狀態、觀測、動作",
+        "zh": "状态描述系统在某时刻的情况，例如物体位置、关节位置和速度；观测是控制器实际能得到的输入，可能只是状态的一部分，也可能包含传感器噪声；动作是系统接受的控制输入。MuJoCo 的模型与运行数据区分了系统描述和随仿真变化的数据，控制输入通过所配置的执行器影响动力学。具体动作含义必须以环境定义为准，不能看到一个数字数组就把它叫作“关节角度”。",
+        "en": "State describes the system at a moment. Observation is the information available to a controller and may be partial or noisy. An action is a control input. MuJoCo separates the system model from changing simulation data; configured actuators determine how control inputs affect dynamics. An array of action values is not automatically an array of joint angles.",
+        "tw": "狀態描述某時刻的系統情況；觀測是控制器能取得的輸入，可能局部且有雜訊；動作是系統接受的控制輸入。MuJoCo 區分系統模型與隨模擬變化的資料，設定的致動器決定控制輸入如何影響動力學。不能把任何動作陣列都叫作關節角度。"
+      },
+      {
+        "heading": "看不见，不等于不存在",
+        "headingEn": "Unobserved does not mean absent",
+        "headingTw": "看不見，不等於不存在",
+        "zh": "在本站网格示意中，局部视野只暴露附近格子，远处障碍要走近才会被发现。这个例子适合解释信息边界，但它没有接触力、惯性或传感器模型，不能当成物理仿真。迁移到抓取任务时，要分别记录真实状态与控制器观测，避免不小心把目标真值提供给本应只使用图像的方法。",
+        "en": "The site’s local-view grid reveals nearby cells; distant obstacles are discovered later. It illustrates information limits but has no contact forces, inertia or sensor model. In a grasping experiment, keep ground-truth state separate from controller observations so an image-only method does not accidentally receive privileged target coordinates.",
+        "tw": "本站局部視野網格只顯示附近格子，遠處障礙靠近才會發現。它能解釋資訊邊界，但沒有接觸力、慣性或感測器模型，不能當物理模擬。抓取實驗應區分真實狀態與控制器觀測，避免把目標真值意外提供給只應使用影像的方法。"
+      },
+      {
+        "heading": "成功要在运行前定义",
+        "headingEn": "Define success before running",
+        "headingTw": "成功要在執行前定義",
+        "zh": "夹爪到达杯子旁边，不等于抓住；抓住，不等于搬运后稳定放下。实验前就应约定完成条件、超时、碰撞和物体掉落的处理，并保存失败运行。VL01 的下一步是先跑通固定场景，再只改变目标偏移进行对照。环境、次数与判据将由共创确定，当前没有成功率或 Sim2Real 结论。",
+        "en": "Reaching the cup is not grasping it; grasping is not stable placement. Define completion, timeout, collision and drop handling before a run, and retain failures. VL01 will first establish a fixed scene, then vary target offsets. Environment and criteria remain co-creation tasks; no success rate or Sim2Real result is claimed.",
+        "tw": "夾爪到達杯子旁邊不等於抓住；抓住也不等於穩定放下。執行前約定完成條件、逾時、碰撞和掉落處理，保留失敗紀錄。VL01 先跑通固定場景，再只改變目標偏移。環境、次數與判據待共創確定，目前沒有成功率或 Sim2Real 結論。"
+      }
+    ],
+    "status": "planning",
+    "date": "2026-09-22",
+    "updated": "2026-09-22",
+    "sourceLocale": "zh-CN",
+    "editorialOrigin": "ai-assisted-reference",
+    "minutes": 4,
+    "publicationBlocked": true
+  }
+]

@@ -65,30 +65,47 @@ export default function Articles() {
             message: "按内容类型筛选",
           })}
         >
-          {types.map((value, i) => (
-            <button
-              type="button"
-              key={value}
-              aria-pressed={type === value}
-              onClick={() => {
-                setType(value);
-                const url = new URL(location.href);
-                value === "all"
-                  ? url.searchParams.delete("type")
-                  : url.searchParams.set("type", value);
-                history.replaceState(history.state, "", url);
-              }}
-            >
-              {labels[i]}{" "}
-              <span className="filter-count">
-                {
-                  writing.filter((e) => value === "all" || e.type === value)
-                    .length
-                }
-              </span>
-            </button>
-          ))}
+          {types.map(
+            (value, i) =>
+              (value === "all" ||
+                value === type ||
+                writing.some((e) => e.type === value)) && (
+                <button
+                  type="button"
+                  key={value}
+                  aria-pressed={type === value}
+                  onClick={() => {
+                    setType(value);
+                    const url = new URL(location.href);
+                    value === "all"
+                      ? url.searchParams.delete("type")
+                      : url.searchParams.set("type", value);
+                    history.replaceState(history.state, "", url);
+                  }}
+                >
+                  {labels[i]}{" "}
+                  <span className="filter-count">
+                    {
+                      writing.filter((e) => value === "all" || e.type === value)
+                        .length
+                    }
+                  </span>
+                </button>
+              ),
+          )}
         </div>
+        {type !== "all" && !writing.some((e) => e.type === type) && (
+          <button
+            onClick={() => {
+              setType("all");
+              const url = new URL(location.href);
+              url.searchParams.delete("type");
+              history.replaceState(history.state, "", url);
+            }}
+          >
+            {t("返回全部文章", "Show all writing", "返回全部文章")}
+          </button>
+        )}
         {type === "all" && writing[0] && (
           <article
             className="article-spotlight"

@@ -1,238 +1,342 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useText } from "./Shell";
-import styles from "./ConversationWorkbench.module.css";
+import Link from "../runtime/Link";
+import {
+  memoryRun,
+  recordedHistory,
+  buildMemoryRequest,
+  learningEvidence,
+  recordedRequest,
+} from "../lib/memory-lab.mjs";
+import s from "./ConversationWorkbench.module.css";
 
 export default function ConversationWorkbench() {
   const t = useText();
-  const section = useRef(null);
-  useEffect(() => {
-    if (window.location.hash !== "#conversation-workbench") return;
-    const frame = requestAnimationFrame(() =>
-      section.current?.scrollIntoView({ behavior: "instant", block: "start" }),
-    );
-    return () => cancelAnimationFrame(frame);
-  }, []);
-  const [included, setIncluded] = useState([true, true]);
-  const [summary, setSummary] = useState(false);
-  const history = [
-    {
-      role: "user",
-      content: t(
-        "我正在学习 Java。",
-        "I am learning Java.",
-        "我正在學習 Java。",
-      ),
-    },
-    {
-      role: "assistant",
-      content: t(
-        "我们可以从接口开始。",
-        "We can start with interfaces.",
-        "我們可以從介面開始。",
-      ),
-    },
+  const [mode, setMode] = useState("replay");
+  const [turn, setTurn] = useState(0);
+  const [ids, setIds] = useState(recordedHistory.map((m) => m.id));
+  const request =
+    mode === "replay" ? recordedRequest(turn) : buildMemoryRequest(ids);
+  const evidence = learningEvidence(ids);
+  const labels = [
+    t("问候", "Greeting", "問候"),
+    t("提供事实", "Add a fact", "提供事實"),
+    t("追问", "Follow up", "追問"),
   ];
-  const question = {
-    role: "user",
-    content: t(
-      "我正在学习什么？你建议从哪里开始？",
-      "What am I learning? Where did you suggest starting?",
-      "我正在學習什麼？你建議從哪裡開始？",
-    ),
-  };
-  const selected = history.filter((_, i) => included[i]);
-  const messages = [
-    ...(summary && selected.length
-      ? [
+  function download() {
+    const blob = new Blob(
+      [
+        JSON.stringify(
           {
-            role: "user",
-            content:
-              t("历史摘要：", "History summary: ", "歷史摘要：") +
-              selected.map((m) => m.content).join(" "),
+            kind: "hohoo-memory-request",
+            version: 1,
+            execution: "not-executed",
+            request,
           },
-        ]
-      : selected),
-    question,
-  ];
+          null,
+          2,
+        ),
+      ],
+      { type: "application/json" },
+    );
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "memory-request-not-executed.json";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
   return (
     <section
       id="conversation-workbench"
-      ref={section}
-      className={styles.workbench}
-      aria-labelledby="workbench-title"
+      className={s.workbench}
+      aria-label={t(
+        "对话记忆实验室",
+        "Conversation memory lab",
+        "對話記憶實驗室",
+      )}
     >
-      <p className="eyebrow">
-        {t(
-          "动手理解 / 对话上下文",
-          "Try it / Conversation context",
-          "動手理解 / 對話上下文",
-        )}
-      </p>
-      <h2 id="workbench-title">
-        {t(
-          "模型的“记忆”，由谁带上？",
-          "Who brings the model’s “memory”?",
-          "模型的「記憶」，由誰帶上？",
-        )}
-      </h2>
-      <p>
-        {t(
-          "取消一条历史消息，观察右侧请求。聊天界面里的记录，只有被放进这次请求，才能成为这次输入的一部分。",
-          "Uncheck a past message and inspect the request. A message in the chat history becomes part of this input only when it is included in this request.",
-          "取消一條歷史訊息，觀察右側請求。聊天介面裡的記錄，只有被放進這次請求，才能成為這次輸入的一部分。",
-        )}
-      </p>
-      <p className={styles.caption}>
-        {t(
-          "本地教学演示 · 固定示例 · 不调用 API · 不生成模型回答",
-          "Local teaching demo · Fixed examples · No API calls or model responses",
-          "本機教學演示 · 固定範例 · 不呼叫 API · 不生成模型回答",
-        )}
-      </p>
-      <div className={styles.columns}>
-        <div>
-          <h3>
-            {t("对话记忆侦探", "Conversation memory detective", "對話記憶偵探")}
-          </h3>
-          <label className={styles.message}>
-            <input
-              type="checkbox"
-              checked={summary}
-              onChange={(e) => setSummary(e.target.checked)}
-            />
-            {t(
-              "把选中历史改为摘要",
-              "Summarize selected history",
-              "把選中歷史改為摘要",
-            )}
-          </label>
-          <p className={styles.caption}>
-            {t(
-              "摘要只保留勾选的事实，不会找回已移除的信息。这里用固定规则拼接，不由模型生成。",
-              "The summary keeps selected facts only; removed information cannot be recovered. This is a rule-based summary, not model output.",
-              "摘要只保留勾選的事實，不會找回已移除的資訊。這裡用固定規則串接，不由模型生成。",
-            )}
-          </p>
-          <fieldset className={styles.history}>
-            <legend>
-              {t(
-                "带上哪些历史？",
-                "Which history should we send?",
-                "帶上哪些歷史？",
-              )}
-            </legend>
-            {history.map((message, i) => (
-              <label key={message.role} className={styles.message}>
-                <input
-                  type="checkbox"
-                  checked={included[i]}
-                  onChange={(e) =>
-                    setIncluded(
-                      included.map((value, j) =>
-                        i === j ? e.target.checked : value,
-                      ),
-                    )
-                  }
-                />
-                <span>
-                  <small>
-                    {i === 0
-                      ? t(
-                          "上一轮 · 用户",
-                          "Previous turn · User",
-                          "上一輪 · 使用者",
-                        )
-                      : t(
-                          "上一轮 · 助手",
-                          "Previous turn · Assistant",
-                          "上一輪 · 助手",
-                        )}
-                  </small>
-                  <span>{message.content}</span>
-                </span>
-              </label>
-            ))}
-          </fieldset>
-          <div className={styles.question}>
-            <small>
-              {t(
-                "当前问题 · 始终发送",
-                "Current question · Always included",
-                "目前問題 · 一律傳送",
-              )}
-            </small>
-            <p>{question.content}</p>
-          </div>
-          <button
-            type="button"
-            onClick={() => {
-              setIncluded([true, true]);
-              setSummary(false);
-            }}
-          >
-            {t("恢复完整上下文", "Restore full context", "恢復完整上下文")}
-          </button>
-        </div>
-        <div className={styles.request}>
-          <p className={styles.caption}>
-            {t("请求预览", "Request preview", "請求預覽")} · {messages.length}{" "}
-            {t("条消息", "messages", "條訊息")}
-          </p>
-          <pre
-            tabIndex={0}
-            aria-label={t("请求 JSON", "Request JSON", "請求 JSON")}
-          >
-            <code>
-              {JSON.stringify({ model: "agnes-2.5-flash", messages }, null, 2)}
-            </code>
-          </pre>
-        </div>
-      </div>
-      <div className={styles.evidence} role="status">
-        <strong>
+      <header className={s.header}>
+        <p className="eyebrow">
+          {t("实践现场 / 01", "Practice / 01", "實作現場 / 01")}
+        </p>
+        <h2>
           {t(
-            "这次请求里的线索",
-            "Evidence in this request",
-            "這次請求裡的線索",
+            "如果不带上前文，记忆还在吗？",
+            "What remains when history is removed?",
+            "如果不帶上前文，記憶還在嗎？",
           )}
-        </strong>
-        <ul>
-          <li>
-            {included[0]
-              ? t(
-                  "包含学习主题：Java。",
-                  "Learning topic included: Java.",
-                  "包含學習主題：Java。",
-                )
-              : t(
-                  "没有提供学习主题，无法据此确定你正在学什么。",
-                  "No learning topic is supplied, so this input does not establish what you are learning.",
-                  "沒有提供學習主題，無法據此確定你正在學什麼。",
-                )}
-          </li>
-          <li>
-            {included[1]
-              ? t(
-                  "包含助手之前的建议：从接口开始。",
-                  "Previous suggestion included: start with interfaces.",
-                  "包含助手之前的建議：從介面開始。",
-                )
-              : t(
-                  "没有提供助手之前的建议。",
-                  "The assistant’s previous suggestion is absent.",
-                  "沒有提供助手之前的建議。",
-                )}
-          </li>
-        </ul>
+        </h2>
         <p>
           {t(
-            "这是对输入的检查，不是对模型输出的预测。真实模型仍可能答错；缺少信息时，也不保证它会主动说不知道。",
-            "This checks the input, not the model’s future output. A real model can still make mistakes or guess when information is missing.",
-            "這是對輸入的檢查，不是對模型輸出的預測。真實模型仍可能答錯；缺少資訊時，也不保證它會主動說不知道。",
+            "先回放一次真实对话，再亲手拆开请求。看见界面中的历史，和模型这一次实际收到的内容之间的区别。",
+            "Replay a real conversation, then take the request apart. Compare the visible conversation with the messages actually included in the next input.",
+            "先回放一次真實對話，再親手拆開請求。看見介面中的歷史，和模型這一次實際收到的內容之間的區別。",
           )}
         </p>
+        <p className={s.caption}>
+          {t(
+            "本地交互 · 不调用模型 · 原始记录保留中文 · 不上传输入",
+            "Local interaction · No model calls · Original Chinese transcript · No input uploads",
+            "本機互動 · 不呼叫模型 · 原始紀錄保留中文 · 不上傳輸入",
+          )}
+        </p>
+      </header>
+      <div
+        className={s.toolbar}
+        role="group"
+        aria-label={t("体验方式", "Experience mode", "體驗方式")}
+      >
+        <button
+          aria-pressed={mode === "replay"}
+          onClick={() => setMode("replay")}
+        >
+          {t("01 真实记录回放", "01 Recorded run", "01 真實紀錄回放")}
+        </button>
+        <button aria-pressed={mode === "edit"} onClick={() => setMode("edit")}>
+          {t("02 裁剪请求", "02 Edit the request", "02 裁剪請求")}
+        </button>
       </div>
+      {mode === "replay" ? (
+        <>
+          <div
+            className={s.steps}
+            role="group"
+            aria-label={t("选择轮次", "Choose a turn", "選擇輪次")}
+          >
+            {labels.map((label, i) => (
+              <button
+                key={i}
+                aria-pressed={turn === i}
+                onClick={() => setTurn(i)}
+              >
+                <span>0{i + 1}</span>
+                {label}
+              </button>
+            ))}
+          </div>
+          <div className={s.columns}>
+            <div className={s.panel}>
+              <h3>{t("发出什么", "What was sent", "送出什麼")}</h3>
+              <p className={s.caption}>
+                {t(
+                  "根据作者对话记录还原的消息列表，不是抓包原文。",
+                  "Message list reconstructed from the author’s transcript; not a raw network capture.",
+                  "根據作者對話紀錄還原的訊息列表，不是封包原文。",
+                )}
+              </p>
+              <ol className={s.messages}>
+                {request.messages.map((m, i) => (
+                  <li key={i} data-role={m.role}>
+                    <small>
+                      {m.role === "user"
+                        ? t("用户", "User", "使用者")
+                        : t("助手", "Assistant", "助手")}
+                    </small>
+                    <p lang="zh-CN">{m.content}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className={s.observation}>
+              <p className="eyebrow">
+                {t(
+                  "实际观察 / 作者记录",
+                  "Observation / Author transcript",
+                  "實際觀察 / 作者紀錄",
+                )}
+              </p>
+              <blockquote lang="zh-CN">
+                {memoryRun.turns[turn].answer}
+              </blockquote>
+              <dl className={s.usage}>
+                {["Input", "Output", "Total"].map((label, i) => (
+                  <div key={label}>
+                    <dt>
+                      {
+                        [
+                          t("输入", "Input", "輸入"),
+                          t("输出", "Output", "輸出"),
+                          t("合计", "Total", "合計"),
+                        ][i]
+                      }
+                    </dt>
+                    <dd>{memoryRun.turns[turn].usage[i]}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className={s.caption}>
+                {t(
+                  "Token 来自这一次运行，不是当前请求估算、固定价格或性能指标。",
+                  "Token counts belong to this historical run, not a current estimate, price or benchmark.",
+                  "Token 來自這一次執行，不是目前請求估算、固定價格或效能指標。",
+                )}
+              </p>
+              <p>
+                {turn === 2
+                  ? t(
+                      "当前问题没有 Java；此前用户消息与助手回答中都包含 Java。不能仅凭这一例证明模型每次都能正确利用历史。",
+                      "The current question does not mention Java. Both prior user and assistant messages do. This single example does not establish reliable recall.",
+                      "目前問題沒有 Java；此前使用者訊息與助手回答中都包含 Java。不能僅憑這一例證明模型每次都能正確利用歷史。",
+                    )
+                  : t(
+                      "继续查看下一轮，观察已有回答如何进入下一次请求。",
+                      "Move to the next turn to see how the answer becomes part of the next request.",
+                      "繼續查看下一輪，觀察已有回答如何進入下一次請求。",
+                    )}
+              </p>
+              {turn < 2 ? (
+                <button onClick={() => setTurn(turn + 1)}>
+                  {t("下一轮 →", "Next turn →", "下一輪 →")}
+                </button>
+              ) : (
+                <button onClick={() => setMode("edit")}>
+                  {t(
+                    "亲手移除历史 →",
+                    "Remove history yourself →",
+                    "親手移除歷史 →",
+                  )}
+                </button>
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            className={s.toolbar}
+            role="group"
+            aria-label={t("历史策略", "History strategy", "歷史策略")}
+          >
+            <button onClick={() => setIds(recordedHistory.map((m) => m.id))}>
+              {t("完整历史", "Full history", "完整歷史")}
+            </button>
+            <button onClick={() => setIds(["u1", "a1"])}>
+              {t("最近一轮", "Last turn", "最近一輪")}
+            </button>
+            <button onClick={() => setIds([])}>
+              {t("不带历史", "No history", "不帶歷史")}
+            </button>
+          </div>
+          <div className={s.columns}>
+            <fieldset className={s.panel}>
+              <legend>
+                {t("保留哪些消息？", "Which messages stay?", "保留哪些訊息？")}
+              </legend>
+              {recordedHistory.map((m, i) => (
+                <label className={s.message} key={m.id}>
+                  <input
+                    type="checkbox"
+                    checked={ids.includes(m.id)}
+                    onChange={(e) =>
+                      setIds(
+                        e.target.checked
+                          ? [...ids, m.id]
+                          : ids.filter((id) => id !== m.id),
+                      )
+                    }
+                  />
+                  <span>
+                    <small>
+                      {i + 1} ·{" "}
+                      {m.role === "user"
+                        ? t("用户", "User", "使用者")
+                        : t("助手", "Assistant", "助手")}
+                    </small>
+                    <span lang="zh-CN">{m.content}</span>
+                  </span>
+                </label>
+              ))}
+              <p className={s.question}>
+                {t(
+                  "当前问题始终保留：",
+                  "Current question is always included:",
+                  "目前問題一律保留：",
+                )}
+                <span lang="zh-CN">我正在学习什么</span>
+              </p>
+            </fieldset>
+            <div className={s.observation}>
+              <h3>
+                {t(
+                  "检查输入中的证据",
+                  "Inspect input evidence",
+                  "檢查輸入中的證據",
+                )}
+              </h3>
+              <p role="status">
+                {evidence.length
+                  ? t(
+                      `还有 ${evidence.length} 条消息包含 Java。`,
+                      `Java remains in ${evidence.length} message(s).`,
+                      `還有 ${evidence.length} 條訊息包含 Java。`,
+                    )
+                  : t(
+                      "当前请求没有提供学习主题。",
+                      "No learning topic is supplied in this request.",
+                      "目前請求沒有提供學習主題。",
+                    )}
+              </p>
+              <p>
+                {t(
+                  "删除用户的事实消息后，助手的回答也可能保留同一事实。要验证信息是否真的被移除，需要检查整个请求。",
+                  "An assistant reply can repeat a fact after the user’s original message is removed. Inspect the entire request before concluding that a fact is absent.",
+                  "刪除使用者的事實訊息後，助手的回答也可能保留同一事實。要驗證資訊是否真的被移除，需要檢查整個請求。",
+                )}
+              </p>
+              <div className={s.empty}>
+                <strong>
+                  {t("尚未调用模型", "Model not called", "尚未呼叫模型")}
+                </strong>
+                <p>
+                  {t(
+                    "不会用原来的成功回答填充修改后的请求。这里仅检查固定记录中的事实，不预测模型回答。",
+                    "The original successful answer is never reused for an edited request. This checks facts in a fixed transcript, not future model output.",
+                    "不會用原來的成功回答填充修改後的請求。這裡僅檢查固定紀錄中的事實，不預測模型回答。",
+                  )}
+                </p>
+              </div>
+              <button onClick={download}>
+                {t(
+                  "导出请求 JSON ↓",
+                  "Export request JSON ↓",
+                  "匯出請求 JSON ↓",
+                )}
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+      <details className={s.json}>
+        <summary>
+          {t("查看消息 JSON", "Inspect message JSON", "檢視訊息 JSON")} ·{" "}
+          {request.messages.length} {t("条", "messages", "條")}
+        </summary>
+        <pre tabIndex={0}>
+          <code>{JSON.stringify(request, null, 2)}</code>
+        </pre>
+      </details>
+      <footer className={s.footer}>
+        <Link to="/docs/ai-apps/java-first-llm">
+          {t(
+            "阅读原始实践记录 →",
+            "Read the original article →",
+            "閱讀原始實作紀錄 →",
+          )}
+        </Link>
+        <a
+          href="https://github.com/VirtualSelect/hohoo-ai-lab/tree/845fa9f18475b77e761806d14565612680ba6fe1/demos/03-multi-turn-chat"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t(
+            "运行配套 Java Demo ↗",
+            "Run the Java demo ↗",
+            "執行配套 Java Demo ↗",
+          )}
+        </a>
+      </footer>
     </section>
   );
 }

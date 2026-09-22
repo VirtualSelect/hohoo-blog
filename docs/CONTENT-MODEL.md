@@ -1417,3 +1417,19 @@ apps/web/scripts/content.mjs 从同一内容源生成三语言路由、文章 HT
 本机阅读宽度保存于 `huhohoo.reader.v1`：`{version:1,width:"standard"|"wide"}`。无记录、损坏或未知版本回退标准宽度；存储失败仅在本次访问生效。该偏好不进入作者内容、统计或跨设备同步。
 
 项目界面预览不产生新的内容记录；运行摘录、首页摘句、教程实践对照复用已发布 Java 教程中的真实记录，不能独立标为新实验或新结论。项目过程导航来自既有 sections，截图仅从既有 screenshots 元数据生成。
+
+## 对话记忆实验室证据（2026-09-22）
+
+`apps/web/lib/memory-lab.mjs` 保存作者提供的三轮控制台摘录与当次 Token 用量。来源为已发布 Java 首篇；UI 保留原始中文，并翻译说明文字。消息列表按控制台记录还原，不能标成完整网络请求。
+
+裁剪模式从同一历史按原顺序选择消息；当前问题始终保留，事实检查仅针对固定记录中的 Java 字符串。不预测答案，不显示历史 Token 作为裁剪请求的估算。导出的 v1 请求封套带 `execution: not-executed`；没有模型调用、存储或用户标识。不进入正式 Lab 结果索引。
+
+## Notes 正文与来源（2026-09-22）
+
+`data/notes.json` 使用 published 条目形成可阅读笔记，分支审阅与上线分开。每篇 sections 为 heading / headingEn / headingTw 与 zh / en / tw；sources 使用 href / label / labelEn / labelTw；related 继续使用真实内容 ID。
+
+`editorialOrigin: ai-assisted-reference` 必须展示 AI 协助资料整理说明，不等于作者个人实测或已人工审阅观点。notes.json 的三语言共存，现有 manifest 以同一文件的 SHA256 跟踪完整性，任意修改后须重新检查对应译文再同步 revision。非中文只在翻译状态为 AI_TRANSLATED 或 REVIEWED 时显示正文，缺失译文沿用原提示。
+
+## 教学交互目录
+
+apps/web/lib/workshop-catalog.mjs 为工作台问题、三语言任务说明、领域、标签和关联入口的单一来源。type:workshop 只进入搜索，不进入原创文章/研究成果索引。URL 使用 /build?tool=<id>#workbench，兼容原有三个 desk 锚点。failure-lab.mjs 是确定性的本地状态机，模拟数据与真实 memory-lab 运行摘录分开。

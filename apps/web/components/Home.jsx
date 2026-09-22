@@ -11,6 +11,7 @@ import VisitorStats from "./VisitorStats";
 import LabSketch from "./LabSketch";
 import ProjectShowcase from "./ProjectShowcase";
 import FlagshipExperience from "./FlagshipExperience";
+import WorkshopEntry from "./WorkshopEntry";
 
 export default function Home() {
   const { locale, globalData, items } = useSite(),
@@ -148,11 +149,23 @@ export default function Home() {
                 <Link to={p.href}>{p.title} ↗</Link>
               </h3>
               <p>{p.description}</p>
+              {p.id === "project:hohoo-ai-lab" && (
+                <p>
+                  <Link to="/projects/hohoo-ai-lab#conversation-workbench">
+                    {t(
+                      "进入对话记忆实验室 →",
+                      "Explore conversation memory →",
+                      "進入對話記憶實驗室 →",
+                    )}
+                  </Link>
+                </p>
+              )}
               <small>{p.stack?.join(" · ")}</small>
             </article>
           ))}
         </div>
       </section>
+      <WorkshopEntry />
       <details className="home-discovery">
         <summary>
           <span>
