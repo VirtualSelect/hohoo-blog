@@ -1,5 +1,13 @@
 # Huhohoo Content Model
 
+## 文章阅读目的（2026-09-22）
+
+Docs / Blog 可选 `article_kind`：`tutorial`（实战教程）、`case-study`（工程案例）、`mechanism`（机制拆解）、`retrospective`（实验复盘）、`essay`（随笔）；兼容 Notes / Papers 的 `note`、`paper`。这是阅读目的，不新增学习方向，也不替代 `type`。旧 Doc 默认 tutorial，Blog 默认 essay；新文章必须显式填写。统一索引字段为 `articleKind`，展示和筛选复用 `src/utils/writing-kinds.cjs`。
+
+文章页使用 `kind` + `domain` 可分享筛选，保留旧 `type` 查询兼容。没有内容的分类默认不展示；没有真实实验结果时不建立“实验复盘”文章。技术拆解需附一手来源、版本或核对日期、可核对例子和限制，不能计为已完成实验。三篇新稿已于 2026-09-22 获作者确认发布，随主干部署上线。
+
+翻译使用现有 manifest 的源文和译文 SHA256，AI 译文保持 `AI_TRANSLATED`，不得标记为人工审校。发布状态只控制当前构建内的可见性，不代表已经部署到生产。
+
 ## 本地学习背包与证据入口（2026-09-19）
 
 - `huhohoo.practice.v1:docs/ai-apps/java-first-llm`：`{version:1,completed:string[]}`，仅 environment/request/parse/history 四项访客自检，不是作者进度或自动验证。
