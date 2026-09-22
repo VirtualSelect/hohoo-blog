@@ -1,5 +1,35 @@
 [
   {
+    "id": "0f6b35c8c934c4e7ef0f",
+    "title": "Artificial Analysis 评测 GPT-6 Sol 与 Luna：成本减半，智能指数持平",
+    "url": "https://aihot.news/items/cmud02r5503swro7nhqpu7dgu",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-22T18:20:06.000Z",
+    "collectedAt": "2026-09-22T21:38:25.372Z",
+    "category": "ai-apps",
+    "summary": "Artificial Analysis 评测 GPT-6 Sol 和 Luna，两模型价格约为 GPT-5.6 对应版本一半，Sol 定价 $2/$10、Luna $0.10/$0.50 每百万输入/输出 token，Intelligence Index 与 GPT-5.6 持平。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-fca5aed",
+    "coverage": []
+  },
+  {
+    "id": "c4d413fda9626159492f",
+    "title": "Claude Code v2.1.280 发布，新增 Claude Opus 5.5 为默认 Opus 模型",
+    "url": "https://aihot.news/items/cmucxceh40salroedruwhn0ee",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-22T16:38:14.000Z",
+    "collectedAt": "2026-09-22T21:38:25.372Z",
+    "category": "ai-apps",
+    "summary": "Claude Code 发布 v2.1.280，新增 Claude Opus 5.5（claude-opus-5-5）为默认 Opus 模型，支持 1M 上下文，价格为 $4/$20 per Mtok、缓存读取 $0.20/Mtok；同时将 Pro 和 Team Standard 计划的默认模型从 Sonnet 改为 Opus。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c99209d6",
+    "coverage": []
+  },
+  {
     "id": "6f103e1368f86379223c",
     "title": "llm-typesafe 0.1a0",
     "url": "https://simonwillison.net/2026/Sep/22/llm-typesafe",
