@@ -1,7 +1,8 @@
-import { uiLabel } from '@site/src/utils/ui-labels';
-import React from 'react';
-import Link from '@lab/runtime/Link';
-import { translate } from '@lab/runtime/Translate';
+import { uiLabel } from "@site/src/utils/ui-labels";
+import React from "react";
+import Link from "@lab/runtime/Link";
+import { translate } from "@lab/runtime/Translate";
+import WritingKind from "./WritingKind";
 export default function WritingList({ items }) {
   return items.length ? (
     <ol className="hh-rows hh-writing-list">
@@ -9,14 +10,22 @@ export default function WritingList({ items }) {
         <li key={item.id}>
           <div>
             <p className="hh-eyebrow">
-              {String(index + 1).padStart(2, '0')} /{' '}
-              {uiLabel(item.type === 'doc'
-                ? {
-                    'ai-apps': 'BUILD',
-                    llm: 'UNDERSTAND',
-                    'embodied-ai': 'EXPLORE',
-                  }[item.domain] || 'DOC'
-                : item.type.toUpperCase())}
+              {String(index + 1).padStart(2, "0")} /{" "}
+              {uiLabel(
+                item.type === "doc"
+                  ? {
+                      "ai-apps": "BUILD",
+                      llm: "UNDERSTAND",
+                      "embodied-ai": "EXPLORE",
+                    }[item.domain] || "DOC"
+                  : item.type.toUpperCase(),
+              )}
+              {item.type === "doc" && (
+                <>
+                  {" "}
+                  · <WritingKind entry={item} />
+                </>
+              )}
             </p>
             <h2>
               <Link to={item.href}>{item.title}</Link>
@@ -25,8 +34,12 @@ export default function WritingList({ items }) {
           </div>
           <div className="hh-row-meta">
             {item.date && <time dateTime={item.date}>{item.date}</time>}
-            {item.minutes && <span>{item.minutes} {uiLabel("MIN")}</span>}
-            {item.translationStatus === 'AI_TRANSLATED' && (
+            {item.minutes && (
+              <span>
+                {item.minutes} {uiLabel("MIN")}
+              </span>
+            )}
+            {item.translationStatus === "AI_TRANSLATED" && (
               <span>{uiLabel("AI TRANSLATED")}</span>
             )}
           </div>
@@ -36,8 +49,8 @@ export default function WritingList({ items }) {
   ) : (
     <p className="hh-empty">
       {translate({
-        id: 'writing.empty',
-        message: '当前语言暂无匹配的已发布内容。',
+        id: "writing.empty",
+        message: "当前语言暂无匹配的已发布内容。",
       })}
     </p>
   );

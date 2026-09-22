@@ -20,5 +20,71 @@
         "file": "i18n/zh-TW/docs/ai-apps/java-first-llm.md"
       }
     }
+  },
+  "doc:ai-apps/radar-publishing-pipeline": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-22",
+    "file": "docs/ai-apps/radar-publishing-pipeline.md",
+    "sourceRevision": "a5c7ecb3afed7ad653cd03cacabb9f0afaa9a9f3bd04d369c64fe16245670890",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-22",
+        "sourceRevision": "a5c7ecb3afed7ad653cd03cacabb9f0afaa9a9f3bd04d369c64fe16245670890",
+        "translationRevision": "25855aeacc70036781e796509bc1943079a60291201d72cb999e11fa8a330033",
+        "file": "i18n/en/docs/ai-apps/radar-publishing-pipeline.md"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-22",
+        "sourceRevision": "a5c7ecb3afed7ad653cd03cacabb9f0afaa9a9f3bd04d369c64fe16245670890",
+        "translationRevision": "2468130fd6be3155faa1b66afd8f907a22009062a20b9931963703771fa77fd5",
+        "file": "i18n/zh-TW/docs/ai-apps/radar-publishing-pipeline.md"
+      }
+    }
+  },
+  "doc:llm/kv-cache": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-22",
+    "file": "docs/llm/kv-cache.md",
+    "sourceRevision": "ae8a1a0593f2471471dc2cd9955aac135c8647a5df3cfa8375c01f960f96f72b",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-22",
+        "sourceRevision": "ae8a1a0593f2471471dc2cd9955aac135c8647a5df3cfa8375c01f960f96f72b",
+        "translationRevision": "3a7d4d6dc0bf148dd1fc4f253ed908eb0f7d2c0d9749a01cdbe003a491a341f1",
+        "file": "i18n/en/docs/llm/kv-cache.md"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-22",
+        "sourceRevision": "ae8a1a0593f2471471dc2cd9955aac135c8647a5df3cfa8375c01f960f96f72b",
+        "translationRevision": "e08e144a9a4452a56b66b9f1d3118ed0b53241ff441463cef05879dd2640d0c9",
+        "file": "i18n/zh-TW/docs/llm/kv-cache.md"
+      }
+    }
+  },
+  "doc:embodied-ai/openvla-action-pipeline": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-22",
+    "file": "docs/embodied-ai/openvla-action-pipeline.md",
+    "sourceRevision": "b5c222316dc0495d0e5a37d898fa06d04bceb462029b5a2c5611552d6bdbfe6a",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-22",
+        "sourceRevision": "b5c222316dc0495d0e5a37d898fa06d04bceb462029b5a2c5611552d6bdbfe6a",
+        "translationRevision": "cc289c55bdd51ec7b0d67bf970b527747c4dc1fc611c12c280410bd9c3d4ead7",
+        "file": "i18n/en/docs/embodied-ai/openvla-action-pipeline.md"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-22",
+        "sourceRevision": "b5c222316dc0495d0e5a37d898fa06d04bceb462029b5a2c5611552d6bdbfe6a",
+        "translationRevision": "ec4a49fd6cdcad17b0129ad6a82a72313f46da84e0e7fb15b98bef478d773634",
+        "file": "i18n/zh-TW/docs/embodied-ai/openvla-action-pipeline.md"
+      }
+    }
   }
 }

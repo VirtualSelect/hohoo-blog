@@ -1299,6 +1299,35 @@ html[data-theme="dark"] {
     padding: 24px;
   }
 }
+.writing-filters {
+  margin-block: 32px;
+  border-block: 1px solid var(--blog-border);
+  padding-block: 20px;
+}
+.writing-filters .hh-controls {
+  margin-block: 0 0.75rem;
+}
+.writing-domain-filters button {
+  background: transparent;
+}
+.writing-filter-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 14px;
+  color: var(--blog-muted);
+}
+.writing-filter-summary p {
+  margin: 0;
+}
+.writing-filter-summary button {
+  min-height: 44px;
+}
+.writing-kind {
+  white-space: normal;
+}
 @media (prefers-reduced-motion: no-preference) {
   .home-exits > a,
   .expandable-figure button,

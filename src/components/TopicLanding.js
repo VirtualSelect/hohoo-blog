@@ -8,6 +8,7 @@ import TopicPapers from "./TopicPapers";
 import TopicNews from "./TopicNews";
 import { useText } from "@lab/components/Shell";
 import LabSketch from "@lab/components/LabSketch";
+import { writingKind } from "../utils/writing-kinds.cjs";
 export default function TopicLanding({ category }) {
   const en = useEnglish();
   const t = useText();
@@ -20,8 +21,17 @@ export default function TopicLanding({ category }) {
         t.id === (category === "embodied-ai" ? "embodied" : "applications"),
     );
   const docs = entries.filter(
-    (e) => e.domain === category && ["doc", "note"].includes(e.type),
+    (e) =>
+      e.domain === category &&
+      e.status === "published" &&
+      ["doc", "note"].includes(e.type) &&
+      e.translationStatus !== "MISSING",
   );
+  const engineering =
+    category === "ai-apps"
+      ? docs.filter((e) => writingKind(e) === "case-study")
+      : [];
+  const starting = docs.filter((e) => !engineering.includes(e));
   return (
     <div className="topic-landing" data-domain={category}>
       <p className="hh-eyebrow">
@@ -39,7 +49,7 @@ export default function TopicLanding({ category }) {
           }
         />
       </div>
-      {docs.length > 0 && (
+      {starting.length > 0 && (
         <Section
           label={uiLabel("START HERE")}
           title={t(
@@ -48,7 +58,7 @@ export default function TopicLanding({ category }) {
             "先讀一篇，再動手試試",
           )}
         >
-          <ContentRows items={docs} />
+          <ContentRows items={starting} />
         </Section>
       )}
       {category === "ai-apps" && (
@@ -56,6 +66,7 @@ export default function TopicLanding({ category }) {
           label={uiLabel("AI ENGINEERING")}
           title={en ? "From application to delivery" : "从应用实现，到工程交付"}
         >
+          {engineering.length > 0 && <ContentRows items={engineering} />}
           <p className="hh-lead">
             {en
               ? "An application subdirection, not a separate track."

@@ -21,12 +21,12 @@
     ],
     "repo": "https://github.com/VirtualSelect/hohoo-blog",
     "demo": "https://huhohoo.com/",
-    "related": [],
+    "related": ["doc:ai-apps/radar-publishing-pipeline"],
     "sections": [
       {
         "heading": "Overview",
-        "zh": "本站代码与内容同仓库管理。当前重构分支使用 Next.js，阅读路线、收藏、论文导读和外部资讯围绕三个研究方向组织；生产域名切换另行发布。",
-        "en": "Code and content share a repository. The redesign branch uses Next.js to connect learning, saved reading and research signals; production migration is a separate release."
+        "zh": "本站使用 Next.js，代码与内容同仓库管理。阅读路线、实践记录和外部资讯围绕三个研究方向组织；AI Radar 在独立工作流中采集、检查并提交内容，再由部署系统更新网站。",
+        "en": "This Next.js site keeps code and content in one repository. Learning, practice and external signals follow three research tracks. AI Radar collects, checks and commits content in a separate workflow before deployment updates the site."
       },
       {
         "heading": "Problem",

@@ -19,7 +19,15 @@ test("index keeps native blog dates and URLs, and excludes planning docs", () =>
           },
         },
       ],
-      docs: [{ id: "planned", frontMatter: { status: "planning" } }],
+      docs: [
+        { id: "planned", frontMatter: { status: "planning" } },
+        {
+          id: "ai-apps/radar-publishing-pipeline",
+          title: "Engineering case",
+          permalink: "/en/docs/ai-apps/radar-publishing-pipeline",
+          frontMatter: { status: "published", article_kind: "case-study" },
+        },
+      ],
     },
     "/en",
   );
@@ -27,6 +35,7 @@ test("index keeps native blog dates and URLs, and excludes planning docs", () =>
   assert.equal(blog.date, "2024-07-11");
   assert.equal(blog.href, "/en/blog/real");
   assert.ok(!result.some((e) => e.id === "doc:planned"));
+  assert.equal(result.find((e) => e.type === "doc").articleKind, "case-study");
 });
 test("activity excludes proposals, source signals and undated paper guides", () => {
   assert.deepEqual(
@@ -47,6 +56,10 @@ test("registry rejects broken relations, bad dates and invented completed labs",
     status: "production",
   };
   assert.throws(() => validate([base, base]), /Duplicate/);
+  assert.throws(
+    () => validate([{ ...base, articleKind: "invented-kind" }]),
+    /Invalid article kind/,
+  );
   assert.throws(() => validate([{ ...base, related: ["missing"] }]), /Unknown/);
   assert.throws(
     () => validate([{ ...base, date: "2026-02-30" }]),
