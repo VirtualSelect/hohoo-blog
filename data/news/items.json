@@ -1,5 +1,20 @@
 [
   {
+    "id": "6f103e1368f86379223c",
+    "title": "llm-typesafe 0.1a0",
+    "url": "https://simonwillison.net/2026/Sep/22/llm-typesafe",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-09-22T15:54:16.000Z",
+    "collectedAt": "2026-09-22T17:14:28.759Z",
+    "category": "llm",
+    "summary": "Release: llm-typesafe 0.1a0 I built this new plugin for LLM to add support for TypeSafe AI's new Jev model . Install it like this: llm install llm-typesafe Then set an API key (…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-5ac794cd",
+    "coverage": []
+  },
+  {
     "id": "00f6d892c6f4e1005522",
     "title": "An Iterative LangGraph Agent for Text-to-SQL: Natural Language Access to the Chicago Crime Database",
     "url": "https://arxiv.org/abs/2609.22917",
