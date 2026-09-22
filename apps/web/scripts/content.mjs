@@ -216,6 +216,8 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
       tags: e.tags || [],
       status: e.status,
     }));
+  const { workshopSearchEntries } = await import("../lib/workshop-catalog.mjs");
+  search.push(...workshopSearchEntries(locale));
   const journeyMessages = json(`i18n/${locale}/code.json`);
   search.push({
     id: "virtual-lab",

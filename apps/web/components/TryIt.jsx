@@ -2,14 +2,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useText } from "./Shell";
 import styles from "./LearningExercises.module.css";
-export default function TryIt({ id, title, children }) {
+export default function TryIt({ id, title, anchors = [], children }) {
   const t = useText(),
     ref = useRef(null);
   const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    // Mount before resolving nested deep links; ordinary visits stay lightweight.
-    if (window.location.hash) setMounted(true);
-  }, []);
+  const anchorKey = anchors.join("|");
   useEffect(() => {
     const reveal = () => {
       let hash;
@@ -18,7 +15,7 @@ export default function TryIt({ id, title, children }) {
       } catch {
         return;
       }
-      if (hash && !mounted) {
+      if ((hash === id || anchorKey.split("|").includes(hash)) && !mounted) {
         setMounted(true);
         return;
       }
@@ -27,7 +24,7 @@ export default function TryIt({ id, title, children }) {
       ref.current.open = true;
       for (
         let p = target.parentElement;
-        p && p !== ref.current;
+        p && p !== document.body;
         p = p.parentElement
       )
         if (p.tagName === "DETAILS") p.open = true;
@@ -38,7 +35,7 @@ export default function TryIt({ id, title, children }) {
     reveal();
     window.addEventListener("hashchange", reveal);
     return () => window.removeEventListener("hashchange", reveal);
-  }, [mounted]);
+  }, [mounted, id, anchorKey]);
   return (
     <details
       id={id}

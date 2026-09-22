@@ -58,3 +58,7 @@
 6. Robot Data Dashboard：真实数据管线运行后再开发。
 
 本轮只完成 Sprint 1；后续阶段等待用户指令。
+
+## 研究案例执行清单
+
+[三方向共创待办](RESEARCH-COCREATION.md) 补充 A1、L1 与 VL01 首轮执行要求。E1 是 VL01 的执行案例，不是新实验室，不改变本文件现有状态。真实研究交付通过原有 evidence / articles / result 字段回填。

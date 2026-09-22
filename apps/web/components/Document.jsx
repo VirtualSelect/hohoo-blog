@@ -256,6 +256,7 @@ export default function Document({ children }) {
             </summary>
             <TryIt
               id="request-exercise"
+              anchors={["request-journey-title"]}
               title={t(
                 "请求与错误排查",
                 "Requests and troubleshooting",
@@ -267,6 +268,7 @@ export default function Document({ children }) {
             </TryIt>
             <TryIt
               id="memory-exercise"
+              anchors={["conversation-workbench"]}
               title={t("对话记忆", "Conversation memory", "對話記憶")}
             >
               <ConversationWorkbench />

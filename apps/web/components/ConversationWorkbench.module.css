@@ -1,52 +1,128 @@
 .workbench {
   margin-block: 3rem;
-  padding-block: 2rem;
-  border-block: 1px solid var(--hh-border);
+  border-top: 3px solid var(--lab-blue);
   scroll-margin-top: 7rem;
+  min-width: 0;
 }
-.workbench h2 {
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  line-height: 1.4;
+.header {
+  padding: 2rem 0 1rem;
+  max-width: 52rem;
+}
+.header h2 {
+  font-size: clamp(1.6rem, 3.2vw, 2.7rem);
+  line-height: 1.3;
 }
 .caption,
-.message small,
-.question small {
+.message small {
   color: var(--blog-muted);
   font-size: 0.85rem;
 }
+.toolbar,
+.steps,
+.footer {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-block: 1rem;
+}
+.workbench button {
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  background: var(--hh-bg);
+  color: var(--hh-text-primary);
+  border: 1px solid var(--hh-border);
+  cursor: pointer;
+  font: inherit;
+}
+.workbench button[aria-pressed="true"] {
+  background: var(--lab-blue-soft);
+  border-color: var(--lab-blue);
+  box-shadow: inset 0 -2px var(--lab-blue);
+}
+.steps button {
+  flex: 1;
+  text-align: left;
+}
+.steps span {
+  margin-right: 0.7rem;
+  font-family: monospace;
+  color: var(--lab-blue);
+}
 .columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: 1.5rem;
+  align-items: start;
   margin-block: 1.5rem;
 }
 .columns > * {
   min-width: 0;
 }
-.history {
-  border: 0;
-  padding: 0;
+.panel {
+  border: 1px solid var(--hh-border);
+  padding: 1.4rem;
   margin: 0;
-  min-width: 0;
 }
-.history legend {
-  font-weight: 600;
-  margin-bottom: 0.75rem;
+.messages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.messages li {
+  border-left: 2px solid var(--lab-blue);
+  padding: 0.5rem 1rem;
+  margin-block: 1rem;
+}
+.messages li[data-role="assistant"] {
+  border-color: var(--lab-lavender);
+  background: var(--lab-lavender-soft);
+}
+.messages p {
+  margin: 0.35rem 0;
+  overflow-wrap: anywhere;
+}
+.messages small {
+  color: var(--blog-muted);
+}
+.observation {
+  padding: 1.5rem;
+  background: var(--lab-apricot-soft);
+  border-top: 2px solid var(--lab-apricot);
+}
+.observation blockquote {
+  margin: 1.25rem 0;
+  padding: 0;
+  border: 0;
+  font-size: 1.1rem;
+  line-height: 1.9;
+}
+.usage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  border-block: 1px solid var(--hh-border);
+  padding: 1rem 0;
+}
+.usage dt {
+  color: var(--blog-muted);
+  font-size: 0.8rem;
+}
+.usage dd {
+  margin: 0;
+  font: 1.5rem monospace;
 }
 .message {
   display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding-block: 1rem;
-  border-top: 1px solid var(--hh-border);
+  gap: 0.7rem;
+  border-bottom: 1px solid var(--hh-border);
+  padding: 1rem 0;
   cursor: pointer;
 }
 .message input {
   width: 20px;
   height: 20px;
-  margin: 0.35rem 0 0;
-  accent-color: var(--hh-accent);
   flex: 0 0 auto;
+  accent-color: var(--hh-accent);
 }
 .message span span,
 .message small {
@@ -55,29 +131,37 @@
 .question {
   border-left: 2px solid var(--hh-accent);
   padding-left: 1rem;
-  margin-block: 1rem;
 }
-.question p {
-  margin-top: 0.25rem;
+.empty {
+  padding: 1rem 0;
+  border-block: 1px dashed var(--hh-border);
+  margin-bottom: 1rem;
 }
-.request pre {
-  max-width: 100%;
-  max-height: 32rem;
+.json {
+  border-block: 1px solid var(--hh-border);
+}
+.json summary {
+  padding: 1rem 0;
+  cursor: pointer;
+  min-height: 44px;
+}
+.json pre {
+  background: var(--blog-soft);
+  max-height: 28rem;
   overflow: auto;
   padding: 1rem;
-  background: var(--blog-soft);
-  font-size: 0.8rem;
-  line-height: 1.7;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+  font-size: 0.8rem;
 }
-.evidence {
-  border-top: 1px solid var(--hh-border);
-  padding-top: 1.25rem;
+.footer {
+  justify-content: space-between;
+  padding: 1rem 0;
 }
-.evidence p {
-  color: var(--blog-muted);
-  font-size: 0.9rem;
+.footer a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 .workbench :focus-visible {
   outline: 2px solid var(--hh-accent);
@@ -86,5 +170,12 @@
 @media (max-width: 768px) {
   .columns {
     grid-template-columns: 1fr;
+  }
+  .panel,
+  .observation {
+    padding: 1rem;
+  }
+  .steps button {
+    padding: 0.65rem 0.4rem;
   }
 }

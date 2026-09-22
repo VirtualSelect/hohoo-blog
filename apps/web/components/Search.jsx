@@ -149,7 +149,9 @@ export default function Search({ onClose }) {
                 to={e.href}
               >
                 <span className="eyebrow">
-                  {e.type === "learning" ? (
+                  {e.type === "workshop" ? (
+                    t("交互实验", "Interactive exercise", "互動實驗")
+                  ) : e.type === "learning" ? (
                     <Translate id="journey.roadmapLabel" />
                   ) : (
                     uiLabel(e.type.toUpperCase())

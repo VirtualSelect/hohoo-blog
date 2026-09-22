@@ -1,29 +1,50 @@
-import { uiLabel } from '@site/src/utils/ui-labels';
-import React, { useState } from 'react';
-import Layout from '@lab/runtime/Layout';
-import {
-  useContent,
-  useEnglish,
-  ContentRows,
-} from '@site/src/components/ContentUI';
+import React, { useState } from "react";
+import Layout from "@lab/runtime/Layout";
+import { useContent, ContentRows } from "@site/src/components/ContentUI";
+import { useText } from "@lab/components/Shell";
 export default function Notes() {
-  const en = useEnglish();
-  const { entries } = useContent();
-  const [query, setQuery] = useState('');
-  const notes = entries.filter((e) => e.type === 'note');
+  const t = useText(),
+    { entries } = useContent();
+  const [query, setQuery] = useState("");
+  const notes = entries.filter(
+    (e) => e.type === "note" && e.translationStatus !== "MISSING",
+  );
+  const matches = notes.filter((n) =>
+    [n.title, n.description, ...(n.aliases || [])]
+      .join(" ")
+      .toLowerCase()
+      .includes(query.trim().toLowerCase()),
+  );
   return (
-    <Layout title="Notes" description="围绕一个概念或问题的短笔记。">
+    <Layout
+      title={t("知识笔记", "Notes", "知識筆記")}
+      description={t(
+        "从具体问题出发，理解概念、证据与边界。",
+        "Understand concepts, evidence and limits through concrete questions.",
+        "從具體問題出發，理解概念、證據與邊界。",
+      )}
+    >
       <main className="hh-page">
-        <p className="hh-eyebrow">{uiLabel("KNOWLEDGE / NOTES")}</p>
-        <h1>{en ? 'One concept, one note.' : '一个概念，一篇短笔记。'}</h1>
+        <p className="hh-eyebrow">
+          {t("知识 / 短笔记", "Knowledge / Notes", "知識 / 短筆記")}
+        </p>
+        <h1>
+          {t(
+            "把一个问题，弄明白。",
+            "Understand one question at a time.",
+            "把一個問題，弄明白。",
+          )}
+        </h1>
         <p className="hh-lead">
-          {en
-            ? 'Short explanations with sources and connections.'
-            : '记录概念、来源与适用边界，把零散理解连接起来。'}
+          {t(
+            "从真实问题和明确来源出发。每篇解释一个概念，留下一条可以继续验证的路径。",
+            "Each note starts from a concrete question and traceable sources, with a next step you can verify.",
+            "從真實問題和明確來源出發。每篇解釋一個概念，留下一條可以繼續驗證的路徑。",
+          )}
         </p>
         {!!notes.length && (
           <label>
-            {en ? 'Search notes' : '搜索笔记'}{' '}
+            {t("搜索笔记", "Search notes", "搜尋筆記")}{" "}
             <input
               type="search"
               value={query}
@@ -32,13 +53,16 @@ export default function Notes() {
           </label>
         )}
         <ContentRows
-          items={notes.filter((n) =>
-            [n.title, n.description, ...(n.aliases || [])]
-              .join(' ')
-              .toLowerCase()
-              .includes(query.toLowerCase()),
-          )}
-          empty="暂无已发布短笔记。"
+          items={matches}
+          empty={
+            query
+              ? t(
+                  "没有匹配的笔记，请换个关键词。",
+                  "No matching notes. Try another term.",
+                  "沒有符合的筆記，請換個關鍵字。",
+                )
+              : t("暂无笔记。", "No notes yet.", "尚無筆記。")
+          }
         />
       </main>
     </Layout>

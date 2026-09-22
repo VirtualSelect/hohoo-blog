@@ -12,7 +12,10 @@ import ExperimentDesign from "./ExperimentDesign";
 import ContentProvenance, { Freshness } from "./ContentProvenance";
 import { Related, Status, useEnglish } from "./ContentUI";
 import ProjectShowcase from "@lab/components/ProjectShowcase";
-import FlagshipExperience from "@lab/components/FlagshipExperience";
+import dynamic from "next/dynamic";
+const ConversationWorkbench = dynamic(
+  () => import("@lab/components/ConversationWorkbench"),
+);
 export default function ContentDetail({ entry: e, children }) {
   const en = useEnglish();
   const locale = useSiteConfig().i18n.currentLocale;
@@ -80,6 +83,15 @@ export default function ContentDetail({ entry: e, children }) {
           )}
         </div>
         <ContentProvenance kind={e.provenance} />
+        {e.editorialOrigin === "ai-assisted-reference" && (
+          <aside className="hh-translation">
+            {en
+              ? "AI-assisted reference note based on linked sources and existing records. It is not a new experiment or an author-reviewed personal conclusion."
+              : locale === "zh-TW"
+                ? "AI 協助整理的知識筆記，依據所列來源與既有紀錄；不是新實驗，也不代表作者已審閱的個人結論。"
+                : "AI 协助整理的知识笔记，依据所列来源与已有记录；不是新实验，也不代表作者已审阅的个人结论。"}
+          </aside>
+        )}
         <Freshness entry={e} />
         {e.stack && <p className="hh-meta">{e.stack.join(" · ")}</p>}
         {(e.repo || e.demo) && (
@@ -94,7 +106,7 @@ export default function ContentDetail({ entry: e, children }) {
           </p>
         )}
         {e.id === "project:hohoo-ai-lab" ? (
-          <FlagshipExperience mode="project" />
+          <ConversationWorkbench />
         ) : (
           e.type === "project" && <ProjectShowcase id={e.id} />
         )}
@@ -110,12 +122,17 @@ export default function ContentDetail({ entry: e, children }) {
               ))}
             </nav>
           )}
-        {locale !== "zh-CN" ? (
+        {locale !== "zh-CN" && (
           <TranslationNotice
             id={e.id}
             original={e.href.replace(/^\/(en|zh-TW)(?=\/)/, "")}
           />
-        ) : lab ? (
+        )}
+        {locale !== "zh-CN" &&
+        !(
+          e.type === "note" &&
+          ["AI_TRANSLATED", "REVIEWED"].includes(e.translationStatus)
+        ) ? null : lab ? (
           <>
             <section className="hh-section">
               <h2 className="hh-eyebrow">01 / {uiLabel("QUESTION")}</h2>
@@ -150,8 +167,14 @@ export default function ContentDetail({ entry: e, children }) {
               data-section-kind={s.heading.toLowerCase()}
               key={s.heading}
             >
-              <h2>{uiLabel(s.heading)}</h2>
-              <p>{en ? s.en : s.zh}</p>
+              <h2>
+                {en
+                  ? s.headingEn || uiLabel(s.heading)
+                  : locale === "zh-TW"
+                    ? s.headingTw || uiLabel(s.heading)
+                    : uiLabel(s.heading)}
+              </h2>
+              <p>{en ? s.en : locale === "zh-TW" ? s.tw : s.zh}</p>
             </section>
           ))
         )}
@@ -171,6 +194,45 @@ export default function ContentDetail({ entry: e, children }) {
           <ProjectEvidence entry={e} />
         )}
         {e.type === "note" && <ReadingActions id={e.id} en={en} />}
+        {e.type === "note" && !!e.sources?.length && (
+          <section className="hh-section">
+            <h2>
+              {en
+                ? "Sources and next steps"
+                : locale === "zh-TW"
+                  ? "來源與下一步"
+                  : "来源与下一步"}
+            </h2>
+            <ul>
+              {e.sources.map((source) => (
+                <li key={source.href}>
+                  {source.href.startsWith("/") ? (
+                    <Link to={source.href}>
+                      {en
+                        ? source.labelEn || source.label
+                        : locale === "zh-TW"
+                          ? source.labelTw || source.label
+                          : source.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={source.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {en
+                        ? source.labelEn || source.label
+                        : locale === "zh-TW"
+                          ? source.labelTw || source.label
+                          : source.label}{" "}
+                      ↗
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
         {children}
         <Related ids={e.related} />
         <p>
