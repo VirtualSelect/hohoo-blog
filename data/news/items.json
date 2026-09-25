@@ -1,5 +1,35 @@
 [
   {
+    "id": "0ec8795678516ce830d4",
+    "title": "Claude Devs 测算 Opus 5.5 相比 Opus 5 在 Claude Code 任务中的成本变化",
+    "url": "https://aihot.news/items/cmuhazjqv076rro3b6ta3dnck",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-25T18:13:31.000Z",
+    "collectedAt": "2026-09-25T18:51:08.730Z",
+    "category": "ai-apps",
+    "summary": "Opus 5.5 每输入和输出 token 比 Opus 5 便宜 20%，缓存读取便宜 60%。作者据此计算了在 Claude Code 中完成一个任务的实际成本变化，并发布了计算器，读者可从 /usage 运行自己的测算，详见 https://claude.dev/blog/what-a-task-costs-on-opus-5-5/。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-2fcc0932",
+    "coverage": []
+  },
+  {
+    "id": "b2fa8a2edec0188e54e6",
+    "title": "GitHub Copilot app 新手教程：如何用 canvases 构建自定义工作流",
+    "url": "https://aihot.news/items/cmuha4bdk063qro3buzyc19hv",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-25T18:00:00.000Z",
+    "collectedAt": "2026-09-25T18:51:08.730Z",
+    "category": "ai-apps",
+    "summary": "GitHub 官方博客发布 GitHub Copilot app 新手教程，介绍用 /create-canvas 技能通过自然语言描述生成可自定义的 canvas 界面。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e619cf46",
+    "coverage": []
+  },
+  {
     "id": "b1fff0e5da30fd067df4",
     "title": "Satya Nadella 宣布 Copilot 迄今最大更新，定位为工作新 OS",
     "url": "https://aihot.news/items/cmugxabb31gj8rogv0mand702",
