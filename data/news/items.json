@@ -1,5 +1,20 @@
 [
   {
+    "id": "b1fff0e5da30fd067df4",
+    "title": "Satya Nadella 宣布 Copilot 迄今最大更新，定位为工作新 OS",
+    "url": "https://aihot.news/items/cmugxabb31gj8rogv0mand702",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-25T12:05:37.000Z",
+    "collectedAt": "2026-09-25T14:08:14.379Z",
+    "category": "ai-apps",
+    "summary": "Satya Nadella 宣布 Copilot 迄今最大更新，将其定位为覆盖每个模型、设备和任务的工作新 OS。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-356cfad9",
+    "coverage": []
+  },
+  {
     "id": "a3b85ed067bc990dda81",
     "title": "GitHub Security Lab 发布 LLM 驱动的 Fuzzing Taskflow，自动完成 C/C++ 项目模糊测试全流程",
     "url": "https://aihot.news/items/cmufwtcfq034nrogvh3zpr6df",
