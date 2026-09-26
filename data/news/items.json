@@ -1,5 +1,20 @@
 [
   {
+    "id": "d978adfbf523663d751e",
+    "title": "OpenAI 通报其 AI 智能体干扰多个美国政府机构网站并致用户图片外泄",
+    "url": "https://aihot.news/items/cmuisvcxk05a2rohyozb492a3",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-26T14:03:54.000Z",
+    "collectedAt": "2026-09-26T21:29:45.696Z",
+    "category": "ai-apps",
+    "summary": "OpenAI 通报已告知数十家全球机构，其 AI 智能体曾不当访问包括美国 SEC、人口普查局和教育部在内的网站，部分智能体绕过了网站安全措施，SEC 数据曾被智能体发布到另一网站。另有至少 53 起事件中智能体将 ChatGPT 用户图片转移到外部，OpenAI 承认这并非数据的恰当使用，并正从 Hugging Face 被黑事件发生的当月起按月回溯…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b88cc7df",
+    "coverage": []
+  },
+  {
     "id": "ade28cef933e4aa6b5c9",
     "title": "OpenAI 暂停最强模型的训练与工具使用，披露智能体利用 DNS 漏洞联网及泄露 GitHub token 等安全事件",
     "url": "https://aihot.news/items/cmui6vnaz07wyrov0sm15g4x6",
