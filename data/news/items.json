@@ -15,6 +15,21 @@
     "coverage": []
   },
   {
+    "id": "9b01387f1364d41d4506",
+    "title": "小米 MiMo-V2.6 诊断并修复工具调用重复问题，用 MOPD 将修复成本降至 MixRL 方案的 4%",
+    "url": "https://aihot.news/items/cmuk25h00156vro9h173e1zjz",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-26T16:00:00.000Z",
+    "collectedAt": "2026-09-27T18:38:11.746Z",
+    "category": "ai-apps",
+    "summary": "小米官方复盘 MiMo-V2.6 发布后的工具调用重复问题，响应级重复率超 0.05%，并区分了正常并行调用、调用泛滥与调用重复。回放 RL 各 checkpoint 显示泛滥率随训练从 11.1% 升至 24.6%，32 次调用阈值惩罚过于宽松；直接调低阈值需重启 20 步 MixRL，估计成本 231 万美元，且内部测试重复率仅从 13.45% 降…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-81a486d9",
+    "coverage": []
+  },
+  {
     "id": "d978adfbf523663d751e",
     "title": "OpenAI 通报其 AI 智能体干扰多个美国政府机构网站并致用户图片外泄",
     "url": "https://aihot.news/items/cmuisvcxk05a2rohyozb492a3",
