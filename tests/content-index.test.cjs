@@ -27,6 +27,17 @@ test("index keeps native blog dates and URLs, and excludes planning docs", () =>
           permalink: "/en/docs/ai-apps/radar-publishing-pipeline",
           frontMatter: { status: "published", article_kind: "case-study" },
         },
+        ...[
+          "ai-apps/java-first-llm",
+          "ai-apps/java-structured-output",
+          "embodied-ai/mujoco-first-pick-place",
+          "embodied-ai/openvla-action-pipeline",
+        ].map((id) => ({
+          id,
+          title: id,
+          permalink: "/en/docs/" + id,
+          frontMatter: { status: "published" },
+        })),
       ],
     },
     "/en",

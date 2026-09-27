@@ -5,28 +5,42 @@ import ArchitectureDiagram from "./ArchitectureDiagram";
 import { useEnglish } from "./ContentUI";
 import history from "@site/data/build-log.json";
 import ExpandableFigure from "@lab/components/ExpandableFigure";
+import useSiteConfig from "@lab/runtime/context";
 export default function ProjectEvidence({ entry }) {
   const en = useEnglish();
+  const tw = useSiteConfig().i18n.currentLocale === "zh-TW";
   const logs = history.filter((log) => log.project === entry.id);
   return (
     <>
       {!!entry.resources?.length && (
         <section className="hh-section">
-          <h2>{en ? "CODE & READING" : "代码与配套阅读"}</h2>
+          <h2>
+            {en
+              ? "Code and companion reading"
+              : tw
+                ? "程式碼與配套閱讀"
+                : "代码与配套阅读"}
+          </h2>
           <ul className="hh-rows">
             {entry.resources.map((resource) => (
               <li key={resource.href}>
                 <div>
                   <h3>
                     <Link to={resource.href}>
-                      {en ? resource.labelEn || resource.label : resource.label}{" "}
+                      {en
+                        ? resource.labelEn || resource.label
+                        : tw
+                          ? resource.labelTw || resource.label
+                          : resource.label}{" "}
                       →
                     </Link>
                   </h3>
                   <p>
                     {en
                       ? resource.descriptionEn || resource.description
-                      : resource.description}
+                      : tw
+                        ? resource.descriptionTw || resource.description
+                        : resource.description}
                   </p>
                 </div>
               </li>

@@ -34,9 +34,22 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
           (r) => r.includes("CONTENT-MODEL") || r.includes("NODE-RUNTIME"),
         ),
       );
-      assert.equal(
-        data.globalData["learning-index"].entries[0].stepId,
+      const learning = data.globalData["learning-index"].entries;
+      for (const step of [
         "first-call",
+        "structured-output",
+        "first-simulation",
+      ])
+        assert(
+          learning.some((entry) => entry.stepId === step),
+          step,
+        );
+      assert.deepEqual(
+        learning.map((entry) => entry.date),
+        learning
+          .map((entry) => entry.date)
+          .toSorted()
+          .reverse(),
       );
     },
   );

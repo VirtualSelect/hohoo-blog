@@ -130,7 +130,7 @@ export default function ContentDetail({ entry: e, children }) {
         )}
         {locale !== "zh-CN" &&
         !(
-          e.type === "note" &&
+          ["note", "project"].includes(e.type) &&
           ["AI_TRANSLATED", "REVIEWED"].includes(e.translationStatus)
         ) ? null : lab ? (
           <>
@@ -190,9 +190,11 @@ export default function ContentDetail({ entry: e, children }) {
             </ol>
           </section>
         )}
-        {locale === "zh-CN" && e.type === "project" && (
-          <ProjectEvidence entry={e} />
-        )}
+        {e.type === "project" &&
+          (locale === "zh-CN" ||
+            ["AI_TRANSLATED", "REVIEWED"].includes(e.translationStatus)) && (
+            <ProjectEvidence entry={e} />
+          )}
         {e.type === "note" && <ReadingActions id={e.id} en={en} />}
         {e.type === "note" && !!e.sources?.length && (
           <section className="hh-section">

@@ -4,7 +4,7 @@
   "targetProject": {
     "name": "hohoo-embodied-agent",
     "repository": "https://github.com/VirtualSelect/hohoo-embodied-agent",
-    "status": "planning",
+    "status": "building",
     "architecture": [
       "journey.node.user",
       "journey.node.chat",
@@ -102,7 +102,8 @@
       "startedAt": null,
       "completedAt": null,
       "articles": [
-        "/docs/ai-apps/java-first-llm"
+        "/docs/ai-apps/java-first-llm",
+        "/docs/ai-apps/java-structured-output"
       ],
       "code": [],
       "demos": [],
@@ -203,7 +204,9 @@
       "status": "not-started",
       "startedAt": null,
       "completedAt": null,
-      "articles": [],
+      "articles": [
+        "/docs/embodied-ai/mujoco-first-pick-place"
+      ],
       "code": [],
       "demos": [],
       "evidence": [],
@@ -240,7 +243,9 @@
       "status": "not-started",
       "startedAt": null,
       "completedAt": null,
-      "articles": [],
+      "articles": [
+        "/docs/embodied-ai/mujoco-first-pick-place"
+      ],
       "code": [],
       "demos": [],
       "evidence": [],

@@ -995,5 +995,20 @@
   },
   "journey.repository": {
     "message": "查看 GitHub 仓库"
+  },
+  "journey.lab.VL01.firstArticle": {
+    "message": "第一次抓取与偏差对照"
+  },
+  "journey.lab.VL01.firstCode": {
+    "message": "固定版本的场景与代码"
+  },
+  "journey.lab.VL01.firstEvidence": {
+    "message": "九回合原始证据"
+  },
+  "journey.lab.VL01.firstVideo": {
+    "message": "观看真实仿真与失败视频"
+  },
+  "journey.lab.VL01.firstResult": {
+    "message": "首个固定场景案例已由 Codex 在作者授权下执行：无偏移三回合满足协议，25 / 50 mm偏移各三回合未抬起。保留视频、状态和轨迹；不是泛化成功率，完整VL01与M4/M5仍未完成。"
   }
 }
