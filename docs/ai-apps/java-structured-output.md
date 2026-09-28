@@ -19,7 +19,7 @@ related: ["project:hohoo-ai-lab", "doc:ai-apps/java-first-llm"]
 本次实验没有得到“一切顺利”的演示。模型第一次返回 HTTP 200，却没有遵守“不要代码围栏”的要求；后面还遇到了读取超时。我们把这些真实结果保留下来，完成一个可以拒绝不合格结果、也可以明确适配特定格式的 Java 程序。
 
 :::note 实践与证据范围
-本轮由 Codex 在作者授权下，于北京时间 2026-09-28 使用本机 Java 8 和 Agnes 接口实际执行。本文由 AI 辅助编写，未声称作者已亲手完成复现或人工审校。在线调用共四次；离线校验、HTTP 故障注入和响应重放分别标注。全部代码与脱敏记录位于独立的 [hohoo-ai-lab 仓库](https://github.com/VirtualSelect/hohoo-ai-lab/tree/0f91065aeac1cb1da22a20ec87a2ab2c14b21938/demos/04-structured-output)。
+实验于北京时间 2026-09-28 使用本机 Java 8 和 Agnes 接口执行。在线调用共四次；离线校验、HTTP 故障注入和响应重放分别标注。全部代码与脱敏记录位于独立的 [hohoo-ai-lab 仓库](https://github.com/VirtualSelect/hohoo-ai-lab/tree/0f91065aeac1cb1da22a20ec87a2ab2c14b21938/demos/04-structured-output)。
 :::
 
 ## 1. 先定义“可用”，再写提示词

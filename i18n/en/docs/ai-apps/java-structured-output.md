@@ -19,7 +19,7 @@ The first tutorial connected Java to a multi-turn conversation. This one takes t
 The real run was not a clean success demo. The first response was HTTP 200 but ignored the instruction to omit Markdown fences. Later requests timed out. We retained those results and built a program that rejects invalid output while allowing one explicitly chosen formatting accommodation.
 
 :::note Execution and evidence
-Codex executed this work with the author's authorization on September 28, 2026, Beijing time, using the local Java 8 environment and Agnes endpoint. This AI-assisted article does not claim that the author personally reproduced or reviewed it. Four online attempts, offline fixtures, loopback HTTP tests and response replay are identified separately. Code and redacted records live in the independent [hohoo-ai-lab repository](https://github.com/VirtualSelect/hohoo-ai-lab/tree/0f91065aeac1cb1da22a20ec87a2ab2c14b21938/demos/04-structured-output).
+The experiment ran on September 28, 2026, Beijing time, using the local Java 8 environment and Agnes endpoint. Four online attempts, offline fixtures, loopback HTTP tests and response replay are identified separately. Code and redacted records live in the independent [hohoo-ai-lab repository](https://github.com/VirtualSelect/hohoo-ai-lab/tree/0f91065aeac1cb1da22a20ec87a2ab2c14b21938/demos/04-structured-output).
 :::
 
 ## 1. Define a usable result before prompting

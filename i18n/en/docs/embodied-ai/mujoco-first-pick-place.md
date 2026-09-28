@@ -18,7 +18,7 @@ Moving an object on screen is easy. More useful questions are: why did it move, 
 This practice starts with a small physical task: grip a red cube, lift it, carry it over a blue bin, release it and check that it settles. Then only one condition changes: the pickup target shifts25 or50mm along x.
 
 :::note Scope of the actual run
-Codex ran MuJoCo3.3.7 locally with the author's authorization on September28,2026, Beijing time. The code and scene were written for this exercise. This is an educational Cartesian gripper, not a commercial robot. There is no real hardware, visual detection, LLM planning, ROS2 or policy training. It is a control-and-data foundation for embodied learning, not a claim of trained embodied intelligence. The article is AI-assisted and does not claim personal reproduction or human review by the author.
+The experiment ran locally with MuJoCo 3.3.7 on September 28, 2026, Beijing time. This is an educational Cartesian gripper, not a commercial robot. There is no real hardware, visual detection, LLM planning, ROS2 or policy training. It is a control-and-data foundation for embodied learning, not a claim of trained embodied intelligence.
 :::
 
 ## 1. Watch the recorded episode
