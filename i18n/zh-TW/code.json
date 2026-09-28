@@ -1429,5 +1429,14 @@
   },
   "journey.lab.VL01.firstResult": {
     "message": "首個固定場景案例已由 Codex 在作者授權下執行：無偏移三回合符合協議，25 / 50 mm偏移各三回合未抬起。保留影片、狀態與軌跡；不是泛化成功率，完整VL01與M4/M5仍未完成。"
+  },
+  "reading.nextPublished": {
+    "message": "下一篇已發布內容"
+  },
+  "reading.markCompleted": {
+    "message": "標記完成"
+  },
+  "status.learning": {
+    "message": "學習中"
   }
 }

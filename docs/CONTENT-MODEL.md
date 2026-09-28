@@ -1,5 +1,12 @@
 # Huhohoo Content Model
 
+## 研究证据与精选入口（2026-09-29）
+
+- `data/editorial.json` 引用真实内容 ID；首页精选无需依赖数组前两项，也不改变文章日期。
+- `data/practice/mujoco.json` 是固定版本 CSV 的展示投影，含来源 commit、标准化换行后的 CSV SHA256、50Hz 高度记录与阶段首条观测；数值显示保留四位小数。原始证据仍在独立具身仓库，通过 `scripts/build-practice-evidence.mjs <repo>` 重建。
+- 已执行 Lab 可提供 `method/result/observations/conclusion/limitations/reproduce` 及 `En/Tw` 对应字段。翻译仍由 localization manifest 管理，未翻译正文继续隐藏。`inconclusive` 沿用既有状态，表示有记录但尚不能给出研究结论；不计作完成，关联的已发布复盘文章可进入 Timeline。
+- VL01 的具体回合组可作为独立 Lab 记录，不自动把 Journey 学习计划改为 completed；L1 记录请求可用性与回答正确性，不混用分母。
+
 ## 文章阅读目的（2026-09-22）
 
 Docs / Blog 可选 `article_kind`：`tutorial`（实战教程）、`case-study`（工程案例）、`mechanism`（机制拆解）、`retrospective`（实验复盘）、`essay`（随笔）；兼容 Notes / Papers 的 `note`、`paper`。这是阅读目的，不新增学习方向，也不替代 `type`。旧 Doc 默认 tutorial，Blog 默认 essay；新文章必须显式填写。统一索引字段为 `articleKind`，展示和筛选复用 `src/utils/writing-kinds.cjs`。

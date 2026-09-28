@@ -16,6 +16,8 @@ import dynamic from "next/dynamic";
 const ConversationWorkbench = dynamic(
   () => import("@lab/components/ConversationWorkbench"),
 );
+const MujocoEvidence = dynamic(() => import("@lab/components/MujocoEvidence"));
+import TryIt from "@lab/components/TryIt";
 export default function ContentDetail({ entry: e, children }) {
   const en = useEnglish();
   const locale = useSiteConfig().i18n.currentLocale;
@@ -130,13 +132,13 @@ export default function ContentDetail({ entry: e, children }) {
         )}
         {locale !== "zh-CN" &&
         !(
-          ["note", "project"].includes(e.type) &&
+          ["note", "project", "lab"].includes(e.type) &&
           ["AI_TRANSLATED", "REVIEWED"].includes(e.translationStatus)
         ) ? null : lab ? (
           <>
             <section className="hh-section">
               <h2 className="hh-eyebrow">01 / {uiLabel("QUESTION")}</h2>
-              <p>{en ? e.goalEn : e.goalZh}</p>
+              <p>{en ? e.goalEn : tw ? e.goalTw : e.goalZh}</p>
             </section>
             <ExperimentDesign entry={e} />
             {e.status === "planning" || e.status === "planned"
@@ -155,7 +157,13 @@ export default function ContentDetail({ entry: e, children }) {
                   .map((key) => (
                     <section className="hh-section" key={key}>
                       <h2>{uiLabel(key)}</h2>
-                      <p>{e[key]}</p>
+                      <p>
+                        {en
+                          ? e[key + "En"] || e[key]
+                          : tw
+                            ? e[key + "Tw"] || e[key]
+                            : e[key]}
+                      </p>
                     </section>
                   ))}
           </>
@@ -177,6 +185,20 @@ export default function ContentDetail({ entry: e, children }) {
               <p>{en ? s.en : locale === "zh-TW" ? s.tw : s.zh}</p>
             </section>
           ))
+        )}
+        {e.id === "lab:vl01-pickup-offset" && (
+          <TryIt
+            id="mujoco-evidence"
+            title={
+              en
+                ? "Recorded experiment comparison"
+                : tw
+                  ? "真實實驗對照"
+                  : "真实实验对照"
+            }
+          >
+            <MujocoEvidence />
+          </TryIt>
         )}
         {locale === "zh-CN" && !!e.experimentLog?.length && (
           <section className="hh-section">

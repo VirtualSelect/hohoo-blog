@@ -49,6 +49,47 @@ function LiveSite() {
 
 export default function ProjectShowcase({ id }) {
   const t = useText();
+  if (id === "project:hohoo-embodied-agent") {
+    return (
+      <ExpandableFigure
+        title={t(
+          "MuJoCo / 真实抓取录像",
+          "MuJoCo / recorded pickup",
+          "MuJoCo / 真實抓取錄影",
+        )}
+        renderExpanded={() => (
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            width="960"
+            height="640"
+            style={{ width: "100%", height: "auto" }}
+            src="/media/practice/vl01-baseline.mp4"
+            poster="/media/practice/vl01-lift.png"
+            aria-label={t(
+              "零偏移首回合录像",
+              "Zero-offset episode 1 recording",
+              "零偏移首回合錄影",
+            )}
+          />
+        )}
+      >
+        <img
+          src="/media/practice/vl01-lift.png"
+          alt={t(
+            "夹爪在接触作用下抬起方块；固定场景，未训练策略。",
+            "Contact-based cube pickup in a fixed scene, without a trained policy.",
+            "夾爪在接觸作用下抬起方塊；固定場景，未訓練策略。",
+          )}
+          width="960"
+          height="640"
+          loading="lazy"
+          style={{ width: "100%", height: "auto", display: "block" }}
+        />
+      </ExpandableFigure>
+    );
+  }
   if (!["project:hohoo-blog", "project:hohoo-ai-lab"].includes(id)) return null;
   const blog = id === "project:hohoo-blog";
   const title = blog

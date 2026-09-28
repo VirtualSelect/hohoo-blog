@@ -1010,5 +1010,17 @@
   },
   "journey.lab.VL01.firstResult": {
     "message": "首个固定场景案例已由 Codex 在作者授权下执行：无偏移三回合满足协议，25 / 50 mm偏移各三回合未抬起。保留视频、状态和轨迹；不是泛化成功率，完整VL01与M4/M5仍未完成。"
+  },
+  "reading.nextPublished": {
+    "message": "下一篇已发布内容"
+  },
+  "reading.markCompleted": {
+    "message": "标记完成"
+  },
+  "status.learning": {
+    "message": "学习中"
+  },
+  "label.inconclusive": {
+    "message": "尚无定论"
   }
 }

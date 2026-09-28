@@ -17,6 +17,14 @@ export function Status({ value }) {
     planning: [uiLabel("PLANNED"), "PLANNED"],
     planned: [uiLabel("PLANNED"), "PLANNED"],
     inconclusive: [uiLabel("INCONCLUSIVE"), "INCONCLUSIVE"],
+    experiment: [
+      translate({ id: "ui.22133c81a1", message: "实验中" }),
+      "Experiment",
+    ],
+    learning: [
+      translate({ id: "status.learning", message: "学习中" }),
+      "Learning",
+    ],
     archived: [uiLabel("ARCHIVED"), "ARCHIVED"],
     production: [
       translate({

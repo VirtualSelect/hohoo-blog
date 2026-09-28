@@ -10,7 +10,8 @@ import DiscoveryCompass from "./DiscoveryCompass";
 import VisitorStats from "./VisitorStats";
 import LabSketch from "./LabSketch";
 import ProjectShowcase from "./ProjectShowcase";
-import FlagshipExperience from "./FlagshipExperience";
+import ResearchSpotlight from "./ResearchSpotlight";
+import editorial from "@site/data/editorial.json";
 import WorkshopEntry from "./WorkshopEntry";
 
 export default function Home() {
@@ -18,7 +19,9 @@ export default function Home() {
     t = useText();
   const entries = globalData["content-index"].entries;
   const latest = writingEntries(entries).slice(0, 4),
-    projects = entries.filter((e) => e.type === "project").slice(0, 2);
+    projects = editorial.featuredProjects
+      .map((id) => entries.find((e) => e.id === id))
+      .filter(Boolean);
   const firstTutorial = entries.find((e) =>
     e.href.endsWith("/docs/ai-apps/java-first-llm"),
   );
@@ -55,7 +58,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        {firstTutorial && <FlagshipExperience mode="cover" />}
+        <ResearchSpotlight />
       </section>
       {latest.some((e) => e.id !== firstTutorial?.id) && (
         <section className="home-section">
@@ -116,19 +119,21 @@ export default function Home() {
                   )}
                 </p>
                 <span className="project-wordmark">
-                  {p.href.endsWith("/hohoo-blog") ? "Hohoo." : "Java → AI"}
+                  {p.domain === "embodied-ai"
+                    ? "MuJoCo → " + t("行动", "Action", "行動")
+                    : "Java → AI"}
                 </span>
                 <ol>
-                  {(p.href.endsWith("/hohoo-blog")
+                  {(p.domain === "embodied-ai"
                     ? [
-                        t("发现资讯", "Discover", "發現資訊"),
-                        t("沉淀知识", "Learn", "沉澱知識"),
-                        t("动手实践", "Build", "動手實作"),
+                        t("接触抓取", "Contact", "接觸抓取"),
+                        t("偏移对照", "Compare offsets", "偏移對照"),
+                        t("轨迹复核", "Audit trajectories", "軌跡複核"),
                       ]
                     : [
                         t("发送请求", "Request", "傳送請求"),
                         t("解析响应", "Parse", "解析回應"),
-                        t("多轮对话", "Conversation", "多輪對話"),
+                        t("输出验收", "Validate output", "輸出驗證"),
                       ]
                   ).map((label, i) => (
                     <li key={label}>

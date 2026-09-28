@@ -16,7 +16,9 @@ const ErrorClinic = dynamic(() => import("./ErrorClinic"));
 const PracticeCompanion = dynamic(() => import("./PracticeCompanion"));
 import ArticleHistory from "./ArticleHistory";
 import VisitorStats from "./VisitorStats";
-import FlagshipExperience from "./FlagshipExperience";
+const FlagshipExperience = dynamic(() => import("./FlagshipExperience"));
+const MujocoEvidence = dynamic(() => import("./MujocoEvidence"));
+const OutputValidation = dynamic(() => import("./OutputValidation"));
 import {
   readerSettingsKey,
   parseReaderSettings,
@@ -245,6 +247,26 @@ export default function Document({ children }) {
         <div id="reading-content" ref={ref}>
           {children}
         </div>
+        {d.route === "docs/embodied-ai/mujoco-first-pick-place" && (
+          <TryIt
+            id="mujoco-evidence"
+            title={t(
+              "真实实验对照",
+              "Recorded experiment comparison",
+              "真實實驗對照",
+            )}
+          >
+            <MujocoEvidence />
+          </TryIt>
+        )}
+        {d.route === "docs/ai-apps/java-structured-output" && (
+          <TryIt
+            id="output-validation"
+            title={t("输出验收台", "Output validation bench", "輸出驗證台")}
+          >
+            <OutputValidation />
+          </TryIt>
+        )}
         {d.route === "docs/ai-apps/java-first-llm" && (
           <details className="manual-extras">
             <summary>

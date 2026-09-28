@@ -13,6 +13,9 @@ difficulty: beginner
 related: ["project:hohoo-embodied-agent", "doc:embodied-ai/openvla-action-pipeline"]
 ---
 
+[開啟真實實驗對照：切換偏移組、定位錄影階段、查看軌跡 →](#mujoco-evidence)
+
+
 讓一個物體在畫面里移動并不難。更值得弄明白的是：它為什么移動？夾爪有沒有真正接觸方塊？發出了正確的動作，任務為什么仍然會失敗？
 
 這次從一個小而完整的物理任務開始：讓夾爪抓起紅色方塊，搬到藍色盒子上方，松手，并確認方塊落定。然后只改一個條件——拾取目標向右偏25 mm或50 mm——觀察相同程序會發生什么。

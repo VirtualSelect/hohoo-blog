@@ -643,7 +643,7 @@
     "message": "PLANNED"
   },
   "label.inconclusive": {
-    "message": "INCONCLUSIVE"
+    "message": "Inconclusive"
   },
   "label.archived": {
     "message": "ARCHIVED"
@@ -1622,5 +1622,14 @@
   },
   "journey.lab.VL01.firstResult": {
     "message": "Codex completed the authorized first fixed-scene case: three baseline episodes met the protocol; three each at 25 / 50 mm failed to lift. Videos, states and trajectories are preserved. These are not generalization rates; full VL01 and M4/M5 remain incomplete."
+  },
+  "reading.nextPublished": {
+    "message": "Next published article"
+  },
+  "reading.markCompleted": {
+    "message": "Mark completed"
+  },
+  "status.learning": {
+    "message": "Learning"
   }
 }

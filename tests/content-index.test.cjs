@@ -32,6 +32,8 @@ test("index keeps native blog dates and URLs, and excludes planning docs", () =>
           "ai-apps/java-structured-output",
           "embodied-ai/mujoco-first-pick-place",
           "embodied-ai/openvla-action-pipeline",
+          "llm/kv-cache",
+          "llm/context-position-experiment",
         ].map((id) => ({
           id,
           title: id,
