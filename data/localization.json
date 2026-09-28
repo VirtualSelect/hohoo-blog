@@ -86,5 +86,93 @@
         "file": "i18n/zh-TW/docs/embodied-ai/openvla-action-pipeline.md"
       }
     }
+  },
+  "doc:ai-apps/java-structured-output": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-28",
+    "file": "docs/ai-apps/java-structured-output.md",
+    "sourceRevision": "1e8c0247ccd89f90df5ad10162ad7c000f709eb225f011253d8adf5b93de5426",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-28",
+        "sourceRevision": "1e8c0247ccd89f90df5ad10162ad7c000f709eb225f011253d8adf5b93de5426",
+        "translationRevision": "53bd688fa172d346c81fcc2c30d9cc730c72577785ef2013b668ab8d05da1ea7",
+        "file": "i18n/en/docs/ai-apps/java-structured-output.md"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-28",
+        "sourceRevision": "1e8c0247ccd89f90df5ad10162ad7c000f709eb225f011253d8adf5b93de5426",
+        "translationRevision": "5343e5f630a839b7c51569713a07f50cbff128d40d07f1f2a10d40cf041d6d42",
+        "file": "i18n/zh-TW/docs/ai-apps/java-structured-output.md"
+      }
+    }
+  },
+  "doc:embodied-ai/mujoco-first-pick-place": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-28",
+    "file": "docs/embodied-ai/mujoco-first-pick-place.md",
+    "sourceRevision": "462a6cbec0a35df3c41a7fe5cab7ffa39bddf1e33977e0927b712ebfb241d307",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-28",
+        "sourceRevision": "462a6cbec0a35df3c41a7fe5cab7ffa39bddf1e33977e0927b712ebfb241d307",
+        "translationRevision": "5410e8c64e5a23a959bad9b37c94f0670022f6835aa8e11bae37fe4326a5ceeb",
+        "file": "i18n/en/docs/embodied-ai/mujoco-first-pick-place.md"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-28",
+        "sourceRevision": "462a6cbec0a35df3c41a7fe5cab7ffa39bddf1e33977e0927b712ebfb241d307",
+        "translationRevision": "3d27aa23dd5ea35afb267ba9086bc47fdb580f5e03165391f8b3a84e7ad4d1fa",
+        "file": "i18n/zh-TW/docs/embodied-ai/mujoco-first-pick-place.md"
+      }
+    }
+  },
+  "project:hohoo-ai-lab": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-28",
+    "file": "data/projects.json",
+    "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-28",
+        "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+        "translationRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+        "file": "data/projects.json"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-28",
+        "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+        "translationRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+        "file": "data/projects.json"
+      }
+    }
+  },
+  "project:hohoo-embodied-agent": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-28",
+    "file": "data/projects.json",
+    "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-28",
+        "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+        "translationRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+        "file": "data/projects.json"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-28",
+        "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+        "translationRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+        "file": "data/projects.json"
+      }
+    }
   }
 }

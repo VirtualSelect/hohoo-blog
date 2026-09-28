@@ -1557,3 +1557,18 @@ html[data-theme="dark"] .token.class-name {
     gap: 1.5rem;
   }
 }
+
+/* Native, on-demand playback for recorded practice; no extra player JS. */
+.prose video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  margin: 24px 0 12px;
+  background: var(--hh-surface, #111);
+  border: 1px solid var(--hh-border);
+}
+.prose video:focus-visible {
+  outline: 2px solid var(--hh-accent);
+  outline-offset: 4px;
+}

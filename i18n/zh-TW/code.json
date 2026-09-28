@@ -1414,5 +1414,20 @@
   },
   "journey.repository": {
     "message": "查看 GitHub 儲存庫"
+  },
+  "journey.lab.VL01.firstArticle": {
+    "message": "第一次抓取與偏差對照"
+  },
+  "journey.lab.VL01.firstCode": {
+    "message": "固定版本的場景與程式碼"
+  },
+  "journey.lab.VL01.firstEvidence": {
+    "message": "九回合原始證據"
+  },
+  "journey.lab.VL01.firstVideo": {
+    "message": "觀看真實模擬與失敗影片"
+  },
+  "journey.lab.VL01.firstResult": {
+    "message": "首個固定場景案例已由 Codex 在作者授權下執行：無偏移三回合符合協議，25 / 50 mm偏移各三回合未抬起。保留影片、狀態與軌跡；不是泛化成功率，完整VL01與M4/M5仍未完成。"
   }
 }

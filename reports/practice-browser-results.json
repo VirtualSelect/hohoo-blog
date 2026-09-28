@@ -1,0 +1,515 @@
+{
+  "base": "http://localhost:4202",
+  "viewports": 72,
+  "results": [
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1440,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1440,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1280,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1280,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1024,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1024,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 768,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 768,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 430,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 430,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 375,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "ai-apps/java-structured-output",
+      "width": 375,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1440,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1440,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1280,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1280,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1024,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1024,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 768,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 768,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 430,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 430,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 375,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-CN",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 375,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1440,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1440,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1280,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1280,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1024,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1024,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 768,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 768,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 430,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 430,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 375,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "ai-apps/java-structured-output",
+      "width": 375,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1440,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1440,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1280,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1280,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1024,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1024,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 768,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 768,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 430,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 430,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 375,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "en",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 375,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1440,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1440,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1280,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1280,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1024,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 1024,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 768,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 768,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 430,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 430,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 375,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "ai-apps/java-structured-output",
+      "width": 375,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1440,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1440,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1280,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1280,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1024,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 1024,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 768,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 768,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 430,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 430,
+      "theme": "dark",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 375,
+      "theme": "light",
+      "noOverflow": true
+    },
+    {
+      "locale": "zh-TW",
+      "slug": "embodied-ai/mujoco-first-pick-place",
+      "width": 375,
+      "theme": "dark",
+      "noOverflow": true
+    }
+  ],
+  "errors": [],
+  "consoleErrors": [],
+  "video": "6 plays passed; no request before play",
+  "keyboard": "summary, search and Escape passed",
+  "noJavaScript": "both article bodies readable"
+}

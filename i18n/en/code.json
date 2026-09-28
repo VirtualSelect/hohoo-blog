@@ -1607,5 +1607,20 @@
   },
   "journey.repository": {
     "message": "View GitHub repository"
+  },
+  "journey.lab.VL01.firstArticle": {
+    "message": "First pickup and target-bias comparison"
+  },
+  "journey.lab.VL01.firstCode": {
+    "message": "Pinned scene and code"
+  },
+  "journey.lab.VL01.firstEvidence": {
+    "message": "Nine recorded episodes"
+  },
+  "journey.lab.VL01.firstVideo": {
+    "message": "Watch the recorded simulation and failure"
+  },
+  "journey.lab.VL01.firstResult": {
+    "message": "Codex completed the authorized first fixed-scene case: three baseline episodes met the protocol; three each at 25 / 50 mm failed to lift. Videos, states and trajectories are preserved. These are not generalization rates; full VL01 and M4/M5 remain incomplete."
   }
 }

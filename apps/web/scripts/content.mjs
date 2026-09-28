@@ -7,6 +7,7 @@ import { validateJourney, validateVirtualLabs } from "../lib/journey.mjs";
 import matter from "gray-matter";
 import { marked } from "marked";
 import sanitize from "sanitize-html";
+import { articleVideo } from "../lib/article-media.mjs";
 const require = createRequire(import.meta.url);
 const here = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const root = path.resolve(here, "../..");
@@ -171,13 +172,25 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
           "img",
           "details",
           "summary",
+          "video",
         ],
         allowedAttributes: {
           ...sanitize.defaults.allowedAttributes,
           "*": ["id", "class"],
           img: ["src", "alt", "width", "height", "loading"],
+          video: [
+            "src",
+            "poster",
+            "controls",
+            "preload",
+            "playsinline",
+            "width",
+            "height",
+            "aria-label",
+          ],
         },
         transformTags: {
+          video: articleVideo,
           a: (tag, attrs) => {
             if (
               locale !== "zh-CN" &&

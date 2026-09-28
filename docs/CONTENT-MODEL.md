@@ -1441,3 +1441,9 @@ apps/web/scripts/content.mjs 从同一内容源生成三语言路由、文章 HT
 ## 教学交互目录
 
 apps/web/lib/workshop-catalog.mjs 为工作台问题、三语言任务说明、领域、标签和关联入口的单一来源。type:workshop 只进入搜索，不进入原创文章/研究成果索引。URL 使用 /build?tool=<id>#workbench，兼容原有三个 desk 锚点。failure-lab.mjs 是确定性的本地状态机，模拟数据与真实 memory-lab 运行摘录分开。
+
+## 实践文章与原始证据（2026-09-28）
+
+正文以固定Git提交关联独立工程与真实记录。实验由AI在授权下执行时，应明示执行者、环境和证据边界，不声称作者已复现或审校。失败、超时与离线fixture分开；过程影片来自实际运行。
+
+Markdown原生video只允许 `/media/practice/<kebab-name>.mp4`，poster只允许同目录PNG/WebP；构建时固定controls、preload=none、playsinline及宽高，拒绝外部播放器和自动播放属性。无声视频提供相邻文字替代及原始证据链接。项目正文仅在翻译manifest可用时展示对应译文，三语段落与资源使用现有sections/resources字段维护。

@@ -32,7 +32,7 @@
         "M4",
         "M5"
       ],
-      "status": "planning",
+      "status": "learning",
       "topics": [
         "Joint",
         "Link",
@@ -69,12 +69,32 @@
         "journey.lab.VL01.step4",
         "journey.lab.VL01.step5"
       ],
-      "articles": [],
-      "demos": [],
-      "github": [],
-      "evidence": [],
-      "result": null,
-      "startedAt": null,
+      "articles": [
+        {
+          "href": "/docs/embodied-ai/mujoco-first-pick-place",
+          "titleKey": "journey.lab.VL01.firstArticle"
+        }
+      ],
+      "demos": [
+        {
+          "href": "/docs/embodied-ai/mujoco-first-pick-place",
+          "titleKey": "journey.lab.VL01.firstVideo"
+        }
+      ],
+      "github": [
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/17144c47a2294f157420946b15f78c49d8d17dd5/experiments/vl01_pick_place",
+          "titleKey": "journey.lab.VL01.firstCode"
+        }
+      ],
+      "evidence": [
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/17144c47a2294f157420946b15f78c49d8d17dd5/evidence/vl01-20260928-v2",
+          "titleKey": "journey.lab.VL01.firstEvidence"
+        }
+      ],
+      "result": "journey.lab.VL01.firstResult",
+      "startedAt": "2026-09-28",
       "completedAt": null
     },
     {
