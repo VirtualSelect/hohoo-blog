@@ -14,6 +14,9 @@ prerequisites: ["doc:ai-apps/java-first-llm"]
 related: ["project:hohoo-ai-lab", "doc:ai-apps/java-first-llm"]
 ---
 
+[Open the validation bench: edit a recorded response and inspect rejection layers →](#output-validation)
+
+
 The first tutorial connected Java to a multi-turn conversation. This one takes the next step: how can a blog use a model's proposed article category instead of merely printing its reply?
 
 The real run was not a clean success demo. The first response was HTTP 200 but ignored the instruction to omit Markdown fences. Later requests timed out. We retained those results and built a program that rejects invalid output while allowing one explicitly chosen formatting accommodation.

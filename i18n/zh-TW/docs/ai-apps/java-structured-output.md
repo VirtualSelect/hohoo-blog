@@ -14,6 +14,9 @@ prerequisites: ["doc:ai-apps/java-first-llm"]
 related: ["project:hohoo-ai-lab", "doc:ai-apps/java-first-llm"]
 ---
 
+[開啟輸出驗證台：編輯真實回應，逐層觀察拒絕原因 →](#output-validation)
+
+
 上一篇讓 Java 接上了多輪對話。這一篇向前走一步：假設博客需要根據文章簡介選擇分類，模型的回答怎樣才能進入程序，而不只是打印給人看？
 
 本次實驗沒有得到“一切順利”的演示。模型第一次返回 HTTP 200，卻沒有遵守“不要代碼圍欄”的要求；后面還遇到了讀取超時。我們把這些真實結果保留下來，完成一個可以拒絕不合格結果、也可以明確適配特定格式的 Java 程序。

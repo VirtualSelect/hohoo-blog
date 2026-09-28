@@ -13,6 +13,9 @@ difficulty: beginner
 related: ["project:hohoo-embodied-agent", "doc:embodied-ai/openvla-action-pipeline"]
 ---
 
+[Open recorded evidence: switch offsets, seek video phases and inspect trajectories →](#mujoco-evidence)
+
+
 Moving an object on screen is easy. More useful questions are: why did it move, did the fingers actually contact it, and why can a completed motion still fail the task?
 
 This practice starts with a small physical task: grip a red cube, lift it, carry it over a blue bin, release it and check that it settles. Then only one condition changes: the pickup target shifts25 or50mm along x.

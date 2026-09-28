@@ -22,20 +22,6 @@
         "difficulty": "beginner"
       },
       {
-        "id": "spring-ai",
-        "title": "Spring AI 快速入门",
-        "en": "Spring AI introduction",
-        "topic": "application",
-        "prerequisite": "Java 与模型调用",
-        "prerequisiteEn": "Java and model calls",
-        "status": "planning",
-        "area": "application",
-        "outcome": "",
-        "outcomeEn": "",
-        "domain": "ai-apps",
-        "difficulty": "beginner"
-      },
-      {
         "id": "structured-output",
         "title": "Java LLM 实践（二）：结构化输出验收",
         "en": "Java LLM practice II: validate structured output",
@@ -63,6 +49,20 @@
         "outcomeEn": "",
         "domain": "ai-apps",
         "difficulty": "intermediate"
+      },
+      {
+        "id": "spring-ai",
+        "title": "Spring AI 快速入门",
+        "en": "Spring AI introduction",
+        "topic": "application",
+        "prerequisite": "Java 与模型调用",
+        "prerequisiteEn": "Java and model calls",
+        "status": "planning",
+        "area": "application",
+        "outcome": "",
+        "outcomeEn": "",
+        "domain": "ai-apps",
+        "difficulty": "beginner"
       },
       {
         "id": "blog-rag",

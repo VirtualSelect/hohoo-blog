@@ -93,7 +93,9 @@
     "repo": "https://github.com/VirtualSelect/hohoo-ai-lab",
     "related": [
       "doc:ai-apps/java-first-llm",
-      "doc:ai-apps/java-structured-output"
+      "doc:ai-apps/java-structured-output",
+      "doc:llm/context-position-experiment",
+      "lab:context-position"
     ],
     "architecture": [
       "Console input",
@@ -188,6 +190,15 @@
         "description": "HTTP 200之后，怎样验收模型的 JSON？",
         "descriptionEn": "After HTTP 200: how should Java validate model JSON?",
         "descriptionTw": "HTTP 200之後，如何驗收模型的 JSON？"
+      },
+      {
+        "label": "L1：上下文位置试验",
+        "labelEn": "L1: context position trial",
+        "labelTw": "L1：上下文位置試驗",
+        "description": "协议、29 次请求与独立审计；提前停止，不宣称位置无关。",
+        "descriptionEn": "Protocol, 29 attempts and an independent audit; stopped early, no claim of position independence.",
+        "descriptionTw": "協定、29 次請求與獨立審計；提前停止，不宣稱位置無關。",
+        "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/e072718c3cd66d44978612208d393ff0d3eff9e4/experiments/01-context-position"
       }
     ],
     "titleTw": "Java LLM 實作集",

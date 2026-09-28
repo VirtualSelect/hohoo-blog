@@ -89,89 +89,155 @@
   },
   "doc:ai-apps/java-structured-output": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-09-28",
+    "sourceUpdatedAt": "2026-09-29",
     "file": "docs/ai-apps/java-structured-output.md",
-    "sourceRevision": "1e8c0247ccd89f90df5ad10162ad7c000f709eb225f011253d8adf5b93de5426",
+    "sourceRevision": "18206721ad67bad723d819458b1b68790ab9314c27572f0ba140686d87168685",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-28",
-        "sourceRevision": "1e8c0247ccd89f90df5ad10162ad7c000f709eb225f011253d8adf5b93de5426",
-        "translationRevision": "53bd688fa172d346c81fcc2c30d9cc730c72577785ef2013b668ab8d05da1ea7",
-        "file": "i18n/en/docs/ai-apps/java-structured-output.md"
+        "translatedAt": "2026-09-29",
+        "file": "i18n/en/docs/ai-apps/java-structured-output.md",
+        "sourceRevision": "18206721ad67bad723d819458b1b68790ab9314c27572f0ba140686d87168685",
+        "translationRevision": "7d27707332c6611645e7f77755bf0a5a7e855a186a5b0ece9a5f8a54e68355c6"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-28",
-        "sourceRevision": "1e8c0247ccd89f90df5ad10162ad7c000f709eb225f011253d8adf5b93de5426",
-        "translationRevision": "5343e5f630a839b7c51569713a07f50cbff128d40d07f1f2a10d40cf041d6d42",
-        "file": "i18n/zh-TW/docs/ai-apps/java-structured-output.md"
+        "translatedAt": "2026-09-29",
+        "file": "i18n/zh-TW/docs/ai-apps/java-structured-output.md",
+        "sourceRevision": "18206721ad67bad723d819458b1b68790ab9314c27572f0ba140686d87168685",
+        "translationRevision": "0947b839acfd452af4564c50db82b08a2e792e6ae2136868d4d48e04a40de9da"
       }
     }
   },
   "doc:embodied-ai/mujoco-first-pick-place": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-09-28",
+    "sourceUpdatedAt": "2026-09-29",
     "file": "docs/embodied-ai/mujoco-first-pick-place.md",
-    "sourceRevision": "462a6cbec0a35df3c41a7fe5cab7ffa39bddf1e33977e0927b712ebfb241d307",
+    "sourceRevision": "d9548a570e7b7fa4c13c7a6e322a2d3e4b271c0343ebb9f122d5e7306c53e770",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-28",
-        "sourceRevision": "462a6cbec0a35df3c41a7fe5cab7ffa39bddf1e33977e0927b712ebfb241d307",
-        "translationRevision": "5410e8c64e5a23a959bad9b37c94f0670022f6835aa8e11bae37fe4326a5ceeb",
-        "file": "i18n/en/docs/embodied-ai/mujoco-first-pick-place.md"
+        "translatedAt": "2026-09-29",
+        "file": "i18n/en/docs/embodied-ai/mujoco-first-pick-place.md",
+        "sourceRevision": "d9548a570e7b7fa4c13c7a6e322a2d3e4b271c0343ebb9f122d5e7306c53e770",
+        "translationRevision": "d7553a61a0511ff0ec4c9eb060896b1234191cb79277f3146ac29be863e8cea5"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-28",
-        "sourceRevision": "462a6cbec0a35df3c41a7fe5cab7ffa39bddf1e33977e0927b712ebfb241d307",
-        "translationRevision": "3d27aa23dd5ea35afb267ba9086bc47fdb580f5e03165391f8b3a84e7ad4d1fa",
-        "file": "i18n/zh-TW/docs/embodied-ai/mujoco-first-pick-place.md"
+        "translatedAt": "2026-09-29",
+        "file": "i18n/zh-TW/docs/embodied-ai/mujoco-first-pick-place.md",
+        "sourceRevision": "d9548a570e7b7fa4c13c7a6e322a2d3e4b271c0343ebb9f122d5e7306c53e770",
+        "translationRevision": "1a35941ebf71aa493e19f63f677f6b5fbd4d3b0f9bacd04cbdcb04a4c3a1b5a4"
       }
     }
   },
   "project:hohoo-ai-lab": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-09-28",
+    "sourceUpdatedAt": "2026-09-29",
     "file": "data/projects.json",
-    "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+    "sourceRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-28",
-        "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
-        "translationRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
-        "file": "data/projects.json"
+        "translatedAt": "2026-09-29",
+        "file": "data/projects.json",
+        "sourceRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e",
+        "translationRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-28",
-        "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
-        "translationRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
-        "file": "data/projects.json"
+        "translatedAt": "2026-09-29",
+        "file": "data/projects.json",
+        "sourceRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e",
+        "translationRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e"
       }
     }
   },
   "project:hohoo-embodied-agent": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-09-28",
+    "sourceUpdatedAt": "2026-09-29",
     "file": "data/projects.json",
-    "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
+    "sourceRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-28",
-        "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
-        "translationRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
-        "file": "data/projects.json"
+        "translatedAt": "2026-09-29",
+        "file": "data/projects.json",
+        "sourceRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e",
+        "translationRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-28",
-        "sourceRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
-        "translationRevision": "5b60c03477a055bf88685847d4da81296208acee2bc7a40a36ad18a8d2976f00",
-        "file": "data/projects.json"
+        "translatedAt": "2026-09-29",
+        "file": "data/projects.json",
+        "sourceRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e",
+        "translationRevision": "3406e78272ed7acdf5a0eaeaca281a87b340bde405380788fbb8be5c6083c92e"
+      }
+    }
+  },
+  "doc:llm/context-position-experiment": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-29",
+    "file": "docs/llm/context-position-experiment.md",
+    "sourceRevision": "c2472570060adcc968e3fb314df8783e19d58f2213239a832ad7c51d3def8f9e",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-29",
+        "file": "i18n/en/docs/llm/context-position-experiment.md",
+        "sourceRevision": "c2472570060adcc968e3fb314df8783e19d58f2213239a832ad7c51d3def8f9e",
+        "translationRevision": "00760d1e81a0947bed6e8197ed773bfadb38d69b04b19a6a81a8affb1bd7abff"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-29",
+        "file": "i18n/zh-TW/docs/llm/context-position-experiment.md",
+        "sourceRevision": "c2472570060adcc968e3fb314df8783e19d58f2213239a832ad7c51d3def8f9e",
+        "translationRevision": "dcee02d293c21bee065b8983e7beb3c6ff9ea97557b1d47e23cda91981ebfade"
+      }
+    }
+  },
+  "lab:vl01-pickup-offset": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-29",
+    "file": "data/experiments.json",
+    "sourceRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-29",
+        "file": "data/experiments.json",
+        "sourceRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1",
+        "translationRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-29",
+        "file": "data/experiments.json",
+        "sourceRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1",
+        "translationRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1"
+      }
+    }
+  },
+  "lab:context-position": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-09-29",
+    "file": "data/experiments.json",
+    "sourceRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-29",
+        "file": "data/experiments.json",
+        "sourceRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1",
+        "translationRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-09-29",
+        "file": "data/experiments.json",
+        "sourceRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1",
+        "translationRevision": "97d84326069e85d1e166ed935aa5e5351291c50b084167ac8c6ef4f8a76f28e1"
       }
     }
   }

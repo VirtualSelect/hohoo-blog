@@ -5,11 +5,10 @@ import {
   resolveSegments,
   locales,
 } from "../../lib/content";
-import VirtualLab from "../../components/VirtualLab";
-import Journey from "../../components/Journey";
 import Shell from "../../components/Shell";
-import Views from "../../components/Views";
-import Document from "../../components/Document";
+import RouteContent from "../../components/RouteContent";
+import Journey from "../../components/Journey";
+import VirtualLab from "../../components/VirtualLab";
 const aliases = {
   aboutMe: "about",
   news: "radar",
@@ -135,18 +134,18 @@ export default async function Page({ params }) {
       {document &&
       !document.frontMatter.landing &&
       ["docs", "blog"].includes(document.kind) ? (
-        <Document>
+        <RouteContent kind="document" locale={locale}>
           <div
             className="prose"
             dangerouslySetInnerHTML={{ __html: document.html }}
           />
-        </Document>
+        </RouteContent>
       ) : route === "journey" ? (
         <Journey locale={locale} />
       ) : route === "journey/virtual-lab" ? (
         <VirtualLab locale={locale} />
       ) : (
-        <Views />
+        <RouteContent kind="views" locale={locale} />
       )}
     </Shell>
   );

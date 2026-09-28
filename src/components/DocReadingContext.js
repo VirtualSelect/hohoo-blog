@@ -19,6 +19,13 @@ export default function DocReadingContext({ position }) {
   const step = f.learning_step;
   const track = tracks.find((t) => t.steps.some((s) => s.id === step));
   const index = track?.steps.findIndex((s) => s.id === step);
+  const adjacent = track
+    ? track.steps
+        .map((s) => entries.find((e) => e.stepId === s.id))
+        .filter(Boolean)
+    : [];
+  const publishedIndex = adjacent.findIndex((e) => e.stepId === step);
+  const nextArticle = publishedIndex >= 0 ? adjacent[publishedIndex + 1] : null;
   useEffect(() => {
     if (
       position === "header" &&
@@ -74,6 +81,19 @@ export default function DocReadingContext({ position }) {
     <>
       {track && (
         <section className="hh-reading-context">
+          {nextArticle && (
+            <p>
+              <Link to={nextArticle.permalink}>
+                {en
+                  ? "Next published article"
+                  : translate({
+                      id: "reading.nextPublished",
+                      message: "下一篇已发布内容",
+                    })}
+                ：{nextArticle.title} →
+              </Link>
+            </p>
+          )}
           <h2>
             {en
               ? "You are here"
@@ -122,8 +142,15 @@ export default function DocReadingContext({ position }) {
           >
             ✓{" "}
             {en
-              ? "Completed"
-              : translate({ id: "ui.e99b48a29b", message: "已完成" })}
+              ? state.items[step]?.status === "completed"
+                ? "Completed"
+                : "Mark completed"
+              : state.items[step]?.status === "completed"
+                ? translate({ id: "ui.e99b48a29b", message: "已完成" })
+                : translate({
+                    id: "reading.markCompleted",
+                    message: "标记完成",
+                  })}
           </button>
           {state.error && (
             <p role="status">

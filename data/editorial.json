@@ -1,0 +1,4 @@
+{
+  "featuredProjects": ["project:hohoo-ai-lab", "project:hohoo-embodied-agent"],
+  "featuredArticles": ["doc:ai-apps/java-structured-output", "doc:embodied-ai/mujoco-first-pick-place"]
+}
