@@ -1,5 +1,20 @@
 [
   {
+    "id": "a5ed36c52daf126be1b6",
+    "title": "英伟达联合超100家伙伴推出开放代理安全平台",
+    "url": "https://aihot.news/items/qnf8fa8fygvfw23p9if6pvj5c",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-28T09:12:26.000Z",
+    "collectedAt": "2026-09-28T14:25:08.326Z",
+    "category": "ai-apps",
+    "summary": "2026年9月28日，黄仁勋在X平台宣布，英伟达联合超过100家行业伙伴，推出NVIDIA Open Agent Safety Platform，整合OpenShell与Sentry两大组件。该平台旨在构建安全代理系统的信任层，强调“安全是信任的基础”，并称其为“AI经济的基石”。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6bc1d32b",
+    "coverage": []
+  },
+  {
     "id": "6e67da2902d33e57f470",
     "title": "DeepSeek-V4-Flash 正式版上线，Agent 能力大幅增强",
     "url": "https://aihot.news/items/gceiqkfodixkftvouxe27znw3",
@@ -117,6 +132,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-65d13e1f",
+    "coverage": []
+  },
+  {
+    "id": "5b65fe336b7f05624b90",
+    "title": "NVIDIA 发布开源运行时 OpenShell，为 AI Agent 提供权限管控与安全沙箱",
+    "url": "https://aihot.news/items/q5uxhmt17ywcspz44neanmel7",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-27T16:00:00.000Z",
+    "collectedAt": "2026-09-28T14:25:08.326Z",
+    "category": "embodied-ai",
+    "summary": "NVIDIA 推出开源项目 NVIDIA OpenShell 0.1.0，这是一个用于定义和执行 AI Agent 访问权限的运行时。它通过沙箱执行、受控服务访问、凭证管理和形式化策略分析，在 Agent 工作负载外部强制实施权限控制。OpenShell 支持 Codex、Claude Code 等框架，允许团队在不重写 Agent 的情况下限制 AP…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-137f3249",
     "coverage": []
   },
   {
