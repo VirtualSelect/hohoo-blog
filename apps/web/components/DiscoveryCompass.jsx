@@ -1,4 +1,6 @@
 "use client";
+import { radarDay } from "@site/src/utils/radar-date.mjs";
+
 import { useState } from "react";
 import { useSite } from "../runtime/context";
 import { useText } from "./Shell";
@@ -42,14 +44,12 @@ export default function DiscoveryCompass() {
         "Explore an external development. This is a source excerpt; the link opens the original.",
         "看看外部世界的新進展。以下是來源摘錄，點擊前往原文。",
       ),
-      pool: items
-        .slice(0, 10)
-        .map((item) => ({
-          ...item,
-          href: item.url,
-          description: item.summary,
-          date: item.publishedAt?.slice(0, 10),
-        })),
+      pool: items.slice(0, 10).map((item) => ({
+        ...item,
+        href: item.url,
+        description: item.summary,
+        date: radarDay(item.publishedAt),
+      })),
     },
   ];
   const selected = options[mode];

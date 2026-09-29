@@ -1,4 +1,6 @@
 "use client";
+import { radarDay, radarDateTime } from "@site/src/utils/radar-date.mjs";
+
 import Link from "../runtime/Link";
 import { useSite } from "../runtime/context";
 import { useText } from "./Shell";
@@ -242,7 +244,12 @@ export default function Home() {
         </div>
         {items.slice(0, 3).map((i) => (
           <article key={i.id}>
-            <time>{i.publishedAt.slice(0, 10)}</time>
+            <time
+              dateTime={i.publishedAt}
+              title={radarDateTime(i.publishedAt) + " UTC+8"}
+            >
+              {radarDay(i.publishedAt)}
+            </time>
             <div>
               <a href={i.url}>
                 <h3>{i.title} ↗</h3>
