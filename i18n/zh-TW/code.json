@@ -1438,5 +1438,17 @@
   },
   "status.learning": {
     "message": "學習中"
+  },
+  "journey.lab.VL01.guardArticle": {
+    "message": "第二篇：沒抓住，就別繼續搬運"
+  },
+  "journey.lab.VL01.guardCode": {
+    "message": "抓取確認與失敗停止程式碼"
+  },
+  "journey.lab.VL01.guardEvidence": {
+    "message": "18回合門控對照證據"
+  },
+  "journey.lab.VL01.guardResult": {
+    "message": "已完成偏移與門控兩輪實驗；六次失敗停止搬運，成功條件軌跡一致。完整VL01仍在學習中。"
   }
 }

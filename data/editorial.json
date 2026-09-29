@@ -1,4 +1,7 @@
 {
   "featuredProjects": ["project:hohoo-ai-lab", "project:hohoo-embodied-agent"],
-  "featuredArticles": ["doc:ai-apps/java-structured-output", "doc:embodied-ai/mujoco-first-pick-place"]
+  "featuredArticles": [
+    "doc:llm/context-position-paired-protocol",
+    "doc:embodied-ai/mujoco-grasp-guard"
+  ]
 }

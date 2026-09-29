@@ -1,0 +1,123 @@
+{
+  "measuredAt": "2026-09-29T03:28:07.831Z",
+  "base": "http://localhost:4202",
+  "scope": "HTTP response and referenced local build assets. Not LCP, INP, CLS or browser execution time.",
+  "results": [
+    {
+      "route": "/",
+      "samples": [
+        {
+          "headersMs": 129,
+          "bodyMs": 142,
+          "htmlBytes": 161220,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        },
+        {
+          "headersMs": 10,
+          "bodyMs": 15,
+          "htmlBytes": 161220,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        },
+        {
+          "headersMs": 8,
+          "bodyMs": 13,
+          "htmlBytes": 161220,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        }
+      ]
+    },
+    {
+      "route": "/docs/ai-apps/java-first-llm",
+      "samples": [
+        {
+          "headersMs": 21,
+          "bodyMs": 41,
+          "htmlBytes": 200067,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        },
+        {
+          "headersMs": 9,
+          "bodyMs": 21,
+          "htmlBytes": 200067,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        },
+        {
+          "headersMs": 6,
+          "bodyMs": 12,
+          "htmlBytes": 200067,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        }
+      ]
+    },
+    {
+      "route": "/radar",
+      "samples": [
+        {
+          "headersMs": 9,
+          "bodyMs": 13,
+          "htmlBytes": 171331,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        },
+        {
+          "headersMs": 7,
+          "bodyMs": 11,
+          "htmlBytes": 171331,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        },
+        {
+          "headersMs": 7,
+          "bodyMs": 12,
+          "htmlBytes": 171331,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        }
+      ]
+    },
+    {
+      "route": "/about",
+      "samples": [
+        {
+          "headersMs": 8,
+          "bodyMs": 11,
+          "htmlBytes": 138818,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        },
+        {
+          "headersMs": 7,
+          "bodyMs": 10,
+          "htmlBytes": 138818,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        },
+        {
+          "headersMs": 6,
+          "bodyMs": 10,
+          "htmlBytes": 138818,
+          "referencedJsBytes": 603050,
+          "scriptCount": 8,
+          "cache": "HIT"
+        }
+      ]
+    }
+  ]
+}

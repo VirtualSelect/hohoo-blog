@@ -12,18 +12,10 @@
     "date": "2026-09-11",
     "updated": "2026-09-11",
     "featured": true,
-    "stack": [
-      "Next.js",
-      "React",
-      "RSS",
-      "GitHub Actions",
-      "Vercel"
-    ],
+    "stack": ["Next.js", "React", "RSS", "GitHub Actions", "Vercel"],
     "repo": "https://github.com/VirtualSelect/hohoo-blog",
     "demo": "https://huhohoo.com/",
-    "related": [
-      "doc:ai-apps/radar-publishing-pipeline"
-    ],
+    "related": ["doc:ai-apps/radar-publishing-pipeline"],
     "sections": [
       {
         "heading": "Overview",
@@ -85,17 +77,14 @@
     "domain": "ai-apps",
     "status": "building",
     "featured": true,
-    "stack": [
-      "Java 8",
-      "Gson",
-      "HTTP"
-    ],
+    "stack": ["Java 8", "Gson", "HTTP"],
     "repo": "https://github.com/VirtualSelect/hohoo-ai-lab",
     "related": [
       "doc:ai-apps/java-first-llm",
       "doc:ai-apps/java-structured-output",
       "doc:llm/context-position-experiment",
-      "lab:context-position"
+      "lab:context-position",
+      "doc:llm/context-position-paired-protocol"
     ],
     "architecture": [
       "Console input",
@@ -199,12 +188,21 @@
         "descriptionEn": "Protocol, 29 attempts and an independent audit; stopped early, no claim of position independence.",
         "descriptionTw": "協定、29 次請求與獨立審計；提前停止，不宣稱位置無關。",
         "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/e072718c3cd66d44978612208d393ff0d3eff9e4/experiments/01-context-position"
+      },
+      {
+        "href": "/docs/llm/context-position-paired-protocol",
+        "label": "L1v2：成组对照与请求节流",
+        "labelEn": "L1v2: paired blocks and pacing",
+        "labelTw": "L1v2：成組對照與請求節流",
+        "description": "80项离线检查与24项请求计划；尚无新模型实测。",
+        "descriptionEn": "80 offline checks and a 24-request plan; no new live model results.",
+        "descriptionTw": "80項離線檢查與24項請求計畫；尚無新模型實測。"
       }
     ],
     "titleTw": "Java LLM 實作集",
     "descriptionTw": "從首次請求、多輪對話到結構化輸出驗收：四個 Java 8 範例與可追溯紀錄。",
     "sourceLocale": "zh-CN",
-    "updated": "2026-09-28"
+    "updated": "2026-09-29"
   },
   {
     "id": "project:hohoo-embodied-agent",
@@ -220,19 +218,15 @@
     "domain": "embodied-ai",
     "status": "experiment",
     "date": "2026-09-28",
-    "updated": "2026-09-28",
+    "updated": "2026-09-29",
     "featured": false,
-    "stack": [
-      "Python 3.12",
-      "MuJoCo 3.3.7",
-      "NumPy",
-      "Matplotlib"
-    ],
+    "stack": ["Python 3.12", "MuJoCo 3.3.7", "NumPy", "Matplotlib"],
     "repo": "https://github.com/VirtualSelect/hohoo-embodied-agent",
     "sourceLocale": "zh-CN",
     "related": [
       "doc:embodied-ai/mujoco-first-pick-place",
-      "doc:embodied-ai/openvla-action-pipeline"
+      "doc:embodied-ai/openvla-action-pipeline",
+      "doc:embodied-ai/mujoco-grasp-guard"
     ],
     "sections": [
       {
@@ -261,9 +255,9 @@
       },
       {
         "heading": "Limitations",
-        "zh": "固定时间表不会因抓取失败而停止。尚未实现ROS2、视觉估计、重新规划、机械臂逆运动学或Sim2Real；完整M4/M5仍未完成。下一步先验证抬起失败时停止搬运。",
-        "en": "The timed controller continues after failed pickup. ROS2, visual estimation, replanning, arm IK and Sim2Real remain unimplemented; full M4/M5 milestones are incomplete. The next test should stop transport when lift fails.",
-        "tw": "固定時間表不會因抓取失敗而停止。尚未實作ROS2、視覺估計、重新規劃、機械臂逆運動學或Sim2Real；完整M4/M5仍未完成。下一步先驗證抬起失敗時停止搬運。"
+        "zh": "第二轮已加入搬运前的失败检查，但状态来自仿真真值；搬运中滑落监测、恢复、视觉、ROS2和真实硬件仍未实现。完整M4/M5未完成。",
+        "en": "The follow-up adds a pre-transfer gate using privileged simulator state. In-transfer slip monitoring, recovery, vision, ROS2 and hardware remain unimplemented; full M4/M5 are incomplete.",
+        "tw": "第二輪已加入搬運前失敗檢查，但使用模擬真值；搬運中滑落監測、恢復、視覺、ROS2與實體硬體仍未實作。完整M4/M5未完成。"
       }
     ],
     "resources": [
@@ -293,6 +287,15 @@
         "description": "CSV、状态、视频、截图与轨迹图",
         "descriptionEn": "CSV, states, videos, screenshots and plots",
         "descriptionTw": "CSV、狀態、影片、截圖與軌跡圖"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-grasp-guard",
+        "label": "第二篇：失败抓取停止搬运",
+        "labelEn": "Follow-up: stop empty transfer",
+        "labelTw": "第二篇：失敗抓取停止搬運",
+        "description": "18回合、原始CSV、六段录像与独立审计",
+        "descriptionEn": "18 rollouts, raw CSV, six recordings and an independent audit",
+        "descriptionTw": "18回合、原始CSV、六段錄影與獨立審計"
       }
     ]
   }

@@ -1,0 +1,39 @@
+{
+  "base": "http://localhost:4202",
+  "pages": 82,
+  "errors": [],
+  "videos": [
+    {
+      "theme": "light",
+      "index": 0,
+      "duration": 9.2,
+      "width": 960,
+      "currentTime": 0.501482,
+      "error": null
+    },
+    {
+      "theme": "light",
+      "index": 1,
+      "duration": 4.6,
+      "width": 960,
+      "currentTime": 0.502058,
+      "error": null
+    },
+    {
+      "theme": "dark",
+      "index": 0,
+      "duration": 9.2,
+      "width": 960,
+      "currentTime": 0.502405,
+      "error": null
+    },
+    {
+      "theme": "dark",
+      "index": 1,
+      "duration": 4.6,
+      "width": 960,
+      "currentTime": 0.503252,
+      "error": null
+    }
+  ]
+}

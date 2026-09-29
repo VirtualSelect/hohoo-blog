@@ -9,9 +9,7 @@
     "number": "001",
     "status": "planning",
     "domain": "ai-apps",
-    "related": [
-      "paper:2005.11401"
-    ],
+    "related": ["paper:2005.11401"],
     "design": {
       "zh": {
         "hypothesis": "在资料确实包含答案的问题上，固定生成模型后，加入检索可能改善可追溯回答；资料缺失时不一定改善。",
@@ -53,9 +51,7 @@
     "number": "002",
     "status": "planning",
     "domain": "ai-apps",
-    "related": [
-      "paper:2210.03629"
-    ],
+    "related": ["paper:2210.03629"],
     "design": {
       "zh": {
         "hypothesis": "有限重试和明确的工具错误结构可能改善可恢复故障下的任务完成情况，但会增加调用成本。",
@@ -97,9 +93,7 @@
     "number": "003",
     "status": "planning",
     "domain": "embodied-ai",
-    "related": [
-      "paper:2307.15818"
-    ],
+    "related": ["paper:2307.15818"],
     "design": {
       "zh": {
         "hypothesis": "在固定动作范围的仿真任务中，离散表示的粒度会影响表示误差与可达动作的精度。",
@@ -184,7 +178,8 @@
     "related": [
       "doc:llm/context-position-experiment",
       "doc:llm/kv-cache",
-      "project:hohoo-ai-lab"
+      "project:hohoo-ai-lab",
+      "doc:llm/context-position-paired-protocol"
     ],
     "repo": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/e072718c3cd66d44978612208d393ff0d3eff9e4/experiments/01-context-position",
     "method": "冻结 6 组资料、四条件、两次重复，预算 48；随机顺序但无重试，连续三次请求/协议失败停止。",
@@ -205,5 +200,44 @@
     "reproduce": "Java 工程提供 92 项离线断言、完整请求计划及独立 audit.mjs。新实测需新目录与独立预算。",
     "reproduceEn": "The Java project supplies 92 offline assertions, the full request plan and independent audit.mjs. New live runs require a new directory and budget.",
     "reproduceTw": "Java 工程提供 92 項離線斷言、完整請求計畫及獨立 audit.mjs。新實測需新目錄與獨立預算。"
+  },
+  {
+    "id": "grasp-guard",
+    "number": "006",
+    "domain": "embodied-ai",
+    "status": "completed",
+    "date": "2026-09-29",
+    "provenance": "experiment-result",
+    "zh": "E2 / 抓取确认后再搬运",
+    "en": "E2 / Confirm the grasp before transfer",
+    "titleTw": "E2 / 確認抓取後再搬運",
+    "goalZh": "用连续高度与双侧接触记录，判断失败抓取后是否应该继续搬运。",
+    "goalEn": "Use sustained height and bilateral contact to decide whether transfer should proceed.",
+    "descriptionTw": "以連續高度與雙側接觸紀錄，判斷失敗抓取後是否應繼續搬運。",
+    "related": [
+      "doc:embodied-ai/mujoco-grasp-guard",
+      "doc:embodied-ai/mujoco-first-pick-place",
+      "project:hohoo-embodied-agent",
+      "lab:vl01-pickup-offset"
+    ],
+    "repo": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/eb186ee4927da99d4ba48e334fabf9442c929507/experiments/vl01_grasp_guard",
+    "method": "固定原场景与动作；0/25/50 mm × baseline/guarded × 3次，共18回合。4秒时用最近0.2秒记录确认高度与双侧接触。",
+    "methodEn": "Same scene and motion; 0/25/50 mm × baseline/guarded × three repeats = 18 rollouts. At 4 s, check height and bilateral contact over the last 0.2 s.",
+    "methodTw": "固定原場景與動作；0/25/50 mm × baseline/guarded × 3次，共18回合。4秒時以最近0.2秒紀錄確認高度與雙側接觸。",
+    "result": "六次偏移失败取消搬运；三个无偏移成功回合的完整轨迹保持不变。任务完成数没有增加。",
+    "resultEn": "Six biased failures cancelled transfer; three successful zero-offset trajectories remained identical. Task completion did not improve.",
+    "resultTw": "六次偏移失敗取消搬運；三個無偏移成功回合的完整軌跡不變。任務完成數未增加。",
+    "observations": "25 mm条件判定后水平路程由246.221 mm降至数值残余；方块仍未被抬起。",
+    "observationsEn": "At 25 mm bias, post-gate horizontal path fell from 246.221 mm to a numerical residual; the cube was still not lifted.",
+    "observationsTw": "25 mm條件判定後水平路程由246.221 mm降至數值殘餘；方塊仍未抬起。",
+    "conclusion": "在这些固定条件中，任务前置检查阻止空手搬运，未修复抓取或验证泛化能力。",
+    "conclusionEn": "For these fixed conditions, a task precondition prevented empty transfer without fixing pickup or establishing generalization.",
+    "conclusionTw": "在這些固定條件中，任務前置檢查阻止空手搬運，未修復抓取或驗證泛化能力。",
+    "limitations": "仿真真值、确定性重复、一次性判断；不是视觉闭环、真实硬件急停或滑落恢复。",
+    "limitationsEn": "Privileged simulator state, deterministic repeats and a one-time check; not visual control, a hardware emergency stop or slip recovery.",
+    "limitationsTw": "模擬真值、確定性重複、一次判斷；不是視覺閉環、實體硬體急停或滑落恢復。",
+    "reproduce": "8项边界测试；18条CSV独立审计；9对前缀一致，9条基线复现旧实验，3对成功全轨迹一致。附六段录像和状态重放。",
+    "reproduceEn": "Eight boundary tests; 18 independent CSV audits; nine matching prefixes, nine reproduced baselines and three identical successful pairs. Six recordings and state replay included.",
+    "reproduceTw": "8項邊界測試、18條CSV獨立審計；9對前綴一致、9條基線重現舊實驗、3對成功完整軌跡一致。附六段錄影與狀態重放。"
   }
 ]

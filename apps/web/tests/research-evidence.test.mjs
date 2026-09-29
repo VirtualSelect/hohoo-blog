@@ -14,6 +14,7 @@ for (const locale of ["zh-CN", "en", "zh-TW"]) {
       "doc:llm/context-position-experiment",
       "lab:context-position",
       "lab:vl01-pickup-offset",
+      "lab:grasp-guard",
     ]) {
       const entry = entries.find((e) => e.id === id);
       assert.ok(entry, id);
@@ -33,6 +34,31 @@ for (const locale of ["zh-CN", "en", "zh-TW"]) {
     assert.ok(doc.headings.length >= 7);
     const learning = data.globalData["learning-index"].entries;
     assert.ok(learning.some((e) => e.stepId === "structured-output"));
+    for (const route of [
+      "docs/embodied-ai/mujoco-grasp-guard",
+      "docs/llm/context-position-paired-protocol",
+    ]) {
+      const followup = data.documents.find((item) => item.route === route);
+      assert.ok(followup && !followup.sourceFallback);
+      assert.ok(followup.headings.length >= 8);
+      const prefix = locale === "zh-CN" ? "" : "/" + locale;
+      for (const match of followup.html.matchAll(
+        /href="(\/[^"#?]*)(?:[?#][^"]*)?"/g,
+      )) {
+        assert.ok(
+          data.routes.includes(match[1].slice(prefix.length + 1)),
+          match[1],
+        );
+      }
+      for (const match of followup.html.matchAll(
+        /(?:src|poster)="(\/media\/practice\/[^\"]+)"/g,
+      )) {
+        assert.ok(
+          fs.existsSync(new URL("../../../static" + match[1], import.meta.url)),
+          match[1],
+        );
+      }
+    }
   });
 }
 test("display evidence retains phases, honest outcomes and actual local media", () => {

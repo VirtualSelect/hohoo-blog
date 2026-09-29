@@ -10,10 +10,10 @@
     },
     {
       "kind": "LEARNING",
-      "zh": "从模型输出验收继续梳理工具参数与失败边界。",
-      "en": "Extending output validation toward tool arguments and failure boundaries.",
-      "to": "/docs/ai-apps/java-structured-output",
-      "tw": "從模型輸出驗證繼續梳理工具參數與失敗邊界。"
+      "zh": "把上下文试验改为成组对照，先检查材料与请求预算。",
+      "en": "Rebuilding context trials around paired blocks, material checks and request budgets.",
+      "to": "/docs/llm/context-position-paired-protocol",
+      "tw": "把上下文試驗改為成組對照，先檢查材料與請求預算。"
     },
     {
       "kind": "READING",
@@ -24,17 +24,17 @@
     },
     {
       "kind": "EXPLORING",
-      "zh": "对照抓取目标偏移，区分接触、抬起与放置成功。",
-      "en": "Comparing pickup offsets and distinguishing contact, lifting and successful placement.",
-      "to": "/docs/embodied-ai/mujoco-first-pick-place",
-      "tw": "對照抓取目標偏移，區分接觸、抬起與放置成功。"
+      "zh": "抓取失败后停止搬运：18回合仿真与轨迹对照。",
+      "en": "Stopping transfer after failed pickup: 18 recorded simulation rollouts.",
+      "to": "/docs/embodied-ai/mujoco-grasp-guard",
+      "tw": "抓取失敗後停止搬運：18回合模擬與軌跡對照。"
     },
     {
       "kind": "NEXT",
-      "zh": "下一轮先改善请求节流，再扩展上下文材料；抓取实验继续验证失败时停止搬运。",
-      "en": "Next: pace requests before expanding context material, and stop transfer after failed grasps.",
-      "to": "/docs/llm/context-position-experiment",
-      "tw": "下一輪先改善請求節流，再擴展上下文材料；抓取實驗繼續驗證失敗時停止搬運。"
+      "zh": "在冻结协议上执行LLM新对照；具身实验下一步验证搬运中的滑落。",
+      "en": "Run the frozen LLM comparison next; test slips during transfer in the simulation.",
+      "to": "/docs/llm/context-position-paired-protocol",
+      "tw": "在凍結協定上執行LLM新對照；具身實驗下一步驗證搬運中的滑落。"
     }
   ]
 }

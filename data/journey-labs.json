@@ -28,10 +28,7 @@
       "descriptionKey": "journey.lab.VL01.description",
       "robotKey": "journey.lab.VL01.robot",
       "environmentKey": "journey.lab.VL01.environment",
-      "milestones": [
-        "M4",
-        "M5"
-      ],
+      "milestones": ["M4", "M5"],
       "status": "learning",
       "topics": [
         "Joint",
@@ -73,6 +70,10 @@
         {
           "href": "/docs/embodied-ai/mujoco-first-pick-place",
           "titleKey": "journey.lab.VL01.firstArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-grasp-guard",
+          "titleKey": "journey.lab.VL01.guardArticle"
         }
       ],
       "demos": [
@@ -85,15 +86,23 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/17144c47a2294f157420946b15f78c49d8d17dd5/experiments/vl01_pick_place",
           "titleKey": "journey.lab.VL01.firstCode"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/eb186ee4927da99d4ba48e334fabf9442c929507/experiments/vl01_grasp_guard",
+          "titleKey": "journey.lab.VL01.guardCode"
         }
       ],
       "evidence": [
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/17144c47a2294f157420946b15f78c49d8d17dd5/evidence/vl01-20260928-v2",
           "titleKey": "journey.lab.VL01.firstEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/eb186ee4927da99d4ba48e334fabf9442c929507/evidence/grasp-guard-20260929",
+          "titleKey": "journey.lab.VL01.guardEvidence"
         }
       ],
-      "result": "journey.lab.VL01.firstResult",
+      "result": "journey.lab.VL01.guardResult",
       "startedAt": "2026-09-28",
       "completedAt": null
     },
@@ -106,11 +115,7 @@
       "descriptionKey": "journey.lab.VL02.description",
       "robotKey": "journey.lab.VL02.robot",
       "environmentKey": "journey.lab.VL02.environment",
-      "milestones": [
-        "M3",
-        "M4",
-        "M8"
-      ],
+      "milestones": ["M3", "M4", "M8"],
       "status": "planning",
       "topics": [
         "Node",
@@ -166,11 +171,7 @@
       "descriptionKey": "journey.lab.VL03.description",
       "robotKey": "journey.lab.VL03.robot",
       "environmentKey": "journey.lab.VL03.environment",
-      "milestones": [
-        "M6",
-        "M9",
-        "M10"
-      ],
+      "milestones": ["M6", "M9", "M10"],
       "status": "planning",
       "topics": [
         "PyTorch",
@@ -216,9 +217,7 @@
       "descriptionKey": "journey.lab.VL04.description",
       "robotKey": "journey.lab.VL04.robot",
       "environmentKey": "journey.lab.VL04.environment",
-      "milestones": [
-        "M10"
-      ],
+      "milestones": ["M10"],
       "status": "future",
       "topics": [
         "Isaac Sim",
