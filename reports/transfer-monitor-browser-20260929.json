@@ -1,0 +1,272 @@
+{
+  "checks": 42,
+  "layouts": [
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1280,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1280,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1024,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 1024,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 768,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 768,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 430,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 430,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 375,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "zh-CN",
+      "width": 375,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 1280,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 1280,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 1024,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 1024,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 768,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 768,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 430,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 430,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 375,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/en",
+      "width": 375,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 1440,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 1440,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 1280,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 1280,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 1024,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 1024,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 768,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 768,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 430,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 430,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 375,
+      "theme": "light",
+      "overflow": false
+    },
+    {
+      "locale": "/zh-TW",
+      "width": 375,
+      "theme": "dark",
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "path": "/articles",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "path": "/labs/transfer-monitor",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "path": "/projects/hohoo-embodied-agent",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "path": "/journey/virtual-lab",
+      "width": 375,
+      "overflow": false
+    },
+    {
+      "path": "/timeline",
+      "width": 375,
+      "overflow": false
+    }
+  ],
+  "videos": [
+    {
+      "src": "/media/practice/transfer-monitor-once.mp4",
+      "duration": 9.2,
+      "ready": 4
+    },
+    {
+      "src": "/media/practice/transfer-monitor-debounced.mp4",
+      "duration": 5.46,
+      "ready": 4
+    }
+  ],
+  "searchGap": {
+    "bottom": 374.3125,
+    "nextTop": 390.3125,
+    "outline": "2px",
+    "offset": "2px",
+    "focused": true
+  },
+  "consoleErrors": [],
+  "preloadRequests": 0
+}

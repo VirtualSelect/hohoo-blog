@@ -1034,5 +1034,17 @@
   },
   "journey.lab.VL01.guardResult": {
     "message": "已完成偏移与门控两轮实验；六次失败停止搬运，成功条件轨迹一致。完整VL01仍在学习中。"
+  },
+  "journey.lab.VL01.monitorArticle": {
+    "message": "第三篇：抓住之后，还要一直确认吗？"
+  },
+  "journey.lab.VL01.monitorCode": {
+    "message": "持续接触监测代码"
+  },
+  "journey.lab.VL01.monitorEvidence": {
+    "message": "27回合监测对照证据"
+  },
+  "journey.lab.VL01.monitorResult": {
+    "message": "已完成偏移、门控、持续监测三轮实验。取消搬运不等于恢复抓取；完整VL01仍在学习中。"
   }
 }

@@ -226,20 +226,21 @@
     "related": [
       "doc:embodied-ai/mujoco-first-pick-place",
       "doc:embodied-ai/openvla-action-pipeline",
-      "doc:embodied-ai/mujoco-grasp-guard"
+      "doc:embodied-ai/mujoco-grasp-guard",
+      "doc:embodied-ai/mujoco-transfer-monitor"
     ],
     "sections": [
       {
         "heading": "Overview",
-        "zh": "仓库已从规划进入首轮仿真。VL01 使用原创教学级笛卡尔夹爪，通过真实仿真接触搬运红色方块；没有真机、视觉模型或训练策略。",
-        "en": "The repository now contains its first simulation. VL01 uses an original educational Cartesian gripper and simulated physical contact to move a red cube. It has no physical robot, vision model or trained policy.",
-        "tw": "倉庫已從規劃進入首輪模擬。VL01 使用原創教學級笛卡爾夾爪，透過真實模擬接觸搬運紅色方塊；沒有實體機器人、視覺模型或訓練策略。"
+        "zh": "已完成拾取偏移、抓取前置确认与搬运持续监测三轮实验。复用原创MuJoCo笛卡尔夹爪，记录动作、真实仿真接触、失败与状态。",
+        "en": "Three experiments now cover pickup bias, pre-transfer grasp confirmation and continuous transfer monitoring using an original MuJoCo Cartesian gripper. Actions, simulated contacts, failures and states are recorded.",
+        "tw": "已完成拾取偏移、抓取前置確認與搬運持續監測三輪實驗。復用原創MuJoCo笛卡爾夾爪，記錄動作、真實模擬接觸、失敗與狀態。"
       },
       {
         "heading": "Goal",
-        "zh": "验证“发出动作”和“完成任务”的差别：固定场景与控制器，只改变拾取目标的横向偏差。",
-        "en": "Separate issuing actions from completing a task: keep the scene and controller fixed and change only pickup-target bias.",
-        "tw": "驗證「發出動作」與「完成任務」的差別：固定場景與控制器，只改變拾取目標的橫向偏差。"
+        "zh": "区分发出动作、满足阶段条件与完成任务；通过固定对照验证失败后的行为。",
+        "en": "Distinguish commands, phase conditions and task completion through controlled comparisons of failure responses.",
+        "tw": "區分送出動作、滿足階段條件與完成任務；以固定對照驗證失敗後行為。"
       },
       {
         "heading": "Architecture",
@@ -249,15 +250,15 @@
       },
       {
         "heading": "Validation",
-        "zh": "Codex在作者授权下完成九回合：0、25、50 mm偏移各三次。无偏移满足本协议；两个偏移组没有抬起方块。五项契约检查、九条CSV轨迹复核与保存状态重放通过。所有重复初始条件相同，不能解释为泛化成功率。",
-        "en": "Codex ran nine authorized episodes: three each at 0, 25 and 50 mm bias. The baseline satisfied this protocol; both biased conditions failed to lift. Five contract checks, nine CSV audits and state replay passed. Identical initial conditions mean these repeats are not generalization statistics.",
-        "tw": "Codex在作者授權下完成九回合：0、25、50 mm偏移各三次。無偏移符合本協議；兩個偏移組沒有抬起方塊。五項契約檢查、九條CSV軌跡複核與保存狀態重放通過。所有重複初始條件相同，不能解釋為泛化成功率。"
+        "zh": "首轮9回合、门控18回合、持续监测27回合分别归档。最新一轮11项边界测试、27条CSV独立审计与18对状态前缀核对通过。没有随机化，不报告泛化成功率。",
+        "en": "The 9-rollout pickup, 18-rollout gate and 27-rollout monitoring experiments are archived separately. The latest passed 11 boundary tests, 27 CSV audits and 18 paired-prefix comparisons. No randomization or generalization success-rate claim.",
+        "tw": "首輪9回合、門控18回合、持續監測27回合分別歸檔。最新一輪11項邊界測試、27條CSV獨立審計與18對狀態前綴核對通過。未隨機化，不報告泛化成功率。"
       },
       {
         "heading": "Limitations",
-        "zh": "第二轮已加入搬运前的失败检查，但状态来自仿真真值；搬运中滑落监测、恢复、视觉、ROS2和真实硬件仍未实现。完整M4/M5未完成。",
-        "en": "The follow-up adds a pre-transfer gate using privileged simulator state. In-transfer slip monitoring, recovery, vision, ROS2 and hardware remain unimplemented; full M4/M5 are incomplete.",
-        "tw": "第二輪已加入搬運前失敗檢查，但使用模擬真值；搬運中滑落監測、恢復、視覺、ROS2與實體硬體仍未實作。完整M4/M5未完成。"
+        "zh": "使用仿真真值；持续监测仅覆盖搬运阶段，强制松爪不等于自然滑移。恢复、观测新鲜度、视觉、ROS2与真实硬件未实现。完整M4/M5未完成。",
+        "en": "Uses privileged simulator state. Monitoring covers transfer only; forced opening is not natural slip. Recovery, observation freshness, vision, ROS2 and hardware are unimplemented. Full M4/M5 remain incomplete.",
+        "tw": "使用模擬真值；持續監測僅覆蓋搬運階段，強制鬆爪不等於自然滑移。恢復、觀測新鮮度、視覺、ROS2與實體硬體未實作。完整M4/M5未完成。"
       }
     ],
     "resources": [
@@ -296,6 +297,15 @@
         "description": "18回合、原始CSV、六段录像与独立审计",
         "descriptionEn": "18 rollouts, raw CSV, six recordings and an independent audit",
         "descriptionTw": "18回合、原始CSV、六段錄影與獨立審計"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-transfer-monitor",
+        "label": "第三篇：搬运中的持续监测",
+        "labelEn": "Practice III: monitor during transfer",
+        "labelTw": "第三篇：搬運中的持續監測",
+        "description": "27回合：误停、40毫秒确认延迟与真实轨迹重放",
+        "descriptionEn": "27 rollouts: false cancellations, a 40 ms confirmation delay and measured trajectory replays",
+        "descriptionTw": "27回合：誤停、40毫秒確認延遲與真實軌跡重放"
       }
     ]
   }
