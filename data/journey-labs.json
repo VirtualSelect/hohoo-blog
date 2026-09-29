@@ -78,12 +78,20 @@
         {
           "href": "/docs/embodied-ai/mujoco-transfer-monitor",
           "titleKey": "journey.lab.VL01.monitorArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-observation-freshness",
+          "titleKey": "journey.lab.VL01.freshnessArticle"
         }
       ],
       "demos": [
         {
           "href": "/docs/embodied-ai/mujoco-first-pick-place",
           "titleKey": "journey.lab.VL01.firstVideo"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86/experiments/vl01_observation_freshness",
+          "titleKey": "journey.lab.VL01.freshnessCode"
         }
       ],
       "github": [
@@ -112,9 +120,13 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/581e8e383b397eff947880d888f5c089204bba98/evidence/transfer-monitor-20260929",
           "titleKey": "journey.lab.VL01.monitorEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86/evidence/freshness-20260929",
+          "titleKey": "journey.lab.VL01.freshnessEvidence"
         }
       ],
-      "result": "journey.lab.VL01.monitorResult",
+      "result": "journey.lab.VL01.freshnessResult",
       "startedAt": "2026-09-28",
       "completedAt": null
     },

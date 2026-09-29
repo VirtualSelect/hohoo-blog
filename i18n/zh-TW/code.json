@@ -1462,5 +1462,17 @@
   },
   "journey.lab.VL01.monitorResult": {
     "message": "已完成偏移、門控、持續監測三輪實驗。取消搬運不等於恢復抓取；完整VL01仍在學習中。"
+  },
+  "journey.lab.VL01.freshnessArticle": {
+    "message": "第四篇：訊息還在到，觀測已經過期了"
+  },
+  "journey.lab.VL01.freshnessCode": {
+    "message": "E4 / 觀測新鮮度程式碼"
+  },
+  "journey.lab.VL01.freshnessEvidence": {
+    "message": "E4 / 45回合原始證據"
+  },
+  "journey.lab.VL01.freshnessResult": {
+    "message": "已記錄四輪模擬。最新45回合檢驗取樣、舊封包與靜默；年齡檢查識別過期證據，但不恢復抓取，完整VL01仍在學習中。"
   }
 }

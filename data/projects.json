@@ -227,14 +227,15 @@
       "doc:embodied-ai/mujoco-first-pick-place",
       "doc:embodied-ai/openvla-action-pipeline",
       "doc:embodied-ai/mujoco-grasp-guard",
-      "doc:embodied-ai/mujoco-transfer-monitor"
+      "doc:embodied-ai/mujoco-transfer-monitor",
+      "doc:embodied-ai/mujoco-observation-freshness"
     ],
     "sections": [
       {
         "heading": "Overview",
-        "zh": "已完成拾取偏移、抓取前置确认与搬运持续监测三轮实验。复用原创MuJoCo笛卡尔夹爪，记录动作、真实仿真接触、失败与状态。",
-        "en": "Three experiments now cover pickup bias, pre-transfer grasp confirmation and continuous transfer monitoring using an original MuJoCo Cartesian gripper. Actions, simulated contacts, failures and states are recorded.",
-        "tw": "已完成拾取偏移、抓取前置確認與搬運持續監測三輪實驗。復用原創MuJoCo笛卡爾夾爪，記錄動作、真實模擬接觸、失敗與狀態。"
+        "zh": "已完成拾取偏移、抓取门控、搬运监测与观测新鲜度四轮实验。复用同一MuJoCo夹爪，代码与原始证据分别归档。",
+        "en": "Four experiments cover pickup bias, grasp gating, transfer monitoring and observation freshness, reusing one MuJoCo gripper with separately archived code and evidence.",
+        "tw": "已完成拾取偏移、抓取門控、搬運監測與觀測新鮮度四輪實驗。復用同一MuJoCo夾爪，程式碼與原始證據分別歸檔。"
       },
       {
         "heading": "Goal",
@@ -250,15 +251,15 @@
       },
       {
         "heading": "Validation",
-        "zh": "首轮9回合、门控18回合、持续监测27回合分别归档。最新一轮11项边界测试、27条CSV独立审计与18对状态前缀核对通过。没有随机化，不报告泛化成功率。",
-        "en": "The 9-rollout pickup, 18-rollout gate and 27-rollout monitoring experiments are archived separately. The latest passed 11 boundary tests, 27 CSV audits and 18 paired-prefix comparisons. No randomization or generalization success-rate claim.",
-        "tw": "首輪9回合、門控18回合、持續監測27回合分別歸檔。最新一輪11項邊界測試、27條CSV獨立審計與18對狀態前綴核對通過。未隨機化，不報告泛化成功率。"
+        "zh": "四轮分别9、18、27和45回合。最新一轮17项边界测试、45回合独立审计、45对决策前缀及9条旧基线核对通过。没有随机化，不报告泛化成功率。",
+        "en": "The four rounds contain 9, 18, 27 and 45 rollouts. The latest passed 17 boundary tests, 45 independent audits, 45 paired-prefix checks and nine baseline comparisons. No randomization or generalization success-rate claim.",
+        "tw": "四輪分別9、18、27與45回合。最新17項邊界測試、45回合獨立審計、45對決策前綴及9條舊基線核對通過。未隨機化，不報告泛化成功率。"
       },
       {
         "heading": "Limitations",
-        "zh": "使用仿真真值；持续监测仅覆盖搬运阶段，强制松爪不等于自然滑移。恢复、观测新鲜度、视觉、ROS2与真实硬件未实现。完整M4/M5未完成。",
-        "en": "Uses privileged simulator state. Monitoring covers transfer only; forced opening is not natural slip. Recovery, observation freshness, vision, ROS2 and hardware are unimplemented. Full M4/M5 remain incomplete.",
-        "tw": "使用模擬真值；持續監測僅覆蓋搬運階段，強制鬆爪不等於自然滑移。恢復、觀測新鮮度、視覺、ROS2與實體硬體未實作。完整M4/M5未完成。"
+        "zh": "使用仿真真值与同一时钟，监测仅覆盖搬运。已检查观测年龄，但真实网络、时钟偏差、恢复、视觉、ROS2与硬件仍未实现。完整M4/M5未完成。",
+        "en": "Uses privileged simulation state and one clock; monitors transfer only. Capture age is checked, but real networks, clock skew, recovery, vision, ROS2 and hardware are unimplemented. Full M4/M5 remain incomplete.",
+        "tw": "使用模擬真值與同一時鐘，監測僅覆蓋搬運。已檢查觀測年齡，但真實網路、時鐘偏差、恢復、視覺、ROS2與硬體仍未實作。完整M4/M5未完成。"
       }
     ],
     "resources": [
@@ -306,6 +307,15 @@
         "description": "27回合：误停、40毫秒确认延迟与真实轨迹重放",
         "descriptionEn": "27 rollouts: false cancellations, a 40 ms confirmation delay and measured trajectory replays",
         "descriptionTw": "27回合：誤停、40毫秒確認延遲與真實軌跡重放"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-observation-freshness",
+        "label": "第四篇：观测新鲜度与采样间隔",
+        "labelEn": "Practice IV: freshness and sampling",
+        "labelTw": "第四篇：觀測新鮮度與取樣間隔",
+        "description": "45回合：计数、时间跨度与过期证据",
+        "descriptionEn": "45 rollouts: counts, elapsed evidence and expired observations",
+        "descriptionTw": "45回合：計數、時間跨度與過期證據"
       }
     ]
   }
