@@ -74,6 +74,10 @@
         {
           "href": "/docs/embodied-ai/mujoco-grasp-guard",
           "titleKey": "journey.lab.VL01.guardArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-transfer-monitor",
+          "titleKey": "journey.lab.VL01.monitorArticle"
         }
       ],
       "demos": [
@@ -90,6 +94,10 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/eb186ee4927da99d4ba48e334fabf9442c929507/experiments/vl01_grasp_guard",
           "titleKey": "journey.lab.VL01.guardCode"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/581e8e383b397eff947880d888f5c089204bba98/experiments/vl01_transfer_monitor",
+          "titleKey": "journey.lab.VL01.monitorCode"
         }
       ],
       "evidence": [
@@ -100,9 +108,13 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/eb186ee4927da99d4ba48e334fabf9442c929507/evidence/grasp-guard-20260929",
           "titleKey": "journey.lab.VL01.guardEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/581e8e383b397eff947880d888f5c089204bba98/evidence/transfer-monitor-20260929",
+          "titleKey": "journey.lab.VL01.monitorEvidence"
         }
       ],
-      "result": "journey.lab.VL01.guardResult",
+      "result": "journey.lab.VL01.monitorResult",
       "startedAt": "2026-09-28",
       "completedAt": null
     },

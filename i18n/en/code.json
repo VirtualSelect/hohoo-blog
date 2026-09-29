@@ -1643,5 +1643,17 @@
   },
   "journey.lab.VL01.guardResult": {
     "message": "Offset and gate comparisons are recorded: six failures stopped transfer and successful trajectories matched. The broader VL01 remains in progress."
+  },
+  "journey.lab.VL01.monitorArticle": {
+    "message": "Practice III: does a confirmed grasp need monitoring?"
+  },
+  "journey.lab.VL01.monitorCode": {
+    "message": "Continuous contact monitor code"
+  },
+  "journey.lab.VL01.monitorEvidence": {
+    "message": "27-rollout monitoring evidence"
+  },
+  "journey.lab.VL01.monitorResult": {
+    "message": "Pickup bias, gating and continuous monitoring experiments are recorded. Cancellation is not grasp recovery; the broader VL01 remains in progress."
   }
 }

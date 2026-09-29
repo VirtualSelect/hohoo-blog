@@ -36,6 +36,7 @@ test("index keeps native blog dates and URLs, and excludes planning docs", () =>
           "llm/context-position-experiment",
           "llm/context-position-paired-protocol",
           "embodied-ai/mujoco-grasp-guard",
+          "embodied-ai/mujoco-transfer-monitor",
         ].map((id) => ({
           id,
           title: id,

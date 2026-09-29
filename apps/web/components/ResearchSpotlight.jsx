@@ -21,6 +21,7 @@ export default function ResearchSpotlight() {
           (e) => e.id === id,
         );
         if (!entry) return null;
+        const media = editorial.featuredMedia?.[id];
         return (
           <Link key={id} to={entry.href} className={s.feature}>
             <span className="eyebrow">
@@ -31,16 +32,12 @@ export default function ResearchSpotlight() {
                 : "MuJoCo → " +
                   t("接触与动作", "contact & action", "接觸與動作")}
             </span>
-            {entry.domain === "embodied-ai" && (
+            {media && (
               <img
-                src="/media/practice/grasp-guard-stop.png"
-                alt={t(
-                  "真实仿真截图：抓取失败后，夹爪停止搬运",
-                  "Recorded simulation: transfer stops after failed pickup",
-                  "真實模擬截圖：抓取失敗後，夾爪停止搬運",
-                )}
-                width="960"
-                height="640"
+                src={media.src}
+                alt={t(media.alt, media.altEn, media.altTw)}
+                width={media.width}
+                height={media.height}
               />
             )}
             <h2>{entry.title}</h2>

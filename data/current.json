@@ -24,17 +24,17 @@
     },
     {
       "kind": "EXPLORING",
-      "zh": "抓取失败后停止搬运：18回合仿真与轨迹对照。",
-      "en": "Stopping transfer after failed pickup: 18 recorded simulation rollouts.",
-      "to": "/docs/embodied-ai/mujoco-grasp-guard",
-      "tw": "抓取失敗後停止搬運：18回合模擬與軌跡對照。"
+      "zh": "搬运中的持续监测：用27回合对照误停、等待与真实掉落。",
+      "en": "Monitoring transfer: 27 rollouts separating false alarms, waiting and actual drops.",
+      "to": "/docs/embodied-ai/mujoco-transfer-monitor",
+      "tw": "搬運中的持續監測：以27回合對照誤停、等待與真實掉落。"
     },
     {
       "kind": "NEXT",
-      "zh": "在冻结协议上执行LLM新对照；具身实验下一步验证搬运中的滑落。",
-      "en": "Run the frozen LLM comparison next; test slips during transfer in the simulation.",
+      "zh": "下一步检查观测是否过期及不同采样间隔；LLM成组对照仍待实测。",
+      "en": "Next: observation freshness and sampling intervals; the paired LLM trial still awaits live execution.",
       "to": "/docs/llm/context-position-paired-protocol",
-      "tw": "在凍結協定上執行LLM新對照；具身實驗下一步驗證搬運中的滑落。"
+      "tw": "下一步檢查觀測是否過期與不同取樣間隔；LLM成組對照仍待實測。"
     }
   ]
 }

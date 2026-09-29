@@ -2,6 +2,16 @@
   "featuredProjects": ["project:hohoo-ai-lab", "project:hohoo-embodied-agent"],
   "featuredArticles": [
     "doc:llm/context-position-paired-protocol",
-    "doc:embodied-ai/mujoco-grasp-guard"
-  ]
+    "doc:embodied-ai/mujoco-transfer-monitor"
+  ],
+  "featuredMedia": {
+    "doc:embodied-ai/mujoco-transfer-monitor": {
+      "src": "/media/practice/transfer-monitor-debounced.png",
+      "width": 960,
+      "height": 640,
+      "alt": "真实CSV坐标投影：方块掉落后，夹爪保持目标",
+      "altEn": "Measured CSV coordinate projection: the hand holds its target after the cube falls",
+      "altTw": "真實CSV座標投影：方塊掉落後，夾爪保持目標"
+    }
+  }
 }
