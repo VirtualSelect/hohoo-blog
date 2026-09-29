@@ -1,0 +1,73 @@
+{
+  "date": "2026-09-29",
+  "base": "http://localhost:4202",
+  "route": "/docs/embodied-ai/mujoco-first-pick-place#mujoco-evidence",
+  "rootCause": "The input focus ring extended 7px past the border while the following result-count paragraph had no top spacing.",
+  "fix": {
+    "inputBottomMarginPx": 16,
+    "focusOutlineWidthPx": 2,
+    "focusOutlineOffsetPx": 2,
+    "startSectionPaddingPx": 8
+  },
+  "matrix": {
+    "locales": [
+      "zh-CN",
+      "zh-TW",
+      "en"
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "widths": [
+      1440,
+      1280,
+      1024,
+      768,
+      430,
+      375
+    ],
+    "cases": 36,
+    "passed": 36,
+    "minimumInputToStatusGapPx": 16,
+    "maximumFocusRingExtentPx": 4,
+    "checks": [
+      "automatic input focus",
+      "empty query",
+      "matching query",
+      "no matches and stable dialog width",
+      "no horizontal overflow",
+      "Tab reaches the first result",
+      "last result scrolls into view",
+      "Escape closes",
+      "focus returns to search trigger"
+    ]
+  },
+  "additionalScenarios": [
+    {
+      "scenario": "short-viewport-click-result",
+      "viewport": "375x360",
+      "route": "/projects/hohoo-ai-lab"
+    },
+    {
+      "scenario": "close-button-and-backdrop",
+      "passed": true
+    },
+    {
+      "scenario": "loading-error-retry",
+      "viewport": "375x667",
+      "gap": 16,
+      "passed": true
+    }
+  ],
+  "totalCases": 39,
+  "pageErrors": [],
+  "validation": {
+    "webTests": 73,
+    "build": "passed; 229 static pages",
+    "format": "passed; globals.css"
+  },
+  "limitations": [
+    "Desktop Chrome with resized viewports; no physical phone/virtual keyboard test."
+  ]
+}
