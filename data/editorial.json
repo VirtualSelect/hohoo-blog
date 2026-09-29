@@ -2,16 +2,16 @@
   "featuredProjects": ["project:hohoo-ai-lab", "project:hohoo-embodied-agent"],
   "featuredArticles": [
     "doc:llm/context-position-paired-protocol",
-    "doc:embodied-ai/mujoco-transfer-monitor"
+    "doc:embodied-ai/mujoco-observation-freshness"
   ],
   "featuredMedia": {
-    "doc:embodied-ai/mujoco-transfer-monitor": {
-      "src": "/media/practice/transfer-monitor-debounced.png",
-      "width": 960,
-      "height": 640,
-      "alt": "真实CSV坐标投影：方块掉落后，夹爪保持目标",
-      "altEn": "Measured CSV coordinate projection: the hand holds its target after the cube falls",
-      "altTw": "真實CSV座標投影：方塊掉落後，夾爪保持目標"
+    "doc:embodied-ai/mujoco-observation-freshness": {
+      "src": "/media/practice/freshness-timeline.png",
+      "width": 1620,
+      "height": 1080,
+      "alt": "实际日志：旧正常包持续到达，观测年龄继续增长",
+      "altEn": "Measured log: old good packets keep arriving as capture age rises",
+      "altTw": "實際紀錄：舊正常封包持續抵達，觀測年齡繼續增長"
     }
   }
 }

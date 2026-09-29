@@ -16,6 +16,7 @@ for (const locale of ["zh-CN", "en", "zh-TW"]) {
       "lab:vl01-pickup-offset",
       "lab:grasp-guard",
       "lab:transfer-monitor",
+      "lab:observation-freshness",
     ]) {
       const entry = entries.find((e) => e.id === id);
       assert.ok(entry, id);
@@ -38,6 +39,7 @@ for (const locale of ["zh-CN", "en", "zh-TW"]) {
     for (const route of [
       "docs/embodied-ai/mujoco-grasp-guard",
       "docs/embodied-ai/mujoco-transfer-monitor",
+      "docs/embodied-ai/mujoco-observation-freshness",
       "docs/llm/context-position-paired-protocol",
     ]) {
       const followup = data.documents.find((item) => item.route === route);

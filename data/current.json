@@ -24,17 +24,17 @@
     },
     {
       "kind": "EXPLORING",
-      "zh": "搬运中的持续监测：用27回合对照误停、等待与真实掉落。",
-      "en": "Monitoring transfer: 27 rollouts separating false alarms, waiting and actual drops.",
-      "to": "/docs/embodied-ai/mujoco-transfer-monitor",
-      "tw": "搬運中的持續監測：以27回合對照誤停、等待與真實掉落。"
+      "zh": "观测新鲜度：45回合对照采样间隔、旧消息重送与静默。",
+      "en": "Observation freshness: 45 rollouts comparing sampling, stale replay and silence.",
+      "to": "/docs/embodied-ai/mujoco-observation-freshness",
+      "tw": "觀測新鮮度：45回合對照取樣間隔、舊訊息重送與靜默。"
     },
     {
       "kind": "NEXT",
-      "zh": "下一步检查观测是否过期及不同采样间隔；LLM成组对照仍待实测。",
-      "en": "Next: observation freshness and sampling intervals; the paired LLM trial still awaits live execution.",
+      "zh": "下一步定义延迟、乱序与重新观测后的恢复条件；LLM成组对照仍待实测。",
+      "en": "Next: delayed or reordered evidence and recovery after a new observation; the paired LLM trial awaits live execution.",
       "to": "/docs/llm/context-position-paired-protocol",
-      "tw": "下一步檢查觀測是否過期與不同取樣間隔；LLM成組對照仍待實測。"
+      "tw": "下一步定義延遲、亂序與重新觀測後的恢復條件；LLM成組對照仍待實測。"
     }
   ]
 }

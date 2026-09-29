@@ -1655,5 +1655,17 @@
   },
   "journey.lab.VL01.monitorResult": {
     "message": "Pickup bias, gating and continuous monitoring experiments are recorded. Cancellation is not grasp recovery; the broader VL01 remains in progress."
+  },
+  "journey.lab.VL01.freshnessArticle": {
+    "message": "Practice IV: messages arrive, observations expire"
+  },
+  "journey.lab.VL01.freshnessCode": {
+    "message": "E4 / Observation freshness code"
+  },
+  "journey.lab.VL01.freshnessEvidence": {
+    "message": "E4 / 45 recorded rollouts"
+  },
+  "journey.lab.VL01.freshnessResult": {
+    "message": "Four simulation experiments recorded. The latest 45 rollouts test sampling, stale packets and silence. Age checks detect expired evidence, not grasp recovery; full VL01 remains in progress."
   }
 }
