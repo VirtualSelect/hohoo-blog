@@ -45,12 +45,13 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
       kinds.filterWriting(entries, { kind: "mechanism", domain: "llm" }).length,
       1,
     );
-    assert.equal(
-      kinds.filterWriting(entries, {
-        kind: "case-study",
-        domain: "embodied-ai",
-      }).length,
-      0,
+    assert.ok(
+      kinds
+        .filterWriting(entries, {
+          kind: "case-study",
+          domain: "embodied-ai",
+        })
+        .some((entry) => entry.id === "doc:embodied-ai/mujoco-grasp-guard"),
     );
   });
   test(`${locale}: article arithmetic runs as printed without a model or network`, () => {

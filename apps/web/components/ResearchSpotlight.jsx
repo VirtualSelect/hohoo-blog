@@ -14,7 +14,7 @@ export default function ResearchSpotlight() {
       aria-label={t("最近的实践", "Recent practice", "最近的實作")}
     >
       <p className="eyebrow">
-        {t("从运行记录出发", "From recorded runs", "從執行紀錄出發")}
+        {t("从代码与证据出发", "From code and evidence", "從程式碼與證據出發")}
       </p>
       {editorial.featuredArticles.map((id, i) => {
         const entry = globalData["content-index"].entries.find(
@@ -25,37 +25,26 @@ export default function ResearchSpotlight() {
           <Link key={id} to={entry.href} className={s.feature}>
             <span className="eyebrow">
               0{i + 1} /{" "}
-              {i === 0
-                ? "Java → JSON"
+              {entry.domain === "llm"
+                ? "LLM → " +
+                  t("对照与验证", "comparison & validation", "對照與驗證")
                 : "MuJoCo → " +
                   t("接触与动作", "contact & action", "接觸與動作")}
             </span>
-            {i === 1 && (
+            {entry.domain === "embodied-ai" && (
               <img
-                src="/media/practice/vl01-lift.png"
+                src="/media/practice/grasp-guard-stop.png"
                 alt={t(
-                  "真实仿真截图：夹爪抬起红色方块",
-                  "Recorded simulation: the gripper lifts the red cube",
-                  "真實模擬截圖：夾爪抬起紅色方塊",
+                  "真实仿真截图：抓取失败后，夹爪停止搬运",
+                  "Recorded simulation: transfer stops after failed pickup",
+                  "真實模擬截圖：抓取失敗後，夾爪停止搬運",
                 )}
                 width="960"
                 height="640"
               />
             )}
             <h2>{entry.title}</h2>
-            <p>
-              {i === 0
-                ? t(
-                    "HTTP 200 之后，还需要哪些验收？",
-                    "What must be checked after HTTP 200?",
-                    "HTTP 200 之後，還需要哪些驗證？",
-                  )
-                : t(
-                    "同一段控制程序，为什么偏了 25 mm 就抓不到？",
-                    "Why does a 25 mm offset break the same controller?",
-                    "同一段控制程式，為什麼偏了 25 mm 就抓不到？",
-                  )}
-            </p>
+            <p>{entry.description}</p>
             <span>
               {t("查看过程与证据", "Explore the evidence", "查看過程與證據")} ↗
             </span>

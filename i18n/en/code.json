@@ -1631,5 +1631,17 @@
   },
   "status.learning": {
     "message": "Learning"
+  },
+  "journey.lab.VL01.guardArticle": {
+    "message": "Follow-up: skip transfer after a failed grasp"
+  },
+  "journey.lab.VL01.guardCode": {
+    "message": "Grasp confirmation and stop code"
+  },
+  "journey.lab.VL01.guardEvidence": {
+    "message": "18-rollout gate comparison"
+  },
+  "journey.lab.VL01.guardResult": {
+    "message": "Offset and gate comparisons are recorded: six failures stopped transfer and successful trajectories matched. The broader VL01 remains in progress."
   }
 }

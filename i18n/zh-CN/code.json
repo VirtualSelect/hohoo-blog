@@ -1022,5 +1022,17 @@
   },
   "label.inconclusive": {
     "message": "尚无定论"
+  },
+  "journey.lab.VL01.guardArticle": {
+    "message": "第二篇：没抓住，就别继续搬运"
+  },
+  "journey.lab.VL01.guardCode": {
+    "message": "抓取确认与失败停止代码"
+  },
+  "journey.lab.VL01.guardEvidence": {
+    "message": "18回合门控对照证据"
+  },
+  "journey.lab.VL01.guardResult": {
+    "message": "已完成偏移与门控两轮实验；六次失败停止搬运，成功条件轨迹一致。完整VL01仍在学习中。"
   }
 }
