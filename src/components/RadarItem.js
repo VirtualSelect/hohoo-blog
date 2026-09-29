@@ -1,3 +1,4 @@
+import { radarDay, radarDateTime } from "@site/src/utils/radar-date.mjs";
 import { uiLabel } from "@site/src/utils/ui-labels";
 import useSiteConfig from "@lab/runtime/context";
 import { translate } from "@lab/runtime/Translate";
@@ -30,8 +31,11 @@ export default function RadarItem({ item, compact = false, showDate = true }) {
             <>
               {" "}
               ·{" "}
-              <time dateTime={item.publishedAt}>
-                {item.publishedAt.slice(0, 10)}
+              <time
+                dateTime={item.publishedAt}
+                title={radarDateTime(item.publishedAt) + " UTC+8"}
+              >
+                {radarDay(item.publishedAt)}
               </time>
             </>
           )}

@@ -49,7 +49,7 @@ jobs:
       - name: Install Next.js dependencies
         run: npm ci --prefix apps/web --no-audit --no-fund
       - name: Test collector
-        run: node --test tests/news.test.mjs tests/news-full-feed.test.mjs tests/news-feed.test.cjs
+        run: node --test tests/news.test.mjs tests/news-full-feed.test.mjs tests/news-freshness.test.mjs tests/news-feed.test.cjs
       - name: Collect a filtered batch
         env:
           NEWS_SUMMARIZE: 'false'
@@ -94,13 +94,18 @@ jobs:
           } else {
             const report = JSON.parse(fs.readFileSync(file, 'utf8'));
             const lines = ['\n## Collection outcome', `Run: ${report.runAt}`, `Selected: ${report.selected.length}`, `Rejected by relevance rules: ${report.rejected?.length || 0}`];
+            if (report.budget) lines.push(`UTC intake day: ${report.budget.day}; used before run: ${report.budget.used}/${report.budget.limit}; released now: ${report.budget.released}; available now: ${report.budget.available}.`);
             lines.push(`Publication window: ${report.since} → ${report.runAt}`);
             for (const source of report.sources) lines.push(`- ${source.source}: ${source.status}; in window: ${source.inWindow ?? 0}; newest: ${source.newestPublishedAt || 'none'}; ${source.error || ''}`);
             const reasons = {};
             for (const item of report.notSelected || []) reasons[item.reason] = (reasons[item.reason] || 0) + 1;
             for (const [reason, count] of Object.entries(reasons)) lines.push(`- ${reason}: ${count}`);
             for (const source of report.sources.filter(s => s.status === 'failed')) console.log(`::warning::News source failed: ${source.source}`);
-            if (!report.selected.length) lines.push('No new eligible items after filtering, deduplication and daily limits. This does not mean the feed is empty.');
+            if (!report.selected.length) {
+              if (report.budget?.remaining === 0) lines.push('Daily intake quota exhausted: later eligible updates are deferred, not a fetch or deployment failure.');
+              else if (reasons['reserved-for-later'] || reasons['source-reserved-for-later']) lines.push('Some daily slots are reserved for a later UTC time window.');
+              else lines.push('No new eligible items after filtering and deduplication. This does not mean the feed is empty.');
+            }
             fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
           }
           NODE

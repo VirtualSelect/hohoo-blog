@@ -1,3 +1,4 @@
+import { radarDay, radarDateTime } from "@site/src/utils/radar-date.mjs";
 import ReadingActions from '@site/src/components/ReadingActions';
 import React from 'react';
 import Link from '@lab/runtime/Link';
@@ -27,8 +28,8 @@ export default function NewsDigest({ day }) {
               <h2>{content.title}</h2>
               <p>
                 {item.sourceName} ·{' '}
-                <time dateTime={item.publishedAt}>
-                  {item.publishedAt.slice(0, 10)}
+                <time dateTime={item.publishedAt} title={radarDateTime(item.publishedAt) + " UTC+8"}>
+                  {radarDay(item.publishedAt)}
                 </time>
               </p>
               <p>{content.summary}</p>

@@ -1,3 +1,4 @@
+import { radarDay, radarDateTime } from "@site/src/utils/radar-date.mjs";
 import ReadingActions from '@site/src/components/ReadingActions';
 import { localizedNews } from '@site/src/utils/news-locale.mjs';
 import React from 'react';
@@ -29,8 +30,8 @@ export default function TopicNews({ category }) {
             }}>
             <small>
               {item.sourceName} ·{' '}
-              <time dateTime={item.publishedAt}>
-                {item.publishedAt.slice(0, 10)}
+              <time dateTime={item.publishedAt} title={radarDateTime(item.publishedAt) + " UTC+8"}>
+                {radarDay(item.publishedAt)}
               </time>
             </small>
             {localizedNews(item, en ? 'en' : 'zh').fallback && (

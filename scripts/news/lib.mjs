@@ -56,30 +56,103 @@ export async function parseFeed(xml, source, now = new Date(), lookbackDays = 14
 export function publicNewsItem({relevanceText, ...item}) {
   return item;
 }
-export function selectItems(candidates, existing, config, now = new Date(), diagnostics = []) {
+// Release the daily budget gradually so the first run cannot consume every slot.
+export function intakeBudget(existing, config, now = new Date()) {
   const day = now.toISOString().slice(0, 10);
-  const seen = new Set(existing.map(item => item.url));
-  const titles = new Set(existing.map(item => item.title.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '')));
+  const used = existing.filter(
+    (item) => item.collectedAt.slice(0, 10) === day,
+  ).length;
+  const fraction = config.pacedDailyBudget
+    ? [0.4, 0.6, 0.8, 1][Math.floor(now.getUTCHours() / 6)]
+    : 1;
+  const released = Math.ceil(config.dailyLimit * fraction);
+  return {
+    day,
+    timeZone: "UTC",
+    limit: config.dailyLimit,
+    used,
+    released,
+    remaining: Math.max(0, config.dailyLimit - used),
+    available: Math.max(0, released - used),
+    fraction,
+  };
+}
+export function selectItems(
+  candidates,
+  existing,
+  config,
+  now = new Date(),
+  diagnostics = [],
+) {
+  const day = now.toISOString().slice(0, 10);
+  const seen = new Set(existing.map((item) => item.url));
+  const titles = new Set(
+    existing.map((item) =>
+      item.title.toLowerCase().replace(/[^\p{L}\p{N}]/gu, ""),
+    ),
+  );
   const blocked = new Set(config.blockedUrls || []);
   const selected = [];
-  const today = existing.filter(item => item.collectedAt.slice(0, 10) === day);
+  const budget = intakeBudget(existing, config, now);
+  const today = existing.filter(
+    (item) => item.collectedAt.slice(0, 10) === day,
+  );
   const counts = new Map();
-  const sources = new Map((config.sources || []).map(source=>[source.id,source]));
-  const priority = item=>sources.get(item.sourceId)?.priority || 0;
-  const sourceLimit = item=>sources.get(item.sourceId)?.dailyLimit ?? config.perSourceLimit;
-  for (const item of today) counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1);
-  const relevance = new Map(candidates.map(item => [item, researchPriority(item)]));
-  for (const item of [...candidates].sort((a,b) => relevance.get(b)-relevance.get(a) || priority(b)-priority(a) || b.publishedAt.localeCompare(a.publishedAt) || a.id.localeCompare(b.id))) {
-    const titleKey = item.title.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+  const sources = new Map(
+    (config.sources || []).map((source) => [source.id, source]),
+  );
+  const priority = (item) => sources.get(item.sourceId)?.priority || 0;
+  const sourceLimit = (item) =>
+    sources.get(item.sourceId)?.dailyLimit ?? config.perSourceLimit;
+  for (const item of today)
+    counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1);
+  const relevance = new Map(
+    candidates.map((item) => [item, researchPriority(item)]),
+  );
+  for (const item of [...candidates].sort(
+    (a, b) =>
+      (config.freshnessFirst
+        ? b.publishedAt.slice(0, 10).localeCompare(a.publishedAt.slice(0, 10))
+        : 0) ||
+      relevance.get(b) - relevance.get(a) ||
+      priority(b) - priority(a) ||
+      b.publishedAt.localeCompare(a.publishedAt) ||
+      a.id.localeCompare(b.id),
+  )) {
+    const titleKey = item.title.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
     const age = now - new Date(item.publishedAt);
-    const reason = !Number.isFinite(age) || age < 0 ? 'invalid-date'
-      : config.windowHours && age > config.windowHours * 3600000 ? 'outside-window'
-      : blocked.has(item.url) ? 'blocked'
-      : seen.has(item.url) || titles.has(titleKey) ? 'duplicate'
-      : selected.length + today.length >= config.dailyLimit ? 'daily-limit'
-      : (counts.get(item.sourceId) || 0) >= sourceLimit(item) ? 'source-limit' : null;
-    if (reason) { diagnostics.push({id:item.id, sourceId:item.sourceId, publishedAt:item.publishedAt, reason}); continue; }
-    seen.add(item.url); titles.add(titleKey); counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1); selected.push(item);
+    const reason =
+      !Number.isFinite(age) || age < 0
+        ? "invalid-date"
+        : config.windowHours && age > config.windowHours * 3600000
+          ? "outside-window"
+          : blocked.has(item.url)
+            ? "blocked"
+            : seen.has(item.url) || titles.has(titleKey)
+              ? "duplicate"
+              : selected.length + today.length >= config.dailyLimit
+                ? "daily-limit"
+                : (counts.get(item.sourceId) || 0) >= sourceLimit(item)
+                  ? "source-limit"
+                  : selected.length + today.length >= budget.released
+                    ? "reserved-for-later"
+                    : (counts.get(item.sourceId) || 0) >=
+                        Math.ceil(sourceLimit(item) * budget.fraction)
+                      ? "source-reserved-for-later"
+                      : null;
+    if (reason) {
+      diagnostics.push({
+        id: item.id,
+        sourceId: item.sourceId,
+        publishedAt: item.publishedAt,
+        reason,
+      });
+      continue;
+    }
+    seen.add(item.url);
+    titles.add(titleKey);
+    counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1);
+    selected.push(item);
   }
   return selected;
 }

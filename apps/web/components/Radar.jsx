@@ -1,4 +1,6 @@
 "use client";
+import { radarDay, radarDateTime } from "@site/src/utils/radar-date.mjs";
+
 import { useEffect, useRef, useState } from "react";
 import {
   readRadarFilters,
@@ -118,13 +120,13 @@ export default function Radar() {
           <p className="radar-intake hh-meta">
             {t("最近收录", "Latest addition", "最近收錄")} ·{" "}
             <time dateTime={lastCollected}>
-              {lastCollected.slice(0, 16).replace("T", " ")} UTC
+              {radarDateTime(lastCollected)} UTC+8
             </time>
             <br />
             {t(
-              "时间轴按来源发布时间排列；收录时间不代表采集任务的最后运行时间。",
-              "The timeline follows source publication dates. Latest addition is not the last crawler run.",
-              "時間軸按來源發佈時間排列；收錄時間不代表採集任務的最後執行時間。",
+              "时间轴按来源发布时间排列，统一显示北京时间（UTC+8）；最近收录不代表采集任务的最后运行时间。",
+              "Source publication dates are displayed in Beijing time (UTC+8). Latest addition is not the last crawler run.",
+              "時間軸按來源發佈時間排列，統一顯示北京時間（UTC+8）；最近收錄不代表採集任務的最後執行時間。",
             )}
           </p>
         )}
@@ -244,10 +246,10 @@ export default function Radar() {
             <div className="radar-event" key={i.id}>
               <div className="radar-date">
                 {index === 0 ||
-                filtered[index - 1].publishedAt.slice(0, 10) !==
-                  i.publishedAt.slice(0, 10) ? (
+                radarDay(filtered[index - 1].publishedAt) !==
+                  radarDay(i.publishedAt) ? (
                   <time dateTime={i.publishedAt}>
-                    {i.publishedAt.slice(0, 10)}
+                    {radarDay(i.publishedAt)}
                   </time>
                 ) : null}
               </div>

@@ -129,5 +129,7 @@
       "fetchStrategy": "rss",
       "parserVersion": "arxiv-rss-v1"
     }
-  ]
+  ],
+  "freshnessFirst": true,
+  "pacedDailyBudget": true
 }
