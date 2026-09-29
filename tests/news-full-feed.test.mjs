@@ -19,7 +19,7 @@ test('full feed provides evidence beyond the short excerpt without publishing it
   assert.equal(assessRelevance(item).accepted,true);
   assert.equal(assessRelevance(publicNewsItem(item)).accepted,false);
   assert.equal(researchPriority(item),2);
-  const chosen = selectItems(items,[],{dailyLimit:10,perSourceLimit:2,sources:[{id:'aihot',dailyLimit:6}]},now).map(publicNewsItem);
+  const chosen = selectItems(items,[],{dailyLimit:10,perSourceLimit:2,sources:[{id:'aihot',dailyLimit:'shared'}]},now).map(publicNewsItem);
   assert.ok(!JSON.stringify(chosen).includes('relevanceText'));
   assert.ok(!JSON.stringify(chosen).includes('静态分析'));
 });
@@ -68,11 +68,11 @@ test('promotions, bare announcements and pure rankings stay excluded',()=>{
   assert.equal(assessRelevance({title:'LLM 排行榜分析',summary:'提供评测代码和复现步骤，使用消融实验解释差异。'}).accepted,true);
 });
 
-test('configured full feed preserves ten total and six AIHOT daily slots',()=>{
+test('configured full feed shares the ten-item global budget',()=>{
   const config=JSON.parse(fs.readFileSync(new URL('../config/news-sources.json',import.meta.url)));
   assert.equal(config.dailyLimit,10);
   const source=config.sources.find(s=>s.id==='aihot');
-  assert.equal(source.dailyLimit,6);
+  assert.equal(source.dailyLimit,'shared');
   assert.equal(new URL(source.feed).pathname,'/feed/full.xml');
   assert.equal(new URL(source.feed).searchParams.get('aihot_actor'),'5a162b13-b63a-47c5-8257-ce3b0d9bc878');
 });

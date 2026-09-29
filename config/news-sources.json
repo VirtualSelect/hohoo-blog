@@ -18,7 +18,7 @@
       ],
       "defaultCategory": "ai-apps",
       "priority": 100,
-      "dailyLimit": 6,
+      "dailyLimit": "shared",
       "aggregator": true,
       "enabled": true,
       "type": "aggregator",
