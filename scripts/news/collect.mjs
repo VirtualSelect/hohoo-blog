@@ -46,6 +46,7 @@ for (const source of sources) {
     throw new Error("Invalid source priority");
   if (
     source.dailyLimit !== undefined &&
+    source.dailyLimit !== "shared" &&
     (!Number.isInteger(source.dailyLimit) ||
       source.dailyLimit < 1 ||
       source.dailyLimit > config.dailyLimit)

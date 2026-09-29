@@ -61,7 +61,7 @@ test('primary source wins within limits, with fallback and rerun caps',()=>{
  assert.equal(selectItems(secondary,[],cfg,now).length,2);
 });
 
-test('ten daily slots and six AIHOT slots are shared by repeat runs',()=>{
+test('explicit numeric source caps remain supported across repeat runs',()=>{
  const cfg={dailyLimit:10,perSourceLimit:2,sources:[{id:'aihot',priority:100,dailyLimit:6}]};
  const candidates=Array.from({length:18},(_,i)=>item('cap'+i,{sourceId:i<8?'aihot':i<13?'other-a':'other-b'}));
  const first=selectItems(candidates,[],cfg,now);

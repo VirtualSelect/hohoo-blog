@@ -8,7 +8,7 @@ const config = {
   perSourceLimit: 2,
   pacedDailyBudget: true,
   freshnessFirst: true,
-  sources: [{ id: "aihot", priority: 100, dailyLimit: 6 }],
+  sources: [{ id: "aihot", priority: 100, dailyLimit: "shared" }],
 };
 const item = (id, sourceId = "aihot", extra = {}) => ({
   id,
@@ -20,20 +20,20 @@ const item = (id, sourceId = "aihot", extra = {}) => ({
   ...extra,
 });
 
-test("daily budget release boundaries preserve headroom and never exceed 10/6 across reruns", () => {
+test("shared AIHOT budget follows global releases without a six-item cap across reruns", () => {
   const candidates = Array.from({ length: 30 }, (_, i) =>
     item(String(i), i < 20 ? "aihot" : i < 25 ? "other-a" : "other-b"),
   );
   const saved = [];
   for (const [hour, expected, primary] of [
-    [0, 4, 3],
-    [5, 4, 3],
-    [6, 6, 4],
-    [11, 6, 4],
-    [12, 8, 5],
-    [17, 8, 5],
-    [18, 10, 6],
-    [23, 10, 6],
+    [0, 4, 4],
+    [5, 4, 4],
+    [6, 6, 6],
+    [11, 6, 6],
+    [12, 8, 8],
+    [17, 8, 8],
+    [18, 10, 10],
+    [23, 10, 10],
   ]) {
     const now = new Date(`2026-09-29T${String(hour).padStart(2, "0")}:30:00Z`);
     const reasons = [];
@@ -44,6 +44,31 @@ test("daily budget release boundaries preserve headroom and never exceed 10/6 ac
     if (hour === 0)
       assert.ok(reasons.some((x) => x.reason === "reserved-for-later"));
   }
+});
+
+test("shared source only fills remaining global slots, including slots spent by other sources", () => {
+  const now = new Date("2026-09-29T18:30:00Z");
+  const candidates = Array.from({ length: 12 }, (_, i) => item("candidate" + i));
+  const existing = Array.from({ length: 5 }, (_, i) =>
+    item("saved" + i, i < 2 ? "aihot" : "other-" + i),
+  );
+  const selected = selectItems(candidates, existing, config, now);
+  assert.equal(selected.length, 5);
+  const saved = [...existing, ...selected];
+  assert.equal(saved.length, 10);
+  assert.equal(saved.filter((x) => x.sourceId === "aihot").length, 7);
+  assert.equal(selectItems(candidates, saved, config, now).length, 0);
+  assert.equal(selectItems(candidates, [], { ...config, dailyLimit: 7 }, now).length, 7);
+});
+
+test("shared quota does not guarantee AIHOT slots ahead of more relevant sources", () => {
+  const now = new Date("2026-09-29T18:30:00Z");
+  const broad = item("broad", "aihot", { title: "LLM training update" });
+  const focused = item("focused", "other-a");
+  assert.deepEqual(
+    selectItems([broad, focused], [], { ...config, dailyLimit: 1 }, now).map((x) => x.id),
+    ["focused"],
+  );
 });
 
 test("already-full days are not retroactively freed and UTC midnight resets the budget", () => {

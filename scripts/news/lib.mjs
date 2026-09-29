@@ -102,8 +102,11 @@ export function selectItems(
     (config.sources || []).map((source) => [source.id, source]),
   );
   const priority = (item) => sources.get(item.sourceId)?.priority || 0;
-  const sourceLimit = (item) =>
-    sources.get(item.sourceId)?.dailyLimit ?? config.perSourceLimit;
+  const sourceLimit = (item) => {
+    const limit = sources.get(item.sourceId)?.dailyLimit;
+    // Shared sources compete for the same global budget; no extra slots are created.
+    return limit === "shared" ? config.dailyLimit : limit ?? config.perSourceLimit;
+  };
   for (const item of today)
     counts.set(item.sourceId, (counts.get(item.sourceId) || 0) + 1);
   const relevance = new Map(
