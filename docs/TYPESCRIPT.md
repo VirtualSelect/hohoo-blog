@@ -26,6 +26,8 @@ npm run build
 
 `typecheck` 依次生成真实内容、Next.js 路由类型，再运行 `tsc --noEmit`。CI 与本地共用命令；生产构建同时保留 Next.js 类型检查，未启用 `ignoreBuildErrors`。
 
+根目录与 `apps/web/.npmrc` 均固定官方 npm registry；应用有独立锁文件，因此单独安装时也应使用同一来源。新增依赖后检查 `apps/web/package-lock.json` 的下载地址，避免本机镜像设置进入锁文件。npm 12 的 CI 安装会拒绝不属于当前 registry 的远程包地址；应修正来源并保留 integrity 校验，不放宽安装安全规则。
+
 `strict: true`，`allowJs: true`，`checkJs: false`。已迁移 TS 严格检查；仍在使用的 JS/JSX 并不等于已完成类型迁移。`skipLibCheck` 只跳过第三方声明内部检查。迁移边界暂用少量 JSDoc 描述 JS 组件参数，不使用全局 `any` 模块声明或 `@ts-nocheck`。
 
 编译器与 React / React DOM / Node 类型包均为 `apps/web` 的开发依赖。固定 TypeScript 7.0.2，当前 Next.js 16.3.5 已支持 CLI 类型检查；不升级框架、不引入运行时库。使用项目固定 Node 26.8.2；原生 Node 测试执行可擦除类型的 `.ts` 文件，不使用 enum、namespace 或参数属性。
