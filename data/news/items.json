@@ -1,5 +1,35 @@
 [
   {
+    "id": "00720885d684f9df95dc",
+    "title": "RGDT-Bench: Benchmarking LLM Reasoning for Rule-Governed Decisions and Their Justifications",
+    "url": "https://arxiv.org/abs/2609.34455",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-09-30T04:00:00.000Z",
+    "collectedAt": "2026-09-30T07:42:04.035Z",
+    "category": "llm",
+    "summary": "We study reasoning in Rule-Governed Decision Tasks (RGDTs), where models apply external rules to case facts and justify decisions, as required in policy, contract, and complianc…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-37c0e225",
+    "coverage": []
+  },
+  {
+    "id": "00eb44549af90eda7104",
+    "title": "AquaWAM: A Dynamics-aware World Action Model for Underwater Embodied Agents",
+    "url": "https://arxiv.org/abs/2609.33299",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-09-30T04:00:00.000Z",
+    "collectedAt": "2026-09-30T07:42:04.035Z",
+    "category": "embodied-ai",
+    "summary": "World Action Models (WAMs) are becoming increasingly important and useful for embodied intelligence, as they enable robots to anticipate the consequences of candidate actions be…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-7eeda4c",
+    "coverage": []
+  },
+  {
     "id": "d1a5cc2c9a1d63d88caf",
     "title": "OpenRouter 教程：如何测试 AI Agent 的工具调用准确性",
     "url": "https://aihot.news/items/qu0zwrg9img0cfv03vtgmopbs",
