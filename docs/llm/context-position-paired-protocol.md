@@ -1,11 +1,11 @@
 ---
 title: LLM 实验（二）：先让对照成立，再谈上下文位置
-description: 从上一轮限流失败出发，用 Java 8 重建成组对照、请求节流、停止条件与独立审计；公开80项离线检查和24项请求计划。
+description: 用 Java 8 实现成组对照与节流，完成 Agnes 3.0 的24次真实请求；公开逐项评分、服务端用量，并解释全对结果的边界。
 slug: /llm/context-position-paired-protocol
 status: published
 published_at: "2026-09-29"
-updated: "2026-09-29"
-reading_minutes: 12
+updated: "2026-09-30"
+reading_minutes: 16
 domain: llm
 article_kind: case-study
 difficulty: intermediate
@@ -22,7 +22,7 @@ related:
 
 接下来如果只是“等一会儿再跑一遍”，我们仍然可能得到一份难以解释的汇总。这篇先解决更基础的问题：**怎样把实验写成一个会守预算、会停止、也知道哪些结果能比较的程序？**
 
-本篇交付的是已经运行过离线检查的Java工程、冻结材料与完整请求计划。**80项离线检查通过，24项计划完成独立审计；本版本尚未执行新的线上模型对照。以下不报告新的模型正确率，也不把模拟响应当成实测。**
+本篇最初于2026-09-29交付通过80项离线检查的Java工程与24项冻结计划。**2026-09-30新增 Agnes 3.0 实测：24次请求完成，6组对照完整。第1–8节保留最初的协议说明，第9节提供新型号的独立结果，旧材料不覆盖。**
 
 [工程与复现说明](https://github.com/VirtualSelect/hohoo-ai-lab/tree/dae0b8c50cd786b1bced8686f265f7560430d4f1/experiments/02-context-position-paced) · [完整24项请求](https://github.com/VirtualSelect/hohoo-ai-lab/tree/dae0b8c50cd786b1bced8686f265f7560430d4f1/experiments/02-context-position-paced/evidence/20260929-l1v2-offline/plan.json) · [验证记录](https://github.com/VirtualSelect/hohoo-ai-lab/tree/dae0b8c50cd786b1bced8686f265f7560430d4f1/experiments/02-context-position-paced/evidence/20260929-l1v2-offline/manifest.json)
 
@@ -43,6 +43,8 @@ related:
 这里的有效指“请求与响应协议可用”，不是“答案正确”。答错、拒答、格式错误必须保留在评分中，不能为了漂亮的结果排除它们。
 
 ## 2. 新协议具体冻结了什么？
+
+下表记录2026-09-29首发的准备版本。2026-09-30的真实运行使用重新冻结的 L1v2-agnes3 / version 3，模型改为 agnes-3.0-flash；其他对照设计不变，详见第9节。
 
 | 项目     | 新版设定                                            |
 | -------- | --------------------------------------------------- |
@@ -186,3 +188,58 @@ node audit.mjs evidence/my-live-run
 [Lost in the Middle](https://arxiv.org/abs/2307.03172)研究了特定任务和模型中相关信息位置对表现的影响；本案例借用了对照思路，材料和实验规模不同，不是论文复现。
 
 本篇完成的是一个更可审计的实验入口。下一份结果报告应该在这份冻结协议上运行、逐条核验，再决定扩大题型、增加长度还是研究检索。**先保证比较成立，才能讨论比较发现了什么。**
+
+## 9. Agnes 3.0：24次在线对照，全部符合预期说明了什么？
+
+2026-09-30，在重新冻结的 L1v2-agnes3 协议下完成24次真实调用。每份响应的 model 均为 agnes-3.0-flash；Java 1.8.0_171，运行代码提交为 b352a38。请求计划与调用前保存的准备版本逐项一致，没有看结果后修改问题、重试或补样本。
+
+[本轮代码与复现说明](https://github.com/VirtualSelect/hohoo-ai-lab/tree/e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1/experiments/02-context-position-paced) · [独立审计汇总](https://github.com/VirtualSelect/hohoo-ai-lab/tree/e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1/experiments/02-context-position-paced/evidence/20260930-agnes3-live/audit.json) · [逐条响应](https://github.com/VirtualSelect/hohoo-ai-lab/tree/e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1/experiments/02-context-position-paced/evidence/20260930-agnes3-live)
+
+### 9.1 先看请求是否可用，再看回答是否正确
+
+| 项目 | 本次记录 |
+| --- | ---: |
+| 计划 / 实际尝试 / 可评分响应 | 24 / 24 / 24 |
+| 完整对照块 | 6 / 6 |
+| HTTP或响应协议失败 | 0 |
+| 含答案条件：编号正确 | 18 / 18 |
+| 缺失答案条件：正确输出UNKNOWN | 6 / 6 |
+| 重试 / 未执行 | 0 / 0 |
+
+评分只去掉首尾空白，未从解释中提取编号，也没有让另一个模型代评。三种位置各6次，其中60行和240行材料各3次：
+
+| 干扰行数 | 开头 | 中间 | 末尾 | 无答案 |
+| --- | ---: | ---: | ---: | ---: |
+| 60 | 3/3编号正确 | 3/3编号正确 | 3/3编号正确 | 3/3正确拒答 |
+| 240 | 3/3编号正确 | 3/3编号正确 | 3/3编号正确 | 3/3正确拒答 |
+
+分母是固定请求数，不是独立随机抽样的真实业务问题数。三个项目在不同条件下反复使用，24次请求不能当作24种独立任务。
+
+### 9.2 从一条响应走到可复核结论
+
+第1条请求是F1、60行干扰、答案在开头。原始记录显示 HTTP 200、finishReason=stop、正文为 QX-7319。usage 是输入2323、输出8、总计2331 tokens。
+
+复核时先根据 case 找到冻结的期望编号，再从 plan.json 检查发送材料与目标位置，最后比较响应正文。outcome 是本地程序算出的评分，不能只相信这个字段；独立 audit.mjs 会重算评分、请求哈希、完整块与用量。5项新增离线测试确认原证据通过，而篡改模型、评分、用量或请求哈希均被拒绝。
+
+离线审计不会读取密钥或发起模型请求，进入实验目录后执行：
+
+```sh
+node audit.mjs evidence/20260930-agnes3-live
+node --test audit.test.mjs
+```
+
+### 9.3 用量与节流确实执行了吗？
+
+24份响应合计输入 **134,614**、输出 **144**、总计 **134,758 tokens**。单次返回的输入计数为2,320–8,898 tokens。这是本端点的 usage 口径，不把它换算成未核实的账单价格。输出很短也不代表长材料调用没有输入成本。
+
+执行时间为UTC 05:06:52.476–05:17:12.120，北京时间13:06:52至13:17:12。根据每条开始时间和处理耗时，最短观察间隔为 **20.001秒**，符合至少20秒的设定。本轮没有429，只能说明本轮未触发限流，不能反推平台保证的配额。
+
+### 9.4 全对是观察，不是“位置无关”的证明
+
+本次没有观察到三个位置的回答差异。更准确的解释是：**这组三题、两种材料长度和每格一次的任务，没有区分出模型在位置上的表现。**
+
+所有条件达到最高分，存在测量天花板。目标行的句式和项目名也比较鲜明，材料虽包含大量其他编号，仍可能不足以构成困难检索。我们没有测到上下文极限，也没有隔离内部注意力机制。
+
+不能把本轮与旧Agnes 2.5的26份响应合并，也不能把两轮差异归因为模型升级：旧试验的材料、顺序、长度和停止规则不相同。
+
+下一步应先固定更接近业务的困难条件，例如相似项目名、旧新版本冲突或自然改写的问题，再保留无答案对照并增加重复。该扩展尚未执行；本轮预算到24次即结束。

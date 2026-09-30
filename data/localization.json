@@ -135,21 +135,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/projects.json",
-    "sourceRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121",
+    "sourceRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/projects.json",
-        "sourceRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121",
-        "translationRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121"
+        "sourceRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26",
+        "translationRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/projects.json",
-        "sourceRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121",
-        "translationRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121"
+        "sourceRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26",
+        "translationRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26"
       }
     }
   },
@@ -157,21 +157,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/projects.json",
-    "sourceRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121",
+    "sourceRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/projects.json",
-        "sourceRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121",
-        "translationRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121"
+        "sourceRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26",
+        "translationRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/projects.json",
-        "sourceRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121",
-        "translationRevision": "c15ea5eb9d65fecb4d30c66a4b3f14f023d48843bfb24440c234e419f035d121"
+        "sourceRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26",
+        "translationRevision": "7a2f113e26319c31eab90955ac9518e502d8563b83d6e0156bc346a16298cc26"
       }
     }
   },
@@ -265,23 +265,23 @@
   },
   "doc:llm/context-position-paired-protocol": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-09-29",
+    "sourceUpdatedAt": "2026-09-30",
     "file": "docs/llm/context-position-paired-protocol.md",
-    "sourceRevision": "d13b022ac3fa4548318243f59579f240853205124a634825392628eeaaef6613",
+    "sourceRevision": "d456957c0ab2c0f65a895565698a40333bea99480a48baeb2bb677a08dd7cc03",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-29",
+        "translatedAt": "2026-09-30",
         "file": "i18n/en/docs/llm/context-position-paired-protocol.md",
-        "sourceRevision": "d13b022ac3fa4548318243f59579f240853205124a634825392628eeaaef6613",
-        "translationRevision": "426cb0bef0faf7e3a5a6c39bc3a372cebe910523d127553583de1f177e4c8b8f"
+        "sourceRevision": "d456957c0ab2c0f65a895565698a40333bea99480a48baeb2bb677a08dd7cc03",
+        "translationRevision": "c6940a17809334d2e6b3d3583b7be9fc430a2e550d1da2710ef1ba0841626c40"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-09-29",
+        "translatedAt": "2026-09-30",
         "file": "i18n/zh-TW/docs/llm/context-position-paired-protocol.md",
-        "sourceRevision": "d13b022ac3fa4548318243f59579f240853205124a634825392628eeaaef6613",
-        "translationRevision": "b8071011f00cd9daac52a1e4b862610d22834b4670fca71ec799a313dc912805"
+        "sourceRevision": "d456957c0ab2c0f65a895565698a40333bea99480a48baeb2bb677a08dd7cc03",
+        "translationRevision": "0deba8c4e88079b97566f9f3ef3f4b2103e5d4726f073f34d5d5bc55f350d226"
       }
     }
   },
