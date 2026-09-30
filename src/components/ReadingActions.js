@@ -8,7 +8,7 @@ import {
   readingKey,
   toggleInbox,
 } from "@site/src/utils/reading-inbox.mjs";
-import { learningSymbols } from "@site/src/utils/learning-progress.mjs";
+import { learningSymbols } from "@site/src/utils/learning-progress.ts";
 import styles from "./ReadingActions.module.css";
 let memory = emptyInbox();
 let volatileStorage = false;

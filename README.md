@@ -34,6 +34,7 @@ Windows 旧终端未更新 Node 路径时可运行 `. ./scripts/use-node.ps1`。
 
 ```sh
 npm run format:check
+npm run typecheck
 npm run test:web
 node --test tests/*.test.cjs tests/*.test.mjs
 npm run i18n:check
@@ -43,7 +44,9 @@ npm run build
 npm run test:routes --prefix apps/web
 ```
 
-`format:check` 从仓库根目录调用现有应用检查，覆盖 `apps/web` 的 app、components、runtime、lib、scripts、tests 与 next.config.mjs。应用文件由 `.gitattributes` 固定 LF 换行，避免 Windows 检出后出现仅换行造成的告警；CI 使用同一命令。Markdown 内容、研究原始证据和生成目录不纳入这项应用格式检查，也不因此被改写。
+`format:check` 从仓库根目录调用应用检查，覆盖 `apps/web` 的 app、components、runtime、lib、scripts、tests、配置文件及本轮迁移的共享 TS 文件。应用与共享 TS 文件由 `.gitattributes` 固定 LF 换行，避免 Windows 检出后出现仅换行造成的告警；CI 使用同一命令。Markdown 内容、研究原始证据和生成目录不纳入这项应用格式检查，也不因此被改写。
+
+博客已渐进接入 TypeScript：路由、上下文、国际化、文章列表与阅读器、分类筛选和学习进度使用严格类型检查；其他 JS/JSX 继续共存。`npm run typecheck` 会先生成内容和 Next.js 路由类型，干净检出后也可运行。范围、边界及后续迁移方法见 [TypeScript 维护说明](docs/TYPESCRIPT.md)。当前没有独立 lint 命令。
 
 ## 维护与部署
 

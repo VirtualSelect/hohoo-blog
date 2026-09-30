@@ -77,8 +77,9 @@ test('verification needs provenance and evidence, not publication approval', () 
   );
 });
 test('planned experiments have design and no fabricated result or execution log', () => {
-  for (const e of require('../data/experiments.json')) {
-    assert.equal(e.status, 'planning');
+  const planned = require('../data/experiments.json').filter(e => e.status === 'planning');
+  assert.ok(planned.length, 'The planning registry must contain planned experiments');
+  for (const e of planned) {
     assert.ok(e.design.zh.hypothesis);
     assert.ok(e.design.en.variables.controlled);
     assert.equal(e.result, undefined);

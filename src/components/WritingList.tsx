@@ -3,7 +3,13 @@ import React from "react";
 import Link from "@lab/runtime/Link";
 import { translate } from "@lab/runtime/Translate";
 import WritingKind from "./WritingKind";
-export default function WritingList({ items }) {
+import type { ContentEntry, Domain } from "@lab/lib/site-types";
+const trackLabels: Record<Domain, string> = {
+  "ai-apps": "BUILD",
+  llm: "UNDERSTAND",
+  "embodied-ai": "EXPLORE",
+};
+export default function WritingList({ items }: { items: ContentEntry[] }) {
   return items.length ? (
     <ol className="hh-rows hh-writing-list">
       {items.map((item, index) => (
@@ -13,11 +19,9 @@ export default function WritingList({ items }) {
               {String(index + 1).padStart(2, "0")} /{" "}
               {uiLabel(
                 item.type === "doc"
-                  ? {
-                      "ai-apps": "BUILD",
-                      llm: "UNDERSTAND",
-                      "embodied-ai": "EXPLORE",
-                    }[item.domain] || "DOC"
+                  ? item.domain
+                    ? trackLabels[item.domain]
+                    : "DOC"
                   : item.type.toUpperCase(),
               )}
               {item.type === "doc" && (

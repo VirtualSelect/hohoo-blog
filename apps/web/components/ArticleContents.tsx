@@ -1,14 +1,21 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useText } from "./Shell";
+import type { Heading } from "../lib/site-types";
 
-export default function ArticleContents({ headings, mobile = false }) {
+export default function ArticleContents({
+  headings,
+  mobile = false,
+}: {
+  headings: Heading[];
+  mobile?: boolean;
+}) {
   const t = useText();
   const [active, setActive] = useState("");
   useEffect(() => {
     const elements = headings
       .map((h) => document.getElementById(h.id))
-      .filter(Boolean);
+      .filter((element): element is HTMLElement => element !== null);
     if (!elements.length) return;
     const update = () => {
       const current = elements
@@ -23,7 +30,7 @@ export default function ArticleContents({ headings, mobile = false }) {
     });
     elements.forEach((el) => observer.observe(el));
     // A large anchor jump can skip intersection boundaries entirely.
-    let timer;
+    let timer: ReturnType<typeof setTimeout> | undefined;
     const settled = () => {
       clearTimeout(timer);
       timer = setTimeout(update, 120);

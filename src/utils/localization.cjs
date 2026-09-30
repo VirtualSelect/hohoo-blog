@@ -20,6 +20,7 @@ function translationStatus(meta, locale) {
     return 'OUTDATED';
   return record.status;
 }
+/** @param {import("../../apps/web/lib/site-types").ContentEntry[]} entries */
 function writingEntries(entries) {
   return entries
     .filter(

@@ -9,13 +9,21 @@ import {
   writingKind,
   writingFilters,
   filterWriting,
-} from "../utils/writing-kinds.cjs";
+} from "../utils/writing-kinds.ts";
 import { useText } from "../../apps/web/components/Shell";
 import LabSketch from "../../apps/web/components/LabSketch";
 import Link from "@lab/runtime/Link";
 
-const defaultFilters = { kind: "all", domain: "all", type: "all" };
-const descriptions = {
+import type { WritingFilters } from "../utils/writing-kinds.ts";
+import type { ArticleKind, Domain, LocalizedText } from "@lab/lib/site-types";
+const defaultFilters: WritingFilters = {
+  kind: "all",
+  domain: "all",
+  type: "all",
+};
+const descriptions: Partial<Record<ArticleKind, LocalizedText>> & {
+  all: LocalizedText;
+} = {
   all: [
     "从可运行的教程，到有出处的机制与工程拆解。",
     "Runnable tutorials, sourced mechanisms and engineering decisions.",
@@ -54,7 +62,7 @@ export default function Articles() {
     window.addEventListener("popstate", sync);
     return () => window.removeEventListener("popstate", sync);
   }, []);
-  function updateFilters(next) {
+  function updateFilters(next: WritingFilters) {
     setFilters(next);
     const url = new URL(location.href);
     for (const [key, value] of Object.entries(next)) {
@@ -65,7 +73,7 @@ export default function Articles() {
   }
   const visible = filterWriting(writing, filters);
   const filtered = Object.values(filters).some((value) => value !== "all");
-  const domains = [
+  const domains: [Domain | "all", string][] = [
     ["all", t("全部方向", "All tracks", "全部方向")],
     ["ai-apps", t("AI 应用开发", "AI Applications", "AI 應用開發")],
     ["llm", "LLM"],
@@ -96,7 +104,7 @@ export default function Articles() {
               "依閱讀目的篩選",
             )}
           >
-            {["all", ...Object.keys(writingKinds)]
+            {(["all", ...Object.keys(writingKinds)] as WritingFilters["kind"][])
               .filter(
                 (kind) =>
                   kind === "all" ||

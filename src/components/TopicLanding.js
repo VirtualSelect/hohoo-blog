@@ -8,7 +8,7 @@ import TopicPapers from "./TopicPapers";
 import TopicNews from "./TopicNews";
 import { useText } from "@lab/components/Shell";
 import LabSketch from "@lab/components/LabSketch";
-import { writingKind } from "../utils/writing-kinds.cjs";
+import { writingKind } from "../utils/writing-kinds.ts";
 export default function TopicLanding({ category }) {
   const en = useEnglish();
   const t = useText();

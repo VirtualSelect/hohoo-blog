@@ -7,9 +7,10 @@
     "build": "npm run prepare:content && next build --webpack",
     "start": "next start -p 4181",
     "test": "node --test tests/*.test.mjs",
-    "format:check": "prettier --check app components runtime lib scripts tests next.config.mjs",
+    "format:check": "prettier --check app components runtime lib scripts tests next.config.mjs tsconfig.json ../../src/pages/articles.tsx ../../src/components/WritingList.tsx ../../src/components/WritingKind.tsx ../../src/utils/writing-kinds.ts ../../src/utils/learning-progress.ts ../../tsconfig.json",
     "test:routes": "node scripts/verify-routes.mjs",
-    "perf:check": "node scripts/performance-check.mjs"
+    "perf:check": "node scripts/performance-check.mjs",
+    "typecheck": "npm run prepare:content && next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -22,6 +23,10 @@
     "sanitize-html": "^2.17.0"
   },
   "devDependencies": {
-    "prettier": "^3.6.2"
+    "@types/node": "22.19.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "prettier": "^3.6.2",
+    "typescript": "7.0.2"
   }
 }

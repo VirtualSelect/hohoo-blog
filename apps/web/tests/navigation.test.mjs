@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { languageUrl } from "../lib/navigation.mjs";
+import { languageUrl } from "../lib/navigation.ts";
 
 test("language changes discard stale anchors while preserving page and filters", () => {
   for (const [route, hash] of [
