@@ -4,8 +4,8 @@
     "project:hohoo-embodied-agent"
   ],
   "featuredArticles": [
-    "doc:embodied-ai/mujoco-recovery-gate",
-    "doc:ai-apps/typescript-output-boundary"
+    "doc:embodied-ai/mujoco-recovery-ablation",
+    "doc:llm/context-similar-distractors"
   ],
   "featuredMedia": {
     "doc:embodied-ai/mujoco-observation-freshness": {
@@ -23,6 +23,14 @@
       "alt": "真实控制日志：旧包重送下的反复启停与重新验收",
       "altEn": "Recorded control: repeated stale-packet resumptions versus revalidation",
       "altTw": "真實控制紀錄：舊包重送下的反覆啟停與重新驗收"
+    },
+    "doc:embodied-ai/mujoco-recovery-ablation": {
+      "src": "/media/practice/ablation-jumps.png",
+      "width": 1800,
+      "height": 675,
+      "alt": "四对真实恢复目标跳变；左右子图横轴刻度不同，请对照数值",
+      "altEn": "Four measured recovery-target pairs; panels use different x-axis scales, compare numeric values",
+      "altTw": "四對真實恢復目標跳變；左右子圖橫軸刻度不同，請對照數值"
     }
   }
 }

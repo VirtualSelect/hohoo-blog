@@ -1058,5 +1058,20 @@
   },
   "journey.lab.VL01.freshnessResult": {
     "message": "已记录四轮仿真。最新45回合检验采样、旧包和静默；年龄检查识别过期证据，但不恢复抓取，完整VL01仍在学习中。"
+  },
+  "journey.lab.VL01.recoveryArticle": {
+    "message": "第五篇：重新验收后恢复"
+  },
+  "journey.lab.VL01.ablationArticle": {
+    "message": "第六篇：恢复门控与路径消融"
+  },
+  "journey.lab.VL01.ablationCode": {
+    "message": "E6 / 恢复消融代码"
+  },
+  "journey.lab.VL01.ablationEvidence": {
+    "message": "E6 / 30回合与回归证据"
+  },
+  "journey.lab.VL01.ablationResult": {
+    "message": "六轮固定场景对照已归档。E6拆开恢复门控和路径重规划：目标跳变明显降低，但没有观察到放置率提升；完整M4/M5仍待推进。"
   }
 }

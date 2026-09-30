@@ -28,7 +28,10 @@
       "descriptionKey": "journey.lab.VL01.description",
       "robotKey": "journey.lab.VL01.robot",
       "environmentKey": "journey.lab.VL01.environment",
-      "milestones": ["M4", "M5"],
+      "milestones": [
+        "M4",
+        "M5"
+      ],
       "status": "learning",
       "topics": [
         "Joint",
@@ -82,6 +85,14 @@
         {
           "href": "/docs/embodied-ai/mujoco-observation-freshness",
           "titleKey": "journey.lab.VL01.freshnessArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-recovery-gate",
+          "titleKey": "journey.lab.VL01.recoveryArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-recovery-ablation",
+          "titleKey": "journey.lab.VL01.ablationArticle"
         }
       ],
       "demos": [
@@ -106,6 +117,10 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/581e8e383b397eff947880d888f5c089204bba98/experiments/vl01_transfer_monitor",
           "titleKey": "journey.lab.VL01.monitorCode"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/31166a333a51e9ca580c6c2dff9edcfca1dacb90/experiments/vl01_recovery_ablation",
+          "titleKey": "journey.lab.VL01.ablationCode"
         }
       ],
       "evidence": [
@@ -124,9 +139,13 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86/evidence/freshness-20260929",
           "titleKey": "journey.lab.VL01.freshnessEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/31166a333a51e9ca580c6c2dff9edcfca1dacb90/evidence/recovery-ablation-20260930",
+          "titleKey": "journey.lab.VL01.ablationEvidence"
         }
       ],
-      "result": "journey.lab.VL01.freshnessResult",
+      "result": "journey.lab.VL01.ablationResult",
       "startedAt": "2026-09-28",
       "completedAt": null
     },
@@ -139,7 +158,11 @@
       "descriptionKey": "journey.lab.VL02.description",
       "robotKey": "journey.lab.VL02.robot",
       "environmentKey": "journey.lab.VL02.environment",
-      "milestones": ["M3", "M4", "M8"],
+      "milestones": [
+        "M3",
+        "M4",
+        "M8"
+      ],
       "status": "planning",
       "topics": [
         "Node",
@@ -195,7 +218,11 @@
       "descriptionKey": "journey.lab.VL03.description",
       "robotKey": "journey.lab.VL03.robot",
       "environmentKey": "journey.lab.VL03.environment",
-      "milestones": ["M6", "M9", "M10"],
+      "milestones": [
+        "M6",
+        "M9",
+        "M10"
+      ],
       "status": "planning",
       "topics": [
         "PyTorch",
@@ -241,7 +268,9 @@
       "descriptionKey": "journey.lab.VL04.description",
       "robotKey": "journey.lab.VL04.robot",
       "environmentKey": "journey.lab.VL04.environment",
-      "milestones": ["M10"],
+      "milestones": [
+        "M10"
+      ],
       "status": "future",
       "topics": [
         "Isaac Sim",

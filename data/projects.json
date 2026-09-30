@@ -102,7 +102,8 @@
       "doc:ai-apps/java-transactional-history",
       "doc:ai-apps/typescript-output-boundary",
       "lab:transactional-history",
-      "lab:typescript-output-boundary"
+      "lab:typescript-output-boundary",
+      "doc:llm/context-similar-distractors"
     ],
     "architecture": [
       "Console input",
@@ -233,6 +234,24 @@
         "description": "32组对照 · 原始JSON与unknown · 无模型调用",
         "descriptionEn": "32 cases · raw JSON and unknown · no model calls",
         "descriptionTw": "32組對照 · 原始JSON與unknown · 無模型呼叫"
+      },
+      {
+        "href": "/docs/llm/context-similar-distractors",
+        "label": "L1v3：相似干扰实验设计",
+        "labelEn": "L1v3: similar-distractor design",
+        "labelTw": "L1v3：相似干擾實驗設計",
+        "description": "128项冻结材料，Java 8与独立审计通过；尚未在线执行",
+        "descriptionEn": "128 frozen items verified in Java 8 and independently audited; no live run yet",
+        "descriptionTw": "128項凍結材料，Java 8與獨立稽核通過；尚未線上執行"
+      },
+      {
+        "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/987c9f06e3f6db01cc274ea17cfe9a1e2ffe854a/experiments/04-context-position-similar",
+        "label": "相似干扰工程与冻结请求",
+        "labelEn": "Similar-distractor code and frozen requests",
+        "labelTw": "相似干擾工程與凍結請求",
+        "description": "2515项Java离线断言、60项Node测试、0次真实请求",
+        "descriptionEn": "2,515 Java offline checks, 60 Node tests, zero live requests",
+        "descriptionTw": "2515項Java離線斷言、60項Node測試、0次真實請求"
       }
     ],
     "titleTw": "Java LLM 實作集",
@@ -248,9 +267,9 @@
     "title": "Hohoo 具身实验",
     "titleEn": "Hohoo Embodied Experiments",
     "titleTw": "Hohoo 具身實驗",
-    "description": "五轮MuJoCo教学对照：从拾取偏移到恢复门控，保留原始轨迹、决策与独立审计。",
-    "descriptionEn": "Five MuJoCo teaching experiments, from pickup bias to recovery gating, with raw trajectories, decisions and independent audits.",
-    "descriptionTw": "五輪MuJoCo教學對照：從拾取偏移到恢復門控，保留原始軌跡、決策與獨立稽核。",
+    "description": "六轮MuJoCo教学对照：从拾取偏移到恢复消融，保留原始轨迹、决策与独立审计。",
+    "descriptionEn": "Six MuJoCo teaching experiments, from pickup bias to recovery ablation, with raw trajectories, decisions and independent audits.",
+    "descriptionTw": "六輪MuJoCo教學對照：從拾取偏移到恢復消融，保留原始軌跡、決策與獨立稽核。",
     "domain": "embodied-ai",
     "status": "experiment",
     "date": "2026-09-28",
@@ -271,14 +290,16 @@
       "doc:embodied-ai/mujoco-transfer-monitor",
       "doc:embodied-ai/mujoco-observation-freshness",
       "doc:embodied-ai/mujoco-recovery-gate",
-      "lab:recovery-gate"
+      "lab:recovery-gate",
+      "doc:embodied-ai/mujoco-recovery-ablation",
+      "lab:recovery-ablation"
     ],
     "sections": [
       {
         "heading": "Overview",
-        "zh": "五轮实验覆盖拾取偏移、抓取门控、持续监测、观测新鲜度与条件恢复。复用同一夹爪场景，逐轮保存代码、协议与原始数据。",
-        "en": "Five experiments cover pickup bias, grasp gating, monitoring, freshness and conditional recovery. Each archives code, protocol and raw data from the same gripper scene.",
-        "tw": "五輪實驗涵蓋拾取偏移、抓取門控、持續監測、觀測新鮮度與條件恢復。共用夾爪場景，逐輪保存程式、協定與原始資料。"
+        "zh": "六轮实验覆盖拾取偏移、抓取门控、持续监测、观测新鲜度、条件恢复与门控/路径消融。复用同一夹爪场景，逐轮保存代码、协议与原始数据。",
+        "en": "Six experiments cover pickup bias, grasp gating, monitoring, freshness, conditional recovery and gate/path ablation. Each archives code, protocol and raw data from the same gripper scene.",
+        "tw": "六輪實驗涵蓋拾取偏移、抓取門控、持續監測、觀測新鮮度、條件恢復與門控/路徑消融。共用夾爪場景，逐輪保存程式、協定與原始資料。"
       },
       {
         "heading": "Goal",
@@ -294,9 +315,9 @@
       },
       {
         "heading": "Validation",
-        "zh": "五轮分别9、18、27、45、18回合。最新18项边界测试通过；独立审计核对12组一致前缀、2个恢复窗口、108份原始文件。固定条件，不报告泛化成功率。",
-        "en": "The rounds contain 9, 18, 27, 45 and 18 rollouts. Latest: 18 boundary tests, 12 identical prefixes, two recovery windows and 108 audited raw files. Fixed conditions, no generalization rate.",
-        "tw": "五輪分別9、18、27、45、18回合。最新18項邊界測試通過；獨立稽核12組一致前綴、2個恢復窗口、108份原始檔。固定條件，不報告泛化成功率。"
+        "zh": "六轮分别9、18、27、45、18、30回合。E6另有18回合E5回归；本机30项测试通过，独立核对180份文件、36组前缀与102次恢复。固定条件，不报告泛化成功率。",
+        "en": "The six rounds contain 9, 18, 27, 45, 18 and 30 rollouts. E6 adds 18 E5 regression runs. Local checks: 30 tests, 180 audited files, 36 prefixes and 102 resumptions. Fixed conditions, no generalization rate.",
+        "tw": "六輪分別9、18、27、45、18、30回合。E6另有18回合E5回歸；本機30項測試通過，獨立核對180份檔案、36組前綴與102次恢復。固定條件，不報告泛化成功率。"
       },
       {
         "heading": "Limitations",
@@ -368,6 +389,24 @@
         "description": "18回合 · 旧包反复启停 · 新证据与路径重规划",
         "descriptionEn": "18 rollouts · replay-driven cycling · new evidence and replanning",
         "descriptionTw": "18回合 · 舊包反覆啟停 · 新證據與路徑重新規劃"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-recovery-ablation",
+        "label": "第六篇：恢复门控与路径消融",
+        "labelEn": "Practice VI: gate/path ablation",
+        "labelTw": "第六篇：恢復門控與路徑消融",
+        "description": "30回合 · 目标跳变 · 72次恢复的监测范围问题",
+        "descriptionEn": "30 rollouts · target jumps · the monitoring scope behind 72 resumptions",
+        "descriptionTw": "30回合 · 目標跳變 · 72次恢復的監測範圍問題"
+      },
+      {
+        "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/31166a333a51e9ca580c6c2dff9edcfca1dacb90/evidence/recovery-ablation-20260930",
+        "label": "E6代码与原始证据",
+        "labelEn": "E6 code and raw evidence",
+        "labelTw": "E6程式碼與原始證據",
+        "description": "30回合消融与18回合回归，保留原始运行与独立复核",
+        "descriptionEn": "30 ablation and 18 regression runs; original execution and independent revalidation",
+        "descriptionTw": "30回合消融與18回合回歸，保留原始執行與獨立複核"
       }
     ]
   }

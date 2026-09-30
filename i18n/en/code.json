@@ -1667,5 +1667,20 @@
   },
   "journey.lab.VL01.freshnessResult": {
     "message": "Four simulation experiments recorded. The latest 45 rollouts test sampling, stale packets and silence. Age checks detect expired evidence, not grasp recovery; full VL01 remains in progress."
+  },
+  "journey.lab.VL01.recoveryArticle": {
+    "message": "Practice V: revalidate before resuming"
+  },
+  "journey.lab.VL01.ablationArticle": {
+    "message": "Practice VI: gate/path ablation"
+  },
+  "journey.lab.VL01.ablationCode": {
+    "message": "E6 / Recovery ablation code"
+  },
+  "journey.lab.VL01.ablationEvidence": {
+    "message": "E6 / 30 rollouts and regression evidence"
+  },
+  "journey.lab.VL01.ablationResult": {
+    "message": "Six fixed-scene experiments are archived. E6 separates the gate and path: target jumps decrease, without an observed placement-rate gain. Full M4/M5 milestones remain open."
   }
 }

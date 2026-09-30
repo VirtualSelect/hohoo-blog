@@ -1474,5 +1474,20 @@
   },
   "journey.lab.VL01.freshnessResult": {
     "message": "已記錄四輪模擬。最新45回合檢驗取樣、舊封包與靜默；年齡檢查識別過期證據，但不恢復抓取，完整VL01仍在學習中。"
+  },
+  "journey.lab.VL01.recoveryArticle": {
+    "message": "第五篇：重新驗收後恢復"
+  },
+  "journey.lab.VL01.ablationArticle": {
+    "message": "第六篇：恢復門控與路徑消融"
+  },
+  "journey.lab.VL01.ablationCode": {
+    "message": "E6 / 恢復消融程式碼"
+  },
+  "journey.lab.VL01.ablationEvidence": {
+    "message": "E6 / 30回合與回歸證據"
+  },
+  "journey.lab.VL01.ablationResult": {
+    "message": "六輪固定場景對照已歸檔。E6拆開恢復門控與路徑重新規劃：目標跳變明顯降低，但未觀察到放置率提升；完整M4/M5仍待推進。"
   }
 }
