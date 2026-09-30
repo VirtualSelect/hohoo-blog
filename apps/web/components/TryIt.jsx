@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useText } from "./Shell";
 import styles from "./LearningExercises.module.css";
+/** @param {{ id: string, title: string, anchors?: string[], children: import('react').ReactNode }} props */
 export default function TryIt({ id, title, anchors = [], children }) {
   const t = useText(),
     ref = useRef(null);

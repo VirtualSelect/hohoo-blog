@@ -24,6 +24,8 @@ jobs:
       - run: npm ci --prefix apps/web --no-audit --no-fund
       - name: Check application formatting
         run: npm run format:check
+      - name: Check application types
+        run: npm run typecheck
       - run: npm run test:web
       - run: node --test tests/content-index.test.cjs tests/learning-progress.test.mjs tests/radar.test.cjs
       - run: npm run test:news

@@ -2,3 +2,5 @@ node_modules/
 .next/
 generated/
 public/
+*.tsbuildinfo
+next-env.d.ts

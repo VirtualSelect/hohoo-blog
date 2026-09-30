@@ -1,3 +1,7 @@
 # Keep the application format check stable across Windows and Linux checkouts.
 # Binary files remain binary; historical research evidence elsewhere is untouched.
 apps/web/** text=auto eol=lf
+# Shared TypeScript modules checked by the web application.
+src/**/*.tsx text eol=lf
+src/**/*.ts text eol=lf
+tsconfig.json text eol=lf

@@ -1,8 +1,11 @@
 "use client";
 import { createContext, use } from "react";
-export const SiteContext = createContext(null);
+import type { SiteContextValue } from "../lib/site-types";
+export const SiteContext = createContext<SiteContextValue | null>(null);
 export function useSite() {
-  return use(SiteContext);
+  const site = use(SiteContext);
+  if (!site) throw new Error("SiteContext must be provided by Shell");
+  return site;
 }
 export default function useSiteConfig() {
   const { locale } = useSite();

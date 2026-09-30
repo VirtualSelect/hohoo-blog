@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { useSite } from "../runtime/context";
+import { useDoc } from "../runtime/doc";
+import type { PropsWithChildren } from "react";
+import type { ReaderWidth } from "../lib/reader-settings.ts";
 import { useText } from "./Shell";
 import Link from "../runtime/Link";
 import DocReadingContext from "@site/src/components/DocReadingContext";
@@ -22,16 +24,19 @@ const OutputValidation = dynamic(() => import("./OutputValidation"));
 import {
   readerSettingsKey,
   parseReaderSettings,
-} from "../lib/reader-settings.mjs";
-export default function Document({ children }) {
-  const { document: d } = useSite(),
+} from "../lib/reader-settings.ts";
+export default function Document({ children }: PropsWithChildren) {
+  const d = useDoc(),
     t = useText(),
-    ref = useRef(null);
-  const [readerWidth, setReaderWidth] = useState("standard");
+    ref = useRef<HTMLDivElement>(null);
+  const [readerWidth, setReaderWidth] = useState<ReaderWidth>("standard");
   const [storageError, setStorageError] = useState(false);
-  const imageDialog = useRef(null);
-  const imageTrigger = useRef(null);
-  const [zoomImage, setZoomImage] = useState(null);
+  const imageDialog = useRef<HTMLDialogElement>(null);
+  const imageTrigger = useRef<HTMLButtonElement>(null);
+  const [zoomImage, setZoomImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
   useEffect(() => {
     try {
       setReaderWidth(
@@ -53,9 +58,9 @@ export default function Document({ children }) {
     }
   }
   useEffect(() => {
-    const buttons = [];
-    const cleanups = [];
-    const timers = new Set();
+    const buttons: HTMLButtonElement[] = [];
+    const cleanups: (() => void)[] = [];
+    const timers = new Set<ReturnType<typeof setTimeout>>();
     for (const pre of ref.current?.querySelectorAll("pre") || []) {
       const b = window.document.createElement("button");
       b.className = "copy-code";
@@ -107,7 +112,9 @@ export default function Document({ children }) {
         cleanups.push(() => pre.classList.remove("code-collapsed"));
       }
     }
-    for (const img of ref.current?.querySelectorAll(".prose img") || []) {
+    for (const img of ref.current?.querySelectorAll<HTMLImageElement>(
+      ".prose img",
+    ) || []) {
       const zoom = window.document.createElement("button");
       zoom.type = "button";
       zoom.className = "image-zoom";
@@ -115,7 +122,7 @@ export default function Document({ children }) {
       zoom.onclick = () => {
         imageTrigger.current = zoom;
         setZoomImage({ src: img.currentSrc || img.src, alt: img.alt });
-        imageDialog.current.showModal();
+        imageDialog.current?.showModal();
       };
       img.after(zoom);
       buttons.push(zoom);
@@ -211,7 +218,7 @@ export default function Document({ children }) {
             href="#article-toc"
             onClick={() => {
               const toc = window.document.getElementById("article-toc");
-              if (toc) toc.open = true;
+              if (toc instanceof HTMLDetailsElement) toc.open = true;
             }}
           >
             {t("目录", "Contents", "目錄")}
@@ -326,7 +333,7 @@ export default function Document({ children }) {
           imageTrigger.current?.focus({ preventScroll: true });
         }}
       >
-        <button onClick={() => imageDialog.current.close()}>
+        <button onClick={() => imageDialog.current?.close()}>
           {t("关闭", "Close", "關閉")} ×
         </button>
         {zoomImage && <img src={zoomImage.src} alt={zoomImage.alt} />}

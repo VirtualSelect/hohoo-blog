@@ -7,7 +7,7 @@ import {
   parseProgress,
   migrateProgress,
   updateProgress,
-} from '@site/src/utils/learning-progress.mjs';
+} from '@site/src/utils/learning-progress.ts';
 const ids = tracks.flatMap((t) => t.steps.map((s) => s.id));
 const eventName = 'huhohoo-learning-change';
 let memory = emptyProgress(),

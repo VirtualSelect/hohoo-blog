@@ -1,6 +1,12 @@
 "use client";
 import Link, { useLinkStatus } from "next/link";
 import { useSite } from "./context";
+import type { ComponentProps } from "react";
+type LocalLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
+  to?: string;
+  href?: string;
+  autoAddBaseUrl?: boolean;
+};
 function Pending() {
   const { pending } = useLinkStatus();
   const { locale } = useSite();
@@ -21,7 +27,7 @@ export default function LocalLink({
   children,
   autoAddBaseUrl,
   ...props
-}) {
+}: LocalLinkProps) {
   const { locale } = useSite();
   let target = to || href || "/";
   if (

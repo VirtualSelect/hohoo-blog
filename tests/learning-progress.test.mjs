@@ -5,7 +5,7 @@ import {
   migrateProgress,
   updateProgress,
   emptyProgress,
-} from '../src/utils/learning-progress.mjs';
+} from '../src/utils/learning-progress.ts';
 test('legacy saves and completions migrate without invented timestamps', () => {
   const state = migrateProgress(
     JSON.stringify({
@@ -45,4 +45,13 @@ test('reading, completion and saving remain independent and resume is recorded',
   assert.equal(state.items.a.status, 'reading');
   assert.deepEqual(updateProgress(state, 'a', 'completed').saved, ['a']);
   assert.equal(updateProgress(state, 'a', 'saved').items.a.status, 'reading');
+});
+
+test('unexpected JSON shapes never become learning records', () => {
+  for (const value of [null, [], 12, true, { version: 1, items: ['reading'], saved: [12, null] }, { version: 1, items: { a: null, b: [] } }]) {
+    assert.deepEqual(parseProgress(JSON.stringify(value), ['a', 'b']), emptyProgress());
+  }
+  assert.deepEqual(migrateProgress('[]', ['a']), emptyProgress());
+  const state = parseProgress(JSON.stringify({version: 1, items: {a: {status: 'reading', updatedAt: 'not-a-date'}}}), ['a']);
+  assert.deepEqual(state.items.a, {status: 'reading'});
 });

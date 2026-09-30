@@ -6,23 +6,26 @@ import { SiteContext, useSite } from "../runtime/context";
 import Link from "../runtime/Link";
 import dynamic from "next/dynamic";
 const Search = dynamic(() => import("./Search"));
-import { languageUrl } from "../lib/navigation.mjs";
+import { languageUrl } from "../lib/navigation.ts";
+import { isLocale, type SiteContextValue } from "../lib/site-types";
+import type { PropsWithChildren, ReactNode } from "react";
 export function useText() {
   const { locale } = useSite();
   return useCallback(
-    (zh, en, tw = zh) => (locale === "en" ? en : locale === "zh-TW" ? tw : zh),
+    (zh: string, en: string, tw = zh) =>
+      locale === "en" ? en : locale === "zh-TW" ? tw : zh,
     [locale],
   );
 }
-function Frame({ children }) {
+function Frame({ children }: PropsWithChildren) {
   const { locale, route } = useSite(),
     t = useText(),
     [menu, setMenu] = useState(false),
     [search, setSearch] = useState(false);
-  const trigger = useRef(null);
-  const menuTrigger = useRef(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const menuTrigger = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    const key = (e) => {
+    const key = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         setSearch(true);
@@ -42,7 +45,7 @@ function Frame({ children }) {
     setSearch(false);
     document.documentElement.lang = locale;
   }, [route, locale]);
-  const nav = [
+  const nav: [string, ReactNode][] = [
     ["articles", t("文章", "Writing", "文章")],
     ["journey", <Translate key="journey" id="journey.nav" />],
     ["build", t("实践", "Build", "實作")],
@@ -98,6 +101,7 @@ function Frame({ children }) {
             id="language"
             value={locale}
             onChange={(e) => {
+              if (!isLocale(e.target.value)) return;
               window.location.assign(
                 languageUrl(e.target.value, route, window.location.href),
               );
@@ -165,7 +169,10 @@ function Frame({ children }) {
     </div>
   );
 }
-export default function Shell({ value, children }) {
+export default function Shell({
+  value,
+  children,
+}: PropsWithChildren<{ value: SiteContextValue }>) {
   return (
     <SiteContext.Provider value={value}>
       <Frame>{children}</Frame>

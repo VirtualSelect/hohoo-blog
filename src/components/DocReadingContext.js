@@ -8,7 +8,7 @@ import { useContentData } from "@lab/runtime/data";
 import tracks from "@site/data/learning-paths.json";
 import { Related, useEnglish } from "./ContentUI";
 import useLearningProgress from "./useLearningProgress";
-import { learningSymbols } from "@site/src/utils/learning-progress.mjs";
+import { learningSymbols } from "@site/src/utils/learning-progress.ts";
 import WritingKind from "./WritingKind";
 export default function DocReadingContext({ position }) {
   const { metadata, frontMatter: f } = useDoc();

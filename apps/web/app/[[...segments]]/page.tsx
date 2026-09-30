@@ -4,12 +4,15 @@ import {
   getMessages,
   resolveSegments,
   locales,
+  toClientDocument,
 } from "../../lib/content";
 import Shell from "../../components/Shell";
 import RouteContent from "../../components/RouteContent";
 import Journey from "../../components/Journey";
 import VirtualLab from "../../components/VirtualLab";
-const aliases = {
+import type { Metadata } from "next";
+type RouteProps = { params: Promise<{ segments?: string[] }> };
+const aliases: Record<string, string | undefined> = {
   aboutMe: "about",
   news: "radar",
   lab: "labs",
@@ -27,21 +30,25 @@ export function generateStaticParams() {
     })),
   );
 }
-function read(segments) {
+function read(segments?: string[]) {
   const { locale, route } = resolveSegments(segments);
   return { locale, route, data: getContent(locale) };
 }
-export async function generateMetadata({ params }) {
+export async function generateMetadata({
+  params,
+}: RouteProps): Promise<Metadata> {
   const { locale, route, data } = read((await params).segments);
   const entry = data.globalData["content-index"].entries.find(
     (e) => e.href === (locale === "zh-CN" ? "" : "/" + locale) + "/" + route,
   );
   const doc = data.documents.find((d) => d.route === route);
-  const titles = {
+  const titles: Record<string, string[]> = {
     articles: ["文章", "Writing", "文章"],
-    journey: Array(3).fill(getMessages(locale)["journey.title"].message),
+    journey: Array(3).fill(
+      getMessages(locale)["journey.title"]?.message || "AI Journey",
+    ),
     "journey/virtual-lab": Array(3).fill(
-      getMessages(locale)["journey.virtual.title"].message,
+      getMessages(locale)["journey.virtual.title"]?.message || "Virtual Lab",
     ),
     learning: ["学习路线", "Learning", "學習路線"],
     build: ["实践", "Build", "實作"],
@@ -66,10 +73,10 @@ export async function generateMetadata({ params }) {
     (route ? route : "Hohoo's AI Lab");
   const description =
     (route === "journey/virtual-lab"
-      ? getMessages(locale)["journey.virtual.intro"].message
+      ? getMessages(locale)["journey.virtual.intro"]?.message
       : null) ||
     (route === "journey"
-      ? getMessages(locale)["journey.intro"].message
+      ? getMessages(locale)["journey.intro"]?.message
       : null) ||
     doc?.metadata.description ||
     entry?.description ||
@@ -104,7 +111,7 @@ export async function generateMetadata({ params }) {
     },
   };
 }
-export default async function Page({ params }) {
+export default async function Page({ params }: RouteProps) {
   const { locale, route, data } = read((await params).segments);
   if (aliases[route])
     permanentRedirect(
@@ -128,13 +135,13 @@ export default async function Page({ params }) {
         searchUrl: data.searchUrl,
         radarArchive: route === "radar" ? data.radarArchive : null,
         messages: getMessages(locale),
-        document: document ? { ...document, html: undefined } : null,
+        document: document ? toClientDocument(document) : null,
       }}
     >
       {document &&
       !document.frontMatter.landing &&
       ["docs", "blog"].includes(document.kind) ? (
-        <RouteContent kind="document" locale={locale}>
+        <RouteContent kind="document">
           <div
             className="prose"
             dangerouslySetInnerHTML={{ __html: document.html }}
@@ -145,7 +152,7 @@ export default async function Page({ params }) {
       ) : route === "journey/virtual-lab" ? (
         <VirtualLab locale={locale} />
       ) : (
-        <RouteContent kind="views" locale={locale} />
+        <RouteContent kind="views" />
       )}
     </Shell>
   );

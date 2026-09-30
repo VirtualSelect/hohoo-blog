@@ -3,7 +3,9 @@ import "../editorial.css";
 import { resolveSegments } from "../../lib/content";
 import VisitAnalytics from "../../components/VisitAnalytics";
 import { themeScript } from "../../lib/theme-init.mjs";
-export const metadata = {
+import type { Metadata } from "next";
+import type { PropsWithChildren } from "react";
+export const metadata: Metadata = {
   metadataBase: new URL("https://huhohoo.com"),
   title: { default: "Hohoo's AI Lab", template: "%s · Hohoo" },
   description: "公开学习、实验、构建与分享 AI。",
@@ -13,7 +15,10 @@ export const metadata = {
     apple: "/img/hohoo.jpg",
   },
 };
-export default async function RootLayout({ children, params }) {
+export default async function RootLayout({
+  children,
+  params,
+}: PropsWithChildren<{ params: Promise<{ segments?: string[] }> }>) {
   const { locale } = resolveSegments((await params).segments);
   return (
     <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>

@@ -16,6 +16,7 @@ const snippets = [
   'JsonObject root = JsonParser.parseString(responseBody)\n    .getAsJsonObject();\nString answer = root.getAsJsonArray("choices")\n    .get(0).getAsJsonObject()\n    .getAsJsonObject("message")\n    .get("content").getAsString();\nSystem.out.println(answer.trim());',
   'history.add(new ChatMessage("user", question));\nChatResponse response = request(history);\nhistory.add(new ChatMessage(\n    "assistant", response.content));',
 ];
+/** @param {{ mode?: string, headings?: import('../lib/site-types').Heading[] }} props */
 export default function FlagshipExperience({ mode = "guide", headings = [] }) {
   const t = useText();
   const [stage, setStage] = useState(0),

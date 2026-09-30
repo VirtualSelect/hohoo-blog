@@ -1,6 +1,6 @@
 # Next.js 博客
 
-用户授权的全站重构分支：`codex/nextjs-redesign`。
+当前博客的 Next.js App Router 应用。核心阅读链路已接入 TypeScript，其他 JS/JSX 渐进共存。
 
 ## 运行
 
@@ -9,12 +9,15 @@
 - `npm start`：新版开发服务，http://localhost:4181
 - `npm run build`：内容构建与 Next.js 生产构建
 - `npm run preview`：新版生产预览
+- `npm run typecheck`：生成内容与路由声明，严格检查应用及共享 TS 代码（根目录同名命令亦可使用）
+
+维护边界见 [TypeScript 说明](../../docs/TYPESCRIPT.md)。编译器与类型包仅在开发/构建阶段使用，不加入浏览器运行时。
 
 ## 内容与边界
 
 `scripts/content.mjs` 读取原有 docs/blog/JSON/翻译目录，复用内容校验、学习索引与 Radar 去重逻辑，不依赖 `.docusaurus` 或旧站点构建产物。生成数据与 public 资源不入库。
 
-App Router 管理路由、metadata、404、旧地址跳转、sitemap、robots。为服务端正确输出三语言 `html lang`，当前使用轻量请求头代理与 SSR；内容预处理仍在构建阶段完成，没有实时采集或模型请求。
+App Router 管理路由、metadata、404、旧地址跳转、sitemap、robots。三语言路径在构建阶段生成静态 HTML，layout 根据路径输出 `html lang`；内容预处理在构建阶段完成，没有实时采集或模型请求。
 
 首页、导航、搜索、Radar、About、文章阅读器为 Next.js 新组件。`runtime` 提供站点自己的 Link、翻译与内容上下文；共享组件直接导入这些模块，不再使用 Docusaurus API 或别名。保留原组件用于复用收藏、学习进度和实验证据逻辑。
 

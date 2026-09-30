@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
-import kinds from "../../../src/utils/writing-kinds.cjs";
+import * as kinds from "../../../src/utils/writing-kinds.ts";
 import localization from "../../../src/utils/localization.cjs";
 
 const articles = [

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { parseReaderSettings } from "../lib/reader-settings.mjs";
+import { parseReaderSettings } from "../lib/reader-settings.ts";
 test("reader preferences recover from missing, corrupt and unknown versions", () => {
   for (const value of [
     null,
