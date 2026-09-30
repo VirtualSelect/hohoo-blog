@@ -1,5 +1,20 @@
 [
   {
+    "id": "7f13e679aeee10fa5f70",
+    "title": "Expanding AI Storage Access with NVIDIA cuObject and the NVIDIA SCADA Server SDK",
+    "url": "https://developer.nvidia.com/blog/expanding-ai-storage-access-with-nvidia-cuobject-and-the-nvidia-scada-server-sdk",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-09-30T19:13:02.000Z",
+    "collectedAt": "2026-09-30T20:58:43.436Z",
+    "category": "ai-apps",
+    "summary": "AI infrastructure engineers, storage developers, and cloud service providers need fast and secure access to high-capacity file and object storage to support AI... AI infrastruct…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-cf9abf3b",
+    "coverage": []
+  },
+  {
     "id": "ba8133a0e65d65f160a5",
     "title": "Tracing Agent Harness Behavior with NVIDIA NeMo Relay",
     "url": "https://developer.nvidia.com/blog/tracing-agent-harness-behavior-with-nvidia-nemo-relay",
@@ -42,6 +57,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-7eeda4c",
+    "coverage": []
+  },
+  {
+    "id": "01be3c1c5d73dd6b44e9",
+    "title": "Gondola: Grounded Vision Language Planning for Robotic Manipulation",
+    "url": "https://arxiv.org/abs/2506.11261",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-09-30T04:00:00.000Z",
+    "collectedAt": "2026-09-30T20:58:43.436Z",
+    "category": "embodied-ai",
+    "summary": "Vision-language-action (VLA) models have shown promising progress in robotic manipulation. However, directly mapping visual observations and language instructions to low-level a…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-49edff50",
     "coverage": []
   },
   {
