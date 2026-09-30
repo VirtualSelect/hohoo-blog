@@ -212,9 +212,9 @@
         "label": "L1v2：成组对照与请求节流",
         "labelEn": "L1v2: paired blocks and pacing",
         "labelTw": "L1v2：成組對照與請求節流",
-        "description": "80项离线检查与24项请求计划；尚无新模型实测。",
-        "descriptionEn": "80 offline checks and a 24-request plan; no new live model results.",
-        "descriptionTw": "80項離線檢查與24項請求計畫；尚無新模型實測。"
+        "description": "Agnes 3.0完成24次真实请求、6组对照；原始响应、用量与独立审计均可复核。",
+        "descriptionEn": "24 live Agnes 3.0 requests in six complete blocks, with responses, usage and independent auditing.",
+        "descriptionTw": "Agnes 3.0完成24次真實請求、6組對照；原始回應、用量與獨立稽核均可複核。"
       },
       {
         "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/405c25668d9bb9aee0ccb258b258103271314300/demos/05-transactional-chat",

@@ -10,10 +10,10 @@
     },
     {
       "kind": "LEARNING",
-      "zh": "把上下文试验改为成组对照，先检查材料与请求预算。",
-      "en": "Rebuilding context trials around paired blocks, material checks and request budgets.",
+      "zh": "完成Agnes 3.0的24次成组对照，核对全对结果能支持什么结论。",
+      "en": "Auditing 24 paired Agnes 3.0 calls and the limits of their perfect observed score.",
       "to": "/docs/llm/context-position-paired-protocol",
-      "tw": "把上下文試驗改為成組對照，先檢查材料與請求預算。"
+      "tw": "完成Agnes 3.0的24次成組對照，核對全對結果能支持什麼結論。"
     },
     {
       "kind": "READING",
@@ -31,10 +31,10 @@
     },
     {
       "kind": "NEXT",
-      "zh": "分离恢复门控与路径重规划的影响；Agnes 3.0成组对照已准备，尚无新实测。",
-      "en": "Separate recovery gating from replanning; the Agnes 3.0 paired trial is prepared, with no new live results.",
+      "zh": "分离恢复门控与路径重规划的影响；为上下文试验设计更有区分度的材料。",
+      "en": "Separate recovery gating from replanning, and design more discriminating context materials.",
       "to": "/docs/llm/context-position-paired-protocol",
-      "tw": "分離恢復門控與路徑重新規劃的影響；Agnes 3.0成組對照已備妥，尚無新實測。"
+      "tw": "分離恢復門控與路徑重新規劃的影響；為上下文試驗設計更具區分度的材料。"
     }
   ]
 }

@@ -33,6 +33,7 @@ Windows 旧终端未更新 Node 路径时可运行 `. ./scripts/use-node.ps1`。
 ## 验证
 
 ```sh
+npm run format:check
 npm run test:web
 node --test tests/*.test.cjs tests/*.test.mjs
 npm run i18n:check
@@ -41,6 +42,8 @@ npm run build
 # 启动生产预览后：
 npm run test:routes --prefix apps/web
 ```
+
+`format:check` 从仓库根目录调用现有应用检查，覆盖 `apps/web` 的 app、components、runtime、lib、scripts、tests 与 next.config.mjs。应用文件由 `.gitattributes` 固定 LF 换行，避免 Windows 检出后出现仅换行造成的告警；CI 使用同一命令。Markdown 内容、研究原始证据和生成目录不纳入这项应用格式检查，也不因此被改写。
 
 ## 维护与部署
 
