@@ -9,7 +9,9 @@
     "number": "001",
     "status": "planning",
     "domain": "ai-apps",
-    "related": ["paper:2005.11401"],
+    "related": [
+      "paper:2005.11401"
+    ],
     "design": {
       "zh": {
         "hypothesis": "在资料确实包含答案的问题上，固定生成模型后，加入检索可能改善可追溯回答；资料缺失时不一定改善。",
@@ -51,7 +53,9 @@
     "number": "002",
     "status": "planning",
     "domain": "ai-apps",
-    "related": ["paper:2210.03629"],
+    "related": [
+      "paper:2210.03629"
+    ],
     "design": {
       "zh": {
         "hypothesis": "有限重试和明确的工具错误结构可能改善可恢复故障下的任务完成情况，但会增加调用成本。",
@@ -93,7 +97,9 @@
     "number": "003",
     "status": "planning",
     "domain": "embodied-ai",
-    "related": ["paper:2307.15818"],
+    "related": [
+      "paper:2307.15818"
+    ],
     "design": {
       "zh": {
         "hypothesis": "在固定动作范围的仿真任务中，离散表示的粒度会影响表示误差与可达动作的精度。",
@@ -317,5 +323,119 @@
     "reproduce": "17项新边界测试及原有24项测试通过；45回合独立审计，45对状态前缀相同、9条旧基线复现。180份已提交原始文件哈希一致。",
     "reproduceEn": "17 new and 24 existing tests passed; 45 independently audited rollouts, 45 matching prefixes and nine reproduced baselines. 180 committed raw-file hashes match.",
     "reproduceTw": "17項新邊界測試與原有24項測試通過；45回合獨立審計，45對狀態前綴相同、9條舊基線重現。180份已提交原始檔案雜湊一致。"
+  },
+  {
+    "id": "recovery-gate",
+    "number": "009",
+    "domain": "embodied-ai",
+    "status": "completed",
+    "date": "2026-09-30",
+    "provenance": "experiment-result",
+    "zh": "E5 / 观测恢复后的重新验收",
+    "en": "E5 / Revalidating recovery",
+    "titleTw": "E5 / 觀測恢復後的重新驗收",
+    "goalZh": "通信恢复是否足以继续原动作？比较新证据、旧包重送与剩余路径规划。",
+    "goalEn": "Does delivery recovery authorize the old action? Compare fresh evidence, replay and remaining-path planning.",
+    "descriptionTw": "通訊恢復是否足以繼續原動作？比較新證據、舊包重送與剩餘路徑規劃。",
+    "related": [
+      "doc:embodied-ai/mujoco-recovery-gate",
+      "lab:observation-freshness",
+      "project:hohoo-embodied-agent"
+    ],
+    "repo": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/020db41b883221afde673e33ff6f322e004f12ad/experiments/vl01_recovery_gate",
+    "method": "6条件×3策略、18个固定回合。2ms控制、20ms观测；恢复要求100ms连续新鲜抓取证据，600ms等待期限。",
+    "methodEn": "Six conditions × three policies, 18 fixed rollouts. Control 2 ms, capture 20 ms; recovery requires 100 ms of fresh grasp evidence, with a 600 ms hold deadline.",
+    "methodTw": "6條件×3策略、18個固定回合。2ms控制、20ms觀測；恢復要求100ms連續新鮮抓取證據，600ms等待期限。",
+    "result": "旧正常包重送：收到即恢复策略9次恢复中8次证据不足，但最终完成放置；重新验收只恢复1次。",
+    "resultEn": "Stale replay: receipt-only makes nine resumptions, eight unsupported, yet finishes placement; revalidation resumes once.",
+    "resultTw": "舊正常包重送：收到即恢復9次中8次證據不足，卻最終放置成功；重新驗收只恢復1次。",
+    "observations": "重新验收在纯间断/重送条件分别5.142s/5.302s恢复；真实松爪时5.442s中止，不恢复。",
+    "observationsEn": "Revalidation resumes at 5.142/5.302 s for gap/replay; forced opening aborts at 5.442 s without resuming.",
+    "observationsTw": "重新驗收於純間斷/重送條件5.142s/5.302s恢復；真實鬆爪時5.442s中止。",
+    "conclusion": "最终成功会掩盖错误恢复；收到消息、抓取仍有效和轨迹可继续是三个条件。",
+    "conclusionEn": "Final success can hide unsupported recovery. Delivery, a valid grasp and an appropriate path are separate conditions.",
+    "conclusionTw": "最終成功可能掩蓋錯誤恢復；訊息抵達、抓取有效與軌跡可繼續是三個條件。",
+    "limitations": "固定仿真真值、同一时钟、每格一次；策略同时改变门控与路径。没有重抓取、视觉、ROS2或真机安全结论。",
+    "limitationsEn": "Fixed privileged simulation, one clock and one run per cell; policy bundles change both gate and path. No regrasp, vision, ROS2 or hardware safety claim.",
+    "limitationsTw": "固定模擬真值、同一時鐘、每格一次；策略同時改變門控與路徑。沒有重抓取、視覺、ROS2或實機安全結論。",
+    "reproduce": "18项新测试与41项既有测试通过；独立审计18回合、12组一致前缀、2个恢复窗口、108份原始文件。",
+    "reproduceEn": "18 new and 41 existing tests pass. Audit covers 18 rollouts, 12 identical prefixes, two recovery windows and 108 raw files.",
+    "reproduceTw": "18項新測試與41項既有測試通過；獨立稽核18回合、12組一致前綴、2個恢復窗口、108份原始檔。"
+  },
+  {
+    "id": "typescript-output-boundary",
+    "number": "010",
+    "domain": "ai-apps",
+    "status": "completed",
+    "date": "2026-09-30",
+    "provenance": "experiment-result",
+    "zh": "TypeScript / 输出边界对照",
+    "en": "TypeScript / Output boundary comparison",
+    "titleTw": "TypeScript / 輸出邊界對照",
+    "goalZh": "类型断言与对象校验分别会漏掉哪些无效输入？",
+    "goalEn": "Which invalid inputs escape assertions and object validation?",
+    "descriptionTw": "型別斷言與物件驗證各會漏掉哪些無效輸入？",
+    "related": [
+      "doc:ai-apps/typescript-output-boundary",
+      "doc:ai-apps/java-structured-output",
+      "project:hohoo-ai-lab"
+    ],
+    "repo": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/405c25668d9bb9aee0ccb258b258103271314300/experiments/03-typescript-boundary",
+    "method": "32组合成输入交给断言、对象、原始JSON及既有Java四种入口；另离线重放一份历史真实响应。",
+    "methodEn": "32 synthetic inputs enter assertion, object, raw JSON and existing Java paths; one saved real response is replayed offline.",
+    "methodTw": "32組合成輸入經斷言、物件、原始JSON與既有Java四種入口；另離線重放一份歷史真實回應。",
+    "result": "断言误接收22个、对象校验误接收4个；原始JSON与Java判定32/32一致。",
+    "resultEn": "Assertions falsely accept 22 invalid cases; object validation four; raw JSON and Java agree on 32/32.",
+    "resultTw": "斷言誤接收22個、物件驗證誤接收4個；原始JSON與Java判定32/32一致。",
+    "observations": "重复键在JSON.parse后消失；对象入口也无法核验原始字符串长度。历史围栏响应严格拒绝，显式适配重放通过。",
+    "observationsEn": "JSON.parse loses duplicate keys; objects also lack raw length. The saved fenced response fails strict parsing and passes explicit adaptation.",
+    "observationsTw": "重複鍵於JSON.parse後消失，物件入口亦無法驗證原始長度。歷史圍欄回應嚴格拒絕，明確適配後通過。",
+    "conclusion": "静态类型不代替运行时契约；结构正确不等于分类语义正确。",
+    "conclusionEn": "Static types do not replace runtime contracts; structural validity does not establish semantic correctness.",
+    "conclusionTw": "靜態型別不取代執行期契約；結構正確不等於分類語義正確。",
+    "limitations": "刻意构造的边界，不是模型错误率；扁平契约，不是通用JSON解析器。无新增API调用。",
+    "limitationsEn": "Deliberate edge cases, not a model error rate. A flat contract, not a general JSON parser. No new API calls.",
+    "limitationsTw": "刻意構造的邊界，不是模型錯誤率；扁平契約，非通用JSON解析器。無新增API呼叫。",
+    "reproduce": "类型检查、37项测试与32组差分审计通过；Node26.8.2、TypeScript7.0.2、Java1.8.0_171。",
+    "reproduceEn": "Typecheck, 37 tests and a 32-case differential audit pass; Node 26.8.2, TypeScript 7.0.2, Java 1.8.0_171.",
+    "reproduceTw": "型別檢查、37項測試與32組差分稽核通過；Node26.8.2、TypeScript7.0.2、Java1.8.0_171。"
+  },
+  {
+    "id": "transactional-history",
+    "number": "011",
+    "domain": "ai-apps",
+    "status": "completed",
+    "date": "2026-09-30",
+    "provenance": "experiment-result",
+    "zh": "A1 / 对话历史的提交边界",
+    "en": "A1 / The chat-history commit boundary",
+    "titleTw": "A1 / 對話歷史的提交邊界",
+    "goalZh": "请求失败、截断或候选裁剪后，如何保持已提交历史正确？",
+    "goalEn": "How should committed history survive failures, truncation and candidate trimming?",
+    "descriptionTw": "請求失敗、截斷或候選裁剪後，如何保持已提交歷史正確？",
+    "related": [
+      "doc:ai-apps/java-transactional-history",
+      "doc:ai-apps/java-first-llm",
+      "project:hohoo-ai-lab"
+    ],
+    "repo": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/405c25668d9bb9aee0ccb258b258103271314300/demos/05-transactional-chat",
+    "method": "Java 8候选副本、完整问答提交、UTF-8请求体预算；用显式替身注入超时、429、空回复、截断与坏响应。",
+    "methodEn": "Java 8 candidate snapshots, whole-pair commits and a UTF-8 wire budget; explicit doubles inject timeout, 429, empty, truncated and malformed replies.",
+    "methodTw": "Java 8候選副本、完整問答提交、UTF-8請求體預算；明確替身注入逾時、429、空回覆、截斷與壞回應。",
+    "result": "41项离线断言通过，13次本地传输替身调用，真实网络请求0次。",
+    "resultEn": "41 offline assertions pass, 13 local transport-double invocations and zero network requests.",
+    "resultTw": "41項離線斷言通過，13次本地傳輸替身呼叫，真實網路請求0次。",
+    "observations": "需要裁剪的候选请求失败后，原历史保持完整；成功后被裁掉的问答不再重新出现。",
+    "observationsEn": "A failed candidate that needed trimming preserves original history; after success, evicted pairs do not reappear.",
+    "observationsTw": "需裁剪的候選請求失敗後原歷史保持完整；成功後被裁掉的問答不再出現。",
+    "conclusion": "外部结果通过完整性验收以后，才以整轮为单位替换历史。",
+    "conclusionEn": "Replace history by complete turns only after output completeness checks.",
+    "conclusionTw": "外部結果通過完整性驗收後，才以整輪取代歷史。",
+    "limitations": "仅单进程状态测试；故障为注入，不证明模型记忆或真实网络行为。没有持久化、并发服务或自动重试。",
+    "limitationsEn": "In-process state tests with injected faults; no claim about model memory or real network behavior. No persistence, concurrent service or automatic retry.",
+    "limitationsTw": "僅單程序狀態測試；注入故障不證明模型記憶或真實網路行為。無持久化、並行服務或自動重試。",
+    "reproduce": "Maven编译与--self-test输出新报告；--live已提供agnes-3.0-flash适配器，本轮未在线执行。",
+    "reproduceEn": "Compile with Maven and write a new --self-test report. The --live Agnes 3.0 adapter exists but was not exercised online.",
+    "reproduceTw": "Maven編譯與--self-test輸出新報告；--live提供agnes-3.0-flash適配器，本輪未線上執行。"
   }
 ]

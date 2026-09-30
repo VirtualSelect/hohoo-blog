@@ -12,10 +12,18 @@
     "date": "2026-09-11",
     "updated": "2026-09-11",
     "featured": true,
-    "stack": ["Next.js", "React", "RSS", "GitHub Actions", "Vercel"],
+    "stack": [
+      "Next.js",
+      "React",
+      "RSS",
+      "GitHub Actions",
+      "Vercel"
+    ],
     "repo": "https://github.com/VirtualSelect/hohoo-blog",
     "demo": "https://huhohoo.com/",
-    "related": ["doc:ai-apps/radar-publishing-pipeline"],
+    "related": [
+      "doc:ai-apps/radar-publishing-pipeline"
+    ],
     "sections": [
       {
         "heading": "Overview",
@@ -72,19 +80,29 @@
     "type": "project",
     "title": "Java LLM 实践集",
     "titleEn": "Java LLM Practice",
-    "description": "从首次请求、多轮对话到结构化输出验收：四个 Java 8 示例与可追溯记录。",
-    "descriptionEn": "Four Java 8 demos: requests, parsing, multi-turn chat and output validation, with traceable records.",
+    "description": "五个 Java 8 Demo与TypeScript边界对照：请求、输出验收、事务式历史及可追溯实验。",
+    "descriptionEn": "Five Java 8 demos plus a TypeScript boundary comparison: requests, validation, transactional history and traceable experiments.",
     "domain": "ai-apps",
     "status": "building",
     "featured": true,
-    "stack": ["Java 8", "Gson", "HTTP"],
+    "stack": [
+      "Java 8",
+      "Gson",
+      "HTTP",
+      "TypeScript",
+      "Node.js"
+    ],
     "repo": "https://github.com/VirtualSelect/hohoo-ai-lab",
     "related": [
       "doc:ai-apps/java-first-llm",
       "doc:ai-apps/java-structured-output",
       "doc:llm/context-position-experiment",
       "lab:context-position",
-      "doc:llm/context-position-paired-protocol"
+      "doc:llm/context-position-paired-protocol",
+      "doc:ai-apps/java-transactional-history",
+      "doc:ai-apps/typescript-output-boundary",
+      "lab:transactional-history",
+      "lab:typescript-output-boundary"
     ],
     "architecture": [
       "Console input",
@@ -96,9 +114,9 @@
     "sections": [
       {
         "heading": "Overview",
-        "zh": "与实践文章配套的四个独立 Demo，覆盖首次调用、解析、对话历史与结构化输出。它是可运行的学习代码，不是线上 AI 产品。",
-        "en": "Four standalone demos accompany the articles: first request, parsing, history and structured output. This is runnable learning code, not a production AI service.",
-        "tw": "與實作文章配套的四個獨立 Demo，涵蓋首次呼叫、解析、對話歷史與結構化輸出。這是可執行的學習程式碼，不是線上 AI 產品。"
+        "zh": "五个独立Java Demo覆盖首次请求、解析、多轮历史、结构化输出与整轮提交；TypeScript作为AI Engineering补充，复用同一输出契约，不替代Java主线。",
+        "en": "Five Java demos cover requests, parsing, chat history, structured output and whole-turn commits. TypeScript supplements AI Engineering using the same output contract, without replacing Java.",
+        "tw": "五個獨立Java Demo涵蓋首次請求、解析、多輪歷史、結構化輸出與整輪提交；TypeScript補充AI Engineering，共用輸出契約，不取代Java主線。"
       },
       {
         "heading": "Problem",
@@ -114,9 +132,9 @@
       },
       {
         "heading": "Validation",
-        "zh": "前三个 Demo 有作者原始运行记录。第四个由 Codex 在作者授权下执行：35项离线检查通过；四次线上尝试中，一次200返回代码围栏而被严格校验拒绝，三次读取超时。首次响应经显式移除单一围栏后离线重放通过；这不是额外一次在线成功。",
-        "en": "The first three demos retain the author’s original runs. For Demo 04, Codex ran 35 passing offline checks and four authorized API attempts: one HTTP 200 reply was rejected for code fences, and three reads timed out. Explicit single-fence adaptation passed an offline replay; it is not another online success.",
-        "tw": "前三個 Demo 有作者原始執行紀錄。第四個由 Codex 在作者授權下執行：35項離線檢查通過；四次線上嘗試中，一次200回傳程式碼圍欄而被嚴格驗證拒絕，三次讀取逾時。首次回應經明確移除單一圍欄後離線重放通過；這不是額外一次線上成功。"
+        "zh": "前三个Demo保留原始运行记录。第四个35项离线检查；四次真实请求一次返回围栏、三次超时。第五个41项离线状态检查、无在线调用。TypeScript37项测试、32组Java对照与历史响应离线重放通过。",
+        "en": "The first three demos retain original runs. Demo 04: 35 offline checks, one fenced reply and three timeouts in four live attempts. Demo 05: 41 offline state checks, no live calls. TypeScript: 37 tests, 32 Java comparisons and historical response replay.",
+        "tw": "前三個Demo保留原始執行紀錄。第四個35項離線檢查，四次真實請求一次圍欄回應、三次逾時。第五個41項離線狀態檢查、無線上呼叫。TypeScript37項測試、32組Java對照及歷史回應離線重放通過。"
       },
       {
         "heading": "Limitations",
@@ -197,12 +215,30 @@
         "description": "80项离线检查与24项请求计划；尚无新模型实测。",
         "descriptionEn": "80 offline checks and a 24-request plan; no new live model results.",
         "descriptionTw": "80項離線檢查與24項請求計畫；尚無新模型實測。"
+      },
+      {
+        "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/405c25668d9bb9aee0ccb258b258103271314300/demos/05-transactional-chat",
+        "label": "05 / 事务式对话历史",
+        "labelEn": "05 / Transactional chat history",
+        "labelTw": "05 / 交易式對話歷史",
+        "description": "候选副本 · 整轮提交 · 41项离线检查",
+        "descriptionEn": "Candidate snapshot · whole-turn commit · 41 offline checks",
+        "descriptionTw": "候選副本 · 整輪提交 · 41項離線檢查"
+      },
+      {
+        "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/405c25668d9bb9aee0ccb258b258103271314300/experiments/03-typescript-boundary",
+        "label": "TypeScript / 输出边界",
+        "labelEn": "TypeScript / Output boundary",
+        "labelTw": "TypeScript / 輸出邊界",
+        "description": "32组对照 · 原始JSON与unknown · 无模型调用",
+        "descriptionEn": "32 cases · raw JSON and unknown · no model calls",
+        "descriptionTw": "32組對照 · 原始JSON與unknown · 無模型呼叫"
       }
     ],
     "titleTw": "Java LLM 實作集",
-    "descriptionTw": "從首次請求、多輪對話到結構化輸出驗收：四個 Java 8 範例與可追溯紀錄。",
+    "descriptionTw": "五個 Java 8 Demo與TypeScript邊界對照：請求、輸出驗收、交易式歷史及可追溯實驗。",
     "sourceLocale": "zh-CN",
-    "updated": "2026-09-29"
+    "updated": "2026-09-30"
   },
   {
     "id": "project:hohoo-embodied-agent",
@@ -212,15 +248,20 @@
     "title": "Hohoo 具身实验",
     "titleEn": "Hohoo Embodied Experiments",
     "titleTw": "Hohoo 具身實驗",
-    "description": "从一个 MuJoCo 夹爪开始，保存动作、接触、失败与可重放的证据。",
-    "descriptionEn": "Start with a MuJoCo gripper and preserve actions, contacts, failures and replayable evidence.",
-    "descriptionTw": "從一個 MuJoCo 夾爪開始，保存動作、接觸、失敗與可重放的證據。",
+    "description": "五轮MuJoCo教学对照：从拾取偏移到恢复门控，保留原始轨迹、决策与独立审计。",
+    "descriptionEn": "Five MuJoCo teaching experiments, from pickup bias to recovery gating, with raw trajectories, decisions and independent audits.",
+    "descriptionTw": "五輪MuJoCo教學對照：從拾取偏移到恢復門控，保留原始軌跡、決策與獨立稽核。",
     "domain": "embodied-ai",
     "status": "experiment",
     "date": "2026-09-28",
-    "updated": "2026-09-29",
+    "updated": "2026-09-30",
     "featured": false,
-    "stack": ["Python 3.12", "MuJoCo 3.3.7", "NumPy", "Matplotlib"],
+    "stack": [
+      "Python 3.12",
+      "MuJoCo 3.3.7",
+      "NumPy",
+      "Matplotlib"
+    ],
     "repo": "https://github.com/VirtualSelect/hohoo-embodied-agent",
     "sourceLocale": "zh-CN",
     "related": [
@@ -228,14 +269,16 @@
       "doc:embodied-ai/openvla-action-pipeline",
       "doc:embodied-ai/mujoco-grasp-guard",
       "doc:embodied-ai/mujoco-transfer-monitor",
-      "doc:embodied-ai/mujoco-observation-freshness"
+      "doc:embodied-ai/mujoco-observation-freshness",
+      "doc:embodied-ai/mujoco-recovery-gate",
+      "lab:recovery-gate"
     ],
     "sections": [
       {
         "heading": "Overview",
-        "zh": "已完成拾取偏移、抓取门控、搬运监测与观测新鲜度四轮实验。复用同一MuJoCo夹爪，代码与原始证据分别归档。",
-        "en": "Four experiments cover pickup bias, grasp gating, transfer monitoring and observation freshness, reusing one MuJoCo gripper with separately archived code and evidence.",
-        "tw": "已完成拾取偏移、抓取門控、搬運監測與觀測新鮮度四輪實驗。復用同一MuJoCo夾爪，程式碼與原始證據分別歸檔。"
+        "zh": "五轮实验覆盖拾取偏移、抓取门控、持续监测、观测新鲜度与条件恢复。复用同一夹爪场景，逐轮保存代码、协议与原始数据。",
+        "en": "Five experiments cover pickup bias, grasp gating, monitoring, freshness and conditional recovery. Each archives code, protocol and raw data from the same gripper scene.",
+        "tw": "五輪實驗涵蓋拾取偏移、抓取門控、持續監測、觀測新鮮度與條件恢復。共用夾爪場景，逐輪保存程式、協定與原始資料。"
       },
       {
         "heading": "Goal",
@@ -251,15 +294,15 @@
       },
       {
         "heading": "Validation",
-        "zh": "四轮分别9、18、27和45回合。最新一轮17项边界测试、45回合独立审计、45对决策前缀及9条旧基线核对通过。没有随机化，不报告泛化成功率。",
-        "en": "The four rounds contain 9, 18, 27 and 45 rollouts. The latest passed 17 boundary tests, 45 independent audits, 45 paired-prefix checks and nine baseline comparisons. No randomization or generalization success-rate claim.",
-        "tw": "四輪分別9、18、27與45回合。最新17項邊界測試、45回合獨立審計、45對決策前綴及9條舊基線核對通過。未隨機化，不報告泛化成功率。"
+        "zh": "五轮分别9、18、27、45、18回合。最新18项边界测试通过；独立审计核对12组一致前缀、2个恢复窗口、108份原始文件。固定条件，不报告泛化成功率。",
+        "en": "The rounds contain 9, 18, 27, 45 and 18 rollouts. Latest: 18 boundary tests, 12 identical prefixes, two recovery windows and 108 audited raw files. Fixed conditions, no generalization rate.",
+        "tw": "五輪分別9、18、27、45、18回合。最新18項邊界測試通過；獨立稽核12組一致前綴、2個恢復窗口、108份原始檔。固定條件，不報告泛化成功率。"
       },
       {
         "heading": "Limitations",
-        "zh": "使用仿真真值与同一时钟，监测仅覆盖搬运。已检查观测年龄，但真实网络、时钟偏差、恢复、视觉、ROS2与硬件仍未实现。完整M4/M5未完成。",
-        "en": "Uses privileged simulation state and one clock; monitors transfer only. Capture age is checked, but real networks, clock skew, recovery, vision, ROS2 and hardware are unimplemented. Full M4/M5 remain incomplete.",
-        "tw": "使用模擬真值與同一時鐘，監測僅覆蓋搬運。已檢查觀測年齡，但真實網路、時鐘偏差、恢復、視覺、ROS2與硬體仍未實作。完整M4/M5未完成。"
+        "zh": "观测来自仿真真值，使用同一时钟；恢复仅限通信重新有效且仍抓住物体。没有重抓取、视觉、ROS2桥接、学习策略或真机验证，完整M4/M5仍未完成。",
+        "en": "Privileged simulation observations and one clock. Recovery requires renewed communication and a retained grasp. No regrasp, vision, ROS2 bridge, learned policy or physical validation; M4/M5 remain incomplete.",
+        "tw": "觀測來自模擬真值與同一時鐘；恢復僅限通訊重新有效且仍抓住物體。沒有重抓取、視覺、ROS2橋接、學習策略或實機驗證，完整M4/M5未完成。"
       }
     ],
     "resources": [
@@ -316,6 +359,15 @@
         "description": "45回合：计数、时间跨度与过期证据",
         "descriptionEn": "45 rollouts: counts, elapsed evidence and expired observations",
         "descriptionTw": "45回合：計數、時間跨度與過期證據"
+      },
+      {
+        "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/020db41b883221afde673e33ff6f322e004f12ad/experiments/vl01_recovery_gate",
+        "label": "E5 / 重新验收后恢复",
+        "labelEn": "E5 / Revalidate before resuming",
+        "labelTw": "E5 / 重新驗收後恢復",
+        "description": "18回合 · 旧包反复启停 · 新证据与路径重规划",
+        "descriptionEn": "18 rollouts · replay-driven cycling · new evidence and replanning",
+        "descriptionTw": "18回合 · 舊包反覆啟停 · 新證據與路徑重新規劃"
       }
     ]
   }

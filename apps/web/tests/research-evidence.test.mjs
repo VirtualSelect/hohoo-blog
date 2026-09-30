@@ -17,6 +17,9 @@ for (const locale of ["zh-CN", "en", "zh-TW"]) {
       "lab:grasp-guard",
       "lab:transfer-monitor",
       "lab:observation-freshness",
+      "lab:recovery-gate",
+      "lab:typescript-output-boundary",
+      "lab:transactional-history",
     ]) {
       const entry = entries.find((e) => e.id === id);
       assert.ok(entry, id);
@@ -41,6 +44,9 @@ for (const locale of ["zh-CN", "en", "zh-TW"]) {
       "docs/embodied-ai/mujoco-transfer-monitor",
       "docs/embodied-ai/mujoco-observation-freshness",
       "docs/llm/context-position-paired-protocol",
+      "docs/embodied-ai/mujoco-recovery-gate",
+      "docs/ai-apps/typescript-output-boundary",
+      "docs/ai-apps/java-transactional-history",
     ]) {
       const followup = data.documents.find((item) => item.route === route);
       assert.ok(followup && !followup.sourceFallback);

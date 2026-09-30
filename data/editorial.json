@@ -1,8 +1,11 @@
 {
-  "featuredProjects": ["project:hohoo-ai-lab", "project:hohoo-embodied-agent"],
+  "featuredProjects": [
+    "project:hohoo-ai-lab",
+    "project:hohoo-embodied-agent"
+  ],
   "featuredArticles": [
-    "doc:llm/context-position-paired-protocol",
-    "doc:embodied-ai/mujoco-observation-freshness"
+    "doc:embodied-ai/mujoco-recovery-gate",
+    "doc:ai-apps/typescript-output-boundary"
   ],
   "featuredMedia": {
     "doc:embodied-ai/mujoco-observation-freshness": {
@@ -12,6 +15,14 @@
       "alt": "实际日志：旧正常包持续到达，观测年龄继续增长",
       "altEn": "Measured log: old good packets keep arriving as capture age rises",
       "altTw": "實際紀錄：舊正常封包持續抵達，觀測年齡繼續增長"
+    },
+    "doc:embodied-ai/mujoco-recovery-gate": {
+      "src": "/media/practice/recovery-decisions.png",
+      "width": 1700,
+      "height": 1190,
+      "alt": "真实控制日志：旧包重送下的反复启停与重新验收",
+      "altEn": "Recorded control: repeated stale-packet resumptions versus revalidation",
+      "altTw": "真實控制紀錄：舊包重送下的反覆啟停與重新驗收"
     }
   }
 }
