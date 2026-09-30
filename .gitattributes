@@ -1,0 +1,3 @@
+# Keep the application format check stable across Windows and Linux checkouts.
+# Binary files remain binary; historical research evidence elsewhere is untouched.
+apps/web/** text=auto eol=lf
