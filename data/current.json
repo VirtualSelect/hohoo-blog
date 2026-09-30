@@ -1,12 +1,12 @@
 {
-  "updated": "2026-09-29",
+  "updated": "2026-09-30",
   "items": [
     {
       "kind": "BUILDING",
-      "zh": "维护 Java LLM 实践集与 MuJoCo 抓取实验，整理可复现代码和原始记录。",
-      "en": "Maintaining Java LLM demos and MuJoCo grasp experiments with reproducible code and records.",
-      "to": "/projects/hohoo-embodied-agent",
-      "tw": "維護 Java LLM 實作集與 MuJoCo 抓取實驗，整理可重現程式碼與原始紀錄。"
+      "zh": "为Java对话增加整轮提交，并用TypeScript验证同一输出契约。",
+      "en": "Adding whole-turn Java commits and testing the same output contract in TypeScript.",
+      "to": "/docs/ai-apps/typescript-output-boundary",
+      "tw": "為Java對話加入整輪提交，以TypeScript驗證同一輸出契約。"
     },
     {
       "kind": "LEARNING",
@@ -24,17 +24,17 @@
     },
     {
       "kind": "EXPLORING",
-      "zh": "观测新鲜度：45回合对照采样间隔、旧消息重送与静默。",
-      "en": "Observation freshness: 45 rollouts comparing sampling, stale replay and silence.",
-      "to": "/docs/embodied-ai/mujoco-observation-freshness",
-      "tw": "觀測新鮮度：45回合對照取樣間隔、舊訊息重送與靜默。"
+      "zh": "通信恢复不等于抓取恢复：18回合对照旧包重送与重新验收。",
+      "en": "Communication recovery is not grasp recovery: 18 rollouts compare replay and revalidation.",
+      "to": "/docs/embodied-ai/mujoco-recovery-gate",
+      "tw": "通訊恢復不等於抓取恢復：18回合比較舊包重送與重新驗收。"
     },
     {
       "kind": "NEXT",
-      "zh": "下一步定义延迟、乱序与重新观测后的恢复条件；LLM成组对照仍待实测。",
-      "en": "Next: delayed or reordered evidence and recovery after a new observation; the paired LLM trial awaits live execution.",
+      "zh": "分离恢复门控与路径重规划的影响；Agnes 3.0成组对照已准备，尚无新实测。",
+      "en": "Separate recovery gating from replanning; the Agnes 3.0 paired trial is prepared, with no new live results.",
       "to": "/docs/llm/context-position-paired-protocol",
-      "tw": "下一步定義延遲、亂序與重新觀測後的恢復條件；LLM成組對照仍待實測。"
+      "tw": "分離恢復門控與路徑重新規劃的影響；Agnes 3.0成組對照已備妥，尚無新實測。"
     }
   ]
 }

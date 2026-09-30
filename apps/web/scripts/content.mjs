@@ -23,6 +23,7 @@ const Prism = require("prismjs");
 require("prismjs/components/prism-java");
 require("prismjs/components/prism-json");
 require("prismjs/components/prism-bash");
+require("prismjs/components/prism-typescript");
 const json = (p) => JSON.parse(fs.readFileSync(path.join(root, p), "utf8"));
 const walk = (p) =>
   fs
