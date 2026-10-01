@@ -602,18 +602,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-01",
         "file": "i18n/en/docs/embodied-ai/mujoco-phase-contracts.md",
-        "sourceRevision": "cd5a092e6c3665e9183219981d71bc65e45a4c77c777fb257fd8c2c20e1b7889",
-        "translationRevision": "8591712b31ecc677a824d2255a0eaeed6708726bb475c5d1f5ba45bd048993fe"
+        "sourceRevision": "db58a5298b91620e464e2df20fba624080b6911ee652b50332b7a3382196b0d5",
+        "translationRevision": "a5d3e2405b9d173c57b11f58ffd4ba5ce7845700990fac94d04f25f3252fc7b8"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-01",
         "file": "i18n/zh-TW/docs/embodied-ai/mujoco-phase-contracts.md",
-        "sourceRevision": "cd5a092e6c3665e9183219981d71bc65e45a4c77c777fb257fd8c2c20e1b7889",
-        "translationRevision": "c049d011a57c3247329a0c5f75f5f491e54a64f9b2f6109c5bb659beedd6b7bd"
+        "sourceRevision": "db58a5298b91620e464e2df20fba624080b6911ee652b50332b7a3382196b0d5",
+        "translationRevision": "da5ebd49680020e278f1ece3c857baaa72015973e67a9213b1184e48eb6417a3"
       }
     },
-    "sourceRevision": "cd5a092e6c3665e9183219981d71bc65e45a4c77c777fb257fd8c2c20e1b7889"
+    "sourceRevision": "db58a5298b91620e464e2df20fba624080b6911ee652b50332b7a3382196b0d5"
   },
   "lab:phase-contracts": {
     "sourceLocale": "zh-CN",

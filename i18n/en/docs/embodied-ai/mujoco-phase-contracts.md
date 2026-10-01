@@ -98,7 +98,7 @@ Neither stale communication nor lost contact caused this stop. **The implementat
 
 The clean `phase-aware` and `transfer-only` state/control traces are identical and both place. This supports removing the transfer-height requirement in this particular lowering task, not deleting every height constraint from robot control.
 
-![Measured heights: reuse-transfer stops clean lowering at 6.002 seconds; after early forced opening, all three cube trajectories fall toward the tray. Crosses mark first stops and shading marks scheduled lowering.](/media/practice/phase-lowering-contracts.png)
+<img src="/media/practice/phase-lowering-contracts.png" alt="Measured heights: reuse-transfer stops clean lowering at 6.002 seconds; after early forced opening, all three cube trajectories fall toward the tray. Crosses mark first stops and shading marks scheduled lowering." width="1560" height="598" loading="lazy" />
 
 Some curves overlap. A descending cube in the right panel does not imply a planned release occurred.
 
@@ -124,7 +124,7 @@ Thus, one policy falsely alarms and passes the endpoint check, while another cor
 
 For both silence and stale replay, `phase-aware` stops at 5.642 s. Its latest accepted capture is from 5.582 s: exactly 60 ms old. Twelve replayed packets arrive, but neither their sequence nor capture time advances, so they do not reset age.
 
-![Recorded capture age during lowering silence and stale replay. The phase-aware monitor stops at the 60 millisecond limit; age recovers after the fault, but the stop remains latched.](/media/practice/phase-capture-age.png)
+<img src="/media/practice/phase-capture-age.png" alt="Recorded capture age during lowering silence and stale replay. The phase-aware monitor stops at the 60 millisecond limit; age recovers after the fault, but the stop remains latched." width="1560" height="559" loading="lazy" />
 
 Bad-capture confirmation spans 40 ms; the age limit is 60 ms. These have different origins. Fault commands begin at 5.600 s; the first post-step fault sample would be at 5.602 s. The 5.642 s alarm is 40 ms after that sample instant but 60 ms after the last good capture. A latency report must state its reference point.
 
