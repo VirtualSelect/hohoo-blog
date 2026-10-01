@@ -1,5 +1,35 @@
 [
   {
+    "id": "0fb07d4809171867f470",
+    "title": "OpenAI 称拦截蒸馏窃取攻击，但研究者称同样手法在 Azure 上仍可窃取 GPT-6 Astra 等模型的推理内容",
+    "url": "https://aihot.news/items/uxe9v0hypn93df9ogn6glwled",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-01T12:05:49.000Z",
+    "collectedAt": "2026-10-01T17:07:54.445Z",
+    "category": "llm",
+    "summary": "OpenAI 称 7 月拦截了一起针对其模型推理链的蒸馏窃取活动，7 月 24 至 25 日出现来自超 4000 用户的 16000 次请求，关联账号超 15000 个，OpenAI 将其与 Moonshot AI 相关人员联系起来，并于 7 月 28 日关停。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d8382ff6",
+    "coverage": []
+  },
+  {
+    "id": "5c5d854609738814f627",
+    "title": "Fine-Tuning NVIDIA Nemotron for Saudi Arabic Dialects, with a Path to Other Languages",
+    "url": "https://developer.nvidia.com/blog/fine-tuning-nvidia-nemotron-for-saudi-arabic-dialects-with-a-path-to-other-languages",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-01T05:00:00.000Z",
+    "collectedAt": "2026-10-01T17:07:54.445Z",
+    "category": "llm",
+    "summary": "Automatic speech recognition must handle how people actually speak, not only the languages and styles that dominate pretraining data. Regional dialects and... Automatic speech r…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-bf2da6fa",
+    "coverage": []
+  },
+  {
     "id": "0144ff9cc6e3fdc74155",
     "title": "Experience-Driven Continual Learning of Terrain Traversability for Quadruped Robots",
     "url": "https://arxiv.org/abs/2609.39755",
