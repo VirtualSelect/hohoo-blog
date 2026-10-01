@@ -1,5 +1,35 @@
 [
   {
+    "id": "0144ff9cc6e3fdc74155",
+    "title": "Experience-Driven Continual Learning of Terrain Traversability for Quadruped Robots",
+    "url": "https://arxiv.org/abs/2609.39755",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-01T04:00:00.000Z",
+    "collectedAt": "2026-10-01T09:23:54.111Z",
+    "category": "embodied-ai",
+    "summary": "Safe and efficient quadruped navigation over unfamiliar terrain requires predicting terrain-robot interaction before contact: geometry and visual appearance alone cannot reveal …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6cdd2f36",
+    "coverage": []
+  },
+  {
+    "id": "05cf16e74a6bc17da242",
+    "title": "VehicleArena: A Realistic Urban Environment for Multi-Agent Driving",
+    "url": "https://arxiv.org/abs/2609.35916",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-01T04:00:00.000Z",
+    "collectedAt": "2026-10-01T09:23:54.111Z",
+    "category": "embodied-ai",
+    "summary": "Real-world embodied agents often pursue independent objectives within a shared physical environment, where their actions can alter the conditions faced by others. Existing bench…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-bd858985",
+    "coverage": []
+  },
+  {
     "id": "6cb17c9e85641257e5f8",
     "title": "OpenRouter 教程：如何在 CI 中用 LLM eval 门禁拦截 Pull Request",
     "url": "https://aihot.news/items/ska7k3allx8q9uu8yv5vzy8zw",
