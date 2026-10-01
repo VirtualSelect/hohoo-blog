@@ -1489,5 +1489,17 @@
   },
   "journey.lab.VL01.ablationResult": {
     "message": "六輪固定場景對照已歸檔。E6拆開恢復門控與路徑重新規劃：目標跳變明顯降低，但未觀察到放置率提升；完整M4/M5仍待推進。"
+  },
+  "journey.lab.VL01.phaseArticle": {
+    "message": "第七篇：下降階段的抓取契約"
+  },
+  "journey.lab.VL01.phaseCode": {
+    "message": "E7 / 階段監測程式碼"
+  },
+  "journey.lab.VL01.phaseEvidence": {
+    "message": "E7 / 21回合與獨立審計"
+  },
+  "journey.lab.VL01.phaseResult": {
+    "message": "七輪固定場景實驗已歸檔。E7顯示照搬高度規則會誤停正常下降；正確報警後仍可能未完成放置。完整VL01與M4/M5仍待推進。"
   }
 }

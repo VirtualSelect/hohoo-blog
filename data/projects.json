@@ -267,13 +267,13 @@
     "title": "Hohoo 具身实验",
     "titleEn": "Hohoo Embodied Experiments",
     "titleTw": "Hohoo 具身實驗",
-    "description": "六轮MuJoCo教学对照：从拾取偏移到恢复消融，保留原始轨迹、决策与独立审计。",
-    "descriptionEn": "Six MuJoCo teaching experiments, from pickup bias to recovery ablation, with raw trajectories, decisions and independent audits.",
-    "descriptionTw": "六輪MuJoCo教學對照：從拾取偏移到恢復消融，保留原始軌跡、決策與獨立稽核。",
+    "description": "七轮MuJoCo教学对照：从拾取偏移到阶段契约，保留原始轨迹、决策与独立审计。",
+    "descriptionEn": "Seven MuJoCo teaching experiments, from pickup bias to stage contracts, with raw trajectories, decisions and independent audits.",
+    "descriptionTw": "七輪MuJoCo教學對照：從拾取偏移到階段契約，保留原始軌跡、決策與獨立稽核。",
     "domain": "embodied-ai",
     "status": "experiment",
     "date": "2026-09-28",
-    "updated": "2026-09-30",
+    "updated": "2026-10-01",
     "featured": false,
     "stack": [
       "Python 3.12",
@@ -292,14 +292,16 @@
       "doc:embodied-ai/mujoco-recovery-gate",
       "lab:recovery-gate",
       "doc:embodied-ai/mujoco-recovery-ablation",
-      "lab:recovery-ablation"
+      "lab:recovery-ablation",
+      "doc:embodied-ai/mujoco-phase-contracts",
+      "lab:phase-contracts"
     ],
     "sections": [
       {
         "heading": "Overview",
-        "zh": "六轮实验覆盖拾取偏移、抓取门控、持续监测、观测新鲜度、条件恢复与门控/路径消融。复用同一夹爪场景，逐轮保存代码、协议与原始数据。",
-        "en": "Six experiments cover pickup bias, grasp gating, monitoring, freshness, conditional recovery and gate/path ablation. Each archives code, protocol and raw data from the same gripper scene.",
-        "tw": "六輪實驗涵蓋拾取偏移、抓取門控、持續監測、觀測新鮮度、條件恢復與門控/路徑消融。共用夾爪場景，逐輪保存程式、協定與原始資料。"
+        "zh": "七轮实验覆盖拾取偏移、抓取门控、持续监测、新鲜度、条件恢复、门控/路径消融与下降阶段契约。共用夹爪场景，逐轮保存协议和原始数据。",
+        "en": "Seven experiments cover pickup bias, grasp gating, monitoring, freshness, recovery, gate/path ablation and lowering contracts. Each archives its protocol and raw data from a shared gripper scene.",
+        "tw": "七輪實驗覆蓋拾取偏移、抓取門控、持續監測、新鮮度、條件恢復、門控/路徑消融與下降階段契約。共用夾爪場景，逐輪保存協議和原始資料。"
       },
       {
         "heading": "Goal",
@@ -315,9 +317,9 @@
       },
       {
         "heading": "Validation",
-        "zh": "六轮分别9、18、27、45、18、30回合。E6另有18回合E5回归；本机30项测试通过，独立核对180份文件、36组前缀与102次恢复。固定条件，不报告泛化成功率。",
-        "en": "The six rounds contain 9, 18, 27, 45, 18 and 30 rollouts. E6 adds 18 E5 regression runs. Local checks: 30 tests, 180 audited files, 36 prefixes and 102 resumptions. Fixed conditions, no generalization rate.",
-        "tw": "六輪分別9、18、27、45、18、30回合。E6另有18回合E5回歸；本機30項測試通過，獨立核對180份檔案、36組前綴與102次恢復。固定條件，不報告泛化成功率。"
+        "zh": "七轮分别9、18、27、45、18、30、21回合；E6另有18回合E5回归。E7通过21项测试，独立核对105份回合文件、10份源码指纹与21组前缀。不报告泛化成功率。",
+        "en": "Seven rounds contain 9, 18, 27, 45, 18, 30 and 21 rollouts; E6 also has 18 E5 regressions. E7 passes 21 tests and audits 105 episode files, 10 source fingerprints and 21 prefixes. No generalized success rate.",
+        "tw": "七輪分別9、18、27、45、18、30、21回合；E6另有18回合E5回歸。E7通過21項測試，獨立核對105份回合檔案、10份原始碼指紋與21組前綴。不報告泛化成功率。"
       },
       {
         "heading": "Limitations",
@@ -407,6 +409,24 @@
         "description": "30回合消融与18回合回归，保留原始运行与独立复核",
         "descriptionEn": "30 ablation and 18 regression runs; original execution and independent revalidation",
         "descriptionTw": "30回合消融與18回合回歸，保留原始執行與獨立複核"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-phase-contracts",
+        "label": "第七篇：下降阶段的抓取契约",
+        "labelEn": "Practice VII: lowering contracts",
+        "labelTw": "第七篇：下降階段的抓取契約",
+        "description": "21回合 · 正常误停 · 停止后残留接触",
+        "descriptionEn": "21 rollouts · clean-run false alarm · residual contact after stopping",
+        "descriptionTw": "21回合 · 正常誤停 · 停止後殘留接觸"
+      },
+      {
+        "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/43dacf4bbe72e0eecc288c1dc46692f51be2b43e/evidence/phase-contracts-20261001",
+        "label": "E7完整证据",
+        "labelEn": "Complete E7 evidence",
+        "labelTw": "E7完整證據",
+        "description": "冻结代码、逐步控制日志、状态、完整矩阵与独立审计",
+        "descriptionEn": "Frozen code, per-step control logs, states, full matrix and independent auditing",
+        "descriptionTw": "固定程式碼、逐步控制紀錄、狀態、完整矩陣與獨立稽核"
       }
     ]
   }

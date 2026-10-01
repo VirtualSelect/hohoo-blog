@@ -93,6 +93,10 @@
         {
           "href": "/docs/embodied-ai/mujoco-recovery-ablation",
           "titleKey": "journey.lab.VL01.ablationArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-phase-contracts",
+          "titleKey": "journey.lab.VL01.phaseArticle"
         }
       ],
       "demos": [
@@ -121,6 +125,10 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/31166a333a51e9ca580c6c2dff9edcfca1dacb90/experiments/vl01_recovery_ablation",
           "titleKey": "journey.lab.VL01.ablationCode"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/43dacf4bbe72e0eecc288c1dc46692f51be2b43e/experiments/vl01_phase_contracts",
+          "titleKey": "journey.lab.VL01.phaseCode"
         }
       ],
       "evidence": [
@@ -143,9 +151,13 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/31166a333a51e9ca580c6c2dff9edcfca1dacb90/evidence/recovery-ablation-20260930",
           "titleKey": "journey.lab.VL01.ablationEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/43dacf4bbe72e0eecc288c1dc46692f51be2b43e/evidence/phase-contracts-20261001",
+          "titleKey": "journey.lab.VL01.phaseEvidence"
         }
       ],
-      "result": "journey.lab.VL01.ablationResult",
+      "result": "journey.lab.VL01.phaseResult",
       "startedAt": "2026-09-28",
       "completedAt": null
     },

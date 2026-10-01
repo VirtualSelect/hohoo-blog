@@ -4,7 +4,7 @@
     "project:hohoo-embodied-agent"
   ],
   "featuredArticles": [
-    "doc:embodied-ai/mujoco-recovery-ablation",
+    "doc:embodied-ai/mujoco-phase-contracts",
     "doc:llm/context-similar-distractors"
   ],
   "featuredMedia": {
@@ -31,6 +31,14 @@
       "alt": "四对真实恢复目标跳变；左右子图横轴刻度不同，请对照数值",
       "altEn": "Four measured recovery-target pairs; panels use different x-axis scales, compare numeric values",
       "altTw": "四對真實恢復目標跳變；左右子圖橫軸刻度不同，請對照數值"
+    },
+    "doc:embodied-ai/mujoco-phase-contracts": {
+      "src": "/media/practice/phase-lowering-contracts.png",
+      "width": 1560,
+      "height": 598,
+      "alt": "真实日志：正常下降中的高度规则误停，与早下降松爪后的方块高度",
+      "altEn": "Recorded heights: a false stop during clean lowering and an early forced-opening fault",
+      "altTw": "真實紀錄：正常下降中的高度規則誤停，與早下降鬆爪後的方塊高度"
     }
   }
 }
