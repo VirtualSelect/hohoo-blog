@@ -1,5 +1,20 @@
 [
   {
+    "id": "6cb17c9e85641257e5f8",
+    "title": "OpenRouter 教程：如何在 CI 中用 LLM eval 门禁拦截 Pull Request",
+    "url": "https://aihot.news/items/ska7k3allx8q9uu8yv5vzy8zw",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-01T00:00:00.000Z",
+    "collectedAt": "2026-10-01T01:31:01.277Z",
+    "category": "llm",
+    "summary": "OpenRouter 发布教程，讲解如何用固定的 eval 集在 CI 中门禁 pull request，当通过率低于阈值时脚本以非零退出码阻止合并，做法与单元测试门禁一致。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-5b38e45",
+    "coverage": []
+  },
+  {
     "id": "7f13e679aeee10fa5f70",
     "title": "Expanding AI Storage Access with NVIDIA cuObject and the NVIDIA SCADA Server SDK",
     "url": "https://developer.nvidia.com/blog/expanding-ai-storage-access-with-nvidia-cuobject-and-the-nvidia-scada-server-sdk",
@@ -27,6 +42,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-6b6b3b2a",
+    "coverage": []
+  },
+  {
+    "id": "f7ffbef7fa280eb141a6",
+    "title": "OpenAI 披露并处置一起有组织的模型蒸馏攻击行动",
+    "url": "https://aihot.news/items/gq8k1ru5wb2hx8ihtno5rrlrf",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-30T10:30:00.000Z",
+    "collectedAt": "2026-10-01T01:31:01.277Z",
+    "category": "llm",
+    "summary": "OpenAI 披露其识别并处置了一起有组织的攻击行动，该行动旨在系统性提取模型受保护的推理内容，最早活动出现在 7 月第一周。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-fdf6b665",
     "coverage": []
   },
   {
@@ -72,6 +102,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-49edff50",
+    "coverage": []
+  },
+  {
+    "id": "05d7ed42ea671c18e7d1",
+    "title": "One Model Is Not a Crowd: Multi-LLM and Aspect-Conditioned Diverse Comment Generation",
+    "url": "https://arxiv.org/abs/2609.33666",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-09-30T04:00:00.000Z",
+    "collectedAt": "2026-10-01T01:31:01.277Z",
+    "category": "ai-apps",
+    "summary": "Human communication on the internet is shaped by diverse perspectives, most visibly expressed in online comment spaces. As large language model (LLM)based AI agents begin to inh…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-7f19e4cf",
+    "coverage": []
+  },
+  {
+    "id": "08a765469c4a636c186f",
+    "title": "RynnWorld-4D: 4D Embodied World Models for Robotic Manipulation",
+    "url": "https://arxiv.org/abs/2607.06559",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-09-30T04:00:00.000Z",
+    "collectedAt": "2026-10-01T01:31:01.277Z",
+    "category": "embodied-ai",
+    "summary": "Robotic manipulation in the open world requires not only recognizing what a scene looks like, but also anticipating how its 3D structure moves under interaction. We argue that s…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b8d67aa8",
     "coverage": []
   },
   {
