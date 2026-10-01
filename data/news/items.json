@@ -1,5 +1,35 @@
 [
   {
+    "id": "10af873095e4cd94f602",
+    "title": "MiMo-V2.6-Pro 和 MiMo-V2.6-Flash 登陆 Agent Arena，分列开源模型第5和第9",
+    "url": "https://aihot.news/items/fe4cigybkf7nhdwb0il9ggrns",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-01T18:57:58.000Z",
+    "collectedAt": "2026-10-01T22:53:04.566Z",
+    "category": "ai-apps",
+    "summary": "Arena 宣布 Xiaomi MiMo-V2.6-Pro 和 MiMo-V2.6-Flash 登陆 Agent Arena。Pro 在 8.1K+ 真实智能体会话中净提升 +3.17%，列开源模型第5，较 MiMo-V2.5-Pro（第13，-7.23%）提升9个名次；其 Confirmed Success 得分 +7.35%，列开源模型第2。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-eb1f92e6",
+    "coverage": []
+  },
+  {
+    "id": "31dd1edb77c73ea99765",
+    "title": "Claude Code 推出 mods 功能，可用 TypeScript 定制行为与 UI",
+    "url": "https://aihot.news/items/qqvpv4tiarctdrthhbx7447b2",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-01T18:08:07.000Z",
+    "collectedAt": "2026-10-01T22:53:04.566Z",
+    "category": "ai-apps",
+    "summary": "Claude Code 推出 mods 功能，支持修改模型行为、自定义 UI 并替换自有功能。用几行 TypeScript 即可编写，也可由 Claude 代为构建；mods 随插件分发，可在 CLI 或桌面应用中通过 /plugin 安装。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-306ab8ae",
+    "coverage": []
+  },
+  {
     "id": "0fb07d4809171867f470",
     "title": "OpenAI 称拦截蒸馏窃取攻击，但研究者称同样手法在 Azure 上仍可窃取 GPT-6 Astra 等模型的推理内容",
     "url": "https://aihot.news/items/uxe9v0hypn93df9ogn6glwled",
