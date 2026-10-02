@@ -1,5 +1,20 @@
 [
   {
+    "id": "218dd638ffae4370087d",
+    "title": "Baseten 工程师实测：LLM 生成的推理引擎比 vLLM 快最多 90%",
+    "url": "https://aihot.news/items/uwm1ml1igd8k2u81g14uf8pc3",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-02T21:09:34.000Z",
+    "collectedAt": "2026-10-02T23:59:10.071Z",
+    "category": "ai-apps",
+    "summary": "Baseten 工程师参考 MetaInfer 论文，让 Claude Code（Fable 5）为 Qwen-3.6-35B-A3B（NVFP4，单张 B200）自动构建推理引擎 VibeQwen，单流解码比 vLLM 0.25.1 快 90%，首 token 从 28ms 降至 12ms，并发 32 时吞吐高 71%。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c4658f7e",
+    "coverage": []
+  },
+  {
     "id": "56c490db040147f1def4",
     "title": "AutoSynthData: Generating Training Data for Enterprise Agents",
     "url": "https://huggingface.co/blog/ServiceNow-AI/autosynthdata",
