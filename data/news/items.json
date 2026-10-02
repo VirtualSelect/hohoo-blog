@@ -225,6 +225,21 @@
     "coverage": []
   },
   {
+    "id": "d7531401fe14e27818c2",
+    "title": "Claude Code 推出 mods，可用 TypeScript 函数改写提示词、替换内置功能",
+    "url": "https://aihot.news/items/qzfc4nrsqe4rk8yxlk16ox6in",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-09-30T16:00:00.000Z",
+    "collectedAt": "2026-10-02T13:06:30.812Z",
+    "category": "ai-apps",
+    "summary": "Anthropic 为 Claude Code 推出 mods，一种小型 TypeScript 函数，可挂接到 Claude Code 的事件流，改写提示词、拦截或重试工具调用、审批权限请求并添加新 UI，随插件安装和分享。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b62d67fa",
+    "coverage": []
+  },
+  {
     "id": "f7ffbef7fa280eb141a6",
     "title": "OpenAI 披露并处置一起有组织的模型蒸馏攻击行动",
     "url": "https://aihot.news/items/gq8k1ru5wb2hx8ihtno5rrlrf",
