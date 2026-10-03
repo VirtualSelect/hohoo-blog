@@ -7,10 +7,12 @@
     "goalZh": "固定一组问题与资料，记录命中文档、引用与回答正确性；对比无检索和有检索。",
     "goalEn": "Use fixed questions and documents; compare retrieval hits, citations and answer correctness with and without retrieval.",
     "number": "001",
-    "status": "planning",
+    "status": "running",
     "domain": "ai-apps",
     "related": [
-      "paper:2005.11401"
+      "paper:2005.11401",
+      "doc:ai-apps/java-retrieval-evidence",
+      "project:hohoo-ai-lab"
     ],
     "design": {
       "zh": {
@@ -38,10 +40,27 @@
         "risks": "Leakage, label bias, generation randomness and small samples. Analyze missing-evidence questions separately."
       }
     },
-    "experimentLog": [],
+    "experimentLog": [
+      {
+        "date": "2026-10-03",
+        "title": "12道有答案题top1/top3均11题；两道无答案题有一道仍返回候选。"
+      }
+    ],
     "titleTw": "檢索品質對照實驗",
     "descriptionTw": "固定一組問題與資料，記錄命中文件、引用與回答正確性，比較有無檢索的差異。",
-    "sourceLocale": "zh-CN"
+    "sourceLocale": "zh-CN",
+    "date": "2026-10-03",
+    "provenance": "experiment-result",
+    "repo": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/65e4d79528d7c6e57e96e684bc1c4dbc73b61caa/demos/06-reliable-workflows",
+    "method": "10篇原创合成英文资料与14题BM25离线基线；保留原有生成回答对照计划。",
+    "methodEn": "A BM25 offline baseline over ten owned synthetic English documents and fourteen questions; the generation comparison remains planned.",
+    "methodTw": "10篇原創合成英文資料與14題BM25離線基線；保留原有生成回答對照計劃。",
+    "result": "12道有答案题top1/top3均11题；两道无答案题有一道仍返回候选。",
+    "resultEn": "Eleven of twelve answerable questions hit at 1/3; one of two unanswerable questions still retrieves candidates.",
+    "resultTw": "12道有答案題top1/top3均11題；兩道無答案題有一道仍返回候選。",
+    "limitations": "无Embedding或生成模型；引用存在不证明答案得到支持，端到端RAG质量未测。",
+    "limitationsEn": "No embedding or generation model. Citation existence is not entailment; end-to-end RAG quality is unmeasured.",
+    "limitationsTw": "無Embedding或生成模型；引用存在不證明答案得到支持，端到端RAG質量未測。"
   },
   {
     "id": "tool-eval",
@@ -51,10 +70,12 @@
     "goalZh": "使用可控的只读工具，注入超时与空结果，记录任务完成率和调用次数。",
     "goalEn": "Use controlled read-only tools; inject timeouts and empty results, then record completion and call counts.",
     "number": "002",
-    "status": "planning",
+    "status": "running",
     "domain": "ai-apps",
     "related": [
-      "paper:2210.03629"
+      "paper:2210.03629",
+      "doc:ai-apps/java-tool-boundary",
+      "project:hohoo-ai-lab"
     ],
     "design": {
       "zh": {
@@ -82,10 +103,27 @@
         "risks": "Retries cannot fix unrecoverable errors. Randomness and inconsistent fault injection confound comparisons."
       }
     },
-    "experimentLog": [],
+    "experimentLog": [
+      {
+        "date": "2026-10-03",
+        "title": "15项工具边界检查通过；超时后不配合中断的线程仍继续执行。"
+      }
+    ],
     "titleTw": "工具呼叫失敗復原實驗",
     "descriptionTw": "使用可控制的唯讀工具，注入逾時與空結果，記錄任務完成率和呼叫次數。",
-    "sourceLocale": "zh-CN"
+    "sourceLocale": "zh-CN",
+    "date": "2026-10-03",
+    "provenance": "experiment-result",
+    "repo": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/65e4d79528d7c6e57e96e684bc1c4dbc73b61caa/demos/06-reliable-workflows",
+    "method": "本地只读执行层与故障注入；完整模型Agent对照仍待执行。",
+    "methodEn": "Local read-only execution and fault injection; the full model Agent comparison is still pending.",
+    "methodTw": "本地只讀執行層與故障注入；完整模型Agent對照仍待執行。",
+    "result": "15项工具边界检查通过；超时后不配合中断的线程仍继续执行。",
+    "resultEn": "Fifteen tool checks pass; an interruption-ignoring worker continues after timeout.",
+    "resultTw": "15項工具邊界檢查通過；超時後不配合中斷的執行緒仍繼續執行。",
+    "limitations": "没有模型自主选工具、策略收益或真实服务调用；不代表完整计划完成。",
+    "limitationsEn": "No model-selected tools, policy-benefit study or real-service call; the full plan is not complete.",
+    "limitationsTw": "沒有模型自主選工具、策略收益或真實服務調用；不代表完整計劃完成。"
   },
   {
     "id": "action-representation",
@@ -515,5 +553,192 @@
     "reproduce": "21项测试通过；独立审计105份逐回合文件、10份源码指纹和21组决策分叉前缀。原始CSV、状态与图表全部归档。",
     "reproduceEn": "21 tests pass. Independent auditing covers 105 episode files, 10 source fingerprints and 21 pre-decision prefixes. Raw CSV, state snapshots and figures are archived.",
     "reproduceTw": "21項測試通過；獨立審計105份逐回合檔案、10份原始碼指紋和21組決策分叉前綴。原始CSV、狀態與圖表全部歸檔。"
+  },
+  {
+    "id": "concurrent-history",
+    "number": "014",
+    "domain": "ai-apps",
+    "status": "completed",
+    "date": "2026-10-03",
+    "provenance": "experiment-result",
+    "zh": "A2 / 并发历史提交",
+    "en": "A2 / Concurrent history commits",
+    "titleTw": "A2 / 並發歷史提交",
+    "goalZh": "用真实Java线程复现回复乱序，加入版本票据、完整问答提交与有界回执，明确本地幂等和远端执行的区别。",
+    "goalEn": "Reproduce reversed response order with real Java threads, then enforce versioned commits, complete turns and bounded receipts.",
+    "descriptionTw": "用真實Java執行緒復現回復亂序，加入版本票據、完整問答提交與有界回執，明確本地冪等和遠端執行的區別。",
+    "repo": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/65e4d79528d7c6e57e96e684bc1c4dbc73b61caa/demos/06-reliable-workflows",
+    "related": [
+      "doc:ai-apps/java-concurrent-history",
+      "project:hohoo-ai-lab"
+    ],
+    "method": "真实Java线程固定乱序返回，八项会话验收。",
+    "methodEn": "Actual Java threads with latch-controlled response order; eight session checks.",
+    "methodTw": "真實Java執行緒固定亂序返回，八項會話驗收。",
+    "result": "快请求提交，慢请求返回STALE；最终只保留一对问答和一次版本递增。",
+    "resultEn": "The fast reply commits; the stale reply is rejected. One pair and one version increment remain.",
+    "resultTw": "快請求提交，慢請求返回STALE；最終只保留一對問答和一次版本遞增。",
+    "observations": "回执去重、版本冲突与半轮输出分别处理；无模型请求。",
+    "observationsEn": "Receipts, version conflicts and incomplete turns are handled separately; no model requests.",
+    "observationsTw": "回執去重、版本沖突與半輪輸出分別處理；無模型請求。",
+    "conclusion": "锁外请求与锁内提交可以分开，但过期回复不能无条件接回当前历史。",
+    "conclusionEn": "Request generation can happen outside the lock, but stale responses cannot blindly join current history.",
+    "conclusionTw": "鎖外請求與鎖內提交可以分開，但過期回復不能無條件接回當前歷史。",
+    "limitations": "仅进程内状态，回执有界；不保证远端恰好执行一次，也不覆盖所有线程交错。",
+    "limitationsEn": "In-process state and bounded receipts only; no remote exactly-once guarantee or exhaustive concurrency proof.",
+    "limitationsTw": "僅進程內狀態，回執有界；不保證遠端恰好執行一次，也不覆蓋所有執行緒交錯。",
+    "reproduce": "代码、冻结参数、原始结果和独立审计见固定版本仓库。",
+    "reproduceEn": "See the pinned repository for code, frozen parameters, raw results and independent auditing.",
+    "reproduceTw": "程式碼、固定參數、原始結果和獨立稽核見固定版本儲存庫。"
+  },
+  {
+    "id": "attention-mechanisms",
+    "number": "015",
+    "domain": "llm",
+    "status": "completed",
+    "date": "2026-10-03",
+    "provenance": "experiment-result",
+    "zh": "L2–L4 / 注意力与缓存机制",
+    "en": "L2–L4 / Attention and cache mechanics",
+    "titleTw": "L2–L4 / 注意力與快取機制",
+    "goalZh": "从手算两行Attention到双层数值对照，验证因果掩码、Softmax与未来信息泄漏。",
+    "goalEn": "From a two-row hand calculation to a two-layer numeric experiment: causal masks, softmax and future-information leakage.",
+    "descriptionTw": "從手算兩行Attention到雙層數值對照，驗證因果掩碼、Softmax與未來資訊泄漏。",
+    "repo": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/65e4d79528d7c6e57e96e684bc1c4dbc73b61caa/experiments/05-attention-lab",
+    "related": [
+      "doc:llm/causal-mask-lab",
+      "doc:llm/kv-cache-equivalence",
+      "doc:llm/sliding-cache-positions",
+      "project:hohoo-ai-lab"
+    ],
+    "method": "未训练双层网络，三固定种子；完整、增量、分块与窗口路径对照。",
+    "methodEn": "An untrained two-layer network, three fixed seeds, full/incremental/chunk/window comparisons.",
+    "methodTw": "未訓練雙層網絡，三固定種子；完整、增量、分塊與窗口路徑對照。",
+    "result": "正确缓存最大误差低于1e-12；错误位置和分块掩码产生可检出的偏差。",
+    "resultEn": "Correct caches stay below 1e-12 error; wrong positions and chunk masks produce detectable differences.",
+    "resultTw": "正確快取最大誤差低於1e-12；錯誤位置和分塊掩碼產生可檢出的偏差。",
+    "observations": "逐前缀/缓存投影行数1800/144；完整/窗口K/V负载12288/2048字节。",
+    "observationsEn": "Prefix/cache projected rows: 1800/144; full/window K/V payload: 12288/2048 bytes.",
+    "observationsTw": "逐前綴/快取投影行數1800/144；完整/窗口K/V負載12288/2048字節。",
+    "conclusion": "缓存保存变换后的表示，槽位不等于绝对位置；局部缓存不等于裁剪原始输入重算。",
+    "conclusionEn": "Caches retain transformed states. Slots are not absolute positions, and local caches are not cropped-input recomputation.",
+    "conclusionTw": "快取保存變換後的表示，槽位不等於絕對位置；局部快取不等於裁剪原始輸入重算。",
+    "limitations": "无训练、语言任务、在线调用或硬件速度基准；教学网络不代表Agnes架构。",
+    "limitationsEn": "No training, language task, online call or hardware-speed benchmark; this network does not represent Agnes.",
+    "limitationsTw": "無訓練、語言任務、在線調用或硬件速度基準；教學網絡不代表Agnes架構。",
+    "reproduce": "代码、冻结参数、原始结果和独立审计见固定版本仓库。",
+    "reproduceEn": "See the pinned repository for code, frozen parameters, raw results and independent auditing.",
+    "reproduceTw": "程式碼、固定參數、原始結果和獨立稽核見固定版本儲存庫。"
+  },
+  {
+    "id": "exit-actions",
+    "number": "016",
+    "domain": "embodied-ai",
+    "status": "completed",
+    "date": "2026-10-03",
+    "provenance": "experiment-result",
+    "zh": "E8 / 报警后的退出动作",
+    "en": "E8 / Post-alarm exit actions",
+    "titleTw": "E8 / 報警後的退出動作",
+    "goalZh": "15回合固定场景对照保持、松爪、松爪后退：报警相同，退出动作不同，最终放置也不同。",
+    "goalEn": "Fifteen fixed-scene rollouts compare hold, open and open-then-retreat after identical alarms.",
+    "descriptionTw": "15回合固定場景對照保持、鬆爪、鬆爪後退：報警相同，退出動作不同，最終放置也不同。",
+    "repo": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget",
+    "related": [
+      "doc:embodied-ai/mujoco-exit-actions",
+      "project:hohoo-embodied-agent"
+    ],
+    "method": "五条件×保持、松爪、松爪后退，共15个固定场景回合。",
+    "methodEn": "Five conditions × hold/open/open-retreat: 15 fixed-scene rollouts.",
+    "methodTw": "五條件×保持、鬆爪、鬆爪後退，共15個固定場景回合。",
+    "result": "晚下降与丢包条件下，松爪消除最终残留夹持；搬运掉落三策略仍失败。",
+    "resultEn": "Opening removes final residual grasp in late lowering/silence; all transfer-drop policies still fail.",
+    "resultTw": "晚下降與丟包條件下，鬆爪消除最終殘留夾持；搬運掉落三策略仍失敗。",
+    "observations": "15组报警前物理前缀一致；open与open-retreat最终验收相同。",
+    "observationsEn": "Fifteen pre-alarm state pairs match; open and open-retreat have identical final acceptance.",
+    "observationsTw": "15組報警前物理前綴一致；open與open-retreat最終驗收相同。",
+    "conclusion": "相同报警不意味着相同物理结局，退出动作需要独立验收。",
+    "conclusionEn": "Identical alarms do not imply identical physical outcomes; exit actions need independent checks.",
+    "conclusionTw": "相同報警不意味著相同物理結局，退出動作需要獨立驗收。",
+    "limitations": "单回合确定性格、已知托盘，无接触力与真机安全验证；掉入托盘不等于规划释放。",
+    "limitationsEn": "One deterministic rollout per cell, known tray, no force/hardware safety validation; falling into the tray is not planned release.",
+    "limitationsTw": "單回合確定性格、已知托盤，無接觸力與真機安全驗證；掉入托盤不等於規劃釋放。",
+    "reproduce": "代码、冻结参数、原始结果和独立审计见固定版本仓库。",
+    "reproduceEn": "See the pinned repository for code, frozen parameters, raw results and independent auditing.",
+    "reproduceTw": "程式碼、固定參數、原始結果和獨立稽核見固定版本儲存庫。"
+  },
+  {
+    "id": "release-verification",
+    "number": "017",
+    "domain": "embodied-ai",
+    "status": "completed",
+    "date": "2026-10-03",
+    "provenance": "experiment-result",
+    "zh": "E9 / 释放后的完成验收",
+    "en": "E9 / Post-release completion verification",
+    "titleTw": "E9 / 釋放後的完成驗收",
+    "goalZh": "五条真实轨迹同时检查单帧与持续窗口：错误观测、延迟松爪和完成后的外力揭示验收范围。",
+    "goalEn": "Apply single-capture and sustained-window checks to five actual trajectories, including forged observations and post-completion disturbance.",
+    "descriptionTw": "五條真實軌跡同時檢查單幀與持續窗口：錯誤觀測、延遲鬆爪和完成後的外力揭示驗收範圍。",
+    "repo": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget",
+    "related": [
+      "doc:embodied-ai/mujoco-release-verification",
+      "project:hohoo-embodied-agent"
+    ],
+    "method": "五条物理轨迹，同时计算单帧与至少250ms连续窗口；观察器不反馈控制。",
+    "methodEn": "Five physical trajectories scored by single-capture and 250 ms-window observers without control feedback.",
+    "methodTw": "五條物理軌跡，同時計算單幀與至少250ms連續窗口；觀察器不反饋控制。",
+    "result": "孤立错误报告骗过单帧判据，持续窗口未通过；后续外力使两者早先通过的轨迹终点失败。",
+    "resultEn": "A forged capture fools the single rule, not the window. Later force invalidates final placement after both had accepted.",
+    "resultTw": "孤立錯誤報告騙過單幀判據，持續窗口未通過；後續外力使兩者早先通過的軌跡終點失敗。",
+    "observations": "正常完成时刻6.842/7.102s；20ms采样下窗口实际跨260ms。",
+    "observationsEn": "Clean completion at 6.842/7.102 s;20 ms sampling makes the actual window span 260 ms.",
+    "observationsTw": "正常完成時刻6.842/7.102s；20ms取樣下窗口實際跨260ms。",
+    "conclusion": "完成事件与当前有效状态需要分开；连续窗口不是未来稳定性的保证。",
+    "conclusionEn": "Completion events and current validity differ; a sustained window does not guarantee future stability.",
+    "conclusionTw": "完成事件與當前有效狀態需要分開；連續窗口不是未來穩定性的保證。",
+    "limitations": "仿真真值观测、合成单帧故障；没有真实视觉误差或持续成功状态撤销机制。",
+    "limitationsEn": "Privileged simulated observations and a synthetic capture fault; no realistic vision error or validity-revocation implementation.",
+    "limitationsTw": "模擬真值觀測、合成單幀故障；沒有真實視覺誤差或持續成功狀態撤銷機制。",
+    "reproduce": "代码、冻结参数、原始结果和独立审计见固定版本仓库。",
+    "reproduceEn": "See the pinned repository for code, frozen parameters, raw results and independent auditing.",
+    "reproduceTw": "程式碼、固定參數、原始結果和獨立稽核見固定版本儲存庫。"
+  },
+  {
+    "id": "recovery-budget",
+    "number": "018",
+    "domain": "embodied-ai",
+    "status": "completed",
+    "date": "2026-10-03",
+    "provenance": "experiment-result",
+    "zh": "E10 / 有界恢复与冷却",
+    "en": "E10 / Bounded recovery and cooldown",
+    "titleTw": "E10 / 有界恢復與冷卻",
+    "goalZh": "12回合对照无限恢复、两次预算与400ms冷却：分别记录启停、验收窗口、终止原因和最终任务结果。",
+    "goalEn": "Twelve rollouts compare unlimited recovery, a two-resume cap and a 400 ms cooldown, separating bounded behavior from task completion.",
+    "descriptionTw": "12回合對照無限恢復、兩次預算與400ms冷卻：分別記錄啟停、驗收窗口、終止原因和最終任務結果。",
+    "repo": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget",
+    "related": [
+      "doc:embodied-ai/mujoco-recovery-budget",
+      "project:hohoo-embodied-agent"
+    ],
+    "method": "四通信条件×三预算策略，共12回合；相同新鲜观测门控和500ms搬运重规划。",
+    "methodEn": "Four communication conditions × three budgets: 12 rollouts with the same freshness gate and 500 ms transfer replan.",
+    "methodTw": "四通信條件×三預算策略，共12回合；相同新鮮觀測門控和500ms搬運重新規劃。",
+    "result": "周期丢包下无上限恢复6次并完成；两次预算策略恢复2次后中止。",
+    "resultEn": "Under repeated gaps, unlimited resumes six times and finishes; capped policies resume twice and abort.",
+    "resultTw": "周期丟包下無上限恢復6次並完成；兩次預算策略恢復2次後中止。",
+    "observations": "400ms冷却后仍在40ms后再次停机；永久丢包均由800ms期限中止。",
+    "observationsEn": "After 400 ms cooldown another stop occurs 40 ms later; permanent silence triggers the 800 ms deadline.",
+    "observationsTw": "400ms冷卻後仍在40ms後再次停機；永久丟包均由800ms期限中止。",
+    "conclusion": "预算约束工作量，不保证完成率或未来通信稳定。",
+    "conclusionEn": "Budgets bound work, not completion rate or future communication health.",
+    "conclusionTw": "預算約束工作量，不保證完成率或未來通信穩定。",
+    "limitations": "仅搬运监测，绝对故障时刻与路径进度耦合；中止保持目标，未组合E8退出动作。",
+    "limitationsEn": "Transfer-only monitoring; absolute faults interact with progress. Abort holds targets and does not integrate E8 exits.",
+    "limitationsTw": "僅搬運監測，絕對故障時刻與路徑進度耦合；中止保持目標，未組合E8退出動作。",
+    "reproduce": "代码、冻结参数、原始结果和独立审计见固定版本仓库。",
+    "reproduceEn": "See the pinned repository for code, frozen parameters, raw results and independent auditing.",
+    "reproduceTw": "程式碼、固定參數、原始結果和獨立稽核見固定版本儲存庫。"
   }
 ]

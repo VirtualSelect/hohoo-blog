@@ -97,6 +97,18 @@
         {
           "href": "/docs/embodied-ai/mujoco-phase-contracts",
           "titleKey": "journey.lab.VL01.phaseArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-exit-actions",
+          "titleKey": "journey.lab.VL01.mujoco-exit-actions"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-recovery-budget",
+          "titleKey": "journey.lab.VL01.mujoco-recovery-budget"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-release-verification",
+          "titleKey": "journey.lab.VL01.mujoco-release-verification"
         }
       ],
       "demos": [
@@ -129,6 +141,10 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/43dacf4bbe72e0eecc288c1dc46692f51be2b43e/experiments/vl01_phase_contracts",
           "titleKey": "journey.lab.VL01.phaseCode"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget",
+          "titleKey": "journey.lab.VL01.seriesOctoberCode"
         }
       ],
       "evidence": [
@@ -155,9 +171,13 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/43dacf4bbe72e0eecc288c1dc46692f51be2b43e/evidence/phase-contracts-20261001",
           "titleKey": "journey.lab.VL01.phaseEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/evidence/exit-release-budget-20261003",
+          "titleKey": "journey.lab.VL01.seriesOctoberEvidence"
         }
       ],
-      "result": "journey.lab.VL01.phaseResult",
+      "result": "journey.lab.VL01.seriesOctober",
       "startedAt": "2026-09-28",
       "completedAt": null
     },

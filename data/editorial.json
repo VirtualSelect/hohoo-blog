@@ -4,8 +4,8 @@
     "project:hohoo-embodied-agent"
   ],
   "featuredArticles": [
-    "doc:embodied-ai/mujoco-phase-contracts",
-    "doc:llm/context-similar-distractors"
+    "doc:ai-apps/java-tool-boundary",
+    "doc:embodied-ai/mujoco-release-verification"
   ],
   "featuredMedia": {
     "doc:embodied-ai/mujoco-observation-freshness": {
@@ -39,6 +39,54 @@
       "alt": "真实日志：正常下降中的高度规则误停，与早下降松爪后的方块高度",
       "altEn": "Recorded heights: a false stop during clean lowering and an early forced-opening fault",
       "altTw": "真實紀錄：正常下降中的高度規則誤停，與早下降鬆爪後的方塊高度"
+    },
+    "doc:llm/causal-mask-lab": {
+      "src": "/media/practice/causal-mask.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "从手算两行Attention到双层数值对照，验证因果掩码、Softmax与未来信息泄漏。",
+      "altEn": "From a two-row hand calculation to a two-layer numeric experiment: causal masks, softmax and future-information leakage.",
+      "altTw": "從手算兩行Attention到雙層數值對照，驗證因果掩碼、Softmax與未來資訊泄漏。"
+    },
+    "doc:llm/kv-cache-equivalence": {
+      "src": "/media/practice/kv-storage.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "逐前缀重算、逐Token缓存与分块缓存三路对照，记录误差、投影行数和真实数组字节。",
+      "altEn": "Compare prefix recomputation, token decoding and chunk caching with output errors, projected-row counts and actual array payloads.",
+      "altTw": "逐前綴重算、逐Token快取與分塊快取三路對照，記錄誤差、投影行數和真實數組字節。"
+    },
+    "doc:embodied-ai/mujoco-exit-actions": {
+      "src": "/media/practice/exit-actions.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "15回合固定场景对照保持、松爪、松爪后退：报警相同，退出动作不同，最终放置也不同。",
+      "altEn": "Fifteen fixed-scene rollouts compare hold, open and open-then-retreat after identical alarms.",
+      "altTw": "15回合固定場景對照保持、鬆爪、鬆爪後退：報警相同，退出動作不同，最終放置也不同。"
+    },
+    "doc:embodied-ai/mujoco-recovery-budget": {
+      "src": "/media/practice/recovery-budget.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "12回合对照无限恢复、两次预算与400ms冷却：分别记录启停、验收窗口、终止原因和最终任务结果。",
+      "altEn": "Twelve rollouts compare unlimited recovery, a two-resume cap and a400ms cooldown, separating bounded behavior from task completion.",
+      "altTw": "12回合對照無限恢復、兩次預算與400ms冷卻：分別記錄啟停、驗收窗口、終止原因和最終任務結果。"
+    },
+    "doc:embodied-ai/mujoco-release-verification": {
+      "src": "/media/practice/release-verification.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "五条真实轨迹同时检查单帧与持续窗口：错误观测、延迟松爪和完成后的外力揭示验收范围。",
+      "altEn": "Apply single-capture and sustained-window checks to five actual trajectories, including forged observations and post-completion disturbance.",
+      "altTw": "五條真實軌跡同時檢查單幀與持續窗口：錯誤觀測、延遲鬆爪和完成後的外力揭示驗收範圍。"
+    },
+    "doc:llm/sliding-cache-positions": {
+      "src": "/media/practice/cache-positions.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "用双层滑动注意力区分绝对位置、缓存槽位和历史表示，展示两种形状正确却计算错误的实现。",
+      "altEn": "Separate absolute positions, cache slots and retained representations with a two-layer sliding-attention experiment.",
+      "altTw": "用雙層滑動注意力區分絕對位置、快取槽位和歷史表示，展示兩種形狀正確卻計算錯誤的實現。"
     }
   }
 }

@@ -1501,5 +1501,23 @@
   },
   "journey.lab.VL01.phaseResult": {
     "message": "七輪固定場景實驗已歸檔。E7顯示照搬高度規則會誤停正常下降；正確報警後仍可能未完成放置。完整VL01與M4/M5仍待推進。"
+  },
+  "journey.lab.VL01.mujoco-exit-actions": {
+    "message": "具身智能實踐（八）：檢測到掉落以後，夾爪應該做什麼？"
+  },
+  "journey.lab.VL01.mujoco-recovery-budget": {
+    "message": "具身智能實踐（十）：恢復次數受控了，為什麼任務反而沒完成？"
+  },
+  "journey.lab.VL01.mujoco-release-verification": {
+    "message": "具身智能實踐（九）：鬆爪命令成功，不等於放置完成"
+  },
+  "journey.lab.VL01.seriesOctober": {
+    "message": "E8–E10新增32回合：退出動作、釋放驗收、恢復預算分別驗證；完整VL01與M4/M5仍待推進。"
+  },
+  "journey.lab.VL01.seriesOctoberCode": {
+    "message": "E8–E10 / 固定版本程式碼"
+  },
+  "journey.lab.VL01.seriesOctoberEvidence": {
+    "message": "E8–E10 / 32回合原始證據"
   }
 }

@@ -1694,5 +1694,23 @@
   },
   "journey.lab.VL01.phaseResult": {
     "message": "Seven fixed-scene experiments are archived. E7 shows that reusing the height rule falsely stops normal lowering, while a correct alarm can still precede failed placement. VL01 and full M4/M5 remain open."
+  },
+  "journey.lab.VL01.mujoco-exit-actions": {
+    "message": "Embodied AI VIII: what should the gripper do after a drop alarm?"
+  },
+  "journey.lab.VL01.mujoco-recovery-budget": {
+    "message": "Embodied AI X: why can a recovery budget stop a recoverable task?"
+  },
+  "journey.lab.VL01.mujoco-release-verification": {
+    "message": "Embodied AI IX: a release command is not verified placement"
+  },
+  "journey.lab.VL01.seriesOctober": {
+    "message": "E8–E10 add32 rollouts covering exit actions, release verification and recovery budgets. Full VL01 and M4/M5 remain open."
+  },
+  "journey.lab.VL01.seriesOctoberCode": {
+    "message": "E8–E10 / Pinned code"
+  },
+  "journey.lab.VL01.seriesOctoberEvidence": {
+    "message": "E8–E10 / Evidence from32 rollouts"
   }
 }

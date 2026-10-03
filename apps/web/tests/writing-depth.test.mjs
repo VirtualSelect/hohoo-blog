@@ -41,9 +41,15 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
         );
       }
     }
-    assert.equal(
-      kinds.filterWriting(entries, { kind: "mechanism", domain: "llm" }).length,
-      1,
+    const mechanisms = kinds.filterWriting(entries, {
+      kind: "mechanism",
+      domain: "llm",
+    });
+    assert.ok(mechanisms.some((entry) => entry.id === "doc:llm/kv-cache"));
+    assert.ok(
+      mechanisms.every(
+        (entry) => entry.articleKind === "mechanism" && entry.domain === "llm",
+      ),
     );
     assert.ok(
       kinds
