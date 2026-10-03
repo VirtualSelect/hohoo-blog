@@ -1531,5 +1531,17 @@
   },
   "journey.lab.VL01.lifecycleResult": {
     "message": "E11 完成七回合持續驗收：區分歷史事件、當前有效、未知和無效；保留單幀誤報。完整 VL01 與 M4/M5 仍待推進。"
+  },
+  "journey.lab.VL01.abortArticle": {
+    "message": "具身智能實踐（十二）：恢復預算耗盡之後，夾爪應該做什麼？"
+  },
+  "journey.lab.VL01.abortCode": {
+    "message": "E12 / 終止退出程式碼"
+  },
+  "journey.lab.VL01.abortEvidence": {
+    "message": "E12 / 12 回合記錄與三畫面回放"
+  },
+  "journey.lab.VL01.abortResult": {
+    "message": "E12 將恢復預算與退出動作組合：12 回合保留懸空與落地失敗，下降靜默暴露階段覆蓋邊界；完整 VL01、M4/M5 尚未完成。"
   }
 }

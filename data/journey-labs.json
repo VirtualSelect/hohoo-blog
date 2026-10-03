@@ -113,6 +113,10 @@
         {
           "href": "/docs/embodied-ai/mujoco-completion-lifecycle",
           "titleKey": "journey.lab.VL01.lifecycleArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-abort-exit",
+          "titleKey": "journey.lab.VL01.abortArticle"
         }
       ],
       "demos": [
@@ -153,6 +157,10 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/cd26180e8560155d18c45d34a33dc9ef25bbcdf6/experiments/vl01_completion_lifecycle",
           "titleKey": "journey.lab.VL01.lifecycleCode"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/2cf78a9afce618ea8ce35a882f0db203b2a74f57/experiments/vl01_abort_exit",
+          "titleKey": "journey.lab.VL01.abortCode"
         }
       ],
       "evidence": [
@@ -187,9 +195,13 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/cd26180e8560155d18c45d34a33dc9ef25bbcdf6/evidence/completion-lifecycle-20261003",
           "titleKey": "journey.lab.VL01.lifecycleEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/2cf78a9afce618ea8ce35a882f0db203b2a74f57/evidence/abort-exit-20261003",
+          "titleKey": "journey.lab.VL01.abortEvidence"
         }
       ],
-      "result": "journey.lab.VL01.lifecycleResult",
+      "result": "journey.lab.VL01.abortResult",
       "startedAt": "2026-09-28",
       "completedAt": null
     },

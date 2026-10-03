@@ -1115,5 +1115,17 @@
   },
   "journey.lab.VL01.lifecycleResult": {
     "message": "E11 完成七回合持续验收：区分历史事件、当前有效、未知和无效；保留单帧误报。完整 VL01 与 M4/M5 仍待推进。"
+  },
+  "journey.lab.VL01.abortArticle": {
+    "message": "具身智能实践（十二）：恢复预算耗尽之后，夹爪应该做什么？"
+  },
+  "journey.lab.VL01.abortCode": {
+    "message": "E12 / 终止退出代码"
+  },
+  "journey.lab.VL01.abortEvidence": {
+    "message": "E12 / 12 回合记录与三画面回放"
+  },
+  "journey.lab.VL01.abortResult": {
+    "message": "E12 将恢复预算与退出动作组合：12 回合保留悬空与落地失败，下降静默暴露阶段覆盖边界；完整 VL01、M4/M5 尚未完成。"
   }
 }

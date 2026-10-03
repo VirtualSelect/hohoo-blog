@@ -80,8 +80,8 @@
     "type": "project",
     "title": "Java LLM 实践集",
     "titleEn": "Java LLM Practice",
-    "description": "Java 对话、工具、检索与引用验收，以及本地注意力和缓存机制研究；每轮保留固定代码、逐项结果与复核。",
-    "descriptionEn": "Java conversation, tools, retrieval and claim validation, plus local attention/cache mechanics, with pinned code and audited per-case results.",
+    "description": "Java 对话、结构化输出、工具与引用验收、流式提交边界，以及本地注意力和前缀缓存实验。",
+    "descriptionEn": "Java conversation, structured output, tools, claim validation and streaming commitment, alongside local attention and prefix-cache experiments.",
     "domain": "ai-apps",
     "status": "building",
     "featured": true,
@@ -116,7 +116,11 @@
       "lab:tool-eval",
       "doc:ai-apps/java-grounded-claims",
       "doc:llm/prefix-cache-invalidation",
-      "lab:prefix-cache"
+      "lab:prefix-cache",
+      "doc:ai-apps/java-streaming-boundary",
+      "lab:streaming-boundary",
+      "doc:llm/longest-prefix-reuse",
+      "lab:longest-prefix-reuse"
     ],
     "architecture": [
       "Console input",
@@ -128,9 +132,9 @@
     "sections": [
       {
         "heading": "Overview",
-        "zh": "Java 对话、工具、检索与引用验收，以及本地注意力和缓存机制研究；每轮保留固定代码、逐项结果与复核。",
-        "en": "Java conversation, tools, retrieval and claim validation, plus local attention/cache mechanics, with pinned code and audited per-case results.",
-        "tw": "Java 對話、工具、檢索與引用驗收，以及本地注意力和快取機制研究；每輪保留固定程式碼、逐項結果與復核。"
+        "zh": "Java 对话、结构化输出、工具与引用验收、流式提交边界，以及本地注意力和前缀缓存实验。",
+        "en": "Java conversation, structured output, tools, claim validation and streaming commitment, alongside local attention and prefix-cache experiments.",
+        "tw": "Java 對話、結構化輸出、工具與引用驗收、流式提交邊界，以及本地注意力和前綴快取實驗。"
       },
       {
         "heading": "Problem",
@@ -337,10 +341,28 @@
         "description": "三种子、六条件，比较错误复用与带键校验的前缀缓存；数值相同也不代表允许跨作用域共享。",
         "descriptionEn": "Three seeds and six conditions compare unchecked and keyed prefix reuse; numerical equality does not establish permission to share across scopes.",
         "descriptionTw": "三種子、六條件，比較錯誤重用與帶鍵校驗的前綴快取；數值相同也不代表允許跨作用域共享。"
+      },
+      {
+        "href": "/docs/ai-apps/java-streaming-boundary",
+        "label": "Java LLM 实践（八）：流式回答断了，半句答案该不该进入历史？",
+        "labelEn": "Java LLM practice (8): should an interrupted stream enter conversation history?",
+        "labelTw": "Java LLM 實踐（八）：流式回答斷了，半句答案該不該進入歷史？",
+        "description": "22 个回环 HTTP 案例，验证 UTF-8、SSE 分帧、取消与异常结束，把逐步预览和完整历史提交分开。",
+        "descriptionEn": "22 loopback HTTP cases separate incremental preview from committing history, testing UTF-8, SSE framing, cancellation and abnormal endings.",
+        "descriptionTw": "22 個回環 HTTP 案例，驗證 UTF-8、SSE 分幀、取消與異常結束，把逐步預覽和完整歷史提交分開。"
+      },
+      {
+        "href": "/docs/llm/longest-prefix-reuse",
+        "label": "LLM 机制实验（五）：改了历史，能否只重算变化的后缀？",
+        "labelEn": "LLM mechanics (5): after editing history, can we recompute only the changed suffix?",
+        "labelTw": "LLM 機制實驗（五）：改了歷史，能否只重算變化的後綴？",
+        "description": "27 个固定条件、81 个原始数组，验证最长相同前缀裁剪、位置同步、滑窗回退与作用域隔离。",
+        "descriptionEn": "27 fixed conditions and 81 raw arrays test longest-prefix cropping, continuation positions, sliding-window fallback and scope isolation.",
+        "descriptionTw": "27 個固定條件、81 個原始數組，驗證最長相同前綴裁剪、位置同步、滑窗回退與作用域隔離。"
       }
     ],
     "titleTw": "Java LLM 實作集",
-    "descriptionTw": "Java 對話、工具、檢索與引用驗收，以及本地注意力和快取機制研究；每輪保留固定程式碼、逐項結果與復核。",
+    "descriptionTw": "Java 對話、結構化輸出、工具與引用驗收、流式提交邊界，以及本地注意力和前綴快取實驗。",
     "sourceLocale": "zh-CN",
     "updated": "2026-10-03"
   },
@@ -352,9 +374,9 @@
     "title": "Hohoo 具身实验",
     "titleEn": "Hohoo Embodied Experiments",
     "titleTw": "Hohoo 具身實驗",
-    "description": "从拾取偏移推进到完成状态生命周期：十一轮 MuJoCo 教学实验，保留失败、原始轨迹与独立复核。",
-    "descriptionEn": "Eleven MuJoCo teaching studies from pickup bias to completion validity, retaining failures, raw trajectories and independent audits.",
-    "descriptionTw": "從拾取偏移推進到完成狀態生命周期：十一輪 MuJoCo 教學實驗，保留失敗、原始軌跡與獨立復核。",
+    "description": "十二轮 MuJoCo 教学实验，从拾取偏移推进到完成状态、恢复预算与终止后的退出动作，保留真实失败和可回放轨迹。",
+    "descriptionEn": "Twelve MuJoCo teaching studies from pickup bias to completion validity, recovery budgets and post-abort exits, retaining failures and replayable trajectories.",
+    "descriptionTw": "十二輪 MuJoCo 教學實驗，從拾取偏移推進到完成狀態、恢復預算與終止後的退出動作，保留真實失敗和可回放軌跡。",
     "domain": "embodied-ai",
     "status": "experiment",
     "date": "2026-09-28",
@@ -387,14 +409,16 @@
       "lab:recovery-budget",
       "lab:release-verification",
       "doc:embodied-ai/mujoco-completion-lifecycle",
-      "lab:completion-lifecycle"
+      "lab:completion-lifecycle",
+      "doc:embodied-ai/mujoco-abort-exit",
+      "lab:abort-exit"
     ],
     "sections": [
       {
         "heading": "Overview",
-        "zh": "从拾取偏移推进到完成状态生命周期：十一轮 MuJoCo 教学实验，保留失败、原始轨迹与独立复核。",
-        "en": "Eleven MuJoCo teaching studies from pickup bias to completion validity, retaining failures, raw trajectories and independent audits.",
-        "tw": "從拾取偏移推進到完成狀態生命周期：十一輪 MuJoCo 教學實驗，保留失敗、原始軌跡與獨立復核。"
+        "zh": "十二轮 MuJoCo 教学实验，从拾取偏移推进到完成状态、恢复预算与终止后的退出动作，保留真实失败和可回放轨迹。",
+        "en": "Twelve MuJoCo teaching studies from pickup bias to completion validity, recovery budgets and post-abort exits, retaining failures and replayable trajectories.",
+        "tw": "十二輪 MuJoCo 教學實驗，從拾取偏移推進到完成狀態、恢復預算與終止後的退出動作，保留真實失敗和可回放軌跡。"
       },
       {
         "heading": "Goal",
@@ -556,6 +580,15 @@
         "description": "七条 MuJoCo 轨迹与双画面回放，将历史完成事件和当前有效状态分开，保留传感误报与过期边界。",
         "descriptionEn": "Seven MuJoCo rollouts and a paired replay separate historical completion from current validity, including false alarms and expiry boundaries.",
         "descriptionTw": "七條 MuJoCo 軌跡與雙畫面回放，將歷史完成事件和當前有效狀態分開，保留傳感誤報與過期邊界。"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-abort-exit",
+        "label": "具身智能实践（十二）：恢复预算耗尽之后，夹爪应该做什么？",
+        "labelEn": "Embodied AI practice (12): what should the gripper do after recovery is exhausted?",
+        "labelTw": "具身智能實踐（十二）：恢復預算耗盡之後，夾爪應該做什麼？",
+        "description": "12 个 MuJoCo 回合与三画面回放，对比保持、松爪、松爪后退，区分终止决定与实际退出后果。",
+        "descriptionEn": "12 MuJoCo rollouts and synchronized three-view replay compare hold, open and open-retreat, separating terminal decisions from physical consequences.",
+        "descriptionTw": "12 個 MuJoCo 回合與三畫面回放，對比保持、鬆爪、鬆爪後退，區分終止決定與實際退出後果。"
       }
     ]
   }

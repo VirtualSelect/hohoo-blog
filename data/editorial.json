@@ -4,8 +4,8 @@
     "project:hohoo-embodied-agent"
   ],
   "featuredArticles": [
-    "doc:ai-apps/java-grounded-claims",
-    "doc:embodied-ai/mujoco-completion-lifecycle"
+    "doc:ai-apps/java-streaming-boundary",
+    "doc:embodied-ai/mujoco-abort-exit"
   ],
   "featuredMedia": {
     "doc:embodied-ai/mujoco-observation-freshness": {
@@ -111,6 +111,30 @@
       "alt": "七条 MuJoCo 轨迹与双画面回放，将历史完成事件和当前有效状态分开，保留传感误报与过期边界。",
       "altEn": "Seven MuJoCo rollouts and a paired replay separate historical completion from current validity, including false alarms and expiry boundaries.",
       "altTw": "七條 MuJoCo 軌跡與雙畫面回放，將歷史完成事件和當前有效狀態分開，保留傳感誤報與過期邊界。"
+    },
+    "doc:ai-apps/java-streaming-boundary": {
+      "src": "/media/practice/streaming-boundary.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "22 个回环 HTTP 案例，验证 UTF-8、SSE 分帧、取消与异常结束，把逐步预览和完整历史提交分开。",
+      "altEn": "22 loopback HTTP cases separate incremental preview from committing history, testing UTF-8, SSE framing, cancellation and abnormal endings.",
+      "altTw": "22 個回環 HTTP 案例，驗證 UTF-8、SSE 分幀、取消與異常結束，把逐步預覽和完整歷史提交分開。"
+    },
+    "doc:llm/longest-prefix-reuse": {
+      "src": "/media/practice/longest-prefix-reuse.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "27 个固定条件、81 个原始数组，验证最长相同前缀裁剪、位置同步、滑窗回退与作用域隔离。",
+      "altEn": "27 fixed conditions and 81 raw arrays test longest-prefix cropping, continuation positions, sliding-window fallback and scope isolation.",
+      "altTw": "27 個固定條件、81 個原始數組，驗證最長相同前綴裁剪、位置同步、滑窗回退與作用域隔離。"
+    },
+    "doc:embodied-ai/mujoco-abort-exit": {
+      "src": "/media/practice/abort-exit.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "12 个 MuJoCo 回合与三画面回放，对比保持、松爪、松爪后退，区分终止决定与实际退出后果。",
+      "altEn": "12 MuJoCo rollouts and synchronized three-view replay compare hold, open and open-retreat, separating terminal decisions from physical consequences.",
+      "altTw": "12 個 MuJoCo 回合與三畫面回放，對比保持、鬆爪、鬆爪後退，區分終止決定與實際退出後果。"
     }
   }
 }

@@ -1724,5 +1724,17 @@
   },
   "journey.lab.VL01.lifecycleResult": {
     "message": "E11 adds seven validity-lifecycle rollouts, separating historical events, valid, unknown and invalid states while retaining false alarms. Full VL01 and M4/M5 remain open."
+  },
+  "journey.lab.VL01.abortArticle": {
+    "message": "Embodied AI practice (12): what should the gripper do after recovery is exhausted?"
+  },
+  "journey.lab.VL01.abortCode": {
+    "message": "E12 / Post-abort exit code"
+  },
+  "journey.lab.VL01.abortEvidence": {
+    "message": "E12 / 12 rollouts and three-view replay"
+  },
+  "journey.lab.VL01.abortResult": {
+    "message": "E12 combines recovery budgets with exits: 12 rollouts retain suspended/drop failures and expose phase coverage under lowering silence. Full VL01 and M4/M5 remain open."
   }
 }
