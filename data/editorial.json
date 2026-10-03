@@ -4,8 +4,8 @@
     "project:hohoo-embodied-agent"
   ],
   "featuredArticles": [
-    "doc:ai-apps/java-tool-boundary",
-    "doc:embodied-ai/mujoco-release-verification"
+    "doc:ai-apps/java-grounded-claims",
+    "doc:embodied-ai/mujoco-completion-lifecycle"
   ],
   "featuredMedia": {
     "doc:embodied-ai/mujoco-observation-freshness": {
@@ -87,6 +87,30 @@
       "alt": "用双层滑动注意力区分绝对位置、缓存槽位和历史表示，展示两种形状正确却计算错误的实现。",
       "altEn": "Separate absolute positions, cache slots and retained representations with a two-layer sliding-attention experiment.",
       "altTw": "用雙層滑動注意力區分絕對位置、快取槽位和歷史表示，展示兩種形狀正確卻計算錯誤的實現。"
+    },
+    "doc:ai-apps/java-grounded-claims": {
+      "src": "/media/practice/claim-contract.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "22 个固定配置案例，拆开引用存在、版本范围、字段支持与完整性，验证 Java 回答验收边界。",
+      "altEn": "22 frozen configuration cases separate citation existence, revision scope, field support and completeness in a Java answer gate.",
+      "altTw": "22 個固定配置案例，拆開引用存在、版本範圍、字段支持與完整性，驗證 Java 回答驗收邊界。"
+    },
+    "doc:llm/prefix-cache-invalidation": {
+      "src": "/media/practice/prefix-cache-invalid.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "三种子、六条件，比较错误复用与带键校验的前缀缓存；数值相同也不代表允许跨作用域共享。",
+      "altEn": "Three seeds and six conditions compare unchecked and keyed prefix reuse; numerical equality does not establish permission to share across scopes.",
+      "altTw": "三種子、六條件，比較錯誤重用與帶鍵校驗的前綴快取；數值相同也不代表允許跨作用域共享。"
+    },
+    "doc:embodied-ai/mujoco-completion-lifecycle": {
+      "src": "/media/practice/completion-lifecycle.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "七条 MuJoCo 轨迹与双画面回放，将历史完成事件和当前有效状态分开，保留传感误报与过期边界。",
+      "altEn": "Seven MuJoCo rollouts and a paired replay separate historical completion from current validity, including false alarms and expiry boundaries.",
+      "altTw": "七條 MuJoCo 軌跡與雙畫面回放，將歷史完成事件和當前有效狀態分開，保留傳感誤報與過期邊界。"
     }
   }
 }

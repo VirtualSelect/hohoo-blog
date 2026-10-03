@@ -80,8 +80,8 @@
     "type": "project",
     "title": "Java LLM 实践集",
     "titleEn": "Java LLM Practice",
-    "description": "Java并发提交、工具边界、检索证据与本地注意力机制实验，配套固定源码、逐项结果和复核。",
-    "descriptionEn": "Java concurrency, tool boundaries, retrieval evidence and local attention mechanics, with pinned code and audited results.",
+    "description": "Java 对话、工具、检索与引用验收，以及本地注意力和缓存机制研究；每轮保留固定代码、逐项结果与复核。",
+    "descriptionEn": "Java conversation, tools, retrieval and claim validation, plus local attention/cache mechanics, with pinned code and audited per-case results.",
     "domain": "ai-apps",
     "status": "building",
     "featured": true,
@@ -113,7 +113,10 @@
       "lab:attention-mechanisms",
       "lab:concurrent-history",
       "lab:retrieval-eval",
-      "lab:tool-eval"
+      "lab:tool-eval",
+      "doc:ai-apps/java-grounded-claims",
+      "doc:llm/prefix-cache-invalidation",
+      "lab:prefix-cache"
     ],
     "architecture": [
       "Console input",
@@ -125,9 +128,9 @@
     "sections": [
       {
         "heading": "Overview",
-        "zh": "Java并发提交、工具边界、检索证据与本地注意力机制实验，配套固定源码、逐项结果和复核。",
-        "en": "Java concurrency, tool boundaries, retrieval evidence and local attention mechanics, with pinned code and audited results.",
-        "tw": "Java並發提交、工具邊界、檢索證據與本地注意力機制實驗，配套固定原始碼、逐項結果和復核。"
+        "zh": "Java 对话、工具、检索与引用验收，以及本地注意力和缓存机制研究；每轮保留固定代码、逐项结果与复核。",
+        "en": "Java conversation, tools, retrieval and claim validation, plus local attention/cache mechanics, with pinned code and audited per-case results.",
+        "tw": "Java 對話、工具、檢索與引用驗收，以及本地注意力和快取機制研究；每輪保留固定程式碼、逐項結果與復核。"
       },
       {
         "heading": "Problem",
@@ -316,10 +319,28 @@
         "description": "用双层滑动注意力区分绝对位置、缓存槽位和历史表示，展示两种形状正确却计算错误的实现。",
         "descriptionEn": "Separate absolute positions, cache slots and retained representations with a two-layer sliding-attention experiment.",
         "descriptionTw": "用雙層滑動注意力區分絕對位置、快取槽位和歷史表示，展示兩種形狀正確卻計算錯誤的實現。"
+      },
+      {
+        "href": "/docs/ai-apps/java-grounded-claims",
+        "label": "Java LLM 实践（七）：引用是真的，为什么答案仍然不能通过？",
+        "labelEn": "Java LLM practice (7): a real citation can still support a wrong answer",
+        "labelTw": "Java LLM 實踐（七）：引用是真的，為什麼答案仍然不能通過？",
+        "description": "22 个固定配置案例，拆开引用存在、版本范围、字段支持与完整性，验证 Java 回答验收边界。",
+        "descriptionEn": "22 frozen configuration cases separate citation existence, revision scope, field support and completeness in a Java answer gate.",
+        "descriptionTw": "22 個固定配置案例，拆開引用存在、版本範圍、欄位支持與完整性，驗證 Java 回答驗收邊界。"
+      },
+      {
+        "href": "/docs/llm/prefix-cache-invalidation",
+        "label": "LLM 机制实验（四）：前缀改了，旧 KV Cache 还能继续用吗？",
+        "labelEn": "LLM mechanics (4): when a prefix changes, is the old KV cache still valid?",
+        "labelTw": "LLM 機制實驗（四）：前綴改了，舊 KV Cache 還能繼續用嗎？",
+        "description": "三种子、六条件，比较错误复用与带键校验的前缀缓存；数值相同也不代表允许跨作用域共享。",
+        "descriptionEn": "Three seeds and six conditions compare unchecked and keyed prefix reuse; numerical equality does not establish permission to share across scopes.",
+        "descriptionTw": "三種子、六條件，比較錯誤重用與帶鍵校驗的前綴快取；數值相同也不代表允許跨作用域共享。"
       }
     ],
     "titleTw": "Java LLM 實作集",
-    "descriptionTw": "Java並發提交、工具邊界、檢索證據與本地注意力機制實驗，配套固定原始碼、逐項結果和復核。",
+    "descriptionTw": "Java 對話、工具、檢索與引用驗收，以及本地注意力和快取機制研究；每輪保留固定程式碼、逐項結果與復核。",
     "sourceLocale": "zh-CN",
     "updated": "2026-10-03"
   },
@@ -331,9 +352,9 @@
     "title": "Hohoo 具身实验",
     "titleEn": "Hohoo Embodied Experiments",
     "titleTw": "Hohoo 具身實驗",
-    "description": "从拾取偏移推进到退出动作、释放验收与有界恢复：十轮MuJoCo教学实验，保留失败与原始轨迹。",
-    "descriptionEn": "Ten MuJoCo teaching studies from pickup bias to exit actions, release verification and bounded recovery, retaining failures and raw trajectories.",
-    "descriptionTw": "從拾取偏移推進到退出動作、釋放驗收與有界恢復：十輪MuJoCo教學實驗，保留失敗與原始軌跡。",
+    "description": "从拾取偏移推进到完成状态生命周期：十一轮 MuJoCo 教学实验，保留失败、原始轨迹与独立复核。",
+    "descriptionEn": "Eleven MuJoCo teaching studies from pickup bias to completion validity, retaining failures, raw trajectories and independent audits.",
+    "descriptionTw": "從拾取偏移推進到完成狀態生命周期：十一輪 MuJoCo 教學實驗，保留失敗、原始軌跡與獨立復核。",
     "domain": "embodied-ai",
     "status": "experiment",
     "date": "2026-09-28",
@@ -364,14 +385,16 @@
       "doc:embodied-ai/mujoco-release-verification",
       "lab:exit-actions",
       "lab:recovery-budget",
-      "lab:release-verification"
+      "lab:release-verification",
+      "doc:embodied-ai/mujoco-completion-lifecycle",
+      "lab:completion-lifecycle"
     ],
     "sections": [
       {
         "heading": "Overview",
-        "zh": "从拾取偏移推进到退出动作、释放验收与有界恢复：十轮MuJoCo教学实验，保留失败与原始轨迹。",
-        "en": "Ten MuJoCo teaching studies from pickup bias to exit actions, release verification and bounded recovery, retaining failures and raw trajectories.",
-        "tw": "從拾取偏移推進到退出動作、釋放驗收與有界恢復：十輪MuJoCo教學實驗，保留失敗與原始軌跡。"
+        "zh": "从拾取偏移推进到完成状态生命周期：十一轮 MuJoCo 教学实验，保留失败、原始轨迹与独立复核。",
+        "en": "Eleven MuJoCo teaching studies from pickup bias to completion validity, retaining failures, raw trajectories and independent audits.",
+        "tw": "從拾取偏移推進到完成狀態生命周期：十一輪 MuJoCo 教學實驗，保留失敗、原始軌跡與獨立復核。"
       },
       {
         "heading": "Goal",
@@ -524,6 +547,15 @@
         "description": "五条真实轨迹同时检查单帧与持续窗口：错误观测、延迟松爪和完成后的外力揭示验收范围。",
         "descriptionEn": "Apply single-capture and sustained-window checks to five actual trajectories, including forged observations and post-completion disturbance.",
         "descriptionTw": "五條真實軌跡同時檢查單幀與持續窗口：錯誤觀測、延遲鬆爪和完成後的外力揭示驗收範圍。"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-completion-lifecycle",
+        "label": "具身智能实践（十一）：已经放好了，为什么还要撤销“完成”？",
+        "labelEn": "Embodied AI practice (11): placement completed, but is it still valid?",
+        "labelTw": "具身智能實踐（十一）：已經放好了，為什麼還要撤銷“完成”？",
+        "description": "七条 MuJoCo 轨迹与双画面回放，将历史完成事件和当前有效状态分开，保留传感误报与过期边界。",
+        "descriptionEn": "Seven MuJoCo rollouts and a paired replay separate historical completion from current validity, including false alarms and expiry boundaries.",
+        "descriptionTw": "七條 MuJoCo 軌跡與雙畫面回放，將歷史完成事件和當前有效狀態分開，保留傳感誤報與過期邊界。"
       }
     ]
   }

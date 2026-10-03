@@ -1103,5 +1103,17 @@
   },
   "journey.lab.VL01.seriesOctoberEvidence": {
     "message": "E8–E10 / 32回合原始证据"
+  },
+  "journey.lab.VL01.lifecycleArticle": {
+    "message": "具身智能实践（十一）：已经放好了，为什么还要撤销“完成”？"
+  },
+  "journey.lab.VL01.lifecycleCode": {
+    "message": "E11 / 完成状态代码"
+  },
+  "journey.lab.VL01.lifecycleEvidence": {
+    "message": "E11 / 七回合记录与回放"
+  },
+  "journey.lab.VL01.lifecycleResult": {
+    "message": "E11 完成七回合持续验收：区分历史事件、当前有效、未知和无效；保留单帧误报。完整 VL01 与 M4/M5 仍待推进。"
   }
 }

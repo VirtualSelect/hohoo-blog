@@ -2,6 +2,7 @@
 
 ## 研究证据与精选入口（2026-09-29）
 
+- 本地文章录像可提供真实 `width` / `height`（1–4096 正整数，必须成对）；缺失或非法时回退 960×640。按需原生播放、`preload=none`，不自动播放。双画面回放仍属于原始轨迹的展示产物，不计作新增实验。
 - `data/editorial.json` 引用真实内容 ID；首页精选无需依赖数组前两项，也不改变文章日期。可选 `featuredMedia` 按内容 ID 保存已有素材的 `src/width/height/alt/altEn/altTw`，避免更换精选文章后仍显示另一篇的证据图；没有对应素材时隐藏图片。
 - `data/practice/mujoco.json` 是固定版本 CSV 的展示投影，含来源 commit、标准化换行后的 CSV SHA256、50Hz 高度记录与阶段首条观测；数值显示保留四位小数。原始证据仍在独立具身仓库，通过 `scripts/build-practice-evidence.mjs <repo>` 重建。
 - 已执行 Lab 可提供 `method/result/observations/conclusion/limitations/reproduce` 及 `En/Tw` 对应字段。翻译仍由 localization manifest 管理，未翻译正文继续隐藏。`inconclusive` 沿用既有状态，表示有记录但尚不能给出研究结论；不计作完成，关联的已发布复盘文章可进入 Timeline。

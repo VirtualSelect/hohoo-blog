@@ -109,6 +109,10 @@
         {
           "href": "/docs/embodied-ai/mujoco-release-verification",
           "titleKey": "journey.lab.VL01.mujoco-release-verification"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-completion-lifecycle",
+          "titleKey": "journey.lab.VL01.lifecycleArticle"
         }
       ],
       "demos": [
@@ -145,6 +149,10 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget",
           "titleKey": "journey.lab.VL01.seriesOctoberCode"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/cd26180e8560155d18c45d34a33dc9ef25bbcdf6/experiments/vl01_completion_lifecycle",
+          "titleKey": "journey.lab.VL01.lifecycleCode"
         }
       ],
       "evidence": [
@@ -175,9 +183,13 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/evidence/exit-release-budget-20261003",
           "titleKey": "journey.lab.VL01.seriesOctoberEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/cd26180e8560155d18c45d34a33dc9ef25bbcdf6/evidence/completion-lifecycle-20261003",
+          "titleKey": "journey.lab.VL01.lifecycleEvidence"
         }
       ],
-      "result": "journey.lab.VL01.seriesOctober",
+      "result": "journey.lab.VL01.lifecycleResult",
       "startedAt": "2026-09-28",
       "completedAt": null
     },

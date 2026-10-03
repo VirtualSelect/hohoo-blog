@@ -14,10 +14,13 @@ const routes = [
   "embodied-ai/mujoco-exit-actions",
   "embodied-ai/mujoco-release-verification",
   "embodied-ai/mujoco-recovery-budget",
+  "ai-apps/java-grounded-claims",
+  "llm/prefix-cache-invalidation",
+  "embodied-ai/mujoco-completion-lifecycle",
 ];
 
 for (const locale of ["zh-CN", "en", "zh-TW"]) {
-  test(`${locale}: nine research articles retain sources, relationships and translated bodies`, () => {
+  test(`${locale}: October research articles retain sources, relationships and translated bodies`, () => {
     const data = read(`../generated/${locale}.json`);
     const entries = data.globalData["content-index"].entries;
     for (const route of routes) {

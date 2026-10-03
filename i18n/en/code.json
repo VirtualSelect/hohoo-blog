@@ -1712,5 +1712,17 @@
   },
   "journey.lab.VL01.seriesOctoberEvidence": {
     "message": "E8–E10 / Evidence from32 rollouts"
+  },
+  "journey.lab.VL01.lifecycleArticle": {
+    "message": "Embodied AI practice (11): placement completed, but is it still valid?"
+  },
+  "journey.lab.VL01.lifecycleCode": {
+    "message": "E11 / Completion lifecycle code"
+  },
+  "journey.lab.VL01.lifecycleEvidence": {
+    "message": "E11 / Seven rollouts and recorded replay"
+  },
+  "journey.lab.VL01.lifecycleResult": {
+    "message": "E11 adds seven validity-lifecycle rollouts, separating historical events, valid, unknown and invalid states while retaining false alarms. Full VL01 and M4/M5 remain open."
   }
 }

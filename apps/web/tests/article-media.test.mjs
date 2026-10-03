@@ -2,6 +2,27 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { articleVideo } from "../lib/article-media.mjs";
 
+test("recordings preserve bounded intrinsic dimensions without trusting CSS input", () => {
+  const src = "/media/practice/completion-replay.mp4";
+  const valid = articleVideo("video", { src, width: "1280", height: "448" });
+  assert.equal(valid.attribs.width, "1280");
+  assert.equal(valid.attribs.height, "448");
+  for (const width of [
+    "0",
+    "-1",
+    "99999",
+    "100%",
+    "1e3",
+    "1280px",
+    "",
+    undefined,
+  ]) {
+    const result = articleVideo("video", { src, width, height: "448" });
+    assert.equal(result.attribs.width, "960");
+    assert.equal(result.attribs.height, "640");
+  }
+});
+
 test("article recordings load only on demand with accessible native controls", () => {
   const result = articleVideo("video", {
     src: "/media/practice/vl01-baseline.mp4",

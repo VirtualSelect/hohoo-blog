@@ -1569,7 +1569,7 @@ html[data-theme="dark"] .token.class-name {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: auto;
   margin: 24px 0 12px;
   background: var(--hh-surface, #111);
   border: 1px solid var(--hh-border);
