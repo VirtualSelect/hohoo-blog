@@ -1,5 +1,20 @@
 [
   {
+    "id": "8818e4a8c36c91dacbb0",
+    "title": "LMSYS 发布开源聊天模型 Vicuna-13B，用 ShareGPT 对话微调 LLaMA，训练成本约 $300",
+    "url": "https://aihot.news/items/eu8pag1qg6pf93gn9k1ql0m0z",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-03T15:50:46.000Z",
+    "collectedAt": "2026-10-03T16:40:49.266Z",
+    "category": "llm",
+    "summary": "LMSYS 团队发布 Vicuna-13B，通过约 70K ShareGPT 用户共享对话微调 LLaMA，训练成本约 $300，代码、权重和在线 demo 以非商业许可公开。GPT-4 作为评审的初步评估显示其达到 ChatGPT/Bard 90% 以上质量，在 45% 问题上不逊于 ChatGPT；团队同时提出基于 GPT-4 的自动评测框架，并说…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6fbec74b",
+    "coverage": []
+  },
+  {
     "id": "218dd638ffae4370087d",
     "title": "Baseten 工程师实测：LLM 生成的推理引擎比 vLLM 快最多 90%",
     "url": "https://aihot.news/items/uwm1ml1igd8k2u81g14uf8pc3",
