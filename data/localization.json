@@ -135,21 +135,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-10-03",
     "file": "data/projects.json",
-    "sourceRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4",
+    "sourceRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/projects.json",
-        "sourceRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4",
-        "translationRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4"
+        "sourceRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b",
+        "translationRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/projects.json",
-        "sourceRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4",
-        "translationRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4"
+        "sourceRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b",
+        "translationRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b"
       }
     }
   },
@@ -157,21 +157,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-10-03",
     "file": "data/projects.json",
-    "sourceRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4",
+    "sourceRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/projects.json",
-        "sourceRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4",
-        "translationRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4"
+        "sourceRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b",
+        "translationRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/projects.json",
-        "sourceRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4",
-        "translationRevision": "875e5a4d090b482a133db0a8ca3168a9e5dd9af68ce3209832516f2e323bb7e4"
+        "sourceRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b",
+        "translationRevision": "4dcb811dfd006421a22ff89f6855d9f1491a29a2a4d877258350ad59a0009a8b"
       }
     }
   },
@@ -201,21 +201,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/experiments.json",
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     }
   },
@@ -223,21 +223,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/experiments.json",
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     }
   },
@@ -294,18 +294,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "doc:embodied-ai/mujoco-transfer-monitor": {
     "sourceLocale": "zh-CN",
@@ -333,21 +333,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/experiments.json",
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     }
   },
@@ -377,20 +377,20 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/experiments.json",
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
         "file": "data/experiments.json"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
         "file": "data/experiments.json"
       }
     }
@@ -465,21 +465,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/experiments.json",
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     }
   },
@@ -487,21 +487,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/experiments.json",
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     }
   },
@@ -509,21 +509,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/experiments.json",
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     }
   },
@@ -575,21 +575,21 @@
     "sourceLocale": "zh-CN",
     "sourceUpdatedAt": "2026-09-30",
     "file": "data/experiments.json",
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-09-30",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     }
   },
@@ -624,18 +624,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-01",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-01",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "doc:llm/causal-mask-lab": {
     "sourceLocale": "zh-CN",
@@ -844,18 +844,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "lab:attention-mechanisms": {
     "sourceLocale": "zh-CN",
@@ -866,18 +866,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "lab:exit-actions": {
     "sourceLocale": "zh-CN",
@@ -888,18 +888,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "lab:release-verification": {
     "sourceLocale": "zh-CN",
@@ -910,18 +910,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "lab:recovery-budget": {
     "sourceLocale": "zh-CN",
@@ -932,18 +932,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "lab:tool-eval": {
     "sourceLocale": "zh-CN",
@@ -954,18 +954,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "lab:retrieval-eval": {
     "sourceLocale": "zh-CN",
@@ -976,18 +976,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "doc:ai-apps/java-grounded-claims": {
     "sourceLocale": "zh-CN",
@@ -1064,18 +1064,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "lab:completion-lifecycle": {
     "sourceLocale": "zh-CN",
@@ -1086,18 +1086,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "doc:ai-apps/java-streaming-boundary": {
     "sourceLocale": "zh-CN",
@@ -1130,18 +1130,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "doc:llm/longest-prefix-reuse": {
     "sourceLocale": "zh-CN",
@@ -1174,18 +1174,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   },
   "doc:embodied-ai/mujoco-abort-exit": {
     "sourceLocale": "zh-CN",
@@ -1218,17 +1218,149 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-03",
         "file": "data/experiments.json",
-        "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb",
-        "translationRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
       }
     },
-    "sourceRevision": "3f9be00a8f8f0143d076f5377c23410e4adc38c40c9f5b47c2d271fece8952bb"
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
+  },
+  "doc:ai-apps/java-stream-session-ownership": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-10-04",
+    "file": "docs/ai-apps/java-stream-session-ownership.md",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "i18n/en/docs/ai-apps/java-stream-session-ownership.md",
+        "sourceRevision": "7ce5b01f8b56ef81160f2a5549dc2911468deb2db8af8a3fdd0aa42594fd2e95",
+        "translationRevision": "b4c5443b9e0996b8c8ba196a792ef9efef55d538ff5e4aa6e645cbae01476739"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "i18n/zh-TW/docs/ai-apps/java-stream-session-ownership.md",
+        "sourceRevision": "7ce5b01f8b56ef81160f2a5549dc2911468deb2db8af8a3fdd0aa42594fd2e95",
+        "translationRevision": "e53156bb8497dd43e3c811d43e4dc171f51a03e07e4438205603a272143e77d1"
+      }
+    },
+    "sourceRevision": "7ce5b01f8b56ef81160f2a5549dc2911468deb2db8af8a3fdd0aa42594fd2e95"
+  },
+  "lab:stream-session-ownership": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-10-04",
+    "file": "data/experiments.json",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "data/experiments.json",
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "data/experiments.json",
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
+      }
+    },
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
+  },
+  "doc:llm/prefix-cache-byte-budget": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-10-04",
+    "file": "docs/llm/prefix-cache-byte-budget.md",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "i18n/en/docs/llm/prefix-cache-byte-budget.md",
+        "sourceRevision": "066cf4a6d538ac8025ac054eb2811b88a5a0443c9e22ba1941c47062db2cf0aa",
+        "translationRevision": "5d9ff1b7fd8ed7e73a4b06200dc44270ded997270470bf513e7d322891b3c8ac"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "i18n/zh-TW/docs/llm/prefix-cache-byte-budget.md",
+        "sourceRevision": "066cf4a6d538ac8025ac054eb2811b88a5a0443c9e22ba1941c47062db2cf0aa",
+        "translationRevision": "0c3419de99d99f751eb6951e3a77ab08883029ddc43e90193d62d4be458fd6ac"
+      }
+    },
+    "sourceRevision": "066cf4a6d538ac8025ac054eb2811b88a5a0443c9e22ba1941c47062db2cf0aa"
+  },
+  "lab:prefix-cache-byte-budget": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-10-04",
+    "file": "data/experiments.json",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "data/experiments.json",
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "data/experiments.json",
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
+      }
+    },
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
+  },
+  "doc:embodied-ai/mujoco-phase-recovery": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-10-04",
+    "file": "docs/embodied-ai/mujoco-phase-recovery.md",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "i18n/en/docs/embodied-ai/mujoco-phase-recovery.md",
+        "sourceRevision": "4d6bd3e2e42749f70423e9175783aa48c106c538db86ca2c541d34736baebc60",
+        "translationRevision": "71bdf9a4eb88fbd91d0fd56ecf62f3bd56eed8e37b3cb0a088062b87ee9463a9"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "i18n/zh-TW/docs/embodied-ai/mujoco-phase-recovery.md",
+        "sourceRevision": "4d6bd3e2e42749f70423e9175783aa48c106c538db86ca2c541d34736baebc60",
+        "translationRevision": "ffa063901116023de07d59fc6224c0d96627fc8efdc82f56e95b64f0b651ecdf"
+      }
+    },
+    "sourceRevision": "4d6bd3e2e42749f70423e9175783aa48c106c538db86ca2c541d34736baebc60"
+  },
+  "lab:phase-recovery": {
+    "sourceLocale": "zh-CN",
+    "sourceUpdatedAt": "2026-10-04",
+    "file": "data/experiments.json",
+    "translations": {
+      "en": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "data/experiments.json",
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
+      },
+      "zh-TW": {
+        "status": "AI_TRANSLATED",
+        "translatedAt": "2026-10-04",
+        "file": "data/experiments.json",
+        "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273",
+        "translationRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
+      }
+    },
+    "sourceRevision": "67d16c712b12a6e02a468f947972a61426b285f67171d9a8c316edd8ffe60273"
   }
 }

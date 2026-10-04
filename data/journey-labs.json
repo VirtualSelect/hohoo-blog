@@ -117,6 +117,10 @@
         {
           "href": "/docs/embodied-ai/mujoco-abort-exit",
           "titleKey": "journey.lab.VL01.abortArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-phase-recovery",
+          "titleKey": "journey.lab.VL01.phaseRecoveryArticle"
         }
       ],
       "demos": [
@@ -161,6 +165,10 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/2cf78a9afce618ea8ce35a882f0db203b2a74f57/experiments/vl01_abort_exit",
           "titleKey": "journey.lab.VL01.abortCode"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/ad2e33523e8e5580da90ae914e1cccf765c8d1b1/experiments/vl01_phase_recovery",
+          "titleKey": "journey.lab.VL01.phaseRecoveryCode"
         }
       ],
       "evidence": [
@@ -199,9 +207,13 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/2cf78a9afce618ea8ce35a882f0db203b2a74f57/evidence/abort-exit-20261003",
           "titleKey": "journey.lab.VL01.abortEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/ad2e33523e8e5580da90ae914e1cccf765c8d1b1/evidence/phase-recovery-20261004",
+          "titleKey": "journey.lab.VL01.phaseRecoveryEvidence"
         }
       ],
-      "result": "journey.lab.VL01.abortResult",
+      "result": "journey.lab.VL01.phaseRecoveryResult",
       "startedAt": "2026-09-28",
       "completedAt": null
     },

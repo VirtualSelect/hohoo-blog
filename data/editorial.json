@@ -4,8 +4,8 @@
     "project:hohoo-embodied-agent"
   ],
   "featuredArticles": [
-    "doc:ai-apps/java-streaming-boundary",
-    "doc:embodied-ai/mujoco-abort-exit"
+    "doc:ai-apps/java-stream-session-ownership",
+    "doc:embodied-ai/mujoco-phase-recovery"
   ],
   "featuredMedia": {
     "doc:embodied-ai/mujoco-observation-freshness": {
@@ -135,6 +135,30 @@
       "alt": "12 个 MuJoCo 回合与三画面回放，对比保持、松爪、松爪后退，区分终止决定与实际退出后果。",
       "altEn": "12 MuJoCo rollouts and synchronized three-view replay compare hold, open and open-retreat, separating terminal decisions from physical consequences.",
       "altTw": "12 個 MuJoCo 回合與三畫面回放，對比保持、鬆爪、鬆爪後退，區分終止決定與實際退出後果。"
+    },
+    "doc:ai-apps/java-stream-session-ownership": {
+      "src": "/media/practice/stream-session.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "18 种固定线程交错，验证流式预览、完成和错误回调的请求归属，以及取消和有限幂等的边界。",
+      "altEn": "18 controlled thread schedules test request ownership for streaming previews, completion and errors, with cancellation and bounded deduplication.",
+      "altTw": "18 種固定執行緒交錯，驗證流式預覽、完成和錯誤回呼的請求歸屬，以及取消和有限冪等的邊界。"
+    },
+    "doc:llm/prefix-cache-byte-budget": {
+      "src": "/media/practice/cache-budget.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "27 条冷启动轨迹、324 次请求与 648 个数组，按字节限制前缀检查点，观察工作集、隔离与 LRU 淘汰的实际收益。",
+      "altEn": "324 requests across cold-start traces and 648 arrays test byte-bounded prefix checkpoints, working sets, isolation and LRU eviction.",
+      "altTw": "27 條冷啟動軌跡、324 次請求與 648 個陣列，按位元組限制前綴檢查點，觀察工作集、隔離與 LRU 淘汰的實際收益。"
+    },
+    "doc:embodied-ai/mujoco-phase-recovery": {
+      "src": "/media/practice/phase-recovery.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "18 个 MuJoCo 回合与同步回放，将阶段契约接入恢复预算，区分正常下降误停、物理放置和控制器终止。",
+      "altEn": "18 MuJoCo rollouts and synchronized replay connect phase contracts to recovery budgets, separating false holds, physical placement and controller abort.",
+      "altTw": "18 個 MuJoCo 回合與同步回放，將階段契約接入恢復預算，區分正常下降誤停、物理放置和控制器終止。"
     }
   }
 }

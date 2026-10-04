@@ -1736,5 +1736,17 @@
   },
   "journey.lab.VL01.abortResult": {
     "message": "E12 combines recovery budgets with exits: 12 rollouts retain suspended/drop failures and expose phase coverage under lowering silence. Full VL01 and M4/M5 remain open."
+  },
+  "journey.lab.VL01.phaseRecoveryArticle": {
+    "message": "Embodied AI practice (13): where should recovery resume after interrupted lowering?"
+  },
+  "journey.lab.VL01.phaseRecoveryCode": {
+    "message": "E13 / Phase recovery code"
+  },
+  "journey.lab.VL01.phaseRecoveryEvidence": {
+    "message": "E13 / 18 rollouts and synchronized replay"
+  },
+  "journey.lab.VL01.phaseRecoveryResult": {
+    "message": "E13 connects phase contracts to recovery: 18 rollouts retain false lowering holds, permanent observation loss and accidental post-abort placement. Full VL01 and M4/M5 remain open."
   }
 }

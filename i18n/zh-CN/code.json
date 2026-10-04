@@ -1127,5 +1127,17 @@
   },
   "journey.lab.VL01.abortResult": {
     "message": "E12 将恢复预算与退出动作组合：12 回合保留悬空与落地失败，下降静默暴露阶段覆盖边界；完整 VL01、M4/M5 尚未完成。"
+  },
+  "journey.lab.VL01.phaseRecoveryArticle": {
+    "message": "具身智能实践（十三）：下降中断之后，应该从哪一步恢复？"
+  },
+  "journey.lab.VL01.phaseRecoveryCode": {
+    "message": "E13 / 阶段恢复代码"
+  },
+  "journey.lab.VL01.phaseRecoveryEvidence": {
+    "message": "E13 / 18 回合记录与同步回放"
+  },
+  "journey.lab.VL01.phaseRecoveryResult": {
+    "message": "E13 将阶段契约接入恢复：18回合保留正常下降误停、永久缺测与终止后偶然放置；完整 VL01、M4/M5 尚未完成。"
   }
 }

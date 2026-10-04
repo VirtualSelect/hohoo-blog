@@ -1543,5 +1543,17 @@
   },
   "journey.lab.VL01.abortResult": {
     "message": "E12 將恢復預算與退出動作組合：12 回合保留懸空與落地失敗，下降靜默暴露階段覆蓋邊界；完整 VL01、M4/M5 尚未完成。"
+  },
+  "journey.lab.VL01.phaseRecoveryArticle": {
+    "message": "具身智能實踐（十三）：下降中斷之後，應該從哪一步恢復？"
+  },
+  "journey.lab.VL01.phaseRecoveryCode": {
+    "message": "E13 / 階段恢復程式碼"
+  },
+  "journey.lab.VL01.phaseRecoveryEvidence": {
+    "message": "E13 / 18 回合記錄與同步回放"
+  },
+  "journey.lab.VL01.phaseRecoveryResult": {
+    "message": "E13 將階段契約接入恢復：18回合保留正常下降誤停、永久缺測與終止後偶然放置；完整 VL01、M4/M5 尚未完成。"
   }
 }
