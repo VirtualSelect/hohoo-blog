@@ -80,8 +80,8 @@
     "type": "project",
     "title": "Java LLM 实践集",
     "titleEn": "Java LLM Practice",
-    "description": "Java 对话、结构化输出、工具与引用验收、流式会话所有权，以及本地注意力和字节预算缓存实验。",
-    "descriptionEn": "Java conversation, structured output, tools, claim validation and streaming ownership, alongside attention and byte-budgeted cache experiments.",
+    "description": "Java 对话、结构化输出、工具与引用验收、流式连接取消，以及本地注意力、缓存准入和实测查询实验。",
+    "descriptionEn": "Java conversation, structured output, tools, claim validation and streaming cancellation, alongside attention, cache admission and measured-query experiments.",
     "domain": "ai-apps",
     "status": "building",
     "featured": true,
@@ -124,7 +124,11 @@
       "doc:ai-apps/java-stream-session-ownership",
       "lab:stream-session-ownership",
       "doc:llm/prefix-cache-byte-budget",
-      "lab:prefix-cache-byte-budget"
+      "lab:prefix-cache-byte-budget",
+      "doc:ai-apps/java-transport-cancellation",
+      "lab:transport-cancellation",
+      "doc:llm/prefix-cache-admission",
+      "lab:prefix-cache-admission"
     ],
     "architecture": [
       "Console input",
@@ -136,9 +140,9 @@
     "sections": [
       {
         "heading": "Overview",
-        "zh": "Java 对话、结构化输出、工具与引用验收、流式会话所有权，以及本地注意力和字节预算缓存实验。",
-        "en": "Java conversation, structured output, tools, claim validation and streaming ownership, alongside attention and byte-budgeted cache experiments.",
-        "tw": "Java 對話、結構化輸出、工具與引用驗收、流式會話所有權，以及本地注意力和位元組預算快取實驗。"
+        "zh": "Java 对话、结构化输出、工具与引用验收、流式连接取消，以及本地注意力、缓存准入和实测查询实验。",
+        "en": "Java conversation, structured output, tools, claim validation and streaming cancellation, alongside attention, cache admission and measured-query experiments.",
+        "tw": "Java 對話、結構化輸出、工具與引用驗收、流式連接取消，以及本地注意力、快取準入和實測查詢實驗。"
       },
       {
         "heading": "Problem",
@@ -381,12 +385,30 @@
         "description": "27 条冷启动轨迹、324 次请求与 648 个数组，按字节限制前缀检查点，观察工作集、隔离与 LRU 淘汰的实际收益。",
         "descriptionEn": "324 requests across cold-start traces and 648 arrays test byte-bounded prefix checkpoints, working sets, isolation and LRU eviction.",
         "descriptionTw": "27 條冷啟動軌跡、324 次請求與 648 個陣列，按位元組限制前綴檢查點，觀察工作集、隔離與 LRU 淘汰的實際收益。"
+      },
+      {
+        "href": "/docs/ai-apps/java-transport-cancellation",
+        "label": "Java LLM 实践（十）：点了取消，读取线程为什么还在运行？",
+        "labelEn": "Java LLM practice (10): why is the reader still running after cancellation?",
+        "labelTw": "Java LLM 實踐（十）：點了取消，讀取執行緒為什麼還在運行？",
+        "description": "30次本地HTTP连接，区分会话取消、阻塞读取退出与远端工作，比较Future中断和主动关闭连接。",
+        "descriptionEn": "30 local HTTP connections separate conversation invalidation, reader exit and server work, comparing Future interruption with socket closure.",
+        "descriptionTw": "30次本地HTTP連接，區分會話取消、阻塞讀取退出與遠端工作，比較Future中斷和主動關閉連接。"
+      },
+      {
+        "href": "/docs/llm/prefix-cache-admission",
+        "label": "LLM 机制实验（七）：缓存省了计算，为什么实测反而更慢？",
+        "labelEn": "LLM mechanics (7): why is caching slower even when it saves computation?",
+        "labelTw": "LLM 機制實驗（七）：快取省了計算，為什麼實測反而更慢？",
+        "description": "4860次实测查询比较三种缓存准入策略，把字节预算、工作集、计算量与本地耗时放在一起验证。",
+        "descriptionEn": "4,860 measured queries compare three admission policies, connecting byte budgets, working sets, computation and local elapsed time.",
+        "descriptionTw": "4860次實測查詢比較三種快取準入策略，把位元組預算、工作集、計算量與本地耗時放在一起驗證。"
       }
     ],
     "titleTw": "Java LLM 實作集",
-    "descriptionTw": "Java 對話、結構化輸出、工具與引用驗收、流式會話所有權，以及本地注意力和位元組預算快取實驗。",
+    "descriptionTw": "Java 對話、結構化輸出、工具與引用驗收、流式連接取消，以及本地注意力、快取準入和實測查詢實驗。",
     "sourceLocale": "zh-CN",
-    "updated": "2026-10-04"
+    "updated": "2026-10-05"
   },
   {
     "id": "project:hohoo-embodied-agent",
@@ -396,13 +418,13 @@
     "title": "Hohoo 具身实验",
     "titleEn": "Hohoo Embodied Experiments",
     "titleTw": "Hohoo 具身實驗",
-    "description": "十三轮 MuJoCo 教学实验，从拾取偏移推进到阶段恢复、完成状态与终止动作，保留物理结果和控制状态的区别。",
-    "descriptionEn": "Thirteen MuJoCo teaching studies from pickup bias to phase-aware recovery, completion validity and terminal exits, separating physical outcomes from controller state.",
-    "descriptionTw": "十三輪 MuJoCo 教學實驗，從拾取偏移推進到階段恢復、完成狀態與終止動作，保留物理結果和控制狀態的區別。",
+    "description": "十四轮 MuJoCo 教学实验，从拾取偏移到阶段恢复与完成资格，记录物理结果、执行状态和证据有效期。",
+    "descriptionEn": "Fourteen MuJoCo teaching studies from pickup bias to phase-aware recovery and qualified completion, retaining physical outcomes, execution state and evidence validity.",
+    "descriptionTw": "十四輪 MuJoCo 教學實驗，從拾取偏移到階段恢復與完成資格，記錄物理結果、執行狀態和證據有效期。",
     "domain": "embodied-ai",
     "status": "experiment",
     "date": "2026-09-28",
-    "updated": "2026-10-04",
+    "updated": "2026-10-05",
     "featured": false,
     "stack": [
       "Python 3.12",
@@ -435,14 +457,16 @@
       "doc:embodied-ai/mujoco-abort-exit",
       "lab:abort-exit",
       "doc:embodied-ai/mujoco-phase-recovery",
-      "lab:phase-recovery"
+      "lab:phase-recovery",
+      "doc:embodied-ai/mujoco-qualified-completion",
+      "lab:qualified-completion"
     ],
     "sections": [
       {
         "heading": "Overview",
-        "zh": "十三轮 MuJoCo 教学实验，从拾取偏移推进到阶段恢复、完成状态与终止动作，保留物理结果和控制状态的区别。",
-        "en": "Thirteen MuJoCo teaching studies from pickup bias to phase-aware recovery, completion validity and terminal exits, separating physical outcomes from controller state.",
-        "tw": "十三輪 MuJoCo 教學實驗，從拾取偏移推進到階段恢復、完成狀態與終止動作，保留物理結果和控制狀態的區別。"
+        "zh": "十四轮 MuJoCo 教学实验，从拾取偏移到阶段恢复与完成资格，记录物理结果、执行状态和证据有效期。",
+        "en": "Fourteen MuJoCo teaching studies from pickup bias to phase-aware recovery and qualified completion, retaining physical outcomes, execution state and evidence validity.",
+        "tw": "十四輪 MuJoCo 教學實驗，從拾取偏移到階段恢復與完成資格，記錄物理結果、執行狀態和證據有效期。"
       },
       {
         "heading": "Goal",
@@ -622,6 +646,15 @@
         "description": "18 个 MuJoCo 回合与同步回放，将阶段契约接入恢复预算，区分正常下降误停、物理放置和控制器终止。",
         "descriptionEn": "18 MuJoCo rollouts and synchronized replay connect phase contracts to recovery budgets, separating false holds, physical placement and controller abort.",
         "descriptionTw": "18 個 MuJoCo 回合與同步回放，將階段契約接入恢復預算，區分正常下降誤停、物理放置和控制器終止。"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-qualified-completion",
+        "label": "具身智能实践（十四）：方块落进盒子，就能宣布任务完成吗？",
+        "labelEn": "Embodied AI practice (14): does landing in the bin mean the task is complete?",
+        "labelTw": "具身智能實踐（十四）：方塊落進盒子，就能宣布任務完成嗎？",
+        "description": "8条MuJoCo轨迹、三个旁路判定器与真实回放，区分历史放置、当前证据和恢复流程中的完成资格。",
+        "descriptionEn": "Eight MuJoCo trajectories, three passive readouts and recorded-state replay separate historical placement, current evidence and qualified completion.",
+        "descriptionTw": "8條MuJoCo軌跡、三個旁路判定器與真實回放，區分歷史放置、當前證據和恢復流程中的完成資格。"
       }
     ]
   }

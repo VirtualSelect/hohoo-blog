@@ -1748,5 +1748,17 @@
   },
   "journey.lab.VL01.phaseRecoveryResult": {
     "message": "E13 connects phase contracts to recovery: 18 rollouts retain false lowering holds, permanent observation loss and accidental post-abort placement. Full VL01 and M4/M5 remain open."
+  },
+  "journey.lab.VL01.qualifiedCompletionArticle": {
+    "message": "Embodied AI practice (14): does landing in the bin mean the task is complete?"
+  },
+  "journey.lab.VL01.qualifiedCompletionCode": {
+    "message": "E14 / Qualified completion code"
+  },
+  "journey.lab.VL01.qualifiedCompletionEvidence": {
+    "message": "E14 / 8 rollouts and three-scenario replay"
+  },
+  "journey.lab.VL01.qualifiedCompletionResult": {
+    "message": "E14 connects completion contracts to recovery: eight rollouts separate historical placement, current validity and execution qualification. Full VL01 and M4/M5 remain open."
   }
 }

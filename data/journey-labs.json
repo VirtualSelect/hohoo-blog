@@ -121,6 +121,10 @@
         {
           "href": "/docs/embodied-ai/mujoco-phase-recovery",
           "titleKey": "journey.lab.VL01.phaseRecoveryArticle"
+        },
+        {
+          "href": "/docs/embodied-ai/mujoco-qualified-completion",
+          "titleKey": "journey.lab.VL01.qualifiedCompletionArticle"
         }
       ],
       "demos": [
@@ -169,6 +173,10 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/ad2e33523e8e5580da90ae914e1cccf765c8d1b1/experiments/vl01_phase_recovery",
           "titleKey": "journey.lab.VL01.phaseRecoveryCode"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/9800095689ce3893f9e7a6ec681355e76c6fcff6/experiments/vl01_qualified_completion",
+          "titleKey": "journey.lab.VL01.qualifiedCompletionCode"
         }
       ],
       "evidence": [
@@ -211,9 +219,13 @@
         {
           "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/ad2e33523e8e5580da90ae914e1cccf765c8d1b1/evidence/phase-recovery-20261004",
           "titleKey": "journey.lab.VL01.phaseRecoveryEvidence"
+        },
+        {
+          "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/9800095689ce3893f9e7a6ec681355e76c6fcff6/evidence/qualified-completion-20261005",
+          "titleKey": "journey.lab.VL01.qualifiedCompletionEvidence"
         }
       ],
-      "result": "journey.lab.VL01.phaseRecoveryResult",
+      "result": "journey.lab.VL01.qualifiedCompletionResult",
       "startedAt": "2026-09-28",
       "completedAt": null
     },

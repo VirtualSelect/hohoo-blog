@@ -1555,5 +1555,17 @@
   },
   "journey.lab.VL01.phaseRecoveryResult": {
     "message": "E13 將階段契約接入恢復：18回合保留正常下降誤停、永久缺測與終止後偶然放置；完整 VL01、M4/M5 尚未完成。"
+  },
+  "journey.lab.VL01.qualifiedCompletionArticle": {
+    "message": "具身智能實踐（十四）：方塊落進盒子，就能宣布任務完成嗎？"
+  },
+  "journey.lab.VL01.qualifiedCompletionCode": {
+    "message": "E14 / 完成資格程式碼"
+  },
+  "journey.lab.VL01.qualifiedCompletionEvidence": {
+    "message": "E14 / 8 回合記錄與三場景回放"
+  },
+  "journey.lab.VL01.qualifiedCompletionResult": {
+    "message": "E14 將完成契約接入恢復：8回合區分歷史放置、當前有效性與完成資格；完整 VL01、M4/M5 尚未完成。"
   }
 }

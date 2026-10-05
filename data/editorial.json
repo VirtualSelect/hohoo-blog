@@ -4,8 +4,8 @@
     "project:hohoo-embodied-agent"
   ],
   "featuredArticles": [
-    "doc:ai-apps/java-stream-session-ownership",
-    "doc:embodied-ai/mujoco-phase-recovery"
+    "doc:ai-apps/java-transport-cancellation",
+    "doc:embodied-ai/mujoco-qualified-completion"
   ],
   "featuredMedia": {
     "doc:embodied-ai/mujoco-observation-freshness": {
@@ -159,6 +159,30 @@
       "alt": "18 个 MuJoCo 回合与同步回放，将阶段契约接入恢复预算，区分正常下降误停、物理放置和控制器终止。",
       "altEn": "18 MuJoCo rollouts and synchronized replay connect phase contracts to recovery budgets, separating false holds, physical placement and controller abort.",
       "altTw": "18 個 MuJoCo 回合與同步回放，將階段契約接入恢復預算，區分正常下降誤停、物理放置和控制器終止。"
+    },
+    "doc:ai-apps/java-transport-cancellation": {
+      "src": "/media/practice/transport-cancellation.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "30次本地HTTP连接，区分会话取消、阻塞读取退出与远端工作，比较Future中断和主动关闭连接。",
+      "altEn": "30 local HTTP connections separate conversation invalidation, reader exit and server work, comparing Future interruption with socket closure.",
+      "altTw": "30次本地HTTP連接，區分會話取消、阻塞讀取退出與遠端工作，比較Future中斷和主動關閉連接。"
+    },
+    "doc:llm/prefix-cache-admission": {
+      "src": "/media/practice/cache-admission.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "4860次实测查询比较三种缓存准入策略，把字节预算、工作集、计算量与本地耗时放在一起验证。",
+      "altEn": "4,860 measured queries compare three admission policies, connecting byte budgets, working sets, computation and local elapsed time.",
+      "altTw": "4860次實測查詢比較三種快取準入策略，把位元組預算、工作集、計算量與本地耗時放在一起驗證。"
+    },
+    "doc:embodied-ai/mujoco-qualified-completion": {
+      "src": "/media/practice/qualified-completion.png",
+      "width": 1500,
+      "height": 600,
+      "alt": "8条MuJoCo轨迹、三个旁路判定器与真实回放，区分历史放置、当前证据和恢复流程中的完成资格。",
+      "altEn": "Eight MuJoCo trajectories, three passive readouts and recorded-state replay separate historical placement, current evidence and qualified completion.",
+      "altTw": "8條MuJoCo軌跡、三個旁路判定器與真實回放，區分歷史放置、當前證據和恢復流程中的完成資格。"
     }
   }
 }

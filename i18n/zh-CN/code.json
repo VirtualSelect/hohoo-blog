@@ -1139,5 +1139,17 @@
   },
   "journey.lab.VL01.phaseRecoveryResult": {
     "message": "E13 将阶段契约接入恢复：18回合保留正常下降误停、永久缺测与终止后偶然放置；完整 VL01、M4/M5 尚未完成。"
+  },
+  "journey.lab.VL01.qualifiedCompletionArticle": {
+    "message": "具身智能实践（十四）：方块落进盒子，就能宣布任务完成吗？"
+  },
+  "journey.lab.VL01.qualifiedCompletionCode": {
+    "message": "E14 / 完成资格代码"
+  },
+  "journey.lab.VL01.qualifiedCompletionEvidence": {
+    "message": "E14 / 8 回合记录与三场景回放"
+  },
+  "journey.lab.VL01.qualifiedCompletionResult": {
+    "message": "E14 将完成契约接入恢复：8回合区分历史放置、当前有效性与完成资格；完整 VL01、M4/M5 尚未完成。"
   }
 }
