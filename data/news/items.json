@@ -1,5 +1,20 @@
 [
   {
+    "id": "d0cde7c05203d2862138",
+    "title": "Using Parseable with Datasette for OpenTelemetry traces",
+    "url": "https://simonwillison.net/2026/Oct/6/datasette-parseable-opentelemetry",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-06T19:07:31.000Z",
+    "collectedAt": "2026-10-06T21:12:18.554Z",
+    "category": "ai-apps",
+    "summary": "TIL: Using Parseable with Datasette for OpenTelemetry traces I saw Parseable in a Show HN today - it's a new observability platform with both an open source (AGPL) Rust implemen…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-5a527fc1",
+    "coverage": []
+  },
+  {
     "id": "6247776c64fe073cccbe",
     "title": "Claude Code 云端会话实战指南：每个任务独占一台 VM，可并行跑任务并以分支收尾",
     "url": "https://aihot.news/items/sxr71auxicu8uk3e4bqxol02h",
@@ -12,6 +27,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-4f49de7a",
+    "coverage": []
+  },
+  {
+    "id": "f57eff9c23a4454b476b",
+    "title": "Advancing computer use with Ironclad",
+    "url": "https://openai.com/index/advancing-computer-use-with-ironclad",
+    "sourceId": "openai",
+    "sourceName": "OpenAI",
+    "publishedAt": "2026-10-06T10:00:00.000Z",
+    "collectedAt": "2026-10-06T21:12:18.554Z",
+    "category": "ai-apps",
+    "summary": "Learn how OpenAI and Ironclad are training and evaluating AI agents on complex contracting workflows to advance computer use for professional work.",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-8fc0eae6",
     "coverage": []
   },
   {
