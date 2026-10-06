@@ -7,6 +7,7 @@ import Link from "../runtime/Link";
 import { searchEntries } from "@site/src/utils/search.mjs";
 import { writingEntries } from "@site/src/utils/localization.cjs";
 import { uiLabel } from "@site/src/utils/ui-labels";
+import WritingKind from "@site/src/components/WritingKind";
 export default function Search({ onClose }) {
   const { searchUrl, globalData } = useSite(),
     t = useText(),
@@ -153,6 +154,8 @@ export default function Search({ onClose }) {
                     t("交互实验", "Interactive exercise", "互動實驗")
                   ) : e.type === "learning" ? (
                     <Translate id="journey.roadmapLabel" />
+                  ) : ["doc", "blog", "note", "paper"].includes(e.type) ? (
+                    <WritingKind entry={e} />
                   ) : (
                     uiLabel(e.type.toUpperCase())
                   )}

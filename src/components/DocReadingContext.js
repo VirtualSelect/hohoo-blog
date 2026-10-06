@@ -10,15 +10,24 @@ import { Related, useEnglish } from "./ContentUI";
 import useLearningProgress from "./useLearningProgress";
 import { learningSymbols } from "@site/src/utils/learning-progress.ts";
 import WritingKind from "./WritingKind";
+import { useText } from "@lab/components/Shell";
 export default function DocReadingContext({ position }) {
   const { metadata, frontMatter: f } = useDoc();
   const en = useEnglish();
+  const t = useText();
   const { entries } = useContentData("learning-index");
+  const content = useContentData("content-index").entries;
+  const prerequisites = (f.prerequisites || [])
+    .map((id) => content.find((entry) => entry.id === id))
+    .filter(Boolean);
   const state = useLearningProgress();
   const recorded = useRef(null);
   const step = f.learning_step;
   const track = tracks.find((t) => t.steps.some((s) => s.id === step));
-  const index = track?.steps.findIndex((s) => s.id === step);
+  const routeSteps =
+    track?.steps.filter((s) => entries.some((e) => e.stepId === s.id)) || [];
+  const index = routeSteps.findIndex((s) => s.id === step);
+  const reviewNotice = track?.steps.find((s) => s.id === step)?.reviewNotice;
   const adjacent = track
     ? track.steps
         .map((s) => entries.find((e) => e.stepId === s.id))
@@ -62,18 +71,55 @@ export default function DocReadingContext({ position }) {
               " " +
               (index + 1) +
               " / " +
-              track.steps.length}
+              routeSteps.length}
         </p>
+        {track?.steps.find((s) => s.id === step)?.followUps?.length > 0 && (
+          <details className="article-followups">
+            <summary>
+              {t(
+                "这篇之后，已经有了哪些结果？",
+                "What was published after this article?",
+                "這篇之後，已經有了哪些結果？",
+              )}
+            </summary>
+            <p>
+              {t(
+                "保留本文发表时的结论与下一步设想；以下是已发表的后续内容，不代表所有局限都已解决。",
+                "The original conclusions and next-step proposals are retained. These published follow-ups do not imply that every limitation has been resolved.",
+                "保留本文發表時的結論與下一步構想；以下是已發布的後續內容，不代表所有侷限皆已解決。",
+              )}
+            </p>
+            <Related ids={track.steps.find((s) => s.id === step).followUps} />
+          </details>
+        )}
+        {reviewNotice && (
+          <aside className="article-followups">
+            <p className="hh-eyebrow">
+              {t("复核说明", "Review note", "複核說明")} · {reviewNotice.date}
+            </p>
+            <p>{t(...reviewNotice.text)}</p>
+            <Link to={reviewNotice.href}>
+              {t("查看边界说明", "Read the limitation", "查看邊界說明")} →
+            </Link>
+          </aside>
+        )}
         <ContentProvenance kind={f.provenance} />
         <Freshness entry={f} />
-        <Related
-          ids={f.prerequisites || []}
-          title={
-            en
-              ? "Prerequisites"
-              : translate({ id: "ui.24e94830a2", message: "前置知识" })
-          }
-        />
+        {prerequisites.length > 0 && (
+          <nav
+            className="reading-prerequisites"
+            aria-label={t("前置知识", "Prerequisites", "前置知識")}
+          >
+            <span className="hh-eyebrow">
+              {t("先修", "Prerequisites", "先修")}
+            </span>
+            {prerequisites.map((entry) => (
+              <Link key={entry.id} to={entry.href}>
+                {entry.title} →
+              </Link>
+            ))}
+          </nav>
+        )}
       </div>
     );
   }
@@ -100,10 +146,10 @@ export default function DocReadingContext({ position }) {
               : translate({ id: "ui.55d22ed084", message: "当前学习位置" })}
           </h2>
           <p className="hh-eyebrow">
-            {uiLabel(track.brand)} / {en ? track.en : track.title}
+            {uiLabel(track.brand)} / {t(track.title, track.en, track.titleTw)}
           </p>
           <ol start={Math.max(0, index - 1) + 1}>
-            {track.steps.slice(Math.max(0, index - 1), index + 2).map((s) => {
+            {routeSteps.slice(Math.max(0, index - 1), index + 2).map((s) => {
               const article = entries.find((e) => e.stepId === s.id);
               return (
                 <li
@@ -112,14 +158,10 @@ export default function DocReadingContext({ position }) {
                 >
                   {learningSymbols[state.items[s.id]?.status || "not-started"]}{" "}
                   {s.id === step ? (
-                    en ? (
-                      s.en
-                    ) : (
-                      s.title
-                    )
+                    article?.title || (en ? s.en : s.title)
                   ) : (
                     <Link to={article?.permalink || "/learning#step-" + s.id}>
-                      {en ? s.en : s.title}
+                      {article?.title || (en ? s.en : s.title)}
                     </Link>
                   )}
                   {!article && " · " + uiLabel("PLANNED")}

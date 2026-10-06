@@ -7,6 +7,7 @@ import type { ReaderWidth } from "../lib/reader-settings.ts";
 import { useText } from "./Shell";
 import Link from "../runtime/Link";
 import DocReadingContext from "@site/src/components/DocReadingContext";
+import ReproductionGuide from "./ReproductionGuide";
 import TranslationNotice from "@site/src/components/TranslationNotice";
 import ArticleContents from "./ArticleContents";
 const ConversationWorkbench = dynamic(() => import("./ConversationWorkbench"));
@@ -252,6 +253,7 @@ export default function Document({ children }: PropsWithChildren) {
           <FlagshipExperience headings={d.headings} />
         )}
         <div id="reading-content" ref={ref}>
+          <ReproductionGuide id={d.metadata.id} />
           {children}
         </div>
         {d.route === "docs/embodied-ai/mujoco-first-pick-place" && (

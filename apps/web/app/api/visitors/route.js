@@ -1,10 +1,6 @@
-import { getContent } from "../../../lib/content";
+import visitorPaths from "../../../generated/visitor-paths.json";
 import { unstable_cache } from "next/cache";
-import {
-  canonicalPath,
-  publicPaths,
-  publicCountries,
-} from "../../../lib/visitor-stats.mjs";
+import { publicPaths, publicCountries } from "../../../lib/visitor-stats.mjs";
 
 export const dynamic = "force-dynamic";
 const cacheHeaders = {
@@ -88,10 +84,7 @@ export async function GET() {
       totals.visitors < 0
     )
       throw new Error("invalid_totals");
-    const content = getContent("zh-CN");
-    const entries = content.globalData["content-index"].entries;
-    const allowed = new Set(entries.map((e) => canonicalPath(e.href)));
-    for (const route of content.routes) allowed.add(canonicalPath("/" + route));
+    const allowed = new Set(visitorPaths);
     return Response.json(
       {
         status: "ready",

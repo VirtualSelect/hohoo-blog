@@ -4,7 +4,7 @@ description: 沿著本站真實程式碼，追蹤采集窗口、每日配額、�
 slug: /ai-apps/radar-publishing-pipeline
 status: published
 published_at: '2026-09-22'
-updated: '2026-09-22'
+updated: '2026-10-06'
 reading_minutes: 12
 domain: ai-apps
 article_kind: case-study
@@ -18,6 +18,10 @@ related: ["project:hohoo-blog", "doc:ai-apps/java-first-llm"]
 
 :::note 證據範圍
 本文由 AI 輔助整理，依據博客倉庫提交 `558e0a9` 的實現。描述的是可檢查的程式碼行為，不是一次新的線上事故復盤，也沒有測量生產延遲或篩選準確率。文中的配額算例是說明性輸入。可從 [固定版本原始碼](https://github.com/VirtualSelect/hohoo-blog/tree/558e0a9010e3f63a6dd8e03e109339d22554287b) 對照閱讀。
+:::
+
+:::note 2026-10-06 設定更新
+截至 2026-10-06，AIHOT 已改為動態共享全站每天 10 條額度，不再固定最多 6 條。下文保留 2026-09-22 固定版本的規則與算例，用於解釋當時的實作；目前執行參數請對照[已核對的設定](https://github.com/VirtualSelect/hohoo-blog/blob/cecd32caef36055f872fb51f81daf05ed514b956/config/news-sources.json)。RSS 的發布時間也可能是聚合來源發布日，不能直接當作原公告日期。
 :::
 
 ## 1. 一條資訊經過哪些邊界？

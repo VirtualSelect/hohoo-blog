@@ -8,33 +8,126 @@
     "steps": [
       {
         "id": "first-call",
-        "title": "Java 8 调用大语言模型：从第一次请求到多轮对话",
-        "en": "Your first LLM application from Java",
-        "topic": "AI 应用开发",
-        "prerequisite": "Java 与 HTTP 基础",
-        "prerequisiteEn": "Java and HTTP basics",
-        "minutes": 15,
-        "outcome": "完成一次模型请求，理解输入、输出与错误处理。",
-        "outcomeEn": "Goal: make a model request and understand inputs, outputs and errors.",
-        "status": "published",
-        "domain": "ai-apps",
-        "area": "application",
-        "difficulty": "beginner"
+        "doc": "ai-apps/java-first-llm",
+        "outcome": "发送请求、解析回答，并正确传递多轮历史。",
+        "outcomeEn": "Send a request, parse the answer and pass conversation history.",
+        "outcomeTw": "發送請求、解析回答，並正確傳遞多輪歷史。",
+        "prerequisites": [],
+        "followUps": ["doc:ai-apps/java-structured-output"]
       },
       {
         "id": "structured-output",
-        "title": "Java LLM 实践（二）：结构化输出验收",
-        "en": "Java LLM practice II: validate structured output",
-        "topic": "LLM 分享",
-        "prerequisite": "完成模型调用阶段",
-        "prerequisiteEn": "Complete the model-call stage",
-        "minutes": 16,
-        "outcome": "区分传输、协议、结构与语义；运行严格校验和真实响应重放。",
-        "outcomeEn": "Separate transport, protocol, structure and meaning; run strict checks and replay a captured response.",
-        "status": "published",
-        "domain": "ai-apps",
-        "area": "application",
-        "difficulty": "intermediate"
+        "doc": "ai-apps/java-structured-output",
+        "outcome": "把传输、JSON 结构和业务验收分开。",
+        "outcomeEn": "Separate transport, JSON structure and business acceptance.",
+        "outcomeTw": "將傳輸、JSON 結構與業務驗收分開。",
+        "prerequisites": ["doc:ai-apps/java-first-llm"],
+        "followUps": ["doc:ai-apps/java-transactional-history"]
+      },
+      {
+        "id": "java-transactional-history",
+        "doc": "ai-apps/java-transactional-history",
+        "outcome": "让一次问答原子提交，失败不留下半轮。",
+        "outcomeEn": "Commit a whole turn atomically without leaving partial history.",
+        "outcomeTw": "讓一次問答原子提交，失敗不留下半輪。",
+        "prerequisites": ["doc:ai-apps/java-structured-output"],
+        "followUps": ["doc:ai-apps/java-concurrent-history"]
+      },
+      {
+        "id": "java-concurrent-history",
+        "doc": "ai-apps/java-concurrent-history",
+        "outcome": "用版本票据实现先提交者获胜，说明与串行的区别。",
+        "outcomeEn": "Use version tickets for first-committer-wins and contrast serialization.",
+        "outcomeTw": "用版本票據實作先提交者勝出，說明與序列執行的差異。",
+        "prerequisites": ["doc:ai-apps/java-transactional-history"],
+        "followUps": ["doc:ai-apps/java-tool-boundary"]
+      },
+      {
+        "id": "java-tool-boundary",
+        "doc": "ai-apps/java-tool-boundary",
+        "outcome": "限制工具白名单、参数与预算，区分超时和真正停止。",
+        "outcomeEn": "Bound tools, arguments and budgets; distinguish timeout from termination.",
+        "outcomeTw": "限制工具白名單、參數與預算，區分逾時和真正停止。",
+        "prerequisites": ["doc:ai-apps/java-structured-output"],
+        "followUps": ["doc:ai-apps/java-retrieval-evidence"]
+      },
+      {
+        "id": "java-retrieval-evidence",
+        "doc": "ai-apps/java-retrieval-evidence",
+        "outcome": "复算 BM25 检索和无答案误命中，识别玩具语料的局限。",
+        "outcomeEn": "Recompute BM25 retrieval and false hits on unanswerable toy queries.",
+        "outcomeTw": "重算 BM25 檢索與無答案誤命中，辨識玩具語料的侷限。",
+        "prerequisites": ["doc:ai-apps/java-first-llm"],
+        "followUps": ["doc:ai-apps/java-grounded-claims"]
+      },
+      {
+        "id": "java-grounded-claims",
+        "doc": "ai-apps/java-grounded-claims",
+        "outcome": "校验证据与声明对应，而不把规则匹配当语义蕴含。",
+        "outcomeEn": "Validate claim–evidence correspondence without claiming semantic entailment.",
+        "outcomeTw": "校驗證據與聲明對應，不將規則比對當成語義蘊含。",
+        "prerequisites": ["doc:ai-apps/java-retrieval-evidence"],
+        "followUps": ["doc:ai-apps/java-streaming-boundary"]
+      },
+      {
+        "id": "java-streaming-boundary",
+        "doc": "ai-apps/java-streaming-boundary",
+        "outcome": "区分流式预览与可提交的完整回答。",
+        "outcomeEn": "Separate streamed previews from a complete, committable answer.",
+        "outcomeTw": "區分串流預覽與可提交的完整回答。",
+        "prerequisites": ["doc:ai-apps/java-structured-output"],
+        "followUps": ["doc:ai-apps/java-stream-session-ownership"],
+        "reviewNotice": {
+          "date": "2026-10-06",
+          "text": [
+            "复核发现：固定版本的 Gson 解析路径仍会接纳字符串中未转义的控制字符，已有通过项不代表严格 JSON 合规。详见第九篇的复核边界。",
+            "Review: the pinned Gson parsing path still accepts unescaped control characters in strings. Passing the recorded cases does not establish strict JSON compliance. See the review boundary in article nine.",
+            "複核發現：固定版本的 Gson 解析路徑仍會接受字串中未跳脫的控制字元，既有通過項不代表嚴格 JSON 合規。詳見第九篇的複核邊界。"
+          ],
+          "href": "/docs/ai-apps/java-stream-session-ownership"
+        }
+      },
+      {
+        "id": "java-stream-session-ownership",
+        "doc": "ai-apps/java-stream-session-ownership",
+        "outcome": "比较三种会话策略，阻止旧回调覆盖当前请求。",
+        "outcomeEn": "Compare three session policies and reject callbacks from superseded requests.",
+        "outcomeTw": "比較三種會話策略，阻止舊回呼覆蓋目前請求。",
+        "prerequisites": ["doc:ai-apps/java-streaming-boundary"],
+        "followUps": ["doc:ai-apps/java-transport-cancellation"]
+      },
+      {
+        "id": "java-transport-cancellation",
+        "doc": "ai-apps/java-transport-cancellation",
+        "outcome": "区分本地取消、连接停止和远端任务终止。",
+        "outcomeEn": "Distinguish local cancellation, transport shutdown and remote termination.",
+        "outcomeTw": "區分本機取消、連線停止和遠端任務終止。",
+        "prerequisites": ["doc:ai-apps/java-stream-session-ownership"],
+        "reviewNotice": {
+          "date": "2026-10-06",
+          "text": [
+            "固定版本仍有复现限制：运行脚本依赖本机 Maven 路径并强制离线；独立审计未自动核对源码指纹。继承的 Gson 解析边界见第九篇。本文记录不构成跨机器安装或严格 JSON 合规的证明。",
+            "The pinned runner depends on a machine-specific Maven path and forces offline mode; its audit does not verify source hashes. The inherited Gson parsing boundary is discussed in article nine. These records do not establish portable setup or strict JSON compliance.",
+            "固定版本仍有重現限制：執行腳本依賴本機 Maven 路徑並強制離線；獨立稽核未自動核對原始碼指紋。繼承的 Gson 解析邊界見第九篇。本文紀錄不構成跨機器安裝或嚴格 JSON 合規的證明。"
+          ],
+          "href": "/docs/ai-apps/java-stream-session-ownership"
+        }
+      },
+      {
+        "id": "typescript-output-boundary",
+        "doc": "ai-apps/typescript-output-boundary",
+        "outcome": "理解静态类型为何不能替代外部响应的运行时校验。",
+        "outcomeEn": "Explain why static types do not replace runtime validation of external responses.",
+        "outcomeTw": "理解靜態型別為何不能取代外部回應的執行期校驗。",
+        "prerequisites": ["doc:ai-apps/java-structured-output"]
+      },
+      {
+        "id": "radar-publishing-pipeline",
+        "doc": "ai-apps/radar-publishing-pipeline",
+        "outcome": "追踪采集、去重和发布，区分历史实现与当前配置。",
+        "outcomeEn": "Trace collection, deduplication and publication, distinguishing historical and current settings.",
+        "outcomeTw": "追蹤採集、去重與發布，區分歷史實作與目前設定。",
+        "prerequisites": []
       },
       {
         "id": "tool-calling",
@@ -48,7 +141,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Tool Calling"
       },
       {
         "id": "spring-ai",
@@ -62,7 +156,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "beginner"
+        "difficulty": "beginner",
+        "titleTw": "Spring AI 快速入門"
       },
       {
         "id": "blog-rag",
@@ -77,7 +172,8 @@
         "status": "planning",
         "domain": "ai-apps",
         "area": "application",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "RAG From Scratch"
       },
       {
         "id": "agent",
@@ -91,7 +187,8 @@
         "domain": "ai-apps",
         "difficulty": "intermediate",
         "outcome": "",
-        "outcomeEn": ""
+        "outcomeEn": "",
+        "titleTw": "Agent 工作流程"
       },
       {
         "id": "evaluation",
@@ -106,7 +203,8 @@
         "status": "planning",
         "domain": "ai-apps",
         "area": "application",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "評估效果、記錄失敗與改進"
       },
       {
         "id": "observability",
@@ -120,7 +218,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "AI 應用可觀測性"
       },
       {
         "id": "production",
@@ -134,7 +233,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Production"
       },
       {
         "id": "ai-coding",
@@ -148,7 +248,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "AI Coding"
       },
       {
         "id": "codex",
@@ -162,7 +263,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Codex"
       },
       {
         "id": "mcp",
@@ -176,7 +278,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "MCP"
       },
       {
         "id": "skills",
@@ -190,7 +293,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Skills"
       },
       {
         "id": "harness",
@@ -204,7 +308,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Harness Engineering"
       },
       {
         "id": "testing",
@@ -218,7 +323,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Testing"
       },
       {
         "id": "performance",
@@ -232,11 +338,19 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "ai-apps",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Performance"
       }
     ],
     "domain": "ai-apps",
-    "brand": "BUILD"
+    "brand": "BUILD",
+    "synthesis": "java-stream-session-ownership",
+    "titleTw": "AI 應用開發",
+    "background": [
+      "Java、HTTP 与 JSON 基础",
+      "Java, HTTP and JSON basics",
+      "Java、HTTP 與 JSON 基礎"
+    ]
   },
   {
     "id": "understand",
@@ -247,6 +361,107 @@
     "intro": "理解模型的输入、表示与推理机制。",
     "english": "Understand model inputs, representations and inference.",
     "steps": [
+      {
+        "id": "kv-cache",
+        "doc": "llm/kv-cache",
+        "outcome": "估算 K/V 数组容量，区分会话记忆和计算复用。",
+        "outcomeEn": "Estimate K/V payload and distinguish conversation context from computation reuse.",
+        "outcomeTw": "估算 K/V 陣列容量，區分會話記憶與計算重用。",
+        "prerequisites": [],
+        "followUps": [
+          "doc:llm/longest-prefix-reuse",
+          "doc:llm/prefix-cache-byte-budget",
+          "doc:llm/prefix-cache-admission"
+        ]
+      },
+      {
+        "id": "causal-mask-lab",
+        "doc": "llm/causal-mask-lab",
+        "outcome": "用未来信息泄漏反例检验因果掩码。",
+        "outcomeEn": "Test causal masking with a future-information leakage counterexample.",
+        "outcomeTw": "用未來資訊洩漏反例檢驗因果遮罩。",
+        "prerequisites": ["doc:llm/kv-cache"],
+        "followUps": ["doc:llm/kv-cache-equivalence"]
+      },
+      {
+        "id": "kv-cache-equivalence",
+        "doc": "llm/kv-cache-equivalence",
+        "outcome": "逐步比较完整重算与增量计算的数值结果。",
+        "outcomeEn": "Compare full and incremental computation step by step.",
+        "outcomeTw": "逐步比較完整重算與增量計算的數值結果。",
+        "prerequisites": ["doc:llm/causal-mask-lab"],
+        "followUps": ["doc:llm/sliding-cache-positions"]
+      },
+      {
+        "id": "sliding-cache-positions",
+        "doc": "llm/sliding-cache-positions",
+        "outcome": "滑动窗口裁剪后仍保留正确位置语义。",
+        "outcomeEn": "Preserve position semantics after sliding-window eviction.",
+        "outcomeTw": "滑動視窗裁切後仍保留正確位置語義。",
+        "prerequisites": ["doc:llm/kv-cache-equivalence"],
+        "followUps": ["doc:llm/prefix-cache-invalidation"]
+      },
+      {
+        "id": "prefix-cache-invalidation",
+        "doc": "llm/prefix-cache-invalidation",
+        "outcome": "识别模型、位置与输入变更后的失效条件。",
+        "outcomeEn": "Identify invalidation conditions after model, position or input changes.",
+        "outcomeTw": "辨識模型、位置與輸入變更後的失效條件。",
+        "prerequisites": ["doc:llm/sliding-cache-positions"],
+        "followUps": ["doc:llm/longest-prefix-reuse"]
+      },
+      {
+        "id": "longest-prefix-reuse",
+        "doc": "llm/longest-prefix-reuse",
+        "outcome": "匹配最长有效前缀并续算剩余 Token。",
+        "outcomeEn": "Match the longest valid prefix and compute the remaining tokens.",
+        "outcomeTw": "比對最長有效前綴並續算剩餘 Token。",
+        "prerequisites": ["doc:llm/prefix-cache-invalidation"],
+        "followUps": ["doc:llm/prefix-cache-byte-budget"]
+      },
+      {
+        "id": "prefix-cache-byte-budget",
+        "doc": "llm/prefix-cache-byte-budget",
+        "outcome": "按数组字节数限制 LRU，解释工作集放不下时的零命中。",
+        "outcomeEn": "Budget array bytes in LRU and explain zero hits when the working set does not fit.",
+        "outcomeTw": "依陣列位元組數限制 LRU，解釋工作集放不下時的零命中。",
+        "prerequisites": ["doc:llm/longest-prefix-reuse"],
+        "followUps": ["doc:llm/prefix-cache-admission"]
+      },
+      {
+        "id": "prefix-cache-admission",
+        "doc": "llm/prefix-cache-admission",
+        "outcome": "同时判断数值等价、计算节省与实测时间。",
+        "outcomeEn": "Evaluate numerical equivalence, saved work and measured time separately.",
+        "outcomeTw": "同時判斷數值等價、計算節省與實測時間。",
+        "prerequisites": ["doc:llm/prefix-cache-byte-budget"]
+      },
+      {
+        "id": "context-position-experiment",
+        "doc": "llm/context-position-experiment",
+        "outcome": "区分计划、尝试、有效响应，保留限流后的不完整结果。",
+        "outcomeEn": "Separate planned, attempted and valid calls, including rate-limited incomplete runs.",
+        "outcomeTw": "區分計畫、嘗試與有效回應，保留限流後的不完整結果。",
+        "prerequisites": [],
+        "followUps": ["doc:llm/context-position-paired-protocol"]
+      },
+      {
+        "id": "context-position-paired-protocol",
+        "doc": "llm/context-position-paired-protocol",
+        "outcome": "复核 24 次真实对照，说明全对结果的测量天花板。",
+        "outcomeEn": "Audit 24 real paired calls and explain a ceiling effect.",
+        "outcomeTw": "複核 24 次真實對照，說明全對結果的測量天花板。",
+        "prerequisites": ["doc:llm/context-position-experiment"],
+        "followUps": ["doc:llm/context-similar-distractors"]
+      },
+      {
+        "id": "context-similar-distractors",
+        "doc": "llm/context-similar-distractors",
+        "outcome": "检查 128 项离线实验设计，不把准备完成当模型结果。",
+        "outcomeEn": "Inspect a 128-case offline protocol without claiming model results.",
+        "outcomeTw": "檢查 128 項離線實驗設計，不將準備完成當成模型結果。",
+        "prerequisites": ["doc:llm/context-position-paired-protocol"]
+      },
       {
         "id": "token",
         "title": "Token 到底是什么",
@@ -259,7 +474,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "llm",
-        "difficulty": "beginner"
+        "difficulty": "beginner",
+        "titleTw": "Token 到底是什麼"
       },
       {
         "id": "context-window",
@@ -273,7 +489,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "llm",
-        "difficulty": "beginner"
+        "difficulty": "beginner",
+        "titleTw": "Context Window"
       },
       {
         "id": "embedding",
@@ -287,7 +504,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "llm",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Embedding"
       },
       {
         "id": "attention",
@@ -301,7 +519,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "llm",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Attention"
       },
       {
         "id": "transformer",
@@ -315,7 +534,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "llm",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Transformer"
       },
       {
         "id": "llm-evaluation",
@@ -329,7 +549,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "llm",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "LLM Evaluation"
       },
       {
         "id": "sampling",
@@ -343,8 +564,16 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "llm",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Sampling / Inference"
       }
+    ],
+    "synthesis": "prefix-cache-admission",
+    "titleTw": "LLM",
+    "background": [
+      "Python、数组与矩阵运算基础；机制实验不使用训练好的大模型",
+      "Python, arrays and matrices; mechanism experiments use an untrained toy model",
+      "Python、陣列與矩陣運算基礎；機制實驗不使用訓練好的大型模型"
     ]
   },
   {
@@ -354,6 +583,148 @@
     "intro": "独立于应用开发路线，从概念与阅读开始，再进入仿真；不预设你已经拥有机器人硬件。",
     "english": "A separate path from concepts and reading to simulation. No robot hardware is assumed.",
     "steps": [
+      {
+        "id": "first-simulation",
+        "doc": "embodied-ai/mujoco-first-pick-place",
+        "outcome": "运行接触抓取并保留失败轨迹。",
+        "outcomeEn": "Run contact-based pickup and preserve failed trajectories.",
+        "outcomeTw": "執行接觸抓取並保留失敗軌跡。",
+        "prerequisites": [],
+        "followUps": ["doc:embodied-ai/mujoco-grasp-guard"]
+      },
+      {
+        "id": "mujoco-grasp-guard",
+        "doc": "embodied-ai/mujoco-grasp-guard",
+        "outcome": "在搬运前验收抓取，失败时停止推进。",
+        "outcomeEn": "Validate grasp before transfer and stop on failure.",
+        "outcomeTw": "搬運前驗收抓取，失敗時停止推進。",
+        "prerequisites": ["doc:embodied-ai/mujoco-first-pick-place"],
+        "followUps": ["doc:embodied-ai/mujoco-transfer-monitor"]
+      },
+      {
+        "id": "mujoco-transfer-monitor",
+        "doc": "embodied-ai/mujoco-transfer-monitor",
+        "outcome": "持续监测搬运中的滑落，而不只检查起点。",
+        "outcomeEn": "Monitor slips during transfer, not only at its start.",
+        "outcomeTw": "持續監測搬運中的滑落，不僅檢查起點。",
+        "prerequisites": ["doc:embodied-ai/mujoco-grasp-guard"],
+        "followUps": ["doc:embodied-ai/mujoco-observation-freshness"]
+      },
+      {
+        "id": "mujoco-observation-freshness",
+        "doc": "embodied-ai/mujoco-observation-freshness",
+        "outcome": "按采样时间判断缺测与旧包。",
+        "outcomeEn": "Judge missing and stale observations by capture time.",
+        "outcomeTw": "依取樣時間判斷缺測與舊封包。",
+        "prerequisites": ["doc:embodied-ai/mujoco-transfer-monitor"],
+        "followUps": ["doc:embodied-ai/mujoco-recovery-gate"]
+      },
+      {
+        "id": "mujoco-recovery-gate",
+        "doc": "embodied-ai/mujoco-recovery-gate",
+        "outcome": "恢复通信后重新验收，再决定继续。",
+        "outcomeEn": "Revalidate after communication recovery before continuing.",
+        "outcomeTw": "恢復通訊後重新驗收，再決定繼續。",
+        "prerequisites": ["doc:embodied-ai/mujoco-observation-freshness"],
+        "followUps": ["doc:embodied-ai/mujoco-recovery-ablation"]
+      },
+      {
+        "id": "mujoco-recovery-ablation",
+        "doc": "embodied-ai/mujoco-recovery-ablation",
+        "outcome": "分离恢复门控和路径重规划的影响。",
+        "outcomeEn": "Separate recovery gating from replanning effects.",
+        "outcomeTw": "分離恢復門控與路徑重新規劃的影響。",
+        "prerequisites": ["doc:embodied-ai/mujoco-recovery-gate"],
+        "followUps": ["doc:embodied-ai/mujoco-phase-contracts"]
+      },
+      {
+        "id": "mujoco-phase-contracts",
+        "doc": "embodied-ai/mujoco-phase-contracts",
+        "outcome": "按阶段选择验收条件，避免下降时误触高度规则。",
+        "outcomeEn": "Choose phase-specific checks instead of applying lift-height rules during lowering.",
+        "outcomeTw": "依階段選擇驗收條件，避免下降時誤觸高度規則。",
+        "prerequisites": ["doc:embodied-ai/mujoco-recovery-ablation"],
+        "followUps": ["doc:embodied-ai/mujoco-exit-actions"]
+      },
+      {
+        "id": "mujoco-exit-actions",
+        "doc": "embodied-ai/mujoco-exit-actions",
+        "outcome": "解释报警后保持、停止与撤离的物理后果。",
+        "outcomeEn": "Explain physical consequences of hold, stop and retreat after an alarm.",
+        "outcomeTw": "解釋警報後保持、停止與撤離的物理後果。",
+        "prerequisites": ["doc:embodied-ai/mujoco-phase-contracts"],
+        "followUps": ["doc:embodied-ai/mujoco-release-verification"]
+      },
+      {
+        "id": "mujoco-release-verification",
+        "doc": "embodied-ai/mujoco-release-verification",
+        "outcome": "用接触与稳定窗口验收释放结果。",
+        "outcomeEn": "Validate release through contact and a stability window.",
+        "outcomeTw": "用接觸與穩定視窗驗收釋放結果。",
+        "prerequisites": ["doc:embodied-ai/mujoco-exit-actions"],
+        "followUps": ["doc:embodied-ai/mujoco-recovery-budget"]
+      },
+      {
+        "id": "mujoco-recovery-budget",
+        "doc": "embodied-ai/mujoco-recovery-budget",
+        "outcome": "给重新验收加时限，并保留终止原因。",
+        "outcomeEn": "Bound revalidation time and retain the reason for termination.",
+        "outcomeTw": "為重新驗收加上時限，並保留終止原因。",
+        "prerequisites": ["doc:embodied-ai/mujoco-release-verification"],
+        "followUps": ["doc:embodied-ai/mujoco-completion-lifecycle"]
+      },
+      {
+        "id": "mujoco-completion-lifecycle",
+        "doc": "embodied-ai/mujoco-completion-lifecycle",
+        "outcome": "分开记录历史完成和当前有效性。",
+        "outcomeEn": "Record historical completion separately from current validity.",
+        "outcomeTw": "分開記錄歷史完成與目前有效性。",
+        "prerequisites": ["doc:embodied-ai/mujoco-recovery-budget"],
+        "followUps": ["doc:embodied-ai/mujoco-abort-exit"],
+        "reviewNotice": {
+          "date": "2026-10-06",
+          "text": [
+            "带传输延迟的连续流存在窗口反复清空的反例。原轨迹仍保留，但不能据此宣称任意延迟下都正确；第十四篇勘误给出输入条件和影响。",
+            "A delayed continuous stream can repeatedly reset the evidence window. The original traces are retained, but do not prove correctness under arbitrary delays. The correction in article fourteen specifies the input and impact.",
+            "帶傳輸延遲的連續流存在視窗反覆清空的反例。保留原軌跡，但不能據此宣稱任意延遲下皆正確；第十四篇勘誤提供輸入條件與影響。"
+          ],
+          "href": "/docs/embodied-ai/mujoco-qualified-completion"
+        }
+      },
+      {
+        "id": "mujoco-abort-exit",
+        "doc": "embodied-ai/mujoco-abort-exit",
+        "outcome": "检验终止后的撤离动作，而不把状态改名当安全。",
+        "outcomeEn": "Test exit actions after abort rather than equating a state label with safety.",
+        "outcomeTw": "檢驗終止後的撤離動作，不將狀態改名當成安全。",
+        "prerequisites": ["doc:embodied-ai/mujoco-completion-lifecycle"],
+        "followUps": ["doc:embodied-ai/mujoco-phase-recovery"]
+      },
+      {
+        "id": "mujoco-phase-recovery",
+        "doc": "embodied-ai/mujoco-phase-recovery",
+        "outcome": "连接阶段、恢复预算和退出动作。",
+        "outcomeEn": "Connect phase checks, recovery budgets and exit actions.",
+        "outcomeTw": "連接階段、恢復預算與退出動作。",
+        "prerequisites": ["doc:embodied-ai/mujoco-abort-exit"],
+        "followUps": ["doc:embodied-ai/mujoco-qualified-completion"]
+      },
+      {
+        "id": "mujoco-qualified-completion",
+        "doc": "embodied-ai/mujoco-qualified-completion",
+        "outcome": "区分物理放置、当前有效与合格完成。",
+        "outcomeEn": "Distinguish physical placement, current validity and qualified completion.",
+        "outcomeTw": "區分物理放置、目前有效與合格完成。",
+        "prerequisites": ["doc:embodied-ai/mujoco-phase-recovery"]
+      },
+      {
+        "id": "openvla-action-pipeline",
+        "doc": "embodied-ai/openvla-action-pipeline",
+        "outcome": "追踪 OpenVLA 动作接口，不把导读当已完成训练。",
+        "outcomeEn": "Trace the OpenVLA action interface without claiming a completed training run.",
+        "outcomeTw": "追蹤 OpenVLA 動作介面，不將導讀當成已完成訓練。",
+        "prerequisites": []
+      },
       {
         "id": "what-is-embodied-ai",
         "title": "什么是具身智能",
@@ -366,7 +737,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "embodied-ai",
-        "difficulty": "beginner"
+        "difficulty": "beginner",
+        "titleTw": "什麼是具身智能"
       },
       {
         "id": "embodied-basics",
@@ -381,7 +753,8 @@
         "status": "planning",
         "domain": "embodied-ai",
         "area": "application",
-        "difficulty": "beginner"
+        "difficulty": "beginner",
+        "titleTw": "理解感知、決策與行動"
       },
       {
         "id": "embodied-reading",
@@ -396,7 +769,8 @@
         "status": "planning",
         "domain": "embodied-ai",
         "area": "application",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "帶著問題讀一篇論文"
       },
       {
         "id": "vlm-vla",
@@ -410,7 +784,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "embodied-ai",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "VLM 與 VLA"
       },
       {
         "id": "action-space",
@@ -424,7 +799,8 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "embodied-ai",
-        "difficulty": "intermediate"
+        "difficulty": "intermediate",
+        "titleTw": "Action Space"
       },
       {
         "id": "embodied-benchmark",
@@ -438,25 +814,18 @@
         "outcome": "",
         "outcomeEn": "",
         "domain": "embodied-ai",
-        "difficulty": "intermediate"
-      },
-      {
-        "id": "first-simulation",
-        "title": "MuJoCo 首次抓取与偏差对照",
-        "en": "First MuJoCo pickup and target-bias comparison",
-        "topic": "具身智能",
-        "prerequisite": "基础概念与 Python 基础",
-        "prerequisiteEn": "Basic concepts and Python",
-        "minutes": 18,
-        "outcome": "运行接触抓取，记录九回合，对照失败并重放保存的状态。",
-        "outcomeEn": "Run contact-based pickup, record nine episodes, compare failures and replay saved states.",
-        "status": "published",
-        "domain": "embodied-ai",
-        "area": "application",
-        "difficulty": "beginner"
+        "difficulty": "intermediate",
+        "titleTw": "Embodied Benchmark"
       }
     ],
     "domain": "embodied-ai",
-    "brand": "EXPLORE"
+    "brand": "EXPLORE",
+    "synthesis": "mujoco-qualified-completion",
+    "titleTw": "具身智能",
+    "background": [
+      "Python 基础；教学仿真使用 MuJoCo 与直角坐标夹爪",
+      "Python basics; teaching simulations use MuJoCo and a Cartesian gripper",
+      "Python 基礎；教學模擬使用 MuJoCo 與直角座標夾爪"
+    ]
   }
 ]

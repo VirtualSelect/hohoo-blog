@@ -10,6 +10,7 @@ import { localizedNews } from "@site/src/utils/news-locale.mjs";
 import { useEnglish, Related } from "./ContentUI";
 import ContentProvenance, { Freshness } from "./ContentProvenance";
 import RadarPractice from "@lab/components/RadarPractice";
+import SignalDates from "./SignalDates";
 export default function RadarItem({ item, compact = false, showDate = true }) {
   const en = useEnglish();
   const t = useText();
@@ -49,6 +50,7 @@ export default function RadarItem({ item, compact = false, showDate = true }) {
           )}
         </p>
       </div>
+      <SignalDates item={item} />
       <Freshness
         entry={{
           ...item,

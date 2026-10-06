@@ -4,7 +4,7 @@ description: "4860次實測查詢比較三種快取準入策略，把位元組�
 slug: "/llm/prefix-cache-admission"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-05"
+updated: "2026-10-06"
 reading_minutes: 12
 domain: "llm"
 article_kind: "mechanism"
@@ -17,6 +17,29 @@ related: ["lab:prefix-cache-admission", "project:hohoo-ai-lab", "doc:llm/prefix-
 上一輪發現，8KiB 快取遇到兩個輪流訪問的前綴，會發生[零命中的反覆淘汰](/docs/llm/prefix-cache-byte-budget)。自然的下一步是少存一些檢查點，把容量留給真正有用的前綴。
 
 這次同時測量計算量和耗時。結果並不等於“快取優化成功”：**準入策略改善了某些訪問軌跡，但在這個小型 NumPy 模型上，快取查詢仍然比直接重算慢。**
+
+## 先分清三個問題
+
+| 要回答的問題 | 本系列怎樣檢查 | 能得出的結論 |
+| --- | --- | --- |
+| 結果是否等價？ | 相同輸入下比较快取續算與完整重算陣列，誤差門檻固定 | 本模型與精度下數值一致，不證明語義品質 |
+| 計算是否減少？ | 統計實際 Q/K/V 投影行數 | 少做了這些投影，不等於全部運算等比例減少 |
+| 使用者是否等得更短？ | 計時完整查詢，保留無快取基準與重複結果 | 本機與這組負載的時間，不能外推生產 LLM |
+
+```text
+命中有效前綴 → 少投影一些 Token ─┐
+簽名、查找、複製、分段呼叫 ─────┼→ 查詢總耗時（必須測量）
+未命中時仍要重算 ─────────────┘
+```
+
+三 scope / 16KiB 是具體反例：`longest` 比 `all` 少算一半投影行，卻仍比 `none` 慢。兩個比較對象都要保留，不能只選較慢的快取基準來宣稱加速。
+
+<details><summary>小練習：864 行降到 432 行，能否說「快了 50%」？</summary>
+
+不能，只有投影行數減少 50%。相應中位數為 6.723ms，無快取為 1.697ms。檔案讀取、雜湊和複製均在計時內，但尚未分段剖析，不能認定其中某一項是主要瓶頸。
+
+</details>
+
 
 ## 本篇只改變保存哪些檢查點
 
@@ -102,20 +125,40 @@ fresh, _ = model.full(tokens)
 
 這些固定軌跡沒有取樣真實使用者流量。表中的命中數量用於說明機制，不是線上快取命中率預測。
 
-## 數值正確性與重現
+## 從哪裡開始，怎樣重現
+
+初次閱讀可依序看 [容量與機制](/docs/llm/kv-cache)、[等價性](/docs/llm/kv-cache-equivalence)、[失效](/docs/llm/prefix-cache-invalidation)、[最長前綴](/docs/llm/longest-prefix-reuse)、[位元組預算](/docs/llm/prefix-cache-byte-budget)。這些是已完成的離線數值實驗。
+
+另一條支線為 [24 次 Agnes 3.0 真實呼叫](/docs/llm/context-position-paired-protocol)；後續的 [128 項相似干擾方案](/docs/llm/context-similar-distractors)僅完成離線準備，沒有新模型結果，不能混入本篇分母。
+
+在新目錄準備 Python 3.12 環境（PowerShell）：
+
+```powershell
+git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-cache
+cd hohoo-ai-lab-cache
+git checkout 503f5271ef0d5baa12353d6eeda672dec5fc240e
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install numpy==2.2.6
+cd experiments/09-cache-admission
+..\..\.venv\Scripts\python.exe -m unittest discover -s . -p test_cache.py
+..\..\.venv\Scripts\python.exe run.py --out evidence/my-run
+..\..\.venv\Scripts\python.exe audit.py evidence/my-run
+```
+
+預期得到逐請求記錄與陣列。先查誤差、投影行與預算，再看時間分布。輸出目錄必須不存在；時間不必與封存逐位相同，超過協議誤差門檻才是正確性問題。缺少 NumPy 時確認安裝與執行使用同一解譯器。
+
+**稽核範圍：** 現有腳本校驗結果檔案雜湊並獨立重算部分指標，但不會遍歷 `manifest.sources` 核對原始碼。因此仍須固定上述提交；不能將稽核通過解讀為原始碼、環境與生產效能皆獲證明。
+
+
+<details><summary>附錄：數值校驗與封存結構</summary>
 
 所有 4,860 次查詢都與完整重算比較，最大絕對誤差約 **4.16 × 10⁻¹⁶**。每個配置的首次測量還保存參考與重用兩個陣列，共 1,944 個陣列，便於獨立復算；後四次保存誤差和時序，不重複歸檔陣列。
 
 六組邊界測試覆蓋非法策略、容量相差一位元組、scope 隔離、模型身份變更、返回值與快取記憶體隔離，以及只準入最長檢查點。獨立審計按 Token 與 scope 重放 LRU，不呼叫被測 Store 來判斷結果。
 
-在 `experiments/09-cache-admission` 中運行：
-
-```text
-python -m unittest discover -s . -p test_cache.py
-python run.py --out evidence/my-run
-python audit.py evidence/my-run
-```
 
 需要項目既有的 Python/NumPy 環境；歸檔使用 Python 3.12.14、NumPy 2.2.6。`manifest.json` 保存凍結程式碼版本、環境、NumPy 配置、計時器分辨率與哈希；`results.json` 保留請求順序、耗時、計算計數、複製位元組和淘汰事件。
 
 本輪不是專用基準機測量，沒有 CPU 綁核、GPU 或真實模型推理；重複運行的時間會變化。它給出的可遷移結論是：**同時報告正確性、容量、工作量和真實耗時，才能判斷一個快取優化究竟優化了什麼。**
+
+</details>

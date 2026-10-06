@@ -5,10 +5,10 @@ import tracks from "@site/data/learning-paths.json";
 import topics from "@site/data/topics";
 import { Section, ContentRows, useContent, useEnglish } from "./ContentUI";
 import TopicPapers from "./TopicPapers";
+import SeriesEntry from "./SeriesEntry";
 import TopicNews from "./TopicNews";
 import { useText } from "@lab/components/Shell";
 import LabSketch from "@lab/components/LabSketch";
-import { writingKind } from "../utils/writing-kinds.ts";
 export default function TopicLanding({ category }) {
   const en = useEnglish();
   const t = useText();
@@ -27,11 +27,9 @@ export default function TopicLanding({ category }) {
       ["doc", "note"].includes(e.type) &&
       e.translationStatus !== "MISSING",
   );
-  const engineering =
-    category === "ai-apps"
-      ? docs.filter((e) => writingKind(e) === "case-study")
-      : [];
-  const starting = docs.filter((e) => !engineering.includes(e));
+  const starting = track.steps
+    .map((s) => docs.find((e) => e.id === "doc:" + s.doc))
+    .filter(Boolean);
   return (
     <div className="topic-landing" data-domain={category}>
       <p className="hh-eyebrow">
@@ -49,13 +47,14 @@ export default function TopicLanding({ category }) {
           }
         />
       </div>
+      <SeriesEntry domain={category} />
       {starting.length > 0 && (
         <Section
           label={uiLabel("START HERE")}
           title={t(
-            "先读一篇，再动手试试",
-            "Read, then try it yourself",
-            "先讀一篇，再動手試試",
+            "系列总览 · 建议阅读顺序",
+            "Series overview · suggested reading order",
+            "系列總覽 · 建議閱讀順序",
           )}
         >
           <ContentRows items={starting} />
@@ -66,7 +65,6 @@ export default function TopicLanding({ category }) {
           label={uiLabel("AI ENGINEERING")}
           title={en ? "From application to delivery" : "从应用实现，到工程交付"}
         >
-          {engineering.length > 0 && <ContentRows items={engineering} />}
           <p className="hh-lead">
             {en
               ? "An application subdirection, not a separate track."
@@ -132,19 +130,21 @@ export default function TopicLanding({ category }) {
           )}
         </summary>
         <ol className="hh-concepts">
-          {track.steps.slice(0, 7).map((s) => {
-            const article = docs.find((d) => d.stepId === s.id);
-            return (
-              <li key={s.id}>
-                <Link to={article?.href || "/learning#step-" + s.id}>
-                  {article?.title || (en ? s.en : s.title)}
-                </Link>
-                {!article && (
-                  <small className="hh-meta"> · {uiLabel("PLANNED")}</small>
-                )}
-              </li>
-            );
-          })}
+          {track.steps
+            .filter((s) => !s.doc)
+            .map((s) => {
+              const article = docs.find((d) => d.stepId === s.id);
+              return (
+                <li key={s.id}>
+                  <Link to={article?.href || "/learning#step-" + s.id}>
+                    {article?.title || (en ? s.en : s.title)}
+                  </Link>
+                  {!article && (
+                    <small className="hh-meta"> · {uiLabel("PLANNED")}</small>
+                  )}
+                </li>
+              );
+            })}
         </ol>
       </details>
       <p>

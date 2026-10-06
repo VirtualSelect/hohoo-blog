@@ -439,7 +439,7 @@ small {
 .tracks-section h2 {
   max-width: 360px;
 }
-.track-list > a {
+.track-list > .track-reading-entry > a {
   display: grid;
   grid-template-columns: 110px 1fr 18px;
   gap: 16px;
@@ -1161,7 +1161,7 @@ small {
   .build-visual {
     height: 190px;
   }
-  .track-list > a {
+  .track-list > .track-reading-entry > a {
     grid-template-columns: 95px 1fr 18px;
   }
   .radar-home > article {
@@ -1577,4 +1577,92 @@ html[data-theme="dark"] .token.class-name {
 .prose video:focus-visible {
   outline: 2px solid var(--hh-accent);
   outline-offset: 4px;
+}
+
+.hh-meta.signal-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+}
+
+/* Reading paths share existing surface and typography tokens. */
+.series-entry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  margin: 1rem 0;
+}
+.series-entry a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  overflow-wrap: anywhere;
+}
+.learning-actions {
+  display: flex;
+  gap: 0.5rem 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.learning-actions button {
+  min-height: 44px;
+}
+.learning-page .hh-roadmap {
+  padding-inline-start: 1.4rem;
+}
+.learning-page .hh-roadmap > li {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--hh-border);
+  scroll-margin-top: 6rem;
+}
+.learning-track {
+  scroll-margin-top: 6rem;
+}
+.learning-track summary {
+  min-height: 44px;
+  padding: 0.7rem 0;
+  cursor: pointer;
+}
+.track-reading-entry {
+  min-width: 0;
+}
+.track-reading-entry > a {
+  display: block;
+}
+.track-reading-entry .series-entry {
+  font-size: 0.85rem;
+  flex-direction: column;
+  gap: 0;
+}
+@media (max-width: 768px) {
+  .learning-page .hh-controls label {
+    width: 100%;
+  }
+}
+
+.reproduction-guide {
+  margin: 1.5rem 0;
+  padding: 1rem 0;
+  border-block: 1px solid var(--hh-border);
+}
+.reproduction-guide summary {
+  cursor: pointer;
+  min-height: 44px;
+}
+.reproduction-guide pre {
+  overflow: auto;
+  max-width: 100%;
+}
+.reading-prerequisites {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  font-size: 0.9rem;
+}
+.reading-prerequisites a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
 }

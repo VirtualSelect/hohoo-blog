@@ -4,7 +4,7 @@ description: "4,860 measured queries compare three admission policies, connectin
 slug: "/llm/prefix-cache-admission"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-05"
+updated: "2026-10-06"
 reading_minutes: 12
 domain: "llm"
 article_kind: "mechanism"
@@ -15,6 +15,29 @@ related: ["lab:prefix-cache-admission", "project:hohoo-ai-lab", "doc:llm/prefix-
 [Pinned code](https://github.com/VirtualSelect/hohoo-ai-lab/tree/503f5271ef0d5baa12353d6eeda672dec5fc240e/experiments/09-cache-admission) · [Raw evidence and audit](https://github.com/VirtualSelect/hohoo-ai-lab/tree/503f5271ef0d5baa12353d6eeda672dec5fc240e/experiments/09-cache-admission/evidence/20261005) · [Experiment record](/labs/prefix-cache-admission)
 
 The [previous study](/docs/llm/prefix-cache-byte-budget) found an 8KiB cache repeatedly evicting checkpoints without a single hit. Saving fewer checkpoints seems like an obvious improvement. This time we measure both work and elapsed query time: **admission improves some traces, yet the tiny NumPy model remains faster without caching.**
+
+## Separate three questions
+
+| Question | Check | Supported conclusion |
+| --- | --- | --- |
+| Are the results equivalent? | Compare cached and full arrays for the same input with a fixed tolerance | Numerical agreement under this model and precision, not language quality |
+| Is there less computation? | Count Q/K/V projection rows | These projections decrease, not necessarily every operation |
+| Is the wait shorter? | Time the complete query against a no-cache baseline with repetitions | Local time for this workload, not production LLM performance |
+
+```text
+Valid prefix hit → fewer token projections ─┐
+Signature, lookup, copying, segmented calls ┼→ total query time (measure it)
+Cache miss → recomputation ────────────────┘
+```
+
+The three-scope / 16KiB case is a counterexample: `longest` halves projection rows relative to `all`, yet remains slower than `none`. Retain both baselines rather than choosing the slower cache policy to claim acceleration.
+
+<details><summary>Exercise: do 432 rows instead of 864 mean “50% faster”?</summary>
+
+No. Only the projection count falls by 50%. The corresponding median is 6.723ms versus 1.697ms without caching. File access, hashing and copying are timed, but have not been profiled separately; none can be declared the dominant bottleneck from these totals.
+
+</details>
+
 
 ## Change admission, keep the model
 
@@ -99,20 +122,40 @@ At 12KiB, three longest prefixes require 12,672 bytes, exceeding 12,288. This tr
 
 These deterministic traces are not sampled user traffic. Their hit counts explain mechanisms rather than predict online hit rates.
 
-## Correctness and reproduction
+## Entry points and reproduction
+
+Start with [capacity and mechanisms](/docs/llm/kv-cache), then [equivalence](/docs/llm/kv-cache-equivalence), [invalidation](/docs/llm/prefix-cache-invalidation), [longest-prefix reuse](/docs/llm/longest-prefix-reuse) and [byte budgets](/docs/llm/prefix-cache-byte-budget). These are completed offline numerical experiments.
+
+The separate context branch has [24 real Agnes 3.0 calls](/docs/llm/context-position-paired-protocol). The later [128-case similar-distractor protocol](/docs/llm/context-similar-distractors) is offline preparation only, with no new model results. Do not combine their denominators with these numerical experiments.
+
+In a new directory, prepare Python 3.12 (PowerShell):
+
+```powershell
+git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-cache
+cd hohoo-ai-lab-cache
+git checkout 503f5271ef0d5baa12353d6eeda672dec5fc240e
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install numpy==2.2.6
+cd experiments/09-cache-admission
+..\..\.venv\Scripts\python.exe -m unittest discover -s . -p test_cache.py
+..\..\.venv\Scripts\python.exe run.py --out evidence/my-run
+..\..\.venv\Scripts\python.exe audit.py evidence/my-run
+```
+
+Expect per-query records and arrays. Check numerical error, projection counts and budget invariants before interpreting time. Use a new output directory. Timing need not exactly match the archive; an error beyond the protocol tolerance is a correctness failure. For missing NumPy, check that installation and execution use the same interpreter.
+
+**Audit scope:** the current script checks result-file hashes and independently recomputes some metrics, but does not traverse `manifest.sources` to verify source hashes. Pin the revision as well; an audit pass does not establish source identity, environment identity or production performance.
+
+
+<details><summary>Appendix: numerical checks and archived files</summary>
 
 All 4,860 measured requests are compared with a full reference calculation. Maximum absolute error is **4.16 × 10⁻¹⁶**. The first measured repetition of each configuration archives reference and reused outputs: 1,944 arrays in total. Later repetitions retain errors and timing without duplicating arrays.
 
 Six contract tests cover invalid policy, a one-byte capacity boundary, scope separation, model identity changes, return/cache memory isolation and longest-only admission. The independent audit replays token/scope LRU behavior without calling the Store under test.
 
-In `experiments/09-cache-admission`:
-
-```text
-python -m unittest discover -s . -p test_cache.py
-python run.py --out evidence/my-run
-python audit.py evidence/my-run
-```
 
 Use the repository's Python/NumPy environment. Archived versions are Python 3.12.14 and NumPy 2.2.6. The manifest identifies frozen source, runtime, NumPy configuration, timer resolution and hashes. Raw results retain ordering, elapsed nanoseconds, work counters, copying and eviction events.
 
 This was not a dedicated benchmark machine: no CPU affinity, GPU or production inference engine. Timing will vary. The useful discipline is to report correctness, capacity, work and elapsed time together, so the reader can see exactly what improved.
+
+</details>

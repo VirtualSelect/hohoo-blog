@@ -1,40 +1,40 @@
 {
-  "updated": "2026-09-30",
+  "updated": "2026-10-06",
   "items": [
     {
       "kind": "BUILDING",
-      "zh": "为Java对话增加整轮提交，并用TypeScript验证同一输出契约。",
-      "en": "Adding whole-turn Java commits and testing the same output contract in TypeScript.",
-      "to": "/docs/ai-apps/typescript-output-boundary",
-      "tw": "為Java對話加入整輪提交，以TypeScript驗證同一輸出契約。"
+      "zh": "整理 Java 会话与取消链路，先检查旧代码的边界，再决定完整助手的产品语义。",
+      "en": "Reviewing Java session and cancellation boundaries before choosing semantics for a complete assistant.",
+      "tw": "整理 Java 會話與取消鏈路，先檢查舊程式碼邊界，再決定完整助手的產品語義。",
+      "to": "/docs/ai-apps/java-stream-session-ownership"
     },
     {
       "kind": "LEARNING",
-      "zh": "完成Agnes 3.0的24次成组对照，核对全对结果能支持什么结论。",
-      "en": "Auditing 24 paired Agnes 3.0 calls and the limits of their perfect observed score.",
-      "to": "/docs/llm/context-position-paired-protocol",
-      "tw": "完成Agnes 3.0的24次成組對照，核對全對結果能支持什麼結論。"
+      "zh": "对照缓存的数值一致性、计算量与实测耗时；小型模型上缓存仍可能更慢。",
+      "en": "Comparing cache equivalence, work saved and measured time; caching can still be slower on this small model.",
+      "tw": "比較快取的數值一致性、計算量與實測耗時；小型模型上快取仍可能更慢。",
+      "to": "/docs/llm/prefix-cache-admission"
     },
     {
       "kind": "READING",
-      "zh": "以 RAG、ReAct 和 RT-2 导读作为论文阅读入口。",
-      "en": "Using the RAG, ReAct and RT-2 guides as paper reading starting points.",
-      "to": "/papers",
-      "tw": "以 RAG、ReAct 和 RT-2 導讀作為論文閱讀入口。"
+      "zh": "回看 Agnes 3.0 的 24 次真实调用；相似干扰协议已准备，但没有新模型结果。",
+      "en": "Revisiting 24 real Agnes 3.0 calls; the similar-distractor protocol is prepared but has no new model results.",
+      "tw": "回看 Agnes 3.0 的 24 次真實呼叫；相似干擾協議已準備，但沒有新模型結果。",
+      "to": "/docs/llm/context-position-paired-protocol"
     },
     {
       "kind": "EXPLORING",
-      "zh": "通信恢复不等于抓取恢复：18回合对照旧包重送与重新验收。",
-      "en": "Communication recovery is not grasp recovery: 18 rollouts compare replay and revalidation.",
-      "to": "/docs/embodied-ai/mujoco-recovery-gate",
-      "tw": "通訊恢復不等於抓取恢復：18回合比較舊包重送與重新驗收。"
+      "zh": "MuJoCo 已有 E14 教学证据：区分物理放置、当前有效与流程合格完成，完整 VL01 仍未完成。",
+      "en": "MuJoCo E14 separates physical placement, current validity and qualified completion. Full VL01 remains open.",
+      "tw": "MuJoCo 已有 E14 教學證據：區分物理放置、目前有效與流程合格完成，完整 VL01 仍未完成。",
+      "to": "/docs/embodied-ai/mujoco-qualified-completion"
     },
     {
       "kind": "NEXT",
-      "zh": "分离恢复门控与路径重规划的影响；为上下文试验设计更有区分度的材料。",
-      "en": "Separate recovery gating from replanning, and design more discriminating context materials.",
-      "to": "/docs/llm/context-position-paired-protocol",
-      "tw": "分離恢復門控與路徑重新規劃的影響；為上下文試驗設計更具區分度的材料。"
+      "zh": "先复核复现入口与已知边界；新模型评测、缓存剖析和第二个机器人场景只列为候选。",
+      "en": "First review reproduction and known boundaries. New model evaluations, cache profiling and a second robot scene remain candidates.",
+      "tw": "先複核重現入口與已知邊界；新模型評測、快取剖析和第二個機器人場景僅列為候選。",
+      "to": "/learning"
     }
   ]
 }

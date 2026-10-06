@@ -4,7 +4,7 @@ description: "Eight MuJoCo trajectories, three passive readouts and recorded-sta
 slug: "/embodied-ai/mujoco-qualified-completion"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-05"
+updated: "2026-10-06"
 reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -27,6 +27,40 @@ Qualified completion:          ABORTED, no completion timestamp
 ```
 
 The physical observation is retained. It answers where the object ended up, whereas execution qualification answers how the task got there.
+
+## Connect the modules: execution and completion run in parallel
+
+```text
+Approach → close → lift → transfer → lower → release
+                    │       │         │
+                    └── phase contracts ┘
+                              ↓ fault
+         hold → revalidate within budget → rebuild remaining path
+                              └ exhausted → ABORTED → exit action
+
+A separate observer runs each control tick:
+received packet → freshness → physical placement → current validity
+                               + release intent and no abort → qualification
+```
+
+This maps existing modules, not a newly implemented controller. E7 [phase contracts](/docs/embodied-ai/mujoco-phase-contracts) define what to check; E10 [recovery budgets](/docs/embodied-ai/mujoco-recovery-budget) bound waiting and attempts; E13 [phase recovery](/docs/embodied-ai/mujoco-phase-recovery) connects them. E14 observes passively and does not write actuator commands.
+
+`ABORTED` is an execution terminal state. `VALID / INVALID / UNKNOWN` describe what current evidence supports. `completed_at` records history. Their different simultaneous values are meaningful, not contradictory.
+
+<details><summary>Exercise: the cube remains in the bin, but the latest observation is stale. Success or failure?</summary>
+
+The physical goal may remain satisfied, but the observer lacks fresh evidence: `UNKNOWN`, not continued `VALID` and not an assertion that the cube fell. Preserve historical `completed_at`. The downstream consumer must explicitly choose waiting, pausing or an exit procedure.
+
+</details>
+
+## Correction, 2026-10-06: contracts the implementation does not yet guarantee
+
+Two reproducible boundaries are not covered by the original eight trajectories with zero transport delay:
+
+1. **Expiry runs before the new packet is processed.** The E11 base checks the previous packet first. With 20ms sampling, a fixed 40ms delay and a 60ms age threshold, each incoming packet is fresh but the previous one expires just before receipt. The window repeatedly resets and sustained placement remains `VERIFYING`. Rejecting individual stale packets does not establish correct behavior for a delayed stream.
+2. **Release is a boolean, not a timestamp.** E14 cannot reject a packet captured before release but received afterward. At 2ms/tick, release at tick 100 and a first capture at 90 received at 100 lead to completion at 230 with a last capture at 220. Only 120 ticks (240ms) of evidence are after release, below the required 125 ticks (250ms).
+
+“Do not borrow pre-release evidence” is therefore an **intended contract**, not a universal guarantee of the pinned code. The original 7.102s / 7.302s observations remain valid for their recorded fixed scenarios. No trajectories were rewritten or new physical experiments run for this review. Reuse requires separate fixes for packet-processing order and release-time boundaries, plus delayed, duplicate, reordered and backward-time regressions—not just a larger threshold.
 
 ## Three observers, one physical trajectory
 
@@ -98,7 +132,7 @@ Placement requires x/y within 45mm of the bin center, z within 6mm of 26mm, spee
 
 Two mistakes are exposed separately. The drop case shows that current physical success does not establish normal task completion. The push case shows that historical completion does not establish current validity.
 
-Clean physical completion occurs at 7.102s; qualified completion at 7.302s. Qualification collects a new window after release intent instead of borrowing stable evidence from before release. After a lowering-gap recovery, the corresponding times are 7.142s and 7.342s. This additional wait is a decision-rule effect, not slower robot motion.
+Clean physical completion occurs at 7.102s; qualified completion at 7.302s. These zero-transport-delay trajectories collect a new window after release intent; see the correction above for delayed observations. After a lowering-gap recovery, the corresponding times are 7.142s and 7.342s. This additional wait is a decision-rule effect, not slower robot motion.
 
 ## Identical endpoints can hide different histories
 

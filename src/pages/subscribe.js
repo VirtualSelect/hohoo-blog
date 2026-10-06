@@ -10,20 +10,20 @@ export default function Subscribe() {
   const feeds = [
     {
       path: "/blog/rss.xml",
-      name: t("随笔订阅", "Journal feed", "隨筆訂閱"),
+      name: t("文章订阅", "Writing feed", "文章訂閱"),
       description: t(
-        "已发布的 Blog 随笔，不包含全部 Docs 技术教程。",
-        "Published blog posts; this feed does not include all Docs tutorials.",
-        "已發布的 Blog 隨筆，不包含全部 Docs 技術教學。",
+        "包含已发布的技术文章与 Blog 随笔；按所选语言提供现有译文。",
+        "Published technical Docs and blog posts, using available translations for the selected language.",
+        "包含已發布的技術文章與 Blog 隨筆；依所選語言提供現有譯文。",
       ),
     },
     {
       path: "/news/rss.xml",
       name: t("AI 雷达订阅", "AI Radar feed", "AI 雷達訂閱"),
       description: t(
-        "最近 100 条已发布外部资讯，保留来源和原文链接。",
-        "The latest 100 published external signals, with source links.",
-        "最近 100 條已發布外部資訊，保留來源和原文連結。",
+        "包含当前归档中的已发布外部资讯，保留来源与原文链接；数量随归档更新。/radar/rss.xml 提供相同内容。",
+        "Published external signals in the current archive, with source links. The count changes with the archive. /radar/rss.xml carries the same feed.",
+        "包含目前封存中的已發布外部資訊，保留來源與原文連結；數量隨封存更新。/radar/rss.xml 提供相同內容。",
       ),
     },
   ];

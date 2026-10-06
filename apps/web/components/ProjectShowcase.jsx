@@ -53,9 +53,9 @@ export default function ProjectShowcase({ id }) {
     return (
       <ExpandableFigure
         title={t(
-          "MuJoCo / 真实抓取录像",
-          "MuJoCo / recorded pickup",
-          "MuJoCo / 真實抓取錄影",
+          "MuJoCo 实际仿真录像",
+          "MuJoCo simulation recording",
+          "MuJoCo 實際模擬錄影",
         )}
         renderExpanded={() => (
           <video

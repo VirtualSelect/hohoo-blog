@@ -4,7 +4,7 @@ description: "4860次实测查询比较三种缓存准入策略，把字节预�
 slug: "/llm/prefix-cache-admission"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-05"
+updated: "2026-10-06"
 reading_minutes: 12
 domain: "llm"
 article_kind: "mechanism"
@@ -17,6 +17,29 @@ related: ["lab:prefix-cache-admission", "project:hohoo-ai-lab", "doc:llm/prefix-
 上一轮发现，8KiB 缓存遇到两个轮流访问的前缀，会发生[零命中的反复淘汰](/docs/llm/prefix-cache-byte-budget)。自然的下一步是少存一些检查点，把容量留给真正有用的前缀。
 
 这次同时测量计算量和耗时。结果并不等于“缓存优化成功”：**准入策略改善了某些访问轨迹，但在这个小型 NumPy 模型上，缓存查询仍然比直接重算慢。**
+
+## 先分清三个问题
+
+| 要回答的问题 | 本系列怎样检查 | 能得出的结论 |
+| --- | --- | --- |
+| 结果是否等价？ | 相同输入下比较缓存续算与完整重算数组，误差阈值固定 | 本模型、精度和条件下数值一致，不能证明语义质量 |
+| 计算是否减少？ | 统计实际 Q/K/V 投影行数 | 少做了这些投影，不等于全部计算都等比例减少 |
+| 用户是否等得更短？ | 计时完整查询路径，保留无缓存基线和重复结果 | 本机、这组工作负载的时间；不能外推生产 LLM |
+
+```text
+命中有效前缀 → 少投影一些 Token ─┐
+签名、查找、复制、分段调用 ─────┼→ 查询总耗时（必须测量）
+未命中时仍要重算 ─────────────┘
+```
+
+三 scope / 16KiB 是一个具体反例：`longest` 比 `all` 少算了一半投影行，但比 `none` 的查询中位数仍更慢。应当同时保留这两个比较对象，不能只选较慢的缓存基线制造“加速”。
+
+<details><summary>小练习：864 行降到 432 行，能否说“快了 50%”？</summary>
+
+不能。它只描述投影行数减少 50%。本轮相应耗时是 6.723ms，相比无缓存 1.697ms 并未加速。文件读取、哈希、复制等都在计时内，但还没有分段剖析，不能给其中任何一项分配“主要瓶颈”的结论。
+
+</details>
+
 
 ## 本篇只改变保存哪些检查点
 
@@ -102,20 +125,40 @@ fresh, _ = model.full(tokens)
 
 这些固定轨迹没有采样真实用户流量。表中的命中数量用于说明机制，不是线上缓存命中率预测。
 
-## 数值正确性与复现
+## 从哪里开始，怎样复现
+
+第一次读缓存可先看 [容量与机制](/docs/llm/kv-cache)，再顺序检查 [等价性](/docs/llm/kv-cache-equivalence) → [失效](/docs/llm/prefix-cache-invalidation) → [最长前缀](/docs/llm/longest-prefix-reuse) → [字节预算](/docs/llm/prefix-cache-byte-budget)。这些是已完成的离线数值实验。
+
+另一条研究支线是 [24 次 Agnes 3.0 真实调用](/docs/llm/context-position-paired-protocol)。之后的 [128 项相似干扰方案](/docs/llm/context-similar-distractors)只有离线准备，没有新的真实模型结果，不能混入本篇数值实验的分母。
+
+在新的目录中准备 Python 3.12 环境（下列为 PowerShell）：
+
+```powershell
+git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-cache
+cd hohoo-ai-lab-cache
+git checkout 503f5271ef0d5baa12353d6eeda672dec5fc240e
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install numpy==2.2.6
+cd experiments/09-cache-admission
+..\..\.venv\Scripts\python.exe -m unittest discover -s . -p test_cache.py
+..\..\.venv\Scripts\python.exe run.py --out evidence/my-run
+..\..\.venv\Scripts\python.exe audit.py evidence/my-run
+```
+
+预期产生逐请求记录与数组：检查误差、投影行和预算约束，再看时间分布。`my-run` 必须是新目录。时间无需与归档逐位相等；数值误差超过协议阈值才是正确性问题。缺少 NumPy 时先确认安装和执行使用同一解释器。
+
+**审计范围：** 当前 `audit.py` 校验结果文件哈希并独立重算部分指标，但不会自动遍历 `manifest.sources` 核对源码；复现时必须同时固定上述提交。不能把“审计通过”读成源码、环境和生产性能均已证明。
+
+
+<details><summary>附录：数值校验与归档结构</summary>
 
 所有 4,860 次查询都与完整重算比较，最大绝对误差约 **4.16 × 10⁻¹⁶**。每个配置的首次测量还保存参考与复用两个数组，共 1,944 个数组，便于独立复算；后四次保存误差和时序，不重复归档数组。
 
 六组边界测试覆盖非法策略、容量相差一字节、scope 隔离、模型身份变更、返回值与缓存内存隔离，以及只准入最长检查点。独立审计按 Token 与 scope 重放 LRU，不调用被测 Store 来判断结果。
 
-在 `experiments/09-cache-admission` 中运行：
-
-```text
-python -m unittest discover -s . -p test_cache.py
-python run.py --out evidence/my-run
-python audit.py evidence/my-run
-```
 
 需要项目既有的 Python/NumPy 环境；归档使用 Python 3.12.14、NumPy 2.2.6。`manifest.json` 保存冻结代码版本、环境、NumPy 配置、计时器分辨率与哈希；`results.json` 保留请求顺序、耗时、计算计数、复制字节和淘汰事件。
 
 本轮不是专用基准机测量，没有 CPU 绑核、GPU 或真实模型推理；重复运行的时间会变化。它给出的可迁移结论是：**同时报告正确性、容量、工作量和真实耗时，才能判断一个缓存优化究竟优化了什么。**
+
+</details>

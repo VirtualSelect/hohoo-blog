@@ -354,7 +354,7 @@ html[data-theme="dark"] {
   gap: 32px;
   margin-top: 30px;
 }
-.editorial-home .track-list > a {
+.editorial-home .track-list > .track-reading-entry > a {
   display: grid;
   grid-template-columns: 1fr 24px;
   gap: 12px;
@@ -512,7 +512,7 @@ html[data-theme="dark"] {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  .editorial-home .track-list > a {
+  .editorial-home .track-list > .track-reading-entry > a {
     grid-template-columns: 100px minmax(0, 1fr) 20px;
     align-items: center;
     column-gap: 16px;
@@ -633,7 +633,7 @@ html[data-theme="dark"] {
   .featured-action,
   .tutorial-steps a,
   .home-discovery summary,
-  .track-list > a
+  .track-list > .track-reading-entry > a
 ) {
   transition:
     background-color 220ms ease,
@@ -652,7 +652,7 @@ html[data-theme="dark"] {
   outline: 2px solid var(--hh-accent);
   outline-offset: 4px;
 }
-.editorial-home .track-list > a:hover {
+.editorial-home .track-list > .track-reading-entry > a:hover {
   background: var(--track-wash);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -661,7 +661,7 @@ html[data-theme="dark"] {
     .featured-action,
     .tutorial-steps a,
     .home-discovery summary,
-    .track-list > a
+    .track-list > .track-reading-entry > a
   ) {
     transition: none;
   }
@@ -692,16 +692,19 @@ html[data-theme="dark"] {
 .project-schematic[data-tone="blue"] .project-wordmark {
   color: var(--lab-blue);
 }
-.editorial-home .track-list > a {
+.editorial-home .track-list > .track-reading-entry > a {
   --track-ink: var(--hh-accent);
   --track-wash: var(--blog-soft);
   border-top-color: var(--track-ink);
 }
-.editorial-home .track-list > a[data-track="llm"] {
+.editorial-home .track-list > .track-reading-entry > a[data-track="llm"] {
   --track-ink: var(--lab-blue);
   --track-wash: var(--lab-blue-soft);
 }
-.editorial-home .track-list > a[data-track="embodied-ai"] {
+.editorial-home
+  .track-list
+  > .track-reading-entry
+  > a[data-track="embodied-ai"] {
   --track-ink: var(--lab-lavender);
   --track-wash: var(--lab-lavender-soft);
 }
@@ -710,7 +713,7 @@ html[data-theme="dark"] {
   background: var(--track-wash);
 }
 .editorial-home .track-list small,
-.editorial-home .track-list > a > span {
+.editorial-home .track-list > .track-reading-entry > a > span {
   color: var(--track-ink);
 }
 .editorial-home .radar-home {

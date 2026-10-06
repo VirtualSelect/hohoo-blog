@@ -36,3 +36,7 @@ jobs:
       - run: node --test tests/news-timeline.test.mjs
       - run: npm run news:check
       - run: npm run build
+      - name: Review deployment output size
+        env:
+          STORAGE_STATIC_BUDGET_MB: '350'
+        run: npm run storage:check --prefix apps/web

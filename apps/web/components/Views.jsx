@@ -65,9 +65,9 @@ function About() {
             </h2>
             <p>
               {t(
-                "平时主要写 Java，喜欢把感兴趣的想法做出来。最近把更多注意力放在 AI 应用，也开始读大语言模型与具身智能的资料。",
-                "I usually write Java and enjoy turning ideas into small projects. I’m exploring AI applications, language models and embodied intelligence.",
-                "平時主要寫 Java，喜歡把感興趣的想法做出來。最近把更多注意力放在 AI 應用，也開始讀大語言模型與具身智慧的資料。",
+                "平时主要写 Java，喜欢把感兴趣的想法做出来。这里记录 AI 应用的代码边界、LLM 机制对照和 MuJoCo 仿真实验，也保留失败与尚未验证的问题。",
+                "I usually write Java and enjoy turning ideas into small projects. Here I document AI application boundaries, LLM mechanism comparisons and MuJoCo experiments, including failures and open questions.",
+                "平時主要寫 Java，喜歡把感興趣的想法做出來。這裡記錄 AI 應用的程式碼邊界、LLM 機制比較和 MuJoCo 模擬實驗，也保留失敗與尚未驗證的問題。",
               )}
             </p>
           </header>

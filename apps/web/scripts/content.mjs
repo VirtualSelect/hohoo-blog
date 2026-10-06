@@ -8,6 +8,7 @@ import matter from "gray-matter";
 import { marked } from "marked";
 import sanitize from "sanitize-html";
 import { articleVideo } from "../lib/article-media.mjs";
+import { canonicalPath } from "../lib/visitor-stats.mjs";
 const require = createRequire(import.meta.url);
 const here = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const root = path.resolve(here, "../..");
@@ -16,8 +17,10 @@ const {
   activity,
 } = require("../../../lib/content/content-index.cjs");
 const { collectEntries } = require("../../../lib/content/learning-index.cjs");
+const { learningMetadata } = require("../../../lib/content/learning-paths.cjs");
 const { signals, isoWeek } = require("../../../src/utils/radar.cjs");
 const { projectSignal } = require("../../../src/utils/radar-locale.cjs");
+const { publicationFacts } = require("../../../src/utils/radar-provenance.cjs");
 const { resolveManifest } = require("../../../scripts/i18n/check.cjs");
 const Prism = require("prismjs");
 require("prismjs/components/prism-java");
@@ -93,13 +96,14 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
         locale !== "zh-CN" && fs.existsSync(translated)
           ? matter(fs.readFileSync(translated, "utf8"))
           : source;
-      const f = { ...source.data, ...local.data };
+      let f = { ...source.data, ...local.data };
       if (f.draft || f.unlisted) continue;
       const id =
         f.id ||
         (kind === "blog" ? f.slug : undefined) ||
         relative.replace(/\.(md|mdx)$/, "");
       const slug = String(f.slug || id).replace(/^\//, "");
+      if (kind === "docs") f = learningMetadata(id, f);
       const route = kind + "/" + slug;
       const description =
         f.description ||
@@ -226,6 +230,7 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
       description: e.description,
       href: e.href,
       type: e.type,
+      articleKind: e.articleKind,
       topic: e.domain,
       tags: e.tags || [],
       status: e.status,
@@ -282,6 +287,19 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
     "learning-index": { entries: collectEntries(allContent) },
     "radar-pages": { preview: items.slice(0, 3) },
   };
+  if (locale === "zh-CN") {
+    put(
+      "visitor-paths.json",
+      [
+        ...new Set([
+          ...entries.map((entry) => canonicalPath(entry.href)),
+          ...routes.map((route) => canonicalPath("/" + route)),
+        ]),
+      ]
+        .filter(Boolean)
+        .sort(),
+    );
+  }
   const searchJSON = JSON.stringify(search);
   const searchName = `${locale}-${createHash("sha256").update(searchJSON).digest("hex").slice(0, 16)}.json`;
   fs.mkdirSync(path.join(here, "public", "search"), { recursive: true });
@@ -342,7 +360,7 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
           escape(e.title) +
           "</title><link>" +
           escape(e.url) +
-          "</link><guid>" +
+          '</link><guid isPermaLink="false">' +
           escape(e.id) +
           "</guid><description>" +
           escape(e.description) +
@@ -365,17 +383,46 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
             e.status === "published" &&
             e.translationStatus !== "MISSING",
         )
+        .sort(
+          (a, b) =>
+            (b.date || "").localeCompare(a.date || "") ||
+            a.id.localeCompare(b.id),
+        )
         .map((e) => ({ ...e, url: "https://huhohoo.com" + e.href })),
     ],
     [
       "news/rss.xml",
       "Hohoo / AI Radar",
-      items.map((e) => ({ ...e, date: e.publishedAt, description: e.summary })),
+      items.map((e) => ({
+        ...e,
+        date: e.publishedAt,
+        description: [
+          e.summary,
+          ...publicationFacts(e, locale).map(
+            (f) =>
+              f.label + ": " + f.value + (f.href ? " (" + f.href + ")" : ""),
+          ),
+        ]
+          .filter(Boolean)
+          .join(" · "),
+      })),
     ],
     [
       "radar/rss.xml",
       "Hohoo / AI Radar",
-      items.map((e) => ({ ...e, date: e.publishedAt, description: e.summary })),
+      items.map((e) => ({
+        ...e,
+        date: e.publishedAt,
+        description: [
+          e.summary,
+          ...publicationFacts(e, locale).map(
+            (f) =>
+              f.label + ": " + f.value + (f.href ? " (" + f.href + ")" : ""),
+          ),
+        ]
+          .filter(Boolean)
+          .join(" · "),
+      })),
     ],
   ]) {
     const dest = path.join(here, "public", prefix, target);

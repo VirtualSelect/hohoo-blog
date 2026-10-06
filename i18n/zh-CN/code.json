@@ -670,7 +670,7 @@
     "message": "当前虚拟实验"
   },
   "journey.virtual.noCurrent": {
-    "message": "尚未开始虚拟实验"
+    "message": "没有指定当前实验；请查看已归档的教学成果。"
   },
   "journey.schedule.current": {
     "message": "当前周次"
@@ -814,10 +814,10 @@
     "message": "能否把红色方块从初始位置移动到蓝色盒子，并记录每一步控制和失败原因？"
   },
   "journey.lab.VL01.robot": {
-    "message": "虚拟机械臂与夹爪；型号待实验选定"
+    "message": "教学用 XYZ 直角坐标夹爪；未接入完整机械臂、IK 或 ROS2"
   },
   "journey.lab.VL01.environment": {
-    "message": "桌面、红色方块、蓝色盒子；场景待搭建"
+    "message": "已搭建的教学场景：桌面、方块与目标盒；使用直角坐标夹爪，不代表完整机械臂或 ROS2 集成。"
   },
   "journey.lab.VL01.step1": {
     "message": "定位方块"
@@ -1151,5 +1151,8 @@
   },
   "journey.lab.VL01.qualifiedCompletionResult": {
     "message": "E14 将完成契约接入恢复：8回合区分历史放置、当前有效性与完成资格；完整 VL01、M4/M5 尚未完成。"
+  },
+  "writing.empty": {
+    "message": "没有符合当前筛选条件的文章。试试清除筛选或切换方向。"
   }
 }

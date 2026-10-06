@@ -10,6 +10,7 @@
     "format:check": "prettier --check app components runtime lib scripts tests next.config.mjs tsconfig.json ../../src/pages/articles.tsx ../../src/components/WritingList.tsx ../../src/components/WritingKind.tsx ../../src/utils/writing-kinds.ts ../../src/utils/learning-progress.ts ../../tsconfig.json",
     "test:routes": "node scripts/verify-routes.mjs",
     "perf:check": "node scripts/performance-check.mjs",
+    "storage:check": "node scripts/storage-report.mjs",
     "typecheck": "npm run prepare:content && next typegen && tsc --noEmit"
   },
   "dependencies": {

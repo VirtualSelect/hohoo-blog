@@ -81,7 +81,7 @@
     "message": "隨機探索"
   },
   "writing.empty": {
-    "message": "目前語言沒有符合條件的已發布內容。"
+    "message": "沒有符合目前篩選條件的文章。試試清除篩選或切換方向。"
   },
   "learning.research": {
     "message": "研究總覽"
@@ -1089,7 +1089,7 @@
     "message": "目前虛擬實驗"
   },
   "journey.virtual.noCurrent": {
-    "message": "尚未開始虛擬實驗"
+    "message": "未指定目前實驗；請查看已封存的教學成果。"
   },
   "journey.schedule.current": {
     "message": "目前週次"
@@ -1233,10 +1233,10 @@
     "message": "能否把紅色方塊從初始位置移動到藍色盒子，並記錄每一步控制與失敗原因？"
   },
   "journey.lab.VL01.robot": {
-    "message": "虛擬機械臂與夾爪；型號待實驗選定"
+    "message": "教學用 XYZ 直角座標夾爪；未接入完整機械臂、IK 或 ROS2"
   },
   "journey.lab.VL01.environment": {
-    "message": "桌面、紅色方塊、藍色盒子；場景待搭建"
+    "message": "已搭建的教學場景：桌面、方塊與目標盒；使用直角座標夾爪，不代表完整機械臂或 ROS2 整合。"
   },
   "journey.lab.VL01.step1": {
     "message": "定位方塊"

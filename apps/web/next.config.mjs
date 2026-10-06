@@ -30,7 +30,6 @@ export default {
     }));
   },
   outputFileTracingRoot: root,
-  outputFileTracingIncludes: { "/api/visitors": ["./generated/zh-CN.json"] },
   webpack(config) {
     config.module.rules.push({
       test: /\.(vert|frag|glsl)$/,

@@ -4,7 +4,7 @@ description: "18 controlled thread schedules test request ownership for streamin
 slug: "/ai-apps/java-stream-session-ownership"
 status: "published"
 published_at: "2026-10-04"
-updated: "2026-10-04"
+updated: "2026-10-06"
 reading_minutes: 10
 domain: "ai-apps"
 article_kind: "case-study"
@@ -19,6 +19,33 @@ The previous experiment required a complete stream before committing a conversat
 Suppose A is answering, the user cancels it and starts B, and A's final callback was already queued. An unconditional text update can overwrite B. Even if B later restores the correct screen, the intermediate update was wrong.
 
 This study adds a second question: **does this callback still own the current request?**
+
+## Choose product semantics before choosing concurrency
+
+[Transactional history](/docs/ai-apps/java-transactional-history), [version tickets](/docs/ai-apps/java-concurrent-history) and this article serve different requirements. A later demo does not make every earlier policy wrong. Suppose the user starts A and then B:
+
+| Requirement | Policy | Does B include A’s answer? | What happens to late A? |
+| --- | --- | --- | --- |
+| Answer both, with B continuing A | Serialize the session (Demo 05) | Yes, if A committed successfully before B reads history | B waits; it does not normally overtake A |
+| Solve concurrently from the same history; accept one commit | First-committer-wins (Demo 06) | No, when both acquire version v | The first valid commit invalidates v; the other must reread history before retrying |
+| B replaces the earlier intent | Latest-started-request-wins (Demo 09) | Not if A was still uncommitted | Starting B invalidates A, even if A finishes before B |
+
+This is a **semantic example**, not an additional experiment:
+
+```text
+Serialized:       start A → commit A → start B → commit B
+First committer:  start A(v0) → start B(v0) → commit A(v1) → reject B
+Latest started:   start A(e1) → start B(e2) → reject A     → commit B
+```
+
+If B fails after starting and A later succeeds, the policies still differ. Serialization keeps an already committed A. Version tickets can still accept A if B never committed. Latest-intent ownership does not resurrect A when B fails. Keeping both answers requires a queue or separate branches rather than a single active request.
+
+<details><summary>Exercise: what if “latest request” means the last response to finish?</summary>
+
+Slow A would overwrite faster B, violating latest-intent semantics. Use request identity and generation, not completion order. The runnable `late-preview` case demonstrates this failure.
+
+</details>
+
 
 ## Make the race observable
 
@@ -110,6 +137,23 @@ A real integration must also close connections and handle timeouts, and may use 
 The example retains eight used IDs and eight complete question/answer pairs. Reusing an ID does not start another request; changing the question under the same ID is also rejected. Clearing content retains the ID window to prevent immediate replay.
 
 An evicted ID can be used again. This is finite, single-process deduplication, not durable idempotency. A production service needs authenticated session keys and an explicit receipt lifecycle. Diagnostic event snapshots are for this small experiment; production logs also need limits and redaction.
+
+## Check the environment before reproducing
+
+Use a clean checkout of this article’s revision; the first article’s revision does not contain Demo 09:
+
+```sh
+git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-session
+cd hohoo-ai-lab-session
+git checkout 920fee3717a373dc796269ee3a4a03ec33700ae3
+java -version
+mvn -version
+```
+
+Use Python 3, a Java 8-compatible JDK and Maven. Omit `--offline` on the first dependency download. Replace `/path/to/mvn` below with your executable (for example `mvn.cmd` on Windows). Expect nine trajectories per implementation, inspecting intermediate previews as well as final answers. Check PATH for a missing Maven, the revision for a missing directory, and choose a new output directory rather than overwriting evidence.
+
+**Review boundary, 2026-10-06:** the reused Gson 2.10.1 parsing path still accepts unescaped line feeds and tabs inside strings despite `setLenient(false)`. These ownership experiments do not prove strict JSON compliance. Add protocol rejection rules before using untrusted SSE; the original 18 trajectories are retained, not replaced by a new online experiment.
+
 
 ## Reproduce and inspect
 

@@ -3,6 +3,8 @@ import Link from "../runtime/Link";
 import { useSite } from "../runtime/context";
 import { useText } from "./Shell";
 import editorial from "@site/data/editorial.json";
+import { uiLabel } from "@site/src/utils/ui-labels";
+import WritingKind from "@site/src/components/WritingKind";
 import s from "./ResearchEvidence.module.css";
 
 export default function ResearchSpotlight() {
@@ -25,12 +27,7 @@ export default function ResearchSpotlight() {
         return (
           <Link key={id} to={entry.href} className={s.feature}>
             <span className="eyebrow">
-              0{i + 1} /{" "}
-              {entry.domain === "llm"
-                ? "LLM → " +
-                  t("对照与验证", "comparison & validation", "對照與驗證")
-                : "MuJoCo → " +
-                  t("接触与动作", "contact & action", "接觸與動作")}
+              0{i + 1} / {uiLabel(entry.domain)} · <WritingKind entry={entry} />
             </span>
             {media && (
               <img

@@ -54,12 +54,24 @@ export default function Journey({ locale }) {
               ? t("week").replace("{number}", journey.currentWeek)
               : t("schedule.notStarted")}
           </p>
-          <p className={styles.metadata}>
+          <div className={styles.metadata}>
             {t("virtual.current")} ·{" "}
-            {journey.currentLab
-              ? registry.labs.find((lab) => lab.id === journey.currentLab).id
-              : t("virtual.noCurrent")}
-          </p>
+            {journey.currentLab ? (
+              <LabLinks ids={[journey.currentLab]} locale={locale} />
+            ) : (
+              t("virtual.noCurrent")
+            )}
+          </div>
+          {journey.currentLab && (
+            <p>
+              {
+                messages[
+                  registry.labs.find((lab) => lab.id === journey.currentLab)
+                    .result
+                ]?.message
+              }
+            </p>
+          )}
         </div>
         <aside>
           <p className="eyebrow">{t("target")}</p>

@@ -109,6 +109,10 @@ export interface LearningEntry {
   permalink: string;
   date?: string;
   minutes?: number;
+  domain?: Domain;
+  difficulty?: FrontMatter["difficulty"];
+  prerequisites?: string[];
+  related?: string[];
 }
 export interface RadarSignal {
   id: string;
@@ -119,6 +123,11 @@ export interface RadarSignal {
   sourceName: string;
   publishedAt: string;
   collectedAt: string;
+  originalPublication?: {
+    date: string;
+    sourceUrl: string;
+    verifiedAt: string;
+  };
 }
 export interface RadarArchive {
   chunks: string[];

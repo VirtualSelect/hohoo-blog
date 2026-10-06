@@ -499,7 +499,7 @@
     "message": "Random explore"
   },
   "writing.empty": {
-    "message": "No matching published writing in this language."
+    "message": "No articles match these filters. Clear filters or choose another track."
   },
   "learning.research": {
     "message": "Research overview"
@@ -1282,7 +1282,7 @@
     "message": "Current virtual experiment"
   },
   "journey.virtual.noCurrent": {
-    "message": "No virtual experiment started"
+    "message": "No current experiment selected; see archived teaching results."
   },
   "journey.schedule.current": {
     "message": "Current week"
@@ -1426,10 +1426,10 @@
     "message": "Can the arm move the red cube into the blue box while recording control steps and failure causes?"
   },
   "journey.lab.VL01.robot": {
-    "message": "Virtual arm and gripper; model to be selected"
+    "message": "Teaching XYZ Cartesian gripper; no complete robot arm, IK or ROS2 integration"
   },
   "journey.lab.VL01.environment": {
-    "message": "Tabletop, red cube and blue box; scene to be built"
+    "message": "Existing teaching scene: a tabletop, cube and target box with a Cartesian gripper; not a full robot arm or ROS2 integration."
   },
   "journey.lab.VL01.step1": {
     "message": "Find cube"

@@ -15,6 +15,8 @@ import ProjectShowcase from "./ProjectShowcase";
 import ResearchSpotlight from "./ResearchSpotlight";
 import editorial from "@site/data/editorial.json";
 import WorkshopEntry from "./WorkshopEntry";
+import SeriesEntry from "@site/src/components/SeriesEntry";
+import WritingKind from "@site/src/components/WritingKind";
 
 export default function Home() {
   const { locale, globalData, items } = useSite(),
@@ -80,7 +82,9 @@ export default function Home() {
                 <Link className="writing-row" key={e.id} to={e.href}>
                   <span className="row-number">0{i + 1}</span>
                   <div>
-                    <small>{uiLabel(e.type.toUpperCase())}</small>
+                    <small>
+                      <WritingKind entry={e} />
+                    </small>
                     <h3>{e.title}</h3>
                     <p>{e.description}</p>
                   </div>
@@ -219,14 +223,17 @@ export default function Home() {
               t("具身智能", "Embodied AI", "具身智慧"),
             ],
           ].map(([id, verb, title], i) => (
-            <Link key={id} to={"/docs/" + id} data-track={id}>
-              <LabSketch kind={["application", "model", "embodied"][i]} />
-              <small>
-                0{i + 1} / {verb}
-              </small>
-              <h3>{title}</h3>
-              <span>↗</span>
-            </Link>
+            <div key={id} data-track={id} className="track-reading-entry">
+              <Link to={"/docs/" + id} data-track={id}>
+                <LabSketch kind={["application", "model", "embodied"][i]} />
+                <small>
+                  0{i + 1} / {verb}
+                </small>
+                <h3>{title}</h3>
+                <span>↗</span>
+              </Link>
+              <SeriesEntry domain={id} />
+            </div>
           ))}
         </div>
       </section>

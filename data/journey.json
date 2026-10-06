@@ -631,7 +631,7 @@
     "TensorRT Optimization"
   ],
   "currentWeek": null,
-  "currentLab": null,
+  "currentLab": "VL01",
   "recommendedLab": "VL01",
   "simulation": {
     "labOrder": [

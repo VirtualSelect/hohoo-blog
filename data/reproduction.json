@@ -1,0 +1,114 @@
+{
+  "embodied-ai/mujoco-abort-exit": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "2cf78a9afce618ea8ce35a882f0db203b2a74f57",
+    "directory": "experiments/vl01_abort_exit",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_abort_exit/run.py",
+    "audit": "experiments/vl01_abort_exit/audit.py"
+  },
+  "embodied-ai/mujoco-completion-lifecycle": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "cd26180e8560155d18c45d34a33dc9ef25bbcdf6",
+    "directory": "experiments/vl01_completion_lifecycle",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_completion_lifecycle/run.py",
+    "audit": "experiments/vl01_completion_lifecycle/audit.py"
+  },
+  "embodied-ai/mujoco-exit-actions": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "497d0df30c1f66de50fb38b930f0c6ea069d9634",
+    "directory": "experiments/vl01_exit_release_budget",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_exit_release_budget/run.py",
+    "audit": "experiments/vl01_exit_release_budget/audit.py"
+  },
+  "embodied-ai/mujoco-first-pick-place": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "17144c47a2294f157420946b15f78c49d8d17dd5",
+    "directory": "experiments/vl01_pick_place",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_pick_place/run.py",
+    "audit": "experiments/vl01_pick_place/analyze.py"
+  },
+  "embodied-ai/mujoco-grasp-guard": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "eb186ee4927da99d4ba48e334fabf9442c929507",
+    "directory": "experiments/vl01_grasp_guard",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_grasp_guard/run.py",
+    "audit": "experiments/vl01_grasp_guard/audit.py"
+  },
+  "embodied-ai/mujoco-observation-freshness": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86",
+    "directory": "experiments/vl01_observation_freshness",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_observation_freshness/run.py",
+    "audit": "experiments/vl01_observation_freshness/audit.py"
+  },
+  "embodied-ai/mujoco-phase-contracts": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "43dacf4bbe72e0eecc288c1dc46692f51be2b43e",
+    "directory": "experiments/vl01_phase_contracts",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_phase_contracts/run.py",
+    "audit": "experiments/vl01_phase_contracts/audit.py"
+  },
+  "embodied-ai/mujoco-phase-recovery": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "ad2e33523e8e5580da90ae914e1cccf765c8d1b1",
+    "directory": "experiments/vl01_phase_recovery",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_phase_recovery/run.py",
+    "audit": "experiments/vl01_phase_recovery/audit.py"
+  },
+  "embodied-ai/mujoco-qualified-completion": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "9800095689ce3893f9e7a6ec681355e76c6fcff6",
+    "directory": "experiments/vl01_qualified_completion",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_qualified_completion/run.py",
+    "audit": "experiments/vl01_qualified_completion/audit.py"
+  },
+  "embodied-ai/mujoco-recovery-ablation": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "31166a333a51e9ca580c6c2dff9edcfca1dacb90",
+    "directory": "experiments/vl01_recovery_ablation",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_recovery_ablation/run.py",
+    "audit": "experiments/vl01_recovery_ablation/portable-audit.py"
+  },
+  "embodied-ai/mujoco-recovery-budget": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "497d0df30c1f66de50fb38b930f0c6ea069d9634",
+    "directory": "experiments/vl01_exit_release_budget",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_exit_release_budget/run.py",
+    "audit": "experiments/vl01_exit_release_budget/audit.py"
+  },
+  "embodied-ai/mujoco-recovery-gate": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "020db41b883221afde673e33ff6f322e004f12ad",
+    "directory": "experiments/vl01_recovery_gate",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_recovery_gate/run.py",
+    "audit": "experiments/vl01_recovery_gate/audit.py"
+  },
+  "embodied-ai/mujoco-release-verification": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "497d0df30c1f66de50fb38b930f0c6ea069d9634",
+    "directory": "experiments/vl01_exit_release_budget",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_exit_release_budget/run.py",
+    "audit": "experiments/vl01_exit_release_budget/audit.py"
+  },
+  "embodied-ai/mujoco-transfer-monitor": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "581e8e383b397eff947880d888f5c089204bba98",
+    "directory": "experiments/vl01_transfer_monitor",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/vl01_transfer_monitor/run.py",
+    "audit": "experiments/vl01_transfer_monitor/audit.py"
+  }
+}

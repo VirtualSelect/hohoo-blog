@@ -158,9 +158,9 @@
       },
       {
         "heading": "Validation",
-        "zh": "本批33项Java检查与14题检索复算；9个注意力测试方法覆盖36种分块组合，独立核对48个数组中的27项误差。零新在线请求。历史模型调用结果单独保留。",
-        "en": "This batch: 33 Java checks and 14 recomputed rankings;9 attention test methods cover 36 chunk combinations, with 27 differences recomputed from 48 arrays. Zero new online calls; historical model runs remain separate.",
-        "tw": "本批33項Java檢查與14題檢索複算；9個注意力測試方法涵蓋36種分塊組合，獨立核對48個陣列中的27項誤差。零新線上請求。歷史模型呼叫結果單獨保留。"
+        "zh": "各篇保留独立协议、固定提交与原始记录。真实模型调用、合成检索、线程调度和未训练 NumPy 模型分别解读，不合并为成功率；最近结果见流式取消与缓存准入实验。",
+        "en": "Each study retains its protocol, pinned revision and raw evidence. Real model calls, synthetic retrieval, thread schedules and the untrained NumPy model are interpreted separately, not pooled into a success rate. See transport cancellation and cache admission for the latest results.",
+        "tw": "各篇保留獨立協議、固定提交與原始記錄。真實模型呼叫、合成檢索、執行緒調度與未訓練 NumPy 模型分別解讀，不合併為成功率；最近結果見串流取消與快取準入實驗。"
       },
       {
         "heading": "Limitations",
@@ -482,9 +482,9 @@
       },
       {
         "heading": "Validation",
-        "zh": "前七轮分别9、18、27、45、18、30、21回合；E6另含18回归。E8/E9/E10新增15/5/12回合，16项测试、96份回合文件、15组E8前缀审计通过。不报告泛化成功率。",
-        "en": "The first seven studies contain 9, 18, 27, 45, 18, 30, 21 rollouts, plus 18 E6 regressions. E8/E9/E10 add 15/5/12 rollouts,16 tests,96 episode records and 15 audited E8 prefixes. No generalized success rate.",
-        "tw": "前七輪分別9、18、27、45、18、30、21回合；E6另含18回歸。E8/E9/E10新增15/5/12回合，16項測試、96份回合檔案、15組E8前綴稽核通過。不報告泛化成功率。"
+        "zh": "E1–E14 的轨迹、协议和局限分别归档。E14 的八条轨迹区分物理放置、当前有效性与完成资格；带传输延迟和释放时间的实现边界见第十四篇勘误。实验结果不代表完整 VL01 或 M4/M5 完成。",
+        "en": "E1–E14 retain separate trajectories, protocols and limitations. E14 separates physical placement, current validity and qualified completion over eight trajectories; its correction documents delayed-packet and release-time boundaries. Full VL01 and M4/M5 remain incomplete.",
+        "tw": "E1–E14 的軌跡、協議與侷限分別封存。E14 八條軌跡區分物理放置、目前有效性與完成資格；傳輸延遲與釋放時間的實作邊界見第十四篇勘誤。完整 VL01 與 M4/M5 仍未完成。"
       },
       {
         "heading": "Limitations",

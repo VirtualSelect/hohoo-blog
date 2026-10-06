@@ -10,7 +10,9 @@
       "075fed980e67c694db46",
       "8845b08ab7751c9c55e9",
       "094c7faf707de7f64e58"
-    ]
+    ],
+    "descriptionEn": "Source excerpts and links collected for this week.",
+    "descriptionTw": "本週來源摘錄與連結彙整。"
   },
   {
     "id": "radar-digest:2026-W36",
@@ -19,6 +21,8 @@
     "publishedAt": "2026-09-11T12:32:09.335Z",
     "title": "AI Radar · 2026-W36",
     "description": "本周来源摘录与链接汇总。",
-    "itemIds": ["a139f80b159295ada71d"]
+    "itemIds": ["a139f80b159295ada71d"],
+    "descriptionEn": "Source excerpts and links collected for this week.",
+    "descriptionTw": "本週來源摘錄與連結彙整。"
   }
 ]

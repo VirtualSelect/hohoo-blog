@@ -4,7 +4,7 @@ description: 沿着本站真实代码，追踪采集窗口、每日配额、去�
 slug: /ai-apps/radar-publishing-pipeline
 status: published
 published_at: '2026-09-22'
-updated: '2026-09-22'
+updated: '2026-10-06'
 reading_minutes: 12
 domain: ai-apps
 article_kind: case-study
@@ -18,6 +18,10 @@ related: ["project:hohoo-blog", "doc:ai-apps/java-first-llm"]
 
 :::note 证据范围
 本文由 AI 辅助整理，依据博客仓库提交 `558e0a9` 的实现。描述的是可检查的代码行为，不是一次新的线上事故复盘，也没有测量生产延迟或筛选准确率。文中的配额算例是说明性输入。可从 [固定版本源码](https://github.com/VirtualSelect/hohoo-blog/tree/558e0a9010e3f63a6dd8e03e109339d22554287b) 对照阅读。
+:::
+
+:::note 2026-10-06 配置更新
+截至 2026-10-06，AIHOT 已改为动态共享全站每天 10 条额度，不再固定最多 6 条。下文保留 2026-09-22 固定版本的规则与算例，用于解释当时的实现；当前运行参数请对照[已核对的配置](https://github.com/VirtualSelect/hohoo-blog/blob/cecd32caef36055f872fb51f81daf05ed514b956/config/news-sources.json)。RSS 的发布时间也可能是聚合源发布日，不能直接当作原公告日期。
 :::
 
 ## 1. 一条资讯经过哪些边界？

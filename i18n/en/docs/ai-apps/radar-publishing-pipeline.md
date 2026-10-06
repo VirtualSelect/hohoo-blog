@@ -11,6 +11,10 @@ This walkthrough separates those questions using the site's real code. It explai
 This AI-assisted article describes repository commit `558e0a9`, not a new production incident investigation. No production latency or filtering accuracy was measured. Quota examples use illustrative inputs. Follow the [fixed source snapshot](https://github.com/VirtualSelect/hohoo-blog/tree/558e0a9010e3f63a6dd8e03e109339d22554287b).
 :::
 
+:::note 2026-10-06 configuration update
+As of 2026-10-06, AIHOT dynamically shares the site-wide limit of ten items per day, without a separate six-item cap. The rules and example below retain the pinned 2026-09-22 implementation. For current parameters, see the [verified configuration](https://github.com/VirtualSelect/hohoo-blog/blob/cecd32caef36055f872fb51f81daf05ed514b956/config/news-sources.json). An RSS publication timestamp may describe an aggregator entry, not the original announcement.
+:::
+
 ## 1. Follow the boundaries
 
 ```text

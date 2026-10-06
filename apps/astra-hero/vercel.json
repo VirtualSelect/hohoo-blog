@@ -3,5 +3,6 @@
   "framework": "nextjs",
   "installCommand": "cd ../.. && npm ci --no-audit --no-fund && npm ci --prefix apps/astra-hero --no-audit --no-fund",
   "buildCommand": "npm run build",
+  "ignoreCommand": "node scripts/ignore-build.mjs",
   "outputDirectory": ".next"
 }
