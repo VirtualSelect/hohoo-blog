@@ -1,5 +1,20 @@
 [
   {
+    "id": "1f38373df7757cd03d9d",
+    "title": "Reflection 发布 501B-A23B 开源编码模型 Beam",
+    "url": "https://aihot.news/items/krivwcmcv6qloa3az7f5j0jip",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-06T06:28:43.000Z",
+    "collectedAt": "2026-10-06T15:25:44.487Z",
+    "category": "ai-apps",
+    "summary": "Reflection 发布文本-only 的 501B 总参数 / 23B 激活 MoE 模型 Beam，面向编码、智能体和科学任务，从零训练，完整权重将在本月以 Apache 2.0 发布。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c683e6a7",
+    "coverage": []
+  },
+  {
     "id": "01e76fd6935762720280",
     "title": "Execution-Aligned Progressive Noise for Consistent Asynchronous Replanning in Generative Robot Policies",
     "url": "https://arxiv.org/abs/2610.06090",
