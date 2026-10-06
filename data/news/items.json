@@ -1,5 +1,20 @@
 [
   {
+    "id": "6247776c64fe073cccbe",
+    "title": "Claude Code 云端会话实战指南：每个任务独占一台 VM，可并行跑任务并以分支收尾",
+    "url": "https://aihot.news/items/sxr71auxicu8uk3e4bqxol02h",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-06T12:00:00.000Z",
+    "collectedAt": "2026-10-06T16:42:57.813Z",
+    "category": "ai-apps",
+    "summary": "Claude Code 推出云端会话：每个任务在独立 VM 上运行，仓库克隆到新分支，可从 claude.ai/code、手机、Desktop、终端和 Slack 启动并跟踪，完成后产出可转 PR 的分支，Pro、Max、Team、Enterprise 计划不额外收费。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-4f49de7a",
+    "coverage": []
+  },
+  {
     "id": "1f38373df7757cd03d9d",
     "title": "Reflection 发布 501B-A23B 开源编码模型 Beam",
     "url": "https://aihot.news/items/krivwcmcv6qloa3az7f5j0jip",
@@ -72,6 +87,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-42bd25df",
+    "coverage": []
+  },
+  {
+    "id": "504615dec001b6ea4957",
+    "title": "Google 发布 EmbeddingGemma 2：基于 Gemma 4 的开源多模态嵌入模型",
+    "url": "https://aihot.news/items/pa9kik9bpq8rv2jrgd40emcze",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-06T00:00:00.000Z",
+    "collectedAt": "2026-10-06T16:42:57.813Z",
+    "category": "llm",
+    "summary": "Google 发布基于 Gemma 4 的开源嵌入模型 EmbeddingGemma 2，采用 Apache 2.0 许可，将文本、代码、图像、视频和音频映射到统一的 768 维向量空间，参数量从 270M（文本/代码）到 740M（全模态）按需加载。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e4661baa",
     "coverage": []
   },
   {
