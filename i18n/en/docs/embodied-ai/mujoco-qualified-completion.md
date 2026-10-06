@@ -4,7 +4,7 @@ description: "Eight MuJoCo trajectories, three passive readouts and recorded-sta
 slug: "/embodied-ai/mujoco-qualified-completion"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-06"
+updated: "2026-10-07"
 reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -174,3 +174,9 @@ Observers currently report state; they do not regrasp or retreat after a post-re
 Noise tolerance needs a separately designed noisy-observation study. Command intent also needs an execution acknowledgement in a more realistic system. This fixed simulation does not establish hardware safety, general success rates or completion of the full VL01 milestone.
 
 The next useful test is how downstream actions subscribe to validity changes and stop or replan when evidence expires. That tests whether the completion contract is actually used, beyond adding another success percentage.
+
+## Fix follow-up · 2026-10-07
+
+2026-10-07 correction: incoming observations are handled before expiry at the same tick. E14 records release-intent time and excludes late packets captured before it. Twenty observer checks and reruns of the original E11/E14 protocols (7/8 episodes) passed, including independent audits. Historical evidence stays pinned to its original revision; this does not establish hardware safety or a complete milestone.
+
+[Fixed code and regression commands](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md).

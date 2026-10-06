@@ -4,7 +4,7 @@ description: "22 個回環 HTTP 案例，驗證 UTF-8、SSE 分幀、取消與�
 slug: "/ai-apps/java-streaming-boundary"
 status: "published"
 published_at: "2026-10-03"
-updated: "2026-10-03"
+updated: "2026-10-07"
 reading_minutes: 11
 domain: "ai-apps"
 article_kind: "case-study"
@@ -119,3 +119,9 @@ Maven 不在路徑中時用 `--maven` 指定可執行檔案；依賴已快取時
 建議先做兩個小改動來理解邊界：把 `stop` 改成 `length`，觀察“能顯示但不提交”；刪掉 DONE 後最後一個空行，觀察“終止文字出現了但事件未完整結束”。最後再接真實供應商協議，分別驗證錯誤事件、用量幀和工具增量，不能直接把本地通過當成線上兼容。
 
 這一輪得到的可用原則是：**屏幕上的臨時輸出和下一輪請求的正式歷史，應當有不同的生命周期。** 後續需要補的是並發取消、請求身份與冪等重試，而不是給每個異常自動重發一次。
+
+## 修復進展 · 2026-10-07
+
+2026-10-07 修正：Demo08–10 增加 JSON 詞法校驗，三個範例各通過 53 項離線回歸；執行腳本改用 Maven 參數列表，支援含空格目錄。Demo10 稽核補上原始碼指紋檢查。原文固定版本與原始資料保持不變，修正版不是新增線上模型結果。
+
+[修正版程式碼與回歸指令](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md)。

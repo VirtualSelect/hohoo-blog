@@ -4,7 +4,7 @@ description: "18 種固定執行緒交錯，驗證流式預覽、完成和錯誤
 slug: "/ai-apps/java-stream-session-ownership"
 status: "published"
 published_at: "2026-10-04"
-updated: "2026-10-06"
+updated: "2026-10-07"
 reading_minutes: 10
 domain: "ai-apps"
 article_kind: "case-study"
@@ -187,3 +187,9 @@ python demos/09-stream-session/audit.py demos/09-stream-session/evidence/my-run
 `results.json` 包含 18 條完整事件軌跡和中間狀態；`manifest.json` 固定運行程式碼、輸入協議與原始檔案哈希；`audit.py` 按事件獨立重建歷史和預覽，檢查舊回呼是否曾被接受。另有 7 組契約檢查覆蓋跨會話票據、取消、重複 ID、問答成對裁剪、收據淘汰等邊界。
 
 現在，“一次成功回答”有了兩層條件：協議完整，且提交時仍擁有當前會話。下一步接入真實界面或服務端執行器時，應保留這兩層邊界，並補上連接取消與多行程狀態的實測，而不是繼續增加一個只判斷 HTTP 狀態碼的分支。
+
+## 修復進展 · 2026-10-07
+
+2026-10-07 修正：Demo08–10 增加 JSON 詞法校驗，三個範例各通過 53 項離線回歸；執行腳本改用 Maven 參數列表，支援含空格目錄。Demo10 稽核補上原始碼指紋檢查。原文固定版本與原始資料保持不變，修正版不是新增線上模型結果。
+
+[修正版程式碼與回歸指令](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md)。

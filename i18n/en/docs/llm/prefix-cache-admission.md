@@ -4,7 +4,7 @@ description: "4,860 measured queries compare three admission policies, connectin
 slug: "/llm/prefix-cache-admission"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-06"
+updated: "2026-10-07"
 reading_minutes: 12
 domain: "llm"
 article_kind: "mechanism"
@@ -159,3 +159,9 @@ Use the repository's Python/NumPy environment. Archived versions are Python 3.12
 This was not a dedicated benchmark machine: no CPU affinity, GPU or production inference engine. Timing will vary. The useful discipline is to report correctness, capacity, work and elapsed time together, so the reader can see exactly what improved.
 
 </details>
+
+## Fix follow-up · 2026-10-07
+
+2026-10-07 correction: the audit now verifies manifest.sources and rejects changed code, missing files and paths outside the repository. The original 4,860 queries and timings remain unchanged; source-integrity checks do not provide new cache-performance results.
+
+[Fixed code and regression commands](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md).

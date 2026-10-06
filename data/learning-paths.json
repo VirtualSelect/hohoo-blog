@@ -78,13 +78,14 @@
         "prerequisites": ["doc:ai-apps/java-structured-output"],
         "followUps": ["doc:ai-apps/java-stream-session-ownership"],
         "reviewNotice": {
-          "date": "2026-10-06",
+          "date": "2026-10-07",
           "text": [
-            "复核发现：固定版本的 Gson 解析路径仍会接纳字符串中未转义的控制字符，已有通过项不代表严格 JSON 合规。详见第九篇的复核边界。",
-            "Review: the pinned Gson parsing path still accepts unescaped control characters in strings. Passing the recorded cases does not establish strict JSON compliance. See the review boundary in article nine.",
-            "複核發現：固定版本的 Gson 解析路徑仍會接受字串中未跳脫的控制字元，既有通過項不代表嚴格 JSON 合規。詳見第九篇的複核邊界。"
+            "严格 JSON 边界已补修。原文版本和数据保留，修正版提供独立回归命令。",
+            "Strict JSON boundaries have been corrected. The original revision and data are retained; the fix provides separate regression commands.",
+            "嚴格 JSON 邊界已補修。原文版本和資料保留，修正版提供獨立回歸指令。"
           ],
-          "href": "/docs/ai-apps/java-stream-session-ownership"
+          "href": "/docs/ai-apps/java-stream-session-ownership",
+          "fixHref": "https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md"
         }
       },
       {
@@ -94,7 +95,17 @@
         "outcomeEn": "Compare three session policies and reject callbacks from superseded requests.",
         "outcomeTw": "比較三種會話策略，阻止舊回呼覆蓋目前請求。",
         "prerequisites": ["doc:ai-apps/java-streaming-boundary"],
-        "followUps": ["doc:ai-apps/java-transport-cancellation"]
+        "followUps": ["doc:ai-apps/java-transport-cancellation"],
+        "reviewNotice": {
+          "date": "2026-10-07",
+          "text": [
+            "已修正 JSON 解析边界和含空格路径的复现命令；三种会话策略的产品语义不变。",
+            "JSON parsing boundaries and reproduction paths containing spaces have been fixed. The three session policies retain their product semantics.",
+            "已修正 JSON 解析邊界與含空格路徑的重現指令；三種會話策略的產品語義不變。"
+          ],
+          "href": "/docs/ai-apps/java-stream-session-ownership",
+          "fixHref": "https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md"
+        }
       },
       {
         "id": "java-transport-cancellation",
@@ -104,13 +115,14 @@
         "outcomeTw": "區分本機取消、連線停止和遠端任務終止。",
         "prerequisites": ["doc:ai-apps/java-stream-session-ownership"],
         "reviewNotice": {
-          "date": "2026-10-06",
+          "date": "2026-10-07",
           "text": [
-            "固定版本仍有复现限制：运行脚本依赖本机 Maven 路径并强制离线；独立审计未自动核对源码指纹。继承的 Gson 解析边界见第九篇。本文记录不构成跨机器安装或严格 JSON 合规的证明。",
-            "The pinned runner depends on a machine-specific Maven path and forces offline mode; its audit does not verify source hashes. The inherited Gson parsing boundary is discussed in article nine. These records do not establish portable setup or strict JSON compliance.",
-            "固定版本仍有重現限制：執行腳本依賴本機 Maven 路徑並強制離線；獨立稽核未自動核對原始碼指紋。繼承的 Gson 解析邊界見第九篇。本文紀錄不構成跨機器安裝或嚴格 JSON 合規的證明。"
+            "已修正解析边界、运行脚本和源码审计。修正版只验证本地连接，不推断供应商任务已停止。",
+            "Parsing, runner portability and source auditing have been fixed. The regression checks local connections, not provider task termination.",
+            "已修正解析邊界、執行腳本與原始碼稽核。修正版僅驗證本機連線，不推斷供應商任務已停止。"
           ],
-          "href": "/docs/ai-apps/java-stream-session-ownership"
+          "href": "/docs/ai-apps/java-stream-session-ownership",
+          "fixHref": "https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md"
         }
       },
       {
@@ -434,7 +446,17 @@
         "outcome": "同时判断数值等价、计算节省与实测时间。",
         "outcomeEn": "Evaluate numerical equivalence, saved work and measured time separately.",
         "outcomeTw": "同時判斷數值等價、計算節省與實測時間。",
-        "prerequisites": ["doc:llm/prefix-cache-byte-budget"]
+        "prerequisites": ["doc:llm/prefix-cache-byte-budget"],
+        "reviewNotice": {
+          "date": "2026-10-07",
+          "text": [
+            "审计现已校验源码指纹；原始计时和负结果保留，没有新增性能结论。",
+            "The audit now verifies source fingerprints. Original timings and negative results are retained; no new performance claim is made.",
+            "稽核現已校驗原始碼指紋；原始計時與負結果保留，沒有新增效能結論。"
+          ],
+          "href": "/docs/llm/prefix-cache-admission",
+          "fixHref": "https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md"
+        }
       },
       {
         "id": "context-position-experiment",
@@ -682,13 +704,14 @@
         "prerequisites": ["doc:embodied-ai/mujoco-recovery-budget"],
         "followUps": ["doc:embodied-ai/mujoco-abort-exit"],
         "reviewNotice": {
-          "date": "2026-10-06",
+          "date": "2026-10-07",
           "text": [
-            "带传输延迟的连续流存在窗口反复清空的反例。原轨迹仍保留，但不能据此宣称任意延迟下都正确；第十四篇勘误给出输入条件和影响。",
-            "A delayed continuous stream can repeatedly reset the evidence window. The original traces are retained, but do not prove correctness under arbitrary delays. The correction in article fourteen specifies the input and impact.",
-            "帶傳輸延遲的連續流存在視窗反覆清空的反例。保留原軌跡，但不能據此宣稱任意延遲下皆正確；第十四篇勘誤提供輸入條件與影響。"
+            "已修正新观测到达与旧观测过期的处理顺序。原轨迹保留，修正版重跑了同一组七个条件。",
+            "The arrival/expiry ordering has been corrected. Original trajectories are retained, and the fix reruns the same seven conditions.",
+            "已修正新觀測抵達與舊觀測過期的處理順序。原軌跡保留，修正版重跑同一組七個條件。"
           ],
-          "href": "/docs/embodied-ai/mujoco-qualified-completion"
+          "href": "/docs/embodied-ai/mujoco-qualified-completion",
+          "fixHref": "https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md"
         }
       },
       {
@@ -715,7 +738,17 @@
         "outcome": "区分物理放置、当前有效与合格完成。",
         "outcomeEn": "Distinguish physical placement, current validity and qualified completion.",
         "outcomeTw": "區分物理放置、目前有效與合格完成。",
-        "prerequisites": ["doc:embodied-ai/mujoco-phase-recovery"]
+        "prerequisites": ["doc:embodied-ai/mujoco-phase-recovery"],
+        "reviewNotice": {
+          "date": "2026-10-07",
+          "text": [
+            "已增加释放时刻边界，拒绝释放前捕获的观测。修正版依赖每个控制周期提供释放状态，不扩大为通用完成保证。",
+            "A release-time boundary now rejects pre-release captures. The fix requires release state on every control tick; it is not a general completion guarantee.",
+            "已增加釋放時刻邊界，拒絕釋放前擷取的觀測。修正版依賴每個控制週期提供釋放狀態，不擴大為通用完成保證。"
+          ],
+          "href": "/docs/embodied-ai/mujoco-qualified-completion",
+          "fixHref": "https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md"
+        }
       },
       {
         "id": "openvla-action-pipeline",

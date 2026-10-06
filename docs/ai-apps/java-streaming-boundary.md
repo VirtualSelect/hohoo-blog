@@ -4,7 +4,7 @@ description: "22 个回环 HTTP 案例，验证 UTF-8、SSE 分帧、取消与�
 slug: "/ai-apps/java-streaming-boundary"
 status: "published"
 published_at: "2026-10-03"
-updated: "2026-10-03"
+updated: "2026-10-07"
 reading_minutes: 11
 domain: "ai-apps"
 article_kind: "case-study"
@@ -119,3 +119,9 @@ Maven 不在路径中时用 `--maven` 指定可执行文件；依赖已缓存时
 建议先做两个小改动来理解边界：把 `stop` 改成 `length`，观察“能显示但不提交”；删掉 DONE 后最后一个空行，观察“终止文字出现了但事件未完整结束”。最后再接真实供应商协议，分别验证错误事件、用量帧和工具增量，不能直接把本地通过当成线上兼容。
 
 这一轮得到的可用原则是：**屏幕上的临时输出和下一轮请求的正式历史，应当有不同的生命周期。** 后续需要补的是并发取消、请求身份与幂等重试，而不是给每个异常自动重发一次。
+
+## 修复进展 · 2026-10-07
+
+2026-10-07 修正：Demo08–10 增加 JSON 词法校验，三个示例各通过 53 项离线回归；运行脚本改用 Maven 参数列表，支持含空格目录。Demo10 审计补上源码指纹检查。原文固定版本与原始数据保持不变，修正版不是新增在线模型结果。
+
+[修正版代码与回归命令](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md)。

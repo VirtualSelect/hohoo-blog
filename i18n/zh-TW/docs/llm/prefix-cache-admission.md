@@ -4,7 +4,7 @@ description: "4860次實測查詢比較三種快取準入策略，把位元組�
 slug: "/llm/prefix-cache-admission"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-06"
+updated: "2026-10-07"
 reading_minutes: 12
 domain: "llm"
 article_kind: "mechanism"
@@ -162,3 +162,9 @@ cd experiments/09-cache-admission
 本輪不是專用基準機測量，沒有 CPU 綁核、GPU 或真實模型推理；重複運行的時間會變化。它給出的可遷移結論是：**同時報告正確性、容量、工作量和真實耗時，才能判斷一個快取優化究竟優化了什麼。**
 
 </details>
+
+## 修復進展 · 2026-10-07
+
+2026-10-07 修正：稽核現在逐項校驗 manifest.sources，拒絕原始碼變更、缺失檔案或越界路徑。舊 4,860 次查詢與耗時保持原樣；本次原始碼一致性回歸不提供新的快取效能結論。
+
+[修正版程式碼與回歸指令](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md)。

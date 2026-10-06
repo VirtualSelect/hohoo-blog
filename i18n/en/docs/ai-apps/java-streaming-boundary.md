@@ -4,7 +4,7 @@ description: "22 loopback HTTP cases separate incremental preview from committin
 slug: "/ai-apps/java-streaming-boundary"
 status: "published"
 published_at: "2026-10-03"
-updated: "2026-10-03"
+updated: "2026-10-07"
 reading_minutes: 11
 domain: "ai-apps"
 article_kind: "case-study"
@@ -114,3 +114,9 @@ Pass `--maven` for an explicit executable and `--offline` when dependencies are 
 Change `stop` to `length` to see visible text without commitment. Remove the final blank line after DONE to see a terminal-looking string that never becomes a complete event. A live integration still needs provider-specific checks for errors, usage frames and tool deltas.
 
 The useful result is a lifecycle distinction: temporary display and reusable conversation history need different acceptance rules. Concurrent cancellation, request identity and idempotent retries remain follow-up work; automatic retry is not the default fix for every failure.
+
+## Fix follow-up · 2026-10-07
+
+2026-10-07 correction: Demo08–10 now validate JSON lexical spelling; each passes 53 offline checks. Maven argument lists preserve output paths containing spaces, and Demo10 audits source fingerprints. The article’s pinned revision and original data remain unchanged; these fixes are not new online model results.
+
+[Fixed code and regression commands](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md).

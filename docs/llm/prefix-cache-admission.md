@@ -4,7 +4,7 @@ description: "4860次实测查询比较三种缓存准入策略，把字节预�
 slug: "/llm/prefix-cache-admission"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-06"
+updated: "2026-10-07"
 reading_minutes: 12
 domain: "llm"
 article_kind: "mechanism"
@@ -162,3 +162,9 @@ cd experiments/09-cache-admission
 本轮不是专用基准机测量，没有 CPU 绑核、GPU 或真实模型推理；重复运行的时间会变化。它给出的可迁移结论是：**同时报告正确性、容量、工作量和真实耗时，才能判断一个缓存优化究竟优化了什么。**
 
 </details>
+
+## 修复进展 · 2026-10-07
+
+2026-10-07 修正：审计现在逐项校验 manifest.sources，拒绝源码变化、缺失文件或越界路径。旧 4,860 次查询与耗时保持原样；本次源码一致性回归不提供新的缓存性能结论。
+
+[修正版代码与回归命令](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md)。

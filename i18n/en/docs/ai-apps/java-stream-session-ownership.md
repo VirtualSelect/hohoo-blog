@@ -4,7 +4,7 @@ description: "18 controlled thread schedules test request ownership for streamin
 slug: "/ai-apps/java-stream-session-ownership"
 status: "published"
 published_at: "2026-10-04"
-updated: "2026-10-06"
+updated: "2026-10-07"
 reading_minutes: 10
 domain: "ai-apps"
 article_kind: "case-study"
@@ -167,3 +167,9 @@ python demos/09-stream-session/audit.py demos/09-stream-session/evidence/my-run
 Use `--offline` if Maven dependencies are cached. The archived execution used Java 8u171. `results.json` contains all 18 event traces and intermediate states. The manifest pins source and raw-file hashes. The audit independently reconstructs previews and history rather than accepting final counters. Seven additional contract groups cover ownership, cancellation, duplicate IDs, paired-history limits, receipt eviction and validation.
 
 A successful answer now needs both protocol completeness and current ownership at commitment. The next integration should preserve both while testing real connection cancellation and multi-process state, rather than adding another HTTP-status check.
+
+## Fix follow-up · 2026-10-07
+
+2026-10-07 correction: Demo08–10 now validate JSON lexical spelling; each passes 53 offline checks. Maven argument lists preserve output paths containing spaces, and Demo10 audits source fingerprints. The article’s pinned revision and original data remain unchanged; these fixes are not new online model results.
+
+[Fixed code and regression commands](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md).

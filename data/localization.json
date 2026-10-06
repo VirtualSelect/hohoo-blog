@@ -1035,25 +1035,25 @@
   },
   "doc:embodied-ai/mujoco-completion-lifecycle": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-10-03",
+    "sourceUpdatedAt": "2026-10-07",
     "file": "docs/embodied-ai/mujoco-completion-lifecycle.md",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-03",
+        "translatedAt": "2026-10-07",
         "file": "i18n/en/docs/embodied-ai/mujoco-completion-lifecycle.md",
-        "sourceRevision": "7506da29760f41bf250bfed68949c3603461b0cf92f714d304cc5d313bf8d3cf",
-        "translationRevision": "c36027c79b1f74fb8aa68aa76f693eda85d48dc8827e1d3a073674fd4dd53b89"
+        "sourceRevision": "fd11dc9544827b08d7292f6566bb06070b0b98a367f311d3b3dc99b7290ba649",
+        "translationRevision": "b760262c4da7b5320147dd94eb8085bf9ed71947ba13746dacc8b49dfdba3702"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-03",
+        "translatedAt": "2026-10-07",
         "file": "i18n/zh-TW/docs/embodied-ai/mujoco-completion-lifecycle.md",
-        "sourceRevision": "7506da29760f41bf250bfed68949c3603461b0cf92f714d304cc5d313bf8d3cf",
-        "translationRevision": "6ac43c2093c55dac3a44b5a6be714ca81d66f5eb665f2189d51aaf5007855fd2"
+        "sourceRevision": "fd11dc9544827b08d7292f6566bb06070b0b98a367f311d3b3dc99b7290ba649",
+        "translationRevision": "66fb35cceeb26ec2fa79f13999c62939ab5f270941e1331707e93369fc28a7e1"
       }
     },
-    "sourceRevision": "7506da29760f41bf250bfed68949c3603461b0cf92f714d304cc5d313bf8d3cf"
+    "sourceRevision": "fd11dc9544827b08d7292f6566bb06070b0b98a367f311d3b3dc99b7290ba649"
   },
   "lab:prefix-cache": {
     "sourceLocale": "zh-CN",
@@ -1101,25 +1101,25 @@
   },
   "doc:ai-apps/java-streaming-boundary": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-10-03",
+    "sourceUpdatedAt": "2026-10-07",
     "file": "docs/ai-apps/java-streaming-boundary.md",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-03",
+        "translatedAt": "2026-10-07",
         "file": "i18n/en/docs/ai-apps/java-streaming-boundary.md",
-        "sourceRevision": "fae0cff966278cfcc44c6de865aac377c3d0bca571f91c2586507dfb14e1087d",
-        "translationRevision": "f784f6853a4ace6f42692e3cf9f86fbc9f2061384ca9f9642bf9cbdce3805959"
+        "sourceRevision": "612510c8644781b701c113985412704b5cf8ab21213ad32d8977924e53a9bcc6",
+        "translationRevision": "81faa801410ac271fe206489a2e3e0e705cec8bbe5b95ae7189ad50f3262b779"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-03",
+        "translatedAt": "2026-10-07",
         "file": "i18n/zh-TW/docs/ai-apps/java-streaming-boundary.md",
-        "sourceRevision": "fae0cff966278cfcc44c6de865aac377c3d0bca571f91c2586507dfb14e1087d",
-        "translationRevision": "a45f6fe5ad44e2e17d1f97be53b23427626b0e0e4371130552931fa99c18be53"
+        "sourceRevision": "612510c8644781b701c113985412704b5cf8ab21213ad32d8977924e53a9bcc6",
+        "translationRevision": "cb0d5e69c3c6c19241aa74fc1850b0f934bfe9355aca37264a2780aa3ae7a478"
       }
     },
-    "sourceRevision": "fae0cff966278cfcc44c6de865aac377c3d0bca571f91c2586507dfb14e1087d"
+    "sourceRevision": "612510c8644781b701c113985412704b5cf8ab21213ad32d8977924e53a9bcc6"
   },
   "lab:streaming-boundary": {
     "sourceLocale": "zh-CN",
@@ -1233,25 +1233,25 @@
   },
   "doc:ai-apps/java-stream-session-ownership": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-10-06",
+    "sourceUpdatedAt": "2026-10-07",
     "file": "docs/ai-apps/java-stream-session-ownership.md",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-06",
+        "translatedAt": "2026-10-07",
         "file": "i18n/en/docs/ai-apps/java-stream-session-ownership.md",
-        "sourceRevision": "e6d23bcc2fce7a88b9b383372d2e9eb27f1e79199ae128672377411faebea7a9",
-        "translationRevision": "cf3b8f6dd5f345741e10263c6768fe2b6dd7924286de4d24674a8a20f2b96750"
+        "sourceRevision": "d0145a523c6f5f6a995c8c9901aa0cd2c68916c4e83c0195ee615ad6443be85e",
+        "translationRevision": "e7b728a865524f4b834f43f8b2ce74b46efe40fd0eba5e411d16bc6aba40426a"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-06",
+        "translatedAt": "2026-10-07",
         "file": "i18n/zh-TW/docs/ai-apps/java-stream-session-ownership.md",
-        "sourceRevision": "e6d23bcc2fce7a88b9b383372d2e9eb27f1e79199ae128672377411faebea7a9",
-        "translationRevision": "6b4391884c81776d56b9bc34955ab85daedfdfe7cc29d8cf95455baa7241d1bd"
+        "sourceRevision": "d0145a523c6f5f6a995c8c9901aa0cd2c68916c4e83c0195ee615ad6443be85e",
+        "translationRevision": "66c76beae2be8f60fbc06294022c7c668187c5bcdd60000328cd746ddfe5774d"
       }
     },
-    "sourceRevision": "e6d23bcc2fce7a88b9b383372d2e9eb27f1e79199ae128672377411faebea7a9"
+    "sourceRevision": "d0145a523c6f5f6a995c8c9901aa0cd2c68916c4e83c0195ee615ad6443be85e"
   },
   "lab:stream-session-ownership": {
     "sourceLocale": "zh-CN",
@@ -1365,25 +1365,25 @@
   },
   "doc:ai-apps/java-transport-cancellation": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-10-05",
+    "sourceUpdatedAt": "2026-10-07",
     "file": "docs/ai-apps/java-transport-cancellation.md",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-05",
+        "translatedAt": "2026-10-07",
         "file": "i18n/en/docs/ai-apps/java-transport-cancellation.md",
-        "sourceRevision": "f188a2136c00b742429a8e5816cd0404d5b392104975901161938719393ee5ee",
-        "translationRevision": "b5feed412b10cd84c1ae8d214bcca8e616b94fecca0aa59c6639fcd1773b6706"
+        "sourceRevision": "6ff6a36136c6073af2b5b5b525db583a66ded86f9c357aa8a10e6855e811f0df",
+        "translationRevision": "ca7e93b11d924b8aa09ef4faf87b7bf560eb8e9fdd7a16c5c106c2acc2cc2cb4"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-05",
+        "translatedAt": "2026-10-07",
         "file": "i18n/zh-TW/docs/ai-apps/java-transport-cancellation.md",
-        "sourceRevision": "f188a2136c00b742429a8e5816cd0404d5b392104975901161938719393ee5ee",
-        "translationRevision": "23232a855b3c48678f4f8194d341870daec2a4f471802acd4d2765f13cec59f4"
+        "sourceRevision": "6ff6a36136c6073af2b5b5b525db583a66ded86f9c357aa8a10e6855e811f0df",
+        "translationRevision": "42abdffaad6f8500f4c938e3aaf6dbe5bef8dca30a40fb332c63d954fe80b114"
       }
     },
-    "sourceRevision": "f188a2136c00b742429a8e5816cd0404d5b392104975901161938719393ee5ee"
+    "sourceRevision": "6ff6a36136c6073af2b5b5b525db583a66ded86f9c357aa8a10e6855e811f0df"
   },
   "lab:transport-cancellation": {
     "sourceLocale": "zh-CN",
@@ -1409,25 +1409,25 @@
   },
   "doc:llm/prefix-cache-admission": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-10-06",
+    "sourceUpdatedAt": "2026-10-07",
     "file": "docs/llm/prefix-cache-admission.md",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-06",
+        "translatedAt": "2026-10-07",
         "file": "i18n/en/docs/llm/prefix-cache-admission.md",
-        "sourceRevision": "e96ea449acb65acdf0ea2d9f34e1d97845b09ea7b0518473335400814820eb7f",
-        "translationRevision": "dfb7d9a7a23ccd575518e5757abe43d7bf8762e24ef2ab20a2143a0a300ff27e"
+        "sourceRevision": "a8558a5ebd6130c48b113e55c82277ed9e07876b211b6b0c602e3014d795851e",
+        "translationRevision": "d4b0015b8e1df39e3b75e9fc96c36ba4660e3ae0bd252b96051d05ab87da4653"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-06",
+        "translatedAt": "2026-10-07",
         "file": "i18n/zh-TW/docs/llm/prefix-cache-admission.md",
-        "sourceRevision": "e96ea449acb65acdf0ea2d9f34e1d97845b09ea7b0518473335400814820eb7f",
-        "translationRevision": "f89da8046f4d0ace7751caebab29e4f4f96cecc3f614a0bbb7d4302204ae9b42"
+        "sourceRevision": "a8558a5ebd6130c48b113e55c82277ed9e07876b211b6b0c602e3014d795851e",
+        "translationRevision": "8447964824eeccb63aaf61f23e298df8a117771ea8f8677391b3a4aaa7325a63"
       }
     },
-    "sourceRevision": "e96ea449acb65acdf0ea2d9f34e1d97845b09ea7b0518473335400814820eb7f"
+    "sourceRevision": "a8558a5ebd6130c48b113e55c82277ed9e07876b211b6b0c602e3014d795851e"
   },
   "lab:prefix-cache-admission": {
     "sourceLocale": "zh-CN",
@@ -1453,25 +1453,25 @@
   },
   "doc:embodied-ai/mujoco-qualified-completion": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-10-06",
+    "sourceUpdatedAt": "2026-10-07",
     "file": "docs/embodied-ai/mujoco-qualified-completion.md",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-06",
+        "translatedAt": "2026-10-07",
         "file": "i18n/en/docs/embodied-ai/mujoco-qualified-completion.md",
-        "sourceRevision": "13f165f52c37c18e377d347db1c86b7d31e00597a08199e995cdd2baa386a80a",
-        "translationRevision": "3de001979ede2726328c8e14d99de2f8089e91f9ccbf3671f45c6ac0c3493ef3"
+        "sourceRevision": "e6cb51f9da21f7d382e80de1f7780cfc8262ccbe8eb5c6cd0d2e17c1c40ee126",
+        "translationRevision": "1e373061a9cf768e9fa0aa962d47b8e6752eec7c37323ef3feb7e9c41da98341"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-06",
+        "translatedAt": "2026-10-07",
         "file": "i18n/zh-TW/docs/embodied-ai/mujoco-qualified-completion.md",
-        "sourceRevision": "13f165f52c37c18e377d347db1c86b7d31e00597a08199e995cdd2baa386a80a",
-        "translationRevision": "9bde0f781b555ee1630d3d7f378fe98751de2fa34be80a23c6cea1e01bda67d8"
+        "sourceRevision": "e6cb51f9da21f7d382e80de1f7780cfc8262ccbe8eb5c6cd0d2e17c1c40ee126",
+        "translationRevision": "c64fdad3aa69a558c2900940c950c09ff5ab0f05bcd2cb27045b04fe2be1d994"
       }
     },
-    "sourceRevision": "13f165f52c37c18e377d347db1c86b7d31e00597a08199e995cdd2baa386a80a"
+    "sourceRevision": "e6cb51f9da21f7d382e80de1f7780cfc8262ccbe8eb5c6cd0d2e17c1c40ee126"
   },
   "lab:qualified-completion": {
     "sourceLocale": "zh-CN",

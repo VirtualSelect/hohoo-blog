@@ -4,7 +4,7 @@ description: "七条 MuJoCo 轨迹与双画面回放，将历史完成事件和�
 slug: "/embodied-ai/mujoco-completion-lifecycle"
 status: "published"
 published_at: "2026-10-03"
-updated: "2026-10-03"
+updated: "2026-10-07"
 reading_minutes: 11
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -126,3 +126,9 @@ python experiments/vl01_completion_lifecycle/replay.py --evidence evidence/MY-E1
 关于推进物理与仅更新派生量的区别，见 [MuJoCo 官方 simulation 文档](https://mujoco.readthedocs.io/en/stable/programming/simulation.html)。本轮回放使用后者展示存档状态，没有重新模拟一条“更好看”的轨迹。
 
 这次完成的是验收状态生命周期，完整 VL01、真机安全、退出动作与恢复预算的组合仍未完成。可以把下一阶段的接收条件写得更清楚了：既读取历史事件，也验证交接时刻的当前证据；不能只读取一个永不清零的 success。
+
+## 修复进展 · 2026-10-07
+
+2026-10-07 修正：先处理同一时刻的新观测再判断过期；E14 记录释放意图时刻，排除释放前采样的迟到包。20 项判定器检查及原 E11/E14 协议的 7/8 回合复跑通过独立审计。旧证据仍对应原固定版本，不据此扩大到真机或完整里程碑。
+
+[修正版代码与回归命令](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md)。

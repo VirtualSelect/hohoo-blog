@@ -27,7 +27,8 @@ export default function DocReadingContext({ position }) {
   const routeSteps =
     track?.steps.filter((s) => entries.some((e) => e.stepId === s.id)) || [];
   const index = routeSteps.findIndex((s) => s.id === step);
-  const reviewNotice = track?.steps.find((s) => s.id === step)?.reviewNotice;
+  const currentStep = track?.steps.find((s) => s.id === step);
+  const reviewNotice = currentStep?.reviewNotice;
   const adjacent = track
     ? track.steps
         .map((s) => entries.find((e) => e.stepId === s.id))
@@ -98,9 +99,27 @@ export default function DocReadingContext({ position }) {
               {t("复核说明", "Review note", "複核說明")} · {reviewNotice.date}
             </p>
             <p>{t(...reviewNotice.text)}</p>
-            <Link to={reviewNotice.href}>
-              {t("查看边界说明", "Read the limitation", "查看邊界說明")} →
-            </Link>
+            {reviewNotice.href !== `/docs/${currentStep.doc}` && (
+              <Link to={reviewNotice.href}>
+                {t("查看边界说明", "Read the limitation", "查看邊界說明")} →
+              </Link>
+            )}
+            {reviewNotice.fixHref && (
+              <p>
+                <a
+                  href={reviewNotice.fixHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t(
+                    "查看修正版与回归命令",
+                    "View the fix and regression commands",
+                    "查看修正版與回歸指令",
+                  )}{" "}
+                  ↗
+                </a>
+              </p>
+            )}
           </aside>
         )}
         <ContentProvenance kind={f.provenance} />

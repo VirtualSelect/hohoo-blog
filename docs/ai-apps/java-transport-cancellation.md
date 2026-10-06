@@ -4,7 +4,7 @@ description: "30次本地HTTP连接，区分会话取消、阻塞读取退出与
 slug: "/ai-apps/java-transport-cancellation"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-05"
+updated: "2026-10-07"
 reading_minutes: 11
 domain: "ai-apps"
 article_kind: "case-study"
@@ -125,3 +125,9 @@ python audit.py evidence/my-run
 ## 下一步该验证什么
 
 本篇解决单个经典 Socket 的取消边界。真实 SDK 的连接池复用、取消与完成同时发生、取消早于连接创建、多个并发请求的关闭归属，都应单独建立测试。下一步优先接入实际使用的 HTTP 客户端，再讨论连接池和重试，而不是把这个教学 Socket 直接包装成生产 SDK。
+
+## 修复进展 · 2026-10-07
+
+2026-10-07 修正：Demo08–10 增加 JSON 词法校验，三个示例各通过 53 项离线回归；运行脚本改用 Maven 参数列表，支持含空格目录。Demo10 审计补上源码指纹检查。原文固定版本与原始数据保持不变，修正版不是新增在线模型结果。
+
+[修正版代码与回归命令](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md)。

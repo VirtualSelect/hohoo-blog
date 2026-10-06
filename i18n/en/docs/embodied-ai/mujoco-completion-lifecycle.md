@@ -4,7 +4,7 @@ description: "Seven MuJoCo rollouts and a paired replay separate historical comp
 slug: "/embodied-ai/mujoco-completion-lifecycle"
 status: "published"
 published_at: "2026-10-03"
-updated: "2026-10-03"
+updated: "2026-10-07"
 reading_minutes: 11
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -126,3 +126,9 @@ These are PowerShell commands; other shells need their equivalent environment-va
 The distinction between advancing physics and updating derived state is described in the [official MuJoCo simulation documentation](https://mujoco.readthedocs.io/en/stable/programming/simulation.html). The replay uses the latter on stored states rather than rerunning a more attractive trajectory.
 
 This completes a validity-lifecycle experiment, not full VL01, hardware safety, or the combination of exit actions and recovery budgets. The next stage can now require both the historical event and current evidence at handoff instead of relying on a success flag that never clears.
+
+## Fix follow-up · 2026-10-07
+
+2026-10-07 correction: incoming observations are handled before expiry at the same tick. E14 records release-intent time and excludes late packets captured before it. Twenty observer checks and reruns of the original E11/E14 protocols (7/8 episodes) passed, including independent audits. Historical evidence stays pinned to its original revision; this does not establish hardware safety or a complete milestone.
+
+[Fixed code and regression commands](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md).

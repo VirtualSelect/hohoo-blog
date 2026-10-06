@@ -4,7 +4,7 @@ description: "8条MuJoCo轨迹、三个旁路判定器与真实回放，区分�
 slug: "/embodied-ai/mujoco-qualified-completion"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-06"
+updated: "2026-10-07"
 reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -180,3 +180,9 @@ python experiments/vl01_qualified_completion/replay.py --evidence evidence/my-co
 单条坏包就撤销有效性是否过于敏感，需要带噪声分布的独立实验。释放意图也需要在更真实的系统里升级为执行确认。当前固定仿真没有证明真机安全、通用成功率或完整 VL01 已完成。
 
 下一步优先验证：**下游动作如何订阅有效性变化，并在失效后安全停止或重新规划**。这比继续增加一个“成功百分比”更能检验完成契约是否真正被系统使用。
+
+## 修复进展 · 2026-10-07
+
+2026-10-07 修正：先处理同一时刻的新观测再判断过期；E14 记录释放意图时刻，排除释放前采样的迟到包。20 项判定器检查及原 E11/E14 协议的 7/8 回合复跑通过独立审计。旧证据仍对应原固定版本，不据此扩大到真机或完整里程碑。
+
+[修正版代码与回归命令](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md)。
