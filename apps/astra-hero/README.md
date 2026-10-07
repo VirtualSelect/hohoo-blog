@@ -1,6 +1,8 @@
 # Hohoo GPU Particle Hero
 
-独立 Next.js + TypeScript + Three.js 视觉应用，预览端口 **4180**。现有 Docusaurus 博客继续使用根目录的配置、依赖与路由；本应用不复制博客内容。
+独立 Next.js + TypeScript + Three.js 视觉应用，预览端口 **4180**。主博客已使用 apps/web 的 Next.js 架构；本应用不复制博客内容。
+
+博客关于页已整合同一套粒子引擎：默认展示静态名片，点击“展开粒子名片”才加载 Three.js 与 GPU 场景，收起时释放资源。三语言、键盘、暂停与系统减少动态效果均保留，无需 iframe 或跳往独立部署。此应用保留为独立视觉调试入口。
 
 ## 运行
 
