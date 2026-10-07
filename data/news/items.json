@@ -1,5 +1,35 @@
 [
   {
+    "id": "0048f1a933411163d4cb",
+    "title": "IronMan: Information-Constrained Video-Action Learning for Robot Manipulation",
+    "url": "https://arxiv.org/abs/2610.07961",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-07T04:00:00.000Z",
+    "collectedAt": "2026-10-07T09:12:06.553Z",
+    "category": "embodied-ai",
+    "summary": "Video Action Models (VAMs) couple visual dynamics modeling with action generation for robot manipulation. However, video representations are not naturally suited to action gener…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-9fd86e0b",
+    "coverage": []
+  },
+  {
+    "id": "04af875aafbe96870468",
+    "title": "STRUCTURALCOST: A controlled reading time dataset for modeling human sentence processing difficulty",
+    "url": "https://arxiv.org/abs/2610.08208",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-07T04:00:00.000Z",
+    "collectedAt": "2026-10-07T09:12:06.553Z",
+    "category": "llm",
+    "summary": "We introduce STRUCTURALCOST, a self-paced reading dataset of 475 participants and 40,800 observations isolating the processing cost of long-distance subject-verb dependency reso…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-722b2c13",
+    "coverage": []
+  },
+  {
     "id": "c0ba8257b393a1e48242",
     "title": "OpenAI “rogue” agent activities found on Wikimedia projects",
     "url": "https://simonwillison.net/2026/Oct/7/openai-rogue-agents-wikimedia",
