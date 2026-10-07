@@ -1,5 +1,35 @@
 [
   {
+    "id": "c0ba8257b393a1e48242",
+    "title": "OpenAI “rogue” agent activities found on Wikimedia projects",
+    "url": "https://simonwillison.net/2026/Oct/7/openai-rogue-agents-wikimedia",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-07T00:16:45.000Z",
+    "collectedAt": "2026-10-07T01:47:15.419Z",
+    "category": "ai-apps",
+    "summary": "OpenAI “rogue” agent activities found on Wikimedia projects Given how tempting a target wikis are for rogue agent swarms, it's not a huge surprise that Wikipedia found evidence …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e3a710b9",
+    "coverage": []
+  },
+  {
+    "id": "583ba559ff4478c105f3",
+    "title": "GitHub 重建 Git 基础设施，应对智能体规模开发",
+    "url": "https://aihot.news/items/iq15z1msend1ocusxt2phyms7",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-06T20:57:56.000Z",
+    "collectedAt": "2026-10-07T01:47:15.419Z",
+    "category": "ai-apps",
+    "summary": "GitHub 宣布重建 Git 基础设施，以支持智能体规模开发带来的高并发读写负载。2026 年 8 月 GitHub 月度 Git 事件量达 473.3 billion（一年翻倍以上），9 月智能体和开发者产生 7.38 billion commits（超一年前五倍），pushes 同比增长 4.9 倍。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-9e96b056",
+    "coverage": []
+  },
+  {
     "id": "d0cde7c05203d2862138",
     "title": "Using Parseable with Datasette for OpenTelemetry traces",
     "url": "https://simonwillison.net/2026/Oct/6/datasette-parseable-opentelemetry",
@@ -117,6 +147,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-42bd25df",
+    "coverage": []
+  },
+  {
+    "id": "03ae78a2a04571e2c00b",
+    "title": "WasserMan: Benchmark for Underwater Manipulation Policy Learning",
+    "url": "https://arxiv.org/abs/2610.04536",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-06T04:00:00.000Z",
+    "collectedAt": "2026-10-07T01:47:15.419Z",
+    "category": "embodied-ai",
+    "summary": "Underwater manipulation couples visual decisions, contact forces and a thruster-controlled floating base. We introduce WasserMan, to our knowledge the first multi-task simulatio…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-16e5c252",
+    "coverage": []
+  },
+  {
+    "id": "061def391f2385bf9889",
+    "title": "AECP: Artifact-Exclusive Communication Protocol for Multi-Agent Code Generation",
+    "url": "https://arxiv.org/abs/2610.06481",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-06T04:00:00.000Z",
+    "collectedAt": "2026-10-07T01:47:15.419Z",
+    "category": "ai-apps",
+    "summary": "As AI agents increasingly tackle complex repository-level coding tasks, distributing work across multiple agents is a natural way to scale beyond the capabilities of a single ag…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-73b0aef0",
     "coverage": []
   },
   {
