@@ -1,12 +1,33 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { clientGlobalData } from "../lib/client-content.ts";
+import { clientGlobalData, clientMessages } from "../lib/client-content.ts";
 import { canonicalPath, publicPaths } from "../lib/visitor-stats.mjs";
 import {
   affectsAstra,
   ignoredBuildExitCode,
 } from "../../astra-hero/scripts/ignore-build.mjs";
+
+test("client translations preserve every message and leave authoring notes in source", () => {
+  for (const locale of ["zh-CN", "zh-TW", "en"]) {
+    const messages = JSON.parse(
+      fs.readFileSync(
+        new URL(`../../../i18n/${locale}/code.json`, import.meta.url),
+      ),
+    );
+    const before = JSON.stringify(messages);
+    const compact = clientMessages(messages);
+    assert.deepEqual(Object.keys(compact), Object.keys(messages));
+    for (const [key, value] of Object.entries(messages)) {
+      assert.equal(compact[key].message, value.message, key);
+      assert.equal(compact[key].description, undefined);
+    }
+    assert.equal(JSON.stringify(messages), before);
+  }
+  assert.deepEqual(clientMessages({ missing: undefined }), {
+    missing: undefined,
+  });
+});
 
 for (const locale of ["zh-CN", "zh-TW", "en"]) {
   test(`${locale}: compact index preserves discovery and each detail route`, () => {

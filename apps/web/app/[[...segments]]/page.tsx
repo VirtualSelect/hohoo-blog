@@ -11,7 +11,7 @@ import RouteContent from "../../components/RouteContent";
 import Journey from "../../components/Journey";
 import VirtualLab from "../../components/VirtualLab";
 import type { Metadata } from "next";
-import { clientGlobalData } from "../../lib/client-content";
+import { clientGlobalData, clientMessages } from "../../lib/client-content";
 type RouteProps = { params: Promise<{ segments?: string[] }> };
 const aliases: Record<string, string | undefined> = {
   aboutMe: "about",
@@ -135,7 +135,7 @@ export default async function Page({ params }: RouteProps) {
               : [],
         searchUrl: data.searchUrl,
         radarArchive: route === "radar" ? data.radarArchive : null,
-        messages: getMessages(locale),
+        messages: clientMessages(getMessages(locale)),
         document: document ? toClientDocument(document) : null,
       }}
     >
