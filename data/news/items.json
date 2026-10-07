@@ -1,5 +1,35 @@
 [
   {
+    "id": "fdc864340b44ea6ec229",
+    "title": "Claude Haiku 5.5",
+    "url": "https://simonwillison.net/2026/Oct/7/claude-haiku-5-5",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-07T20:56:21.000Z",
+    "collectedAt": "2026-10-07T23:17:22.798Z",
+    "category": "ai-apps",
+    "summary": "As previously promised , here's Anthropic's new fast, low cost model: Introducing Claude Haiku 5.5 . The previous Haiku, 4.5, was very much showing its age. It came out almost a…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-de5669f0",
+    "coverage": []
+  },
+  {
+    "id": "e6ee353cc5ab680e8691",
+    "title": "Claude Code v2.1.293 发布：新增 Claude Haiku 5.5 并修复大量问题",
+    "url": "https://aihot.news/items/vd2lvzvjz4tujiqupl30ifq3k",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-07T18:10:20.000Z",
+    "collectedAt": "2026-10-07T23:17:22.798Z",
+    "category": "ai-apps",
+    "summary": "Claude Code 发布 v2.1.293，新增 Claude Haiku 5.5（claude-haiku-5-5）作为 Anthropic API 默认 Haiku 模型，支持 1M 上下文，价格为 $0.10/$0.50 每百万 token（超 100K 提示为 $0.50/$2.50）。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-3bcf0d38",
+    "coverage": []
+  },
+  {
     "id": "9a305c3b97ad2acfb902",
     "title": "Perplexity 开源 pplx-embed-v2-late 多模态 late-interaction 嵌入模型（9B 与 0.6B）",
     "url": "https://aihot.news/items/lfy2ww68p9lgpxxhu5jssflwf",
