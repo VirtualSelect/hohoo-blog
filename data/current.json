@@ -1,19 +1,19 @@
 {
-  "updated": "2026-10-06",
+  "updated": "2026-10-07",
   "items": [
     {
       "kind": "BUILDING",
-      "zh": "整理 Java 会话与取消链路，先检查旧代码的边界，再决定完整助手的产品语义。",
-      "en": "Reviewing Java session and cancellation boundaries before choosing semantics for a complete assistant.",
-      "tw": "整理 Java 會話與取消鏈路，先檢查舊程式碼邊界，再決定完整助手的產品語義。",
-      "to": "/docs/ai-apps/java-stream-session-ownership"
+      "zh": "Java 助手的请求预算、重试和持久历史已完成本地验证；完整在线产品尚未交付。",
+      "en": "Local validation now covers request budgets, retries and durable turns; the full online assistant remains unfinished.",
+      "tw": "Java 助手的請求預算、重試和持久歷史已完成本地驗證；完整在線產品尚未交付。",
+      "to": "/docs/ai-apps/java-durable-turns"
     },
     {
       "kind": "LEARNING",
-      "zh": "对照缓存的数值一致性、计算量与实测耗时；小型模型上缓存仍可能更慢。",
-      "en": "Comparing cache equivalence, work saved and measured time; caching can still be slower on this small model.",
-      "tw": "比較快取的數值一致性、計算量與實測耗時；小型模型上快取仍可能更慢。",
-      "to": "/docs/llm/prefix-cache-admission"
+      "zh": "把缓存成本拆开测量，并对照分块Softmax与KV量化的内存、误差和计时边界。",
+      "en": "Profiling cache costs and comparing tiled softmax and KV quantization across storage, error and time.",
+      "tw": "把快取成本拆開測量，并對照分塊Softmax與KV量化的內存、誤差和計時邊界。",
+      "to": "/docs/llm/cache-cost-profile"
     },
     {
       "kind": "READING",
@@ -24,16 +24,16 @@
     },
     {
       "kind": "EXPLORING",
-      "zh": "MuJoCo 已有 E14 教学证据：区分物理放置、当前有效与流程合格完成，完整 VL01 仍未完成。",
-      "en": "MuJoCo E14 separates physical placement, current validity and qualified completion. Full VL01 remains open.",
-      "tw": "MuJoCo 已有 E14 教學證據：區分物理放置、目前有效與流程合格完成，完整 VL01 仍未完成。",
-      "to": "/docs/embodied-ai/mujoco-qualified-completion"
+      "zh": "MuJoCo新增二维执行器场景：调参、绕障与延迟观测，36回合保留失败轨迹。",
+      "en": "A second MuJoCo scene compares control, clearance and delayed observations across 36 recorded rollouts.",
+      "tw": "MuJoCo新增二維執行器場景：調參、繞障與延遲觀測，36回合保留失敗軌跡。",
+      "to": "/docs/embodied-ai/mujoco-planar-pd"
     },
     {
       "kind": "NEXT",
-      "zh": "先复核复现入口与已知边界；新模型评测、缓存剖析和第二个机器人场景只列为候选。",
-      "en": "First review reproduction and known boundaries. New model evaluations, cache profiling and a second robot scene remain candidates.",
-      "tw": "先複核重現入口與已知邊界；新模型評測、快取剖析和第二個機器人場景僅列為候選。",
+      "zh": "先复现并理解新的负结果，再决定在线助手整合、真实模型评测及状态估计的后续对照。",
+      "en": "Reproduce the negative results before choosing assistant integration, live-model evaluations or state-estimation studies.",
+      "tw": "先復現并理解新的負結果，再決定在線助手整合、真實模型評測及狀態估計的後續對照。",
       "to": "/learning"
     }
   ]

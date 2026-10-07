@@ -110,5 +110,29 @@
     "requirements": "requirements-lock.txt",
     "run": "experiments/vl01_transfer_monitor/run.py",
     "audit": "experiments/vl01_transfer_monitor/audit.py"
+  },
+  "embodied-ai/mujoco-planar-pd": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "831789c2a1efb4564c4cfabc2298e48e16ada879",
+    "directory": "experiments/planar_reach",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/planar_reach/run.py",
+    "audit": "experiments/planar_reach/audit.py"
+  },
+  "embodied-ai/mujoco-obstacle-clearance": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "831789c2a1efb4564c4cfabc2298e48e16ada879",
+    "directory": "experiments/planar_reach",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/planar_reach/run.py",
+    "audit": "experiments/planar_reach/audit.py"
+  },
+  "embodied-ai/mujoco-delayed-feedback": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "831789c2a1efb4564c4cfabc2298e48e16ada879",
+    "directory": "experiments/planar_reach",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/planar_reach/run.py",
+    "audit": "experiments/planar_reach/audit.py"
   }
 }

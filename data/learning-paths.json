@@ -13,7 +13,9 @@
         "outcomeEn": "Send a request, parse the answer and pass conversation history.",
         "outcomeTw": "發送請求、解析回答，並正確傳遞多輪歷史。",
         "prerequisites": [],
-        "followUps": ["doc:ai-apps/java-structured-output"]
+        "followUps": [
+          "doc:ai-apps/java-structured-output"
+        ]
       },
       {
         "id": "structured-output",
@@ -21,8 +23,12 @@
         "outcome": "把传输、JSON 结构和业务验收分开。",
         "outcomeEn": "Separate transport, JSON structure and business acceptance.",
         "outcomeTw": "將傳輸、JSON 結構與業務驗收分開。",
-        "prerequisites": ["doc:ai-apps/java-first-llm"],
-        "followUps": ["doc:ai-apps/java-transactional-history"]
+        "prerequisites": [
+          "doc:ai-apps/java-first-llm"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-transactional-history"
+        ]
       },
       {
         "id": "java-transactional-history",
@@ -30,8 +36,13 @@
         "outcome": "让一次问答原子提交，失败不留下半轮。",
         "outcomeEn": "Commit a whole turn atomically without leaving partial history.",
         "outcomeTw": "讓一次問答原子提交，失敗不留下半輪。",
-        "prerequisites": ["doc:ai-apps/java-structured-output"],
-        "followUps": ["doc:ai-apps/java-concurrent-history"]
+        "prerequisites": [
+          "doc:ai-apps/java-structured-output"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-concurrent-history",
+          "doc:ai-apps/java-context-wire-budget"
+        ]
       },
       {
         "id": "java-concurrent-history",
@@ -39,8 +50,12 @@
         "outcome": "用版本票据实现先提交者获胜，说明与串行的区别。",
         "outcomeEn": "Use version tickets for first-committer-wins and contrast serialization.",
         "outcomeTw": "用版本票據實作先提交者勝出，說明與序列執行的差異。",
-        "prerequisites": ["doc:ai-apps/java-transactional-history"],
-        "followUps": ["doc:ai-apps/java-tool-boundary"]
+        "prerequisites": [
+          "doc:ai-apps/java-transactional-history"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-tool-boundary"
+        ]
       },
       {
         "id": "java-tool-boundary",
@@ -48,8 +63,12 @@
         "outcome": "限制工具白名单、参数与预算，区分超时和真正停止。",
         "outcomeEn": "Bound tools, arguments and budgets; distinguish timeout from termination.",
         "outcomeTw": "限制工具白名單、參數與預算，區分逾時和真正停止。",
-        "prerequisites": ["doc:ai-apps/java-structured-output"],
-        "followUps": ["doc:ai-apps/java-retrieval-evidence"]
+        "prerequisites": [
+          "doc:ai-apps/java-structured-output"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-retrieval-evidence"
+        ]
       },
       {
         "id": "java-retrieval-evidence",
@@ -57,8 +76,12 @@
         "outcome": "复算 BM25 检索和无答案误命中，识别玩具语料的局限。",
         "outcomeEn": "Recompute BM25 retrieval and false hits on unanswerable toy queries.",
         "outcomeTw": "重算 BM25 檢索與無答案誤命中，辨識玩具語料的侷限。",
-        "prerequisites": ["doc:ai-apps/java-first-llm"],
-        "followUps": ["doc:ai-apps/java-grounded-claims"]
+        "prerequisites": [
+          "doc:ai-apps/java-first-llm"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-grounded-claims"
+        ]
       },
       {
         "id": "java-grounded-claims",
@@ -66,8 +89,12 @@
         "outcome": "校验证据与声明对应，而不把规则匹配当语义蕴含。",
         "outcomeEn": "Validate claim–evidence correspondence without claiming semantic entailment.",
         "outcomeTw": "校驗證據與聲明對應，不將規則比對當成語義蘊含。",
-        "prerequisites": ["doc:ai-apps/java-retrieval-evidence"],
-        "followUps": ["doc:ai-apps/java-streaming-boundary"]
+        "prerequisites": [
+          "doc:ai-apps/java-retrieval-evidence"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-streaming-boundary"
+        ]
       },
       {
         "id": "java-streaming-boundary",
@@ -75,8 +102,12 @@
         "outcome": "区分流式预览与可提交的完整回答。",
         "outcomeEn": "Separate streamed previews from a complete, committable answer.",
         "outcomeTw": "區分串流預覽與可提交的完整回答。",
-        "prerequisites": ["doc:ai-apps/java-structured-output"],
-        "followUps": ["doc:ai-apps/java-stream-session-ownership"],
+        "prerequisites": [
+          "doc:ai-apps/java-structured-output"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-stream-session-ownership"
+        ],
         "reviewNotice": {
           "date": "2026-10-07",
           "text": [
@@ -94,8 +125,12 @@
         "outcome": "比较三种会话策略，阻止旧回调覆盖当前请求。",
         "outcomeEn": "Compare three session policies and reject callbacks from superseded requests.",
         "outcomeTw": "比較三種會話策略，阻止舊回呼覆蓋目前請求。",
-        "prerequisites": ["doc:ai-apps/java-streaming-boundary"],
-        "followUps": ["doc:ai-apps/java-transport-cancellation"],
+        "prerequisites": [
+          "doc:ai-apps/java-streaming-boundary"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-transport-cancellation"
+        ],
         "reviewNotice": {
           "date": "2026-10-07",
           "text": [
@@ -113,7 +148,9 @@
         "outcome": "区分本地取消、连接停止和远端任务终止。",
         "outcomeEn": "Distinguish local cancellation, transport shutdown and remote termination.",
         "outcomeTw": "區分本機取消、連線停止和遠端任務終止。",
-        "prerequisites": ["doc:ai-apps/java-stream-session-ownership"],
+        "prerequisites": [
+          "doc:ai-apps/java-stream-session-ownership"
+        ],
         "reviewNotice": {
           "date": "2026-10-07",
           "text": [
@@ -123,7 +160,10 @@
           ],
           "href": "/docs/ai-apps/java-stream-session-ownership",
           "fixHref": "https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md"
-        }
+        },
+        "followUps": [
+          "doc:ai-apps/java-retry-deadline"
+        ]
       },
       {
         "id": "typescript-output-boundary",
@@ -131,7 +171,9 @@
         "outcome": "理解静态类型为何不能替代外部响应的运行时校验。",
         "outcomeEn": "Explain why static types do not replace runtime validation of external responses.",
         "outcomeTw": "理解靜態型別為何不能取代外部回應的執行期校驗。",
-        "prerequisites": ["doc:ai-apps/java-structured-output"]
+        "prerequisites": [
+          "doc:ai-apps/java-structured-output"
+        ]
       },
       {
         "id": "radar-publishing-pipeline",
@@ -140,6 +182,41 @@
         "outcomeEn": "Trace collection, deduplication and publication, distinguishing historical and current settings.",
         "outcomeTw": "追蹤採集、去重與發布，區分歷史實作與目前設定。",
         "prerequisites": []
+      },
+      {
+        "id": "java-context-wire-budget",
+        "doc": "ai-apps/java-context-wire-budget",
+        "outcome": "通过裁剪、提交、重启和扩窗的连续实验，分离可回看的完整历史与一次模型请求的上下文。",
+        "outcomeEn": "Follow narrowing, commit, restart and expansion to separate durable conversation history from one request context.",
+        "outcomeTw": "通過裁剪、提交、重啟和擴窗的連續實驗，分離可回看的完整歷史與一次模型請求的上下文。",
+        "prerequisites": [
+          "doc:ai-apps/java-transactional-history"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-durable-turns"
+        ]
+      },
+      {
+        "id": "java-retry-deadline",
+        "doc": "ai-apps/java-retry-deadline",
+        "outcome": "七种真实本地 HTTP 情况，比较状态码、Retry-After、尝试上限和总等待预算。",
+        "outcomeEn": "Seven local HTTP conditions separate retryability, Retry-After, attempt limits and elapsed-time budgets.",
+        "outcomeTw": "七種真實本地 HTTP 情況，比較狀態碼、Retry-After、嘗試上限和總等待預算。",
+        "prerequisites": [
+          "doc:ai-apps/java-transport-cancellation"
+        ],
+        "followUps": []
+      },
+      {
+        "id": "java-durable-turns",
+        "doc": "ai-apps/java-durable-turns",
+        "outcome": "校验追加日志、142种截断前缀和三个真实异常退出子进程，明确本地提交与远端幂等的边界。",
+        "outcomeEn": "Checksummed append records, 142 truncated prefixes and three halted JVMs distinguish local recovery from remote exactly-once execution.",
+        "outcomeTw": "校驗追加日志、142種截斷前綴和三個真實異常退出子進程，明確本地提交與遠端冪等的邊界。",
+        "prerequisites": [
+          "doc:ai-apps/java-context-wire-budget"
+        ],
+        "followUps": []
       },
       {
         "id": "tool-calling",
@@ -392,8 +469,12 @@
         "outcome": "用未来信息泄漏反例检验因果掩码。",
         "outcomeEn": "Test causal masking with a future-information leakage counterexample.",
         "outcomeTw": "用未來資訊洩漏反例檢驗因果遮罩。",
-        "prerequisites": ["doc:llm/kv-cache"],
-        "followUps": ["doc:llm/kv-cache-equivalence"]
+        "prerequisites": [
+          "doc:llm/kv-cache"
+        ],
+        "followUps": [
+          "doc:llm/kv-cache-equivalence"
+        ]
       },
       {
         "id": "kv-cache-equivalence",
@@ -401,8 +482,13 @@
         "outcome": "逐步比较完整重算与增量计算的数值结果。",
         "outcomeEn": "Compare full and incremental computation step by step.",
         "outcomeTw": "逐步比較完整重算與增量計算的數值結果。",
-        "prerequisites": ["doc:llm/causal-mask-lab"],
-        "followUps": ["doc:llm/sliding-cache-positions"]
+        "prerequisites": [
+          "doc:llm/causal-mask-lab"
+        ],
+        "followUps": [
+          "doc:llm/sliding-cache-positions",
+          "doc:llm/tiled-online-softmax"
+        ]
       },
       {
         "id": "sliding-cache-positions",
@@ -410,8 +496,12 @@
         "outcome": "滑动窗口裁剪后仍保留正确位置语义。",
         "outcomeEn": "Preserve position semantics after sliding-window eviction.",
         "outcomeTw": "滑動視窗裁切後仍保留正確位置語義。",
-        "prerequisites": ["doc:llm/kv-cache-equivalence"],
-        "followUps": ["doc:llm/prefix-cache-invalidation"]
+        "prerequisites": [
+          "doc:llm/kv-cache-equivalence"
+        ],
+        "followUps": [
+          "doc:llm/prefix-cache-invalidation"
+        ]
       },
       {
         "id": "prefix-cache-invalidation",
@@ -419,8 +509,12 @@
         "outcome": "识别模型、位置与输入变更后的失效条件。",
         "outcomeEn": "Identify invalidation conditions after model, position or input changes.",
         "outcomeTw": "辨識模型、位置與輸入變更後的失效條件。",
-        "prerequisites": ["doc:llm/sliding-cache-positions"],
-        "followUps": ["doc:llm/longest-prefix-reuse"]
+        "prerequisites": [
+          "doc:llm/sliding-cache-positions"
+        ],
+        "followUps": [
+          "doc:llm/longest-prefix-reuse"
+        ]
       },
       {
         "id": "longest-prefix-reuse",
@@ -428,8 +522,12 @@
         "outcome": "匹配最长有效前缀并续算剩余 Token。",
         "outcomeEn": "Match the longest valid prefix and compute the remaining tokens.",
         "outcomeTw": "比對最長有效前綴並續算剩餘 Token。",
-        "prerequisites": ["doc:llm/prefix-cache-invalidation"],
-        "followUps": ["doc:llm/prefix-cache-byte-budget"]
+        "prerequisites": [
+          "doc:llm/prefix-cache-invalidation"
+        ],
+        "followUps": [
+          "doc:llm/prefix-cache-byte-budget"
+        ]
       },
       {
         "id": "prefix-cache-byte-budget",
@@ -437,8 +535,12 @@
         "outcome": "按数组字节数限制 LRU，解释工作集放不下时的零命中。",
         "outcomeEn": "Budget array bytes in LRU and explain zero hits when the working set does not fit.",
         "outcomeTw": "依陣列位元組數限制 LRU，解釋工作集放不下時的零命中。",
-        "prerequisites": ["doc:llm/longest-prefix-reuse"],
-        "followUps": ["doc:llm/prefix-cache-admission"]
+        "prerequisites": [
+          "doc:llm/longest-prefix-reuse"
+        ],
+        "followUps": [
+          "doc:llm/prefix-cache-admission"
+        ]
       },
       {
         "id": "prefix-cache-admission",
@@ -446,7 +548,9 @@
         "outcome": "同时判断数值等价、计算节省与实测时间。",
         "outcomeEn": "Evaluate numerical equivalence, saved work and measured time separately.",
         "outcomeTw": "同時判斷數值等價、計算節省與實測時間。",
-        "prerequisites": ["doc:llm/prefix-cache-byte-budget"],
+        "prerequisites": [
+          "doc:llm/prefix-cache-byte-budget"
+        ],
         "reviewNotice": {
           "date": "2026-10-07",
           "text": [
@@ -456,7 +560,10 @@
           ],
           "href": "/docs/llm/prefix-cache-admission",
           "fixHref": "https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md"
-        }
+        },
+        "followUps": [
+          "doc:llm/cache-cost-profile"
+        ]
       },
       {
         "id": "context-position-experiment",
@@ -465,7 +572,9 @@
         "outcomeEn": "Separate planned, attempted and valid calls, including rate-limited incomplete runs.",
         "outcomeTw": "區分計畫、嘗試與有效回應，保留限流後的不完整結果。",
         "prerequisites": [],
-        "followUps": ["doc:llm/context-position-paired-protocol"]
+        "followUps": [
+          "doc:llm/context-position-paired-protocol"
+        ]
       },
       {
         "id": "context-position-paired-protocol",
@@ -473,8 +582,12 @@
         "outcome": "复核 24 次真实对照，说明全对结果的测量天花板。",
         "outcomeEn": "Audit 24 real paired calls and explain a ceiling effect.",
         "outcomeTw": "複核 24 次真實對照，說明全對結果的測量天花板。",
-        "prerequisites": ["doc:llm/context-position-experiment"],
-        "followUps": ["doc:llm/context-similar-distractors"]
+        "prerequisites": [
+          "doc:llm/context-position-experiment"
+        ],
+        "followUps": [
+          "doc:llm/context-similar-distractors"
+        ]
       },
       {
         "id": "context-similar-distractors",
@@ -482,7 +595,44 @@
         "outcome": "检查 128 项离线实验设计，不把准备完成当模型结果。",
         "outcomeEn": "Inspect a 128-case offline protocol without claiming model results.",
         "outcomeTw": "檢查 128 項離線實驗設計，不將準備完成當成模型結果。",
-        "prerequisites": ["doc:llm/context-position-paired-protocol"]
+        "prerequisites": [
+          "doc:llm/context-position-paired-protocol"
+        ]
+      },
+      {
+        "id": "cache-cost-profile",
+        "doc": "llm/cache-cost-profile",
+        "outcome": "对909次查询做分段计时，验证源码签名、查找、复制与续算分别花在哪里，同时保留缓存仍慢的结果。",
+        "outcomeEn": "Profile 909 queries across signatures, lookup, copying and continuation, including the remaining slowdown.",
+        "outcomeTw": "對909次查詢做分段計時，驗證源碼簽名、查找、復制與續算分別花在哪里，同時保留快取仍慢的結果。",
+        "prerequisites": [
+          "doc:llm/prefix-cache-admission"
+        ],
+        "followUps": []
+      },
+      {
+        "id": "tiled-online-softmax",
+        "doc": "llm/tiled-online-softmax",
+        "outcome": "从错误的分块平均出发，推导在线Softmax累加，并用9组数组和558次计时区分省内存与加速。",
+        "outcomeEn": "Derive online softmax from a failing block-average baseline and separate smaller temporaries from measured speed.",
+        "outcomeTw": "從錯誤的分塊平均出發，推導在線Softmax累加，并用9組陣列和558次計時區分省內存與加速。",
+        "prerequisites": [
+          "doc:llm/kv-cache-equivalence"
+        ],
+        "followUps": [
+          "doc:llm/kv-int8-error"
+        ]
+      },
+      {
+        "id": "kv-int8-error",
+        "doc": "llm/kv-int8-error",
+        "outcome": "比较整张量与逐行int8量化，显式计入scale，观察离群值对注意力输出的影响。",
+        "outcomeEn": "Compare tensor and row-wise int8 quantization, including scale bytes and attention error under outliers.",
+        "outcomeTw": "比較整張量與逐行int8量化，顯式計入scale，觀察離群值對注意力輸出的影響。",
+        "prerequisites": [
+          "doc:llm/tiled-online-softmax"
+        ],
+        "followUps": []
       },
       {
         "id": "token",
@@ -612,7 +762,9 @@
         "outcomeEn": "Run contact-based pickup and preserve failed trajectories.",
         "outcomeTw": "執行接觸抓取並保留失敗軌跡。",
         "prerequisites": [],
-        "followUps": ["doc:embodied-ai/mujoco-grasp-guard"]
+        "followUps": [
+          "doc:embodied-ai/mujoco-grasp-guard"
+        ]
       },
       {
         "id": "mujoco-grasp-guard",
@@ -620,8 +772,12 @@
         "outcome": "在搬运前验收抓取，失败时停止推进。",
         "outcomeEn": "Validate grasp before transfer and stop on failure.",
         "outcomeTw": "搬運前驗收抓取，失敗時停止推進。",
-        "prerequisites": ["doc:embodied-ai/mujoco-first-pick-place"],
-        "followUps": ["doc:embodied-ai/mujoco-transfer-monitor"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-first-pick-place"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-transfer-monitor"
+        ]
       },
       {
         "id": "mujoco-transfer-monitor",
@@ -629,8 +785,12 @@
         "outcome": "持续监测搬运中的滑落，而不只检查起点。",
         "outcomeEn": "Monitor slips during transfer, not only at its start.",
         "outcomeTw": "持續監測搬運中的滑落，不僅檢查起點。",
-        "prerequisites": ["doc:embodied-ai/mujoco-grasp-guard"],
-        "followUps": ["doc:embodied-ai/mujoco-observation-freshness"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-grasp-guard"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-observation-freshness"
+        ]
       },
       {
         "id": "mujoco-observation-freshness",
@@ -638,8 +798,12 @@
         "outcome": "按采样时间判断缺测与旧包。",
         "outcomeEn": "Judge missing and stale observations by capture time.",
         "outcomeTw": "依取樣時間判斷缺測與舊封包。",
-        "prerequisites": ["doc:embodied-ai/mujoco-transfer-monitor"],
-        "followUps": ["doc:embodied-ai/mujoco-recovery-gate"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-transfer-monitor"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-recovery-gate"
+        ]
       },
       {
         "id": "mujoco-recovery-gate",
@@ -647,8 +811,12 @@
         "outcome": "恢复通信后重新验收，再决定继续。",
         "outcomeEn": "Revalidate after communication recovery before continuing.",
         "outcomeTw": "恢復通訊後重新驗收，再決定繼續。",
-        "prerequisites": ["doc:embodied-ai/mujoco-observation-freshness"],
-        "followUps": ["doc:embodied-ai/mujoco-recovery-ablation"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-observation-freshness"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-recovery-ablation"
+        ]
       },
       {
         "id": "mujoco-recovery-ablation",
@@ -656,8 +824,12 @@
         "outcome": "分离恢复门控和路径重规划的影响。",
         "outcomeEn": "Separate recovery gating from replanning effects.",
         "outcomeTw": "分離恢復門控與路徑重新規劃的影響。",
-        "prerequisites": ["doc:embodied-ai/mujoco-recovery-gate"],
-        "followUps": ["doc:embodied-ai/mujoco-phase-contracts"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-recovery-gate"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-phase-contracts"
+        ]
       },
       {
         "id": "mujoco-phase-contracts",
@@ -665,8 +837,12 @@
         "outcome": "按阶段选择验收条件，避免下降时误触高度规则。",
         "outcomeEn": "Choose phase-specific checks instead of applying lift-height rules during lowering.",
         "outcomeTw": "依階段選擇驗收條件，避免下降時誤觸高度規則。",
-        "prerequisites": ["doc:embodied-ai/mujoco-recovery-ablation"],
-        "followUps": ["doc:embodied-ai/mujoco-exit-actions"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-recovery-ablation"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-exit-actions"
+        ]
       },
       {
         "id": "mujoco-exit-actions",
@@ -674,8 +850,12 @@
         "outcome": "解释报警后保持、停止与撤离的物理后果。",
         "outcomeEn": "Explain physical consequences of hold, stop and retreat after an alarm.",
         "outcomeTw": "解釋警報後保持、停止與撤離的物理後果。",
-        "prerequisites": ["doc:embodied-ai/mujoco-phase-contracts"],
-        "followUps": ["doc:embodied-ai/mujoco-release-verification"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-phase-contracts"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-release-verification"
+        ]
       },
       {
         "id": "mujoco-release-verification",
@@ -683,8 +863,12 @@
         "outcome": "用接触与稳定窗口验收释放结果。",
         "outcomeEn": "Validate release through contact and a stability window.",
         "outcomeTw": "用接觸與穩定視窗驗收釋放結果。",
-        "prerequisites": ["doc:embodied-ai/mujoco-exit-actions"],
-        "followUps": ["doc:embodied-ai/mujoco-recovery-budget"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-exit-actions"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-recovery-budget"
+        ]
       },
       {
         "id": "mujoco-recovery-budget",
@@ -692,8 +876,12 @@
         "outcome": "给重新验收加时限，并保留终止原因。",
         "outcomeEn": "Bound revalidation time and retain the reason for termination.",
         "outcomeTw": "為重新驗收加上時限，並保留終止原因。",
-        "prerequisites": ["doc:embodied-ai/mujoco-release-verification"],
-        "followUps": ["doc:embodied-ai/mujoco-completion-lifecycle"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-release-verification"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-completion-lifecycle"
+        ]
       },
       {
         "id": "mujoco-completion-lifecycle",
@@ -701,8 +889,12 @@
         "outcome": "分开记录历史完成和当前有效性。",
         "outcomeEn": "Record historical completion separately from current validity.",
         "outcomeTw": "分開記錄歷史完成與目前有效性。",
-        "prerequisites": ["doc:embodied-ai/mujoco-recovery-budget"],
-        "followUps": ["doc:embodied-ai/mujoco-abort-exit"],
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-recovery-budget"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-abort-exit"
+        ],
         "reviewNotice": {
           "date": "2026-10-07",
           "text": [
@@ -720,8 +912,12 @@
         "outcome": "检验终止后的撤离动作，而不把状态改名当安全。",
         "outcomeEn": "Test exit actions after abort rather than equating a state label with safety.",
         "outcomeTw": "檢驗終止後的撤離動作，不將狀態改名當成安全。",
-        "prerequisites": ["doc:embodied-ai/mujoco-completion-lifecycle"],
-        "followUps": ["doc:embodied-ai/mujoco-phase-recovery"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-completion-lifecycle"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-phase-recovery"
+        ]
       },
       {
         "id": "mujoco-phase-recovery",
@@ -729,8 +925,12 @@
         "outcome": "连接阶段、恢复预算和退出动作。",
         "outcomeEn": "Connect phase checks, recovery budgets and exit actions.",
         "outcomeTw": "連接階段、恢復預算與退出動作。",
-        "prerequisites": ["doc:embodied-ai/mujoco-abort-exit"],
-        "followUps": ["doc:embodied-ai/mujoco-qualified-completion"]
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-abort-exit"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-qualified-completion"
+        ]
       },
       {
         "id": "mujoco-qualified-completion",
@@ -738,7 +938,9 @@
         "outcome": "区分物理放置、当前有效与合格完成。",
         "outcomeEn": "Distinguish physical placement, current validity and qualified completion.",
         "outcomeTw": "區分物理放置、目前有效與合格完成。",
-        "prerequisites": ["doc:embodied-ai/mujoco-phase-recovery"],
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-phase-recovery"
+        ],
         "reviewNotice": {
           "date": "2026-10-07",
           "text": [
@@ -748,7 +950,10 @@
           ],
           "href": "/docs/embodied-ai/mujoco-qualified-completion",
           "fixHref": "https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md"
-        }
+        },
+        "followUps": [
+          "doc:embodied-ai/mujoco-planar-pd"
+        ]
       },
       {
         "id": "openvla-action-pipeline",
@@ -757,6 +962,43 @@
         "outcomeEn": "Trace the OpenVLA action interface without claiming a completed training run.",
         "outcomeTw": "追蹤 OpenVLA 動作介面，不將導讀當成已完成訓練。",
         "prerequisites": []
+      },
+      {
+        "id": "mujoco-planar-pd",
+        "doc": "embodied-ai/mujoco-planar-pd",
+        "outcome": "用二维力控执行器比较质量与PD阻尼，记录饱和、超调和稳定完成，避免把经过目标当作任务成功。",
+        "outcomeEn": "Compare mass and PD damping in a planar force-controlled actuator, separating target crossing from stable completion.",
+        "outcomeTw": "用二維力控執行器比較質量與PD阻尼，記錄飽和、超調和穩定完成，避免把經過目標當作任務成功。",
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-qualified-completion"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-obstacle-clearance"
+        ]
+      },
+      {
+        "id": "mujoco-obstacle-clearance",
+        "doc": "embodied-ai/mujoco-obstacle-clearance",
+        "outcome": "六条实际接触轨迹对照直达、贴边和留余量路径，解释几何尺寸、跟踪误差与碰撞之间的关系。",
+        "outcomeEn": "Six contact trajectories compare direct, edge and clearance paths while separating geometry from controller tracking.",
+        "outcomeTw": "六條實際接觸軌跡對照直達、貼邊和留餘量路徑，解釋幾何尺寸、跟蹤誤差與碰撞之間的關係。",
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-planar-pd"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-delayed-feedback"
+        ]
+      },
+      {
+        "id": "mujoco-delayed-feedback",
+        "doc": "embodied-ai/mujoco-delayed-feedback",
+        "outcome": "24条配对轨迹比较即时/80ms延迟、位置噪声和常速度外推，保留超调下降但任务仍失败的结果。",
+        "outcomeEn": "Twenty-four paired traces compare delay, position noise and constant-velocity prediction, retaining incomplete recoveries.",
+        "outcomeTw": "24條配對軌跡比較即時/80ms延遲、位置噪聲和常速度外推，保留超調下降但任務仍失敗的結果。",
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-obstacle-clearance"
+        ],
+        "followUps": []
       },
       {
         "id": "what-is-embodied-ai",

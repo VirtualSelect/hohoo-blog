@@ -80,8 +80,8 @@
     "type": "project",
     "title": "Java LLM 实践集",
     "titleEn": "Java LLM Practice",
-    "description": "Java 对话、结构化输出、工具与引用验收、流式连接取消，以及本地注意力、缓存准入和实测查询实验。",
-    "descriptionEn": "Java conversation, structured output, tools, claim validation and streaming cancellation, alongside attention, cache admission and measured-query experiments.",
+    "description": "Java 会话、请求重试与持久化边界，以及注意力、缓存成本和量化误差的可复现实验。",
+    "descriptionEn": "Reproducible Java conversation, retry and persistence boundaries, alongside attention, cache-cost and quantization-error experiments.",
     "domain": "ai-apps",
     "status": "building",
     "featured": true,
@@ -90,7 +90,9 @@
       "Gson",
       "HTTP",
       "TypeScript",
-      "Node.js"
+      "Node.js",
+      "Python",
+      "NumPy"
     ],
     "repo": "https://github.com/VirtualSelect/hohoo-ai-lab",
     "related": [
@@ -128,7 +130,13 @@
       "doc:ai-apps/java-transport-cancellation",
       "lab:transport-cancellation",
       "doc:llm/prefix-cache-admission",
-      "lab:prefix-cache-admission"
+      "lab:prefix-cache-admission",
+      "doc:ai-apps/java-context-wire-budget",
+      "doc:ai-apps/java-retry-deadline",
+      "doc:ai-apps/java-durable-turns",
+      "doc:llm/cache-cost-profile",
+      "doc:llm/tiled-online-softmax",
+      "doc:llm/kv-int8-error"
     ],
     "architecture": [
       "Console input",
@@ -403,12 +411,66 @@
         "description": "4860次实测查询比较三种缓存准入策略，把字节预算、工作集、计算量与本地耗时放在一起验证。",
         "descriptionEn": "4,860 measured queries compare three admission policies, connecting byte budgets, working sets, computation and local elapsed time.",
         "descriptionTw": "4860次實測查詢比較三種快取準入策略，把位元組預算、工作集、計算量與本地耗時放在一起驗證。"
+      },
+      {
+        "href": "/docs/ai-apps/java-context-wire-budget",
+        "label": "Java 会话历史与请求窗口：裁掉的旧事实还能回来吗？",
+        "labelEn": "Java history and request windows: can a trimmed fact return?",
+        "labelTw": "Java 會話歷史與請求窗口：裁掉的舊事實還能回來嗎？",
+        "description": "通过裁剪、提交、重启和扩窗的连续实验，分离可回看的完整历史与一次模型请求的上下文。",
+        "descriptionEn": "Follow narrowing, commit, restart and expansion to separate durable conversation history from one request context.",
+        "descriptionTw": "通過裁剪、提交、重啟和擴窗的連續實驗，分離可回看的完整歷史與一次模型請求的上下文。"
+      },
+      {
+        "href": "/docs/ai-apps/java-retry-deadline",
+        "label": "Java 请求重试：三次超时，不等于一个总期限",
+        "labelEn": "Java retries: three timeouts are not one deadline",
+        "labelTw": "Java 請求重試：三次超時，不等于一個總期限",
+        "description": "七种真实本地 HTTP 情况，比较状态码、Retry-After、尝试上限和总等待预算。",
+        "descriptionEn": "Seven local HTTP conditions separate retryability, Retry-After, attempt limits and elapsed-time budgets.",
+        "descriptionTw": "七種真實本地 HTTP 情況，比較狀態碼、Retry-After、嘗試上限和總等待預算。"
+      },
+      {
+        "href": "/docs/ai-apps/java-durable-turns",
+        "label": "Java 对话历史落盘：程序崩溃后，半轮记录怎么办？",
+        "labelEn": "Durable Java turns: what survives a process crash?",
+        "labelTw": "Java 對話歷史落盤：程序崩潰後，半輪記錄怎么辦？",
+        "description": "校验追加日志、142种截断前缀和三个真实异常退出子进程，明确本地提交与远端幂等的边界。",
+        "descriptionEn": "Checksummed append records, 142 truncated prefixes and three halted JVMs distinguish local recovery from remote exactly-once execution.",
+        "descriptionTw": "校驗追加日志、142種截斷前綴和三個真實異常退出子進程，明確本地提交與遠端冪等的邊界。"
+      },
+      {
+        "href": "/docs/llm/cache-cost-profile",
+        "label": "KV 缓存开销剖析：把省下的计算和新增的工作分开",
+        "labelEn": "Profiling KV reuse: saved work versus added overhead",
+        "labelTw": "KV 快取開銷剖析：把省下的計算和新增的工作分開",
+        "description": "对909次查询做分段计时，验证源码签名、查找、复制与续算分别花在哪里，同时保留缓存仍慢的结果。",
+        "descriptionEn": "Profile 909 queries across signatures, lookup, copying and continuation, including the remaining slowdown.",
+        "descriptionTw": "對909次查詢做分段計時，驗證源碼簽名、查找、復制與續算分別花在哪里，同時保留快取仍慢的結果。"
+      },
+      {
+        "href": "/docs/llm/tiled-online-softmax",
+        "label": "注意力分块：不保存完整分数矩阵，如何保持结果？",
+        "labelEn": "Tiled attention: preserving results without a full score matrix",
+        "labelTw": "注意力分塊：不保存完整分數矩陣，如何保持結果？",
+        "description": "从错误的分块平均出发，推导在线Softmax累加，并用9组数组和558次计时区分省内存与加速。",
+        "descriptionEn": "Derive online softmax from a failing block-average baseline and separate smaller temporaries from measured speed.",
+        "descriptionTw": "從錯誤的分塊平均出發，推導在線Softmax累加，并用9組陣列和558次計時區分省內存與加速。"
+      },
+      {
+        "href": "/docs/llm/kv-int8-error",
+        "label": "KV 量化入门：省下多少字节，又引入什么误差？",
+        "labelEn": "KV quantization: how many bytes, and at what error?",
+        "labelTw": "KV 量化入門：省下多少位元組，又引入什麼誤差？",
+        "description": "比较整张量与逐行int8量化，显式计入scale，观察离群值对注意力输出的影响。",
+        "descriptionEn": "Compare tensor and row-wise int8 quantization, including scale bytes and attention error under outliers.",
+        "descriptionTw": "比較整張量與逐行int8量化，顯式計入scale，觀察離群值對注意力輸出的影響。"
       }
     ],
     "titleTw": "Java LLM 實作集",
-    "descriptionTw": "Java 對話、結構化輸出、工具與引用驗收、流式連接取消，以及本地注意力、快取準入和實測查詢實驗。",
+    "descriptionTw": "Java 會話、請求重試與持久化邊界，以及注意力、快取成本和量化誤差的可復現實驗。",
     "sourceLocale": "zh-CN",
-    "updated": "2026-10-05"
+    "updated": "2026-10-07"
   },
   {
     "id": "project:hohoo-embodied-agent",
@@ -418,13 +480,13 @@
     "title": "Hohoo 具身实验",
     "titleEn": "Hohoo Embodied Experiments",
     "titleTw": "Hohoo 具身實驗",
-    "description": "十四轮 MuJoCo 教学实验，从拾取偏移到阶段恢复与完成资格，记录物理结果、执行状态和证据有效期。",
-    "descriptionEn": "Fourteen MuJoCo teaching studies from pickup bias to phase-aware recovery and qualified completion, retaining physical outcomes, execution state and evidence validity.",
-    "descriptionTw": "十四輪 MuJoCo 教學實驗，從拾取偏移到階段恢復與完成資格，記錄物理結果、執行狀態和證據有效期。",
+    "description": "MuJoCo 抓取放置与二维力控两个教学场景，记录阶段契约、调参、绕障和延迟反馈的实际结果与失败。",
+    "descriptionEn": "Two MuJoCo teaching scenes—pick-and-place and planar force control—record contracts, tuning, clearance and delayed-feedback outcomes, including failures.",
+    "descriptionTw": "MuJoCo 抓取放置與二維力控兩個教學場景，記錄階段契約、調參、繞障和延遲反饋的實際結果與失敗。",
     "domain": "embodied-ai",
     "status": "experiment",
     "date": "2026-09-28",
-    "updated": "2026-10-05",
+    "updated": "2026-10-07",
     "featured": false,
     "stack": [
       "Python 3.12",
@@ -459,7 +521,10 @@
       "doc:embodied-ai/mujoco-phase-recovery",
       "lab:phase-recovery",
       "doc:embodied-ai/mujoco-qualified-completion",
-      "lab:qualified-completion"
+      "lab:qualified-completion",
+      "doc:embodied-ai/mujoco-planar-pd",
+      "doc:embodied-ai/mujoco-obstacle-clearance",
+      "doc:embodied-ai/mujoco-delayed-feedback"
     ],
     "sections": [
       {
@@ -655,6 +720,33 @@
         "description": "8条MuJoCo轨迹、三个旁路判定器与真实回放，区分历史放置、当前证据和恢复流程中的完成资格。",
         "descriptionEn": "Eight MuJoCo trajectories, three passive readouts and recorded-state replay separate historical placement, current evidence and qualified completion.",
         "descriptionTw": "8條MuJoCo軌跡、三個旁路判定器與真實回放，區分歷史放置、當前證據和恢復流程中的完成資格。"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-planar-pd",
+        "label": "MuJoCo 第二场景：目标位置相同，为什么有的控制器停不住？",
+        "labelEn": "A second MuJoCo scene: why does the actuator overshoot?",
+        "labelTw": "MuJoCo 第二場景：目標位置相同，為什麼有的控制器停不住？",
+        "description": "用二维力控执行器比较质量与PD阻尼，记录饱和、超调和稳定完成，避免把经过目标当作任务成功。",
+        "descriptionEn": "Compare mass and PD damping in a planar force-controlled actuator, separating target crossing from stable completion.",
+        "descriptionTw": "用二維力控執行器比較質量與PD阻尼，記錄飽和、超調和穩定完成，避免把經過目標當作任務成功。"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-obstacle-clearance",
+        "label": "MuJoCo 绕障：路径上的点能过去，执行器就能过去吗？",
+        "labelEn": "MuJoCo obstacle clearance: a point path is not a body path",
+        "labelTw": "MuJoCo 繞障：路徑上的點能過去，執行器就能過去嗎？",
+        "description": "六条实际接触轨迹对照直达、贴边和留余量路径，解释几何尺寸、跟踪误差与碰撞之间的关系。",
+        "descriptionEn": "Six contact trajectories compare direct, edge and clearance paths while separating geometry from controller tracking.",
+        "descriptionTw": "六條實際接觸軌跡對照直達、貼邊和留餘量路徑，解釋幾何尺寸、跟蹤誤差與碰撞之間的關係。"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-delayed-feedback",
+        "label": "MuJoCo 延迟观测：知道旧位置，能预测现在吗？",
+        "labelEn": "Delayed MuJoCo feedback: can an old observation predict now?",
+        "labelTw": "MuJoCo 延遲觀測：知道舊位置，能預測現在嗎？",
+        "description": "24条配对轨迹比较即时/80ms延迟、位置噪声和常速度外推，保留超调下降但任务仍失败的结果。",
+        "descriptionEn": "Twenty-four paired traces compare delay, position noise and constant-velocity prediction, retaining incomplete recoveries.",
+        "descriptionTw": "24條配對軌跡比較即時/80ms延遲、位置噪聲和常速度外推，保留超調下降但任務仍失敗的結果。"
       }
     ]
   }

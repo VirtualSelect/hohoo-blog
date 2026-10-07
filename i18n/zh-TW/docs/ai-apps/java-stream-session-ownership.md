@@ -67,9 +67,9 @@ A 發起早但回傳慢，B 發起晚卻回傳快；最後完成者勝出會讓 
 
 使用 Java 8、一個真實工作執行緒和主執行緒。輸入是合成的記憶體 SSE，解析器原樣重用[上一篇的文本協議](/docs/ai-apps/java-streaming-boundary)。本輪不呼叫 Agnes，也不重新測試網路傳輸。
 
-通過兩把 `CountDownLatch` 控制先後關系：工作執行緒告訴主執行緒“已經到達指定位置”，主執行緒完成取消、清空或切換後，再放行回呼。這比不斷運行帶 `sleep` 的測試更明確：每次都確實進入所聲稱的交錯。
+通過兩把 `CountDownLatch` 控制先後關係：工作執行緒告訴主執行緒“已經到達指定位置”，主執行緒完成取消、清空或切換後，再放行回呼。這比不斷運行帶 `sleep` 的測試更明確：每次都確實進入所聲稱的交錯。
 
-[Java 8 CountDownLatch 文檔](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CountDownLatch.html)定義了等待與放行之間的可見性關系。這裡用它構造可重複測試，不用它作為產品會話鎖。等待設置了 5 秒上限；超時視為測試失敗，不作為模型延遲。
+[Java 8 CountDownLatch 文檔](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CountDownLatch.html)定義了等待與放行之間的可見性關係。這裡用它構造可重複測試，不用它作為產品會話鎖。等待設置了 5 秒上限；超時視為測試失敗，不作為模型延遲。
 
 | 固定場景 | 任意回呼均可寫入 | 僅當前請求可寫入 |
 | --- | --- | --- |

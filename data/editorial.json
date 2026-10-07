@@ -4,8 +4,8 @@
     "project:hohoo-embodied-agent"
   ],
   "featuredArticles": [
-    "doc:ai-apps/java-transport-cancellation",
-    "doc:embodied-ai/mujoco-qualified-completion"
+    "doc:ai-apps/java-durable-turns",
+    "doc:embodied-ai/mujoco-obstacle-clearance"
   ],
   "featuredMedia": {
     "doc:embodied-ai/mujoco-observation-freshness": {
@@ -183,6 +183,14 @@
       "alt": "8条MuJoCo轨迹、三个旁路判定器与真实回放，区分历史放置、当前证据和恢复流程中的完成资格。",
       "altEn": "Eight MuJoCo trajectories, three passive readouts and recorded-state replay separate historical placement, current evidence and qualified completion.",
       "altTw": "8條MuJoCo軌跡、三個旁路判定器與真實回放，區分歷史放置、當前證據和恢復流程中的完成資格。"
+    },
+    "doc:embodied-ai/mujoco-obstacle-clearance": {
+      "src": "/media/practice/planar-path.svg",
+      "width": 800,
+      "height": 400,
+      "alt": "六条实际MuJoCo绕障轨迹",
+      "altEn": "Six recorded MuJoCo obstacle trajectories",
+      "altTw": "六條實際MuJoCo繞障軌跡"
     }
   }
 }
