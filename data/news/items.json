@@ -1,5 +1,35 @@
 [
   {
+    "id": "d5fea414d61e112a2560",
+    "title": "5 Steps to Create SimReady Assets for Robotics with Frontier AI Models",
+    "url": "https://developer.nvidia.com/blog/5-steps-to-create-simready-assets-for-robotics-with-frontier-ai-models",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-08T20:57:55.000Z",
+    "collectedAt": "2026-10-08T21:28:38.959Z",
+    "category": "embodied-ai",
+    "summary": "Preparing CAD assets for robotics simulation requires more than converting geometry to OpenUSD: developers must configure and validate materials, collision... Preparing CAD asse…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-75e05abf",
+    "coverage": []
+  },
+  {
+    "id": "a6073181cdda36b11b7e",
+    "title": "如何在单张 RTX 5090 上用 MiniMax H3 生成实时视频",
+    "url": "https://aihot.news/items/xc7shuv3raxyv5xvh59ez8hjf",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-08T19:01:22.000Z",
+    "collectedAt": "2026-10-08T21:28:38.959Z",
+    "category": "ai-apps",
+    "summary": "ComfyUI 博客作者用智能体搜集各类优化，把 MiniMax H3 实时视频生成压缩到单张 RTX 5090（32 GB 显存）上运行，生成 30 秒视频耗时 23.51 秒，达 1.28 倍实时吞吐。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c91d9983",
+    "coverage": []
+  },
+  {
     "id": "00d8cd492dd233709b99",
     "title": "Toward Evidence-Driven Human-Agent-Robot Teaming for Earth-Independent Anomaly Triage",
     "url": "https://arxiv.org/abs/2610.08933",
