@@ -9,6 +9,8 @@ export function createSharedUniforms(path: PathAtlas) {
   return {
     uPathTexture: { value: path.texture }, uPathSize: { value: path.size },
     uTime: { value: 0 }, uFlow: { value: 1 },
+    uSpectralMode: { value: 0 }, uColorEnergy: { value: 0 },
+    uSecretPathTexture: { value: path.texture }, uSecretPathSize: { value: path.size }, uSecretProgress: { value: 0 },
     uScatterProgress: { value: 0 }, uShapeProgress: { value: 1 }, uRotationProgress: { value: 0 },
     uFieldRotation: { value: new THREE.Matrix4() }, uFieldInverse: { value: new THREE.Matrix4() },
     uViewProjection: { value: new THREE.Matrix4() },
@@ -36,6 +38,12 @@ export function createParticles(count: number, path: PathAtlas, shared: SharedUn
     const stellar = random();
     attributes.aSize[i] = stellar > 0.994 ? 4.7 : stellar > 0.96 ? 2.0 : 0.45 + random() * 0.7;
     attributes.aBrightness[i] = stellar > 0.994 ? 5.5 : stellar > 0.96 ? 1.8 : 0.28 + random() * 0.55;
+    if (shared.uSpectralMode.value > 0) {
+      // Sparse luminous beacons, more visible pinpoints and a fine blue dust
+      // floor. Preserve the standalone portrait's original distribution.
+      attributes.aSize[i] = stellar > 0.9975 ? 3.8 : stellar > 0.975 ? 2.0 : stellar > 0.78 ? 1.15 : 0.45 + phase * 0.5;
+      attributes.aBrightness[i] = stellar > 0.9975 ? 4.5 : stellar > 0.975 ? 1.8 : stellar > 0.78 ? 1.0 : 0.15 + phase * 0.45;
+    }
     attributes.aPhase[i] = phase; attributes.aProgress[i] = progress;
     attributes.aBranch[i] = branch; attributes.aPath[i] = row;
     uv[i * 2] = (i % side + 0.5) / side; uv[i * 2 + 1] = (Math.floor(i / side) + 0.5) / side;
@@ -51,7 +59,7 @@ export function createParticles(count: number, path: PathAtlas, shared: SharedUn
   zero.needsUpdate = true;
   const uniforms = {
     ...shared, uSimulation: { value: zero as THREE.Texture }, uUseSimulation: { value: 0 },
-    uDpr: { value: 1 }, uViewportHeight: { value: 800 },
+    uDpr: { value: 1 }, uViewportHeight: { value: 800 }, uPointFloor: { value: 1.25 },
   };
   const material = new THREE.ShaderMaterial({
     uniforms, vertexShader: vertexSource.replace('/* SHAPE */', shapeSource), fragmentShader: fragmentSource,

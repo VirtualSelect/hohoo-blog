@@ -4,8 +4,10 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { createPathTexture } from './pathTexture';
+import type { PathAtlas } from './pathTexture';
 import { createParticles, createBackgroundStars, createSharedUniforms } from './particles';
 import { createSimulation } from './simulation';
+import { createSurfacePass } from './surface';
 
 export type SceneStatus = 'ready' | 'fallback' | 'lost';
 export interface AstraScene {
@@ -13,18 +15,20 @@ export interface AstraScene {
   rotate(x: number, y: number): void;
   scatter(): void;
   reset(): void;
+  revealSecret(): Promise<boolean>;
+  hideSecret(): void;
   dispose(): void;
 }
 
 export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLElement, signal: AbortSignal,
-  onStatus: (status: SceneStatus) => void, options: { pathUrl?: string; navHeight?: number; fadeOnScroll?: boolean } = {}): Promise<AstraScene> {
+  onStatus: (status: SceneStatus) => void, options: { pathUrl?: string; navHeight?: number; fadeOnScroll?: boolean; themeRoot?: HTMLElement; secretPathUrl?: string; onSecretChange?: (active: boolean) => void } = {}): Promise<AstraScene> {
   const path = await createPathTexture(options.pathUrl || '/hohoo.svg', signal);
   if (signal.aborted) { path.dispose(); throw new DOMException('Aborted', 'AbortError'); }
   let renderer: THREE.WebGLRenderer;
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
   } catch (error) { path.dispose(); throw error; }
-  renderer.setClearColor(0x050505, 1);
+  renderer.setClearColor(options.themeRoot ? 0x000000 : 0x050505, 1);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
   renderer.info.autoReset = false;
@@ -37,6 +41,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
   camera.position.z = 15; camera.updateMatrixWorld();
   const shared = createSharedUniforms(path);
+  shared.uSpectralMode.value = options.themeRoot ? 1 : 0;
   const particles = createParticles(maxCount, path, shared);
   const stars = createBackgroundStars(initialMobile);
   scene.add(stars.points, particles.points);
@@ -51,6 +56,18 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
   bloom.enabled = Boolean(simulation);
   const output = new OutputPass();
   composer.addPass(renderPass); composer.addPass(bloom); composer.addPass(output);
+  const surface = options.themeRoot ? createSurfacePass(options.themeRoot) : null;
+  function updateTheme() {
+    if (!surface) return;
+    surface.update();
+    bloom.strength = 0.48;
+    bloom.radius = 0.20;
+    bloom.threshold = 1.30;
+  }
+  if (surface) {
+    composer.addPass(surface.pass);
+    updateTheme();
+  }
 
   // All vectors, matrices, sample buffers and handlers are allocated once.
   const euler = new THREE.Euler(0.015, -0.035, 0, 'YXZ');
@@ -63,6 +80,36 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
   let dragId = -1, dragX = 0, dragY = 0, dragTime = 0;
   let pointerActive = false, pointerDeadline = 0, scrollTarget = 0, scrollCurrent = 0, burst = 0;
   let slowFrames = 0, qualityTimer = 0;
+  let secretPath: PathAtlas | null = null, secretPending: Promise<PathAtlas> | null = null;
+  let secretTarget = 0, secretRemaining = 0, secretRevision = 0;
+
+  function clearSecret() {
+    secretRevision++; secretTarget = 0; secretRemaining = 0;
+    if (paused || reduced) shared.uSecretProgress.value = 0;
+    options.onSecretChange?.(false);
+  }
+  async function revealSecret() {
+    if (!options.secretPathUrl || disposed || lost) return false;
+    const revision = ++secretRevision;
+    if (!secretPath) {
+      secretPending ??= createPathTexture(options.secretPathUrl, signal).then((atlas) => {
+        if (disposed || signal.aborted) { atlas.dispose(); throw new DOMException('Aborted', 'AbortError'); }
+        secretPath = atlas;
+        return atlas;
+      }).finally(() => { secretPending = null; });
+      await secretPending;
+    }
+    if (disposed || lost || revision !== secretRevision || !secretPath) return false;
+    shared.uSecretPathTexture.value = secretPath.texture;
+    shared.uSecretPathSize.value = secretPath.size;
+    secretTarget = 1; secretRemaining = 8;
+    yaw = -0.035; pitch = 0.015; velocityX = velocityY = burst = 0;
+    pointerActive = false; shared.uPointerStrength.value = 0; simulation?.reset();
+    if (paused || reduced) shared.uSecretProgress.value = 1;
+    options.onSecretChange?.(true);
+    sync();
+    return true;
+  }
 
   function rotation() {
     euler.set(pitch, yaw, 0, 'YXZ');
@@ -81,6 +128,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
   }
   function draw(delta = 0) {
     renderer.info.reset(); rotation(); scrollUniforms();
+    shared.uColorEnergy.value = reduced ? 0 : Math.min(1, burst / 3 + shared.uPointerStrength.value * 0.4);
     if (simulation && delta > 0) {
       accumulator = Math.min(accumulator + delta, 1 / 30);
       // Bounded fixed-step integration; this loop iterates at most twice, never over particles.
@@ -90,7 +138,8 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
       }
       particles.uniforms.uSimulation.value = simulation.texture;
     }
-    composer.render(delta); renderCount++;
+    composer.render(delta);
+    renderCount++;
   }
   function active() { return !disposed && !lost && visible && !document.hidden && !paused && !reduced; }
   function qualitySettings() {
@@ -105,6 +154,9 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     composer.setPixelRatio(dpr); composer.setSize(width, height);
     bloom.setSize(Math.max(1, Math.round(width * dpr * bloomScale)), Math.max(1, Math.round(height * dpr * bloomScale)));
     particles.uniforms.uDpr.value = dpr; particles.uniforms.uViewportHeight.value = height;
+    // A subpixel core disappears on narrow high-DPI screens; keep the 8K budget
+    // but give the embedded portrait a readable minimum point footprint.
+    particles.uniforms.uPointFloor.value = options.themeRoot ? (mobile ? 2.2 : 1.4) * dpr : 1.25;
   }
   function degrade() {
     qualityTimer = 0;
@@ -127,6 +179,12 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     const targetStrength = pointerActive && now < pointerDeadline && dragId < 0 ? 1 : 0;
     shared.uPointerStrength.value += (targetStrength - shared.uPointerStrength.value) * (1 - Math.exp(-9 * delta));
     burst *= Math.exp(-5 * delta);
+    if (secretTarget > 0) {
+      secretRemaining -= delta;
+      if (secretRemaining <= 0) clearSecret();
+    }
+    shared.uSecretProgress.value += (secretTarget - shared.uSecretProgress.value) * (1 - Math.exp(-5 * delta));
+    if (Math.abs(secretTarget - shared.uSecretProgress.value) < 0.001) shared.uSecretProgress.value = secretTarget;
     draw(delta);
     cpuMs = performance.now() - start;
     intervals[sampleCount % intervals.length] = elapsed; sampleCount++;
@@ -143,7 +201,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     if (active()) { last = performance.now(); frame = requestAnimationFrame(tick); }
   }
   function readScroll() {
-    scrollTarget = THREE.MathUtils.clamp((window.scrollY - sectionTop) / sectionTravel, 0, 1);
+    scrollTarget = options.fadeOnScroll === false ? 0 : THREE.MathUtils.clamp((window.scrollY - sectionTop) / sectionTravel, 0, 1);
     // Scroll updates only the three form uniforms on the next frame, not object positions.
   }
   function resize() {
@@ -176,7 +234,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
       velocityY = THREE.MathUtils.clamp(angleY / seconds, -2, 2);
       dragX = event.clientX; dragY = event.clientY; dragTime = event.timeStamp;
       if (paused || reduced) sync();
-    } else if (event.pointerType !== 'touch' && !paused && !reduced) {
+    } else if (event.pointerType !== 'touch' && !paused && !reduced && shared.uSecretProgress.value === 0) {
       const rect = canvas.getBoundingClientRect();
       shared.uPointer.value.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
       pointerActive = true; pointerDeadline = performance.now() + 180;
@@ -189,7 +247,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     if (paused || reduced || event.type === 'pointercancel') velocityX = velocityY = 0;
   }
   function leave() { pointerActive = false; }
-  function motionChange() { reduced = reducedQuery.matches; velocityX = velocityY = 0; simulation?.reset(); sync(); }
+  function motionChange() { reduced = reducedQuery.matches; velocityX = velocityY = 0; shared.uSecretProgress.value = secretTarget; simulation?.reset(); sync(); }
   function contextLost(event: Event) { event.preventDefault(); lost = true; cancelAnimationFrame(frame); onStatus('lost'); }
   function contextRestored() { onStatus('lost'); } // Explicit UI retry recreates all resources together.
   const resizeObserver = new ResizeObserver(resize); resizeObserver.observe(canvas); resizeObserver.observe(section);
@@ -201,6 +259,12 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
   window.addEventListener('scroll', readScroll, { passive: true });
   document.addEventListener('visibilitychange', sync); reducedQuery.addEventListener('change', motionChange);
   mobileQuery.addEventListener('change', resize);
+  // Theme changes repaint even when paused; do not recreate the simulation.
+  const themeObserver = surface ? new MutationObserver(() => {
+    updateTheme();
+    sync();
+  }) : null;
+  themeObserver?.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   const debug = new URLSearchParams(window.location.search).has('debug');
   const diagnostics = {
@@ -213,7 +277,8 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
         paused, reduced, visible, hidden: document.hidden, yaw, pitch, velocityX, velocityY,
         scatter: shared.uScatterProgress.value, shape: shared.uShapeProgress.value, rotation: shared.uRotationProgress.value,
         attributeVersion: (particles.geometry.getAttribute('position') as THREE.BufferAttribute).version, drawCalls: renderer.info.render.calls,
-        textures: renderer.info.memory.textures, geometries: renderer.info.memory.geometries };
+        textures: renderer.info.memory.textures, geometries: renderer.info.memory.geometries,
+        secretActive: secretTarget > 0, secretProgress: shared.uSecretProgress.value };
     },
     sampleSimulation: () => simulation?.readback() ?? null,
     loseContext: () => renderer.forceContextLoss(),
@@ -226,18 +291,21 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     setPaused(value) { paused = value; pointerActive = false; velocityX = velocityY = 0; sync(); },
     rotate(x, y) { yaw += x; pitch = THREE.MathUtils.clamp(pitch + y, -1.15, 1.15); velocityX = velocityY = 0; sync(); },
     scatter() { if (!paused && !reduced) burst = 3; },
-    reset() { yaw = -0.035; pitch = 0.015; velocityX = velocityY = burst = 0; shared.uPointerStrength.value = 0; pointerActive = false; simulation?.reset(); sync(); },
+    revealSecret,
+    hideSecret() { clearSecret(); sync(); },
+    reset() { clearSecret(); shared.uSecretProgress.value = 0; yaw = -0.035; pitch = 0.015; velocityX = velocityY = burst = 0; shared.uPointerStrength.value = 0; pointerActive = false; simulation?.reset(); sync(); },
     dispose() {
       disposed = true; cancelAnimationFrame(frame); clearTimeout(qualityTimer);
       resizeObserver.disconnect(); intersection.disconnect();
+      themeObserver?.disconnect();
       canvas.removeEventListener('pointerdown', down); canvas.removeEventListener('pointermove', move);
       canvas.removeEventListener('pointerup', up); canvas.removeEventListener('pointercancel', up);
       canvas.removeEventListener('lostpointercapture', up); canvas.removeEventListener('pointerleave', leave);
       canvas.removeEventListener('webglcontextlost', contextLost); canvas.removeEventListener('webglcontextrestored', contextRestored);
       window.removeEventListener('scroll', readScroll); document.removeEventListener('visibilitychange', sync);
       reducedQuery.removeEventListener('change', motionChange); mobileQuery.removeEventListener('change', resize);
-      simulation?.dispose(); particles.dispose(); stars.dispose(); path.dispose();
-      bloom.dispose(); output.dispose(); renderPass.dispose(); composer.dispose(); renderer.dispose();
+      simulation?.dispose(); particles.dispose(); stars.dispose(); secretPath?.dispose(); path.dispose();
+      bloom.dispose(); output.dispose(); surface?.pass.dispose(); renderPass.dispose(); composer.dispose(); renderer.dispose();
       if (debugWindow.__astra === diagnostics) delete debugWindow.__astra;
     },
   };
