@@ -1,25 +1,32 @@
 .scrollSection {
+  --astra-sky: #0b1218;
+  --astra-ink: #e6eef2;
+  --astra-muted: #aabac5;
+  --astra-line: rgb(172 194 207 / 18%);
   background: var(--hh-bg);
   color: var(--hh-text-primary);
-  border-bottom: 1px solid var(--hh-border);
   position: relative;
+}
+:global(html[data-theme="dark"]) .scrollSection {
+  --astra-sky: #10171b;
 }
 .sticky {
   position: relative;
   max-width: 1280px;
   margin-inline: auto;
-  padding: 28px 32px 20px;
+  padding: 28px 32px 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
-.eyebrow {
+.eyebrow,
+.plateHeader {
   display: flex;
   justify-content: space-between;
   gap: 24px;
   font-family: var(--hh-base-font-family-monospace);
-  font-size: 0.63rem;
-  letter-spacing: 0.12em;
+  font-size: 0.67rem;
+  letter-spacing: 0.1em;
   color: var(--hh-text-secondary);
 }
 .hidden {
@@ -29,6 +36,35 @@
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+.observatory {
+  position: relative;
+  min-width: 0;
+}
+.scrollSection[data-active="true"] .observatory {
+  background: var(--astra-sky);
+  color: var(--astra-ink);
+  border: 1px solid var(--astra-line);
+  box-shadow: 0 18px 36px -28px rgb(14 29 38 / 35%);
+}
+:global(html[data-theme="dark"]) .observatory {
+  box-shadow: none;
+}
+.plateHeader {
+  position: relative;
+  align-items: center;
+  margin: 0 32px;
+  padding: 22px 0 16px;
+  color: var(--astra-muted);
+  border-bottom: 1px solid var(--astra-line);
+}
+.plateHeader > span:first-child::before {
+  content: "+";
+  margin-inline-end: 12px;
+  color: #c2aa86;
+}
+.plateNote {
+  letter-spacing: 0.04em;
 }
 .canvasWrap {
   position: relative;
@@ -40,14 +76,9 @@
   padding-block: 32px;
 }
 .scrollSection[data-active="true"] .canvasWrap {
-  height: clamp(280px, 36vw, 460px);
+  height: clamp(360px, 38vw, 480px);
   padding: 0;
-  color: #edf4fa;
-}
-:global(html:not([data-theme="dark"]))
-  .scrollSection[data-active="true"]
-  .canvasWrap {
-  background: #070d13;
+  color: var(--astra-ink);
 }
 .scrollSection[data-active="false"] .canvas {
   display: none;
@@ -68,13 +99,164 @@
   outline: 2px solid #bbdeef;
   outline-offset: -8px;
 }
+.constellations {
+  position: absolute;
+  width: 144px;
+  height: 104px;
+  pointer-events: none;
+  color: #91a9b8;
+  overflow: visible;
+}
+.constellations[data-constellation="dipper"] {
+  left: 4%;
+  top: 4%;
+}
+.constellations[data-constellation="cassiopeia"] {
+  right: 4%;
+  bottom: 4%;
+}
+.constellations[data-constellation="orion"] {
+  left: 5%;
+  bottom: 4%;
+}
+.constellations[data-constellation="cygnus"] {
+  right: 11%;
+  top: 3%;
+}
+.constellations[data-constellation="lyra"] {
+  left: calc(50% - 60px);
+  top: 1%;
+  width: 120px;
+  height: 87px;
+}
+.starLines {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 0.5;
+  stroke-linecap: round;
+  opacity: 0.3;
+}
+.starTrace {
+  fill: none;
+  stroke: #c8e6f6;
+  stroke-width: 0.8;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: constellationLight var(--chart-period) ease-in-out
+    var(--chart-phase) infinite;
+  animation-play-state: paused;
+}
+.starNodes {
+  fill: #f5fbff;
+  animation: starTwinkle var(--star-period) ease-in-out var(--star-phase)
+    infinite;
+  animation-play-state: paused;
+}
+.starHalo {
+  opacity: 0.8;
+  animation: starGlow var(--star-period) ease-in-out var(--star-phase) infinite;
+  animation-play-state: paused;
+}
+.starNodes,
+.starHalo,
+.starFlare {
+  /* Coordinates are local to each translated star, including asymmetric flares. */
+  transform-origin: 0 0;
+}
+.starFlare {
+  fill: #e4f3ff;
+  opacity: 0.3;
+  animation: starFlash var(--star-period) ease-in-out var(--star-phase) infinite;
+  animation-play-state: paused;
+}
+.scrollSection[data-astra-running="true"] .starNodes,
+.scrollSection[data-astra-running="true"] .starHalo,
+.scrollSection[data-astra-running="true"] .starFlare,
+.scrollSection[data-astra-running="true"] .starTrace {
+  animation-play-state: running;
+}
+@keyframes starTwinkle {
+  0%,
+  68%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+  24% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  36% {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+}
+@keyframes starGlow {
+  0%,
+  68%,
+  100% {
+    opacity: 0.12;
+    transform: scale(0.55);
+  }
+  24% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  36% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+}
+@keyframes starFlash {
+  0%,
+  12%,
+  48%,
+  100% {
+    opacity: 0;
+    transform: scale(0.45) rotate(-12deg);
+  }
+  24% {
+    opacity: 0.9;
+    transform: scale(1) rotate(0deg);
+  }
+  36% {
+    opacity: 0.2;
+    transform: scale(0.7) rotate(8deg);
+  }
+}
+@keyframes constellationLight {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.6;
+  }
+  32% {
+    stroke-dashoffset: 0;
+    opacity: 0.65;
+  }
+  55%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+.starLabel {
+  fill: #b8c6cd;
+  font-size: 14px;
+  font-family: var(--hh-base-font-family-monospace);
+  letter-spacing: 0.06em;
+}
 .secretStar {
   position: absolute;
-  inset-inline-end: 7%;
-  top: 14%;
+  inset-inline-end: 5%;
+  top: 9%;
   width: 44px;
   height: 44px;
-  padding: 11px;
+  padding: 12px;
   border: 0;
   border-radius: 50%;
   background: transparent;
@@ -105,20 +287,6 @@
   opacity: 0.5;
   cursor: wait;
 }
-.bottom .secretMessage {
-  min-height: 1.7em;
-  margin: 6px 0 0;
-  font-size: 0.75rem;
-  color: var(--hh-accent);
-}
-@media (prefers-reduced-motion: reduce) {
-  .secretStar svg {
-    transition: none;
-  }
-  .secretStar:hover svg {
-    transform: none;
-  }
-}
 .fallback {
   display: block;
   max-width: 100%;
@@ -129,73 +297,109 @@
   pointer-events: none;
 }
 .bottom {
-  text-align: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 24px;
+  row-gap: 8px;
+  margin: 0 32px;
+  padding: 18px 0;
   min-width: 0;
-  opacity: var(--astra-opacity, 1);
+  border-top: 1px solid var(--astra-line);
 }
 .bottom p {
-  color: var(--hh-text-secondary);
-  font-size: 1rem;
+  color: var(--astra-muted);
+  font-size: 0.9rem;
   line-height: 1.8;
-  margin: 0 0 20px;
+  margin: 0;
   overflow-wrap: anywhere;
+}
+.bottom .caption {
+  color: var(--astra-ink);
 }
 .controls {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 2px;
   position: relative;
   z-index: 1;
 }
 .bottom .help {
-  margin: 14px auto 0;
-  max-width: 48rem;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   line-height: 1.7;
 }
-.controls button:focus-visible {
-  outline: 2px solid var(--hh-accent);
-  outline-offset: 4px;
+.bottom .secretMessage {
+  text-align: end;
+  min-height: 1.7em;
+  font-size: 0.7rem;
+  color: #d8c6a7;
 }
 .controls button,
 .error button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   min-height: 44px;
-  padding: 8px 18px;
+  padding: 8px 12px;
   border: 1px solid transparent;
-  border-radius: var(--hh-base-global-radius);
+  border-radius: 2px;
   background: transparent;
-  color: var(--hh-text-primary);
+  color: var(--astra-ink);
   cursor: pointer;
   font-size: 0.75rem;
 }
+.meteorIcon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+.controls button:focus-visible,
+.error button:focus-visible {
+  outline: 2px solid #bbdeef;
+  outline-offset: 2px;
+}
 .scrollSection[data-active="true"] .disclosure {
   margin-inline-start: 8px;
-  border-inline-start-color: var(--hh-border);
+  border-inline-start-color: var(--astra-line);
   border-start-start-radius: 0;
   border-end-start-radius: 0;
+}
+.controls button:hover:not(:disabled),
+.error button:hover {
+  background: rgb(187 222 239 / 7%);
+  border-color: var(--astra-line);
+}
+.controls button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.scrollSection[data-active="false"] .bottom {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-top-color: var(--hh-border);
+}
+.scrollSection[data-active="false"] .bottom p,
+.scrollSection[data-active="false"] .controls button {
+  color: var(--hh-text-primary);
 }
 .scrollSection[data-active="false"] .disclosure {
   border-color: var(--hh-border);
 }
-.controls button:hover,
-.error button:hover {
-  background: var(--blog-soft);
-  border-color: var(--hh-accent);
-}
-.controls button:disabled {
-  opacity: 0.5;
-  cursor: default;
+.scrollSection[data-active="false"] .controls button:focus-visible {
+  outline-color: var(--hh-accent);
 }
 .scrollLink {
   position: relative;
-  z-index: 1;
   align-self: center;
   color: var(--hh-accent);
   padding: 10px 24px;
   min-height: 44px;
   font-size: 0.8rem;
-  opacity: var(--astra-opacity, 1);
 }
 .scrollLink:hover {
   color: var(--hh-text-primary);
@@ -207,21 +411,91 @@
   font-size: 0.8rem;
   margin: 8px 16px;
 }
-@media (max-width: 700px) {
-  .sticky {
-    padding: 24px 20px 16px;
-    gap: 20px;
-  }
-  .eyebrow span:last-child {
-    display: none;
+@media (max-width: 1024px) {
+  .bottom {
+    grid-template-columns: 1fr;
+    text-align: center;
+    row-gap: 6px;
   }
   .controls {
-    gap: 4px;
+    justify-content: center;
+  }
+  .bottom .secretMessage {
+    text-align: center;
+  }
+}
+@media (max-width: 700px) {
+  .sticky {
+    padding: 24px 20px 0;
+    gap: 18px;
+  }
+  .eyebrow span:last-child,
+  .plateNote {
+    display: none;
+  }
+  .plateHeader {
+    margin-inline: 18px;
+    padding-block: 16px 12px;
+  }
+  .bottom {
+    margin-inline: 18px;
+    padding: 14px 0;
+  }
+  .bottom .caption {
+    max-width: 26em;
+    margin-inline: auto;
+    font-size: 0.85rem;
+  }
+  .controls {
+    gap: 0;
   }
   .controls button {
-    padding-inline: 12px;
+    padding-inline: 9px;
   }
   .scrollSection[data-active="true"] .disclosure {
     margin-inline-start: 0;
+  }
+  .constellations {
+    width: 96px;
+    height: 70px;
+  }
+  .constellations[data-constellation="cygnus"] {
+    right: 15%;
+  }
+  .constellations[data-constellation="orion"],
+  .constellations[data-constellation="cassiopeia"],
+  .constellations[data-constellation="lyra"] {
+    top: auto;
+    bottom: 5%;
+    width: 86px;
+    height: 63px;
+  }
+  .constellations[data-constellation="orion"] {
+    left: 4%;
+  }
+  .constellations[data-constellation="lyra"] {
+    left: calc(50% - 43px);
+  }
+  .secretStar {
+    top: 2%;
+    inset-inline-end: 1%;
+  }
+  .starLabel {
+    font-size: 18px;
+    letter-spacing: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .starNodes,
+  .starHalo,
+  .starFlare,
+  .starTrace {
+    animation: none;
+  }
+  .secretStar svg {
+    transition: none;
+  }
+  .secretStar:hover svg {
+    transform: none;
   }
 }

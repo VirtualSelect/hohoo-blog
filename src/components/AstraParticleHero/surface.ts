@@ -2,14 +2,14 @@ import * as THREE from "three";
 import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
 
 // Compose AFTER OutputPass: particles are already tone-mapped to display RGB.
-// Keeping the page colour out of the HDR/bloom pass avoids a glowing light page
-// and makes an empty canvas pixel exactly match the surrounding CSS surface.
+// The canvas shares its edge colour with the observatory's caption and frame.
 export function createSurfacePass(root: HTMLElement) {
   const pass = new ShaderPass({
     uniforms: {
       tDiffuse: { value: null },
       uBackground: { value: new THREE.Color() },
-      uLightMode: { value: 0 },
+      uMeteor: { value: -1 },
+      uAspect: { value: 1 },
     },
     vertexShader: `
       varying vec2 vUv;
@@ -21,7 +21,8 @@ export function createSurfacePass(root: HTMLElement) {
     fragmentShader: `
       uniform sampler2D tDiffuse;
       uniform vec3 uBackground;
-      uniform float uLightMode;
+      uniform float uMeteor;
+      uniform float uAspect;
       varying vec2 vUv;
       void main() {
         vec3 glow = clamp(texture2D(tDiffuse, vUv).rgb, 0.0, 1.0);
@@ -29,17 +30,25 @@ export function createSurfacePass(root: HTMLElement) {
         float edge = smoothstep(0.0, 0.08, edgeDistance.x)
                    * smoothstep(0.0, 0.12, edgeDistance.y);
         float strength = max(glow.r, max(glow.g, glow.b));
-        // White stars need dark space in BOTH themes. The eye-care page keeps
-        // an explicit night-sky viewport, like an astronomical photograph;
-        // fading black into white would create a muddy grey frame.
-        vec2 field = abs(vUv - 0.5) / vec2(0.54, 0.49);
-        float radius = pow(pow(field.x, 4.0) + pow(field.y, 4.0), 0.25);
-        float sky = (1.0 - smoothstep(0.62, 1.10, radius)) * edge;
-        vec3 midnight = mix(vec3(0.018, 0.036, 0.048), vec3(0.027, 0.050, 0.073), uLightMode);
-        vec3 background = mix(uBackground, midnight, mix(sky, 1.0, uLightMode));
+        float depth = (1.0 - smoothstep(0.15, 0.65, length(vUv - 0.5))) * edge;
+        vec3 background = uBackground * (1.0 - depth * 0.22);
         // Preserve blue and warm stellar temperatures beneath white hot cores.
         vec3 hue = glow / max(strength, 0.0001);
         vec3 radiance = mix(hue, vec3(1.0), pow(strength, 8.0) * 0.08) * strength;
+        // One meteor at a time, scheduled or triggered by the existing scene clock.
+        // Its short trail lives above the wordmark and adds no draw call.
+        if (uMeteor >= 0.0) {
+          vec2 scale = vec2(uAspect, 1.0);
+          vec2 direction = normalize(vec2(0.62, -0.12) * scale);
+          vec2 head = (vec2(0.15, 0.84) + vec2(0.62, -0.12) * uMeteor) * scale;
+          vec2 offset = head - vUv * scale;
+          float along = dot(offset, direction);
+          float across = abs(dot(offset, vec2(-direction.y, direction.x)));
+          float tail = smoothstep(-0.003, 0.005, along) * (1.0 - smoothstep(0.0, 0.13, along)) * exp(-across * 1100.0);
+          float core = exp(-length(offset) * 580.0);
+          float fade = smoothstep(0.0, 0.10, uMeteor) * (1.0 - smoothstep(0.72, 1.0, uMeteor));
+          radiance += (vec3(0.56, 0.75, 0.92) * tail + vec3(1.0, 0.95, 0.86) * core) * fade;
+        }
         gl_FragColor = vec4(background + (1.0 - background) * radiance * edge, 1.0);
       }
     `,
@@ -51,9 +60,8 @@ export function createSurfacePass(root: HTMLElement) {
     const light = document.documentElement.dataset.theme !== "dark";
     // THREE.Color parses CSS to linear RGB; this final pass needs display RGB.
     pass.uniforms.uBackground.value
-      .setStyle(style.backgroundColor)
+      .setStyle(style.getPropertyValue("--astra-sky").trim() || "#0b1218")
       .convertLinearToSRGB();
-    pass.uniforms.uLightMode.value = light ? 1 : 0;
     return light;
   }
   return { pass, update };

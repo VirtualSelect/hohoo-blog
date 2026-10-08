@@ -14,6 +14,7 @@ export interface AstraScene {
   setPaused(value: boolean): void;
   rotate(x: number, y: number): void;
   scatter(): void;
+  shootMeteor(): void;
   reset(): void;
   revealSecret(): Promise<boolean>;
   hideSecret(): void;
@@ -82,6 +83,17 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
   let slowFrames = 0, qualityTimer = 0;
   let secretPath: PathAtlas | null = null, secretPending: Promise<PathAtlas> | null = null;
   let secretTarget = 0, secretRemaining = 0, secretRevision = 0;
+  const meteorDuration = 1.6, meteorInterval = 6;
+  let meteorRemaining = 0, meteorDelay = 2, meteorPasses = 0;
+
+  function startMeteor() {
+    meteorRemaining = meteorDuration; meteorDelay = meteorInterval; meteorPasses++;
+  }
+  function resetMeteor() { meteorRemaining = 0; meteorDelay = 2; }
+  function syncDecorations() {
+    // SVG landmarks use CSS animation, but share the scene's lifecycle gate.
+    options.themeRoot?.setAttribute('data-astra-running', String(active()));
+  }
 
   function clearSecret() {
     secretRevision++; secretTarget = 0; secretRemaining = 0;
@@ -103,6 +115,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     shared.uSecretPathTexture.value = secretPath.texture;
     shared.uSecretPathSize.value = secretPath.size;
     secretTarget = 1; secretRemaining = 8;
+    resetMeteor();
     yaw = -0.035; pitch = 0.015; velocityX = velocityY = burst = 0;
     pointerActive = false; shared.uPointerStrength.value = 0; simulation?.reset();
     if (paused || reduced) shared.uSecretProgress.value = 1;
@@ -128,6 +141,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
   }
   function draw(delta = 0) {
     renderer.info.reset(); rotation(); scrollUniforms();
+    if (surface) surface.pass.uniforms.uMeteor.value = meteorRemaining > 0 ? 1 - meteorRemaining / meteorDuration : -1;
     shared.uColorEnergy.value = reduced ? 0 : Math.min(1, burst / 3 + shared.uPointerStrength.value * 0.4);
     if (simulation && delta > 0) {
       accumulator = Math.min(accumulator + delta, 1 / 30);
@@ -171,6 +185,12 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     const delta = Math.min(elapsed / 1000, 1 / 30); last = now;
     const start = performance.now();
     shared.uTime.value += delta;
+    if (meteorRemaining > 0) meteorRemaining = Math.max(0, meteorRemaining - delta);
+    else if (surface && !secretTarget && shared.uSecretProgress.value === 0) {
+      // Count only active scene time: no background backlog or timer bursts.
+      meteorDelay -= delta;
+      if (meteorDelay <= 0) startMeteor();
+    }
     if (dragId < 0) {
       yaw += velocityX * delta; pitch = THREE.MathUtils.clamp(pitch + velocityY * delta, -1.15, 1.15);
       const damping = Math.exp(-5 * delta); velocityX *= damping; velocityY *= damping;
@@ -194,6 +214,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
   }
   function sync() {
     cancelAnimationFrame(frame); frame = 0;
+    syncDecorations();
     shared.uFlow.value = reduced ? 0 : 1;
     if (disposed || lost || !visible || document.hidden) return;
     if (reduced) { scrollCurrent = 0; shared.uPointerStrength.value = 0; }
@@ -210,6 +231,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     sectionTravel = Math.max(1, sectionRect.height - height - (options.navHeight ?? 64));
     mobile = mobileQuery.matches;
     camera.aspect = width / height;
+    if (surface) surface.pass.uniforms.uAspect.value = camera.aspect;
     const halfWidth = 5.1, halfHeight = 2.5;
     camera.position.z = Math.max(halfHeight, halfWidth / camera.aspect) / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
     camera.updateProjectionMatrix(); camera.updateMatrixWorld();
@@ -247,8 +269,8 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     if (paused || reduced || event.type === 'pointercancel') velocityX = velocityY = 0;
   }
   function leave() { pointerActive = false; }
-  function motionChange() { reduced = reducedQuery.matches; velocityX = velocityY = 0; shared.uSecretProgress.value = secretTarget; simulation?.reset(); sync(); }
-  function contextLost(event: Event) { event.preventDefault(); lost = true; cancelAnimationFrame(frame); onStatus('lost'); }
+  function motionChange() { reduced = reducedQuery.matches; velocityX = velocityY = 0; if (reduced) resetMeteor(); shared.uSecretProgress.value = secretTarget; simulation?.reset(); sync(); }
+  function contextLost(event: Event) { event.preventDefault(); lost = true; cancelAnimationFrame(frame); syncDecorations(); onStatus('lost'); }
   function contextRestored() { onStatus('lost'); } // Explicit UI retry recreates all resources together.
   const resizeObserver = new ResizeObserver(resize); resizeObserver.observe(canvas); resizeObserver.observe(section);
   const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }); intersection.observe(canvas);
@@ -278,7 +300,7 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
         scatter: shared.uScatterProgress.value, shape: shared.uShapeProgress.value, rotation: shared.uRotationProgress.value,
         attributeVersion: (particles.geometry.getAttribute('position') as THREE.BufferAttribute).version, drawCalls: renderer.info.render.calls,
         textures: renderer.info.memory.textures, geometries: renderer.info.memory.geometries,
-        secretActive: secretTarget > 0, secretProgress: shared.uSecretProgress.value };
+        secretActive: secretTarget > 0, secretProgress: shared.uSecretProgress.value, meteorRemaining, meteorDelay, meteorPasses };
     },
     sampleSimulation: () => simulation?.readback() ?? null,
     loseContext: () => renderer.forceContextLoss(),
@@ -291,11 +313,13 @@ export async function createAstraScene(canvas: HTMLCanvasElement, section: HTMLE
     setPaused(value) { paused = value; pointerActive = false; velocityX = velocityY = 0; sync(); },
     rotate(x, y) { yaw += x; pitch = THREE.MathUtils.clamp(pitch + y, -1.15, 1.15); velocityX = velocityY = 0; sync(); },
     scatter() { if (!paused && !reduced) burst = 3; },
+    shootMeteor() { if (surface && active() && !secretTarget && shared.uSecretProgress.value === 0 && meteorRemaining === 0) startMeteor(); },
     revealSecret,
     hideSecret() { clearSecret(); sync(); },
-    reset() { clearSecret(); shared.uSecretProgress.value = 0; yaw = -0.035; pitch = 0.015; velocityX = velocityY = burst = 0; shared.uPointerStrength.value = 0; pointerActive = false; simulation?.reset(); sync(); },
+    reset() { clearSecret(); resetMeteor(); shared.uSecretProgress.value = 0; yaw = -0.035; pitch = 0.015; velocityX = velocityY = burst = 0; shared.uPointerStrength.value = 0; pointerActive = false; simulation?.reset(); sync(); },
     dispose() {
       disposed = true; cancelAnimationFrame(frame); clearTimeout(qualityTimer);
+      options.themeRoot?.removeAttribute('data-astra-running');
       resizeObserver.disconnect(); intersection.disconnect();
       themeObserver?.disconnect();
       canvas.removeEventListener('pointerdown', down); canvas.removeEventListener('pointermove', move);
