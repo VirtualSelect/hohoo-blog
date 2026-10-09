@@ -84,16 +84,18 @@ related: ["lab:mujoco-velocity-estimation", "project:hohoo-embodied-agent", "doc
 
 ## 如何复现和定位失败
 
-```sh
+以下为 Windows PowerShell，明确指定虚拟环境解释器，不依赖激活脚本。
+
+```powershell
 git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
 cd hohoo-embodied-agent-study
 git checkout 1931effc42f9d5974f20c09614dc2ebbdfcbf44b
 python -m venv .venv
-# Windows: .venv/Scripts/activate；Linux/macOS: source .venv/bin/activate
-python -m pip install -r requirements-lock.txt
-python -m unittest discover -s experiments/planar_velocity_estimation -p "test_*.py"
-python experiments/planar_velocity_estimation/run.py --out outputs/velocity-my-run
-python experiments/planar_velocity_estimation/audit.py outputs/velocity-my-run
+$py = '.\.venv\Scripts\python.exe'
+& $py -m pip install -r requirements-lock.txt
+& $py -m unittest discover -s experiments/planar_velocity_estimation -p "test_*.py"
+& $py experiments/planar_velocity_estimation/run.py --out outputs/velocity-my-run
+& $py experiments/planar_velocity_estimation/audit.py outputs/velocity-my-run
 ```
 
 本机验证环境：Windows、Python 3.12.14、MuJoCo 3.3.7、NumPy 2.2.6；其他操作系统未复测。运行不打开渲染窗口，不需 GPU、模型密钥或付费服务。预期 4 个估计器测试通过，打印 54 回合、108000 行、13 个通过；审计再验证每条轨迹的哈希、时间、控制力和验收结果。

@@ -34,9 +34,9 @@ $py = '.\\.venv\\Scripts\\python.exe'
       </pre>
       <p>
         {t(
-          "预期得到原始轨迹、摘要和审计结果；输出目录必须不存在。E8–E10 共用一组实验入口。以上命令不调用模型；先运行数值部分，视频回放按正文单独执行。",
-          "Expect raw trajectories, summaries and audit results. The output directory must not already exist. E8–E10 share one experiment runner. No model calls are made; run the numeric experiment first and use the article’s separate replay command for video.",
-          "預期得到原始軌跡、摘要與稽核結果；輸出目錄必須不存在。E8–E10 共用一組實驗入口。以上指令不呼叫模型；先執行數值部分，影片回放依正文單獨執行。",
+          "预期得到原始轨迹、摘要和审计结果。请使用新的输出目录，避免覆盖旧结果；不同实验对已存在目录的处理并不相同。E8–E10 共用一组实验入口。以上命令不调用模型；先运行数值部分，视频回放按正文单独执行。",
+          "Expect raw trajectories, summaries and audit results. Use a new output directory to preserve earlier results; runners differ in how they handle existing directories. E8–E10 share one experiment runner. No model calls are made; run the numeric experiment first and use the article’s separate replay command for video.",
+          "預期得到原始軌跡、摘要與稽核結果。請使用新的輸出目錄，避免覆蓋舊結果；不同實驗對既有目錄的處理並不相同。E8–E10 共用一組實驗入口。以上指令不呼叫模型；先執行數值部分，影片回放依正文單獨執行。",
         )}
       </p>
       <p>

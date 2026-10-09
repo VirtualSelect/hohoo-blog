@@ -1,6 +1,6 @@
 ---
 title: "KV 量化軸：Key 與 Value 為什么不能一概而論？"
-description: "162組保存整數碼的離線對照，比較全張量、逐Token與K逐通道/V逐Token，保留混合策略并非總更優的結果。"
+description: "162組保存整數碼的離線對照，比較全張量、逐Token與K逐通道/V逐Token，保留混合策略並非總更優的結果。"
 slug: "/llm/kv-quantization-axes"
 status: "published"
 published_at: "2026-10-09"
@@ -13,7 +13,7 @@ prerequisites: ["doc:llm/kv-int8-error"]
 related: ["lab:kv-quantization-axes", "project:hohoo-ai-lab", "doc:llm/tiled-online-softmax"]
 ---
 
-[固定代碼](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/experiments/11-kv-quantization-axes) · [輸入、整數碼與輸出](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/experiments/11-kv-quantization-axes/evidence) · [實驗檔案](/labs/kv-quantization-axes)
+[固定程式碼](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/experiments/11-kv-quantization-axes) · [輸入、整數碼與輸出](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/experiments/11-kv-quantization-axes/evidence) · [實驗檔案](/labs/kv-quantization-axes)
 
 上一篇看到：逐行 int8 能縮小 KV 表示，但一行中較大的元素仍會壓低其他元素的分辨率。那就把分組換成“逐通道”，是否一定更好？本篇的答案是：**取決于離群值怎樣分布，不能只記住一個推薦軸。**
 
@@ -35,7 +35,7 @@ x_hat = code * scale
 
 假設某一個通道在很多 Token 上都很大。逐 Token 的每一行都會被這個通道拉大 scale，小通道的細節一起損失。逐通道把這個大通道隔離，其他列仍可用自己的小步長。反過來，如果一個 Token 的整行異常大，逐 Token 可以隔離它；逐通道會讓每一列都受到影響。
 
-這是一種可檢驗的機制解釋，不代表真實模型一定按這兩種理想形狀分布。[KIVI](https://arxiv.org/abs/2402.02750)也討論了 K/V 分布與不同量化粒度；本實驗只借鑒問題，不復現其分組、非對稱 2bit、殘差緩存或真實模型結論。
+這是一種可檢驗的機制解釋，不代表真實模型一定按這兩種理想形狀分布。[KIVI](https://arxiv.org/abs/2402.02750)也討論了 K/V 分布與不同量化粒度；本實驗只借鑒問題，不重現其分組、非對稱 2bit、殘差緩存或真實模型結論。
 
 ## 為什么 K 誤差與 V 誤差不能混著看
 
@@ -73,26 +73,28 @@ K 改變“關注誰”，V 改變“拿到什么”。本輪把量化目標拆�
 | 64 | 16,384 B | 4,104 B | 4,608 B | 4,480 B |
 | 256 | 65,536 B | 16,392 B | 18,432 B | 17,536 B |
 
-混合方案的公式為 `2ND + 4D + 4N` 字節。N=256 時減少 73.24% 的緩存數組字節；不是嚴格減少 75%。`arrays.npz` 為便于審計重復保存若干數組，它的壓縮文件大小也不等于真實推理緩存大小。
+混合方案的公式為 `2ND + 4D + 4N` 字節。N=256 時減少 73.24% 的緩存數組字節；不是嚴格減少 75%。`arrays.npz` 為便于審計重復保存若干數組，它的壓縮檔案大小也不等于真實推理緩存大小。
 
 本例把 int8 解量化為 float64 再做矩陣乘法，因此只證明存儲表示和局部誤差，**沒有證明實際顯存降低或生成更快**。如果把這個 Python 路徑直接放進解碼循環，解量化和臨時分配甚至可能抵消收益；本輪沒有計時，不能替它編一個加速比。
 
-## 從干凈目錄復現
+## 從干凈目錄重現
 
-```sh
+以下為 Windows PowerShell，明確指定虛擬環境的解譯器，不依賴啟用腳本。
+
+```powershell
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
 git checkout 009289d3c9314d64a495303d9b16517080282788
 python -m venv .venv
-# Windows: .venv/Scripts/activate；Linux/macOS: source .venv/bin/activate
-python -m pip install -r experiments/11-kv-quantization-axes/requirements.txt
-python -m unittest discover -s experiments/11-kv-quantization-axes -p "test_*.py"
-python experiments/11-kv-quantization-axes/run.py --out experiments/11-kv-quantization-axes/target/my-run
-python experiments/11-kv-quantization-axes/audit.py experiments/11-kv-quantization-axes/target/my-run
+$py = '.\.venv\Scripts\python.exe'
+& $py -m pip install -r experiments/11-kv-quantization-axes/requirements.txt
+& $py -m unittest discover -s experiments/11-kv-quantization-axes -p "test_*.py"
+& $py experiments/11-kv-quantization-axes/run.py --out experiments/11-kv-quantization-axes/target/my-run
+& $py experiments/11-kv-quantization-axes/audit.py experiments/11-kv-quantization-axes/target/my-run
 ```
 
 本機 Python 3.12.14 / NumPy 2.2.6 / Windows 已驗證，其他平臺未復測。預期 4 個單測通過，保存 162 個對照，獨立審計輸出 `PASS: 162 archived comparisons...`。審計不用實現中的 attention 函數，而從歸檔整數碼和 scale 解量化，再用另一種 NumPy 表達重算輸出、誤差和字節數。
 
-若 scale 形狀不對，檢查歸約軸：逐 Token 應為 `(N,1)`，逐通道為 `(1,D)`。全零組將 scale 設為 1，不能除以零；輸入 NaN/Inf 會被拒絕。若修改源碼后舊證據哈希不匹配，應運行新輸出目錄，不要修改 manifest 來掩蓋差異。
+若 scale 形狀不對，檢查歸約軸：逐 Token 應為 `(N,1)`，逐通道為 `(1,D)`。全零組將 scale 設為 1，不能除以零；輸入 NaN/Inf 會被拒絕。若修改原始碼后舊證據雜湊不匹配，應執行新輸出目錄，不要修改 manifest 來掩蓋差異。
 
-小練習：讓 V 改為“列離群”，預測逐 Token 還能否隔離誤差；然后為這組新條件另存協議與結果。需要進入真實模型之前，應先測真實 K/V 分布、分組粒度、任務質量、反量化代價與實際內存。這些仍是后續驗證，不由本輪隨機數組代替。
+小練習：讓 V 改為“列離群”，預測逐 Token 還能否隔離誤差；然後為這組新條件另存協議與結果。需要進入真實模型之前，應先測真實 K/V 分布、分組粒度、任務質量、反量化代價與實際內存。這些仍是后續驗證，不由本輪隨機數組代替。

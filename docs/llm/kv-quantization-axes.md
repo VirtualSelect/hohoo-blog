@@ -79,16 +79,18 @@ K 改变“关注谁”，V 改变“拿到什么”。本轮把量化目标拆�
 
 ## 从干净目录复现
 
-```sh
+以下为 Windows PowerShell，明确指定虚拟环境解释器，不依赖激活脚本。
+
+```powershell
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
 git checkout 009289d3c9314d64a495303d9b16517080282788
 python -m venv .venv
-# Windows: .venv/Scripts/activate；Linux/macOS: source .venv/bin/activate
-python -m pip install -r experiments/11-kv-quantization-axes/requirements.txt
-python -m unittest discover -s experiments/11-kv-quantization-axes -p "test_*.py"
-python experiments/11-kv-quantization-axes/run.py --out experiments/11-kv-quantization-axes/target/my-run
-python experiments/11-kv-quantization-axes/audit.py experiments/11-kv-quantization-axes/target/my-run
+$py = '.\.venv\Scripts\python.exe'
+& $py -m pip install -r experiments/11-kv-quantization-axes/requirements.txt
+& $py -m unittest discover -s experiments/11-kv-quantization-axes -p "test_*.py"
+& $py experiments/11-kv-quantization-axes/run.py --out experiments/11-kv-quantization-axes/target/my-run
+& $py experiments/11-kv-quantization-axes/audit.py experiments/11-kv-quantization-axes/target/my-run
 ```
 
 本机 Python 3.12.14 / NumPy 2.2.6 / Windows 已验证，其他平台未复测。预期 4 个单测通过，保存 162 个对照，独立审计输出 `PASS: 162 archived comparisons...`。审计不用实现中的 attention 函数，而从归档整数码和 scale 解量化，再用另一种 NumPy 表达重算输出、误差和字节数。

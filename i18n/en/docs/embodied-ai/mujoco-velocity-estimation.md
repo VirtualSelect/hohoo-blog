@@ -82,16 +82,18 @@ Velocity RMSE compares the estimate with true velocity **at capture time**. The 
 
 ## Reproduce and diagnose
 
-```sh
+The following commands use Windows PowerShell and explicitly select the virtual-environment interpreter.
+
+```powershell
 git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
 cd hohoo-embodied-agent-study
 git checkout 1931effc42f9d5974f20c09614dc2ebbdfcbf44b
 python -m venv .venv
-# Windows: .venv/Scripts/activate; Linux/macOS: source .venv/bin/activate
-python -m pip install -r requirements-lock.txt
-python -m unittest discover -s experiments/planar_velocity_estimation -p "test_*.py"
-python experiments/planar_velocity_estimation/run.py --out outputs/velocity-my-run
-python experiments/planar_velocity_estimation/audit.py outputs/velocity-my-run
+$py = '.\.venv\Scripts\python.exe'
+& $py -m pip install -r requirements-lock.txt
+& $py -m unittest discover -s experiments/planar_velocity_estimation -p "test_*.py"
+& $py experiments/planar_velocity_estimation/run.py --out outputs/velocity-my-run
+& $py experiments/planar_velocity_estimation/audit.py outputs/velocity-my-run
 ```
 
 The tested environment is Windows, Python 3.12.14, MuJoCo 3.3.7 and NumPy 2.2.6. Other operating systems were not retested. No rendering window, GPU, model key or paid service is required. Expect four estimator tests to pass, then 54 episodes, 108000 rows and 13 successes. The audit independently checks hashes, timestamps, estimates, force and acceptance.

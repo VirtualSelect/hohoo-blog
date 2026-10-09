@@ -1908,9 +1908,10 @@
         "translatedAt": "2026-10-09",
         "file": "i18n/zh-TW/docs/ai-apps/java-idempotent-retry.md",
         "sourceRevision": "53b4171c2feb517b512c17ba1e9d5190526c4c8827967162f8169dc73b49d37a",
-        "translationRevision": "e2ce75c7f729bb83cd88eef5119c0656295a6fc33f8f37d599615c5e0a024822"
+        "translationRevision": "6b3657fa27a5ee879d16a822221d1a0a1d090af4ed4d436f56b001dc22e3a7cb"
       }
-    }
+    },
+    "sourceRevision": "53b4171c2feb517b512c17ba1e9d5190526c4c8827967162f8169dc73b49d37a"
   },
   "lab:java-idempotent-retry": {
     "sourceLocale": "zh-CN",
@@ -1943,17 +1944,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-09",
         "file": "i18n/en/docs/llm/kv-quantization-axes.md",
-        "sourceRevision": "fd516951c5268f5fd5ebda3fc02558ca92c19c674b742776a9f1ca778ce48a25",
-        "translationRevision": "61711d703e7a667bc927e3adcbd1830a1c20cd1f26f9ab905be21a03e7a26de4"
+        "sourceRevision": "b18ad604999422d47e043768da0384f0e73c2f95720f6f933c2f3ffc6a9bf844",
+        "translationRevision": "97cf07c658babac9167e6f686eaf84ff642afcbf4674cf4d08f0287cbd0e8c91"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-09",
         "file": "i18n/zh-TW/docs/llm/kv-quantization-axes.md",
-        "sourceRevision": "fd516951c5268f5fd5ebda3fc02558ca92c19c674b742776a9f1ca778ce48a25",
-        "translationRevision": "061b1a42b891da6bbbb67ea60b3b05c93c40e5d9727c4819fc97b1d97ee27634"
+        "sourceRevision": "b18ad604999422d47e043768da0384f0e73c2f95720f6f933c2f3ffc6a9bf844",
+        "translationRevision": "238f0dbfaf2765d9b1799e96654532dbafe5d08e95a77e80473a0b0675091126"
       }
-    }
+    },
+    "sourceRevision": "b18ad604999422d47e043768da0384f0e73c2f95720f6f933c2f3ffc6a9bf844"
   },
   "lab:kv-quantization-axes": {
     "sourceLocale": "zh-CN",
@@ -1986,17 +1988,18 @@
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-09",
         "file": "i18n/en/docs/embodied-ai/mujoco-velocity-estimation.md",
-        "sourceRevision": "3bbb1929004484262815f9868c5774757e6d040ec1b68d5e2868ffaaa50ab97c",
-        "translationRevision": "ee419051f6557388ca7d33bd2081da25991af7153e5c3eb04ba905b555644641"
+        "sourceRevision": "7010c138eb333dd22568d5ed4ced201dd82e08d1298b5d32c24050483619ac3c",
+        "translationRevision": "8e5a0d88e8a95978b2485675bf941be7ac38d949cc5fac3bc0b8ac04ac224e3b"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
         "translatedAt": "2026-10-09",
         "file": "i18n/zh-TW/docs/embodied-ai/mujoco-velocity-estimation.md",
-        "sourceRevision": "3bbb1929004484262815f9868c5774757e6d040ec1b68d5e2868ffaaa50ab97c",
-        "translationRevision": "865b97f9c94ee0616d0b62cbb3c710a03104b65410fef726591624d7159cacbe"
+        "sourceRevision": "7010c138eb333dd22568d5ed4ced201dd82e08d1298b5d32c24050483619ac3c",
+        "translationRevision": "a5f6a619a35791b6b9e859776e17cda72e7e9f7acd23fa68e8a9ea8b4074d88c"
       }
-    }
+    },
+    "sourceRevision": "7010c138eb333dd22568d5ed4ced201dd82e08d1298b5d32c24050483619ac3c"
   },
   "lab:mujoco-velocity-estimation": {
     "sourceLocale": "zh-CN",

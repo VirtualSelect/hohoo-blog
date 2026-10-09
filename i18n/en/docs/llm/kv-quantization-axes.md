@@ -79,16 +79,18 @@ This implementation restores INT8 to float64 before multiplication. It establish
 
 ## Reproduce
 
-```sh
+The following commands use Windows PowerShell and explicitly select the virtual-environment interpreter.
+
+```powershell
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
 git checkout 009289d3c9314d64a495303d9b16517080282788
 python -m venv .venv
-# Windows: .venv/Scripts/activate; Linux/macOS: source .venv/bin/activate
-python -m pip install -r experiments/11-kv-quantization-axes/requirements.txt
-python -m unittest discover -s experiments/11-kv-quantization-axes -p "test_*.py"
-python experiments/11-kv-quantization-axes/run.py --out experiments/11-kv-quantization-axes/target/my-run
-python experiments/11-kv-quantization-axes/audit.py experiments/11-kv-quantization-axes/target/my-run
+$py = '.\.venv\Scripts\python.exe'
+& $py -m pip install -r experiments/11-kv-quantization-axes/requirements.txt
+& $py -m unittest discover -s experiments/11-kv-quantization-axes -p "test_*.py"
+& $py experiments/11-kv-quantization-axes/run.py --out experiments/11-kv-quantization-axes/target/my-run
+& $py experiments/11-kv-quantization-axes/audit.py experiments/11-kv-quantization-axes/target/my-run
 ```
 
 Windows, Python 3.12.14 and NumPy 2.2.6 were tested; other platforms were not. Expect four passing unit tests, 162 saved comparisons and `PASS: 162 archived comparisons...`. The audit does not import the implementation's attention function: it restores archived codes/scales and independently expresses the calculation with NumPy to check outputs, errors and bytes.
