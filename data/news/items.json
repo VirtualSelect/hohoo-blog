@@ -1,5 +1,20 @@
 [
   {
+    "id": "6cb53bbd6b721016b18d",
+    "title": "A new feature for my blog, built using my voice",
+    "url": "https://simonwillison.net/2026/Oct/9/built-using-my-voice",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-09T12:54:06.000Z",
+    "collectedAt": "2026-10-09T17:10:15.150Z",
+    "category": "ai-apps",
+    "summary": "I shipped a new feature for my blog today: the Newsletters page, which offers an index of all of the newsletters I've sent out, both my free weekly Substack and my monthly spons…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-7909d6ca",
+    "coverage": []
+  },
+  {
     "id": "00bd1350d5a9daf67786",
     "title": "Beyond Speech Captions: Speech-Rewarded Style Planning for Conversational Text-to-Speech",
     "url": "https://arxiv.org/abs/2610.11461",
