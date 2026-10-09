@@ -1760,5 +1760,8 @@
   },
   "journey.lab.VL01.qualifiedCompletionResult": {
     "message": "E14 connects completion contracts to recovery: eight rollouts separate historical placement, current validity and execution qualification. Full VL01 and M4/M5 remain open."
+  },
+  "label.retrieve": {
+    "message": "Retrieve"
   }
 }

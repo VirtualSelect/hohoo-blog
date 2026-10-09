@@ -15,6 +15,7 @@ export default function Learning() {
       BUILD: t("构建", "Build", "構建"),
       UNDERSTAND: t("理解", "Understand", "理解"),
       EXPLORE: t("探索", "Explore", "探索"),
+      RETRIEVE: t("检索", "Retrieve", "檢索"),
       beginner: t("入门", "Beginner", "入門"),
       intermediate: t("进阶", "Intermediate", "進階"),
       advanced: t("深入", "Advanced", "深入"),
@@ -62,6 +63,7 @@ export default function Learning() {
         step.outcome,
         step.outcomeEn,
         step.outcomeTw,
+        ...Object.values(step.plan || {}).flat(),
       ]
         .join(" ")
         .toLowerCase()
@@ -147,6 +149,59 @@ export default function Learning() {
                 <Link to={available.get(next.id).permalink}>
                   {title(next)} →
                 </Link>
+              </p>
+            )}
+            {!next && track.steps.find((s) => s.plan) && (
+              <p>
+                <a href={"#step-" + track.steps.find((s) => s.plan).id}>
+                  {t(
+                    "下一步：查看后续研究计划",
+                    "Next: explore the research plan",
+                    "下一步：查看後續研究計畫",
+                  )}{" "}
+                  →
+                </a>
+              </p>
+            )}
+          </>
+        )}
+        {!article && step.plan && (
+          <>
+            <p>{t(step.outcome, step.outcomeEn, step.outcomeTw)}</p>
+            <dl className="research-plan">
+              {[
+                ["before", t("先修知识", "Prerequisites", "先修知識")],
+                ["question", t("研究问题", "Research question", "研究問題")],
+                [
+                  "deliverable",
+                  t("计划产物", "Planned deliverables", "計畫產物"),
+                ],
+                ["validation", t("如何验证", "How to validate", "如何驗證")],
+              ].map(([key, heading]) => (
+                <React.Fragment key={key}>
+                  <dt>{heading}</dt>
+                  <dd>{t(...step.plan[key])}</dd>
+                </React.Fragment>
+              ))}
+            </dl>
+            {step.previousStep && (
+              <p className="hh-meta">
+                <a href={"#step-" + step.previousStep}>
+                  {t("回到前一步", "Previous step", "回到前一步")} ↑
+                </a>
+                {track.steps[track.steps.indexOf(step) + 1] && (
+                  <>
+                    {" "}
+                    ·{" "}
+                    <a
+                      href={
+                        "#step-" + track.steps[track.steps.indexOf(step) + 1].id
+                      }
+                    >
+                      {t("下一步", "Next step", "下一步")} →
+                    </a>
+                  </>
+                )}
               </p>
             )}
           </>
@@ -257,6 +312,20 @@ export default function Learning() {
             )}
           </p>
         )}
+        <nav
+          className="learning-track-nav"
+          aria-label={t(
+            "选择学习方向",
+            "Choose a learning track",
+            "選擇學習方向",
+          )}
+        >
+          {tracks.map((track) => (
+            <a key={track.id} href={"#track-" + track.domain}>
+              {t(track.title, track.en, track.titleTw)}
+            </a>
+          ))}
+        </nav>
         <div className="hh-controls">
           <label>
             {t("查找选题", "Find a topic", "查找選題")}
@@ -341,6 +410,9 @@ export default function Learning() {
               {label(track.brand)} / {t(track.title, track.en, track.titleTw)}
             </h2>
             <p>{t(...track.background)}</p>
+            {track.boundary && (
+              <p className="topic-boundary">{t(...track.boundary)}</p>
+            )}
             <SeriesEntry domain={track.domain} />
             <details
               open={
@@ -368,6 +440,7 @@ export default function Learning() {
             </details>
             <details
               open={
+                target === "track-" + track.domain ||
                 track.steps.some(
                   (s) => !available.has(s.id) && target === "step-" + s.id,
                 ) ||

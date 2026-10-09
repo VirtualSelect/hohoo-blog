@@ -130,6 +130,14 @@ export default function Views() {
         <main className="hh-page">
           <h1>{document.metadata.title}</h1>
           <Topic category={route.split("/")[1]} />
+          {route === "docs/rag" && (
+            <TryIt
+              id="retrieval-exercise"
+              title={t("检索与排序", "Retrieval and ranking", "檢索與排序")}
+            >
+              <RetrievalDrawer />
+            </TryIt>
+          )}
           {route === "docs/llm" && (
             <TryIt
               id="context-exercise"

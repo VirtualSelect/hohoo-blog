@@ -6,7 +6,7 @@ status: "published"
 published_at: "2026-10-03"
 updated: "2026-10-03"
 reading_minutes: 8
-domain: "ai-apps"
+domain: "rag"
 article_kind: "case-study"
 difficulty: "intermediate"
 related: ["lab:retrieval-eval", "project:hohoo-ai-lab", "doc:ai-apps/java-concurrent-history", "doc:ai-apps/java-tool-boundary"]

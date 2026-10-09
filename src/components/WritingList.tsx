@@ -8,6 +8,7 @@ const trackLabels: Record<Domain, string> = {
   "ai-apps": "BUILD",
   llm: "UNDERSTAND",
   "embodied-ai": "EXPLORE",
+  rag: "RETRIEVE",
 };
 export default function WritingList({ items }: { items: ContentEntry[] }) {
   return items.length ? (

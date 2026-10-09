@@ -8,7 +8,7 @@
     "goalEn": "Use fixed questions and documents; compare retrieval hits, citations and answer correctness with and without retrieval.",
     "number": "001",
     "status": "running",
-    "domain": "ai-apps",
+    "domain": "rag",
     "related": [
       "paper:2005.11401",
       "doc:ai-apps/java-retrieval-evidence",

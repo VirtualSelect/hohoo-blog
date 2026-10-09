@@ -39,6 +39,33 @@ export default function LabSketch({ kind = "application" }) {
             stroke="currentColor"
           />
         </>
+      ) : kind === "retrieval" ? (
+        <>
+          {[24, 44, 64].map((y) => (
+            <rect
+              key={y}
+              x="18"
+              y={y}
+              width="44"
+              height="26"
+              rx="3"
+              stroke="currentColor"
+              opacity={y === 44 ? 1 : 0.35}
+            />
+          ))}
+          <path d="M62 57h32m34 0h35m-7-5 7 5-7 5" stroke="currentColor" />
+          <circle cx="110" cy="54" r="15" stroke="currentColor" />
+          <path d="m120 66 12 15" stroke="currentColor" />
+          <rect
+            x="170"
+            y="35"
+            width="52"
+            height="45"
+            rx="3"
+            stroke="currentColor"
+          />
+          <path d="M180 47h29m-29 10h20m-20 10h12" stroke="currentColor" />
+        </>
       ) : kind === "model" ? (
         <>
           {[25, 60, 95].map((y) => (

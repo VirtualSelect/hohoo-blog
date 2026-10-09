@@ -115,6 +115,10 @@
   --tone: var(--lab-blue);
   --wash: var(--lab-blue-soft);
 }
+.tile[data-domain="rag"] {
+  --tone: var(--hh-accent);
+  --wash: var(--blog-soft);
+}
 .tile[data-domain="embodied-ai"] {
   --tone: var(--lab-apricot);
   --wash: var(--lab-apricot-soft);

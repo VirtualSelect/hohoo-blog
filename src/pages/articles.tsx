@@ -77,6 +77,7 @@ export default function Articles() {
     ["all", t("全部方向", "All tracks", "全部方向")],
     ["ai-apps", t("AI 应用开发", "AI Applications", "AI 應用開發")],
     ["llm", "LLM"],
+    ["rag", t("RAG · 检索增强生成", "RAG", "RAG · 檢索增強生成")],
     ["embodied-ai", t("具身智能", "Embodied AI", "具身智能")],
   ];
   return (

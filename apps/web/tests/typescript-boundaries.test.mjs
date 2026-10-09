@@ -35,7 +35,7 @@ for (const locale of locales) {
       assert(isLocale(entry.locale));
       assert(isLocale(entry.sourceLocale));
       if (entry.domain)
-        assert(["ai-apps", "llm", "embodied-ai"].includes(entry.domain));
+        assert(["ai-apps", "llm", "embodied-ai", "rag"].includes(entry.domain));
       if (entry.articleKind)
         assert(Object.hasOwn(writingKinds, entry.articleKind));
       if (entry.minutes !== undefined)

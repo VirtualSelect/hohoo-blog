@@ -7,6 +7,7 @@
     "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
     "url": "https://arxiv.org/abs/2005.11401v4",
     "categories": [
+      "rag",
       "ai-apps",
       "llm"
     ],
@@ -29,7 +30,10 @@
     "version": "v4",
     "concepts": [
       "Retrieval"
-    ]
+    ],
+    "zhTw": {
+      "question": "生成模型如何利用外部知識？"
+    }
   },
   {
     "id": "paper:2210.03629",

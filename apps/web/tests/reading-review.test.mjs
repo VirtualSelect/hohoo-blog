@@ -26,7 +26,11 @@ for (const locale of ["zh-CN", "en", "zh-TW"]) {
     assert.equal(learning.length, docs.length);
     for (const track of tracks) {
       assert.ok(
-        docs.some((e) => e.id === `doc:${track.domain}/${track.synthesis}`),
+        docs.some(
+          (e) =>
+            e.id ===
+            `doc:${track.synthesisDoc || `${track.domain}/${track.synthesis}`}`,
+        ),
       );
       for (const step of track.steps.filter((s) => s.doc)) {
         const entry = learning.find((e) => e.stepId === step.id);

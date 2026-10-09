@@ -1,5 +1,6 @@
 import Link from "next/link";
 import journey from "../../../data/journey.json";
+import topics from "../../../data/topics";
 import { getMessages } from "../lib/content";
 import styles from "./Journey.module.css";
 import JourneySimulation from "./JourneySimulation";
@@ -40,6 +41,37 @@ export default function Journey({ locale }) {
           <Link href={href("/learning")}>{t("learning")} →</Link>
         </nav>
       </header>
+      <section
+        className={styles.section}
+        aria-labelledby="journey-reading-paths"
+      >
+        <h2 id="journey-reading-paths">
+          {locale === "en"
+            ? "Choose a reading path"
+            : locale === "zh-TW"
+              ? "選擇閱讀路線"
+              : "选择阅读路线"}
+        </h2>
+        <p>
+          {locale === "en"
+            ? "Published practice and future topics, including a dedicated RAG path. The project milestones and planned effort allocation below describe the embodied-agent project separately."
+            : locale === "zh-TW"
+              ? "依方向查看已發布實作與後續選題，RAG 有獨立閱讀路線。下方專案里程碑及投入比例仍用於具身智能專案規劃。"
+              : "按方向查看已发布实践与后续选题，RAG 有独立阅读路线。下方项目里程碑及投入比例仍用于具身智能项目规划。"}
+        </p>
+        <nav className={styles.links} aria-labelledby="journey-reading-paths">
+          {topics.map((topic) => (
+            <Link key={topic.id} href={href("/learning#track-" + topic.id)}>
+              {locale === "en"
+                ? topic.en
+                : locale === "zh-TW"
+                  ? topic.titleTw
+                  : topic.title}{" "}
+              →
+            </Link>
+          ))}
+        </nav>
+      </section>
       <section className={styles.focus} aria-labelledby="journey-focus">
         <div>
           <p className="eyebrow">

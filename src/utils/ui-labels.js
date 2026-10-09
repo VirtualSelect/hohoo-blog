@@ -1,5 +1,6 @@
 import { translate } from '@lab/runtime/Translate';
 const labels = {
+"RETRIEVE": () => translate({id:"label.retrieve",message:"检索"}),
 "VALIDATION": () => translate({id:"label.category_validation",message:"验证"}),
 "RESEARCH": () => translate({id:"label.category_research",message:"研究"}),
 "EMBODIED": () => translate({id:"label.category_embodied",message:"具身智能"}),

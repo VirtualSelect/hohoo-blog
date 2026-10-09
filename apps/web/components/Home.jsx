@@ -15,6 +15,7 @@ import ProjectShowcase from "./ProjectShowcase";
 import ResearchSpotlight from "./ResearchSpotlight";
 import editorial from "@site/data/editorial.json";
 import WorkshopEntry from "./WorkshopEntry";
+import topics from "@site/data/topics";
 import SeriesEntry from "@site/src/components/SeriesEntry";
 import WritingKind from "@site/src/components/WritingKind";
 
@@ -203,33 +204,21 @@ export default function Home() {
           </p>
           <h2>
             {t(
-              "沿着三个方向，深入一点。",
-              "Three directions. Deeper understanding.",
-              "沿著三個方向，深入一點。",
+              "沿着四个方向，深入一点。",
+              "Four directions. Deeper understanding.",
+              "沿著四個方向，深入一點。",
             )}
           </h2>
         </div>
         <div className="track-list">
-          {[
-            [
-              "ai-apps",
-              t("构建", "Build", "構建"),
-              t("AI 应用开发", "AI Applications", "AI 應用開發"),
-            ],
-            ["llm", t("理解", "Understand", "理解"), "LLM"],
-            [
-              "embodied-ai",
-              t("探索", "Explore", "探索"),
-              t("具身智能", "Embodied AI", "具身智慧"),
-            ],
-          ].map(([id, verb, title], i) => (
+          {topics.map(({ id, tag, title, en, titleTw, sketch }, i) => (
             <div key={id} data-track={id} className="track-reading-entry">
               <Link to={"/docs/" + id} data-track={id}>
-                <LabSketch kind={["application", "model", "embodied"][i]} />
+                <LabSketch kind={sketch} />
                 <small>
-                  0{i + 1} / {verb}
+                  0{i + 1} / {uiLabel(tag)}
                 </small>
-                <h3>{title}</h3>
+                <h3>{t(title, en, titleTw)}</h3>
                 <span>↗</span>
               </Link>
               <SeriesEntry domain={id} />

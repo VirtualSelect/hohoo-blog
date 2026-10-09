@@ -249,6 +249,7 @@ export default function CreativeWorkbench() {
             ["all", t("全部", "All", "全部")],
             ["ai-apps", t("构建应用", "Build", "構建應用")],
             ["llm", t("理解模型", "Understand", "理解模型")],
+            ["rag", t("检索与证据", "RAG", "檢索與證據")],
             ["embodied-ai", t("探索具身", "Explore", "探索具身")],
           ].map(([id, label]) => (
             <button
@@ -287,9 +288,11 @@ export default function CreativeWorkbench() {
               <small>
                 {w.domain === "llm"
                   ? "LLM"
-                  : w.domain === "ai-apps"
-                    ? t("AI 应用", "AI applications", "AI 應用")
-                    : t("具身智能", "Embodied AI", "具身智慧")}
+                  : w.domain === "rag"
+                    ? "RAG"
+                    : w.domain === "ai-apps"
+                      ? t("AI 应用", "AI applications", "AI 應用")
+                      : t("具身智能", "Embodied AI", "具身智慧")}
               </small>
               <strong>{text(w.title)}</strong>
               <p>{text(w.description)}</p>

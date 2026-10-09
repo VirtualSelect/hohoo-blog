@@ -6,7 +6,7 @@ export function isLocale(value: unknown): value is Locale {
   return value === "zh-CN" || value === "zh-TW" || value === "en";
 }
 export type LocalizedText = readonly [string, string, string?];
-export type Domain = "ai-apps" | "llm" | "embodied-ai";
+export type Domain = "ai-apps" | "llm" | "embodied-ai" | "rag";
 export type ContentType =
   | "doc"
   | "blog"

@@ -78,7 +78,7 @@ export const workshops = [
   },
   {
     id: "retrieval",
-    domain: "ai-apps",
+    domain: "rag",
     mark: "A↔B",
     title: [
       "找到资料，就能答对吗？",
@@ -95,7 +95,7 @@ export const workshops = [
       "Start with an irrelevant document, then add relevant evidence. Is it enough to answer?",
       "先選一份無關資料，再加入相關證據；分清找到內容和足夠回答。",
     ],
-    href: "/docs/ai-apps",
+    href: "/docs/rag",
     tags: ["RAG", "retrieval", "检索", "排序"],
   },
   {

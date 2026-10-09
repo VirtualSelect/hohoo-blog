@@ -13,7 +13,8 @@ export default function SeriesEntry({ domain }) {
   if (!track) return null;
   const first = entries.find((item) => item.id === "doc:" + track.steps[0].doc);
   const synthesis = entries.find(
-    (item) => item.id === `doc:${domain}/${track.synthesis}`,
+    (item) =>
+      item.id === `doc:${track.synthesisDoc || `${domain}/${track.synthesis}`}`,
   );
   return (
     <nav

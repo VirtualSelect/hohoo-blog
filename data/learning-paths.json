@@ -71,32 +71,6 @@
         ]
       },
       {
-        "id": "java-retrieval-evidence",
-        "doc": "ai-apps/java-retrieval-evidence",
-        "outcome": "复算 BM25 检索和无答案误命中，识别玩具语料的局限。",
-        "outcomeEn": "Recompute BM25 retrieval and false hits on unanswerable toy queries.",
-        "outcomeTw": "重算 BM25 檢索與無答案誤命中，辨識玩具語料的侷限。",
-        "prerequisites": [
-          "doc:ai-apps/java-first-llm"
-        ],
-        "followUps": [
-          "doc:ai-apps/java-grounded-claims"
-        ]
-      },
-      {
-        "id": "java-grounded-claims",
-        "doc": "ai-apps/java-grounded-claims",
-        "outcome": "校验证据与声明对应，而不把规则匹配当语义蕴含。",
-        "outcomeEn": "Validate claim–evidence correspondence without claiming semantic entailment.",
-        "outcomeTw": "校驗證據與聲明對應，不將規則比對當成語義蘊含。",
-        "prerequisites": [
-          "doc:ai-apps/java-retrieval-evidence"
-        ],
-        "followUps": [
-          "doc:ai-apps/java-streaming-boundary"
-        ]
-      },
-      {
         "id": "java-streaming-boundary",
         "doc": "ai-apps/java-streaming-boundary",
         "outcome": "区分流式预览与可提交的完整回答。",
@@ -260,22 +234,6 @@
         "domain": "ai-apps",
         "difficulty": "beginner",
         "titleTw": "Spring AI 快速入門"
-      },
-      {
-        "id": "blog-rag",
-        "title": "RAG From Scratch",
-        "en": "Build a Q&A system for this blog",
-        "topic": "AI 应用开发",
-        "prerequisite": "模型调用与输出控制",
-        "prerequisiteEn": "Model calls and output control",
-        "minutes": 20,
-        "outcome": "串联文档处理、检索和回答，保留可追溯的来源。",
-        "outcomeEn": "Goal: connect document processing, retrieval and answers with sources.",
-        "status": "planning",
-        "domain": "ai-apps",
-        "area": "application",
-        "difficulty": "intermediate",
-        "titleTw": "RAG From Scratch"
       },
       {
         "id": "agent",
@@ -1139,6 +1097,293 @@
       "Python 基础；教学仿真使用 MuJoCo 与直角坐标夹爪",
       "Python basics; teaching simulations use MuJoCo and a Cartesian gripper",
       "Python 基礎；教學模擬使用 MuJoCo 與直角座標夾爪"
+    ]
+  },
+  {
+    "id": "retrieval",
+    "domain": "rag",
+    "brand": "RETRIEVE",
+    "title": "RAG · 检索增强生成",
+    "en": "RAG · Retrieval-augmented generation",
+    "titleTw": "RAG · 檢索增強生成",
+    "intro": "把外部资料变成可追溯的回答依据：先检验检索，再检验生成。",
+    "english": "Turn external documents into traceable answer evidence: evaluate retrieval before generation.",
+    "introTw": "把外部資料變成可追溯的回答依據：先檢驗檢索，再檢驗生成。",
+    "background": [
+      "Java、HTTP 与 JSON 基础；先理解检索候选与回答证据的区别。",
+      "Java, HTTP and JSON basics; distinguish retrieved candidates from evidence sufficient for an answer.",
+      "Java、HTTP 與 JSON 基礎；先理解檢索候選與回答證據的區別。"
+    ],
+    "synthesisDoc": "ai-apps/java-grounded-claims",
+    "boundary": [
+      "已发布两篇离线实践：BM25 检索基线、闭合字段的引用校验。它们尚不能证明真实模型的回答质量，也不是完整的博客问答系统。",
+      "Two offline practices are published: a BM25 retrieval baseline and citation checks for closed fields. They do not establish real-model answer quality or constitute a complete blog Q&A system.",
+      "已發布兩篇離線實作：BM25 檢索基線、閉合欄位的引用校驗。它們尚不能證明真實模型的回答品質，也不是完整的部落格問答系統。"
+    ],
+    "pipeline": [
+      [
+        "资料与版本",
+        "Documents & versions",
+        "資料與版本"
+      ],
+      [
+        "分块与索引",
+        "Chunks & index",
+        "分塊與索引"
+      ],
+      [
+        "检索与重排",
+        "Retrieval & reranking",
+        "檢索與重排"
+      ],
+      [
+        "证据与回答",
+        "Evidence & answers",
+        "證據與回答"
+      ],
+      [
+        "评估与拒答",
+        "Evaluation & abstention",
+        "評估與拒答"
+      ]
+    ],
+    "steps": [
+      {
+        "id": "java-retrieval-evidence",
+        "doc": "ai-apps/java-retrieval-evidence",
+        "outcome": "复算 BM25 检索和无答案误命中，识别玩具语料的局限。",
+        "outcomeEn": "Recompute BM25 retrieval and false hits on unanswerable toy queries.",
+        "outcomeTw": "重算 BM25 檢索與無答案誤命中，辨識玩具語料的侷限。",
+        "prerequisites": [
+          "doc:ai-apps/java-first-llm"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-grounded-claims"
+        ]
+      },
+      {
+        "id": "java-grounded-claims",
+        "doc": "ai-apps/java-grounded-claims",
+        "outcome": "校验证据与声明对应，而不把规则匹配当语义蕴含。",
+        "outcomeEn": "Validate claim–evidence correspondence without claiming semantic entailment.",
+        "outcomeTw": "校驗證據與聲明對應，不將規則比對當成語義蘊含。",
+        "prerequisites": [
+          "doc:ai-apps/java-retrieval-evidence"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-streaming-boundary"
+        ]
+      },
+      {
+        "id": "rag-corpus-chunks",
+        "title": "先固定语料，再比较分块",
+        "en": "Freeze the corpus, then compare chunking",
+        "titleTw": "先固定語料，再比較分塊",
+        "outcome": "建立可追溯文档与人工标注问题集，分开开发集与保留测试集。",
+        "outcomeEn": "Build traceable documents and relevance labels, separating development and held-out questions.",
+        "outcomeTw": "建立可追溯文件與人工標註問題集，分開開發集與保留測試集。",
+        "domain": "rag",
+        "status": "planning",
+        "difficulty": "intermediate",
+        "previousStep": "java-grounded-claims",
+        "plan": {
+          "before": [
+            "完成 BM25 基线；能区分文档、片段和引用。",
+            "Complete the BM25 baseline; distinguish documents, chunks and citations.",
+            "完成 BM25 基線；能區分文件、片段和引用。"
+          ],
+          "question": [
+            "固定长度与标题分段会在哪些问题上丢失答案上下文？",
+            "Which questions lose answer context under fixed-length versus heading-based chunks?",
+            "固定長度與標題分段會在哪些問題上遺失答案上下文？"
+          ],
+          "deliverable": [
+            "语料快照、文档版本与来源、带无答案题的标注集、两种分块脚本及逐题检索记录。",
+            "Corpus snapshot, document versions and sources, labeled answerable/unanswerable questions, two chunkers and per-query retrieval logs.",
+            "語料快照、文件版本與來源、帶無答案題的標註集、兩種分塊腳本及逐題檢索記錄。"
+          ],
+          "validation": [
+            "固定分词、检索器和 top-k；报告 Recall@k、答案跨块丢失与重复召回案例。测试集不用于选择分块参数。",
+            "Hold tokenization, retriever and top-k fixed; report Recall@k, split-answer failures and duplicate hits. Do not tune on the held-out set.",
+            "固定分詞、檢索器和 top-k；報告 Recall@k、答案跨塊遺失與重複召回案例。測試集不用於選擇分塊參數。"
+          ]
+        }
+      },
+      {
+        "id": "rag-hybrid-retrieval",
+        "title": "BM25、向量与混合检索怎么选",
+        "en": "Choosing BM25, dense or hybrid retrieval",
+        "titleTw": "BM25、向量與混合檢索怎麼選",
+        "outcome": "在同一问题集上比较关键词匹配、语义召回与融合排序。",
+        "outcomeEn": "Compare lexical matching, dense retrieval and fused ranking on identical questions.",
+        "outcomeTw": "在同一問題集上比較關鍵詞匹配、語義召回與融合排序。",
+        "domain": "rag",
+        "status": "planning",
+        "difficulty": "intermediate",
+        "previousStep": "rag-corpus-chunks",
+        "plan": {
+          "before": [
+            "已有冻结语料与相关性标注；了解 Embedding 与相似度。",
+            "A frozen corpus and relevance labels; basics of embeddings and similarity.",
+            "已有凍結語料與相關性標註；了解 Embedding 與相似度。"
+          ],
+          "question": [
+            "别名、精确编号与中英文混用分别在哪种检索策略下失败？",
+            "How do aliases, exact identifiers and mixed-language queries fail under each strategy?",
+            "別名、精確編號與中英文混用分別在哪種檢索策略下失敗？"
+          ],
+          "deliverable": [
+            "固定模型版本的本地向量索引、BM25/向量/融合三组结果、排名与耗时明细。",
+            "A local vector index with a pinned model version; BM25, dense and fused results with ranks and timings.",
+            "固定模型版本的本地向量索引、BM25／向量／融合三組結果、排名與耗時明細。"
+          ],
+          "validation": [
+            "相同分块和候选预算下比较 Recall@k、MRR、索引大小及查询时间；记录混合检索不如单一路径的题目。",
+            "Compare Recall@k, MRR, index bytes and query time with identical chunks and candidate budgets; retain hybrid regressions.",
+            "相同分塊和候選預算下比較 Recall@k、MRR、索引大小及查詢時間；記錄混合檢索不如單一路徑的題目。"
+          ]
+        }
+      },
+      {
+        "id": "rag-reranking-context",
+        "title": "重排之后，哪些证据进入上下文",
+        "en": "Reranking and assembling the context",
+        "titleTw": "重排之後，哪些證據進入上下文",
+        "outcome": "在固定上下文预算里选择覆盖问题且不过度重复的证据。",
+        "outcomeEn": "Select evidence with answer coverage and limited duplication under a fixed context budget.",
+        "outcomeTw": "在固定上下文預算裡選擇涵蓋問題且不過度重複的證據。",
+        "domain": "rag",
+        "status": "planning",
+        "difficulty": "intermediate",
+        "previousStep": "rag-hybrid-retrieval",
+        "plan": {
+          "before": [
+            "完成检索对照；了解 Token 预算和引用标识。",
+            "Complete retrieval comparisons; understand token budgets and citation IDs.",
+            "完成檢索對照；了解 Token 預算和引用識別碼。"
+          ],
+          "question": [
+            "重排、去重和截断分别改善或损坏了哪些证据？",
+            "Which evidence improves or disappears through reranking, deduplication and truncation?",
+            "重排、去重和截斷分別改善或損壞了哪些證據？"
+          ],
+          "deliverable": [
+            "候选与重排前后清单、上下文组装器、引用映射及预算裁剪日志。",
+            "Candidate and reranked lists, a context assembler, citation maps and budget-truncation logs.",
+            "候選與重排前後清單、上下文組裝器、引用對照及預算裁剪日誌。"
+          ],
+          "validation": [
+            "逐项消融，比较排序质量、证据覆盖、重复比例和耗时；不把排序提高直接写成回答准确率提高。",
+            "Ablate one stage at a time; compare ranking, evidence coverage, duplication and time. Improved ranking alone is not improved answer accuracy.",
+            "逐項消融，比較排序品質、證據涵蓋、重複比例和耗時；不把排序提高直接寫成回答準確率提高。"
+          ]
+        }
+      },
+      {
+        "id": "rag-answer-evaluation",
+        "title": "从命中证据到回答质量与拒答",
+        "en": "From retrieved evidence to answer quality and abstention",
+        "titleTw": "從命中證據到回答品質與拒答",
+        "outcome": "分开衡量检索命中、引用是否支持断言，以及资料缺失时能否拒答。",
+        "outcomeEn": "Measure retrieval hits, claim support and abstention on missing evidence separately.",
+        "outcomeTw": "分開衡量檢索命中、引用是否支持斷言，以及資料缺失時能否拒答。",
+        "domain": "rag",
+        "status": "planning",
+        "difficulty": "intermediate",
+        "previousStep": "rag-reranking-context",
+        "plan": {
+          "before": [
+            "完成证据组装与引用契约；先冻结评分规范。",
+            "Complete context assembly and citation contracts; freeze the scoring rubric first.",
+            "完成證據組裝與引用契約；先凍結評分規範。"
+          ],
+          "question": [
+            "加入检索后，哪些回答改善，哪些只是带上了不支持结论的引用？",
+            "Which answers improve with retrieval, and which merely add unsupported citations?",
+            "加入檢索後，哪些回答改善，哪些只是帶上了不支持結論的引用？"
+          ],
+          "deliverable": [
+            "沿用 retrieval-eval：无检索／有检索的成对输出、模型与提示版本、人工证据支持标注、无答案和冲突题的失败记录。",
+            "Continue retrieval-eval: paired no-retrieval/retrieval outputs, model and prompt versions, human support labels, and missing/conflicting-evidence failures.",
+            "沿用 retrieval-eval：無檢索／有檢索的成對輸出、模型與提示版本、人工證據支持標註、無答案和衝突題的失敗記錄。"
+          ],
+          "validation": [
+            "协议先行；真实模型运行尚未完成。单列正确性、引用支持、错误拒答与无依据作答，保留逐题输出和用量；涉及付费调用须另行授权。",
+            "Protocol first; real-model runs are pending. Report correctness, citation support, false abstention and unsupported answers separately, with per-query outputs and usage. Paid calls need separate authorization.",
+            "協議先行；真實模型執行尚未完成。單列正確性、引用支持、錯誤拒答與無依據作答，保留逐題輸出和用量；涉及付費呼叫須另行授權。"
+          ]
+        }
+      },
+      {
+        "id": "rag-trust-boundaries",
+        "title": "知识更新、访问权限与检索注入",
+        "en": "Updates, permissions and retrieval injection",
+        "titleTw": "知識更新、存取權限與檢索注入",
+        "outcome": "保证被撤回、过期或无权访问的资料不会作为当前回答证据。",
+        "outcomeEn": "Prevent withdrawn, stale or unauthorized documents from becoming current answer evidence.",
+        "outcomeTw": "確保被撤回、過期或無權存取的資料不會作為目前回答證據。",
+        "domain": "rag",
+        "status": "planning",
+        "difficulty": "advanced",
+        "previousStep": "rag-answer-evaluation",
+        "plan": {
+          "before": [
+            "已有文档版本、来源标识和可追溯上下文。",
+            "Versioned documents, source IDs and traceable contexts.",
+            "已有文件版本、來源識別碼和可追溯上下文。"
+          ],
+          "question": [
+            "索引更新与权限变化后，旧片段和缓存会不会继续泄露或误导？",
+            "Can stale chunks and caches leak or mislead after index or permission changes?",
+            "索引更新與權限變化後，舊片段和快取會不會繼續洩漏或誤導？"
+          ],
+          "deliverable": [
+            "版本更新／删除／权限撤销的回归用例、索引与缓存失效记录、检索内容含恶意指令的本地夹具。",
+            "Update, deletion and revocation regression cases; index/cache invalidation logs; local fixtures containing malicious retrieved instructions.",
+            "版本更新／刪除／權限撤銷的回歸案例、索引與快取失效記錄、檢索內容含惡意指令的本地測試資料。"
+          ],
+          "validation": [
+            "权限在证据进入模型前检查；旧版本不可误标当前。外部文本始终是数据，模型不可据此扩大工具权限；本地通过不代表通用注入防御已解决。",
+            "Check access before evidence reaches the model; never label stale versions current. Retrieved text cannot expand tool permissions. Passing local cases is not a general injection-defense guarantee.",
+            "權限在證據進入模型前檢查；舊版本不可誤標目前。外部文字始終是資料，模型不可據此擴大工具權限；本地通過不代表通用注入防禦已解決。"
+          ]
+        }
+      },
+      {
+        "id": "blog-rag",
+        "title": "整合：可追溯的博客问答",
+        "en": "Integration: traceable blog Q&A",
+        "titleTw": "整合：可追溯的部落格問答",
+        "outcome": "把检索、证据、回答和失败处理接成一个可复现的最小应用。",
+        "outcomeEn": "Connect retrieval, evidence, answers and failure handling in a reproducible minimal application.",
+        "outcomeTw": "把檢索、證據、回答和失敗處理接成一個可復現的最小應用。",
+        "domain": "rag",
+        "status": "planning",
+        "difficulty": "advanced",
+        "previousStep": "rag-trust-boundaries",
+        "plan": {
+          "before": [
+            "完成前述评估与安全边界；确认部署成本和产品范围。",
+            "Complete the evaluation and trust-boundary stages; confirm cost and product scope.",
+            "完成前述評估與安全邊界；確認部署成本和產品範圍。"
+          ],
+          "question": [
+            "读者能否核对来源、识别资料缺失，并在失败时继续阅读原文？",
+            "Can readers verify sources, recognize missing evidence and continue reading when the system fails?",
+            "讀者能否核對來源、識別資料缺失，並在失敗時繼續閱讀原文？"
+          ],
+          "deliverable": [
+            "保留在 hohoo-ai-lab 的最小工程、固定语料和版本、安装命令、评估报告及来源／无证据／错误界面。",
+            "A minimal hohoo-ai-lab application, pinned corpus and versions, setup commands, evaluation report, and source/no-evidence/error states.",
+            "保留在 hohoo-ai-lab 的最小工程、固定語料和版本、安裝命令、評估報告及來源／無證據／錯誤介面。"
+          ],
+          "validation": [
+            "从干净环境跑通索引到回答；复现失败与拒答，检查密钥仅在服务端。尚未部署，不把本阶段计为已完成产品。",
+            "Reproduce indexing through answering from a clean environment, including failures and abstention; keep secrets server-side. Not deployed or counted as a completed product.",
+            "從乾淨環境跑通索引到回答；復現失敗與拒答，檢查金鑰僅在伺服器端。尚未部署，不把本階段計為已完成產品。"
+          ]
+        }
+      }
     ]
   }
 ]

@@ -127,7 +127,7 @@ export function pageGlobalData(
     for (const entry of Object.values(forks).flat() as ContentEntry[])
       selected.add(entry.id);
     const step = tracks
-      .flatMap((track) => track.steps)
+      .flatMap<(typeof tracks)[number]["steps"][number]>((track) => track.steps)
       .find((step) => step.id === document.frontMatter.learning_step);
     for (const id of step?.followUps || []) selected.add(id);
   }

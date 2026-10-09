@@ -1567,5 +1567,8 @@
   },
   "journey.lab.VL01.qualifiedCompletionResult": {
     "message": "E14 將完成契約接入恢復：8回合區分歷史放置、當前有效性與完成資格；完整 VL01、M4/M5 尚未完成。"
+  },
+  "label.retrieve": {
+    "message": "檢索"
   }
 }

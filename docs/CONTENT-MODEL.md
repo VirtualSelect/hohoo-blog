@@ -1,5 +1,12 @@
 # Huhohoo Content Model
 
+## RAG 分类（2026-10-09）
+
+长期内容 `domain` 新增 `rag`；AI Radar 的来源分类独立维护，本轮不改变采集分类。RAG 收录检索与引用证据主题，文章路径不因分类变化而迁移：`/docs/ai-apps/java-retrieval-evidence` 与 `/docs/ai-apps/java-grounded-claims` 继续有效。专题入口 `/docs/rag`、路线 `/learning#track-rag`。
+
+路线数据统一在 `data/learning-paths.json`：已发布步骤引用真实 `doc`；未发布步骤无 `doc`，可提供 `plan.before/question/deliverable/validation` 三语数组与 `previousStep`，不进入文章列表或 RSS，不纳入已发表进度分母。`synthesisDoc` 可显式引用既有路径，不要求路径前缀等于当前分类。专题相关项目优先复用文章 `related` 关系。
+
+
 ## 2026-10-06 · 阅读路线与复现入口
 
 - `data/learning-paths.json` 是三条阅读路线的顺序来源。已发布节点只保存 `doc`、稳定 `id`、三语 `outcome`、`prerequisites` 与可选 `followUps`，标题、类型、日期与阅读时长从文章元数据生成；未发表节点单独展示。

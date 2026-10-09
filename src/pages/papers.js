@@ -52,6 +52,7 @@ export default function Papers() {
                 {en ? 'AI applications' : 'AI 应用开发'}
               </option>
               <option value="llm">LLM</option>
+              <option value="rag">RAG</option>
               <option value="embodied-ai">
                 {en ? 'Embodied AI' : '具身智能'}
               </option>

@@ -161,6 +161,9 @@ export default function Document({ children }: PropsWithChildren) {
               {t("AI 应用开发", "AI Applications", "AI 應用開發")}
             </Link>
             <Link to="/docs/llm">LLM</Link>
+            <Link to="/docs/rag">
+              {t("RAG · 检索增强生成", "RAG", "RAG · 檢索增強生成")}
+            </Link>
             <Link to="/docs/embodied-ai">
               {t("具身智能", "Embodied AI", "具身智慧")}
             </Link>

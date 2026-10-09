@@ -14,7 +14,12 @@ function isKind(value: string | null): value is ArticleKind {
   return value !== null && Object.hasOwn(writingKinds, value);
 }
 function isDomain(value: string | null): value is Domain {
-  return value === "ai-apps" || value === "llm" || value === "embodied-ai";
+  return (
+    value === "ai-apps" ||
+    value === "llm" ||
+    value === "embodied-ai" ||
+    value === "rag"
+  );
 }
 // Reading purpose is independent from the storage type (doc/note/blog).
 export const writingKinds: Record<ArticleKind, LocalizedText> = {
