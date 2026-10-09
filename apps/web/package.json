@@ -4,7 +4,7 @@
   "scripts": {
     "prepare:content": "node scripts/content.mjs",
     "dev": "npm run prepare:content && next dev --webpack -p 4181",
-    "build": "npm run prepare:content && next build --webpack",
+    "build": "npm run prepare:content && next build --webpack && node scripts/build-budget.mjs",
     "start": "next start -p 4181",
     "test": "node --test tests/*.test.mjs",
     "format:check": "prettier --check app components runtime lib scripts tests next.config.mjs tsconfig.json ../../src/pages/articles.tsx ../../src/components/WritingList.tsx ../../src/components/WritingKind.tsx ../../src/utils/writing-kinds.ts ../../src/utils/learning-progress.ts ../../tsconfig.json",

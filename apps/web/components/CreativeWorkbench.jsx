@@ -20,6 +20,7 @@ function Loading() {
 }
 
 const instruments = {
+  emergence: dynamic(() => import("./EmergenceGarden"), { loading: Loading }),
   failure: dynamic(() => import("./FailureLab"), { loading: Loading }),
   memory: dynamic(() => import("./ConversationWorkbench"), {
     loading: Loading,

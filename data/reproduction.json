@@ -134,5 +134,13 @@
     "requirements": "requirements-lock.txt",
     "run": "experiments/planar_reach/run.py",
     "audit": "experiments/planar_reach/audit.py"
+  },
+  "embodied-ai/mujoco-velocity-estimation": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "1931effc42f9d5974f20c09614dc2ebbdfcbf44b",
+    "directory": "experiments/planar_velocity_estimation",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/planar_velocity_estimation/run.py",
+    "audit": "experiments/planar_velocity_estimation/audit.py"
   }
 }

@@ -146,6 +146,7 @@ export interface SiteContent {
   documents: SiteDocument[];
   globalData: GlobalData;
   items: RadarSignal[];
+  dailyItems: RadarSignal[];
   radarArchive: RadarArchive;
   searchUrl: string;
 }

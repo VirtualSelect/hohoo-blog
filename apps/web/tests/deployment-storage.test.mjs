@@ -1,7 +1,15 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { clientGlobalData, clientMessages } from "../lib/client-content.ts";
+import {
+  clientGlobalData,
+  clientMessages,
+  pageGlobalData,
+  pageSignals,
+} from "../lib/client-content.ts";
+import { readingForks } from "../lib/reading-forks.mjs";
+import { writingEntries } from "../../../src/utils/localization.cjs";
+import { isoWeek } from "../../../src/utils/radar.cjs";
 import { canonicalPath, publicPaths } from "../lib/visitor-stats.mjs";
 import {
   affectsAstra,
@@ -120,6 +128,74 @@ test("visitor allowlist matches the previous content-derived list exactly", () =
     publicPaths(rows, new Set(expected)),
   );
 });
+
+test("route-scoped data retains all article links, recommendations, progress and search fallbacks", () => {
+  for (const locale of ["zh-CN", "en", "zh-TW"]) {
+    const data = JSON.parse(
+      fs.readFileSync(new URL(`../generated/${locale}.json`, import.meta.url)),
+    );
+    for (const document of data.documents) {
+      const original = clientGlobalData(
+        data.globalData,
+        locale,
+        document.route,
+      );
+      const scoped = pageGlobalData(
+        data.globalData,
+        locale,
+        document.route,
+        document,
+      );
+      if (document.frontMatter.landing) {
+        assert.deepEqual(scoped, original);
+        continue;
+      }
+      const entries = scoped["content-index"].entries;
+      assert.deepEqual(
+        writingEntries(entries).slice(0, 3),
+        writingEntries(original["content-index"].entries).slice(0, 3),
+      );
+      if (["docs", "blog"].includes(document.kind)) {
+        const id =
+          (document.kind === "blog" ? "blog:" : "doc:") + document.metadata.id;
+        assert.deepEqual(
+          readingForks(entries, id, document.frontMatter),
+          readingForks(
+            original["content-index"].entries,
+            id,
+            document.frontMatter,
+          ),
+        );
+        assert.deepEqual(scoped["learning-index"], original["learning-index"]);
+        for (const linked of [
+          ...(document.frontMatter.related || []),
+          ...(document.frontMatter.prerequisites || []),
+        ]) {
+          assert.deepEqual(
+            entries.find((e) => e.id === linked),
+            original["content-index"].entries.find((e) => e.id === linked),
+          );
+        }
+      }
+      assert(
+        Buffer.byteLength(JSON.stringify(scoped)) <
+          Buffer.byteLength(JSON.stringify(original)) * 0.6,
+        document.route,
+      );
+    }
+    for (const route of data.routes.filter((r) =>
+      /^(news\/daily|radar\/weekly)\//.test(r),
+    )) {
+      const source = route.startsWith("news/") ? data.dailyItems : data.items;
+      const expected = source.filter((item) =>
+        route.startsWith("news/")
+          ? item.collectedAt.startsWith(route.split("/").pop())
+          : isoWeek(item.publishedAt) === route.split("/").pop(),
+      );
+      assert.deepEqual(pageSignals(source, route), expected, route);
+    }
+  }
+});
 test("Astra skips unrelated content but builds shared sources and dependency changes", () => {
   for (const file of [
     "data/news/items.json",
@@ -178,4 +254,57 @@ test("Astra skips unrelated content but builds shared sources and dependency cha
     }),
     1,
   );
+});
+
+test("scoped lab/project details retain every detail field and related summary", () => {
+  for (const locale of ["zh-CN", "en", "zh-TW"]) {
+    const data = JSON.parse(
+      fs.readFileSync(new URL(`../generated/${locale}.json`, import.meta.url)),
+    );
+    for (const entry of data.globalData["content-index"].entries.filter((e) =>
+      ["lab", "project", "note", "paper"].includes(e.type),
+    )) {
+      const route = entry.href.replace(/^\/(en|zh-TW)(?=\/)/, "").slice(1);
+      const entries = pageGlobalData(data.globalData, locale, route, null)[
+        "content-index"
+      ].entries;
+      assert.deepEqual(
+        entries.find((e) => e.id === entry.id),
+        entry,
+      );
+      const full = clientGlobalData(data.globalData, locale, route)[
+        "content-index"
+      ].entries;
+      for (const id of entry.related || [])
+        assert.deepEqual(
+          entries.find((e) => e.id === id),
+          full.find((e) => e.id === id),
+        );
+      assert.deepEqual(
+        writingEntries(entries).slice(0, 3),
+        writingEntries(full).slice(0, 3),
+      );
+    }
+  }
+});
+
+test("daily archive preserves every pre-clustering collected record", () => {
+  const raw = JSON.parse(
+    fs.readFileSync(new URL("../../../data/news/items.json", import.meta.url)),
+  );
+  for (const locale of ["zh-CN", "en", "zh-TW"]) {
+    const data = JSON.parse(
+      fs.readFileSync(new URL(`../generated/${locale}.json`, import.meta.url)),
+    );
+    assert.deepEqual(
+      data.dailyItems.map((i) => i.id),
+      raw.map((i) => i.id),
+    );
+    for (const day of new Set(raw.map((i) => i.collectedAt.slice(0, 10)))) {
+      assert.deepEqual(
+        pageSignals(data.dailyItems, "news/daily/" + day).map((i) => i.id),
+        raw.filter((i) => i.collectedAt.startsWith(day)).map((i) => i.id),
+      );
+    }
+  }
 });

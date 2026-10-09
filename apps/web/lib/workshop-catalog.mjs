@@ -1,6 +1,38 @@
 // Teaching experiences, not published research or measured experiments.
 export const workshops = [
   {
+    id: "emergence",
+    domain: "embodied-ai",
+    mark: "✳",
+    title: [
+      "简单规则，能长出怎样的花园？",
+      "What grows from simple rules?",
+      "簡單規則，能長出怎樣的花園？",
+    ],
+    description: [
+      "种下细胞，回看演化，把一帧图案带走。",
+      "Plant cells, rewind their evolution, and take a frame with you.",
+      "種下細胞，回看演化，把一幀圖案帶走。",
+    ],
+    task: [
+      "先选一种花种，单步观察，再点格子查看原因。这是有限网格的规则演示，不是 AI 或物理仿真。",
+      "Choose a seed, step forward and inspect a cell’s rule. A finite-grid demonstration, not AI or physics simulation.",
+      "先選一種花種，單步觀察，再點格子查看原因。這是有限網格的規則示範，不是 AI 或物理模擬。",
+    ],
+    href: "/journey/virtual-lab",
+    tags: [
+      "Conway",
+      "Game of Life",
+      "emergence",
+      "garden",
+      "生命游戏",
+      "涌现",
+      "花园",
+      "湧現",
+      "花園",
+    ],
+  },
+  {
     id: "failure",
     domain: "ai-apps",
     mark: "↺",

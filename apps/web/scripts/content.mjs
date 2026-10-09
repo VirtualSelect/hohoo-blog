@@ -68,10 +68,8 @@ const basePages = [
   "blog/tags/blog",
   "blog/archive",
 ];
-const rawSignals = signals(
-  json("data/news/items.json"),
-  json("config/news-sources.json"),
-);
+const rawNews = json("data/news/items.json");
+const rawSignals = signals(rawNews, json("config/news-sources.json"));
 for (const locale of ["zh-CN", "zh-TW", "en"]) {
   const prefix = locale === "zh-CN" ? "" : "/" + locale;
   const documents = [];
@@ -221,6 +219,8 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
   const allContent = { docs, blogPosts };
   const entries = collectContent(allContent, prefix);
   const items = rawSignals.map((i) => projectSignal(i, locale));
+  // Daily archives retain individual collected records, before event clustering.
+  const dailyItems = rawNews.map((i) => projectSignal(i, locale));
   const weeks = [...new Set(items.map((i) => isoWeek(i.publishedAt)))];
   const search = entries
     .filter((e) => e.translationStatus !== "MISSING")
@@ -316,6 +316,7 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
     locale,
     routes,
     documents,
+    dailyItems,
     globalData,
     items,
     radarArchive: {

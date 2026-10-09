@@ -11,7 +11,11 @@ import RouteContent from "../../components/RouteContent";
 import Journey from "../../components/Journey";
 import VirtualLab from "../../components/VirtualLab";
 import type { Metadata } from "next";
-import { clientGlobalData, clientMessages } from "../../lib/client-content";
+import {
+  pageGlobalData,
+  pageSignals,
+  clientMessages,
+} from "../../lib/client-content";
 type RouteProps = { params: Promise<{ segments?: string[] }> };
 const aliases: Record<string, string | undefined> = {
   aboutMe: "about",
@@ -125,14 +129,11 @@ export default async function Page({ params }: RouteProps) {
       value={{
         locale,
         route,
-        globalData: clientGlobalData(data.globalData, locale, route),
-        items: route.startsWith("radar/weekly/")
-          ? data.items
-          : route === "radar"
-            ? data.items.slice(0, 12)
-            : route === ""
-              ? data.items.slice(0, 10)
-              : [],
+        globalData: pageGlobalData(data.globalData, locale, route, document),
+        items: pageSignals(
+          route.startsWith("news/daily/") ? data.dailyItems : data.items,
+          route,
+        ),
         searchUrl: data.searchUrl,
         radarArchive: route === "radar" ? data.radarArchive : null,
         messages: clientMessages(getMessages(locale)),

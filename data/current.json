@@ -1,19 +1,19 @@
 {
-  "updated": "2026-10-07",
+  "updated": "2026-10-09",
   "items": [
     {
       "kind": "BUILDING",
-      "zh": "Java 助手的请求预算、重试和持久历史已完成本地验证；完整在线产品尚未交付。",
-      "en": "Local validation now covers request budgets, retries and durable turns; the full online assistant remains unfinished.",
-      "tw": "Java 助手的請求預算、重試和持久歷史已完成本地驗證；完整在線產品尚未交付。",
-      "to": "/docs/ai-apps/java-durable-turns"
+      "zh": "七组本地HTTP条件中，同进程丢回复与12客户端并发均只执行一次；重启和提交间隙崩溃后仍重复执行。",
+      "en": "Seven loopback HTTP cases: lost replies and 12 concurrent duplicates execute once within a process; restart and crash gaps still duplicate effects.",
+      "tw": "七組本機HTTP條件中，同程序遺失回覆與12個用戶端並行皆僅執行一次；重新啟動及提交間隙崩潰後仍重複執行。",
+      "to": "/docs/ai-apps/java-idempotent-retry"
     },
     {
       "kind": "LEARNING",
-      "zh": "把缓存成本拆开测量，并对照分块Softmax与KV量化的内存、误差和计时边界。",
-      "en": "Profiling cache costs and comparing tiled softmax and KV quantization across storage, error and time.",
-      "tw": "把快取成本拆開測量，并對照分塊Softmax與KV量化的內存、誤差和計時邊界。",
-      "to": "/docs/llm/cache-cost-profile"
+      "zh": "162组对照中，K通道离群时混合策略平均KV输出误差1.9215%；干净输入上逐Token更准，不能声称一种轴普遍更优。",
+      "en": "Across 162 comparisons, the hybrid averages 1.9215% KV output error with K-channel outliers; token-wise is better on clean inputs.",
+      "tw": "162組對照中，K通道離群時混合策略平均KV輸出誤差1.9215%；乾淨輸入上逐Token更準，不能宣稱一種軸普遍更優。",
+      "to": "/docs/llm/kv-quantization-axes"
     },
     {
       "kind": "READING",
@@ -24,16 +24,16 @@
     },
     {
       "kind": "EXPLORING",
-      "zh": "MuJoCo新增二维执行器场景：调参、绕障与延迟观测，36回合保留失败轨迹。",
-      "en": "A second MuJoCo scene compares control, clearance and delayed observations across 36 recorded rollouts.",
-      "tw": "MuJoCo新增二維執行器場景：調參、繞障與延遲觀測，36回合保留失敗軌跡。",
-      "to": "/docs/embodied-ai/mujoco-planar-pd"
+      "zh": "54回合、108000行真实仿真轨迹，13回合满足最后300ms验收；平滑降低部分噪声，却在80ms延迟下放大尾段误差。",
+      "en": "54 actual simulated rollouts and 108000 rows; 13 pass the final-300ms contract. Smoothing reduces some noise but worsens delayed tail error.",
+      "tw": "54回合、108000行真實模擬軌跡，13回合符合最後300ms驗收；平滑降低部分雜訊，卻在80ms延遲下放大尾段誤差。",
+      "to": "/docs/embodied-ai/mujoco-velocity-estimation"
     },
     {
       "kind": "NEXT",
-      "zh": "先复现并理解新的负结果，再决定在线助手整合、真实模型评测及状态估计的后续对照。",
-      "en": "Reproduce the negative results before choosing assistant integration, live-model evaluations or state-estimation studies.",
-      "tw": "先復現并理解新的負結果，再決定在線助手整合、真實模型評測及狀態估計的後續對照。",
+      "zh": "先复现本轮反例，再决定持久幂等、真实模型量化及估计器与控制器联合调参。",
+      "en": "Reproduce the counterexamples before choosing durable idempotency, real-model quantization or joint estimator/controller tuning.",
+      "tw": "先重現本輪反例，再決定持久冪等、真實模型量化及估計器與控制器聯合調參。",
       "to": "/learning"
     }
   ]

@@ -4,11 +4,12 @@ import SignalDates from "./SignalDates";
 import React from "react";
 import Link from "@lab/runtime/Link";
 import useSiteConfig from "@lab/runtime/context";
-import news from "@site/data/news/items.json";
+import { useSite } from "@lab/runtime/context";
 import { localizedNews } from "@site/src/utils/news-locale.mjs";
 import { useText } from "@lab/components/Shell";
 
 export default function NewsDigest({ day }) {
+  const { items: news } = useSite();
   const {
     i18n: { currentLocale },
   } = useSiteConfig();
@@ -23,7 +24,7 @@ export default function NewsDigest({ day }) {
           "依本站收錄日期（UTC）歸檔，不代表事件發生於當天；原公告、聚合來源發布與收錄時間分別標示。",
         )}
       </p>
-      <Link to="/radar">{en ? "All AI news" : "返回资讯列表"}</Link>
+      <Link to="/radar">{t("返回资讯列表", "All AI news", "返回資訊列表")}</Link>
       {news
         .filter((item) => item.collectedAt.startsWith(day))
         .map((item) => {
@@ -44,16 +45,12 @@ export default function NewsDigest({ day }) {
               <p>{content.summary}</p>
               <small>
                 {content.fallback
-                  ? en
-                    ? "Original text · Translation unavailable"
-                    : "原文内容 · 暂无该语言译文"
-                  : en
-                    ? "AI-assisted translation · Check the source"
-                    : "AI 辅助翻译 · 请核对原文"}
+                  ? t("原文内容 · 暂无该语言译文", "Original text · Translation unavailable", "原文內容 · 暫無該語言譯文")
+                  : t("AI 辅助翻译 · 请核对原文", "AI-assisted translation · Check the source", "AI 輔助翻譯 · 請核對原文")}
               </small>
               <p>
                 <a href={item.url} target="_blank" rel="noopener noreferrer">
-                  {en ? "Read original ↗" : "阅读原文 ↗"}
+                  {t("阅读原文 ↗", "Read original ↗", "閱讀原文 ↗")}
                 </a>
               </p>
               <ReadingActions id={item.id} en={en} />

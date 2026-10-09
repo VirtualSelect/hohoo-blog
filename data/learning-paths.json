@@ -216,7 +216,20 @@
         "prerequisites": [
           "doc:ai-apps/java-context-wire-budget"
         ],
-        "followUps": []
+        "followUps": [
+          "doc:ai-apps/java-idempotent-retry"
+        ]
+      },
+      {
+        "id": "java-idempotent-retry",
+        "doc": "ai-apps/java-idempotent-retry",
+        "outcome": "识别回复丢失与效果未知，复现并发去重和进程崩溃窗口。",
+        "outcomeEn": "Distinguish a lost reply from an unknown effect; reproduce concurrent deduplication and crash gaps.",
+        "outcomeTw": "辨識回覆遺失與效果未知，重現並行去重及程序崩潰窗口。",
+        "prerequisites": [
+          "doc:ai-apps/java-retry-deadline",
+          "doc:ai-apps/java-durable-turns"
+        ]
       },
       {
         "id": "tool-calling",
@@ -632,7 +645,19 @@
         "prerequisites": [
           "doc:llm/tiled-online-softmax"
         ],
-        "followUps": []
+        "followUps": [
+          "doc:llm/kv-quantization-axes"
+        ]
+      },
+      {
+        "id": "kv-quantization-axes",
+        "doc": "llm/kv-quantization-axes",
+        "outcome": "根据离群值分布选择量化轴，独立复算输出误差和scale开销。",
+        "outcomeEn": "Choose quantization axes from outlier structure and independently recompute output error and scale overhead.",
+        "outcomeTw": "依離群值分布選擇量化軸，獨立重算輸出誤差及scale開銷。",
+        "prerequisites": [
+          "doc:llm/kv-int8-error"
+        ]
       },
       {
         "id": "token",
@@ -998,7 +1023,20 @@
         "prerequisites": [
           "doc:embodied-ai/mujoco-obstacle-clearance"
         ],
-        "followUps": []
+        "followUps": [
+          "doc:embodied-ai/mujoco-velocity-estimation"
+        ]
+      },
+      {
+        "id": "mujoco-velocity-estimation",
+        "doc": "embodied-ai/mujoco-velocity-estimation",
+        "outcome": "从位置差分推导噪声放大，复算平滑滞后、控制限幅与稳定完成判定。",
+        "outcomeEn": "Derive finite-difference noise amplification and audit smoothing lag, force clipping and stable completion.",
+        "outcomeTw": "從位置差分推導雜訊放大，重算平滑滯後、控制限幅及穩定完成判定。",
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-delayed-feedback",
+          "doc:embodied-ai/mujoco-planar-pd"
+        ]
       },
       {
         "id": "what-is-embodied-ai",

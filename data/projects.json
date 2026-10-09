@@ -136,7 +136,9 @@
       "doc:ai-apps/java-durable-turns",
       "doc:llm/cache-cost-profile",
       "doc:llm/tiled-online-softmax",
-      "doc:llm/kv-int8-error"
+      "doc:llm/kv-int8-error",
+      "doc:ai-apps/java-idempotent-retry",
+      "doc:llm/kv-quantization-axes"
     ],
     "architecture": [
       "Console input",
@@ -465,6 +467,24 @@
         "description": "比较整张量与逐行int8量化，显式计入scale，观察离群值对注意力输出的影响。",
         "descriptionEn": "Compare tensor and row-wise int8 quantization, including scale bytes and attention error under outliers.",
         "descriptionTw": "比較整張量與逐行int8量化，顯式計入scale，觀察離群值對注意力輸出的影響。"
+      },
+      {
+        "href": "/docs/ai-apps/java-idempotent-retry",
+        "label": "Java 幂等重试：没收到回答，不等于没有执行",
+        "labelEn": "Java idempotent retries: no reply does not mean no effect",
+        "labelTw": "Java 冪等重試：沒收到回答，不等于沒有執行",
+        "description": "用七组本地 HTTP 故障对照，解释幂等键、并发认领、请求冲突与进程崩溃窗口。",
+        "descriptionEn": "Seven loopback HTTP fault cases explain idempotency keys, concurrent admission, payload conflicts and process-crash gaps.",
+        "descriptionTw": "用七組本地 HTTP 故障對照，解釋冪等鍵、并發認領、請求沖突與進程崩潰窗口。"
+      },
+      {
+        "href": "/docs/llm/kv-quantization-axes",
+        "label": "KV 量化轴：Key 与 Value 为什么不能一概而论？",
+        "labelEn": "KV quantization axes: why Key and Value need separate reasoning",
+        "labelTw": "KV 量化軸：Key 與 Value 為什么不能一概而論？",
+        "description": "162组保存整数码的离线对照，比较全张量、逐Token与K逐通道/V逐Token，保留混合策略并非总更优的结果。",
+        "descriptionEn": "162 archived INT8 comparisons examine tensor, token and K-channel/V-token scales, including cases where the hybrid loses.",
+        "descriptionTw": "162組保存整數碼的離線對照，比較全張量、逐Token與K逐通道/V逐Token，保留混合策略并非總更優的結果。"
       }
     ],
     "titleTw": "Java LLM 實作集",
@@ -524,7 +544,8 @@
       "lab:qualified-completion",
       "doc:embodied-ai/mujoco-planar-pd",
       "doc:embodied-ai/mujoco-obstacle-clearance",
-      "doc:embodied-ai/mujoco-delayed-feedback"
+      "doc:embodied-ai/mujoco-delayed-feedback",
+      "doc:embodied-ai/mujoco-velocity-estimation"
     ],
     "sections": [
       {
@@ -747,6 +768,15 @@
         "description": "24条配对轨迹比较即时/80ms延迟、位置噪声和常速度外推，保留超调下降但任务仍失败的结果。",
         "descriptionEn": "Twenty-four paired traces compare delay, position noise and constant-velocity prediction, retaining incomplete recoveries.",
         "descriptionTw": "24條配對軌跡比較即時/80ms延遲、位置噪聲和常速度外推，保留超調下降但任務仍失敗的結果。"
+      },
+      {
+        "href": "/docs/embodied-ai/mujoco-velocity-estimation",
+        "label": "MuJoCo 速度估计：滤掉噪声，也可能让控制更差",
+        "labelEn": "MuJoCo velocity estimation: smoother signals can mean worse control",
+        "labelTw": "MuJoCo 速度估計：濾掉噪聲，也可能讓控制更差",
+        "description": "54回合真实仿真对照位置差分、指数平滑与真值速度参考，解释噪声放大、估计滞后和稳定性验收。",
+        "descriptionEn": "54 actual simulation rollouts compare finite differences, EMA and an oracle reference across position noise and observation delay.",
+        "descriptionTw": "54回合真實仿真對照位置差分、指數平滑與真值速度參考，解釋噪聲放大、估計滯后和穩定性驗收。"
       }
     ]
   }
