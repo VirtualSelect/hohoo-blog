@@ -1,5 +1,20 @@
 [
   {
+    "id": "4717bedf84abef68a268",
+    "title": "Epoch AI 发布 InnovationEval 评测：前沿模型仅达到人类论文 SDPO 增益的 15%",
+    "url": "https://aihot.news/items/mz4js4r6916dip5ojpett06io",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-09T18:41:00.000Z",
+    "collectedAt": "2026-10-09T22:51:54.737Z",
+    "category": "llm",
+    "summary": "Epoch AI 推出 InnovationEval 评测，测试 AI 能否独立复现人类论文中的机器学习创新，对照对象为 Self-Distillation Policy Optimization（SDPO）。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-fbe00a44",
+    "coverage": []
+  },
+  {
     "id": "6cb53bbd6b721016b18d",
     "title": "A new feature for my blog, built using my voice",
     "url": "https://simonwillison.net/2026/Oct/9/built-using-my-voice",
