@@ -30,6 +30,21 @@
     "coverage": []
   },
   {
+    "id": "03d8e6278c95bbfcb577",
+    "title": "Anthropic 用 Claude Managed Agents 构建定时智能体自动化的实践指南",
+    "url": "https://aihot.news/items/gq8yjkqlcdbpy0l5uc8ch2sj8",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-08T12:00:00.000Z",
+    "collectedAt": "2026-10-09T02:32:02.628Z",
+    "category": "ai-apps",
+    "summary": "Anthropic 发布基于 Claude Managed Agents（beta）的每日简报参考实现，按计划读取 Slack 和 GitHub 来源并向 Slack 发布简报。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-ce04877b",
+    "coverage": []
+  },
+  {
     "id": "00d8cd492dd233709b99",
     "title": "Toward Evidence-Driven Human-Agent-Robot Teaming for Earth-Independent Anomaly Triage",
     "url": "https://arxiv.org/abs/2610.08933",
@@ -90,6 +105,36 @@
     "coverage": []
   },
   {
+    "id": "049630240174b8953e18",
+    "title": "IVG-UAV: An Intelligent Voice-Guided UAV System for Autonomous Ripe Fruit Harvesting with Vision-Based Classification and Adaptive Path Planning",
+    "url": "https://arxiv.org/abs/2610.09398",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-08T04:00:00.000Z",
+    "collectedAt": "2026-10-09T02:32:02.628Z",
+    "category": "embodied-ai",
+    "summary": "In tropical regions, their agricultural sectors remain highly dependent on manual labor for fruit harvesting. On large-scale farms, this dependency often results in significant …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-f9ee4d2e",
+    "coverage": []
+  },
+  {
+    "id": "0b075b15fb51cc714843",
+    "title": "InsClaimBench: Benchmarking Insurance Claim Adjudication Across the Decision Chain",
+    "url": "https://arxiv.org/abs/2610.09671",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-08T04:00:00.000Z",
+    "collectedAt": "2026-10-09T02:32:02.628Z",
+    "category": "llm",
+    "summary": "Recent advances in reasoning-oriented large language models (LLMs) have motivated increasing evaluation of their ability to perform professional decision tasks. Insurance claim …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-5f6ead76",
+    "coverage": []
+  },
+  {
     "id": "89af1c9d426befe9530c",
     "title": "ts-rust 发布：由 LLM 将 TypeScript 编译器、检查器和 LSP 移植到 Rust",
     "url": "https://aihot.news/items/yyba9bpxdtqdpqmv739d26ftg",
@@ -102,6 +147,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-5224dda2",
+    "coverage": []
+  },
+  {
+    "id": "2ccab68c1208f4a94d39",
+    "title": "Hugging Face 工程师用 ML Intern 以约 103 美元自制 7 个小模型",
+    "url": "https://aihot.news/items/ylkp4aqm4r5fn7aul2l9kfmxw",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-08T00:00:00.000Z",
+    "collectedAt": "2026-10-09T02:32:02.628Z",
+    "category": "llm",
+    "summary": "Hugging Face 工程师 yuvraj sharma 用 HuggingChat 的 ML Intern 模式在几天内做出 7 个模型，包括可在 CPU 运行、99.7% 有效输出的 0.8B 提示词重写器，以及将柑橘病害识别准确率从 14.9% 提升到 52.8% 的 Qwen3.5-2B 微调模型等，全部计算成本约 103 美元。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-90bdb7ec",
     "coverage": []
   },
   {
