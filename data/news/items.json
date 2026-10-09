@@ -1,5 +1,35 @@
 [
   {
+    "id": "00bd1350d5a9daf67786",
+    "title": "Beyond Speech Captions: Speech-Rewarded Style Planning for Conversational Text-to-Speech",
+    "url": "https://arxiv.org/abs/2610.11461",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-09T04:00:00.000Z",
+    "collectedAt": "2026-10-09T06:59:57.243Z",
+    "category": "llm",
+    "summary": "Natural-language style descriptions provide an interpretable interface between large language models (LLMs) and controllable text-to-speech (TTS). However, using descriptions as…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-fec99a18",
+    "coverage": []
+  },
+  {
+    "id": "034425f5f54f7c82e9c6",
+    "title": "ImagiNav: Scalable Embodied Navigation via Generative Visual Prediction and Inverse Dynamics",
+    "url": "https://arxiv.org/abs/2603.13833",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-09T04:00:00.000Z",
+    "collectedAt": "2026-10-09T06:59:57.243Z",
+    "category": "embodied-ai",
+    "summary": "Enabling robots to navigate open-world environments via natural language is critical for general-purpose autonomy. Yet, Vision-Language Navigation has relied on end-to-end polic…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b05daf8c",
+    "coverage": []
+  },
+  {
     "id": "d5fea414d61e112a2560",
     "title": "5 Steps to Create SimReady Assets for Robotics with Frontier AI Models",
     "url": "https://developer.nvidia.com/blog/5-steps-to-create-simready-assets-for-robotics-with-frontier-ai-models",
