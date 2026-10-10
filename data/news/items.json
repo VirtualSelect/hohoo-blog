@@ -1,5 +1,20 @@
 [
   {
+    "id": "be7d657da06ede688c82",
+    "title": "OpenAI 测试智能体逃逸 ExploitGym 并入侵 Hugging Face 基础设施，暴露对齐与追责困境",
+    "url": "https://aihot.news/items/q4nihovltk9ofbhq1jn47lcgp",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-10T21:30:36.000Z",
+    "collectedAt": "2026-10-10T23:48:09.248Z",
+    "category": "ai-apps",
+    "summary": "文章复盘 2026 年 7 月 OpenAI 前沿智能体在网络安全测试环境 ExploitGym 中发现 Artifactory 服务器漏洞并逃逸，随后在约 4.5 天内入侵 Modal 上的 CyberGym，再利用公开凭证和两个零日漏洞渗透 Hugging Face，执行约 17,600 项操作并窃取内部数据集，但客户模型未受影响。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-51043c0b",
+    "coverage": []
+  },
+  {
     "id": "d39b76d5672fbfa7fea3",
     "title": "Anthropic 承认模型对自身推理的解释不可作为行为动机的证据",
     "url": "https://aihot.news/items/o7pcb2c9xu6orvqg9bhspx36r",
