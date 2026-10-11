@@ -11,6 +11,7 @@ import RouteContent from "../../components/RouteContent";
 import Journey from "../../components/Journey";
 import VirtualLab from "../../components/VirtualLab";
 import type { Metadata } from "next";
+import { brandShareImage } from "../../lib/brand";
 import {
   pageGlobalData,
   pageSignals,
@@ -113,6 +114,14 @@ export async function generateMetadata({
       url,
       locale,
       type: doc ? "article" : "website",
+      siteName: "Hohoo's AI Lab",
+      images: [brandShareImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [brandShareImage.url],
     },
   };
 }

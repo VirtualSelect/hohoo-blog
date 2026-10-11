@@ -3,17 +3,14 @@ import "../editorial.css";
 import { resolveSegments } from "../../lib/content";
 import VisitAnalytics from "../../components/VisitAnalytics";
 import { themeScript } from "../../lib/theme-init.mjs";
+import { brandIcons } from "../../lib/brand";
 import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
 export const metadata: Metadata = {
   metadataBase: new URL("https://huhohoo.com"),
   title: { default: "Hohoo's AI Lab", template: "%s · Hohoo" },
   description: "公开学习、实验、构建与分享 AI。",
-  icons: {
-    icon: { url: "/img/hohoo.jpg", type: "image/jpeg" },
-    shortcut: "/img/hohoo.jpg",
-    apple: "/img/hohoo.jpg",
-  },
+  icons: brandIcons,
 };
 export default async function RootLayout({
   children,

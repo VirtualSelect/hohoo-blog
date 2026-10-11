@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Translate from "../runtime/Translate";
 import ThemeToggle from "./ThemeToggle";
+import Brand from "./Brand";
 import { SiteContext, useSite } from "../runtime/context";
 import Link from "../runtime/Link";
 import dynamic from "next/dynamic";
@@ -58,8 +59,12 @@ function Frame({ children }: PropsWithChildren) {
         {t("跳转到内容", "Skip to content", "跳至內容")}
       </a>
       <header className="site-header">
-        <Link to="/" className="wordmark">
-          Hohoo<span>.</span>
+        <Link
+          to="/"
+          className="brand-link"
+          aria-label={t("Hohoo · 首页", "Hohoo · Home", "Hohoo · 首頁")}
+        >
+          <Brand />
         </Link>
         <nav
           id="main-nav"
@@ -139,8 +144,12 @@ function Frame({ children }: PropsWithChildren) {
           <a href="https://github.com/VirtualSelect">GitHub ↗</a>
         </div>
         <div className="footer-bottom">
-          <Link className="wordmark" to="/">
-            Hohoo.
+          <Link
+            className="brand-link"
+            to="/"
+            aria-label={t("Hohoo · 首页", "Hohoo · Home", "Hohoo · 首頁")}
+          >
+            <Brand />
           </Link>
           <span>
             {t(

@@ -162,13 +162,32 @@ small {
   padding: 0 32px;
   border-bottom: 1px solid var(--hh-border);
 }
-.wordmark {
-  font-size: 28px;
-  font-weight: 750;
-  letter-spacing: -1.5px;
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 44px;
+  border-radius: 3px;
 }
-.wordmark span {
-  color: var(--hh-accent);
+.brand-logo {
+  display: block;
+  width: 146px;
+  aspect-ratio: 980 / 268;
+}
+.brand-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.brand-logo .brand-logo-dark,
+html[data-theme="dark"] .brand-logo .brand-logo-light {
+  display: none;
+}
+html[data-theme="dark"] .brand-logo .brand-logo-dark {
+  display: block;
+}
+.not-found-page > .brand-link {
+  margin-bottom: 40px;
 }
 .site-header > nav {
   margin-left: auto;
@@ -505,9 +524,8 @@ small {
   display: flex;
   gap: 22px;
 }
-.footer-bottom .wordmark {
-  color: var(--hh-text-primary);
-  font-size: 24px;
+.footer-bottom .brand-logo {
+  width: 132px;
 }
 .hh-page {
   max-width: 1200px;
@@ -1122,8 +1140,8 @@ small {
   .header-actions {
     gap: 2px;
   }
-  .wordmark {
-    font-size: 25px;
+  .site-header .brand-logo {
+    width: 112px;
   }
   .home-hero h1 {
     font-size: 52px;

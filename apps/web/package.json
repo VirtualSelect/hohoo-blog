@@ -2,6 +2,7 @@
   "name": "hohoo-web",
   "private": true,
   "scripts": {
+    "brand:generate": "node scripts/brand-assets.mjs",
     "prepare:content": "node scripts/content.mjs",
     "dev": "npm run prepare:content && next dev --webpack -p 4181",
     "build": "npm run prepare:content && next build --webpack && node scripts/build-budget.mjs",

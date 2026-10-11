@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import Brand from "../../components/Brand";
 export default function NotFound() {
   const pathname = usePathname() || "/";
   // The global 404 is prerendered once without a requested path.
@@ -13,6 +14,13 @@ export default function NotFound() {
     locale === "en" ? en : locale === "zh-TW" ? tw : zh;
   return (
     <main className="hh-page not-found-page" lang={prefix ? locale : "zh-CN"}>
+      <Link
+        className="brand-link"
+        href={prefix || "/"}
+        aria-label={t("Hohoo · 首页", "Hohoo · Home", "Hohoo · 首頁")}
+      >
+        <Brand />
+      </Link>
       <p className="eyebrow">404</p>
       <h1>
         {t(
