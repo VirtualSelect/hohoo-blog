@@ -13,7 +13,9 @@ prerequisites: ["doc:embodied-ai/mujoco-delayed-feedback", "doc:embodied-ai/mujo
 related: ["lab:mujoco-velocity-estimation", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-qualified-completion"]
 ---
 
-[固定程式碼](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1931effc42f9d5974f20c09614dc2ebbdfcbf44b/experiments/planar_velocity_estimation) · [54 條壓縮原始軌跡](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1931effc42f9d5974f20c09614dc2ebbdfcbf44b/evidence/planar-velocity-20261009) · [實驗檔案](/labs/mujoco-velocity-estimation)
+> 2026-10-11 重現勘誤：原固定提交 `1931eff` 的 Git 換行轉換改變了 `results.json` 的位元組，導致檢出後雜湊稽核失敗。以下連結與檢出指令已改為保留原始證據位元組的修正版；實驗紀錄、發布日期和結論並未重寫。
+
+[固定程式碼](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f/experiments/planar_velocity_estimation) · [54 條壓縮原始軌跡](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f/evidence/planar-velocity-20261009) · [實驗檔案](/labs/mujoco-velocity-estimation)
 
 上一篇的預測器拿到了取樣時刻的真值速度，這是偏樂觀的條件。很多傳感器只給位置：拿相鄰位置相減，不就能得到速度了嗎？公式成立，但噪聲也被相減，並除以很短的時間間隔。把這個速度直接放進阻尼項，控制力可能抖得比位置更厲害。
 
@@ -89,7 +91,7 @@ related: ["lab:mujoco-velocity-estimation", "project:hohoo-embodied-agent", "doc
 ```powershell
 git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
 cd hohoo-embodied-agent-study
-git checkout 1931effc42f9d5974f20c09614dc2ebbdfcbf44b
+git checkout 1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f
 python -m venv .venv
 $py = '.\.venv\Scripts\python.exe'
 & $py -m pip install -r requirements-lock.txt

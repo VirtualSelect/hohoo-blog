@@ -13,7 +13,9 @@ prerequisites: ["doc:ai-apps/java-retry-deadline", "doc:ai-apps/java-durable-tur
 related: ["lab:java-idempotent-retry", "project:hohoo-ai-lab", "doc:ai-apps/java-tool-boundary"]
 ---
 
-[固定程式碼](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/demos/12-idempotent-retry) · [HTTP 記錄與審計](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/demos/12-idempotent-retry/evidence) · [實驗檔案](/labs/java-idempotent-retry)
+> 2026-10-11 重現勘誤：原固定提交 `009289d` 的 Git 換行轉換改變了 `results.json` 的位元組，導致檢出後雜湊稽核失敗。以下連結與檢出指令已改為保留原始證據位元組的修正版；實驗紀錄、發布日期和結論並未重寫。
+
+[固定程式碼](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba/demos/12-idempotent-retry) · [HTTP 記錄與審計](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba/demos/12-idempotent-retry/evidence) · [實驗檔案](/labs/java-idempotent-retry)
 
 上一篇為重試設置總時限和次數預算，但預算解決的是“還能等多久”，沒有解決“重試會不會再執行一次”。例如助手調用一個有副作用的工具：服務端已經提交結果，回復卻在路上丟了。客戶端此時只知道自己沒收到答案。
 
@@ -98,7 +100,7 @@ synchronized (records) {
 ```sh
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
-git checkout 009289d3c9314d64a495303d9b16517080282788
+git checkout fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba
 python demos/12-idempotent-retry/run.py --java-home "E:/Java/jdk1.8.0_171" --out demos/12-idempotent-retry/target/my-run
 python demos/12-idempotent-retry/audit.py demos/12-idempotent-retry/target/my-run
 ```

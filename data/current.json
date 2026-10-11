@@ -1,19 +1,19 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-10-11",
   "items": [
     {
       "kind": "BUILDING",
-      "zh": "七组本地HTTP条件中，同进程丢回复与12客户端并发均只执行一次；重启和提交间隙崩溃后仍重复执行。",
-      "en": "Seven loopback HTTP cases: lost replies and 12 concurrent duplicates execute once within a process; restart and crash gaps still duplicate effects.",
-      "tw": "七組本機HTTP條件中，同程序遺失回覆與12個用戶端並行皆僅執行一次；重新啟動及提交間隙崩潰後仍重複執行。",
-      "to": "/docs/ai-apps/java-idempotent-retry"
+      "zh": "17种场景、193条子进程记录；无接收端幂等的投递崩溃后执行两次，三个历史恢复窗口均保留完整问答。",
+      "en": "17 scenarios and 193 child-process records. An unkeyed receiver duplicates the effect after a delivery crash; all three history recovery boundaries retain whole turns.",
+      "tw": "17種場景、193條子行程記錄；無接收端冪等的投遞崩潰後執行兩次，三個歷史恢復窗口均保留完整問答。",
+      "to": "/docs/ai-apps/java-recovery-reconciliation"
     },
     {
       "kind": "LEARNING",
-      "zh": "162组对照中，K通道离群时混合策略平均KV输出误差1.9215%；干净输入上逐Token更准，不能声称一种轴普遍更优。",
-      "en": "Across 162 comparisons, the hybrid averages 1.9215% KV output error with K-channel outliers; token-wise is better on clean inputs.",
-      "tw": "162組對照中，K通道離群時混合策略平均KV輸出誤差1.9215%；乾淨輸入上逐Token更準，不能宣稱一種軸普遍更優。",
-      "to": "/docs/llm/kv-quantization-axes"
+      "zh": "144组对照、810条计时：高精度近段窗口在近段注意力上收益更大；分块减少工作数组，但本机CPU计时更慢。",
+      "en": "144 comparisons and 810 timings. Recent float32 windows help recent-focused attention more; block decoding reduces work arrays but is slower on this CPU run.",
+      "tw": "144組對照、810條計時：高精度近段窗口在近段注意力上收益更大；分塊減少工作陣列，但本機CPU計時更慢。",
+      "to": "/docs/llm/kv-block-decode-cost"
     },
     {
       "kind": "READING",
@@ -24,16 +24,16 @@
     },
     {
       "kind": "EXPLORING",
-      "zh": "54回合、108000行真实仿真轨迹，13回合满足最后300ms验收；平滑降低部分噪声，却在80ms延迟下放大尾段误差。",
-      "en": "54 actual simulated rollouts and 108000 rows; 13 pass the final-300ms contract. Smoothing reduces some noise but worsens delayed tail error.",
-      "tw": "54回合、108000行真實模擬軌跡，13回合符合最後300ms驗收；平滑降低部分雜訊，卻在80ms延遲下放大尾段誤差。",
-      "to": "/docs/embodied-ai/mujoco-velocity-estimation"
+      "zh": "153回合、306000物理步；留出集选中控制器7/18通过，失联置零仍滑行，质量缩放降低均值却未通过速度契约。",
+      "en": "153 episodes and 306000 physics steps. The selected controller passes 7/18 holdouts; zero force coasts, and mass scaling lowers mean error without passing the velocity contract.",
+      "tw": "153回合、306000物理步；留出集選中控制器7/18通過，失聯置零仍滑行，質量縮放降低均值卻未通過速度契約。",
+      "to": "/docs/embodied-ai/mujoco-controller-holdout"
     },
     {
       "kind": "NEXT",
-      "zh": "先复现本轮反例，再决定持久幂等、真实模型量化及估计器与控制器联合调参。",
-      "en": "Reproduce the counterexamples before choosing durable idempotency, real-model quantization or joint estimator/controller tuning.",
-      "tw": "先重現本輪反例，再決定持久冪等、真實模型量化及估計器與控制器聯合調參。",
+      "zh": "先人工复现本轮反例，再选择取消意图与日志保留、真实KV分布测量、失联制动和质量迁移消融；RAG路线继续保留既有规划。",
+      "en": "Reproduce the counterexamples before selecting intent cancellation/retention, real KV measurements, braking or mass-transfer ablations. Existing RAG plans remain.",
+      "tw": "先人工重現本輪反例，再選擇取消意圖與紀錄保留、真實KV分布測量、失聯制動和質量遷移消融；RAG路線繼續保留既有規劃。",
       "to": "/learning"
     }
   ]

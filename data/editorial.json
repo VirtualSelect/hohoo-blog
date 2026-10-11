@@ -4,8 +4,9 @@
     "project:hohoo-embodied-agent"
   ],
   "featuredArticles": [
-    "doc:ai-apps/java-durable-turns",
-    "doc:embodied-ai/mujoco-obstacle-clearance"
+    "doc:ai-apps/java-recovery-reconciliation",
+    "doc:llm/kv-block-decode-cost",
+    "doc:embodied-ai/mujoco-controller-holdout"
   ],
   "featuredMedia": {
     "doc:embodied-ai/mujoco-observation-freshness": {
@@ -191,6 +192,26 @@
       "alt": "六条实际MuJoCo绕障轨迹",
       "altEn": "Six recorded MuJoCo obstacle trajectories",
       "altTw": "六條實際MuJoCo繞障軌跡"
+    },
+    "doc:llm/kv-block-decode-cost": {
+      "src": "/img/research/20261011/decode-cost.zh-CN.svg",
+      "width": 720,
+      "height": 346,
+      "alt": "原始计时：分块工作区更小，但本次CPU运行更慢",
+      "altEn": "Recorded timings: less block workspace but slower CPU execution",
+      "altTw": "原始計時：分塊工作區更小，但本次CPU執行更慢",
+      "srcEn": "/img/research/20261011/decode-cost.svg",
+      "srcTw": "/img/research/20261011/decode-cost.zh-TW.svg"
+    },
+    "doc:embodied-ai/mujoco-controller-holdout": {
+      "src": "/img/research/20261011/controller-holdout.zh-CN.svg",
+      "width": 720,
+      "height": 346,
+      "alt": "留出结果：误差降低不等于完整契约通过",
+      "altEn": "Held-out results: lower error is not a full contract pass",
+      "altTw": "留出結果：誤差降低不等於完整契約通過",
+      "srcEn": "/img/research/20261011/controller-holdout.svg",
+      "srcTw": "/img/research/20261011/controller-holdout.zh-TW.svg"
     }
   }
 }

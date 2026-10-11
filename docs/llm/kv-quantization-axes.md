@@ -13,7 +13,9 @@ prerequisites: ["doc:llm/kv-int8-error"]
 related: ["lab:kv-quantization-axes", "project:hohoo-ai-lab", "doc:llm/tiled-online-softmax"]
 ---
 
-[固定代码](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/experiments/11-kv-quantization-axes) · [输入、整数码与输出](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/experiments/11-kv-quantization-axes/evidence) · [实验档案](/labs/kv-quantization-axes)
+> 2026-10-11 复现勘误：原固定提交 `009289d` 的 Git 换行转换改变了 `results.json` 的字节，导致检出后的哈希审计失败。以下链接及检出命令已改为保留原始证据字节的修正版；实验记录、发布日期和结论没有重写。
+
+[固定代码](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba/experiments/11-kv-quantization-axes) · [输入、整数码与输出](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba/experiments/11-kv-quantization-axes/evidence) · [实验档案](/labs/kv-quantization-axes)
 
 上一篇看到：逐行 int8 能缩小 KV 表示，但一行中较大的元素仍会压低其他元素的分辨率。那就把分组换成“逐通道”，是否一定更好？本篇的答案是：**取决于离群值怎样分布，不能只记住一个推荐轴。**
 
@@ -84,7 +86,7 @@ K 改变“关注谁”，V 改变“拿到什么”。本轮把量化目标拆�
 ```powershell
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
-git checkout 009289d3c9314d64a495303d9b16517080282788
+git checkout fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba
 python -m venv .venv
 $py = '.\.venv\Scripts\python.exe'
 & $py -m pip install -r experiments/11-kv-quantization-axes/requirements.txt

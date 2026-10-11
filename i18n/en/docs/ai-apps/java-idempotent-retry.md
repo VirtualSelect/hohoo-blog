@@ -13,7 +13,9 @@ prerequisites: ["doc:ai-apps/java-retry-deadline", "doc:ai-apps/java-durable-tur
 related: ["lab:java-idempotent-retry", "project:hohoo-ai-lab", "doc:ai-apps/java-tool-boundary"]
 ---
 
-[Pinned code](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/demos/12-idempotent-retry) · [HTTP records and audit](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/demos/12-idempotent-retry/evidence) · [Lab](/labs/java-idempotent-retry)
+> Reproduction correction, 2026-10-11: Git newline conversion in the original pinned commit `009289d` changed the bytes of `results.json`, breaking its checkout-time hash audit. Links and checkout commands below now use the byte-preserving fix. The measurements, publication date and conclusions are unchanged.
+
+[Pinned code](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba/demos/12-idempotent-retry) · [HTTP records and audit](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba/demos/12-idempotent-retry/evidence) · [Lab](/labs/java-idempotent-retry)
 
 The previous article bounded retry count and total waiting time. It did not answer whether a retry would perform a side effect twice. A tool server may commit an operation and lose its reply. The client only knows that it did not receive an answer.
 
@@ -98,7 +100,7 @@ Use JDK 8 and Python 3.12. Maven, Gson, a database and credentials are unnecessa
 ```sh
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
-git checkout 009289d3c9314d64a495303d9b16517080282788
+git checkout fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba
 python demos/12-idempotent-retry/run.py --java-home "E:/Java/jdk1.8.0_171" --out demos/12-idempotent-retry/target/my-run
 python demos/12-idempotent-retry/audit.py demos/12-idempotent-retry/target/my-run
 ```

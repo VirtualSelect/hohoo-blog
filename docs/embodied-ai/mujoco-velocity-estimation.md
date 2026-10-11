@@ -13,7 +13,9 @@ prerequisites: ["doc:embodied-ai/mujoco-delayed-feedback", "doc:embodied-ai/mujo
 related: ["lab:mujoco-velocity-estimation", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-qualified-completion"]
 ---
 
-[固定代码](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1931effc42f9d5974f20c09614dc2ebbdfcbf44b/experiments/planar_velocity_estimation) · [54 条压缩原始轨迹](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1931effc42f9d5974f20c09614dc2ebbdfcbf44b/evidence/planar-velocity-20261009) · [实验档案](/labs/mujoco-velocity-estimation)
+> 2026-10-11 复现勘误：原固定提交 `1931eff` 的 Git 换行转换改变了 `results.json` 的字节，导致检出后的哈希审计失败。以下链接及检出命令已改为保留原始证据字节的修正版；实验记录、发布日期和结论没有重写。
+
+[固定代码](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f/experiments/planar_velocity_estimation) · [54 条压缩原始轨迹](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f/evidence/planar-velocity-20261009) · [实验档案](/labs/mujoco-velocity-estimation)
 
 上一篇的预测器拿到了采样时刻的真值速度，这是偏乐观的条件。很多传感器只给位置：拿相邻位置相减，不就能得到速度了吗？公式成立，但噪声也被相减，并除以很短的时间间隔。把这个速度直接放进阻尼项，控制力可能抖得比位置更厉害。
 
@@ -89,7 +91,7 @@ related: ["lab:mujoco-velocity-estimation", "project:hohoo-embodied-agent", "doc
 ```powershell
 git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
 cd hohoo-embodied-agent-study
-git checkout 1931effc42f9d5974f20c09614dc2ebbdfcbf44b
+git checkout 1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f
 python -m venv .venv
 $py = '.\.venv\Scripts\python.exe'
 & $py -m pip install -r requirements-lock.txt

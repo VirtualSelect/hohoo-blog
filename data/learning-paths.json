@@ -203,6 +203,45 @@
         "prerequisites": [
           "doc:ai-apps/java-retry-deadline",
           "doc:ai-apps/java-durable-turns"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-durable-idempotency"
+        ]
+      },
+      {
+        "id": "java-durable-idempotency",
+        "doc": "ai-apps/java-durable-idempotency",
+        "outcome": "用带CRC的追加日志、进程崩溃与99个截断前缀，解释持久幂等的提交边界。",
+        "outcomeEn": "Use a framed journal, process crashes and 99 truncated prefixes to explain durable idempotency.",
+        "outcomeTw": "用帶CRC的追加紀錄、行程崩潰與99個截斷前綴，解釋持久冪等的提交邊界。",
+        "prerequisites": [
+          "doc:ai-apps/java-idempotent-retry"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-outbox-delivery"
+        ]
+      },
+      {
+        "id": "java-outbox-delivery",
+        "doc": "ai-apps/java-outbox-delivery",
+        "outcome": "对照有键和无键接收端，解释回复丢失、回执缺失与远端重复副作用。",
+        "outcomeEn": "Compare keyed and unkeyed receivers to separate lost replies, missing receipts and duplicate remote effects.",
+        "outcomeTw": "對照有鍵和無鍵接收端，解釋回復丟失、回執缺失與遠端重複副作用。",
+        "prerequisites": [
+          "doc:ai-apps/java-durable-idempotency"
+        ],
+        "followUps": [
+          "doc:ai-apps/java-recovery-reconciliation"
+        ]
+      },
+      {
+        "id": "java-recovery-reconciliation",
+        "doc": "ai-apps/java-recovery-reconciliation",
+        "outcome": "在三个提交边界真实终止JVM，以持久事实恢复完整历史，保留远端重复执行反例。",
+        "outcomeEn": "Halt the JVM at three commit boundaries and rebuild whole-turn history from durable facts.",
+        "outcomeTw": "在三個提交邊界真實終止JVM，以持久事實恢復完整歷史，保留遠端重複執行反例。",
+        "prerequisites": [
+          "doc:ai-apps/java-outbox-delivery"
         ]
       },
       {
@@ -615,6 +654,45 @@
         "outcomeTw": "依離群值分布選擇量化軸，獨立重算輸出誤差及scale開銷。",
         "prerequisites": [
           "doc:llm/kv-int8-error"
+        ],
+        "followUps": [
+          "doc:llm/kv-packed-groups"
+        ]
+      },
+      {
+        "id": "kv-packed-groups",
+        "doc": "llm/kv-packed-groups",
+        "outcome": "实际保存半字节整数码，复算分组scale开销、补齐字节与注意力输出误差。",
+        "outcomeEn": "Store real nibbles and audit group-scale overhead, padding bytes and attention output error.",
+        "outcomeTw": "實際保存半位元組整數碼，復算分組scale開銷、補齊位元組與注意力輸出誤差。",
+        "prerequisites": [
+          "doc:llm/kv-quantization-axes"
+        ],
+        "followUps": [
+          "doc:llm/kv-residual-window"
+        ]
+      },
+      {
+        "id": "kv-residual-window",
+        "doc": "llm/kv-residual-window",
+        "outcome": "用早段与近段注意力对照，解释同样的float32窗口为何收益不同。",
+        "outcomeEn": "Compare early-focused and recent-focused attention to explain unequal gains from the same float32 window.",
+        "outcomeTw": "用早段與近段注意力對照，解釋同樣的float32窗口為何收益不同。",
+        "prerequisites": [
+          "doc:llm/kv-packed-groups"
+        ],
+        "followUps": [
+          "doc:llm/kv-block-decode-cost"
+        ]
+      },
+      {
+        "id": "kv-block-decode-cost",
+        "doc": "llm/kv-block-decode-cost",
+        "outcome": "区分缓存负载、工作数组和实测耗时，保留分块CPU实现更慢的810条计时记录。",
+        "outcomeEn": "Separate cache payload, work arrays and observed runtime, retaining 810 timings including slower block decoding.",
+        "outcomeTw": "區分快取負載、工作陣列和實測耗時，保留分塊CPU實現更慢的810條計時記錄。",
+        "prerequisites": [
+          "doc:llm/kv-residual-window"
         ]
       },
       {
@@ -994,6 +1072,45 @@
         "prerequisites": [
           "doc:embodied-ai/mujoco-delayed-feedback",
           "doc:embodied-ai/mujoco-planar-pd"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-controller-holdout"
+        ]
+      },
+      {
+        "id": "mujoco-controller-holdout",
+        "doc": "embodied-ai/mujoco-controller-holdout",
+        "outcome": "54个开发回合选择参数，36个留出回合复核位置误差与稳定完成契约。",
+        "outcomeEn": "Select on 54 development episodes, then check position error and stable completion on 36 held-out episodes.",
+        "outcomeTw": "54個開發回合選擇參數，36個留出回合復核位置誤差與穩定完成契約。",
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-velocity-estimation"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-stale-force"
+        ]
+      },
+      {
+        "id": "mujoco-stale-force",
+        "doc": "embodied-ai/mujoco-stale-force",
+        "outcome": "27回合比较旧观测控制、超时置零与衰减，展示观测超时和物理制动的差别。",
+        "outcomeEn": "Compare stale feedback, zero force and fading in 27 episodes to distinguish timeout from physical braking.",
+        "outcomeTw": "27回合比較舊觀測控制、超時置零與衰減，展示觀測超時和物理制動的差別。",
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-controller-holdout"
+        ],
+        "followUps": [
+          "doc:embodied-ai/mujoco-mass-transfer"
+        ]
+      },
+      {
+        "id": "mujoco-mass-transfer",
+        "doc": "embodied-ai/mujoco-mass-transfer",
+        "outcome": "36回合对照固定和质量缩放增益，解释更低平均误差为何仍不能通过速度验收。",
+        "outcomeEn": "Compare fixed and mass-scaled gains in 36 episodes, including lower mean error without a velocity-contract pass.",
+        "outcomeTw": "36回合對照固定和質量縮放增益，解釋更低平均誤差為何仍不能通過速度驗收。",
+        "prerequisites": [
+          "doc:embodied-ai/mujoco-stale-force"
         ]
       },
       {

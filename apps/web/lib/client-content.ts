@@ -106,6 +106,14 @@ export function pageGlobalData(
       .map((e: ContentEntry) => e.id),
   );
   const article = document && ["docs", "blog"].includes(document.kind);
+  const readingTrack = article
+    ? tracks.find((track) =>
+        track.steps.some(
+          (step) => step.id === document?.frontMatter.learning_step,
+        ),
+      )
+    : undefined;
+  const readingSteps = new Set(readingTrack?.steps.map((step) => step.id));
   if (detail) {
     selected.add(detail.id);
     for (const id of [
@@ -136,7 +144,13 @@ export function pageGlobalData(
       entries: entries.filter((e) => selected.has(e.id)),
       activity: [],
     },
-    "learning-index": article ? compact["learning-index"] : { entries: [] },
+    // Reading context needs the complete current route (numbering, neighbors,
+    // progress), but not every other route. The learning landing keeps all data.
+    "learning-index": {
+      entries: compact["learning-index"].entries.filter((entry) =>
+        readingSteps.has(entry.stepId),
+      ),
+    },
     "radar-pages": { preview: [] },
   };
 }

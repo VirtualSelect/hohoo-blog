@@ -13,7 +13,9 @@ prerequisites: ["doc:llm/kv-int8-error"]
 related: ["lab:kv-quantization-axes", "project:hohoo-ai-lab", "doc:llm/tiled-online-softmax"]
 ---
 
-[Pinned code](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/experiments/11-kv-quantization-axes) · [Inputs, integer codes and outputs](https://github.com/VirtualSelect/hohoo-ai-lab/tree/009289d3c9314d64a495303d9b16517080282788/experiments/11-kv-quantization-axes/evidence) · [Lab](/labs/kv-quantization-axes)
+> Reproduction correction, 2026-10-11: Git newline conversion in the original pinned commit `009289d` changed the bytes of `results.json`, breaking its checkout-time hash audit. Links and checkout commands below now use the byte-preserving fix. The measurements, publication date and conclusions are unchanged.
+
+[Pinned code](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba/experiments/11-kv-quantization-axes) · [Inputs, integer codes and outputs](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba/experiments/11-kv-quantization-axes/evidence) · [Lab](/labs/kv-quantization-axes)
 
 The previous article showed that per-row INT8 shrinks KV storage but leaves small elements vulnerable to a large element in the same row. Is per-channel quantization always better? **It depends on the distribution of outliers. An axis is not a universal recommendation.**
 
@@ -84,7 +86,7 @@ The following commands use Windows PowerShell and explicitly select the virtual-
 ```powershell
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
-git checkout 009289d3c9314d64a495303d9b16517080282788
+git checkout fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba
 python -m venv .venv
 $py = '.\.venv\Scripts\python.exe'
 & $py -m pip install -r experiments/11-kv-quantization-axes/requirements.txt

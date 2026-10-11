@@ -13,7 +13,9 @@ prerequisites: ["doc:embodied-ai/mujoco-delayed-feedback", "doc:embodied-ai/mujo
 related: ["lab:mujoco-velocity-estimation", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-qualified-completion"]
 ---
 
-[Pinned code](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1931effc42f9d5974f20c09614dc2ebbdfcbf44b/experiments/planar_velocity_estimation) · [54 compressed trajectories](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1931effc42f9d5974f20c09614dc2ebbdfcbf44b/evidence/planar-velocity-20261009) · [Lab](/labs/mujoco-velocity-estimation)
+> Reproduction correction, 2026-10-11: Git newline conversion in the original pinned commit `1931eff` changed the bytes of `results.json`, breaking its checkout-time hash audit. Links and checkout commands below now use the byte-preserving fix. The measurements, publication date and conclusions are unchanged.
+
+[Pinned code](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f/experiments/planar_velocity_estimation) · [54 compressed trajectories](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f/evidence/planar-velocity-20261009) · [Lab](/labs/mujoco-velocity-estimation)
 
 The previous predictor received ground-truth velocity at the capture timestamp, an optimistic sensor assumption. Many sensors provide positions instead. Subtracting consecutive positions gives velocity, but also differences the noise and divides it by a short interval. Feeding this directly into damping can create large force fluctuations.
 
@@ -87,7 +89,7 @@ The following commands use Windows PowerShell and explicitly select the virtual-
 ```powershell
 git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
 cd hohoo-embodied-agent-study
-git checkout 1931effc42f9d5974f20c09614dc2ebbdfcbf44b
+git checkout 1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f
 python -m venv .venv
 $py = '.\.venv\Scripts\python.exe'
 & $py -m pip install -r requirements-lock.txt

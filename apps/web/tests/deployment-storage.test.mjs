@@ -10,6 +10,7 @@ import {
 import { readingForks } from "../lib/reading-forks.mjs";
 import { writingEntries } from "../../../src/utils/localization.cjs";
 import { isoWeek } from "../../../src/utils/radar.cjs";
+import tracks from "../../../data/learning-paths.json" with { type: "json" };
 import { canonicalPath, publicPaths } from "../lib/visitor-stats.mjs";
 import {
   affectsAstra,
@@ -166,7 +167,26 @@ test("route-scoped data retains all article links, recommendations, progress and
             document.frontMatter,
           ),
         );
-        assert.deepEqual(scoped["learning-index"], original["learning-index"]);
+        const track = tracks.find((t) =>
+          t.steps.some((s) => s.id === document.frontMatter.learning_step),
+        );
+        const readingSequence = (index) =>
+          (track?.steps || [])
+            .map((step) =>
+              index.entries.find((entry) => entry.stepId === step.id),
+            )
+            .filter(Boolean);
+        // All rendered steps, their ordinal positions and previous/next links
+        // must stay identical, including RAG's moved articles in each locale.
+        assert.deepEqual(
+          readingSequence(scoped["learning-index"]),
+          readingSequence(original["learning-index"]),
+        );
+        assert(
+          scoped["learning-index"].entries.every((entry) =>
+            track?.steps.some((step) => step.id === entry.stepId),
+          ),
+        );
         for (const linked of [
           ...(document.frontMatter.related || []),
           ...(document.frontMatter.prerequisites || []),

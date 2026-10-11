@@ -138,7 +138,15 @@
       "doc:llm/tiled-online-softmax",
       "doc:llm/kv-int8-error",
       "doc:ai-apps/java-idempotent-retry",
-      "doc:llm/kv-quantization-axes"
+      "doc:llm/kv-quantization-axes",
+      "doc:ai-apps/java-durable-idempotency",
+      "doc:ai-apps/java-outbox-delivery",
+      "doc:ai-apps/java-recovery-reconciliation",
+      "lab:durable-dispatch",
+      "doc:llm/kv-packed-groups",
+      "doc:llm/kv-residual-window",
+      "doc:llm/kv-block-decode-cost",
+      "lab:packed-kv"
     ],
     "architecture": [
       "Console input",
@@ -485,12 +493,30 @@
         "description": "162组保存整数码的离线对照，比较全张量、逐Token与K逐通道/V逐Token，保留混合策略并非总更优的结果。",
         "descriptionEn": "162 archived INT8 comparisons examine tensor, token and K-channel/V-token scales, including cases where the hybrid loses.",
         "descriptionTw": "162組保存整數碼的離線對照，比較全張量、逐Token與K逐通道/V逐Token，保留混合策略并非總更優的結果。"
+      },
+      {
+        "label": "持久投递与历史恢复",
+        "labelEn": "Durable delivery and history recovery",
+        "labelTw": "持久投遞與歷史恢復",
+        "description": "17种场景、193条子进程记录；无接收端幂等的投递崩溃后执行两次，三个历史恢复窗口均保留完整问答。",
+        "descriptionEn": "17 scenarios and 193 child-process records. An unkeyed receiver duplicates the effect after a delivery crash; all three history recovery boundaries retain whole turns.",
+        "descriptionTw": "17種場景、193條子行程記錄；無接收端冪等的投遞崩潰後執行兩次，三個歷史恢復窗口均保留完整問答。",
+        "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/0d4009cf840052c3111bbfc40dce900326daa3ae/demos/13-durable-dispatch"
+      },
+      {
+        "label": "KV打包、残差窗口与分块成本",
+        "labelEn": "Packed KV, residual windows and block cost",
+        "labelTw": "KV打包、殘差窗口與分塊成本",
+        "description": "144组对照、810条计时：高精度近段窗口在近段注意力上收益更大；分块减少工作数组，但本机CPU计时更慢。",
+        "descriptionEn": "144 comparisons and 810 timings. Recent float32 windows help recent-focused attention more; block decoding reduces work arrays but is slower on this CPU run.",
+        "descriptionTw": "144組對照、810條計時：高精度近段窗口在近段注意力上收益更大；分塊減少工作陣列，但本機CPU計時更慢。",
+        "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/0d4009cf840052c3111bbfc40dce900326daa3ae/experiments/12-packed-kv"
       }
     ],
     "titleTw": "Java LLM 實作集",
     "descriptionTw": "Java 會話、請求重試與持久化邊界，以及注意力、快取成本和量化誤差的可復現實驗。",
     "sourceLocale": "zh-CN",
-    "updated": "2026-10-07"
+    "updated": "2026-10-11"
   },
   {
     "id": "project:hohoo-embodied-agent",
@@ -506,7 +532,7 @@
     "domain": "embodied-ai",
     "status": "experiment",
     "date": "2026-09-28",
-    "updated": "2026-10-07",
+    "updated": "2026-10-11",
     "featured": false,
     "stack": [
       "Python 3.12",
@@ -545,7 +571,11 @@
       "doc:embodied-ai/mujoco-planar-pd",
       "doc:embodied-ai/mujoco-obstacle-clearance",
       "doc:embodied-ai/mujoco-delayed-feedback",
-      "doc:embodied-ai/mujoco-velocity-estimation"
+      "doc:embodied-ai/mujoco-velocity-estimation",
+      "doc:embodied-ai/mujoco-controller-holdout",
+      "doc:embodied-ai/mujoco-stale-force",
+      "doc:embodied-ai/mujoco-mass-transfer",
+      "lab:planar-reliability"
     ],
     "sections": [
       {
@@ -777,6 +807,15 @@
         "description": "54回合真实仿真对照位置差分、指数平滑与真值速度参考，解释噪声放大、估计滞后和稳定性验收。",
         "descriptionEn": "54 actual simulation rollouts compare finite differences, EMA and an oracle reference across position noise and observation delay.",
         "descriptionTw": "54回合真實仿真對照位置差分、指數平滑與真值速度參考，解釋噪聲放大、估計滯后和穩定性驗收。"
+      },
+      {
+        "label": "二维控制的调参、失联与迁移",
+        "labelEn": "Planar control tuning, observation loss and transfer",
+        "labelTw": "二維控制的調參、失聯與遷移",
+        "description": "153回合、306000物理步；留出集选中控制器7/18通过，失联置零仍滑行，质量缩放降低均值却未通过速度契约。",
+        "descriptionEn": "153 episodes and 306000 physics steps. The selected controller passes 7/18 holdouts; zero force coasts, and mass scaling lowers mean error without passing the velocity contract.",
+        "descriptionTw": "153回合、306000物理步；留出集選中控制器7/18通過，失聯置零仍滑行，質量縮放降低均值卻未通過速度契約。",
+        "href": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1d1faab57e20b352761e9abc736c6d277b505e6b/experiments/planar_reliability"
       }
     ]
   }

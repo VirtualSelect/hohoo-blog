@@ -31,7 +31,11 @@ export default function ResearchSpotlight() {
             </span>
             {media && (
               <img
-                src={media.src}
+                src={t(
+                  media.src,
+                  media.srcEn || media.src,
+                  media.srcTw || media.src,
+                )}
                 alt={t(media.alt, media.altEn, media.altTw)}
                 width={media.width}
                 height={media.height}

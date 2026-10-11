@@ -137,10 +137,34 @@
   },
   "embodied-ai/mujoco-velocity-estimation": {
     "repository": "hohoo-embodied-agent",
-    "commit": "1931effc42f9d5974f20c09614dc2ebbdfcbf44b",
+    "commit": "1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f",
     "directory": "experiments/planar_velocity_estimation",
     "requirements": "requirements-lock.txt",
     "run": "experiments/planar_velocity_estimation/run.py",
     "audit": "experiments/planar_velocity_estimation/audit.py"
+  },
+  "embodied-ai/mujoco-controller-holdout": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "1d1faab57e20b352761e9abc736c6d277b505e6b",
+    "directory": "experiments/planar_reliability",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/planar_reliability/run.py",
+    "audit": "experiments/planar_reliability/audit.py"
+  },
+  "embodied-ai/mujoco-stale-force": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "1d1faab57e20b352761e9abc736c6d277b505e6b",
+    "directory": "experiments/planar_reliability",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/planar_reliability/run.py",
+    "audit": "experiments/planar_reliability/audit.py"
+  },
+  "embodied-ai/mujoco-mass-transfer": {
+    "repository": "hohoo-embodied-agent",
+    "commit": "1d1faab57e20b352761e9abc736c6d277b505e6b",
+    "directory": "experiments/planar_reliability",
+    "requirements": "requirements-lock.txt",
+    "run": "experiments/planar_reliability/run.py",
+    "audit": "experiments/planar_reliability/audit.py"
   }
 }
