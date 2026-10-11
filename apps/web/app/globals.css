@@ -1364,11 +1364,24 @@ html[data-theme="dark"] .token.class-name {
 }
 .profile-avatar {
   border-radius: 50%;
-  object-fit: cover;
   margin: 24px auto 14px;
   display: block;
   width: 140px;
   height: 140px;
+  box-shadow: 0 0 0 1px var(--hh-border);
+}
+.profile-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+.profile-avatar .profile-avatar-dark,
+html[data-theme="dark"] .profile-avatar .profile-avatar-light {
+  display: none;
+}
+html[data-theme="dark"] .profile-avatar .profile-avatar-dark {
+  display: block;
 }
 .profile-card h2 {
   font-size: 32px;

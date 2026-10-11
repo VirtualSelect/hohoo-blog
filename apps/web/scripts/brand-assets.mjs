@@ -56,6 +56,24 @@ const assets = {
     `<g transform="translate(6 10)">${mark(palette.paper, palette.gold)}</g>`,
   ),
 };
+// Same optical anchor as the approved brand-kit avatar: the H carries more
+// visual weight than the star. Keep its 56% scale and space for a round crop.
+const avatarSize = 512;
+const avatarScale = (avatarSize * 0.56) / 280;
+for (const [theme, background, foreground] of [
+  ["light", palette.paper, palette.ink],
+  ["dark", palette.night, palette.paper],
+]) {
+  assets[`hohoo-startrail-avatar-${theme}.svg`] = svg(
+    avatarSize,
+    avatarSize,
+    `<circle cx="256" cy="256" r="256" fill="${background}"/><g transform="translate(${avatarSize / 2 - 110 * avatarScale} ${avatarSize / 2 - 158 * avatarScale}) scale(${avatarScale})"><g transform="translate(6 10)">${mark(foreground, palette.gold)}</g></g>`,
+    "Hohoo Startrail avatar",
+  );
+}
+// Author metadata and existing links have no site theme context.
+assets["hohoo-startrail-avatar.svg"] =
+  assets["hohoo-startrail-avatar-dark.svg"];
 // A stable dark tile keeps the favicon visible in both browser chrome themes.
 const icon = svg(
   320,

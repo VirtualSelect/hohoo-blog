@@ -21,14 +21,32 @@ export default function ProfileCard() {
             ↗
           </Link>
         </div>
-        <Image
+        <span
           className="profile-avatar"
-          src="/img/hohoo.jpg"
-          alt={t("Hohoo 的小熊头像", "Hohoo’s bear avatar", "Hohoo 的小熊頭像")}
-          width={152}
-          height={152}
-          priority
-        />
+          role="img"
+          aria-label={t(
+            "Hohoo 星轨头像",
+            "Hohoo Startrail avatar",
+            "Hohoo 星軌頭像",
+          )}
+        >
+          <Image
+            className="profile-avatar-light"
+            src="/brand/hohoo-startrail-avatar-light.svg"
+            alt=""
+            width={152}
+            height={152}
+            priority
+          />
+          <Image
+            className="profile-avatar-dark"
+            src="/brand/hohoo-startrail-avatar-dark.svg"
+            alt=""
+            width={152}
+            height={152}
+            priority
+          />
+        </span>
         <h2>Hohoo</h2>
         <p className="profile-role">
           {t(
