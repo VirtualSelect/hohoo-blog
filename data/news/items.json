@@ -1,5 +1,35 @@
 [
   {
+    "id": "2a641385d9866774e0cb",
+    "title": "微软发布自研芯片 Maia 300 并将大规模扩展 Maia 推理部署",
+    "url": "https://aihot.news/items/zqlqer8tnl7ejg2ow3xoq7b9q",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-12T13:03:45.000Z",
+    "collectedAt": "2026-10-12T16:02:02.312Z",
+    "category": "ai-apps",
+    "summary": "微软宣布明年起将 Maia 芯片家族扩展到多吉瓦级部署，作为自家产品和服务的首选推理系统，并发布 Maia 300，每瓦 token 产出比主流 GPU 系统高 40%。Maia 200 已在美国、欧洲和澳大利亚部署，在 Teams 和 Copilot 场景中每瓦 token 产出提升最高 1.7x。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-68566904",
+    "coverage": []
+  },
+  {
+    "id": "db71a39c67c53bf8f586",
+    "title": "用 Claude Opus 5.5、Blender、Unreal Engine 和 Meshy 构建游戏的七步教程",
+    "url": "https://aihot.news/items/svvvhr5j2nnywgdw29pso7o49",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-12T07:44:47.000Z",
+    "collectedAt": "2026-10-12T16:02:02.312Z",
+    "category": "ai-apps",
+    "summary": "一篇教程介绍用 Claude Opus 5.5 配合 Claude Code、Blender、Unreal Engine 5 和 Meshy 构建游戏的方法。核心思路是给每个工具分配单一职责：通过 MCP 连接 Blender 和 Meshy，由 Meshy 生成道具和角色、Blender 清理和放置、Unreal 负责光照物理和游戏本身、Opus 在…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-9d743600",
+    "coverage": []
+  },
+  {
     "id": "046f5e47c296a412481b",
     "title": "What Should SFT Learn? Conditional Information Gain for Generalizable Post-Training",
     "url": "https://arxiv.org/abs/2610.12995",
