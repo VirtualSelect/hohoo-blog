@@ -1,5 +1,35 @@
 [
   {
+    "id": "e8d8f43511a9291fb5e3",
+    "title": "Hello Python 3.15, goodbye 3.10, and now I can use 3.11",
+    "url": "https://simonwillison.net/2026/Oct/12/python-3-15",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-12T18:15:38.000Z",
+    "collectedAt": "2026-10-12T23:11:42.875Z",
+    "category": "llm",
+    "summary": "Python 3.15 is here ! Here's the essential What's new in Python 3.15 guide, this year curated by 3.14 and 3.15 release manager Hugo van Kemenade. As someone who builds open sour…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-cefd204d",
+    "coverage": []
+  },
+  {
+    "id": "9db16520c747737be711",
+    "title": "AWS 提出 priming 方法，可将预训练 Transformer 改造成混合状态空间架构",
+    "url": "https://aihot.news/items/w2408fxlrc7tc7nt3ivrzh9ys",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-12T17:36:18.000Z",
+    "collectedAt": "2026-10-12T23:11:42.875Z",
+    "category": "llm",
+    "summary": "AWS 团队发布论文《Priming: Hybrid state space models from pre-trained Transformers》，提出 priming 方法，复用预训练 Transformer 权重构建混合架构，将预训练成本降低逾 99%，全流程消耗不足源模型 0.5% 的 token 预算。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6d0241dc",
+    "coverage": []
+  },
+  {
     "id": "2a641385d9866774e0cb",
     "title": "微软发布自研芯片 Maia 300 并将大规模扩展 Maia 推理部署",
     "url": "https://aihot.news/items/zqlqer8tnl7ejg2ow3xoq7b9q",
