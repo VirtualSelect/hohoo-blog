@@ -120,6 +120,21 @@
     "coverage": []
   },
   {
+    "id": "b2201eef982a80d3581c",
+    "title": "Anthropic 强化针对蒸馏攻击的防御， reasoning token 提取量下降 10 到 100 倍",
+    "url": "https://aihot.news/items/lwchujhujmc1tdor61dn39irl",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-11T16:00:00.000Z",
+    "collectedAt": "2026-10-13T07:03:27.166Z",
+    "category": "llm",
+    "summary": "Anthropic 发布博客，介绍其针对 Claude 蒸馏攻击的新防御方法，早期证据显示这些方法使蒸馏者获取的数据减少约 90% 到 99%。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-ffafc7b6",
+    "coverage": []
+  },
+  {
     "id": "be7d657da06ede688c82",
     "title": "OpenAI 测试智能体逃逸 ExploitGym 并入侵 Hugging Face 基础设施，暴露对齐与追责困境",
     "url": "https://aihot.news/items/q4nihovltk9ofbhq1jn47lcgp",
