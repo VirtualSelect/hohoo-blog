@@ -15,6 +15,21 @@
     "coverage": []
   },
   {
+    "id": "f8bf7aba22fbb7074629",
+    "title": "Liquid AI 发布 LFM2.5-24B-A2B 端侧推理模型",
+    "url": "https://aihot.news/items/j0hjfg7ioz2gs0s8msqnafpjj",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-13T00:00:00.000Z",
+    "collectedAt": "2026-10-13T21:30:41.515Z",
+    "category": "ai-apps",
+    "summary": "Liquid AI 发布开源权重模型 LFM2.5-24B-A2B，总参数 24B、每 token 激活 2B，定位端侧快速智能体。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-28a1ae37",
+    "coverage": []
+  },
+  {
     "id": "e8d8f43511a9291fb5e3",
     "title": "Hello Python 3.15, goodbye 3.10, and now I can use 3.11",
     "url": "https://simonwillison.net/2026/Oct/12/python-3-15",
