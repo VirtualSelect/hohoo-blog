@@ -1,5 +1,20 @@
 [
   {
+    "id": "395b1748fcf2e4c9f932",
+    "title": "LangChain 发布 langchain-scaledown 集成，用 ScaleDown 约束解码模型管理长时智能体上下文",
+    "url": "https://aihot.news/items/uljn62mk9ujyya1xg51hc6dp8",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-13T11:56:53.000Z",
+    "collectedAt": "2026-10-13T16:23:49.697Z",
+    "category": "ai-apps",
+    "summary": "LangChain 发布 langchain-scaledown 集成，并在 LangSmith LLM Gateway 中支持 ScaleDown 的约束解码模型（CDM），用于降低长时智能体上下文管理的成本和延迟。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-4a799fc0",
+    "coverage": []
+  },
+  {
     "id": "e8d8f43511a9291fb5e3",
     "title": "Hello Python 3.15, goodbye 3.10, and now I can use 3.11",
     "url": "https://simonwillison.net/2026/Oct/12/python-3-15",
