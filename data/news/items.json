@@ -30,6 +30,36 @@
     "coverage": []
   },
   {
+    "id": "02199682fda2b32f962c",
+    "title": "DexStitch: Learning and Composing Dexterous Skills from Human Videos via Contact-Aware Robotic Inpainting",
+    "url": "https://arxiv.org/abs/2610.17789",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-14T04:00:00.000Z",
+    "collectedAt": "2026-10-14T13:59:41.493Z",
+    "category": "embodied-ai",
+    "summary": "A long-horizon manipulation task consists of primitive skills and the transitions connecting them. Learning skills that can be executed in sequence requires supervision for both…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d7d6728a",
+    "coverage": []
+  },
+  {
+    "id": "0410fbf76cdfc9eb61c7",
+    "title": "ANCHOR: Assessing Naturalistic Constraint Hierarchies and Ordering in Repository-Grounded Agentic Coding",
+    "url": "https://arxiv.org/abs/2610.16859",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-14T04:00:00.000Z",
+    "collectedAt": "2026-10-14T13:59:41.493Z",
+    "category": "ai-apps",
+    "summary": "For repository-grounded coding agents, a functionally correct patch is not necessarily an acceptable one: developers also constrain how the task must be carried out-modification…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-124df322",
+    "coverage": []
+  },
+  {
     "id": "b3825212fea4d2926fd1",
     "title": "Xbow 用 GPT-5.6 挖出 Chrome 三个漏洞，获 Google 25 万美元全链奖励",
     "url": "https://aihot.news/items/w0kr5nvs73elhfd23vj0vm8hi",
