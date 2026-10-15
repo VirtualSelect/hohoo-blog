@@ -1,5 +1,35 @@
 [
   {
+    "id": "00456424cf1d31da098f",
+    "title": "Claude Opus 5.5 fast mode 结束研究预览并移除等待名单",
+    "url": "https://aihot.news/items/e2ssy0a7scpnel6ppyl3r9f2t",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-15T20:09:02.000Z",
+    "collectedAt": "2026-10-15T21:43:18.717Z",
+    "category": "ai-apps",
+    "summary": "Anthropic 宣布 Claude 平台上的 Opus 5.5 fast mode 不再处于研究预览阶段，并已移除等待名单。该模式速度最高提升 2.5 倍，定价为 $8 / $40 per million tokens；现已登陆 Microsoft Foundry（Azure 托管），Google Cloud 即将支持。Claude Code 中的…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-9fb18cb4",
+    "coverage": []
+  },
+  {
+    "id": "d84da6ff5286e485352f",
+    "title": "Meta 开放权重模型 Muse Spark Open 上架 OpenRouter",
+    "url": "https://aihot.news/items/bicfbjip5iq9ccp8x7sn9yw7k",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-15T18:02:06.000Z",
+    "collectedAt": "2026-10-15T21:43:18.717Z",
+    "category": "ai-apps",
+    "summary": "Meta 发布开放权重模型 Muse Spark Open，现已可在 OpenRouter 使用，定位为面向编码与智能体工作的美国最强开放权重模型。模型总参数 816B、激活 42B，支持 1M token 上下文窗口，原生多模态，OpenRouter 定价为输入 $1.25/M、输出 $4.25/M，正文提到支持图像、视频、音频和 PDF 输入。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-dd418189",
+    "coverage": []
+  },
+  {
     "id": "01327a94966dc1c1ace2",
     "title": "Safe Reinforcement Learning with Receding-Horizon Safety Critic and Differentiable Action Shields",
     "url": "https://arxiv.org/abs/2610.20255",
