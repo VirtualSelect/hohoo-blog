@@ -30,6 +30,36 @@
     "coverage": []
   },
   {
+    "id": "015b71129cb88e70f076",
+    "title": "TrAct: Bridging Robot Control and Visual Prediction with Visual Tracks",
+    "url": "https://arxiv.org/abs/2608.24101",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-15T04:00:00.000Z",
+    "collectedAt": "2026-10-15T12:01:39.762Z",
+    "category": "embodied-ai",
+    "summary": "Robot actions are inherently embodiment-specific and only weakly aligned with image-space visual changes, limiting their effectiveness as conditioning signals for robot world mo…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-3f0e39d3",
+    "coverage": []
+  },
+  {
+    "id": "074dbf2275706c09ea20",
+    "title": "PersEvalBench: Can LLM Evaluators Judge Contextually Appropriate Use of Persona Information?",
+    "url": "https://arxiv.org/abs/2610.19314",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-15T04:00:00.000Z",
+    "collectedAt": "2026-10-15T12:01:39.762Z",
+    "category": "llm",
+    "summary": "Large language model (LLM) evaluators are increasingly used to assess personalized assistants, yet whether they can reliably judge personalization has rarely been tested. We int…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-25d92417",
+    "coverage": []
+  },
+  {
     "id": "498b79fb7ec104357e21",
     "title": "Claude Code 空闲压缩从摘要继续，可用 idleCompaction 关闭并自定义阈值",
     "url": "https://aihot.news/items/whbmvotra7659u98jmj00oegi",
@@ -87,6 +117,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-fe0ac10d",
+    "coverage": []
+  },
+  {
+    "id": "7acd83d2f30f000580b7",
+    "title": "Databricks 讲解如何在 AI Runtime 上将 Qwen 3.8 27B 微调时间缩短 6 倍",
+    "url": "https://aihot.news/items/s27ozk3mqeklm58sqxjeaz2wk",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-14T11:30:00.000Z",
+    "collectedAt": "2026-10-15T12:01:39.762Z",
+    "category": "llm",
+    "summary": "Databricks 演示通过系统性性能优化，将 Qwen 3.8 27B 在 AI Runtime 上的微调时间从 7 小时 44 分钟降至 1 小时 17 分钟，提速 6 倍。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6264c390",
     "coverage": []
   },
   {
@@ -162,6 +207,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-f97ef5ae",
+    "coverage": []
+  },
+  {
+    "id": "b76b11a1199f73b7027f",
+    "title": "Google DeepMind and Singapore Government collaborate to build fine-tuned AI model for scam detection",
+    "url": "https://deepmind.google/blog/on-device-ai-scam-detection-mddi",
+    "sourceId": "deepmind",
+    "sourceName": "Google DeepMind",
+    "publishedAt": "2026-10-14T02:00:14.000Z",
+    "collectedAt": "2026-10-15T12:01:39.762Z",
+    "category": "llm",
+    "summary": "Learn how Google DeepMind and GovTech Singapore uses lightweight on-device Gemma models to intercept conversational scams in private chats with zero cloud data egress.",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-25f54925",
     "coverage": []
   },
   {
