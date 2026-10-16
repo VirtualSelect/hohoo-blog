@@ -30,6 +30,36 @@
     "coverage": []
   },
   {
+    "id": "007a79383c82632f4dc9",
+    "title": "De-Risking Robotic Welding for In-Space Metal Joining Through Physics-Grounded Digital Twins",
+    "url": "https://arxiv.org/abs/2610.21939",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-16T04:00:00.000Z",
+    "collectedAt": "2026-10-16T13:30:28.164Z",
+    "category": "embodied-ai",
+    "summary": "Growing interest in in-space servicing, manufacturing, and assembly has renewed attention on reliable metal joining for modular construction and on-orbit repair. Robotic welding…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b7b9d5d5",
+    "coverage": []
+  },
+  {
+    "id": "024dd99a3768b2055f5a",
+    "title": "Diffeomorphic Hidden-State Steering: Improving Imitation Learning Policy Robustness through Expert Hidden-State Geometry",
+    "url": "https://arxiv.org/abs/2610.21666",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-16T04:00:00.000Z",
+    "collectedAt": "2026-10-16T13:30:28.164Z",
+    "category": "embodied-ai",
+    "summary": "Small observation or action errors can compound during closed-loop execution and disrupt a trained imitation learning policy. We study whether the original expert demonstrations…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-57385818",
+    "coverage": []
+  },
+  {
     "id": "00456424cf1d31da098f",
     "title": "Claude Opus 5.5 fast mode 结束研究预览并移除等待名单",
     "url": "https://aihot.news/items/e2ssy0a7scpnel6ppyl3r9f2t",
