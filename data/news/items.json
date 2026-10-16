@@ -1,5 +1,35 @@
 [
   {
+    "id": "00110ac7429ca9a9a95d",
+    "title": "Chronoberg: A 250-Year Diachronic Corpus with Temporal Affective Lexicons for Language Model Analysis",
+    "url": "https://arxiv.org/abs/2509.22360",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-16T04:00:00.000Z",
+    "collectedAt": "2026-10-16T07:29:36.981Z",
+    "category": "llm",
+    "summary": "Large language models (LLMs) excel at operating at scale by leveraging social media and data crawled from the web. Whereas existing corpora are diverse, their frequent lack of l…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d16d303f",
+    "coverage": []
+  },
+  {
+    "id": "006ed1531f8d9a361413",
+    "title": "Auditing Escalation Reliability in Healthcare LLM Agents: A Perturbation-Controlled Benchmark of Workflow-State Failures",
+    "url": "https://arxiv.org/abs/2610.21270",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-16T04:00:00.000Z",
+    "collectedAt": "2026-10-16T07:29:36.981Z",
+    "category": "ai-apps",
+    "summary": "Trustworthy biomedical AI requires reliable action selection when evidence is missing, stale, conflicting, or late, not only accurate answers on static inputs. We instantiate an…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-35cd72be",
+    "coverage": []
+  },
+  {
     "id": "00456424cf1d31da098f",
     "title": "Claude Opus 5.5 fast mode 结束研究预览并移除等待名单",
     "url": "https://aihot.news/items/e2ssy0a7scpnel6ppyl3r9f2t",
