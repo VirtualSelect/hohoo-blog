@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-26.8.2-brightgreen.svg)](.node-version)
 [![Next.js](https://img.shields.io/badge/Next.js-App%20Router-black.svg)](https://nextjs.org/)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/VirtualSelect/hohoo-blog)
+[![Deploy with Vercel](https://img.shields.io/badge/deploy%20with-vercel-black?logo=vercel)](https://vercel.com/new/clone?repository-url=https://github.com/VirtualSelect/hohoo-blog)
 
 > 一个开箱即用的三语言 AI 技术博客模板 —— Next.js App Router + TypeScript + MDX + 自动化资讯采集管线。
 >
