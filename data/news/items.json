@@ -1,5 +1,20 @@
 [
   {
+    "id": "722cb7b3e9acda994586",
+    "title": "WorkBuddy Intl 更新支持 DeepSeek-V4.1-Flash-1017，10 月 31 日前免费",
+    "url": "https://aihot.news/items/xgj246drlw70qbgypibz6atla",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-17T10:29:00.000Z",
+    "collectedAt": "2026-10-17T12:23:00.869Z",
+    "category": "ai-apps",
+    "summary": "WorkBuddy Intl 已更新至最新的 DeepSeek-V4.1-Flash-1017 模型，10 月 31 日前免费开放。引用的 DeepSeek 官方内容称该模型相比上一版性能更强、任务完成更快、输出更短，已上线网站、App 和 API，并针对 DeepSeek Harness、Tencent CodeBuddy、WorkBuddy 等做了优化。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-50bfb675",
+    "coverage": []
+  },
+  {
     "id": "4d0b158ef9617ca884d5",
     "title": "Anthropic 如何在 Claude 写下 Claude Code 约 90% 代码后重新设计代码评审",
     "url": "https://aihot.news/items/p4mq9t7wyzlxritu15i6d8dtv",
@@ -192,6 +207,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-9fb18cb4",
+    "coverage": []
+  },
+  {
+    "id": "f63d7248b24014115f32",
+    "title": "Chirp Pong",
+    "url": "https://simonwillison.net/2026/Oct/15/chirp-pong",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-15T19:47:52.000Z",
+    "collectedAt": "2026-10-17T12:23:00.869Z",
+    "category": "ai-apps",
+    "summary": "Tool: Chirp Pong Another game experiment - I wanted to see if it was feasible to have a two player game on two separate phones running in static HTML where the networking code u…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-619537d6",
     "coverage": []
   },
   {
