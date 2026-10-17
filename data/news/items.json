@@ -1,5 +1,20 @@
 [
   {
+    "id": "4d0b158ef9617ca884d5",
+    "title": "Anthropic 如何在 Claude 写下 Claude Code 约 90% 代码后重新设计代码评审",
+    "url": "https://aihot.news/items/p4mq9t7wyzlxritu15i6d8dtv",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-17T01:52:43.000Z",
+    "collectedAt": "2026-10-17T07:10:16.695Z",
+    "category": "ai-apps",
+    "summary": "作者解读 Anthropic 关于 Claude Code 代码评审重构的博客：Claude 写了约 90% 的代码，2026 年 6 月到 9 月合并 PR 翻倍以上而 revert 率下降超 40%。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-bd89c196",
+    "coverage": []
+  },
+  {
     "id": "50f6394f3edfd8664ea4",
     "title": "Anthropic 披露 Claude 编写了约 90% 的 Claude Code 代码",
     "url": "https://aihot.news/items/kygipgwqrajle6hctg9nqid7w",
@@ -147,6 +162,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-3ecb085a",
+    "coverage": []
+  },
+  {
+    "id": "b6756c0a180ee554226c",
+    "title": "Benefit Street Partners answers questions faster with Codex",
+    "url": "https://openai.com/index/benefit-street-partners",
+    "sourceId": "openai",
+    "sourceName": "OpenAI",
+    "publishedAt": "2026-10-16T00:00:00.000Z",
+    "collectedAt": "2026-10-17T07:10:16.695Z",
+    "category": "ai-apps",
+    "summary": "Anant Kumar builds tools to compare loan valuations and analyze credit agreements, using Codex for code review and faster follow-ups.",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e9eebb2f",
     "coverage": []
   },
   {
