@@ -1,5 +1,35 @@
 [
   {
+    "id": "50f6394f3edfd8664ea4",
+    "title": "Anthropic 披露 Claude 编写了约 90% 的 Claude Code 代码",
+    "url": "https://aihot.news/items/kygipgwqrajle6hctg9nqid7w",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-16T19:05:40.000Z",
+    "collectedAt": "2026-10-17T00:44:40.109Z",
+    "category": "ai-apps",
+    "summary": "Anthropic 的 ClaudeDevs 账号称 Claude 编写了约 90% 的 Claude Code 代码。6 月至 9 月间合并 PR 翻了一倍以上，回退比例下降超过 40%，团队发文介绍了为达到这一效果如何改造代码评审及采用方法，链接见 claude.dev/blog/solving-code-review-at-anthropic/。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b67a905a",
+    "coverage": []
+  },
+  {
+    "id": "6bee349d6c55071f4f28",
+    "title": "Code, Test, and Deploy on One Machine with NVIDIA RTX Spark",
+    "url": "https://developer.nvidia.com/blog/code-test-and-deploy-on-one-machine-with-nvidia-rtx-spark",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-16T17:00:00.000Z",
+    "collectedAt": "2026-10-17T00:44:40.109Z",
+    "category": "ai-apps",
+    "summary": "AI agents are changing how software gets built. Developers have gone from writing every line of code by hand to directing agents that write most of the code. As... AI agents are…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6a41563a",
+    "coverage": []
+  },
+  {
     "id": "00110ac7429ca9a9a95d",
     "title": "Chronoberg: A 250-Year Diachronic Corpus with Temporal Affective Lexicons for Language Model Analysis",
     "url": "https://arxiv.org/abs/2509.22360",
@@ -57,6 +87,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-57385818",
+    "coverage": []
+  },
+  {
+    "id": "01eed6d81762c6c7981d",
+    "title": "HyCo: Hybrid Drafting for Cost-Efficient Mobile-Cloud Speculative Decoding",
+    "url": "https://arxiv.org/abs/2610.21436",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-16T04:00:00.000Z",
+    "collectedAt": "2026-10-17T00:44:40.109Z",
+    "category": "llm",
+    "summary": "Device-cloud speculative decoding reduces server computation, but growing a deep draft tree with a small language model (SLM) requires repeated passes on a mobile neural process…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-aaa56145",
+    "coverage": []
+  },
+  {
+    "id": "09dc86d8a5c89fd725ac",
+    "title": "LIN-SLAM: Lightweight LiDAR--Inertial Neural SLAM for Real-Time Onboard Navigation",
+    "url": "https://arxiv.org/abs/2610.21199",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-16T04:00:00.000Z",
+    "collectedAt": "2026-10-17T00:44:40.109Z",
+    "category": "embodied-ai",
+    "summary": "Geometric light detection and ranging (LiDAR)--inertial simultaneous localization and mapping (SLAM) provides efficient state estimation but lacks the continuous map representat…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-2ae8beb7",
     "coverage": []
   },
   {
