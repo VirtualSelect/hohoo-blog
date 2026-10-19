@@ -30,6 +30,51 @@
     "coverage": []
   },
   {
+    "id": "09188ae0e82626715d62",
+    "title": "Annotrace: A Workbench for Step-Level Annotation of Agent Traces",
+    "url": "https://arxiv.org/abs/2610.23284",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-19T04:00:00.000Z",
+    "collectedAt": "2026-10-19T13:53:05.153Z",
+    "category": "ai-apps",
+    "summary": "Every study of why LLM agents fail begins by labelling traces by hand, and every such study builds its own throwaway tool. Observability platforms record agent traces but offer …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c1aa7a19",
+    "coverage": []
+  },
+  {
+    "id": "0d05aae1ff0d2e71d622",
+    "title": "Learning Robot Metareasoning: Adaptive Computation Budgets for Real-Time Control",
+    "url": "https://arxiv.org/abs/2610.23662",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-19T04:00:00.000Z",
+    "collectedAt": "2026-10-19T13:53:05.153Z",
+    "category": "embodied-ai",
+    "summary": "Planning while moving faces an historical trade-off between deliberation and reactivity. A planner running concurrently with execution needs time to compute, so the robot must c…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-f5792ac9",
+    "coverage": []
+  },
+  {
+    "id": "768169fbc5579b7b35e2",
+    "title": "llm-tools-datasette 0.1.1",
+    "url": "https://simonwillison.net/2026/Oct/18/llm-tools-datasette",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-18T23:43:09.000Z",
+    "collectedAt": "2026-10-19T13:53:05.153Z",
+    "category": "llm",
+    "summary": "Release: llm-tools-datasette 0.1.1 When I switched LLM over to httpx2 in LLM 0.33 I forget that this would break any plugins which used httpx without directly depending on it. l…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-3a7ade67",
+    "coverage": []
+  },
+  {
     "id": "d221188525e699b5e6bb",
     "title": "llm-echo 0.5",
     "url": "https://simonwillison.net/2026/Oct/18/llm-echo",
@@ -42,6 +87,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-12f1c9f6",
+    "coverage": []
+  },
+  {
+    "id": "f4802b4ad49581f0bf88",
+    "title": "卡兹克实测华硕 ProArt 创16 RTX Spark 电脑，37999 元实现本地 Token 自由",
+    "url": "https://aihot.news/items/i8vi0763u7lz34lkoagoh0agt",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-18T02:04:38.000Z",
+    "collectedAt": "2026-10-19T13:53:05.153Z",
+    "category": "ai-apps",
+    "summary": "作者分享受邀参加英伟达 RTX Spark 全球开售活动后，深度使用一周华硕 ProArt 创16（128G 统一内存+1T，京东售价 37999 元）的体验，开售时 128G 版本在京东几分钟内被抢空。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-f1366bf",
     "coverage": []
   },
   {
