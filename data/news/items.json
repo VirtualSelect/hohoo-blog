@@ -1,5 +1,20 @@
 [
   {
+    "id": "d221188525e699b5e6bb",
+    "title": "llm-echo 0.5",
+    "url": "https://simonwillison.net/2026/Oct/18/llm-echo",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-18T23:16:16.000Z",
+    "collectedAt": "2026-10-19T00:28:23.814Z",
+    "category": "ai-apps",
+    "summary": "Release: llm-echo 0.5 I'm working towards a new LLM release, and testing PRs caused me to revisit the llm-echo debug plugin. This plugin provides a \"model\" which doesn't involve…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-12f1c9f6",
+    "coverage": []
+  },
+  {
     "id": "722cb7b3e9acda994586",
     "title": "WorkBuddy Intl 更新支持 DeepSeek-V4.1-Flash-1017，10 月 31 日前免费",
     "url": "https://aihot.news/items/xgj246drlw70qbgypibz6atla",
