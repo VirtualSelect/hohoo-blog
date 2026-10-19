@@ -1,5 +1,35 @@
 [
   {
+    "id": "00a6f09d3f2ba1220afe",
+    "title": "Exploring The Empirical Privacy Landscape of Synthetic Data",
+    "url": "https://arxiv.org/abs/2610.22659",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-19T04:00:00.000Z",
+    "collectedAt": "2026-10-19T05:14:40.329Z",
+    "category": "llm",
+    "summary": "Methods for training language models on sensitive data differ in how they balance capability gains against the risk of leaking private information. In this paper, we present a c…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6c04009c",
+    "coverage": []
+  },
+  {
+    "id": "0974d89bb90d470b397d",
+    "title": "Ego2Contact: Predicting Touch from Egocentric Human Video for Contact-Rich Robot Manipulation",
+    "url": "https://arxiv.org/abs/2610.22932",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-19T04:00:00.000Z",
+    "collectedAt": "2026-10-19T05:14:40.329Z",
+    "category": "embodied-ai",
+    "summary": "Contact locations and interaction forces are critical for contact-rich robot manipulation but are often ambiguous from vision alone. Measuring them on robots requires specialize…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c251f29f",
+    "coverage": []
+  },
+  {
     "id": "d221188525e699b5e6bb",
     "title": "llm-echo 0.5",
     "url": "https://simonwillison.net/2026/Oct/18/llm-echo",
