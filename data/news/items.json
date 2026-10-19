@@ -1,5 +1,35 @@
 [
   {
+    "id": "d73b478de9ffce6bf15d",
+    "title": "DeepSeek V4.1 Flash 1017 发布，Artificial Analysis 智能指数得分 45 并列开源模型第二",
+    "url": "https://aihot.news/items/wrlpmwb2tsk1moehp5kpsvovb",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-19T16:25:46.000Z",
+    "collectedAt": "2026-10-19T20:09:06.592Z",
+    "category": "ai-apps",
+    "summary": "DeepSeek 发布 DeepSeek V4.1 Flash 1017，在 Artificial Analysis Intelligence Index 得分 45，比 DeepSeek V4.1 Flash 提高 6 分，与 GLM-5.3 并列开源权重模型第二，仅次于 MiMo-V2.6-Pro。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-389276f2",
+    "coverage": []
+  },
+  {
+    "id": "d0e5289e095b4c9ab0f6",
+    "title": "Meta 详解 Thin Orchestrator 模式：让路由少干活提升 AI 智能体可靠性",
+    "url": "https://aihot.news/items/qh6pvehounuylklti7i0zl124",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-19T15:30:37.000Z",
+    "collectedAt": "2026-10-19T20:09:06.592Z",
+    "category": "ai-apps",
+    "summary": "Meta 工程团队介绍其数据管道智能体采用的瘦编排器（thin orchestrator）模式：一个约 1300 行的编排器只负责路由和可靠性检查，将 20+ 工作流分派给 14 个上下文隔离的专项子智能体，自身不做任何领域推理。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-397fa7fe",
+    "coverage": []
+  },
+  {
     "id": "00a6f09d3f2ba1220afe",
     "title": "Exploring The Empirical Privacy Landscape of Synthetic Data",
     "url": "https://arxiv.org/abs/2610.22659",
@@ -87,6 +117,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-12f1c9f6",
+    "coverage": []
+  },
+  {
+    "id": "bc75f6575c8ad783461f",
+    "title": "Google ADK 教程：用流式工具与响应调度构建永不冷场的语音智能体",
+    "url": "https://aihot.news/items/emuxoxo4dpkovprjlldl4ugqt",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-18T16:00:00.000Z",
+    "collectedAt": "2026-10-19T20:09:06.592Z",
+    "category": "ai-apps",
+    "summary": "Google Developers Blog 发布教程，讲解如何用开源 ADK 与 gemini-3.8-live 构建不出现冷场的语音智能体，核心是非阻塞工具调用。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-89de4300",
     "coverage": []
   },
   {
