@@ -1,5 +1,20 @@
 [
   {
+    "id": "8968aa74d796ebc2b900",
+    "title": "面壁智能解析前瞻专家调度 LES 如何让 35B MoE 在手机端侧实时无损运行",
+    "url": "https://aihot.news/items/m2ylwtzb8x49c32spfl1wplqz",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-20T06:22:26.000Z",
+    "collectedAt": "2026-10-20T12:04:00.834Z",
+    "category": "llm",
+    "summary": "面壁智能 MiniCPM-V 团队介绍支撑 MiniCPM-V 4.7 端侧运行的前瞻专家调度（LES）技术，称首次实现 35B-A3B 规模 MoE 在端侧实时无损运行，iPhone 18 Pro Max 实测解码超 20 token/s。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-910404cc",
+    "coverage": []
+  },
+  {
     "id": "008b443e8ade0e005220",
     "title": "Deep Fusion Memory: A Chunk-Level Parametric Memory for Large Language Models",
     "url": "https://arxiv.org/abs/2610.25100",
@@ -27,6 +42,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-3c0a6ab0",
+    "coverage": []
+  },
+  {
+    "id": "0182cce120aad869ce1a",
+    "title": "HarnessRL: Co-Evolving Policies with a Just-in-Time Training Harness for Open-Ended RL",
+    "url": "https://arxiv.org/abs/2610.26426",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-20T04:00:00.000Z",
+    "collectedAt": "2026-10-20T12:04:00.834Z",
+    "category": "ai-apps",
+    "summary": "Rubric-based reinforcement learning (RL) trains policies for open-ended generation with natural-language criteria as rewards, but these rewards can become ineffective as trainin…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-ad7cb62b",
+    "coverage": []
+  },
+  {
+    "id": "0497f46ea4de50e3634b",
+    "title": "ForagerSim: Evaluating Embodied Map-Based Reasoning in Large-Scale Dynamic Worlds",
+    "url": "https://arxiv.org/abs/2610.26395",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-20T04:00:00.000Z",
+    "collectedAt": "2026-10-20T12:04:00.834Z",
+    "category": "embodied-ai",
+    "summary": "Animals build cognitive maps of vast environments, use them to perform map-based navigation, and might even be reusing the same circuitry used in spatial reasoning for creating …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-dddc65dc",
     "coverage": []
   },
   {
