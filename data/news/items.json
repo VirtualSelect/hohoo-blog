@@ -1,5 +1,20 @@
 [
   {
+    "id": "d0f0045fb40f11c22501",
+    "title": "Battle Drones - a vibe coded RTS with audio-based multiplayer",
+    "url": "https://simonwillison.net/2026/Oct/20/battledrones",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-20T19:34:19.000Z",
+    "collectedAt": "2026-10-20T21:50:05.183Z",
+    "category": "embodied-ai",
+    "summary": "My latest vibe coded game experiment is a Command & Conquer style RTS (Real Time Strategy) game called Battle Drones ( play it here ). Unlike my previous experiments , this one …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-ac197bc9",
+    "coverage": []
+  },
+  {
     "id": "cc85791d7dc29cc27df5",
     "title": "Perplexity Computer 现可在 Mac 上完全本地运行，无需云端推理",
     "url": "https://aihot.news/items/zs3zvf51jl6pa35kn4npmoy7j",
@@ -27,6 +42,21 @@
     "summaryKind": "link-only",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-c8a276fe",
+    "coverage": []
+  },
+  {
+    "id": "74d341821f9e2a66d1ac",
+    "title": "llm-d 1.0 发布：Kubernetes 原生分布式推理服务走向生产就绪",
+    "url": "https://aihot.news/items/b1pcaa7ceghor24vjgsjagqqd",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-20T12:00:00.000Z",
+    "collectedAt": "2026-10-20T21:50:05.183Z",
+    "category": "llm",
+    "summary": "IBM、Red Hat 和 Google 等主导的开源推理项目 llm-d 在 PyTorch Conference North America 上发布 llm-d 1.0，这是一个 Kubernetes 原生的分布式推理服务框架，支持任意模型、任意加速器和任意云。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-ec8a787d",
     "coverage": []
   },
   {
