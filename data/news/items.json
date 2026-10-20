@@ -1,5 +1,35 @@
 [
   {
+    "id": "cc85791d7dc29cc27df5",
+    "title": "Perplexity Computer 现可在 Mac 上完全本地运行，无需云端推理",
+    "url": "https://aihot.news/items/zs3zvf51jl6pa35kn4npmoy7j",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-20T16:34:51.000Z",
+    "collectedAt": "2026-10-20T17:29:25.636Z",
+    "category": "ai-apps",
+    "summary": "Perplexity CEO Aravind Srinivas 宣布，Perplexity Computer 现可在 Mac 上完全本地运行，无需云端推理，也不用 WiFi。模型和智能体都在本机运行，可操作 Mac 原生应用和本地文件，敏感数据不必发送到云端，现已在 Perplexity Mac 应用中可用。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-37900a74",
+    "coverage": []
+  },
+  {
+    "id": "ef73bf2ace8ac6719291",
+    "title": "FairStress: A deeper evaluation of fairness in LLM decision-making",
+    "url": "https://huggingface.co/blog/allenai/fairstress",
+    "sourceId": "huggingface",
+    "sourceName": "Hugging Face",
+    "publishedAt": "2026-10-20T16:09:19.000Z",
+    "collectedAt": "2026-10-20T17:29:25.636Z",
+    "category": "llm",
+    "summary": "",
+    "summaryKind": "link-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c8a276fe",
+    "coverage": []
+  },
+  {
     "id": "8968aa74d796ebc2b900",
     "title": "面壁智能解析前瞻专家调度 LES 如何让 35B MoE 在手机端侧实时无损运行",
     "url": "https://aihot.news/items/m2ylwtzb8x49c32spfl1wplqz",
