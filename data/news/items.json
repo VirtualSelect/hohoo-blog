@@ -30,6 +30,21 @@
     "coverage": []
   },
   {
+    "id": "24f50db3e043ed4cfdba",
+    "title": "Developing an AI Factory Digital Twin with an Agent-Assisted Workflow",
+    "url": "https://developer.nvidia.com/blog/developing-an-ai-factory-digital-twin-with-an-agent-assisted-workflow",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-21T09:38:49.000Z",
+    "collectedAt": "2026-10-21T18:52:30.758Z",
+    "category": "ai-apps",
+    "summary": "Building an AI factory digital twin requires developers to bring site plans, equipment assets, and engineering requirements into a consistent model that teams... Building an AI …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-9c4de9e2",
+    "coverage": []
+  },
+  {
     "id": "01d99a613554c6ca7c35",
     "title": "Perceives but Doesn't Brake: A Perception-Action Binding Gap in Reasoning Driving VLAs",
     "url": "https://arxiv.org/abs/2610.28184",
