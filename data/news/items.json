@@ -135,6 +135,36 @@
     "coverage": []
   },
   {
+    "id": "02d5625214457ddbcf9d",
+    "title": "Do Conversational Agents Need Explicit Memory? A Controlled Comparison with Raw-History Retrieval",
+    "url": "https://arxiv.org/abs/2610.24671",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-20T04:00:00.000Z",
+    "collectedAt": "2026-10-21T00:52:08.165Z",
+    "category": "ai-apps",
+    "summary": "Explicit memory systems transform conversation history into persistent representations intended to improve future access, often at substantial construction cost. Yet it remains …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-f88b0d48",
+    "coverage": []
+  },
+  {
+    "id": "05bd9a5c15ea9ca34653",
+    "title": "Scene-Adaptive VLA: Efficient Autonomous Driving via Dynamic Layer Routing",
+    "url": "https://arxiv.org/abs/2610.24590",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-20T04:00:00.000Z",
+    "collectedAt": "2026-10-21T00:52:08.165Z",
+    "category": "embodied-ai",
+    "summary": "Vision-Language-Action (VLA) models offer a promising paradigm for autonomous driving. However, the massive parameter scale of VLAs strains onboard computational resources durin…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d7374530",
+    "coverage": []
+  },
+  {
     "id": "efd79bd778da1c28678a",
     "title": "My obituary for programming",
     "url": "https://simonwillison.net/2026/Oct/19/my-obituary-for-programming",
@@ -162,6 +192,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-389276f2",
+    "coverage": []
+  },
+  {
+    "id": "fde835448e235970e92d",
+    "title": "Google 发布 vLLM 与 SGLang 的 TorchTPU 原生推理引擎",
+    "url": "https://aihot.news/items/mlusnw9gi199uld4ixj58m2cz",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-19T16:00:00.000Z",
+    "collectedAt": "2026-10-21T00:52:08.165Z",
+    "category": "ai-apps",
+    "summary": "Google 在 PyTorch 相关公告中推出基于 TorchTPU 的 vLLM 和 SGLang 原生 PyTorch 推理引擎，分别与 Inferact、RadixArk 合作开发，让开发者用熟悉的 PyTorch 工具在 TPU 上部署模型。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-fdd725c3",
     "coverage": []
   },
   {
