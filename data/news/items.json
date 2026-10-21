@@ -1,5 +1,35 @@
 [
   {
+    "id": "1f9d9c2063177d87e4c3",
+    "title": "NVIDIA 扩展开源模型家族，覆盖语言、机器人、生物与量子计算以支持欧洲主权智能",
+    "url": "https://aihot.news/items/l94ayb89z6n2xxc9ce6c6ubeh",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-21T10:00:07.000Z",
+    "collectedAt": "2026-10-21T14:05:36.658Z",
+    "category": "embodied-ai",
+    "summary": "NVIDIA 扩展开源模型家族，推出 Nemotron 3.5 Super VL 与 Nemotron 3.5 Bolt、Nemotron Retriever、Kumo 结构化数据模型、Cosmos 3.5 世界模型、Alpamayo 2 Edge 自动驾驶推理模型、BioNeMo RFD4-Proteina 蛋白质设计模型及量子计算 Ising 模型家族。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-9de1902f",
+    "coverage": []
+  },
+  {
+    "id": "844d2a2689f652be5a45",
+    "title": "How NVIDIA OpenShell Reference Architecture Secures and Governs AI Agent Workloads at Scale",
+    "url": "https://developer.nvidia.com/blog/how-nvidia-openshell-reference-architecture-secures-and-governs-ai-agent-workloads-at-scale",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-21T09:50:14.000Z",
+    "collectedAt": "2026-10-21T14:05:36.658Z",
+    "category": "ai-apps",
+    "summary": "Autonomous agents can work for hours on complex tasks, accessing files, tools, the internet, and spawning other agents to collaborate with. Executing complex... Autonomous agent…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-f5804c34",
+    "coverage": []
+  },
+  {
     "id": "01d99a613554c6ca7c35",
     "title": "Perceives but Doesn't Brake: A Perception-Action Binding Gap in Reasoning Driving VLAs",
     "url": "https://arxiv.org/abs/2610.28184",
