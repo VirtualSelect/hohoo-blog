@@ -1,5 +1,20 @@
 [
   {
+    "id": "d52968d2b0a9b010f48c",
+    "title": "How to Read Data into GPU Memory in Python with NVIDIA GPUDirect Storage",
+    "url": "https://developer.nvidia.com/blog/how-to-read-data-into-gpu-memory-in-python-with-nvidia-gpudirect-storage",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-22T16:39:09.000Z",
+    "collectedAt": "2026-10-22T17:35:09.210Z",
+    "category": "llm",
+    "summary": "GPU applications are processing ever-growing datasets with increasingly powerful accelerators. According to the 2025 Stanford AI Index, compute for notable AI... GPU application…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-a03f1df7",
+    "coverage": []
+  },
+  {
     "id": "021e1393631a6cc5a7a8",
     "title": "Learning-Enhanced Observer for Sensorless Task-Null-Space Compliant Control",
     "url": "https://arxiv.org/abs/2610.28769",
@@ -57,6 +72,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-ba7032da",
+    "coverage": []
+  },
+  {
+    "id": "7f9911c19f641e050337",
+    "title": "Anthropic 指南：何时把子智能体合并进主 Agent 循环",
+    "url": "https://aihot.news/items/rtbm48num2azmqgrrzy2ep7il",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-22T00:00:00.000Z",
+    "collectedAt": "2026-10-22T17:35:09.210Z",
+    "category": "ai-apps",
+    "summary": "Anthropic Applied AI 团队发布指南，讲解何时把 orchestrator 下的路由器、规划器和领域子智能体合并进单个主 Agent 循环。文中对比显示，带 skills 的单智能体在质量上常优于一提示全包和子智能体设计，且成本和延迟更低，一家客户改用单循环后运行时间约快 2x。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-19a42b73",
     "coverage": []
   },
   {
