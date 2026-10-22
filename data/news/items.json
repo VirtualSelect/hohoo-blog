@@ -1,5 +1,35 @@
 [
   {
+    "id": "021e1393631a6cc5a7a8",
+    "title": "Learning-Enhanced Observer for Sensorless Task-Null-Space Compliant Control",
+    "url": "https://arxiv.org/abs/2610.28769",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-22T04:00:00.000Z",
+    "collectedAt": "2026-10-22T05:18:06.555Z",
+    "category": "embodied-ai",
+    "summary": "This paper presents a novel framework integrating a robust wrench observer with a hybrid pose and force controller for physical Human-Robot Interaction (pHRI). In pHRI tasks, ro…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d209c4f2",
+    "coverage": []
+  },
+  {
+    "id": "02ab2ca30258c89f7e23",
+    "title": "pplx-embed-v2-late Technical Report",
+    "url": "https://arxiv.org/abs/2610.29523",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-22T04:00:00.000Z",
+    "collectedAt": "2026-10-22T05:18:06.555Z",
+    "category": "llm",
+    "summary": "In this report, we introduce pplx-embed-v2-late, a pair of 0.6B and 9B multilingual and multimodal late-interaction models. Both models achieve state-of-the-art results within t…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-4fd00b53",
+    "coverage": []
+  },
+  {
     "id": "1f9d9c2063177d87e4c3",
     "title": "NVIDIA 扩展开源模型家族，覆盖语言、机器人、生物与量子计算以支持欧洲主权智能",
     "url": "https://aihot.news/items/l94ayb89z6n2xxc9ce6c6ubeh",
@@ -87,6 +117,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-5e8e68fb",
+    "coverage": []
+  },
+  {
+    "id": "3fe372fb2e8166f0e814",
+    "title": "Cloudflare links vulnerability discovery to defense with OpenAI",
+    "url": "https://openai.com/index/cloudflare-cyber",
+    "sourceId": "openai",
+    "sourceName": "OpenAI",
+    "publishedAt": "2026-10-21T00:00:00.000Z",
+    "collectedAt": "2026-10-22T05:18:06.555Z",
+    "category": "ai-apps",
+    "summary": "Cloudflare uses OpenAI Daybreak to investigate vulnerabilities and propose fixes for review. Its developers use Codex to build faster and improve code quality.",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c7624149",
     "coverage": []
   },
   {
