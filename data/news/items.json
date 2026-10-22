@@ -1,5 +1,35 @@
 [
   {
+    "id": "259eaed81dd439032175",
+    "title": "Claude 网页、桌面和移动端将默认启用 auto mode",
+    "url": "https://aihot.news/items/ybo2q5ug2e71tfuab9m1t128o",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-22T20:04:24.000Z",
+    "collectedAt": "2026-10-22T21:53:57.777Z",
+    "category": "ai-apps",
+    "summary": "Claude 官方宣布，下周起 Pro、Max 和 Team 套餐在 Claude 网页、桌面和移动端应用中的会话将默认以 auto mode 运行。auto mode 不再逐步请求用户批准，而是由自动检查拦截高风险操作，用户可随时切回手动模式。其引用的 Claude Code 更新提到 auto mode 用独立分类器审查 shell 命令，测试中拦…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-553bd009",
+    "coverage": []
+  },
+  {
+    "id": "ee487a66d7e4ee85c2e1",
+    "title": "Donating Agent Skills to the Agentic AI Foundation",
+    "url": "https://simonwillison.net/2026/Oct/22/donating-agent-skills",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-22T18:09:56.000Z",
+    "collectedAt": "2026-10-22T21:53:57.777Z",
+    "category": "ai-apps",
+    "summary": "Donating Agent Skills to the Agentic AI Foundation News today from Anthropic: We’re committed to keeping Agent Skills open, community-driven, and vendor-neutral. Today, we are d…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-5b2888cd",
+    "coverage": []
+  },
+  {
     "id": "d52968d2b0a9b010f48c",
     "title": "How to Read Data into GPU Memory in Python with NVIDIA GPUDirect Storage",
     "url": "https://developer.nvidia.com/blog/how-to-read-data-into-gpu-memory-in-python-with-nvidia-gpudirect-storage",
