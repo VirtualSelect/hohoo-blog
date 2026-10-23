@@ -1,5 +1,20 @@
 [
   {
+    "id": "51888f116f5b083740bc",
+    "title": "Turning Database Grading into RL Rewards: Post-Training Agents with ThinkingBox",
+    "url": "https://huggingface.co/blog/microsoft/thinkingbox-training",
+    "sourceId": "huggingface",
+    "sourceName": "Hugging Face",
+    "publishedAt": "2026-10-22T22:24:34.000Z",
+    "collectedAt": "2026-10-23T00:54:24.880Z",
+    "category": "ai-apps",
+    "summary": "",
+    "summaryKind": "link-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-bf2b0459",
+    "coverage": []
+  },
+  {
     "id": "259eaed81dd439032175",
     "title": "Claude 网页、桌面和移动端将默认启用 auto mode",
     "url": "https://aihot.news/items/ybo2q5ug2e71tfuab9m1t128o",
@@ -102,6 +117,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-ba7032da",
+    "coverage": []
+  },
+  {
+    "id": "0363501c143ec05bdbbe",
+    "title": "GENIE: A Fine-Grained Measure for Novelty",
+    "url": "https://arxiv.org/abs/2606.12790",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-22T04:00:00.000Z",
+    "collectedAt": "2026-10-23T00:54:24.880Z",
+    "category": "llm",
+    "summary": "Large Language Models have consistently demonstrated a lack of creativity and diversity across tasks. Prior work has focused on addressing whether models are capable of generati…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-bb0e77c8",
+    "coverage": []
+  },
+  {
+    "id": "07721de300d03095cb08",
+    "title": "RoPT: Robust 6DoF Object Pose Tracking in Video",
+    "url": "https://arxiv.org/abs/2610.28962",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-22T04:00:00.000Z",
+    "collectedAt": "2026-10-23T00:54:24.880Z",
+    "category": "embodied-ai",
+    "summary": "Accurate 6-DoF object pose tracking is essential for robotic interaction, yet conventional monocular pipelines frequently suffer from catastrophic divergence under rapid object …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-8af740bc",
     "coverage": []
   },
   {
