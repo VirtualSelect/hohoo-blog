@@ -1,5 +1,35 @@
 [
   {
+    "id": "e66a4522dc8eacb43d10",
+    "title": "OpenAI 红队测试发现 Brotli 未认证远程代码执行漏洞并已披露",
+    "url": "https://aihot.news/items/bflsi3krmtn64gccrmh8dlsdc",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-23T22:55:45.000Z",
+    "collectedAt": "2026-10-23T23:27:03.763Z",
+    "category": "ai-apps",
+    "summary": "OpenAI 公布其在红队演练中发现 Brotli 压缩库存在未认证远程代码执行漏洞，攻击者可通过发送或回复恶意压缩数据在受影响系统上执行代码，无需创建用户账号，影响 Node.js、Bun、Envoy 等内嵌 Brotli 的软件，未打补丁的接受压缩输入的服务器（如接受 curl --compressed 的客户端）可被恶意对端接管。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-cb1bab62",
+    "coverage": []
+  },
+  {
+    "id": "b5619922e4bc775139e3",
+    "title": "Introducing Kimi K3.1 Pro",
+    "url": "https://simonwillison.net/2026/Oct/23/kimi-k31-pro",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-23T19:40:54.000Z",
+    "collectedAt": "2026-10-23T23:27:03.763Z",
+    "category": "llm",
+    "summary": "Introducing Kimi K3.1 Pro Kimi K3.1 Pro landed on the Kimi API today - it's not yet open weights, but Moonshot promise \"Full model weights will be released by Nov 4, 2026\". They…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-f1227865",
+    "coverage": []
+  },
+  {
     "id": "6eb1b1b914d63b40a648",
     "title": "月之暗面 Kimi K3.1 Pro 上线 OpenRouter，1M 上下文多模态开源权重模型",
     "url": "https://aihot.news/items/g725ujk3cq0gquz6g2nlozeu4",
@@ -12,6 +42,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-26c9df3c",
+    "coverage": []
+  },
+  {
+    "id": "9794b201a214a494f024",
+    "title": "Using AI Agents to Teach Robots Like Microduck to Walk in Simulation",
+    "url": "https://developer.nvidia.com/blog/using-ai-agents-to-teach-robots-like-microduck-to-walk-in-simulation",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-23T14:58:32.000Z",
+    "collectedAt": "2026-10-23T23:27:03.763Z",
+    "category": "embodied-ai",
+    "summary": "Teaching a robot to navigate an obstacle course requires more than a walking policy. It must perceive its surroundings, maintain balance, and adjust its actions... Teaching a ro…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d9843b59",
+    "coverage": []
+  },
+  {
+    "id": "f2f9d3ed7dc1e5d6d28c",
+    "title": "OpenAI 详解前沿模型训练环境的安全加固与红队测试",
+    "url": "https://aihot.news/items/ss1c1fu81134agwcw2ae90gai",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-23T10:00:00.000Z",
+    "collectedAt": "2026-10-23T23:27:03.763Z",
+    "category": "ai-apps",
+    "summary": "OpenAI 介绍其前沿模型训练与评估环境的安全加固措施，包括训练期间不接入互联网、构建离线缓存网页世界、以纵深防御多层隔离，并用最强模型（含即将推出的 GPT‑6 Astra Cyber）组成智能体团队进行高算力红队测试。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-46003e80",
     "coverage": []
   },
   {
