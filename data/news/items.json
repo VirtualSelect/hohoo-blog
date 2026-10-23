@@ -1,5 +1,35 @@
 [
   {
+    "id": "0553a20df09ce90fa384",
+    "title": "TRIAD: Benchmarking Omni-Modal Ambiguity in Multimodal Large Language Models",
+    "url": "https://arxiv.org/abs/2610.30841",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-23T04:00:00.000Z",
+    "collectedAt": "2026-10-23T07:54:32.751Z",
+    "category": "llm",
+    "summary": "Ambiguity is a central feature of natural communication: a sentence, image, or sound may remain underspecified until evidence from the other channels is considered. Yet current …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6c204ef7",
+    "coverage": []
+  },
+  {
+    "id": "0ebde52729b06a107f8f",
+    "title": "DiffDreamer: Coupling World Models with Differentiable Simulation for Agile Quadrotor Control",
+    "url": "https://arxiv.org/abs/2610.31617",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-23T04:00:00.000Z",
+    "collectedAt": "2026-10-23T07:54:32.751Z",
+    "category": "embodied-ai",
+    "summary": "Tasks such as quadrotor dynamic-gate racing require agents to anticipate external motion while maintaining precise high-frequency control. World-model-based reinforcement learni…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6dc40a31",
+    "coverage": []
+  },
+  {
     "id": "51888f116f5b083740bc",
     "title": "Turning Database Grading into RL Rewards: Post-Training Agents with ThinkingBox",
     "url": "https://huggingface.co/blog/microsoft/thinkingbox-training",
