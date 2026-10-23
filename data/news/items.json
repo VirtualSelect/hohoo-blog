@@ -1,5 +1,20 @@
 [
   {
+    "id": "6eb1b1b914d63b40a648",
+    "title": "月之暗面 Kimi K3.1 Pro 上线 OpenRouter，1M 上下文多模态开源权重模型",
+    "url": "https://aihot.news/items/g725ujk3cq0gquz6g2nlozeu4",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-23T18:31:22.000Z",
+    "collectedAt": "2026-10-23T18:40:58.887Z",
+    "category": "ai-apps",
+    "summary": "OpenRouter 宣布月之暗面的 Kimi K3.1 Pro 上线，定位为基于 Kimi K3 后训练、面向长程编码和智能体任务的 1M 上下文多模态开源权重模型。定价为 $2/M input tokens、$10/M output tokens，可在 OpenRouter 直接试用。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-26c9df3c",
+    "coverage": []
+  },
+  {
     "id": "0553a20df09ce90fa384",
     "title": "TRIAD: Benchmarking Omni-Modal Ambiguity in Multimodal Large Language Models",
     "url": "https://arxiv.org/abs/2610.30841",
