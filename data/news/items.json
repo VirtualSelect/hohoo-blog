@@ -1,5 +1,20 @@
 [
   {
+    "id": "0652e0d51483e0cff10d",
+    "title": "AtManRL: Towards Faithful Reasoning via Differentiable Attention Saliency",
+    "url": "https://arxiv.org/abs/2604.16158",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-24T04:00:00.000Z",
+    "collectedAt": "2026-10-24T04:58:48.232Z",
+    "category": "embodied-ai",
+    "summary": "Large language models (LLMs) increasingly rely on chain-of-thought (CoT) reasoning to solve complex tasks, yet a reasoning trace may merely accompany the final answer rather tha…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-8fa0325f",
+    "coverage": []
+  },
+  {
     "id": "e66a4522dc8eacb43d10",
     "title": "OpenAI 红队测试发现 Brotli 未认证远程代码执行漏洞并已披露",
     "url": "https://aihot.news/items/bflsi3krmtn64gccrmh8dlsdc",
@@ -42,6 +57,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-26c9df3c",
+    "coverage": []
+  },
+  {
+    "id": "4dcd06f240ef44ca5e9c",
+    "title": "Scaling NVIDIA TensorRT Performance Optimization Beyond a Single Build Route with the Global Performance Tuner, Part 1",
+    "url": "https://developer.nvidia.com/blog/scaling-nvidia-tensorrt-performance-optimization-beyond-a-single-build-route-with-the-global-performance-tuner-part-1",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-23T17:27:35.000Z",
+    "collectedAt": "2026-10-24T04:58:48.232Z",
+    "category": "llm",
+    "summary": "Deploying a trained neural network involves more than translating each operator into a GPU kernel. It is a compilation problem with many legitimate answers. For... Deploying a t…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-ce0bec31",
     "coverage": []
   },
   {
