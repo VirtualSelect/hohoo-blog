@@ -15,6 +15,21 @@
     "coverage": []
   },
   {
+    "id": "06e48ad58519de73d4ca",
+    "title": "Investigating Multi-Cultural Value Selection Biases in LLMs",
+    "url": "https://arxiv.org/abs/2610.31199",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-24T04:00:00.000Z",
+    "collectedAt": "2026-10-24T11:32:11.618Z",
+    "category": "llm",
+    "summary": "Large language models (LLMs) serve users whose cultural identities are multi-layered, yet cultural evaluations commonly reduce identity to one label. In this work, we study LLMs…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6cfb221e",
+    "coverage": []
+  },
+  {
     "id": "e66a4522dc8eacb43d10",
     "title": "OpenAI 红队测试发现 Brotli 未认证远程代码执行漏洞并已披露",
     "url": "https://aihot.news/items/bflsi3krmtn64gccrmh8dlsdc",
