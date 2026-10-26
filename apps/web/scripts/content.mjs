@@ -119,7 +119,23 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
       };
       if (kind === "docs") docs.push(meta);
       else if (kind === "blog")
-        blogPosts.push({ metadata: { ...meta, date: f.date, readingTime: 1 } });
+        blogPosts.push({
+          metadata: {
+            ...meta,
+            date: f.date,
+            readingTime: Math.max(
+              1,
+              Math.round(
+                (local.content
+                  .replace(/```[\s\S]*?```/g, " ")
+                  .replace(/[#*`>\-|]/g, " ")
+                  .replace(/\s+/g, " ")
+                  .trim().length /
+                  400)
+              ),
+            ),
+          },
+        });
       const headings = [];
       const counts = new Map();
       const renderer = new marked.Renderer();
