@@ -1,5 +1,20 @@
 [
   {
+    "id": "742d30efdc4090c11a97",
+    "title": "How Ultrafast cut incident investigation from hours to minutes at OpenAI",
+    "url": "https://openai.com/index/openai-cut-incident-investigation",
+    "sourceId": "openai",
+    "sourceName": "OpenAI",
+    "publishedAt": "2026-10-26T07:00:00.000Z",
+    "collectedAt": "2026-10-26T21:10:16.237Z",
+    "category": "ai-apps",
+    "summary": "See how OpenAI engineers use Codex Ultrafast to investigate incidents in minutes. Explore faster security analysis, code refactoring, and daily workflows.",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-82ca6d12",
+    "coverage": []
+  },
+  {
     "id": "9fd77d4e3cc2a617a548",
     "title": "卡兹克手把手演示用 Codex 和 Claude 逆向改造现实硬件设备",
     "url": "https://aihot.news/items/o1r046h1yurwlvv536eergn57",
