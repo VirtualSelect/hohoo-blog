@@ -1,5 +1,20 @@
 [
   {
+    "id": "a9c488820a62ac4adcd9",
+    "title": "Greptile takes bug detection beyond code review with GPT-6 Astra",
+    "url": "https://openai.com/index/greptile-code-review-codex-astra",
+    "sourceId": "openai",
+    "sourceName": "OpenAI",
+    "publishedAt": "2026-10-26T22:00:00.000Z",
+    "collectedAt": "2026-10-27T01:36:23.463Z",
+    "category": "ai-apps",
+    "summary": "How Greptile uses GPT-6 Astra to test user workflows, Daybreak to strengthen security, and Codex to reduce rework.",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c39608f0",
+    "coverage": []
+  },
+  {
     "id": "742d30efdc4090c11a97",
     "title": "How Ultrafast cut incident investigation from hours to minutes at OpenAI",
     "url": "https://openai.com/index/openai-cut-incident-investigation",
@@ -87,6 +102,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-df48b746",
+    "coverage": []
+  },
+  {
+    "id": "0b7de25d626af2fae563",
+    "title": "GaP: A Graph-as-Policy Multi-Agent Self-Learning Harness For Variational Automation Tasks",
+    "url": "https://arxiv.org/abs/2607.05369",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-26T04:00:00.000Z",
+    "collectedAt": "2026-10-27T01:36:23.463Z",
+    "category": "embodied-ai",
+    "summary": "For robots to work reliably in commercial and industrial applications, recent advances in agentic coding systems have potential to combine interpretable robot programming with t…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b4df72ab",
+    "coverage": []
+  },
+  {
+    "id": "1280de4aaf39ea27d7e4",
+    "title": "ToolRACER: A Robust Agentic Conversation Emulation Resource for Agent Training and Evaluation",
+    "url": "https://arxiv.org/abs/2610.09163",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-26T04:00:00.000Z",
+    "collectedAt": "2026-10-27T01:36:23.463Z",
+    "category": "ai-apps",
+    "summary": "Task-oriented conversational agents remain fragile under real world conversation scenarios as they rarely follow a predictable script, especially when users exhibit non-cooperat…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-bd429554",
     "coverage": []
   },
   {
