@@ -1,5 +1,35 @@
 [
   {
+    "id": "088d80c954f3b98b9715",
+    "title": "犹他州 10 个州政府部门 34 名开发者试点使用 Claude Code",
+    "url": "https://aihot.news/items/fbxzb7x7fzbjn0dmf367ywxrm",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-28T17:09:54.000Z",
+    "collectedAt": "2026-10-28T22:49:32.440Z",
+    "category": "ai-apps",
+    "summary": "Boris Cherny 介绍犹他州向 10 个州政府部门的 34 名开发者提供了 Claude Code。试点显示 80% 的开发者在 30 分钟内搭好可用环境，71% 的开发者在为期四周的试点结束前报告节省了 20 小时以上时间。该推文引用了 Anthropic 与 GSA 合作将 Claude 以 40% 折扣提供给联邦及各级政府的公告作为背景。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-5dc78b92",
+    "coverage": []
+  },
+  {
+    "id": "280fc51136c04b796c84",
+    "title": "Microsoft 通过 Foundry 开放 Copilot harness，支持多模型 Agent 开发",
+    "url": "https://aihot.news/items/tdp7qmrh74fdfarxbi4jaoc6v",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-28T16:51:35.000Z",
+    "collectedAt": "2026-10-28T22:49:32.440Z",
+    "category": "ai-apps",
+    "summary": "Microsoft 宣布将 GitHub 团队打造的 Copilot harness 通过 Microsoft Foundry 向开发者和企业开放，该 harness 已驱动 Copilot Code、Copilot Studio、GitHub Copilot app 和 CLI 等产品。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-eaac76a0",
+    "coverage": []
+  },
+  {
     "id": "40d40d4a66fef630d5f8",
     "title": "GitHub Universe 2026 发布 GitHub Copilot app、Copilot Fusion 等智能体产品",
     "url": "https://aihot.news/items/xonc43xgcx39303i40k8022rl",
