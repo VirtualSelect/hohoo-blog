@@ -1,5 +1,20 @@
 [
   {
+    "id": "b893fff35c9fbf7aca1c",
+    "title": "Axiom 智能体集群用 24 天完成有限单群分类定理的机器验证",
+    "url": "https://aihot.news/items/o5s4s2z9njz29hgd7im06gzrf",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-27T23:31:32.000Z",
+    "collectedAt": "2026-10-28T01:38:43.599Z",
+    "category": "ai-apps",
+    "summary": "作者称 Verified AI 迎来标志性月份，Axiom 的 AI 智能体集群用 24 天完成数学史上最长证明的验证，将跨越 500 多篇论文的 15,000 页有限单群分类定理（CFSG）转化为 3800 万行以上机器验证代码，并发现已发表记录中的 34 处严重出入。引用内容补充称该形式化证明可能是最大的开源项目之一，图中显示 Axiom CFSG…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-53aa051b",
+    "coverage": []
+  },
+  {
     "id": "68b12007f7f448554e3b",
     "title": "Game Boy Color on My Conference Badge",
     "url": "https://simonwillison.net/2026/Oct/27/game-boy-color-on-my-conference-badge",
@@ -45,6 +60,21 @@
     "coverage": []
   },
   {
+    "id": "1e3ebf94e41ebe19793b",
+    "title": "Retell uses OpenAI models to help power 100M monthly calls",
+    "url": "https://openai.com/index/retell-ai",
+    "sourceId": "openai",
+    "sourceName": "OpenAI",
+    "publishedAt": "2026-10-27T15:00:00.000Z",
+    "collectedAt": "2026-10-28T01:38:43.599Z",
+    "category": "ai-apps",
+    "summary": "GPT-6 Astra tops Retell’s voice agent benchmark, while Codex helps it reach a $1.6M annual revenue run rate per employee.",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-7b7ce4b7",
+    "coverage": []
+  },
+  {
     "id": "d7fd07ad12ad39e2fc61",
     "title": "Ai2 发布 Old Ideas, Novel Problems 研究与 benchmark，揭示 LLM 新颖性裁判不稳定",
     "url": "https://aihot.news/items/p92a4pkxkheznj9nmt50o08l6",
@@ -87,6 +117,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-7eab4aa7",
+    "coverage": []
+  },
+  {
+    "id": "03cf979048061c310930",
+    "title": "T-ConSG: A LiDAR-Based Real-Time Temporal Construction Scene Graph for Dynamic and Evolving Environments",
+    "url": "https://arxiv.org/abs/2610.34041",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-27T04:00:00.000Z",
+    "collectedAt": "2026-10-28T01:38:43.599Z",
+    "category": "embodied-ai",
+    "summary": "Dynamic and continuously evolving environments present significant challenges for robotic mapping and scene understanding, particularly on construction sites where moving agents…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-744a9d5e",
+    "coverage": []
+  },
+  {
+    "id": "074545dfb6930b891e63",
+    "title": "Diagnosing and Mitigating Long-Session Degradation in Full-Duplex Speech Models",
+    "url": "https://arxiv.org/abs/2610.34991",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-27T04:00:00.000Z",
+    "collectedAt": "2026-10-28T01:38:43.599Z",
+    "category": "llm",
+    "summary": "End-to-end full-duplex spoken dialogue models enable natural, real-time spoken interactions with interruptions, backchannels, and overlapping speech. Prior evaluations have asse…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-67c5443e",
     "coverage": []
   },
   {
