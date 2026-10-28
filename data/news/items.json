@@ -1,5 +1,20 @@
 [
   {
+    "id": "40d40d4a66fef630d5f8",
+    "title": "GitHub Universe 2026 发布 GitHub Copilot app、Copilot Fusion 等智能体产品",
+    "url": "https://aihot.news/items/xonc43xgcx39303i40k8022rl",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-28T16:09:28.000Z",
+    "collectedAt": "2026-10-28T16:48:23.205Z",
+    "category": "ai-apps",
+    "summary": "GitHub 在 GitHub Universe 2026 上提出把 GitHub 打造为完整软件交付系统的愿景，并发布多项产品：GitHub Copilot app 面向智能体交付。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b4dc1515",
+    "coverage": []
+  },
+  {
     "id": "b669157b1e769dffcb49",
     "title": "Addy Osmani 讲解如何上手 Claude Code Mods",
     "url": "https://aihot.news/items/tw5fe5mj6a2zyp6ica2ec3qpb",
@@ -27,6 +42,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-3bcc7cfd",
+    "coverage": []
+  },
+  {
+    "id": "f4ba9d732d063fef85d3",
+    "title": "Claude Code 触发用量上限后如何用 OpenRouter 继续编码",
+    "url": "https://aihot.news/items/wgss1ksoafvu62x799sdfs0fo",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-28T00:00:00.000Z",
+    "collectedAt": "2026-10-28T16:48:23.205Z",
+    "category": "ai-apps",
+    "summary": "OpenRouter 介绍 Claude Code 触发用量上限时改用 OpenRouter API key 继续编码的方法：设置三个环境变量或用 Ori Harness 的 ori claude 命令，即可按 token 付费使用同样的 Claude 模型，没有五小时和每周限制。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6ef8b829",
     "coverage": []
   },
   {
