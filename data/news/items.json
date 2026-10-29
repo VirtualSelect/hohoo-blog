@@ -1,5 +1,20 @@
 [
   {
+    "id": "8825148d53503e8df066",
+    "title": "OpenRouter 教程：用 LLM 从 PDF 中抽取表格",
+    "url": "https://aihot.news/items/l928e49lwysm0ymgmhyjrkc3z",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-29T00:00:00.000Z",
+    "collectedAt": "2026-10-29T06:24:00.528Z",
+    "category": "llm",
+    "summary": "OpenRouter 发布教程，讲解如何把 PDF 以文件形式连同严格 JSON schema 发给能读文件的模型，让表格以带类型的行返回，括号亏损、千分位和脚注标记等清理都写进字段描述。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-8baaa7aa",
+    "coverage": []
+  },
+  {
     "id": "088d80c954f3b98b9715",
     "title": "犹他州 10 个州政府部门 34 名开发者试点使用 Claude Code",
     "url": "https://aihot.news/items/fbxzb7x7fzbjn0dmf367ywxrm",
@@ -30,6 +45,21 @@
     "coverage": []
   },
   {
+    "id": "5e9e44475572a25994c0",
+    "title": "GitHub Octoverse 2026",
+    "url": "https://simonwillison.net/2026/Oct/28/github-octoverse-2026",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-28T16:45:23.000Z",
+    "collectedAt": "2026-10-29T06:24:00.528Z",
+    "category": "ai-apps",
+    "summary": "GitHub Octoverse 2026 I'm at GitHub Universe today (GitHub gave me a free ticket through their \"GitHub Stars\" program). EVP Jay Parikh just announced this year's Octoverse repor…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-27dc9ec4",
+    "coverage": []
+  },
+  {
     "id": "40d40d4a66fef630d5f8",
     "title": "GitHub Universe 2026 发布 GitHub Copilot app、Copilot Fusion 等智能体产品",
     "url": "https://aihot.news/items/xonc43xgcx39303i40k8022rl",
@@ -42,6 +72,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-b4dc1515",
+    "coverage": []
+  },
+  {
+    "id": "aad5f298a95cf5bc9613",
+    "title": "GitHub Octoverse 2026：开发活动创新高，超 40% 的 PR 由智能体起草",
+    "url": "https://aihot.news/items/s3m3uzabqoxxed9ae50b73qvc",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-28T16:07:40.000Z",
+    "collectedAt": "2026-10-29T06:24:00.528Z",
+    "category": "ai-apps",
+    "summary": "GitHub 发布 2026 年度 Octoverse 报告：过去 12 个月开发者推送代码 179 亿次，超过 2024 和 2025 年之和，合并 PR 达 13 亿次。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-bf207f3e",
+    "coverage": []
+  },
+  {
+    "id": "70f2bbbd704a353daaa0",
+    "title": "The October inflection point for vibe game development",
+    "url": "https://simonwillison.net/2026/Oct/28/vibe-game-development",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-28T13:55:15.000Z",
+    "collectedAt": "2026-10-29T06:24:00.528Z",
+    "category": "embodied-ai",
+    "summary": "I've written before about how November 2025 was an inflection point for coding agents - the point where Opus 4.5 and GPT-5.1 crossed a tipping point that meant their respective …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b8c52e94",
     "coverage": []
   },
   {
