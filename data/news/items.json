@@ -1,5 +1,20 @@
 [
   {
+    "id": "2d2e9705cafefad7b5fd",
+    "title": "腾讯混元发布 Hy-Nomas 技术报告并开源 Hy-Nomas-Bench",
+    "url": "https://aihot.news/items/nb40aoihhydhoo0acp0rcyaol",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-29T17:00:03.000Z",
+    "collectedAt": "2026-10-29T19:49:35.843Z",
+    "category": "embodied-ai",
+    "summary": "腾讯混元发布 Hy-Nomas 开源交互式视频世界模型的技术报告（arXiv:2610.36729），并开源 Hy-Nomas-Bench 数据集用于可复现研究。官方还用 Hy-Nomas 重现 Genie 4 示例并放出对比视频，演示无需排队即可试用，地址为 https://hy-nomas.hy.tencent.com/。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-ae0be007",
+    "coverage": []
+  },
+  {
     "id": "8825148d53503e8df066",
     "title": "OpenRouter 教程：用 LLM 从 PDF 中抽取表格",
     "url": "https://aihot.news/items/l928e49lwysm0ymgmhyjrkc3z",
@@ -12,6 +27,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-8baaa7aa",
+    "coverage": []
+  },
+  {
+    "id": "27846bbfac3ce01ee1e2",
+    "title": "vLLM 发布 Mistral Large 4 Day 0 支持",
+    "url": "https://aihot.news/items/x6x8nkxn5mqc55umit3clj1tf",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-29T00:00:00.000Z",
+    "collectedAt": "2026-10-29T19:49:35.843Z",
+    "category": "ai-apps",
+    "summary": "vLLM 团队宣布对 Mistral 新旗舰模型 Mistral Large 4 提供 Day 0 支持，该模型为 1T 参数、每 token 激活 49B 的原生多模态 MoE 模型，采用 MLA 稀疏注意力加 DSA top-k 索引器、跨层 KV 共享、NoPE、SSMax 和 LeRoPE 等新架构，并内置 DSpark 推测解码草稿器与 Pi…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-96e307e",
     "coverage": []
   },
   {
