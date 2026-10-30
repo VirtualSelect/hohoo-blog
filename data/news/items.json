@@ -1,5 +1,35 @@
 [
   {
+    "id": "14a3b8b5c9a4350fbd1b",
+    "title": "Figma 讲解如何训练专用画布编辑模型",
+    "url": "https://aihot.news/items/z9kqlhsgiz11fvlk3aodm6seg",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-29T21:00:00.000Z",
+    "collectedAt": "2026-10-30T00:16:25.071Z",
+    "category": "ai-apps",
+    "summary": "Figma 介绍其为 agent 自研 Figma 编辑模型的训练方法，先用超过 25 万条合成样本做 SFT，让早期 Llama 3.3 70B 在编辑任务上接近当时顶级模型，后转向 RL 并结合确定性校验器与视觉评委做评测。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e92a9ff5",
+    "coverage": []
+  },
+  {
+    "id": "e65fcafff408f8083fa1",
+    "title": "Building a multiplayer game world with autonomous Fable-class models",
+    "url": "https://simonwillison.net/2026/Oct/29/how-i-built-the-most-ai-pilled-company-in-the-world",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-29T17:00:26.000Z",
+    "collectedAt": "2026-10-30T00:16:25.071Z",
+    "category": "ai-apps",
+    "summary": "How I Built the Most AI-Pilled Company in the World Don't be put off by the clickbait headline, this piece by Jacob Sansbury describing how they are building Spawn is a fascinat…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-5d376996",
+    "coverage": []
+  },
+  {
     "id": "2d2e9705cafefad7b5fd",
     "title": "腾讯混元发布 Hy-Nomas 技术报告并开源 Hy-Nomas-Bench",
     "url": "https://aihot.news/items/nb40aoihhydhoo0acp0rcyaol",
@@ -42,6 +72,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-96e307e",
+    "coverage": []
+  },
+  {
+    "id": "cceba212171c1558a424",
+    "title": "Factory 发布 Droid 1.0，以程序化工具调用构建企业级 Agent harness",
+    "url": "https://aihot.news/items/gjz7lj8j6ojjyj80vkkhy786v",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-29T00:00:00.000Z",
+    "collectedAt": "2026-10-30T00:16:25.071Z",
+    "category": "ai-apps",
+    "summary": "Factory 发布 Droid 1.0，一个模型无关的 agent harness，主打程序化工具调用（PTC），模型通过编写 JavaScript 程序在沙箱中一次执行数百个工具调用。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-da1795bc",
     "coverage": []
   },
   {
