@@ -1,5 +1,35 @@
 [
   {
+    "id": "b0afceb347e7b188bf46",
+    "title": "Build Specialized Agents on a Stack You Control with NVIDIA NemoClaw",
+    "url": "https://developer.nvidia.com/blog/build-specialized-agents-on-a-stack-you-control-with-nvidia-nemoclaw",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-30T16:00:00.000Z",
+    "collectedAt": "2026-10-30T19:39:03.173Z",
+    "category": "ai-apps",
+    "summary": "Building an autonomous agent requires a model, a harness, and domain-specific tools. To deploy an agent more securely, developers need a runtime that enforces... Building an aut…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-2d3960a9",
+    "coverage": []
+  },
+  {
+    "id": "84abd1857de5dfd951d9",
+    "title": "Making it easier for websites to express AI training preferences",
+    "url": "https://openai.com/index/helping-websites-express-ai-training-preferences",
+    "sourceId": "openai",
+    "sourceName": "OpenAI",
+    "publishedAt": "2026-10-30T09:30:00.000Z",
+    "collectedAt": "2026-10-30T19:39:03.173Z",
+    "category": "embodied-ai",
+    "summary": "OpenAI will honor a shared robots.txt signal to help website operators communicate their AI training preferences to participating providers.",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-72f7ae37",
+    "coverage": []
+  },
+  {
     "id": "f4829fe692295bb3142e",
     "title": "Cursor 披露 Claude Code VS Code 扩展被植入恶意软件事件，最多影响 5000 用户",
     "url": "https://aihot.news/items/iu7xvjx1c2c5wqrpn0rwfxcb5",
