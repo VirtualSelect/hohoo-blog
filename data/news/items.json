@@ -1,5 +1,35 @@
 [
   {
+    "id": "398fbcbea1ced32c1530",
+    "title": "OpenRouter 教程：用 Agent SDK 搭建常驻 AI Agent 监控 Hacker News",
+    "url": "https://aihot.news/items/upl3hjjdokqe13w3ieo9opr0v",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-31T00:00:00.000Z",
+    "collectedAt": "2026-10-31T06:13:46.332Z",
+    "category": "ai-apps",
+    "summary": "OpenRouter 发布教程，演示用 @openrouter/agent 0.11.0 在 TypeScript 中搭建定时运行的常驻 AI Agent，监控 Hacker News 并生成摘要。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-1e0dec2c",
+    "coverage": []
+  },
+  {
+    "id": "64829c2e3c567eb8ca2a",
+    "title": "Wiz 报告“黑色十月”：九个 AI 开发者平台接连披露安全事件",
+    "url": "https://aihot.news/items/la0qb77ds4znf2r7ub14a3bqz",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-30T22:51:44.000Z",
+    "collectedAt": "2026-10-31T06:13:46.332Z",
+    "category": "ai-apps",
+    "summary": "Wiz 研究团队梳理 10 月内至少九个 AI 开发者平台披露的安全事件，包括 Fireworks AI、Lightning AI、Railway、Warp、OpenCode 等，多起报告指向凭据窃取、agent swarm 攻击和以“蒸馏”为目的的窃取。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-eef710c6",
+    "coverage": []
+  },
+  {
     "id": "cfb4189f31938d74a87f",
     "title": "Run AI Models for Edge Application Development with Just a Few Commands",
     "url": "https://developer.nvidia.com/blog/run-ai-models-for-edge-application-development-with-just-a-few-commands",
