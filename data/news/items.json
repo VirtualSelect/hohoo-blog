@@ -1,5 +1,35 @@
 [
   {
+    "id": "cfb4189f31938d74a87f",
+    "title": "Run AI Models for Edge Application Development with Just a Few Commands",
+    "url": "https://developer.nvidia.com/blog/run-ai-models-for-edge-application-development-with-just-a-few-commands",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-10-30T20:33:18.000Z",
+    "collectedAt": "2026-10-31T00:00:35.801Z",
+    "category": "embodied-ai",
+    "summary": "AI is expanding beyond the data center as developers build a new generation of agents to act at the edge: monitoring driver attention and cabin conditions,... AI is expanding be…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-3da2daa7",
+    "coverage": []
+  },
+  {
+    "id": "5818be28c4f036b0f020",
+    "title": "Project Suncatcher 在轨道卫星上运行 TPU，Gemma 模型首次在太空完成推理并回传回应",
+    "url": "https://aihot.news/items/cms82puwtmpssdpbjmajoopr9",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-10-30T18:28:00.000Z",
+    "collectedAt": "2026-10-31T00:00:35.801Z",
+    "category": "llm",
+    "summary": "Philipp Schmid 转引 Sundar Pichai 的消息：Google Project Suncatcher 在数周前发射原型卫星后，成功向轨道发送指令、启动 TPU、运行提示词，并在地面收到了首个完整回应（一首 haiku），作者称 Gemma 4 成为首个在太空运行的大语言模型。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-c9258bf0",
+    "coverage": []
+  },
+  {
     "id": "b0afceb347e7b188bf46",
     "title": "Build Specialized Agents on a Stack You Control with NVIDIA NemoClaw",
     "url": "https://developer.nvidia.com/blog/build-specialized-agents-on-a-stack-you-control-with-nvidia-nemoclaw",
@@ -102,6 +132,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-e9aa9fab",
+    "coverage": []
+  },
+  {
+    "id": "055344d7275986f5bef3",
+    "title": "SymAnt: Grounding Long-Horizon Action Anticipation with Adaptable Symbolic Priors",
+    "url": "https://arxiv.org/abs/2610.40632",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-10-30T04:00:00.000Z",
+    "collectedAt": "2026-10-31T00:00:35.801Z",
+    "category": "embodied-ai",
+    "summary": "As robots and intelligent systems increasingly interact with humans, they must anticipate long sequences of future actions from only brief observations. While purely neural mode…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-94925907",
+    "coverage": []
+  },
+  {
+    "id": "0970bbd36efcf4c1ac90",
+    "title": "EpiAgent: Epistemic Self-Play for LLM Agents",
+    "url": "https://arxiv.org/abs/2610.40227",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-10-30T04:00:00.000Z",
+    "collectedAt": "2026-10-31T00:00:35.801Z",
+    "category": "ai-apps",
+    "summary": "Epistemic game theory explains an agent's strategic behavior via the beliefs it holds about others and how these beliefs are updated as the interactions unfold. Modern LLM-based…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e7327485",
     "coverage": []
   },
   {
