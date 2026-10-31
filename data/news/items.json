@@ -30,6 +30,21 @@
     "coverage": []
   },
   {
+    "id": "54f20f9f7f25bd156a2f",
+    "title": "dbreunig/nesformer",
+    "url": "https://simonwillison.net/2026/Oct/30/nesformer",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-30T21:59:22.000Z",
+    "collectedAt": "2026-10-31T13:00:28.214Z",
+    "category": "llm",
+    "summary": "dbreunig/nesformer Inspired by qwenputer by Divyansh Agrawal, Drew Breunig baked a working emulator for a Nintendo Entertainment System 6502 CPU into the weights of Qwen3.5-4B. …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-88dba66c",
+    "coverage": []
+  },
+  {
     "id": "cfb4189f31938d74a87f",
     "title": "Run AI Models for Edge Application Development with Just a Few Commands",
     "url": "https://developer.nvidia.com/blog/run-ai-models-for-edge-application-development-with-just-a-few-commands",
