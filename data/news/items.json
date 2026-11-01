@@ -1,5 +1,35 @@
 [
   {
+    "id": "90fa131b3c6b313b1f0e",
+    "title": "OpenAI 12月起将ChatGPT与Codex合并为统一Token额度",
+    "url": "https://aihot.news/items/f6dxzur6d4pwjdhvm1x6m5rfp",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-01T00:22:41.000Z",
+    "collectedAt": "2026-11-01T06:46:50.330Z",
+    "category": "ai-apps",
+    "summary": "作者引述OpenAI凌晨更新的帮助文档称，从12月开始Plus和Pro用户的ChatGPT聊天与Codex用量将合并为同一Token额度，仅Instant聊天不受影响。作者回顾此前按条数计费的历史、一个月内Codex Pro额度先降后恢复的运营反复，以及社区在GitHub上提issue抗议的反应，认为合并与IPO预期下的算力成本压力有关。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-767f3e19",
+    "coverage": []
+  },
+  {
+    "id": "9fc5ee213b01bfece998",
+    "title": "datasette-llm 0.1a9",
+    "url": "https://simonwillison.net/2026/Oct/31/datasette-llm",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-10-31T22:10:01.000Z",
+    "collectedAt": "2026-11-01T06:46:50.330Z",
+    "category": "ai-apps",
+    "summary": "Release: datasette-llm 0.1a9 I have some big upgrades to Datasette Agent in the pipeline, but in the meantime here's a tiny user experience improvement to the underlying dataset…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-3e364d60",
+    "coverage": []
+  },
+  {
     "id": "398fbcbea1ced32c1530",
     "title": "OpenRouter 教程：用 Agent SDK 搭建常驻 AI Agent 监控 Hacker News",
     "url": "https://aihot.news/items/upl3hjjdokqe13w3ieo9opr0v",
