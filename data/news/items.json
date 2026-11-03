@@ -1,5 +1,35 @@
 [
   {
+    "id": "000262c961472d8b803c",
+    "title": "Saidzoda-Tajik-E5-Large: Fine-Tuning a 560M Embedder for Tajik Retrieval",
+    "url": "https://arxiv.org/abs/2611.00592",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-11-03T05:00:00.000Z",
+    "collectedAt": "2026-11-03T12:17:50.936Z",
+    "category": "llm",
+    "summary": "Finding the passage that answers a question is the first step of most practical systems built on documents, and for Tajik we found no openly described model for it. We present S…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-8a3986d1",
+    "coverage": []
+  },
+  {
+    "id": "0136f7bd46d07d0d624c",
+    "title": "Myoelectric Control for Upper-Limb Exoskeletons: A Decoder-Shaper-Controller Framework, Design Guidelines, and Future Directions",
+    "url": "https://arxiv.org/abs/2611.03418",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-11-03T05:00:00.000Z",
+    "collectedAt": "2026-11-03T12:17:50.936Z",
+    "category": "embodied-ai",
+    "summary": "Myoelectric Control Systems (MCSs) enable voluntary control of wearable robots through muscle activity. However, intention decoding, assistance shaping, and low-level actuator c…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6ba88042",
+    "coverage": []
+  },
+  {
     "id": "0e44a84ee3cb1951eced",
     "title": "DeepSeek Harness 养鱼教程：在 QQ、微信、飞书养大肥鱼并放上 B 站抖音直播",
     "url": "https://aihot.news/items/v41vn9hb5ywv10e68wycj1bjk",
@@ -27,6 +57,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-acae0731",
+    "coverage": []
+  },
+  {
+    "id": "ac0cd4d2e5c6eaccc565",
+    "title": "Revolut 将约 2000 名工程师迁移到自托管 GLM 编码",
+    "url": "https://aihot.news/items/op93lgz2xx0ck3znfm724ebfu",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-02T22:11:24.000Z",
+    "collectedAt": "2026-11-03T12:17:50.936Z",
+    "category": "ai-apps",
+    "summary": "据 Revolut AI 运营负责人 David Abitbol，公司把约 2000 名工程师迁到自托管 GLM 做编码，将 Claude Code 和 Codex 列为例外。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-61dce324",
     "coverage": []
   },
   {
