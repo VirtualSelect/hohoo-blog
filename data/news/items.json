@@ -1,5 +1,35 @@
 [
   {
+    "id": "0e44a84ee3cb1951eced",
+    "title": "DeepSeek Harness 养鱼教程：在 QQ、微信、飞书养大肥鱼并放上 B 站抖音直播",
+    "url": "https://aihot.news/items/v41vn9hb5ywv10e68wycj1bjk",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-03T00:18:00.000Z",
+    "collectedAt": "2026-11-03T02:37:32.838Z",
+    "category": "ai-apps",
+    "summary": "数字生命卡兹克发布一篇 DeepSeek Harness 养鱼教程，讲解如何在 QQ、微信、飞书接入大肥鱼，并让它去 B 站刷视频、在抖音发视频和直播。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-540ca7cc",
+    "coverage": []
+  },
+  {
+    "id": "9d52bf97ae05725130de",
+    "title": "llm 0.37",
+    "url": "https://simonwillison.net/2026/Nov/2/llm",
+    "sourceId": "simon-willison",
+    "sourceName": "Simon Willison",
+    "publishedAt": "2026-11-02T23:49:30.000Z",
+    "collectedAt": "2026-11-03T02:37:32.838Z",
+    "category": "llm",
+    "summary": "Release: llm 0.37 There's a lot of stuff in this new release of my LLM CLI tool and Python library, representing around two months of accumulated features and fixes. I added gpt…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-acae0731",
+    "coverage": []
+  },
+  {
     "id": "9d39f9029866f732a6ea",
     "title": "OpenAI 训练并部署激活分类器作为前沿模型安全监控层",
     "url": "https://aihot.news/items/wlmiqh13694tqabyvu6nzvlrs",
@@ -117,6 +147,36 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-ed60b002",
+    "coverage": []
+  },
+  {
+    "id": "079e5e73e85dd077a7e9",
+    "title": "TacO: Benchmarking Tactile Sensors for Object Manipulation",
+    "url": "https://arxiv.org/abs/2605.21976",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-11-02T05:00:00.000Z",
+    "collectedAt": "2026-11-03T02:37:32.838Z",
+    "category": "embodied-ai",
+    "summary": "Vision-based learning from demonstrations has achieved remarkable success in enabling robots to perform manipulation tasks and high-level semantic reasoning, yet it remains insu…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-721ed9ee",
+    "coverage": []
+  },
+  {
+    "id": "082b6712fe3fd7e37bc0",
+    "title": "Saidzoda-Tajik-LFM-2.6B: Adapting a 2.6B Hybrid Model to Tajik Tool Calling, and What Continued Pretraining Takes Away",
+    "url": "https://arxiv.org/abs/2610.41576",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-11-02T05:00:00.000Z",
+    "collectedAt": "2026-11-03T02:37:32.838Z",
+    "category": "ai-apps",
+    "summary": "We release Saidzoda-Tajik-LFM-2.6B, a Tajik adaptation of the 2.6B-parameter hybrid model LFM2.5-2.6B-Base, built for tool calling in Tajik on modest hardware. The recipe has tw…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-bfb5096e",
     "coverage": []
   },
   {
