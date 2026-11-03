@@ -19,12 +19,12 @@ Running a 27B-scale model locally on a 48GB unified-memory Mac mini is the cheap
 
 | Decision | Conclusion | Why |
 |---|---|---|
-| Model size | 27B Q4 | 16GB weights leaves 32GB for KV and activations |
+| Model size | 27B Q4 | ~16GB weights; remaining memory must also cover the OS, KV, activations, and runtime overhead |
 | Quantization | 4-bit with outlier channels (oQ4-style) | Pure 4-bit degrades on long context; outlier channels are the compromise |
-| KV cache | 4-bit | Halves per-token cost — essential for long context |
-| Context | Cap at 32K | KV expansion + activation peaks make 64K infeasible |
+| KV cache | 4-bit | Ideal KV payload is 1/4 of FP16; quantization and allocation overhead remain |
+| Context | Cap at 32K | Current protective configuration; 64K stability needs measurement |
 | MTP | Enabled | Multi-token prediction head; ~2GB for 30%+ throughput gain |
-| Role | Fallback / auxiliary model | The 64K hard floor means it can't be the primary model |
+| Role | Fallback / auxiliary model | The current 32K configuration falls below this toolchain's 64K primary-model requirement |
 
 ---
 
@@ -63,19 +63,32 @@ During autoregressive generation, the Key/Value attention for every token must b
 KV/token = 2 × layers × KV_heads × head_dim × bytes_per_element
 ```
 
-Using a typical GQA architecture as example (48 layers, 8 KV heads, head_dim 128 — substitute your model's actual config.json values):
+Use a GQA example with 48 layers, 8 KV heads, and head_dim 128. These are illustrative parameters, not a verified configuration of the actual 27B model; substitute the values from your model's `config.json`.
+
+The factor 2 accounts for K and V; FP16 uses 2 bytes per element, and ideally packed 4-bit uses 0.5 bytes. The following assumes one sequence, all layers caching every token, and the same bit-width for K and V:
+
+```
+FP16: 2 × 48 × 8 × 128 × 2   = 196,608 bytes/token = 192 KiB/token
+4-bit: 2 × 48 × 8 × 128 × 0.5 = 49,152 bytes/token  = 48 KiB/token
+32K 4-bit: 49,152 × 32,768 = 1,610,612,736 bytes = 1.5 GiB
+```
+
+Here 8K / 32K / 64K mean 8,192 / 32,768 / 65,536 tokens, including cached input and generated tokens. 1 KiB = 1,024 bytes and 1 GiB = 1,073,741,824 bytes; GB means decimal 1,000,000,000 bytes and is not interchangeable with GiB. Hardware capacity and weight estimates in GB elsewhere in this article are not directly available KV budgets.
 
 | Cache bit-width | Per token | 8K context | 32K context | 64K context |
 |---|---|---|---|---|
-| FP16 | ~192KB | 1.5GB | 6.3GB | **12.6GB** |
-| **4-bit** | **~96KB** | **0.75GB** | **3.2GB** | **6.3GB** |
+| FP16 | 192 KiB | 1.5 GiB | 6 GiB | **12 GiB** |
+| **4-bit (ideally packed)** | **48 KiB** | **0.375 GiB** | **1.5 GiB** | **3 GiB** |
 
-**GQA (Grouped-Query Attention) is the key.** 8 KV heads serving 48 query heads means KV overhead is 1/6 of full attention. Without GQA, 32K-context KV cache would double to 12.6GB, and this machine would essentially lose long-context capability.
+**These are ideal KV payload sizes, not measured runtime memory.** Compared with FP16, 4-bit reduces the payload to one quarter (a 75% reduction), not one half. Actual quantized caches may also include per-group scales, zero-points, alignment, and allocation overhead; peak total memory also includes weights, activations, temporary buffers, and runtime overhead. Concurrent sequences and retained prefix caches can further increase usage, so this table is not a service memory ceiling.
 
-**Why 64K is infeasible:**
-- KV 64K × 4-bit ≈ 6.3GB (theoretically acceptable)
-- But peak activations, temporary buffers during generation, and Metal heap fragmentation push the actual peak far beyond linear estimates
-- Under `wired_limit` constraints, long-context inference triggering Metal OOM is inevitable, not accidental
+**GQA (Grouped-Query Attention) is the key.** With identical layer count, head_dim, cache bit-width, and token count, 8 KV heads serving 48 query heads use 1/6 of the KV capacity of MHA with a separate K/V pair per query head. Increasing KV heads from 8 to 48 multiplies capacity by six: at 32K, FP16 rises from 6 GiB to 36 GiB, and ideal 4-bit rises from 1.5 GiB to 9 GiB. It does not merely double.
+
+**64K feasibility requires runtime validation:**
+- This example's ideal 4-bit KV payload at 64K is 3 GiB, twice the 32K payload
+- Quantization metadata, peak activations, temporary buffers, allocation fragmentation, and actual Metal/wired limits must also be considered
+- The KV formula alone proves neither inevitable OOM nor that 64K already works; validation needs the actual model configuration, runtime version, cache format, concurrency, and peak memory and error logs for both prefill and decode
+- Keep the article's current protective 32K configuration; it is not a hardware limit proven by this formula, and 64K stability remains unverified
 
 **KV 4-bit precision cost**: With reduced mantissa bits, subtle long-range attention ranking can go wrong. For local tool scenarios (code completion, summarization, Q&A), the impact is negligible; for tasks requiring precise long-document retrieval, empirical validation is needed. This is why the approach is “use first, then verify.”
 
@@ -101,13 +114,13 @@ Troubleshooting order:
 
 ## 4. Context Length: How 32768 Came About
 
-The model itself supports context far beyond 32K, but the **actual delivery** is capped at 32768 by three constraints:
+The model itself supports context far beyond 32K, but this article uses a protective **service configuration** cap of 32768, distinguishing three constraints:
 
-1. **Memory budget**: See Section 2 — KV linear expansion + activation peaks
+1. **Memory budget**: See Section 2 — ideal 4-bit KV at 32K is 1.5 GiB; actual peaks need measurement, and this does not establish a hard 32K limit
 2. **Server-side config**: The context ceiling in `model_settings.json` is a protective cap
-3. **Toolchain threshold**: Agent framework primary models require 64K+; 32K directly fails, forcing fallback to auxiliary/backup role
+3. **Toolchain threshold**: The Agent framework used here requires primary models to support 64K+; 32K directly fails, forcing fallback to auxiliary/backup role
 
-**The correct configuration approach: set context per provider, not one global value.** A global `context_length` value locks all models — cloud models with large windows get squeezed and waste budget, local models with small windows get inflated and OOM. The right way is independent per-provider configuration (e.g., 262144 for cloud API, 32768 for local), with the framework routing tasks by model capability.
+**The correct configuration approach: set context per provider, not one global value.** A global `context_length` value locks all models — cloud models with large windows get squeezed and waste budget, local models with small windows may exceed their actual memory budget when inflated. The right way is independent per-provider configuration (e.g., 262144 for cloud API, 32768 for local), with the framework routing tasks by model capability.
 
 **Relationship to prompt caching**: KV cache is also the carrier for prompt caching. When prefixes are stable, repeated prompts can hit the KV cache directly, skipping redundant prefill computation. This requires stable prefix structure on the request side — which is why “context engineering” (budgeting, offloading, compression) and KV quantization are two sides of the same coin, not two separate topics.
 
@@ -129,22 +142,22 @@ The model itself supports context far beyond 32K, but the **actual delivery** is
 
 | Item | Recommended value | Notes |
 |---|---|---|
-| Model | 27B Q4 (4-bit + outlier channels + MTP) | 16GB weights, 32GB left for KV and activations |
+| Model | 27B Q4 (4-bit + outlier channels + MTP) | ~16GB weights; remaining memory must also cover the OS, KV, activations, and runtime overhead |
 | Quantization | 4-bit + outlier channels | Precision-memory compromise |
-| KV cache | 4-bit | 32K context drops from 6.3GB to 3.2GB |
-| Context cap | 32K | Practical ceiling — don't chase 64K |
+| KV cache | 4-bit | This example's ideal 32K KV drops from 6 GiB (FP16) to 1.5 GiB |
+| Context cap | 32K | Current protective configuration; 64K needs peak-memory and stability validation |
 | MTP | Enabled | 30%+ throughput gain, ~2GB cost |
 | Config activation | Must restart after changes | `model_settings.json` hot-change doesn't work |
-| Role | Auxiliary / fallback model | Primary model role goes to 64K+ cloud solutions |
+| Role | Auxiliary / fallback model | This toolchain requires 64K+ for the primary model; the 32K configuration does not qualify |
 
 ## 7. Summary
 
 Running a local 27B model on a 48GB Mac mini is essentially budget allocation across three subsystems:
 
 1. **Quantization budget**: Compress weights to 16GB, preserve precision with outlier channels
-2. **KV budget**: 4-bit + GQA brings 32K context to 3.2GB; 64K doubles to 6.3GB and triggers OOM
-3. **Memory budget**: Unified memory is not an infinite pool — GPU heap is constrained by wired limits, OOM is unrelated to total memory headroom
+2. **KV budget**: This example's ideal 4-bit GQA KV is 1.5 GiB at 32K and 3 GiB at 64K; actual usage and OOM risk need runtime validation
+3. **Memory budget**: Unified memory is not an infinite pool — GPU heap is constrained by wired limits, total memory headroom alone cannot determine OOM risk
 
-Configure these parameters properly, restart for effect, set context per provider, and local inference can reliably serve coding assistance and sensitive data processing. The rest — larger context, higher throughput — belongs to larger memory, or the cloud.
+After configuring these parameters, restarting, and setting context per provider, validate stability with actual tasks. Before raising the cap to 64K, measure peak memory and task quality, then decide whether more memory or a cloud solution is needed.
 
 **The point of a local model isn't to replace the cloud, but to fill the gap the cloud can't: privacy, offline, control.**
