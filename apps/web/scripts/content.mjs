@@ -126,12 +126,11 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
             readingTime: Math.max(
               1,
               Math.round(
-                (local.content
+                local.content
                   .replace(/```[\s\S]*?```/g, " ")
                   .replace(/[#*`>\-|]/g, " ")
                   .replace(/\s+/g, " ")
-                  .trim().length /
-                  400)
+                  .trim().length / 400,
               ),
             ),
           },
