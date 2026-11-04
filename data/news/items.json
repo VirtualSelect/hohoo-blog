@@ -75,6 +75,36 @@
     "coverage": []
   },
   {
+    "id": "023b8a9373f8f3526574",
+    "title": "RoboColosseum: Evaluating Physical Intelligence at Scale In-The-Wild",
+    "url": "https://arxiv.org/abs/2611.02497",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-11-03T05:00:00.000Z",
+    "collectedAt": "2026-11-04T00:51:25.833Z",
+    "category": "embodied-ai",
+    "summary": "General-purpose robot policies must work across robots, tasks, and environments, yet the variation that makes physical trials informative also makes them difficult to reproduce.…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-805ed84f",
+    "coverage": []
+  },
+  {
+    "id": "043466daa8f37c6cbc9e",
+    "title": "A State Change Is Local, Its Consequences Are Not: Dependency-Aware State Revision for Long-Term Agent Memory",
+    "url": "https://arxiv.org/abs/2611.02912",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-11-03T05:00:00.000Z",
+    "collectedAt": "2026-11-04T00:51:25.833Z",
+    "category": "ai-apps",
+    "summary": "Long-lived agents rely on persistent memory of users, tasks and decisions, and this memory must stay consistent with a world that keeps changing. When an upstream fact changes, …",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-9ee342cb",
+    "coverage": []
+  },
+  {
     "id": "0e44a84ee3cb1951eced",
     "title": "DeepSeek Harness 养鱼教程：在 QQ、微信、飞书养大肥鱼并放上 B 站抖音直播",
     "url": "https://aihot.news/items/v41vn9hb5ywv10e68wycj1bjk",
@@ -87,6 +117,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-540ca7cc",
+    "coverage": []
+  },
+  {
+    "id": "7a07608011556ce491b1",
+    "title": "OpenHands 与 Snowflake 推出基于现有 agent harness 的模型后训练方案",
+    "url": "https://aihot.news/items/recqqiy27l866jfbhjk0cusqh",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-03T00:00:00.000Z",
+    "collectedAt": "2026-11-04T00:51:25.833Z",
+    "category": "ai-apps",
+    "summary": "OpenHands 与 Snowflake AI Research 合作，让开发者无需在独立 RL 框架中重建 harness，即可用现有 OpenHands Agent SDK 配置和 Harbor 格式任务对开源权重模型做 RL 后训练，训练由 Snowflake Cortex Training 提供 GPU 支持。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e96a6aeb",
     "coverage": []
   },
   {
@@ -147,6 +192,21 @@
     "summaryKind": "source-excerpt",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-a5c38801",
+    "coverage": []
+  },
+  {
+    "id": "fad22152d46a00f856c0",
+    "title": "Cognition 发布2026年11月实用安全指南：从 Binance 被盗到 Claude Code Cursor 扩展投毒的应对清单",
+    "url": "https://aihot.news/items/dmvn8r8406f7g9vutizbxqesj",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-02T16:00:00.000Z",
+    "collectedAt": "2026-11-04T00:51:25.833Z",
+    "category": "ai-apps",
+    "summary": "Cognition 发布2026年11月实用安全指南，回顾近期重大安全事件并给出公司可执行的安全加固清单。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-7e673243",
     "coverage": []
   },
   {
