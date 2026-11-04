@@ -1,5 +1,35 @@
 [
   {
+    "id": "7247349b7b296b356cc9",
+    "title": "Figma code layers 开放测试：在画布上用代码层和 Figma agent 协作探索设计",
+    "url": "https://aihot.news/items/xm8frob53vrd652eafjfg4o1c",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-04T22:12:00.000Z",
+    "collectedAt": "2026-11-04T23:54:28.224Z",
+    "category": "ai-apps",
+    "summary": "Figma 宣布 code layers 进入面向 100% 用户的 open beta，团队可在画布上直接创建和编辑基于代码的交互原型。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-aa8adaae",
+    "coverage": []
+  },
+  {
+    "id": "4376fc05a5786b49752e",
+    "title": "How NVIDIA Uses AI Agents to Streamline AI Factory Operations",
+    "url": "https://developer.nvidia.com/blog/how-nvidia-uses-ai-agents-to-streamline-ai-factory-operations",
+    "sourceId": "nvidia",
+    "sourceName": "NVIDIA Technical Blog",
+    "publishedAt": "2026-11-04T22:00:17.000Z",
+    "collectedAt": "2026-11-04T23:54:28.224Z",
+    "category": "ai-apps",
+    "summary": "As GPU clusters scale, operations span compute, network, hardware, and scheduling. Site reliability engineers (SREs) often have to examine multiple dashboards... As GPU clusters…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-3b949a6e",
+    "coverage": []
+  },
+  {
     "id": "1f522e8436ab4f4eb31b",
     "title": "Use NVIDIA NeMo to Turn Agent Failures into Tests and Harness Fixes",
     "url": "https://developer.nvidia.com/blog/use-nvidia-nemo-to-turn-agent-failures-into-tests-and-harness-fixes",
