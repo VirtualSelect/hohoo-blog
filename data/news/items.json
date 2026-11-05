@@ -105,6 +105,21 @@
     "coverage": []
   },
   {
+    "id": "e2707af5b10ff4c956f8",
+    "title": "Anthropic 研究 20.7 万 Claude 科研会话：科学家如何使用 Claude",
+    "url": "https://aihot.news/items/giyl2h74lq7ygv5c7vpxu887m",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-04T16:00:00.000Z",
+    "collectedAt": "2026-11-05T16:45:00.334Z",
+    "category": "ai-apps",
+    "summary": "Anthropic 用隐私保护方法分析 207,049 个 Claude 与 Claude Code 科研会话（2026 年 8 月 2 日至 9 月 30 日，消费版套餐），并辅以 528 名科学家调查，研究 Claude 在各科学领域的使用方式。",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-7a2fb20c",
+    "coverage": []
+  },
+  {
     "id": "cd09dc87fba0a54b67f7",
     "title": "datasette-llm 0.1a10",
     "url": "https://simonwillison.net/2026/Nov/4/datasette-llm",
