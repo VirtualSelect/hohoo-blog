@@ -1,5 +1,20 @@
 [
   {
+    "id": "5a90caffb2c87d2e6e8e",
+    "title": "ToyBlocks: A controlled world for robot learning and evaluation",
+    "url": "https://huggingface.co/blog/allenai/toyblocks",
+    "sourceId": "huggingface",
+    "sourceName": "Hugging Face",
+    "publishedAt": "2026-11-06T14:00:48.000Z",
+    "collectedAt": "2026-11-06T16:13:29.354Z",
+    "category": "embodied-ai",
+    "summary": "",
+    "summaryKind": "link-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-7f598b95",
+    "coverage": []
+  },
+  {
     "id": "00777d5b4e4a047b64cf",
     "title": "OopsieRecover: Learning Transferable VLA Corrections from Semantic Interventions",
     "url": "https://arxiv.org/abs/2611.08462",
