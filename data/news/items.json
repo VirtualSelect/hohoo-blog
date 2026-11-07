@@ -75,6 +75,36 @@
     "coverage": []
   },
   {
+    "id": "03e4a9e6d009edc8bb68",
+    "title": "Why Koopman Structure Does Not Help Differentiable World Models for Humanoid Whole-Body Tracking",
+    "url": "https://arxiv.org/abs/2611.00951",
+    "sourceId": "arxiv-ro",
+    "sourceName": "arXiv cs.RO",
+    "publishedAt": "2026-11-06T05:00:00.000Z",
+    "collectedAt": "2026-11-07T02:19:35.501Z",
+    "category": "embodied-ai",
+    "summary": "We test whether Koopman structure helps a differentiable world model used to train a simulated Unitree G1 whole-body tracking policy by backpropagation through imagined rollouts…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-1da1c83",
+    "coverage": []
+  },
+  {
+    "id": "185570a40d5263046a19",
+    "title": "TandemBench: Benchmarking Decision Models for Multi-Agent Collaboration",
+    "url": "https://arxiv.org/abs/2611.05827",
+    "sourceId": "arxiv-cl",
+    "sourceName": "arXiv cs.CL",
+    "publishedAt": "2026-11-06T05:00:00.000Z",
+    "collectedAt": "2026-11-07T02:19:35.501Z",
+    "category": "ai-apps",
+    "summary": "Decision models choose among predefined options in tasks such as routing and action selection. In multi-agent collaboration, a decision determines how members divide work, excha…",
+    "summaryKind": "source-excerpt",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-40be189b",
+    "coverage": []
+  },
+  {
     "id": "5f721228af3682c2417b",
     "title": "Measuring how AI agents handle everyday wet-lab science",
     "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
