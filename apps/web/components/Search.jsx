@@ -94,8 +94,8 @@ export default function Search({ onClose }) {
               {t("从这里开始", "Start here", "從這裡開始")}
             </p>
             <div className="inline-links">
-              <Link to="/journey" onClick={closeSearch}>
-                <Translate id="journey.nav" /> →
+              <Link to="/learning" onClick={closeSearch}>
+                {t("学习路线", "Learning paths", "學習路線")} →
               </Link>
               <Link to="/build" onClick={closeSearch}>
                 {t("项目与实验", "Projects & labs", "專案與實驗")} →

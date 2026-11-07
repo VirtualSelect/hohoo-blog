@@ -9,6 +9,7 @@ import { marked } from "marked";
 import sanitize from "sanitize-html";
 import { articleVideo } from "../lib/article-media.mjs";
 import { canonicalPath } from "../lib/visitor-stats.mjs";
+import { questionEvidence } from "../lib/question-evidence.mjs";
 const require = createRequire(import.meta.url);
 const here = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const root = path.resolve(here, "../..");
@@ -37,6 +38,10 @@ const walk = (p) =>
 const output = path.join(here, "generated");
 fs.mkdirSync(output, { recursive: true });
 const put = (p, v) => fs.writeFileSync(path.join(output, p), JSON.stringify(v));
+put(
+  "question-evidence.json",
+  questionEvidence((file) => fs.readFileSync(path.join(root, file), "utf8")),
+);
 put("manifest.json", resolveManifest());
 const journey = validateJourney(json("data/journey.json"));
 const virtualLabs = validateVirtualLabs(

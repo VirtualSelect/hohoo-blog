@@ -1,13 +1,13 @@
 ---
-title: "24次全對之後：怎樣設計更有區分度的上下文實驗？"
+title: "上下文實驗設計：從24次真實結果到128項待執行協議"
 description: "從Agnes 3.0的24次真實結果出發，排除句式和編號線索，凍結128項相似干擾對照；用Java 8與獨立稽核驗證材料，不把離線準備當模型結果。"
 slug: /llm/context-similar-distractors
 status: published
 published_at: "2026-09-30"
-updated: "2026-09-30"
+updated: "2026-11-07"
 reading_minutes: 10
 domain: llm
-article_kind: case-study
+article_kind: mechanism
 difficulty: intermediate
 related: ["doc:llm/context-position-paired-protocol", "doc:llm/context-position-experiment", "project:hohoo-ai-lab"]
 ---
@@ -123,7 +123,7 @@ node audit.mjs evidence/20260930-offline-prepared --prepared
 
 ## 8. 開始線上實驗前還缺什麼？
 
-已有24次真實請求授權已用於L1v2。新計畫的128是**程式碼上限**，不是費用授權；上線執行前仍需確認當前賬戶費率與本輪總金額上限。本次沒有讀取金鑰、沒有呼叫Agnes。
+本篇的128項新協議尚無真實模型執行紀錄。離線重現不需要金鑰；若要執行線上對照，應先核對服務費率、總請求預算和金額上限。
 
 工程要求明確請求預算、已凍結準備目錄和伺服器程序環境中的金鑰；不在部落格提供公共呼叫入口。每次請求完成後至少等20秒，429/401/403立即停止，其他請求或協議失敗連續兩次停止，不重試。讀取逾時不等於伺服器端沒有執行；缺失usage保持未知，不能報零費用。
 

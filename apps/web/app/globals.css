@@ -1143,6 +1143,9 @@ html[data-theme="dark"] .brand-logo .brand-logo-dark {
   .site-header .brand-logo {
     width: 112px;
   }
+  .site-header .theme-toggle > span {
+    display: none;
+  }
   .home-hero h1 {
     font-size: 52px;
   }

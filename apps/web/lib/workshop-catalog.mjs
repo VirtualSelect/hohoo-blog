@@ -51,7 +51,7 @@ export const workshops = [
       "Trigger a timeout, then retry with a successful response. Compare both histories.",
       "先觸發逾時，再選擇成功回應並重試，比較左右兩份歷史。",
     ],
-    href: "/docs/ai-apps/java-first-llm",
+    href: "/docs/ai-apps/java-transactional-history",
     tags: ["Java", "HTTP", "timeout", "retry", "超时", "重试"],
   },
   {

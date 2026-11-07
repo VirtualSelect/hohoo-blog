@@ -1,6 +1,5 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Translate from "../runtime/Translate";
 import ThemeToggle from "./ThemeToggle";
 import Brand from "./Brand";
 import { SiteContext, useSite } from "../runtime/context";
@@ -48,7 +47,7 @@ function Frame({ children }: PropsWithChildren) {
   }, [route, locale]);
   const nav: [string, ReactNode][] = [
     ["articles", t("文章", "Writing", "文章")],
-    ["journey", <Translate key="journey" id="journey.nav" />],
+    ["learning", t("学习", "Learn", "學習")],
     ["build", t("实践", "Build", "實作")],
     ["radar", t("AI 雷达", "AI Radar", "AI 雷達")],
     ["about", t("关于", "About", "關於")],
@@ -78,7 +77,10 @@ function Frame({ children }: PropsWithChildren) {
               aria-current={
                 route === p ||
                 route.startsWith(p + "/") ||
-                (p === "journey" && ["learning", "research"].includes(route)) ||
+                (p === "learning" &&
+                  (route === "research" ||
+                    route === "journey" ||
+                    route.startsWith("journey/"))) ||
                 (p === "build" && /^(projects|labs)(\/|$)/.test(route)) ||
                 (p === "articles" && /^(blog|docs)(\/|$)/.test(route))
                   ? "page"
@@ -160,6 +162,9 @@ function Frame({ children }: PropsWithChildren) {
           </span>
           <nav aria-label={t("页脚", "Footer", "頁尾")}>
             <Link to="/now">{t("近况", "Now", "近況")}</Link>
+            <Link to="/journey">
+              {t("研究计划", "Research plan", "研究計畫")}
+            </Link>
             <Link to="/timeline">{t("时间轴", "Timeline", "時間軸")}</Link>
             <Link to="/subscribe">RSS</Link>
             <Link to="/changelog">{t("更新", "Changelog", "更新")}</Link>

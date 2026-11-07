@@ -1,7 +1,6 @@
 import type { ContentEntry, GlobalData, Locale, Messages } from "./site-types";
 import type { ClientDocument, RadarSignal } from "./site-types";
 import { writingEntries } from "../../../src/utils/localization.cjs";
-import { readingForks } from "./reading-forks.mjs";
 import tracks from "../../../data/learning-paths.json" with { type: "json" };
 import { isoWeek } from "../../../src/utils/radar.cjs";
 
@@ -131,9 +130,6 @@ export function pageGlobalData(
       ...(document.frontMatter.prerequisites || []),
     ])
       selected.add(linked);
-    const forks = readingForks(entries, id, document.frontMatter);
-    for (const entry of Object.values(forks).flat() as ContentEntry[])
-      selected.add(entry.id);
     const step = tracks
       .flatMap<(typeof tracks)[number]["steps"][number]>((track) => track.steps)
       .find((step) => step.id === document.frontMatter.learning_step);

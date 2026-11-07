@@ -4,7 +4,7 @@ description: "8条MuJoCo轨迹、三个旁路判定器与真实回放，区分�
 slug: "/embodied-ai/mujoco-qualified-completion"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-07"
+updated: "2026-11-07"
 reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -12,6 +12,8 @@ difficulty: "intermediate"
 related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-phase-recovery", "doc:embodied-ai/mujoco-completion-lifecycle"]
 ---
 
+
+**版本提示：下文记录原固定版本的实验。2026-10-06 发现的两个判定缺陷已在 2026-10-07 的修订中处理；复用观察器请优先查看文末修正版与回归命令。原始轨迹和结论仍保留，不混入修复后的数据。**
 [固定版本代码](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/9800095689ce3893f9e7a6ec681355e76c6fcff6/experiments/vl01_qualified_completion) · [原始记录与审计](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/9800095689ce3893f9e7a6ec681355e76c6fcff6/evidence/qualified-completion-20261005) · [实验档案](/labs/qualified-completion)
 
 上一轮[下降阶段恢复](/docs/embodied-ai/mujoco-phase-recovery)留下了一个容易误判的结果：控制器已经终止，方块却落进了盒子。如果只截取最后一帧，这看起来像一次成功放置。
@@ -57,14 +59,14 @@ related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embod
 
 </details>
 
-## 2026-10-06 勘误：当前实现还不能保证哪些契约
+## 历史勘误 · 2026-10-06：原版本的两处契约缺口
 
 复核固定代码后发现两个会影响复用的边界，原八条零传输延迟轨迹不覆盖它们：
 
 1. **过期检查先于新包处理。** E11 基类先按上一个包计算年龄，再接收本次新包。每 20ms 采样、固定延迟 40ms、阈值 60ms 时，包本身未过期，但每次到达前旧包刚好过期，窗口反复清空，持续满足放置仍留在 `VERIFYING`。单次陈旧包拒绝正确，不代表带延迟的连续流也正确。
 2. **释放只有布尔值，没有释放时间。** E14 无法拒绝“释放前采样、释放后到达”的包。2ms/tick 的反例中，释放在 tick 100，首包采样于 90、到达于 100；tick 230 时完成，最后证据采样于 220。释放后的证据跨度只有 120 tick（240ms），小于设定的 125 tick（250ms）。
 
-因此，“不借用释放前证据”应视为**期望契约**，不能当成当前代码的普遍保证。原始 7.102s / 7.302s 等时间仍是已有固定场景的观测；本轮没有改写旧轨迹或补跑物理实验。复用前需要分别修正到达处理顺序与释放时间边界，并加入延迟、重复、乱序和时间倒退回归；这不是把一个阈值调大就能同时解决的问题。
+因此，“不借用释放前证据”应视为**期望契约**，不能当成原固定版本的普遍保证。原始 7.102s / 7.302s 等时间仍是已有固定场景的观测；本轮没有改写旧轨迹或补跑物理实验。当时需要分别修正到达处理顺序与释放时间边界，并加入延迟、重复、乱序和时间倒退回归（修复进展见文末）；这不是把一个阈值调大就能同时解决的问题。
 
 ## 三个判定器观察同一条轨迹
 

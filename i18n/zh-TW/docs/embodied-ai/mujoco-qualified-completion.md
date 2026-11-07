@@ -4,7 +4,7 @@ description: "8條MuJoCo軌跡、三個旁路判定器與真實回放，區分�
 slug: "/embodied-ai/mujoco-qualified-completion"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-07"
+updated: "2026-11-07"
 reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -12,6 +12,8 @@ difficulty: "intermediate"
 related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-phase-recovery", "doc:embodied-ai/mujoco-completion-lifecycle"]
 ---
 
+
+**版本提示：下文記錄原固定版本的實驗。2026-10-06 發現的兩個判定缺陷已在 2026-10-07 的修訂中處理；重用觀察器請優先查看文末修正版與回歸指令。原始軌跡和結論仍保留，不混入修復後的資料。**
 [固定版本程式碼](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/9800095689ce3893f9e7a6ec681355e76c6fcff6/experiments/vl01_qualified_completion) · [原始記錄與審計](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/9800095689ce3893f9e7a6ec681355e76c6fcff6/evidence/qualified-completion-20261005) · [實驗檔案](/labs/qualified-completion)
 
 上一輪[下降階段恢復](/docs/embodied-ai/mujoco-phase-recovery)留下了一個容易誤判的結果：控制器已經終止，方塊卻落進了盒子。如果只截取最後一幀，這看起來像一次成功放置。
@@ -57,7 +59,7 @@ related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embod
 
 </details>
 
-## 2026-10-06 勘誤：目前實作尚不能保證的契約
+## 歷史勘誤 · 2026-10-06：原版本的兩處契約缺口
 
 複核固定程式碼後發現兩個可重現邊界，原八條零傳輸延遲軌跡不涵蓋它們：
 

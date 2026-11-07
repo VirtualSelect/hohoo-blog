@@ -7,7 +7,6 @@ import {
   pageGlobalData,
   pageSignals,
 } from "../lib/client-content.ts";
-import { readingForks } from "../lib/reading-forks.mjs";
 import { writingEntries } from "../../../src/utils/localization.cjs";
 import { isoWeek } from "../../../src/utils/radar.cjs";
 import tracks from "../../../data/learning-paths.json" with { type: "json" };
@@ -157,16 +156,6 @@ test("route-scoped data retains all article links, recommendations, progress and
         writingEntries(original["content-index"].entries).slice(0, 3),
       );
       if (["docs", "blog"].includes(document.kind)) {
-        const id =
-          (document.kind === "blog" ? "blog:" : "doc:") + document.metadata.id;
-        assert.deepEqual(
-          readingForks(entries, id, document.frontMatter),
-          readingForks(
-            original["content-index"].entries,
-            id,
-            document.frontMatter,
-          ),
-        );
         const track = tracks.find((t) =>
           t.steps.some((s) => s.id === document.frontMatter.learning_step),
         );

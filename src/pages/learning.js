@@ -7,6 +7,12 @@ import useLearningProgress from "../components/useLearningProgress";
 import { useText } from "@lab/components/Shell";
 import { learningSymbols } from "@site/src/utils/learning-progress.ts";
 import SeriesEntry from "../components/SeriesEntry";
+import {
+  nextReadingStep,
+  readLearningFilters,
+  learningFilterUrl,
+  readingGroups,
+} from "@lab/lib/reading-paths.mjs";
 
 export default function Learning() {
   const t = useText();
@@ -27,16 +33,23 @@ export default function Learning() {
   const { entries } = useContentData("learning-index");
   const content = useContentData("content-index").entries;
   const progress = useLearningProgress();
-  const [query, setQuery] = useState("");
-  const [saved, setSaved] = useState(false);
-  const [difficulty, setDifficulty] = useState("all");
+  const [filters, setFilters] = useState(() => readLearningFilters());
+  const { query, saved, difficulty } = filters;
   const [target, setTarget] = useState("");
   const [suggestion, setSuggestion] = useState(null);
   useEffect(() => {
-    const sync = () => setTarget(location.hash.slice(1));
+    const sync = () => {
+      setTarget(location.hash.slice(1));
+      setFilters(readLearningFilters(location.search));
+      setSuggestion(null);
+    };
     sync();
     window.addEventListener("hashchange", sync);
-    return () => window.removeEventListener("hashchange", sync);
+    window.addEventListener("popstate", sync);
+    return () => {
+      window.removeEventListener("hashchange", sync);
+      window.removeEventListener("popstate", sync);
+    };
   }, []);
   useEffect(() => {
     // A hash can point inside a previously collapsed reading path.
@@ -73,16 +86,36 @@ export default function Learning() {
   const candidates = tracks
     .flatMap((track) => track.steps)
     .filter((step) => available.has(step.id) && matches(step));
+  const filtered = !!query.trim() || saved || difficulty !== "all";
+  const visibleTracks = tracks
+    .map((track) => ({
+      track,
+      ...readingGroups(track, available, matches),
+    }))
+    .filter(
+      ({ chapters, studies, plans }) =>
+        chapters.length || studies.length || plans.length,
+    );
+  const plannedCount = visibleTracks.reduce(
+    (count, group) => count + group.plans.length,
+    0,
+  );
   const title = (step) =>
     available.get(step.id)?.title ||
     t(step.title, step.en, step.titleTw || step.title);
-  const reset = () => {
-    setQuery("");
-    setSaved(false);
-    setDifficulty("all");
+  const updateFilters = (next, replace = false) => {
+    const value = { ...filters, ...next };
+    setFilters(value);
     setSuggestion(null);
+    setTarget("");
+    const url = learningFilterUrl(location.href, value);
+    if (url !== location.pathname + location.search + location.hash) {
+      history[replace ? "replaceState" : "pushState"](history.state, "", url);
+    }
   };
-  const render = (step, track) => {
+  const reset = () => updateFilters(readLearningFilters());
+  const render = (step, track, nested = false) => {
+    const Heading = nested ? "h4" : "h3";
     const article = available.get(step.id);
     const prereqs = (article?.prerequisites || [])
       .map((id) => content.find((e) => e.id === id))
@@ -90,8 +123,7 @@ export default function Learning() {
     const related = (article?.related || [])
       .map((id) => content.find((e) => e.id === id))
       .filter((e) => e && ["lab", "project"].includes(e.type));
-    const published = track.steps.filter((s) => available.has(s.id));
-    const next = published[published.findIndex((s) => s.id === step.id) + 1];
+    const next = nextReadingStep(track, step.id, available);
     return (
       <li
         id={"step-" + step.id}
@@ -104,7 +136,7 @@ export default function Learning() {
             ? label(article.difficulty)
             : t("计划选题", "Planned topic", "計畫選題")}
         </p>
-        <h3>
+        <Heading>
           {article ? (
             <Link
               to={article.permalink}
@@ -118,31 +150,40 @@ export default function Learning() {
           ) : (
             title(step)
           )}
-        </h3>
+        </Heading>
         {article && (
           <>
             <p>
               {t("读后能做什么：", "After reading: ", "讀後能做什麼：")}
               {t(step.outcome, step.outcomeEn, step.outcomeTw)}
             </p>
-            <p className="hh-meta">
-              {t("先修：", "Prerequisites: ", "先修：")}
-              {prereqs.length
-                ? prereqs.map((e, i) => (
-                    <React.Fragment key={e.id}>
-                      {i > 0 && " · "}
-                      <Link to={e.href}>{e.title}</Link>
-                    </React.Fragment>
-                  ))
-                : t(...track.background)}
-            </p>
-            <div className="series-entry">
-              {related.map((e) => (
-                <Link key={e.id} to={e.href}>
-                  {label(e.type.toUpperCase())} · {e.title} →
-                </Link>
-              ))}
-            </div>
+            <details className="step-resources">
+              <summary>
+                {t(
+                  "先修与配套代码",
+                  "Prerequisites and code",
+                  "先修與配套程式碼",
+                )}
+              </summary>
+              <p className="hh-meta">
+                {t("先修：", "Prerequisites: ", "先修：")}
+                {prereqs.length
+                  ? prereqs.map((e, i) => (
+                      <React.Fragment key={e.id}>
+                        {i > 0 && " · "}
+                        <Link to={e.href}>{e.title}</Link>
+                      </React.Fragment>
+                    ))
+                  : t(...track.background)}
+              </p>
+              <div className="series-entry">
+                {related.map((e) => (
+                  <Link key={e.id} to={e.href}>
+                    {label(e.type.toUpperCase())} · {e.title} →
+                  </Link>
+                ))}
+              </div>
+            </details>
             {next && (
               <p className="hh-meta">
                 {t("下一步：", "Next: ", "下一步：")}
@@ -151,16 +192,16 @@ export default function Learning() {
                 </Link>
               </p>
             )}
-            {!next && track.steps.find((s) => s.plan) && (
+            {!next && (
               <p>
-                <a href={"#step-" + track.steps.find((s) => s.plan).id}>
+                <Link to={"/articles?domain=" + track.domain}>
                   {t(
-                    "下一步：查看后续研究计划",
-                    "Next: explore the research plan",
-                    "下一步：查看後續研究計畫",
+                    "继续选读本方向已发表文章",
+                    "Explore more published articles in this track",
+                    "繼續選讀本方向已發表文章",
                   )}{" "}
                   →
-                </a>
+                </Link>
               </p>
             )}
           </>
@@ -271,9 +312,9 @@ export default function Learning() {
         </h1>
         <p>
           {t(
-            "文章页用于查找；这里给出建议顺序。项目页看整体结构，实验页查协议与证据，实践页动手尝试。",
-            "Find content in Writing; use this page for reading order, Projects for architecture, Labs for protocols and evidence, and Build for hands-on exploration.",
-            "文章頁用於查找；這裡提供建議順序。專案頁看整體結構，實驗頁查協議與證據，實作頁動手嘗試。",
+            "先沿主线建立整体认识，遇到具体问题再读专题。主线是阅读建议；运行实验前仍请核对每篇的先修与固定代码版本。",
+            "Start with the core path, then choose a focused study. This is a reading guide; check each article’s prerequisites and pinned revision before running its experiment.",
+            "先沿主線建立整體認識，遇到具體問題再讀專題。主線是閱讀建議；執行實驗前仍請核對每篇的先修與固定程式碼版本。",
           )}
         </p>
         <p className="hh-meta">
@@ -284,9 +325,9 @@ export default function Learning() {
           }{" "}
           / {entries.length} ·{" "}
           {t(
-            "你的阅读进度，仅保存在当前浏览器。",
-            "Your reading progress, stored in this browser only.",
-            "你的閱讀進度，僅儲存在目前瀏覽器。",
+            "全部文章的阅读进度，仅保存在当前浏览器。",
+            "Progress across all articles, stored in this browser only.",
+            "全部文章的閱讀進度，僅儲存在目前瀏覽器。",
           )}
         </p>
         {resume ? (
@@ -320,7 +361,7 @@ export default function Learning() {
             "選擇學習方向",
           )}
         >
-          {tracks.map((track) => (
+          {visibleTracks.map(({ track }) => (
             <a key={track.id} href={"#track-" + track.domain}>
               {t(track.title, track.en, track.titleTw)}
             </a>
@@ -332,20 +373,14 @@ export default function Learning() {
             <input
               type="search"
               value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setSuggestion(null);
-              }}
+              onChange={(e) => updateFilters({ query: e.target.value }, true)}
             />
           </label>
           <label>
             {t("难度", "Difficulty", "難度")}
             <select
               value={difficulty}
-              onChange={(e) => {
-                setDifficulty(e.target.value);
-                setSuggestion(null);
-              }}
+              onChange={(e) => updateFilters({ difficulty: e.target.value })}
             >
               {["all", "beginner", "intermediate", "advanced"].map((v) => (
                 <option key={v} value={v}>
@@ -359,10 +394,8 @@ export default function Learning() {
           <button
             type="button"
             aria-pressed={saved}
-            onClick={() => {
-              setSaved(!saved);
-              setSuggestion(null);
-            }}
+            disabled={!progress.ready}
+            onClick={() => updateFilters({ saved: !saved })}
           >
             ☆ {t("只看想读", "Saved only", "只看想讀")}
           </button>
@@ -390,7 +423,16 @@ export default function Learning() {
             <a href={"#step-" + suggestion.id}>{title(suggestion)} →</a>
           </p>
         )}
-        {!tracks.some((track) => track.steps.some(matches)) && (
+        {filtered && visibleTracks.length > 0 && (
+          <p role="status">
+            {t(
+              `${candidates.length} 篇已发表文章 · ${plannedCount} 项未发表计划`,
+              `${candidates.length} published ${candidates.length === 1 ? "article" : "articles"} · ${plannedCount} unpublished ${plannedCount === 1 ? "plan" : "plans"}`,
+              `${candidates.length} 篇已發表文章 · ${plannedCount} 項未發表計畫`,
+            )}
+          </p>
+        )}
+        {!visibleTracks.length && (
           <p role="status" className="hh-empty">
             {t(
               "没有符合这些筛选条件的选题。清除筛选后可查看完整路线。",
@@ -399,7 +441,7 @@ export default function Learning() {
             )}
           </p>
         )}
-        {tracks.map((track) => (
+        {visibleTracks.map(({ track, chapters, studies, plans }) => (
           <section
             key={track.id}
             id={"track-" + track.domain}
@@ -414,73 +456,108 @@ export default function Learning() {
               <p className="topic-boundary">{t(...track.boundary)}</p>
             )}
             <SeriesEntry domain={track.domain} />
-            <details
-              open={
-                track.domain === "ai-apps" ||
-                target === "track-" + track.domain ||
-                track.steps.some((s) => target === "step-" + s.id) ||
-                !!query ||
-                saved ||
-                difficulty !== "all"
-              }
-            >
-              <summary>
-                {t(
-                  "已发布的阅读顺序",
-                  "Published reading order",
-                  "已發布的閱讀順序",
-                )}{" "}
-                · {track.steps.filter((s) => available.has(s.id)).length}
-              </summary>
-              <ol className="hh-roadmap">
-                {track.steps
-                  .filter((s) => available.has(s.id) && matches(s))
-                  .map((s) => render(s, track))}
-              </ol>
-            </details>
-            <details
-              open={
-                target === "track-" + track.domain ||
-                track.steps.some(
-                  (s) => !available.has(s.id) && target === "step-" + s.id,
-                ) ||
-                !!query ||
-                saved ||
-                difficulty !== "all"
-              }
-            >
-              <summary>
-                {t(
-                  "后续计划 · 尚未发表",
-                  "Future topics · unpublished",
-                  "後續計畫 · 尚未發表",
-                )}
-              </summary>
-              <ol className="hh-roadmap">
-                {track.steps
-                  .filter((s) => !available.has(s.id) && matches(s))
-                  .map((s) => render(s, track))}
-              </ol>
-            </details>
+            <div className="learning-chapters">
+              {chapters.map((chapter) => {
+                return (
+                  <section className="learning-chapter" key={chapter.title[1]}>
+                    <header>
+                      <p className="hh-eyebrow">
+                        0{chapter.index + 1} / {t("主线", "Core path", "主線")}
+                      </p>
+                      <h3>{t(...chapter.title)}</h3>
+                      <p>{t(...chapter.goal)}</p>
+                    </header>
+                    <ol className="hh-roadmap">
+                      {chapter.steps.map((step) => render(step, track, true))}
+                    </ol>
+                  </section>
+                );
+              })}
+            </div>
+            {studies.length > 0 && (
+              <details
+                open={
+                  studies.some((s) => target === "step-" + s.id) || filtered
+                }
+              >
+                <summary>
+                  {t(
+                    "专题选读 · 按问题深入",
+                    "Focused studies · explore a question",
+                    "專題選讀 · 依問題深入",
+                  )}{" "}
+                  · {studies.length}
+                </summary>
+                <ol className="hh-roadmap">
+                  {studies.map((s) => render(s, track))}
+                </ol>
+              </details>
+            )}
+            {plans.length > 0 && (
+              <details
+                id={"plans-" + track.domain}
+                open={
+                  target === "plans-" + track.domain ||
+                  plans.some((s) => target === "step-" + s.id) ||
+                  filtered
+                }
+              >
+                <summary>
+                  {t(
+                    "后续计划 · 尚未发表",
+                    "Future topics · unpublished",
+                    "後續計畫 · 尚未發表",
+                  )}{" "}
+                  · {plans.length}
+                </summary>
+                <ol className="hh-roadmap">
+                  {plans.map((s) => render(s, track))}
+                </ol>
+              </details>
+            )}
           </section>
         ))}
-        <section className="hh-section" id="engineering">
-          <h2>{t("工程基础", "Engineering foundations", "工程基礎")}</h2>
-          <p>Java · Python · TypeScript · HTTP · JSON</p>
-          <Link to="/docs/ai-apps">
-            {t(
-              "AI 应用与工程专题",
-              "AI applications and engineering",
-              "AI 應用與工程專題",
-            )}{" "}
-            →
-          </Link>
-        </section>
+        {!filtered && (
+          <section className="hh-section" id="engineering">
+            <h2>
+              {t(
+                "遇到工程问题，从这里查",
+                "Find an engineering answer",
+                "遇到工程問題，從這裡查",
+              )}
+            </h2>
+            <p>
+              {t(
+                "已有实践：请求超时、失败重试与可靠投递。",
+                "Published studies on deadlines, retries and reliable delivery.",
+                "已有實作：請求逾時、失敗重試與可靠投遞。",
+              )}
+            </p>
+            <ul className="engineering-reading">
+              {[
+                "java-retry-deadline",
+                "java-idempotent-retry",
+                "java-outbox-delivery",
+              ]
+                .map((id) => available.get(id))
+                .filter(Boolean)
+                .map((entry) => (
+                  <li key={entry.stepId}>
+                    <Link to={entry.permalink}>{entry.title} →</Link>
+                  </li>
+                ))}
+            </ul>
+          </section>
+        )}
         <p>
           <Link to="/reading">{t("阅读清单", "Reading list", "閱讀清單")}</Link>{" "}
           ·{" "}
-          <Link to="/research">
-            {t("研究总览", "Research overview", "研究總覽")}
+          <Link to="/journey">
+            {t(
+              "作者的长期研究计划",
+              "The author’s research plan",
+              "作者的長期研究計畫",
+            )}
           </Link>{" "}
           · <Link to="/build">{t("动手实践", "Build", "動手實作")}</Link>
         </p>

@@ -30,15 +30,35 @@ export default function Journey({ locale }) {
   return (
     <main id="main-content" className={styles.page}>
       <header className={styles.hero}>
-        <p className="eyebrow">{t("title")}</p>
+        <p className="eyebrow">
+          {locale === "en"
+            ? "Hohoo / Research plan"
+            : locale === "zh-TW"
+              ? "Hohoo / 研究計畫"
+              : "Hohoo / 研究计划"}
+        </p>
         <h1>{t("roadmap")}</h1>
         <p className={styles.lead}>{t("intro")}</p>
+        <p>
+          {locale === "en"
+            ? "This is the author’s long-term project plan. For a reading sequence through published work, start with Learning."
+            : locale === "zh-TW"
+              ? "這裡記錄作者的長期專案規劃。若想循序閱讀已發表內容，請先進入學習路線。"
+              : "这里记录作者的长期项目规划。想按顺序阅读已发表内容，请先进入学习路线。"}
+        </p>
         <nav className={styles.links} aria-label={t("title")}>
           <a href="#roadmap">{t("roadmapLabel")} ↓</a>
           <a href="#milestones">{t("milestones")} ↓</a>
           <a href="#schedule">{t("schedule")} ↓</a>
           <Link href={href("/journey/virtual-lab")}>{t("virtual.nav")} →</Link>
-          <Link href={href("/learning")}>{t("learning")} →</Link>
+          <Link href={href("/learning")}>
+            {locale === "en"
+              ? "Published reading paths"
+              : locale === "zh-TW"
+                ? "已發表內容的閱讀路線"
+                : "已发表内容的阅读路线"}{" "}
+            →
+          </Link>
         </nav>
       </header>
       <section

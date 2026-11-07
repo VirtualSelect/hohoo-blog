@@ -1,8 +1,5 @@
 {
-  "featuredProjects": [
-    "project:hohoo-ai-lab",
-    "project:hohoo-embodied-agent"
-  ],
+  "featuredProjects": ["project:hohoo-ai-lab", "project:hohoo-embodied-agent"],
   "featuredArticles": [
     "doc:ai-apps/java-recovery-reconciliation",
     "doc:llm/kv-block-decode-cost",
@@ -213,5 +210,10 @@
       "srcEn": "/img/research/20261011/controller-holdout.svg",
       "srcTw": "/img/research/20261011/controller-holdout.zh-TW.svg"
     }
-  }
+  },
+  "featuredLabs": [
+    "lab:durable-dispatch",
+    "lab:packed-kv",
+    "lab:planar-reliability"
+  ]
 }

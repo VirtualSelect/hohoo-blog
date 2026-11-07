@@ -80,7 +80,7 @@ export function Section({ label, title, to, children }) {
     <section className="hh-section">
       <div className="hh-section-heading">
         <div>
-          <p className="hh-eyebrow">{uiLabel(label)}</p>
+          {label && <p className="hh-eyebrow">{uiLabel(label)}</p>}
           <h2>{title}</h2>
         </div>
         {to && (
@@ -149,7 +149,6 @@ export function Related({ ids = [], title }) {
     .filter(Boolean);
   return items.length ? (
     <Section
-      label={uiLabel("KEEP EXPLORING")}
       title={
         title ||
         (en
