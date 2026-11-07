@@ -53,7 +53,7 @@ function Frame({ children }: PropsWithChildren) {
     ["about", t("关于", "About", "關於")],
   ];
   return (
-    <div className="site-shell">
+    <div className="site-shell fieldnotes-shell">
       <a className="skip" href="#main-content">
         {t("跳转到内容", "Skip to content", "跳至內容")}
       </a>
@@ -65,12 +65,19 @@ function Frame({ children }: PropsWithChildren) {
         >
           <Brand />
         </Link>
+        <p className="rail-caption">
+          {t(
+            "公开学习的研究手记",
+            "A notebook, kept in public",
+            "公開學習的研究手記",
+          )}
+        </p>
         <nav
           id="main-nav"
           className={menu ? "open" : ""}
           aria-label={t("主导航", "Main navigation", "主導覽")}
         >
-          {nav.map(([p, label]) => (
+          {nav.map(([p, label], index) => (
             <Link
               key={p}
               to={"/" + p}
@@ -87,10 +94,25 @@ function Frame({ children }: PropsWithChildren) {
                   : undefined
               }
             >
-              {label}
+              <span className="nav-index" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <span>{label}</span>
+              <span className="nav-arrow" aria-hidden="true">
+                ↗
+              </span>
             </Link>
           ))}
         </nav>
+        <div className="rail-personal">
+          <span>{t("你的书桌", "YOUR DESK", "你的書桌")}</span>
+          <Link to="/reading">
+            {t("阅读清单", "Reading list", "閱讀清單")} ↗
+          </Link>
+          <Link to="/subscribe">
+            {t("订阅更新", "Subscribe", "訂閱更新")} ↗
+          </Link>
+        </div>
         <div className="header-actions">
           <button
             ref={trigger}
@@ -132,6 +154,22 @@ function Frame({ children }: PropsWithChildren) {
         </div>
       </header>
       <div id="main-content" tabIndex={-1} className="site-content">
+        <div className="folio-context">
+          <p>
+            <span aria-hidden="true">✦</span>{" "}
+            {t("Hohoo 的研究手记", "Hohoo’s field notes", "Hohoo 的研究手記")}{" "}
+            <span className="context-divider" aria-hidden="true">
+              /
+            </span>{" "}
+            {route
+              ? nav.find(([p]) => p === route)?.[1] ||
+                t("继续探索", "Explore further", "繼續探索")
+              : t("索引", "Index", "索引")}
+          </p>
+          <Link to="/reading">
+            {t("回到我的书桌", "Back to my desk", "回到我的書桌")} ↗
+          </Link>
+        </div>
         {children}
       </div>
       <footer className="site-footer">

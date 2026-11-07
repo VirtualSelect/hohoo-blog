@@ -81,7 +81,11 @@ const scenes = [
   },
 ] as const;
 
-export default function QuestionStudio() {
+export default function QuestionStudio({
+  embedded = false,
+}: {
+  embedded?: boolean;
+}) {
   const t = useText();
   const text = (copy: readonly [string, string, string]) =>
     t(copy[0], copy[1], copy[2]);
@@ -102,6 +106,7 @@ export default function QuestionStudio() {
     return () => window.removeEventListener("popstate", sync);
   }, []);
   const scene = scenes.find((scene) => scene.id === active)!;
+  const QuestionHeading = embedded ? "h3" : "h2";
   const source = evidence.sources[active];
   const correct = resultFor(active, variant);
   function choose(id: QuestionId) {
@@ -159,35 +164,64 @@ export default function QuestionStudio() {
       className={s.root}
       id="question-studio"
       data-scene={active}
+      data-layout={embedded ? "embedded" : "standalone"}
       aria-labelledby="studio-title"
     >
-      <header className={s.intro}>
-        <div>
-          <p className={s.eyebrow}>
-            HOHOO /{" "}
-            {t("开放研究笔记", "OPEN RESEARCH NOTEBOOK", "開放研究筆記")}
-          </p>
-          <h1 id="studio-title">
-            {t("先猜一个结果。", "Make a prediction.", "先猜一個結果。")}
-            <br />
-            <span>
-              {t("再看证据。", "Then meet the evidence.", "再看證據。")}
-            </span>
-          </h1>
-        </div>
-        <div className={s.introAside}>
+      {embedded ? (
+        <header className={s.sectionIntro}>
+          <div>
+            <p className={s.eyebrow}>
+              {t(
+                "01 / 可交互的研究笔记",
+                "01 / INTERACTIVE FIELD NOTES",
+                "01 / 可互動的研究筆記",
+              )}
+            </p>
+            <h2 id="studio-title">
+              {t(
+                "先试一遍，再读下去。",
+                "A question you can get your hands on.",
+                "先試一遍，再讀下去。",
+              )}
+            </h2>
+          </div>
           <p>
             {t(
-              "我是 Hohoo。这里从一个具体问题出发，写代码，保留失败，再把原因讲清楚。",
-              "I’m Hohoo. Start with a concrete question, write code, keep the failures, and explain what happened.",
-              "我是 Hohoo。這裡從一個具體問題出發，寫程式碼，保留失敗，再把原因講清楚。",
+              "预测一次，换一个条件，再对照已经留下的证据。",
+              "Predict, change a condition, and compare the recorded evidence.",
+              "預測一次，換一個條件，再對照已經留下的證據。",
             )}
           </p>
-          <Link to="/about">
-            {t("认识一下我", "Meet Hohoo", "認識一下我")} ↗
-          </Link>
-        </div>
-      </header>
+        </header>
+      ) : (
+        <header className={s.intro}>
+          <div>
+            <p className={s.eyebrow}>
+              HOHOO /{" "}
+              {t("开放研究笔记", "OPEN RESEARCH NOTEBOOK", "開放研究筆記")}
+            </p>
+            <h1 id="studio-title">
+              {t("先猜一个结果。", "Make a prediction.", "先猜一個結果。")}
+              <br />
+              <span>
+                {t("再看证据。", "Then meet the evidence.", "再看證據。")}
+              </span>
+            </h1>
+          </div>
+          <div className={s.introAside}>
+            <p>
+              {t(
+                "我是 Hohoo。这里从一个具体问题出发，写代码，保留失败，再把原因讲清楚。",
+                "I’m Hohoo. Start with a concrete question, write code, keep the failures, and explain what happened.",
+                "我是 Hohoo。這裡從一個具體問題出發，寫程式碼，保留失敗，再把原因講清楚。",
+              )}
+            </p>
+            <Link to="/about">
+              {t("认识一下我", "Meet Hohoo", "認識一下我")} ↗
+            </Link>
+          </div>
+        </header>
+      )}
       <div
         className={s.selector}
         role="group"
@@ -222,7 +256,7 @@ export default function QuestionStudio() {
             {t("问题现场", "AT THE QUESTION", "問題現場")} / 0
             {scenes.indexOf(scene) + 1}
           </p>
-          <h2>{text(scene.question)}</h2>
+          <QuestionHeading>{text(scene.question)}</QuestionHeading>
           <p>{text(scene.context)}</p>
           <fieldset className={s.prediction}>
             <legend>{t("你的判断", "Your prediction", "你的判斷")}</legend>

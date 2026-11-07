@@ -19,6 +19,12 @@ Java、缓存和控制器界面展示归档结果切片，不执行 HTTP、模�
 
 `?question=java|cache|robot|rag` 可分享当前问题，浏览器返回与刷新恢复问题选择；具体条件、预测和揭晓状态只在当前页面内保留，不跟踪、不新增本地存储。不启用 JavaScript 时仍可读取核心问题并访问正文、代码和记录。
 
+## 研究手记的共享索引（2026-11-07，已确认采用）
+
+`ResearchIndex` 从当前语言的现有内容索引读取各方向已发表 Doc 数量，只统计 `type=doc` 且 `status=published` 的条目；不统计计划、不另存计数。首页链接学习锚点，文章页复用原筛选更新方法及 query string，不引入第二套筛选状态。学习页仍沿用原有紧凑方向导航。
+
+`FieldworkCover` 引用既有 MuJoCo 二维控制文章和实际轨迹 SVG，不创建新的 Lab、数据或实验结论。图中的原始标签保留，并提供三语来源说明。`QuestionStudio` 的嵌入布局只改变信息层级与展示，问题、证据提取、URL 恢复和无 JavaScript 阅读入口保持原协议。
+
 ## RAG 分类（2026-10-09）
 
 长期内容 `domain` 新增 `rag`；AI Radar 的来源分类独立维护，本轮不改变采集分类。RAG 收录检索与引用证据主题，文章路径不因分类变化而迁移：`/docs/ai-apps/java-retrieval-evidence` 与 `/docs/ai-apps/java-grounded-claims` 继续有效。专题入口 `/docs/rag`、路线 `/learning#track-rag`。
