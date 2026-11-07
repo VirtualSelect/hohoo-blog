@@ -123,6 +123,13 @@ export interface RadarSignal {
   sourceName: string;
   publishedAt: string;
   collectedAt: string;
+  category?: Domain;
+  locale?: Locale;
+  translationStatus?: TranslationStatus;
+  related?: string[];
+  sourceArticleUrl?: string;
+  feedContentStatus?: "full" | "summary-only";
+  feedContentUrl?: string;
   originalPublication?: {
     date: string;
     sourceUrl: string;
@@ -131,6 +138,8 @@ export interface RadarSignal {
 }
 export interface RadarArchive {
   chunks: string[];
+  contentAssets?: string[];
+  weeks?: string[];
   total: number;
   sources: [string, string][];
   lastCollected?: string;

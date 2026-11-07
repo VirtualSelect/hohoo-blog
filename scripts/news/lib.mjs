@@ -1,6 +1,7 @@
 import {createHash} from 'node:crypto';
 import Parser from 'rss-parser';
 import {researchPriority} from './relevance.mjs';
+import {rssTextFormat, sourceArticleUrl, validFeedContent} from '../../src/utils/radar-content.mjs';
 
 export const categories = ['ai-apps', 'llm', 'embodied-ai'];
 export function plainText(value = '') {
@@ -40,21 +41,50 @@ export async function parseFeed(xml, source, now = new Date(), lookbackDays = 14
       let excerpt = plainText(rawExcerpt);
       if (source.parserVersion === 'arxiv-rss-v1')
         excerpt = excerpt.replace(/^arXiv:\S+\s+Announce Type:\s*(?:new|replace|cross|replace-cross)\s+Abstract:\s*/i, '');
-      // Full feed text is transient evidence for filtering, never public content.
+      // Filtering uses the whole text; the short feed/list excerpt stays bounded.
       const fullText = plainText(String(item['content:encoded'] || '').replace(/<p>\s*(?:🔗|via AIHOT)[\s\S]*?<\/p>/gi, ''));
       const relevanceText = fullText || excerpt;
       if (!excerpt) excerpt = relevanceText;
       const summary = excerpt.length > 180 ? excerpt.slice(0, 177) + '…' : excerpt;
+      const original = sourceArticleUrl(plainText((String(item.content || '').match(/<a\b[^>]*href=["']([^"']+)["'][^>]*>\s*阅读原文\s*<\/a>/i) || [])[1] || ''));
+      const paragraphs = String(item['content:encoded'] || '')
+        .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '')
+        .replace(/<\/(?:p|li|h[1-6]|blockquote|pre)>|<br\s*\/?\s*>/gi, '\n\n')
+        .split(/\n\s*\n/).map(plainText).filter(Boolean);
+      const body = {format:rssTextFormat,language:feed.language || 'zh-CN',capturedAt:now.toISOString(),paragraphs};
+      const content = source.id === 'aihot' && validFeedContent(body) ? body : undefined;
+      const contentStatus = content ? 'full' : source.contentMode === 'full' ? 'summary-only' : undefined;
       items.push({id: createHash('sha256').update(url).digest('hex').slice(0, 20), title, url,
         sourceId: source.id, sourceName: source.name, publishedAt: published.toISOString(),
         collectedAt: now.toISOString(), category: classify(title + ' ' + summary, source.defaultCategory),
-        summary, summaryKind: summary ? 'source-excerpt' : 'link-only', relevanceText});
+        summary, summaryKind: summary ? 'source-excerpt' : 'link-only', relevanceText,
+        ...(original ? {sourceArticleUrl:original} : {}),
+        ...(contentStatus ? {feedContentStatus:contentStatus} : {}),
+        ...(content ? {feedContent:content} : {})});
     } catch {skipped++;}
   }
   return {items, skipped};
 }
-export function publicNewsItem({relevanceText, ...item}) {
+export function publicNewsItem({relevanceText, feedContent, ...item}) {
   return item;
+}
+export async function fetchSource(source, now = new Date(), lookbackDays = 14, read = fetchText) {
+  const feeds = [source.feed, ...(source.fallbackFeeds || [])];
+  if (feeds.length > 3) throw new Error('Too many fallback feeds');
+  for (const feed of feeds) canonicalUrl(feed, source.hosts);
+  const attempts = [];
+  for (const [index, feed] of feeds.entries()) {
+    try {
+      const contentMode = new URL(feed).pathname === '/feed/full.xml' ? 'full' : 'brief';
+      const result = await parseFeed(await read(feed), {...source, contentMode}, now, lookbackDays);
+      attempts.push({status:'ok', fallback:index > 0});
+      return {...result, fallback:index > 0, attempts};
+    } catch (error) {
+      if ([401,403,429].includes(error.status)) throw error;
+      attempts.push({status:'failed', fallback:index > 0, error:error.message});
+      if (index === feeds.length - 1) throw new Error('All source feeds failed: ' + attempts.map(a => a.error).filter(Boolean).join('; '));
+    }
+  }
 }
 // Release the daily budget gradually so the first run cannot consume every slot.
 export function intakeBudget(existing, config, now = new Date()) {
@@ -164,11 +194,11 @@ export async function fetchText(url, {attempts = 3, maxBytes = 2_000_000, fetchI
   for (let attempt = 0; attempt < attempts; attempt++) {
     try {
       const response = await fetchImpl(url, {signal: AbortSignal.timeout(20000), redirect: 'error', headers: {'User-Agent':'HohooNewsBot/1.0 (+https://huhohoo.com)', Accept:'application/rss+xml, application/atom+xml, application/xml, text/xml'}});
-      if (!response.ok) throw new Error('Feed HTTP ' + response.status);
+      if (!response.ok) {const error = new Error('Feed HTTP ' + response.status); error.status=response.status; throw error;}
       let size = 0; const chunks = [];
       for await (const chunk of response.body) {size += chunk.length; if (size > maxBytes) throw new Error('Feed exceeds size limit'); chunks.push(chunk);}
       return Buffer.concat(chunks).toString('utf8');
-    } catch (error) {last = error; if (attempt + 1 < attempts) await new Promise(resolve => setTimeout(resolve, 500 * 2 ** attempt));}
+    } catch (error) {if ([401,403,429].includes(error.status)) throw error; last = error; if (attempt + 1 < attempts) await new Promise(resolve => setTimeout(resolve, 500 * 2 ** attempt));}
   }
   throw last;
 }

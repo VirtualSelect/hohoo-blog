@@ -9,17 +9,19 @@ export default function ResearchIndex({
   destination = "learning",
   onSelect,
   selected = "all",
+  compact = false,
 }: {
   entries: ContentEntry[];
   destination?: "learning" | "articles";
   onSelect?: (domain: Domain | "all") => void;
   selected?: Domain | "all";
+  compact?: boolean;
 }) {
   const t = useText();
   const Container = onSelect ? "div" : "nav";
   return (
     <section className="research-directory">
-      {onSelect && (
+      {onSelect && !compact && (
         <div className="research-directory-heading">
           <span>
             {t(
@@ -38,10 +40,21 @@ export default function ResearchIndex({
         </div>
       )}
       <Container
-        className="research-index"
+        className={
+          compact ? "research-index research-index-compact" : "research-index"
+        }
         role={onSelect ? "group" : undefined}
         aria-label={t("四个研究方向", "Four research tracks", "四個研究方向")}
       >
+        {compact && onSelect && (
+          <button
+            type="button"
+            aria-pressed={selected === "all"}
+            onClick={() => onSelect("all")}
+          >
+            {t("全部方向", "All tracks", "全部方向")}
+          </button>
+        )}
         {topics.map((topic, i) => {
           const count = entries.filter(
             (e) =>
@@ -60,12 +73,13 @@ export default function ResearchIndex({
               </span>
               <small>
                 {count}{" "}
-                {t(
-                  "篇实践文章",
-                  count === 1 ? "practice article" : "practice articles",
-                  "篇實作文章",
-                )}{" "}
-                <span aria-hidden="true">↗</span>
+                {!compact &&
+                  t(
+                    "篇实践文章",
+                    count === 1 ? "practice article" : "practice articles",
+                    "篇實作文章",
+                  )}{" "}
+                {!compact && <span aria-hidden="true">↗</span>}
               </small>
             </>
           );

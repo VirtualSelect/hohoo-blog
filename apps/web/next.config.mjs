@@ -23,11 +23,23 @@ export default {
     ];
   },
   async redirects() {
-    return ["", "/en", "/zh-TW"].map((prefix) => ({
-      source: prefix + "/blog/a%20new%20milestone",
-      destination: prefix + "/blog/a-new-milestone",
-      permanent: true,
-    }));
+    return ["", "/en", "/zh-TW"].flatMap((prefix) => [
+      {
+        source: prefix + "/blog/a%20new%20milestone",
+        destination: prefix + "/blog/a-new-milestone",
+        permanent: true,
+      },
+      {
+        source: prefix + "/news/daily/2026-10-05",
+        destination: prefix + "/radar",
+        permanent: true,
+      },
+      {
+        source: prefix + "/radar/weekly/2026-W36",
+        destination: prefix + "/radar/weekly",
+        permanent: true,
+      },
+    ]);
   },
   outputFileTracingRoot: root,
   webpack(config) {

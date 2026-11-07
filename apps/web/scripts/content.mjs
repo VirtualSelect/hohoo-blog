@@ -10,6 +10,7 @@ import sanitize from "sanitize-html";
 import { articleVideo } from "../lib/article-media.mjs";
 import { canonicalPath } from "../lib/visitor-stats.mjs";
 import { questionEvidence } from "../lib/question-evidence.mjs";
+import { radarContentAsset } from "../lib/radar-content.mjs";
 const require = createRequire(import.meta.url);
 const here = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const root = path.resolve(here, "../..");
@@ -73,7 +74,15 @@ const basePages = [
   "blog/tags/blog",
   "blog/archive",
 ];
-const rawNews = json("data/news/items.json");
+const contentAssets = [];
+fs.mkdirSync(path.join(here, "public", "radar-content"), { recursive: true });
+const rawNews = json("data/news/items.json").map((item) => {
+  const asset = radarContentAsset(item);
+  if (!asset) return item;
+  fs.writeFileSync(path.join(here, "public", asset.url.slice(1)), asset.json);
+  contentAssets.push(asset.url);
+  return { ...item, feedContentUrl: asset.url };
+});
 const rawSignals = signals(rawNews, json("config/news-sources.json"));
 for (const locale of ["zh-CN", "zh-TW", "en"]) {
   const prefix = locale === "zh-CN" ? "" : "/" + locale;
@@ -341,6 +350,8 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
     items,
     radarArchive: {
       chunks: radarChunks,
+      contentAssets,
+      weeks,
       total: items.length,
       sources: [...new Map(items.map((i) => [i.sourceId, i.sourceName]))],
       lastCollected: items

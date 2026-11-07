@@ -2,14 +2,14 @@
 import registry from "@site/data/radar-practice.json";
 import { useSite } from "../runtime/context";
 import { useText } from "./Shell";
-export default function RadarPractice({ id }) {
+export default function RadarPractice({ id, expanded = false }) {
   const t = useText(),
     { locale } = useSite(),
     item = registry.find((r) => r.signalId === id);
   if (!item) return null;
   const language = locale === "en" ? 1 : locale === "zh-TW" ? 2 : 0;
   return (
-    <details>
+    <details open={expanded}>
       <summary>
         {t("从资讯到验证", "From signal to investigation", "從資訊到驗證")}
       </summary>

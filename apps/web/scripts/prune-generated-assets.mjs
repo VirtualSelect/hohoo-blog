@@ -8,6 +8,7 @@ const defaultApp = path.resolve(
 );
 const locales = ["zh-CN", "zh-TW", "en"];
 const generatedName = /^(zh-CN|zh-TW|en)-[a-f0-9]{16}\.json$/;
+const contentName = /^[a-f0-9]{20}-[a-f0-9]{16}\.json$/;
 
 // Only production builds prune, after all locale manifests have been generated.
 // Development keeps prior snapshots so an open preview can finish lazy loading.
@@ -18,8 +19,9 @@ export function pruneGeneratedAssets(app = defaultApp) {
   }
   const realPublic = fs.realpathSync(publicRoot);
   const directories = new Map();
-  for (const name of ["search", "radar-data"]) {
+  for (const name of ["search", "radar-data", "radar-content"]) {
     const directory = path.join(publicRoot, name);
+    if (name === "radar-content" && !fs.existsSync(directory)) continue;
     if (
       fs.lstatSync(directory).isSymbolicLink() ||
       fs.realpathSync(directory) !== path.join(realPublic, name)
@@ -40,11 +42,16 @@ export function pruneGeneratedAssets(app = defaultApp) {
     const references = [
       ["search", manifest.searchUrl],
       ...manifest.radarArchive.chunks.map((url) => ["radar-data", url]),
+      ...(manifest.radarArchive.contentAssets || []).map((url) => [
+        "radar-content",
+        url,
+      ]),
     ];
     for (const [directory, url] of references) {
-      const pattern = new RegExp(
-        `^/${directory}/${locale}-[a-f0-9]{16}\\.json$`,
-      );
+      const pattern =
+        directory === "radar-content"
+          ? /^\/radar-content\/[a-f0-9]{20}-[a-f0-9]{16}\.json$/
+          : new RegExp(`^/${directory}/${locale}-[a-f0-9]{16}\\.json$`);
       if (typeof url !== "string" || !pattern.test(url)) {
         throw new Error(`Invalid generated asset reference for ${locale}.`);
       }
@@ -60,7 +67,9 @@ export function pruneGeneratedAssets(app = defaultApp) {
     for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
       if (
         !entry.isFile() ||
-        !generatedName.test(entry.name) ||
+        !(name === "radar-content" ? contentName : generatedName).test(
+          entry.name,
+        ) ||
         keep.has(`/${name}/${entry.name}`)
       )
         continue;

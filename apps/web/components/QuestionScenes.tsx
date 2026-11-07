@@ -4,7 +4,8 @@ import evidence from "../generated/question-evidence.json";
 import { checkTimeoutClaim } from "../lib/question-evidence.mjs";
 import s from "./QuestionStudio.module.css";
 
-export type QuestionId = "java" | "cache" | "robot" | "rag";
+import type { QuestionId } from "../lib/research-cases";
+export type { QuestionId } from "../lib/research-cases";
 export function resultFor(id: QuestionId, variant: number): boolean {
   if (id === "java") return evidence.java[variant].count === 1;
   if (id === "cache")

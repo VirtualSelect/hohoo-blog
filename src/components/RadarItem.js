@@ -11,18 +11,29 @@ import { useEnglish, Related } from "./ContentUI";
 import ContentProvenance, { Freshness } from "./ContentProvenance";
 import RadarPractice from "@lab/components/RadarPractice";
 import SignalDates from "./SignalDates";
-export default function RadarItem({ item, compact = false, showDate = true }) {
+import RadarContent from "@lab/components/RadarContent";
+export default function RadarItem({
+  item,
+  compact = false,
+  showDate = true,
+  contextFirst = false,
+  headingAs: Heading = "h3",
+  showFullContent = false,
+}) {
   const en = useEnglish();
   const t = useText();
   const [expanded, setExpanded] = useState(false);
   const c = localizedNews(item, useSiteConfig().i18n.currentLocale);
   const summary = Array.from(c.summary || "");
-  return (
-    <article
-      id={"signal-" + item.id}
-      className="radar-signal"
-      data-category={item.domain}
-    >
+  const title = (
+    <Heading>
+      <a href={item.url} target="_blank" rel="noopener noreferrer">
+        {c.title} ↗
+      </a>
+    </Heading>
+  );
+  const metadata = (
+    <>
       <div className="radar-item-meta">
         <p className="hh-eyebrow">
           {uiLabel("RADAR / SIGNAL")} ·{" "}
@@ -61,11 +72,40 @@ export default function RadarItem({ item, compact = false, showDate = true }) {
             : undefined,
         }}
       />
-      <h3>
-        <a href={item.url} target="_blank" rel="noopener noreferrer">
-          {c.title} ↗
-        </a>
-      </h3>
+    </>
+  );
+  return (
+    <article
+      id={"signal-" + item.id}
+      className="radar-signal"
+      data-category={item.domain}
+    >
+      {contextFirst ? (
+        <>
+          {title}
+          <p className="hh-meta">
+            {item.sourceName} · {uiLabel(item.domain)} ·{" "}
+            <time dateTime={item.publishedAt}>
+              {radarDay(item.publishedAt)}
+            </time>
+          </p>
+          <details className="radar-source-details">
+            <summary>
+              {t(
+                "来源、日期与核验详情",
+                "Source, dates and verification",
+                "來源、日期與核驗詳情",
+              )}
+            </summary>
+            {metadata}
+          </details>
+        </>
+      ) : (
+        <>
+          {metadata}
+          {title}
+        </>
+      )}
       {item.originalTitle && item.originalTitle !== c.title && (
         <p className="hh-meta">
           {uiLabel("ORIGINAL SOURCE TITLE")} · {item.originalTitle}
@@ -92,6 +132,15 @@ export default function RadarItem({ item, compact = false, showDate = true }) {
             : c.summary}
         </p>
       )}
+      {!compact && !c.summary && (
+        <p className="hh-meta">
+          {t(
+            "来源未提供可展示的摘要，可打开原文查看。",
+            "No source excerpt is available. Open the original to read more.",
+            "來源未提供可顯示的摘要，可開啟原文查看。",
+          )}
+        </p>
+      )}
       {summary.length > 240 && (
         <button
           className="summary-expand"
@@ -104,11 +153,18 @@ export default function RadarItem({ item, compact = false, showDate = true }) {
             : t("展开摘要", "Expand summary", "展開摘要")}
         </button>
       )}
+      {showFullContent && <RadarContent item={item} />}
       {!compact && item.whyItMatters && (
         <>
           <p className="hh-eyebrow">{uiLabel("WHY IT MATTERS")}</p>
           <p>{item.whyItMatters}</p>
         </>
+      )}
+      {contextFirst && !compact && (
+        <div className="radar-connections">
+          <Related ids={item.related || []} />
+          <RadarPractice id={item.id} expanded />
+        </div>
       )}
       <div className="radar-item-actions">
         <a
@@ -137,8 +193,8 @@ export default function RadarItem({ item, compact = false, showDate = true }) {
         </a>
         {!compact && <ReadingActions id={item.id} en={en} compact />}
       </div>
-      {!compact && <Related ids={item.related || []} />}{" "}
-      {!compact && <RadarPractice id={item.id} />}
+      {!compact && !contextFirst && <Related ids={item.related || []} />}{" "}
+      {!compact && !contextFirst && <RadarPractice id={item.id} />}
       {!compact &&
         ["primary-confirmed", "cross-checked"].includes(
           item.verificationStatus,

@@ -133,19 +133,32 @@ export default async function Page({ params }: RouteProps) {
     );
   if (!data.routes.includes(route)) notFound();
   const document = data.documents.find((d) => d.route === route) || null;
+  const items = pageSignals(
+    route.startsWith("news/daily/") ||
+      route === "reading" ||
+      /^docs\/(ai-apps|llm|embodied-ai)$/.test(route)
+      ? data.dailyItems
+      : data.items,
+    route,
+  );
   return (
     <Shell
       value={{
         locale,
         route,
-        globalData: pageGlobalData(data.globalData, locale, route, document),
-        items: pageSignals(
-          route.startsWith("news/daily/") ? data.dailyItems : data.items,
+        globalData: pageGlobalData(
+          data.globalData,
+          locale,
           route,
+          document,
+          route === "radar" ? data.items : items,
         ),
+        items,
         searchUrl: data.searchUrl,
-        radarArchive: route === "radar" ? data.radarArchive : null,
-        messages: clientMessages(getMessages(locale)),
+        radarArchive: ["radar", "radar/weekly"].includes(route)
+          ? data.radarArchive
+          : null,
+        messages: clientMessages(getMessages(locale), route),
         document: document ? toClientDocument(document) : null,
       }}
     >

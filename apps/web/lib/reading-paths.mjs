@@ -7,6 +7,54 @@ export function coreSteps(track) {
   );
 }
 
+export function matchesReadingQuery(query = "", ...texts) {
+  const normalize = (value) =>
+    String(value || "")
+      .normalize("NFKC")
+      .toLocaleLowerCase();
+  const haystack = normalize(texts.filter(Boolean).join(" "));
+  return normalize(query)
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .every((token) => haystack.includes(token));
+}
+
+export function readResearchTrack(
+  search,
+  hash,
+  tracks,
+  fallback = "ai-apps",
+  allowAll = false,
+) {
+  const anchor = /^#(?:track|plans)-(.+)$/.exec(hash)?.[1];
+  const step = /^#step-(.+)$/.exec(hash)?.[1];
+  const fromStep =
+    step &&
+    tracks.find((track) => track.steps.some((item) => item.id === step))
+      ?.domain;
+  const params = new URLSearchParams(search);
+  const legacy = {
+    java: "ai-apps",
+    cache: "llm",
+    robot: "embodied-ai",
+    rag: "rag",
+  }[params.get("question")];
+  const value = anchor || fromStep || params.get("track") || legacy;
+  return (allowAll && value === "all") ||
+    tracks.some((track) => track.domain === value)
+    ? value
+    : fallback;
+}
+
+export function researchTrackUrl(href, domain) {
+  const url = new URL(href);
+  url.searchParams.set("track", domain);
+  url.searchParams.delete("question");
+  if (/^#(?:track|plans|step)-/.test(url.hash)) url.hash = "";
+  return url.pathname + url.search + url.hash;
+}
+
 export function readLearningFilters(search = "") {
   const params = new URLSearchParams(search);
   const difficulty = params.get("difficulty");

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Layout from "@lab/runtime/Layout";
 import Link from "@lab/runtime/Link";
 import papers from "@site/data/papers.json";
-import news from "@site/data/news/items.json";
 import tracks from "@site/data/learning-paths.json";
 import { localizedNews } from "@site/src/utils/news-locale.mjs";
 import ReadingActions, {
@@ -32,7 +31,7 @@ const stageLabels = {
   all: ["全部", "All", "全部"],
 };
 export default function Reading() {
-  const { locale } = useSite();
+  const { locale, items: news } = useSite();
   const t = useText();
   const en = locale === "en",
     state = useNewsReading(),
