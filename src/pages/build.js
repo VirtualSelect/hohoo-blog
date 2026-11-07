@@ -24,7 +24,7 @@ export default function Build() {
         "從一個問題出發，在瀏覽器裡觀察，再回到真實專案。",
       )}
     >
-      <main className="hh-page">
+      <main className="hh-page fieldwork-build">
         <header className={s.hero}>
           <div>
             <p className="eyebrow">

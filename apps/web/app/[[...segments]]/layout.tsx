@@ -1,5 +1,6 @@
 import "../globals.css";
 import "../editorial.css";
+import "../fieldnotes.css";
 import { resolveSegments } from "../../lib/content";
 import VisitAnalytics from "../../components/VisitAnalytics";
 import { themeScript } from "../../lib/theme-init.mjs";

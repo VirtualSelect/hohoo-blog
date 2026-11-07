@@ -11,11 +11,12 @@ import {
   filterWriting,
 } from "../utils/writing-kinds.ts";
 import { useText } from "../../apps/web/components/Shell";
+import ResearchIndex from "../../apps/web/components/ResearchIndex";
 import LabSketch from "../../apps/web/components/LabSketch";
 import Link from "@lab/runtime/Link";
 
 import type { WritingFilters } from "../utils/writing-kinds.ts";
-import type { ArticleKind, Domain, LocalizedText } from "@lab/lib/site-types";
+import type { ArticleKind, LocalizedText } from "@lab/lib/site-types";
 const defaultFilters: WritingFilters = {
   kind: "all",
   domain: "all",
@@ -73,13 +74,6 @@ export default function Articles() {
   }
   const visible = filterWriting(writing, filters);
   const filtered = Object.values(filters).some((value) => value !== "all");
-  const domains: [Domain | "all", string][] = [
-    ["all", t("全部方向", "All tracks", "全部方向")],
-    ["ai-apps", t("AI 应用开发", "AI Applications", "AI 應用開發")],
-    ["llm", "LLM"],
-    ["rag", t("RAG · 检索增强生成", "RAG", "RAG · 檢索增強生成")],
-    ["embodied-ai", t("具身智能", "Embodied AI", "具身智能")],
-  ];
   return (
     <Layout
       title={t("文章", "Writing", "文章")}
@@ -95,6 +89,11 @@ export default function Articles() {
           )}
         </h1>
         <p className="hh-lead">{t(...descriptions.all)}</p>
+        <ResearchIndex
+          entries={writing}
+          selected={filters.domain}
+          onSelect={(domain) => updateFilters({ ...filters, domain })}
+        />
         <div className="writing-filters">
           <div
             className="hh-controls"
@@ -129,27 +128,6 @@ export default function Articles() {
                   </span>
                 </button>
               ))}
-          </div>
-          <div
-            className="hh-controls writing-domain-filters"
-            role="group"
-            aria-label={t(
-              "按研究方向筛选",
-              "Filter by research track",
-              "依研究方向篩選",
-            )}
-          >
-            {domains.map(([domain, label]) => (
-              <button
-                key={domain}
-                type="button"
-                data-domain={domain}
-                aria-pressed={filters.domain === domain}
-                onClick={() => updateFilters({ ...filters, domain })}
-              >
-                {label}
-              </button>
-            ))}
           </div>
           <div
             className="writing-filter-summary"

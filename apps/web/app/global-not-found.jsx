@@ -1,5 +1,6 @@
 import "./globals.css";
 import "./editorial.css";
+import "./fieldnotes.css";
 import NotFound from "./[[...segments]]/not-found";
 import { themeScript } from "../lib/theme-init.mjs";
 import { brandIcons } from "../lib/brand";

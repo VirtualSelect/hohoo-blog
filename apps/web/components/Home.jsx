@@ -10,7 +10,8 @@ import VisitorStats from "./VisitorStats";
 import ProjectShowcase from "./ProjectShowcase";
 import QuestionStudio from "./QuestionStudio";
 import editorial from "@site/data/editorial.json";
-import topics from "@site/data/topics";
+import FieldworkCover from "./FieldworkCover";
+import ResearchIndex from "./ResearchIndex";
 import WritingKind from "@site/src/components/WritingKind";
 
 export default function Home() {
@@ -23,32 +24,13 @@ export default function Home() {
       .filter(Boolean);
   return (
     <main className="home editorial-home">
-      <QuestionStudio />
-      <nav
-        className="home-reading-directions"
-        aria-label={t("选择阅读方向", "Choose a reading path", "選擇閱讀方向")}
-      >
-        <p>
-          {t(
-            "从一个问题，走进一条主线。",
-            "One question opens a reading path.",
-            "從一個問題，走進一條主線。",
-          )}
-        </p>
-        <div>
-          {topics.map((topic, i) => (
-            <Link key={topic.id} to={"/learning#track-" + topic.id}>
-              <span>0{i + 1}</span>
-              <strong>{t(topic.title, topic.en, topic.titleTw)}</strong>
-              <span aria-hidden="true">→</span>
-            </Link>
-          ))}
-        </div>
-      </nav>
+      <FieldworkCover entries={entries} />
+      <ResearchIndex entries={entries} />
+      <QuestionStudio embedded />
       <section className="home-section">
         <div className="section-top">
           <div>
-            <p className="eyebrow">01 / {t("作品", "Builds", "作品")}</p>
+            <p className="eyebrow">02 / {t("作品", "Builds", "作品")}</p>
             <h2>{t("把想法做出来", "Ideas, made tangible", "把想法做出來")}</h2>
           </div>
           <Link to="/build">{t("全部实践", "All builds", "全部實作")} →</Link>
@@ -123,7 +105,7 @@ export default function Home() {
         <section className="home-section">
           <div className="section-top">
             <div>
-              <p className="eyebrow">02 / {t("文字", "Writing", "文字")}</p>
+              <p className="eyebrow">03 / {t("文字", "Writing", "文字")}</p>
               <h2>{t("近期文章", "Recent writing", "近期文章")}</h2>
             </div>
             <Link to="/articles">
@@ -160,7 +142,7 @@ export default function Home() {
         <div className="section-top">
           <div>
             <p className="eyebrow">
-              03 / {t("外部信号", "External signals", "外部訊號")}
+              04 / {t("外部信号", "External signals", "外部訊號")}
             </p>
             <h2>{t("AI 雷达", "AI Radar", "AI 雷達")}</h2>
           </div>

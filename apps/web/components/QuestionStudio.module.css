@@ -107,7 +107,7 @@
 .question {
   padding: 32px 36px 32px 0;
 }
-.question h2 {
+.question :is(h2, h3) {
   font-size: clamp(26px, 2.6vw, 37px);
   line-height: 1.35;
   letter-spacing: -0.025em;
@@ -473,7 +473,7 @@
   .question {
     padding: 24px 0;
   }
-  .question h2 {
+  .question :is(h2, h3) {
     margin: 12px 0;
   }
   .prediction {
@@ -505,5 +505,82 @@
   .massDot,
   .barTrack > div {
     transition: none;
+  }
+}
+
+.sectionIntro {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  align-items: end;
+  gap: 32px;
+  padding-block: 8px 28px;
+}
+.sectionIntro h2 {
+  font: 600 34px/1.5 var(--folio-serif);
+  margin: 12px 0 0;
+}
+.sectionIntro > p {
+  font-size: 12px;
+  color: var(--blog-muted);
+  line-height: 1.9;
+  margin: 0;
+}
+.root[data-layout="embedded"] {
+  border-top: 2px solid var(--folio-ink);
+  padding-top: 30px;
+}
+.root[data-layout="embedded"] .instrument {
+  background: var(--folio-paper);
+}
+.root[data-layout="embedded"] .question :is(h2, h3) {
+  font-family: var(--folio-serif);
+  font-size: 29px;
+  line-height: 1.55;
+}
+@media (min-width: 1281px) {
+  .root[data-layout="embedded"] {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+  }
+  .root[data-layout="embedded"] .sectionIntro {
+    grid-column: 1/-1;
+  }
+  .root[data-layout="embedded"] .selector {
+    display: flex;
+    flex-direction: column;
+    border-block: 1px solid var(--hh-border);
+  }
+  .root[data-layout="embedded"] .selector button {
+    border-right: 0;
+    border-bottom: 1px solid var(--hh-border);
+    min-height: 90px;
+    padding: 16px 12px;
+    gap: 10px;
+  }
+  .root[data-layout="embedded"] .selector button:last-child {
+    border-bottom: 0;
+  }
+  .root[data-layout="embedded"] .selector button[aria-pressed="true"] {
+    box-shadow: inset 3px 0 var(--scene-ink);
+  }
+  .root[data-layout="embedded"] .exhibit {
+    border-top: 1px solid var(--hh-border);
+  }
+  .root[data-layout="embedded"] .question {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .root[data-layout="embedded"] .finding,
+  .root[data-layout="embedded"] .sources {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 767px) {
+  .sectionIntro {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .sectionIntro h2 {
+    font-size: 28px;
   }
 }
