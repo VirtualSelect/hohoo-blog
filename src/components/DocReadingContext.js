@@ -11,6 +11,7 @@ import useLearningProgress from "./useLearningProgress";
 import { learningSymbols } from "@site/src/utils/learning-progress.ts";
 import WritingKind from "./WritingKind";
 import { useText } from "@lab/components/Shell";
+import { nextReadingStep } from "@lab/lib/reading-paths.mjs";
 export default function DocReadingContext({ position }) {
   const { metadata, frontMatter: f } = useDoc();
   const en = useEnglish();
@@ -29,13 +30,14 @@ export default function DocReadingContext({ position }) {
   const index = routeSteps.findIndex((s) => s.id === step);
   const currentStep = track?.steps.find((s) => s.id === step);
   const reviewNotice = currentStep?.reviewNotice;
-  const adjacent = track
-    ? track.steps
-        .map((s) => entries.find((e) => e.stepId === s.id))
-        .filter(Boolean)
-    : [];
-  const publishedIndex = adjacent.findIndex((e) => e.stepId === step);
-  const nextArticle = publishedIndex >= 0 ? adjacent[publishedIndex + 1] : null;
+  const nextStep = nextReadingStep(
+    track,
+    step,
+    new Set(entries.map((entry) => entry.stepId)),
+  );
+  const nextArticle = nextStep
+    ? entries.find((entry) => entry.stepId === nextStep.id)
+    : null;
   useEffect(() => {
     if (
       position === "header" &&
@@ -149,45 +151,57 @@ export default function DocReadingContext({ position }) {
           {nextArticle && (
             <p>
               <Link to={nextArticle.permalink}>
-                {en
-                  ? "Next published article"
-                  : translate({
-                      id: "reading.nextPublished",
-                      message: "下一篇已发布内容",
-                    })}
-                ：{nextArticle.title} →
+                {t("建议接着读", "Recommended next reading", "建議接著讀")}：
+                {nextArticle.title} →
               </Link>
             </p>
           )}
-          <h2>
-            {en
-              ? "You are here"
-              : translate({ id: "ui.55d22ed084", message: "当前学习位置" })}
-          </h2>
-          <p className="hh-eyebrow">
-            {uiLabel(track.brand)} / {t(track.title, track.en, track.titleTw)}
+          <details>
+            <summary>
+              {en
+                ? "You are here"
+                : translate({ id: "ui.55d22ed084", message: "当前学习位置" })}
+            </summary>
+            <p className="hh-eyebrow">
+              {uiLabel(track.brand)} / {t(track.title, track.en, track.titleTw)}
+            </p>
+            <ol start={Math.max(0, index - 1) + 1}>
+              {routeSteps.slice(Math.max(0, index - 1), index + 2).map((s) => {
+                const article = entries.find((e) => e.stepId === s.id);
+                return (
+                  <li
+                    key={s.id}
+                    aria-current={s.id === step ? "step" : undefined}
+                  >
+                    {
+                      learningSymbols[
+                        state.items[s.id]?.status || "not-started"
+                      ]
+                    }{" "}
+                    {s.id === step ? (
+                      article?.title || (en ? s.en : s.title)
+                    ) : (
+                      <Link to={article?.permalink || "/learning#step-" + s.id}>
+                        {article?.title || (en ? s.en : s.title)}
+                      </Link>
+                    )}
+                    {!article && " · " + uiLabel("PLANNED")}
+                  </li>
+                );
+              })}
+            </ol>
+            <Related ids={f.related || []} />
+          </details>
+          <p>
+            <Link to={"/learning#track-" + track.domain}>
+              {t(
+                "回到主线与专题选读",
+                "Return to core and focused reading",
+                "回到主線與專題選讀",
+              )}{" "}
+              →
+            </Link>
           </p>
-          <ol start={Math.max(0, index - 1) + 1}>
-            {routeSteps.slice(Math.max(0, index - 1), index + 2).map((s) => {
-              const article = entries.find((e) => e.stepId === s.id);
-              return (
-                <li
-                  key={s.id}
-                  aria-current={s.id === step ? "step" : undefined}
-                >
-                  {learningSymbols[state.items[s.id]?.status || "not-started"]}{" "}
-                  {s.id === step ? (
-                    article?.title || (en ? s.en : s.title)
-                  ) : (
-                    <Link to={article?.permalink || "/learning#step-" + s.id}>
-                      {article?.title || (en ? s.en : s.title)}
-                    </Link>
-                  )}
-                  {!article && " · " + uiLabel("PLANNED")}
-                </li>
-              );
-            })}
-          </ol>
           <button
             type="button"
             disabled={!state.ready}
@@ -225,7 +239,7 @@ export default function DocReadingContext({ position }) {
           )}
         </section>
       )}
-      <Related ids={f.related || []} />
+      {!track && <Related ids={f.related || []} />}
     </>
   );
 }

@@ -13,7 +13,6 @@ import ArticleContents from "./ArticleContents";
 const ConversationWorkbench = dynamic(() => import("./ConversationWorkbench"));
 import ReadingReflection from "./ReadingReflection";
 const RequestJourney = dynamic(() => import("./RequestJourney"));
-import ReadingFork from "./ReadingFork";
 import TryIt from "./TryIt";
 const ErrorClinic = dynamic(() => import("./ErrorClinic"));
 const PracticeCompanion = dynamic(() => import("./PracticeCompanion"));
@@ -321,7 +320,6 @@ export default function Document({ children }: PropsWithChildren) {
           title={d.metadata.title}
         />
         {d.kind === "docs" && <DocReadingContext position="footer" />}
-        <ReadingFork key={d.route} />
         <ArticleHistory route={d.route} />
         <div className="article-end">
           <Link to="/articles">

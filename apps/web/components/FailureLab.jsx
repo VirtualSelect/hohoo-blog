@@ -220,9 +220,9 @@ export default function FailureLab() {
       )}
       <p className={s.quiet}>
         {t(
-          "这解决的是客户端历史一致性，不保证服务端幂等、取消执行或不重复计费。真实 Java Demo 与 API 验证仍待共创。",
-          "This protects client history consistency. It does not guarantee server idempotency, cancellation or billing behavior. Java and live API validation remain future work.",
-          "這解決的是用戶端歷史一致性，不保證伺服器冪等、取消執行或不重複計費。真實 Java Demo 與 API 驗證仍待共創。",
+          "这解决的是客户端历史一致性，不保证服务端幂等、取消执行或不重复计费。配套 Java 工程见下方教程；本演示没有验证在线服务端的副作用。",
+          "This protects client history consistency, not server idempotency, cancellation or billing. The tutorial below includes the Java implementation; this exercise does not verify live server-side effects.",
+          "這解決的是用戶端歷史一致性，不保證伺服器冪等、取消執行或不重複計費。配套 Java 工程見下方教程；本示範沒有驗證線上伺服器的副作用。",
         )}
       </p>
     </div>

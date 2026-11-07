@@ -5,13 +5,16 @@ import { useContent, ContentRows } from "../components/ContentUI";
 import CreativeWorkbench from "@lab/components/CreativeWorkbench";
 import { useText } from "@lab/components/Shell";
 import s from "@lab/components/Workshop.module.css";
+import editorial from "@site/data/editorial.json";
+import GardenEntry from "@lab/components/GardenEntry";
+import DiscoveryCompass from "@lab/components/DiscoveryCompass";
 export default function Build() {
   const { entries } = useContent(),
     t = useText();
   const labs = entries.filter((e) => e.type === "lab");
-  const completed = labs.filter(
-    (e) => !["planning", "planned"].includes(e.status),
-  );
+  const completed = editorial.featuredLabs
+    .map((id) => labs.find((entry) => entry.id === id))
+    .filter(Boolean);
   return (
     <Layout
       title={t("实践", "Build", "實作")}
@@ -87,13 +90,23 @@ export default function Build() {
               "程式碼裡的真實專案",
             )}
           </h2>
-          <ContentRows items={entries.filter((e) => e.type === "project")} />
+          <ContentRows
+            items={editorial.featuredProjects
+              .map((id) => entries.find((entry) => entry.id === id))
+              .filter(Boolean)}
+          />
           <Link to="/projects">
             {t("全部项目", "All projects", "全部專案")} →
           </Link>
         </section>
         <section className="hh-section">
-          <h2>{t("实验与研究", "Experiments and research", "實驗與研究")}</h2>
+          <h2>
+            {t(
+              "代表实验与证据",
+              "Selected experiments and evidence",
+              "代表實驗與證據",
+            )}
+          </h2>
           {completed.length > 0 && <ContentRows items={completed} />}
           <details>
             <summary>
@@ -120,6 +133,17 @@ export default function Build() {
             {t("全部实验", "All experiments", "全部實驗")} →
           </Link>
         </section>
+        <details className="home-discovery">
+          <summary>
+            {t(
+              "轻松探索 · 花园与好奇心指南针",
+              "Explore freely · garden and curiosity compass",
+              "輕鬆探索 · 花園與好奇心指南針",
+            )}
+          </summary>
+          <GardenEntry />
+          <DiscoveryCompass />
+        </details>
       </main>
     </Layout>
   );

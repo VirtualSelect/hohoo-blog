@@ -1,13 +1,13 @@
 ---
-title: "After 24 correct answers: designing a more discriminating context experiment"
+title: "Context experiment design: from 24 live results to a pending 128-request protocol"
 description: "Remove wording and identifier shortcuts, freeze 128 similar-distractor requests, and verify the materials with Java 8 and an independent audit. Offline preparation is not a new model result."
 slug: /llm/context-similar-distractors
 status: published
 published_at: "2026-09-30"
-updated: "2026-09-30"
+updated: "2026-11-07"
 reading_minutes: 10
 domain: llm
-article_kind: case-study
+article_kind: mechanism
 difficulty: intermediate
 related: ["doc:llm/context-position-paired-protocol", "doc:llm/context-position-experiment", "project:hohoo-ai-lab"]
 ---
@@ -123,7 +123,7 @@ Tests cover answer leakage, equal-length pairing, ordering, budget consistency, 
 
 ## 8. What remains before a live run?
 
-The prior 24-request authorization was consumed by L1v2. The new limit of 128 is a code ceiling, not a spending approval. Account rates and a total monetary cap still need confirmation. This integration read no API key and sent no Agnes requests.
+The new 128-request protocol has no live model results. Offline reproduction needs no key. A live comparison requires checking service rates and setting both request and monetary limits beforehand.
 
 The runner requires an explicit request allowance, an audited prepared directory and a key in the process environment. The blog exposes no public calling endpoint. Attempts are separated by at least 20 seconds after completion. HTTP 429/401/403 stop immediately; two consecutive other request/protocol failures also stop, with no retries. A read timeout does not prove the server did nothing. Missing usage stays unknown, never zero cost.
 

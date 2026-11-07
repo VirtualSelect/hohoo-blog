@@ -1,53 +1,43 @@
 "use client";
 import Link from "../runtime/Link";
-import { useSite } from "../runtime/context";
 import { useText } from "./Shell";
-import { workshops, workshopText } from "../lib/workshop-catalog.mjs";
 import s from "./Workshop.module.css";
-import GardenEntry from "./GardenEntry";
 export default function WorkshopEntry() {
-  const t = useText(),
-    { locale } = useSite();
+  const t = useText();
   return (
-    <>
-      <GardenEntry />
-      <section className={s.entry} aria-labelledby="workshop-entry-title">
-        <div>
-          <p className="eyebrow">
-            {t("不妨，动一下手", "Think with your hands", "不妨，動一下手")}
-          </p>
-          <h2 id="workshop-entry-title">
-            {t(
-              "把“好像懂了”，变成一次观察。",
-              "Turn an idea into an observation.",
-              "把「好像懂了」，變成一次觀察。",
-            )}
-          </h2>
-          <p>
-            {t(
-              "从一条重复消息、一段对话或一堵障碍开始。浏览器里的小实验，不需要 API Key。",
-              "Start with a duplicate message, a conversation or an obstacle. Browser exercises, no API key required.",
-              "從一條重複訊息、一段對話或一堵障礙開始。瀏覽器裡的小實驗，不需要 API Key。",
-            )}
-          </p>
-        </div>
-        <nav
-          aria-label={t("精选交互实验", "Selected exercises", "精選互動實驗")}
-        >
-          {["failure", "memory", "robot"].map((id) => {
-            const w = workshops.find((w) => w.id === id);
-            return (
-              <Link key={id} to={`/build?tool=${id}#workbench`}>
-                <span>{workshopText(w.title, locale)}</span>
-                <span aria-hidden="true">↗</span>
-              </Link>
-            );
-          })}
-          <Link to="/build#workbench">
-            {t("查看全部工作台", "Explore all workbenches", "查看全部工作臺")} →
-          </Link>
-        </nav>
-      </section>
-    </>
+    <section className={s.entry} aria-labelledby="workshop-entry-title">
+      <div>
+        <p className="eyebrow">02 / {t("动手理解", "Try it", "動手理解")}</p>
+        <h2 id="workshop-entry-title">
+          {t(
+            "重试一次，为什么多了一条消息？",
+            "One retry. Why two messages?",
+            "重試一次，為什麼多了一條訊息？",
+          )}
+        </h2>
+        <p>
+          {t(
+            "注入一次超时，对照两种历史提交方式。先看见区别，再回到代码理解原因。",
+            "Inject a timeout and compare two ways to commit history. See the difference, then inspect the code.",
+            "注入一次逾時，對照兩種歷史提交方式。先看見差異，再回到程式碼理解原因。",
+          )}
+        </p>
+        <small>
+          {t(
+            "浏览器教学演示 · 无需密钥",
+            "Browser exercise · no API key",
+            "瀏覽器教學示範 · 無需金鑰",
+          )}
+        </small>
+      </div>
+      <nav aria-label={t("动手尝试", "Try an exercise", "動手嘗試")}>
+        <Link to="/build?tool=failure#workbench">
+          {t("打开超时实验", "Open the timeout exercise", "開啟逾時實驗")} →
+        </Link>
+        <Link to="/build#workbench">
+          {t("查看其他工作台", "Explore other workbenches", "查看其他工作臺")} →
+        </Link>
+      </nav>
+    </section>
   );
 }

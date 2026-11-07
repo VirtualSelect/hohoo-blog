@@ -4,7 +4,7 @@ description: "Eight MuJoCo trajectories, three passive readouts and recorded-sta
 slug: "/embodied-ai/mujoco-qualified-completion"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-07"
+updated: "2026-11-07"
 reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -12,6 +12,8 @@ difficulty: "intermediate"
 related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-phase-recovery", "doc:embodied-ai/mujoco-completion-lifecycle"]
 ---
 
+
+**Version note: the experiment below uses its original pinned revision. The two observer defects found on 2026-10-06 were addressed in the 2026-10-07 revision linked at the end. Prefer that revision when reusing the observer; historical trajectories and conclusions remain tied to the original code.**
 [Pinned code](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/9800095689ce3893f9e7a6ec681355e76c6fcff6/experiments/vl01_qualified_completion) · [Raw evidence and audit](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/9800095689ce3893f9e7a6ec681355e76c6fcff6/evidence/qualified-completion-20261005) · [Experiment record](/labs/qualified-completion)
 
 The [phase-aware recovery study](/docs/embodied-ai/mujoco-phase-recovery) left a misleading final frame: the controller had aborted, yet the cube landed inside the bin. This study connects completion back to execution history and asks whether physical placement, current validity and authority to declare completion should share one boolean.
@@ -53,14 +55,14 @@ The physical goal may remain satisfied, but the observer lacks fresh evidence: `
 
 </details>
 
-## Correction, 2026-10-06: contracts the implementation does not yet guarantee
+## Historical correction · 2026-10-06: two gaps in the original contract
 
 Two reproducible boundaries are not covered by the original eight trajectories with zero transport delay:
 
 1. **Expiry runs before the new packet is processed.** The E11 base checks the previous packet first. With 20ms sampling, a fixed 40ms delay and a 60ms age threshold, each incoming packet is fresh but the previous one expires just before receipt. The window repeatedly resets and sustained placement remains `VERIFYING`. Rejecting individual stale packets does not establish correct behavior for a delayed stream.
 2. **Release is a boolean, not a timestamp.** E14 cannot reject a packet captured before release but received afterward. At 2ms/tick, release at tick 100 and a first capture at 90 received at 100 lead to completion at 230 with a last capture at 220. Only 120 ticks (240ms) of evidence are after release, below the required 125 ticks (250ms).
 
-“Do not borrow pre-release evidence” is therefore an **intended contract**, not a universal guarantee of the pinned code. The original 7.102s / 7.302s observations remain valid for their recorded fixed scenarios. No trajectories were rewritten or new physical experiments run for this review. Reuse requires separate fixes for packet-processing order and release-time boundaries, plus delayed, duplicate, reordered and backward-time regressions—not just a larger threshold.
+“Do not borrow pre-release evidence” is therefore an **intended contract**, not a universal guarantee of the pinned code. The original 7.102s / 7.302s observations remain valid for their recorded fixed scenarios. No trajectories were rewritten or new physical experiments run for this review. At that time, reuse required separate fixes for packet-processing order and release-time boundaries, plus delayed, duplicate, reordered and backward-time regressions—not just a larger threshold. See the dated fix follow-up below.
 
 ## Three observers, one physical trajectory
 

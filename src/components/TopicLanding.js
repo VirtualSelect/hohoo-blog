@@ -9,6 +9,7 @@ import SeriesEntry from "./SeriesEntry";
 import TopicNews from "./TopicNews";
 import { useText } from "@lab/components/Shell";
 import LabSketch from "@lab/components/LabSketch";
+import { coreSteps } from "@lab/lib/reading-paths.mjs";
 export default function TopicLanding({ category }) {
   const t = useText();
   const { entries } = useContent();
@@ -26,7 +27,7 @@ export default function TopicLanding({ category }) {
       ["doc", "note"].includes(e.type) &&
       e.translationStatus !== "MISSING",
   );
-  const starting = track.steps
+  const starting = coreSteps(track)
     .map((s) => docs.find((e) => e.id === "doc:" + s.doc))
     .filter(Boolean);
   const projects = entries.filter(
@@ -72,61 +73,57 @@ export default function TopicLanding({ category }) {
       {starting.length > 0 && (
         <Section
           label={uiLabel("START HERE")}
-          title={t(
-            "系列总览 · 建议阅读顺序",
-            "Series overview · suggested reading order",
-            "系列總覽 · 建議閱讀順序",
-          )}
+          title={t("阅读主线", "Core reading path", "閱讀主線")}
         >
-          <ContentRows items={starting} />
-        </Section>
-      )}
-      {category === "ai-apps" && (
-        <Section
-          label={uiLabel("AI ENGINEERING")}
-          title={t(
-            "从应用实现，到工程交付",
-            "From application to delivery",
-            "從應用實作，到工程交付",
-          )}
-        >
-          <p className="hh-lead">
-            {t(
-              "AI 应用开发的工程子方向。",
-              "An engineering subdirection of AI applications.",
-              "AI 應用開發的工程子方向。",
-            )}
-          </p>
-          <ul className="hh-concepts">
-            {[
-              "AI Coding",
-              "Codex",
-              "MCP",
-              "Skills",
-              "Harness",
-              "Testing",
-              "Evals",
-              "Observability",
-              "Production",
-              "Performance",
-            ].map((s) => (
-              <li key={s}>{uiLabel(s)}</li>
+          <ol className="topic-core-list">
+            {(track.chapters || []).map((chapter) => (
+              <li key={chapter.title[1]}>
+                <h3>{t(...chapter.title)}</h3>
+                <p>{t(...chapter.goal)}</p>
+                <ul>
+                  {chapter.steps
+                    .map((id) => starting.find((entry) => entry.stepId === id))
+                    .filter(Boolean)
+                    .map((entry) => (
+                      <li key={entry.id}>
+                        <Link to={entry.href}>{entry.title} →</Link>
+                      </li>
+                    ))}
+                </ul>
+              </li>
             ))}
-          </ul>
-          <Link to="/learning#engineering">
-            {t("工程选题 →", "Engineering topics →", "工程選題 →")}
-          </Link>
+          </ol>
           <p>
-            <Link to="/docs/rag">
+            <Link to={"/articles?domain=" + category}>
               {t(
-                "知识检索与回答评估：进入 RAG 专题",
-                "Knowledge retrieval and answer evaluation: explore RAG",
-                "知識檢索與回答評估：進入 RAG 專題",
+                "本方向全部文章",
+                "All articles in this track",
+                "本方向全部文章",
               )}{" "}
               →
             </Link>
           </p>
+          <Link to={"/learning#track-" + category}>
+            {t(
+              "查看先修、专题选读与阅读进度",
+              "Prerequisites, focused studies and progress",
+              "查看先修、專題選讀與閱讀進度",
+            )}{" "}
+            →
+          </Link>
         </Section>
+      )}
+      {category === "ai-apps" && (
+        <p>
+          <Link to="/learning#engineering">
+            {t(
+              "遇到超时、重试或投递问题？查看已有工程实践",
+              "Working on deadlines, retries or delivery? Browse the engineering studies",
+              "遇到逾時、重試或投遞問題？查看已有工程實作",
+            )}{" "}
+            →
+          </Link>
+        </p>
       )}
       {projects.length > 0 && (
         <Section
@@ -152,9 +149,21 @@ export default function TopicLanding({ category }) {
           />
         </details>
       )}
-      <TopicPapers category={category} />
-      {category !== "rag" && <TopicNews category={category} />}
-      <details className="topic-plans" open={category === "rag"}>
+      <details>
+        <summary>
+          {t("论文与参考资料", "Papers and references", "論文與參考資料")}
+        </summary>
+        <TopicPapers category={category} />
+      </details>
+      {category !== "rag" && (
+        <details>
+          <summary>
+            {t("相关外部资讯", "Related external signals", "相關外部資訊")}
+          </summary>
+          <TopicNews category={category} />
+        </details>
+      )}
+      <details className="topic-plans">
         <summary>
           {t(
             "学习路线与后续选题",
