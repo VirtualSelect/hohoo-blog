@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Layout from "@lab/runtime/Layout";
 import { useContent } from "../components/ContentUI";
 import WritingList from "../components/WritingList";
-import WritingKind from "../components/WritingKind";
 import { writingEntries } from "../utils/localization.cjs";
 import {
   writingKinds,
@@ -10,55 +9,26 @@ import {
   writingFilters,
   filterWriting,
 } from "../utils/writing-kinds.ts";
-import { useText } from "../../apps/web/components/Shell";
-import ResearchIndex from "../../apps/web/components/ResearchIndex";
-import LabSketch from "../../apps/web/components/LabSketch";
-import Link from "@lab/runtime/Link";
-
+import { matchesReadingQuery } from "@lab/lib/reading-paths.mjs";
+import { useText } from "@lab/components/Shell";
+import ResearchIndex from "@lab/components/ResearchIndex";
+import SeriesShelf from "@lab/components/SeriesShelf";
 import type { WritingFilters } from "../utils/writing-kinds.ts";
-import type { ArticleKind, LocalizedText } from "@lab/lib/site-types";
-const defaultFilters: WritingFilters = {
-  kind: "all",
-  domain: "all",
-  type: "all",
-};
-const descriptions: Partial<Record<ArticleKind, LocalizedText>> & {
-  all: LocalizedText;
-} = {
-  all: [
-    "从可运行的教程，到有出处的机制与工程拆解。",
-    "Runnable tutorials, sourced mechanisms and engineering decisions.",
-    "從可執行的教程，到有出處的機制與工程拆解。",
-  ],
-  tutorial: [
-    "跟着请求、代码和真实记录，完成一次实践。",
-    "Follow code, requests and recorded results through a working example.",
-    "跟著請求、程式碼和真實記錄，完成一次實作。",
-  ],
-  "case-study": [
-    "沿着真实项目，理解数据流、取舍与故障边界。",
-    "Follow real projects through data flow, decisions and failure boundaries.",
-    "沿著真實專案，理解資料流程、取捨與故障邊界。",
-  ],
-  mechanism: [
-    "顺着一手资料和可核对的推导，把原理讲清楚。",
-    "Work through primary sources and checkable derivations.",
-    "順著一手資料和可核對的推導，把原理講清楚。",
-  ],
-  essay: [
-    "记录重新开始、持续学习和构建的过程。",
-    "Reflections on starting again, learning and building.",
-    "記錄重新開始、持續學習和構建的過程。",
-  ],
-};
-
+const defaults: WritingFilters = { kind: "all", domain: "all", type: "all" };
 export default function Articles() {
-  const { entries } = useContent();
-  const t = useText();
+  const { entries } = useContent(),
+    t = useText();
   const writing = writingEntries(entries);
-  const [filters, setFilters] = useState(defaultFilters);
+  const [filters, setFilters] = useState(defaults);
+  const [query, setQuery] = useState("");
+  const [showAll, setShowAll] = useState(false);
   useEffect(() => {
-    const sync = () => setFilters(writingFilters(location.search));
+    const sync = () => {
+      setFilters(writingFilters(location.search));
+      const params = new URLSearchParams(location.search);
+      setQuery(params.get("q") || "");
+      setShowAll(params.get("view") === "list");
+    };
     sync();
     window.addEventListener("popstate", sync);
     return () => window.removeEventListener("popstate", sync);
@@ -66,134 +36,159 @@ export default function Articles() {
   function updateFilters(next: WritingFilters) {
     setFilters(next);
     const url = new URL(location.href);
+    url.hash = "";
     for (const [key, value] of Object.entries(next)) {
       if (value === "all") url.searchParams.delete(key);
       else url.searchParams.set(key, value);
     }
-    history.pushState(history.state, "", url);
+    history.pushState(history.state, "", url.pathname + url.search);
   }
-  const visible = filterWriting(writing, filters);
-  const filtered = Object.values(filters).some((value) => value !== "all");
+  function updateQuery(value: string) {
+    setQuery(value);
+    const url = new URL(location.href);
+    url.hash = "";
+    if (value.trim()) url.searchParams.set("q", value);
+    else url.searchParams.delete("q");
+    history.replaceState(history.state, "", url.pathname + url.search);
+  }
+  const filtered =
+    !!query.trim() || Object.values(filters).some((value) => value !== "all");
+  const visible = filterWriting(writing, filters).filter((entry) =>
+    matchesReadingQuery(query, entry.title, entry.description),
+  );
   return (
     <Layout
       title={t("文章", "Writing", "文章")}
-      description={t(...descriptions.all)}
+      description={t(
+        "查找标题、关键词，或按研究方向筛选已发表文章。",
+        "Find published articles by title, keyword or research direction.",
+        "查找標題、關鍵字，或依研究方向篩選已發表文章。",
+      )}
     >
-      <main className="hh-page editorial-articles">
-        <p className="hh-eyebrow">{t("文章", "Writing", "文章")}</p>
-        <h1>
-          {t(
-            "把问题读懂，把方法带走。",
-            "Understand the question. Take away a method.",
-            "把問題讀懂，把方法帶走。",
-          )}
-        </h1>
-        <p className="hh-lead">{t(...descriptions.all)}</p>
-        <ResearchIndex
-          entries={writing}
-          selected={filters.domain}
-          onSelect={(domain) => updateFilters({ ...filters, domain })}
-        />
-        <div className="writing-filters">
-          <div
-            className="hh-controls"
-            role="group"
-            aria-label={t(
-              "按阅读目的筛选",
-              "Filter by reading purpose",
-              "依閱讀目的篩選",
+      <main className="hh-page focused-articles">
+        <header className="focused-heading">
+          <h1>{t("文章", "Writing", "文章")}</h1>
+          <p>
+            {t(
+              "有具体问题，就从搜索开始。",
+              "Have a question? Start with a search.",
+              "有具體問題，就從搜尋開始。",
             )}
-          >
-            {(["all", ...Object.keys(writingKinds)] as WritingFilters["kind"][])
-              .filter(
-                (kind) =>
-                  kind === "all" ||
-                  kind === filters.kind ||
-                  writing.some((e) => writingKind(e) === kind),
-              )
-              .map((kind) => (
-                <button
-                  key={kind}
-                  type="button"
-                  aria-pressed={filters.kind === kind}
-                  onClick={() =>
-                    updateFilters({ ...filters, kind, type: "all" })
-                  }
-                >
-                  {kind === "all"
-                    ? t("全部内容", "All writing", "全部內容")
-                    : t(...writingKinds[kind])}
-                  <span className="filter-count">
-                    {filterWriting(writing, { kind }).length}
-                  </span>
-                </button>
-              ))}
-          </div>
-          <div
-            className="writing-filter-summary"
-            role="status"
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            <p>
-              {visible.length} {t("篇", "entries", "篇")} ·{" "}
-              {t(...(descriptions[filters.kind] || descriptions.all))}
-            </p>
-            {filtered && (
-              <button
-                type="button"
-                onClick={() => updateFilters(defaultFilters)}
-              >
-                {t("清除筛选", "Clear filters", "清除篩選")}
-              </button>
+          </p>
+        </header>
+        <div className="reading-search">
+          <label htmlFor="writing-query">
+            {t("查找文章", "Find an article", "查找文章")}
+          </label>
+          <input
+            id="writing-query"
+            type="search"
+            value={query}
+            onChange={(event) => updateQuery(event.target.value)}
+            placeholder={t(
+              "搜索标题或关键词，例如：超时、缓存",
+              "Search titles or keywords, e.g. timeout, cache",
+              "搜尋標題或關鍵字，例如：逾時、快取",
             )}
-          </div>
+          />
         </div>
-        {!filtered && visible[0] && (
-          <article
-            className="article-spotlight"
-            data-domain={visible[0].domain}
+        <details
+          className="reading-options"
+          open={Object.values(filters).some((value) => value !== "all")}
+        >
+          <summary>
+            {t(
+              "按方向或类型筛选",
+              "Filter by direction or type",
+              "依方向或類型篩選",
+            )}
+          </summary>
+          <ResearchIndex
+            compact
+            entries={writing}
+            selected={filters.domain}
+            onSelect={(domain) => updateFilters({ ...filters, domain })}
+          />
+          <label className="writing-kind-select">
+            {t("文章类型", "Article type", "文章類型")}
+            <select
+              value={filters.kind}
+              onChange={(event) =>
+                updateFilters({
+                  ...filters,
+                  kind: event.target.value as WritingFilters["kind"],
+                  type: "all",
+                })
+              }
+            >
+              <option value="all">
+                {t("全部类型", "All types", "全部類型")}
+              </option>
+              {Object.keys(writingKinds)
+                .filter((kind) =>
+                  writing.some((entry) => writingKind(entry) === kind),
+                )
+                .map((kind) => (
+                  <option key={kind} value={kind}>
+                    {t(...writingKinds[kind as keyof typeof writingKinds])}
+                  </option>
+                ))}
+            </select>
+          </label>
+        </details>
+        <div className="reading-result-count" role="status">
+          <span>
+            {filtered
+              ? `${visible.length} ${t("篇匹配文章", "matching articles", "篇符合文章")}`
+              : t("最近更新", "Recent writing", "最近更新")}
+          </span>
+          {filtered && (
+            <button
+              onClick={() => {
+                updateQuery("");
+                updateFilters(defaults);
+              }}
+            >
+              {t("清除条件", "Clear conditions", "清除條件")}
+            </button>
+          )}
+        </div>
+        <WritingList items={filtered ? visible : visible.slice(0, 6)} />
+        {!filtered && visible.length > 6 && (
+          <details
+            className="writing-complete"
+            open={showAll}
+            onToggle={(event) => {
+              const open = event.currentTarget.open;
+              if (open === showAll) return;
+              setShowAll(open);
+              const url = new URL(location.href);
+              if (open) url.searchParams.set("view", "list");
+              else url.searchParams.delete("view");
+              history.replaceState(
+                history.state,
+                "",
+                url.pathname + url.search + url.hash,
+              );
+            }}
           >
-            <div>
-              <p className="eyebrow">
-                {t("最近更新", "Latest writing", "最近更新")} /{" "}
-                <WritingKind entry={visible[0]} />
-              </p>
-              <h2>
-                <Link to={visible[0].href}>{visible[0].title}</Link>
-              </h2>
-              <p>{visible[0].description}</p>
-              <div className="spotlight-meta">
-                <time dateTime={visible[0].date}>{visible[0].date}</time>
-                {visible[0].minutes && (
-                  <span>
-                    {visible[0].minutes} {t("分钟阅读", "min read", "分鐘閱讀")}
-                  </span>
-                )}
-              </div>
-              <Link className="featured-action" to={visible[0].href}>
-                <span>{t("开始阅读", "Start reading", "開始閱讀")}</span>
-                <span className="action-arrow" aria-hidden="true">
-                  →
-                </span>
-              </Link>
-            </div>
-            <div className="article-sketch" aria-hidden="true">
-              <LabSketch
-                kind={
-                  visible[0].domain === "llm"
-                    ? "model"
-                    : visible[0].domain === "embodied-ai"
-                      ? "embodied"
-                      : "application"
-                }
-              />
-            </div>
-          </article>
+            <summary>
+              {t("继续查看全部文章", "Browse all writing", "繼續查看全部文章")}{" "}
+              · {writing.length}
+            </summary>
+            <WritingList items={visible.slice(6)} />
+          </details>
         )}
-        {(!visible.length || filtered || visible.length > 1) && (
-          <WritingList items={filtered ? visible : visible.slice(1)} />
-        )}
+        <details className="writing-series">
+          <summary>
+            {t(
+              "想系统读？查看系列入口",
+              "Want a sequence? Explore the series",
+              "想系統讀？查看系列入口",
+            )}
+          </summary>
+          <SeriesShelf entries={writing} />
+        </details>
       </main>
     </Layout>
   );

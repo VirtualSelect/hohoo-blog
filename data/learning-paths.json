@@ -438,6 +438,37 @@
       "Java、HTTP 与 JSON 基础",
       "Java, HTTP and JSON basics",
       "Java、HTTP 與 JSON 基礎"
+    ],
+    "entryQuestions": [
+      {
+        "step": "structured-output",
+        "label": [
+          "HTTP 200 之后，怎样验收输出？",
+          "Validate a successful response",
+          "HTTP 200 之後，怎樣驗證輸出？"
+        ]
+      },
+      {
+        "step": "java-stream-session-ownership",
+        "label": [
+          "取消与并发，谁能提交回答？",
+          "Own concurrent and cancelled requests",
+          "取消與並行，誰能提交回答？"
+        ]
+      },
+      {
+        "step": "java-recovery-reconciliation",
+        "label": [
+          "程序崩溃后，怎样恢复对话？",
+          "Recover a conversation after a crash",
+          "程式崩潰後，怎樣恢復對話？"
+        ]
+      }
+    ],
+    "entryDescription": [
+      "用 Java 接入模型，做好输出、会话和错误处理。",
+      "Connect a model from Java; handle output, conversations and failures.",
+      "以 Java 接入模型，做好輸出、對話與錯誤處理。"
     ]
   },
   {
@@ -771,6 +802,37 @@
       "Python、数组与矩阵运算基础；机制实验不使用训练好的大模型",
       "Python, arrays and matrices; mechanism experiments use an untrained toy model",
       "Python、陣列與矩陣運算基礎；機制實驗不使用訓練好的大型模型"
+    ],
+    "entryQuestions": [
+      {
+        "step": "cache-cost-profile",
+        "label": [
+          "少算了，为什么还更慢？",
+          "Explain cache costs",
+          "少算了，為何還更慢？"
+        ]
+      },
+      {
+        "step": "kv-packed-groups",
+        "label": [
+          "KV 量化到底省了多少内存？",
+          "Measure packed KV memory",
+          "KV 量化到底省了多少記憶體？"
+        ]
+      },
+      {
+        "step": "causal-mask-lab",
+        "label": [
+          "模型有没有偷看未来信息？",
+          "Check for future-token leakage",
+          "模型有沒有偷看未來資訊？"
+        ]
+      }
+    ],
+    "entryDescription": [
+      "看懂 Attention、KV Cache 与推理中的取舍。",
+      "Understand Attention, KV caches and inference trade-offs.",
+      "看懂 Attention、KV Cache 與推論中的取捨。"
     ]
   },
   {
@@ -1136,6 +1198,37 @@
       "Python 基础；教学仿真使用 MuJoCo 与直角坐标夹爪",
       "Python basics; teaching simulations use MuJoCo and a Cartesian gripper",
       "Python 基礎；教學模擬使用 MuJoCo 與直角座標夾爪"
+    ],
+    "entryQuestions": [
+      {
+        "step": "mujoco-qualified-completion",
+        "label": [
+          "放到目标上，就算完成了吗？",
+          "Define qualified completion",
+          "放到目標上，就算完成了嗎？"
+        ]
+      },
+      {
+        "step": "mujoco-planar-pd",
+        "label": [
+          "怎样调参，才能稳定停住？",
+          "Tune for a settled arrival",
+          "怎樣調參，才能穩定停住？"
+        ]
+      },
+      {
+        "step": "mujoco-mass-transfer",
+        "label": [
+          "换了质量，还能用同一组参数吗？",
+          "Test a mass change",
+          "換了質量，還能用同一組參數嗎？"
+        ]
+      }
+    ],
+    "entryDescription": [
+      "从 MuJoCo 仿真开始，理解控制、抓取与失败恢复。",
+      "Start in MuJoCo: control, grasping and failure recovery.",
+      "從 MuJoCo 模擬開始，理解控制、抓取與失敗恢復。"
     ]
   },
   {
@@ -1423,6 +1516,29 @@
           ]
         }
       }
+    ],
+    "entryQuestions": [
+      {
+        "step": "java-retrieval-evidence",
+        "label": [
+          "找到了文本，就能放进上下文吗？",
+          "Validate retrieved evidence",
+          "找到了文字，就能放進上下文嗎？"
+        ]
+      },
+      {
+        "step": "java-grounded-claims",
+        "label": [
+          "有引用，就能接受答案吗？",
+          "Validate cited claims",
+          "有引用，就能接受答案嗎？"
+        ]
+      }
+    ],
+    "entryDescription": [
+      "从检索证据到回答引用，分清“找到”和“答对”。",
+      "From retrieved evidence to citations: finding is not answering.",
+      "從檢索證據到回答引用，分清「找到」與「答對」。"
     ]
   }
 ]

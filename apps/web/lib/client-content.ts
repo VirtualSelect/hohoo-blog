@@ -5,12 +5,21 @@ import tracks from "../../../data/learning-paths.json" with { type: "json" };
 import { isoWeek } from "../../../src/utils/radar.cjs";
 
 // Translator notes belong in source files, not in every HTML/Flight payload.
-export function clientMessages(messages: Messages): Messages {
+export function clientMessages(messages: Messages, route?: string): Messages {
+  // The old theme dictionary has no current UI consumers. Journey copy belongs
+  // to its own routes; the shared search dialog needs only its roadmap label.
+  const journey = route === "journey" || route?.startsWith("journey/");
   return Object.fromEntries(
-    Object.entries(messages).map(([key, value]) => [
-      key,
-      value ? { message: value.message } : value,
-    ]),
+    Object.entries(messages)
+      .filter(
+        ([key]) =>
+          route === undefined ||
+          (!key.startsWith("theme.") &&
+            (!key.startsWith("journey.") ||
+              journey ||
+              key === "journey.roadmapLabel")),
+      )
+      .map(([key, value]) => [key, value ? { message: value.message } : value]),
   );
 }
 
@@ -71,6 +80,7 @@ export function clientGlobalData(
   const byId = new Map(entries.map((entry) => [entry.id, entry]));
   return {
     ...data,
+    "radar-pages": { preview: [] },
     "content-index": {
       entries,
       // Preserve order and reuse references so React Flight serializes each
@@ -87,6 +97,7 @@ export function pageGlobalData(
   locale: Locale,
   route: string,
   document: ClientDocument | null,
+  signals: RadarSignal[] = [],
 ): GlobalData {
   const compact = clientGlobalData(data, locale, route);
   const entries = compact["content-index"].entries;
@@ -96,9 +107,13 @@ export function pageGlobalData(
     entries.find(
       (entry) =>
         entry.href === href &&
-        ["lab", "project", "note", "paper"].includes(entry.type),
+        ["lab", "project", "note", "paper", "radar-digest"].includes(
+          entry.type,
+        ),
     );
-  if ((!document && !detail) || document?.frontMatter.landing) return compact;
+  const radar = route === "radar" || route.startsWith("radar/weekly");
+  if ((!document && !detail && !radar) || document?.frontMatter.landing)
+    return compact;
   const selected = new Set<string>(
     writingEntries(entries)
       .slice(0, 3)
@@ -113,6 +128,10 @@ export function pageGlobalData(
       )
     : undefined;
   const readingSteps = new Set(readingTrack?.steps.map((step) => step.id));
+  if (radar) {
+    for (const signal of signals)
+      for (const id of signal.related || []) selected.add(id);
+  }
   if (detail) {
     selected.add(detail.id);
     for (const id of [
@@ -163,9 +182,38 @@ export function pageSignals(
     return items.filter((item) =>
       item.collectedAt.startsWith(route.split("/").pop()!),
     );
-  return route === "radar"
-    ? items.slice(0, 12)
-    : route === ""
-      ? items.slice(0, 10)
-      : [];
+  if (route === "reading")
+    return items.map(
+      ({
+        id,
+        title,
+        summary,
+        url,
+        sourceId,
+        sourceName,
+        publishedAt,
+        collectedAt,
+        category,
+        locale,
+        translationStatus,
+      }) => ({
+        id,
+        title,
+        summary,
+        url,
+        sourceId,
+        sourceName,
+        publishedAt,
+        collectedAt,
+        category,
+        locale,
+        translationStatus,
+      }),
+    );
+  if (/^docs\/(ai-apps|llm|embodied-ai)$/.test(route))
+    return items
+      .filter((item) => item.category === route.split("/")[1])
+      .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+      .slice(0, 3);
+  return route === "radar" ? items.slice(0, 12) : [];
 }

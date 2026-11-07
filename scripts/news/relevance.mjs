@@ -22,7 +22,12 @@ function mechanisms(text) {
   const security = /AI\s*编程|coding.agent/i.test(text)
     && /逆向|工作区|workspace/i.test(text) && /加密|上传|encrypt|upload/i.test(text);
   const architecture = /\bmoe\b/i.test(text) && /稀疏|sparse/i.test(text) && /激活|active.parameter/i.test(text);
-  return context || memory || code || robot || document || audit || multimodal || security || architecture;
+  const activation = /(?:总参数|total.parameters?).{0,20}\d+(?:\.\d+)?\s*(?:[btm]|亿|万)/i.test(text)
+    && /(?:激活|active).{0,12}\d+(?:\.\d+)?\s*(?:[btm]|亿|万)/i.test(text);
+  const coordination = /\bagents?\b|智能体/i.test(text) && /线程|threads?/i.test(text) && /生成.*协调|协调.*生成|spawn.*coordinat|coordinat.*spawn/i.test(text);
+  const imageProtocol = /图像|文生图|image/i.test(text) && /复杂度|complexity/i.test(text) && /规划|planning/i.test(text) && /最高质量|基准测试|benchmark|quality/i.test(text);
+  const catalog = /模型列表|model.catalog/i.test(text) && /更新|动态|refresh|dynamic/i.test(text) && /来源|注册|配置|source|registry/i.test(text);
+  return context || memory || code || robot || document || audit || multimodal || security || architecture || activation || coordination || imageProtocol || catalog;
 }
 export function researchPriority(item) {
   if (!assessRelevance(item).accepted) return 0;
@@ -44,8 +49,8 @@ export function assessRelevance(item) {
   if (excluded.test(text)) return {accepted: false, reason: '泛商业或非本站研究领域'};
   const domains = [
     ['embodied-ai', robotics],
-    ['ai-apps', /\b(rag|retrieval.augmented|agents?|agentic|tool.call\w*|mcp|llm.application\w*|gradio|vllm|sglang|ai.coding|codex|copilot|claude.code|grok.build|harness|context.engineering)\b|智能体|检索增强|工具调用|AI\s*编程|智能编程|编码智能体|上下文工程/i],
-    ['llm', /\b(llm\w*|language.model\w*|transformer\w*|tokeniz\w*|fine.tun\w*|lora|quantiz\w*|distill\w*|moe|multimodal)\b|语言模型|大模型|多模态|同声传译|同传模型|微调|量化|蒸馏/i],
+    ['ai-apps', /\b(rag|retrieval.augmented|agents?|agentic|tool.call\w*|mcp|llm.application\w*|gradio|vllm|sglang|ai.coding|codex|copilot|claude.code|grok.build|harness|context.engineering)\b|智能体|检索增强|工具调用|AI\s*编程|智能编程|编码智能体|上下文工程|模型列表/i],
+    ['llm', /\b(llm\w*|language.model\w*|transformer\w*|tokeniz\w*|fine.tun\w*|lora|quantiz\w*|distill\w*|moe|multimodal)\b|语言模型|大模型|图像模型|图像生成|文生图|多模态|同声传译|同传模型|微调|量化|蒸馏/i],
   ];
   const domain = domains.find(([, pattern]) => pattern.test(text));
   if (!domain) return {accepted: false, reason: '缺少明确研究主题证据'};

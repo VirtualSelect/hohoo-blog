@@ -60,6 +60,31 @@ test("missing locale manifest aborts before removing any file", (t) => {
   assert.ok(fs.existsSync(f.stale));
 });
 
+test("one shared RSS text asset survives all locales while obsolete text is pruned", (t) => {
+  const f = fixture(t);
+  const directory = path.join(f.app, "public/radar-content");
+  fs.mkdirSync(directory);
+  const current = `/radar-content/${"a".repeat(20)}-${"b".repeat(16)}.json`;
+  const stale = path.join(
+    directory,
+    `${"a".repeat(20)}-${"c".repeat(16)}.json`,
+  );
+  fs.writeFileSync(path.join(f.app, "public", current.slice(1)), "body");
+  fs.writeFileSync(stale, "old body");
+  for (const locale of ["zh-CN", "zh-TW", "en"]) {
+    const file = path.join(f.app, "generated", `${locale}.json`);
+    const manifest = JSON.parse(fs.readFileSync(file, "utf8"));
+    manifest.radarArchive.contentAssets = [current];
+    fs.writeFileSync(file, JSON.stringify(manifest));
+  }
+  assert.deepEqual(pruneGeneratedAssets(f.app), { files: 2, bytes: 11 });
+  assert.equal(fs.existsSync(stale), false);
+  assert.equal(
+    fs.readFileSync(path.join(f.app, "public", current.slice(1)), "utf8"),
+    "body",
+  );
+});
+
 test("invalid references abort without touching stale or current files", (t) => {
   const f = fixture(t);
   fs.writeFileSync(

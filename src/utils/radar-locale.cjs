@@ -10,9 +10,11 @@ function projectSignal(item, locale) {
   ]
     .filter(Boolean)
     .join(' ');
-  const { translations, ...source } = item;
+  // Full RSS text is fetched once on demand, never duplicated into each locale.
+  const { translations, feedContent, ...source } = item;
   return {
     ...source,
+    ...(item.coverage ? {coverage:item.coverage.map(member => projectSignal(member, locale))} : {}),
     originalTitle: item.originalTitle || item.title,
     locale,
     title: t?.title || (key === 'zh' ? item.titleZh : undefined) || item.title,

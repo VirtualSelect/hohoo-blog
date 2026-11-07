@@ -5,14 +5,14 @@ import {
   canonicalUrl,
   intakeBudget,
   dailyMarkdown,
-  fetchText,
-  parseFeed,
+  fetchSource,
   publicNewsItem,
   selectItems,
   summarize,
 } from "./lib.mjs";
 import { assessRelevance } from "./relevance.mjs";
 import radar from "../../src/utils/radar.cjs";
+import { mergeFeedContent } from "../../src/utils/radar-content.mjs";
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -37,6 +37,7 @@ if (!sources.length || sources.length > 10)
   throw new Error("Enable between 1 and 10 sources");
 for (const source of sources) {
   canonicalUrl(source.feed, source.hosts);
+  for (const feed of source.fallbackFeeds || []) canonicalUrl(feed, source.hosts);
   if (
     source.priority !== undefined &&
     (!Number.isInteger(source.priority) ||
@@ -74,16 +75,13 @@ const report = {
 const candidates = [];
 for (const source of sources) {
   try {
-    const result = await parseFeed(
-      await fetchText(source.feed),
-      source,
-      now,
-      config.lookbackDays,
-    );
+    const result = await fetchSource(source, now, config.lookbackDays);
     candidates.push(...result.items);
     report.sources.push({
       source: source.name,
       status: "ok",
+      fallback: result.fallback,
+      feedAttempts: result.attempts,
       eligible: result.items.length,
       skipped: result.skipped,
       newestPublishedAt:
@@ -177,13 +175,14 @@ report.selected = selected.map(
 const outputRoot = process.argv.includes("--write")
   ? root
   : path.join(root, ".cache-loader/news-preview");
-const all = radar
-  .attachCoverage(
+const all = mergeFeedContent(
+  radar.attachCoverage(
     [...existing, ...selected],
     relevant.map(publicNewsItem),
     config,
-  )
-  .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  ),
+  candidates,
+).sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 if (
   selected.length ||
   JSON.stringify(all) !== JSON.stringify(existing) ||

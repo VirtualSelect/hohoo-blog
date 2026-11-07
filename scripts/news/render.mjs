@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {canonicalUrl, categories, dailyMarkdown} from './lib.mjs';
+import {sourceArticleUrl, validFeedContent} from '../../src/utils/radar-content.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=async file=>JSON.parse((await fs.readFile(path.join(root,file),'utf8')).replace(/^\uFEFF/,''));
 const preview=process.argv.includes('--preview');
@@ -26,6 +27,9 @@ for(const item of items){
   seen.add(item.url);
   if(!/^[a-f0-9]{20}$/.test(item.id) || !categories.includes(item.category) || typeof item.title!=='string' || !item.title.trim() || item.title.length>240 || typeof item.summary!=='string' || item.summary.length>180 || !['ai-summary','source-excerpt','link-only'].includes(item.summaryKind)) throw new Error('Invalid news metadata: '+item.id);
   if(item.id!==createHash('sha256').update(item.url).digest('hex').slice(0,20)) throw new Error('ID does not match URL: '+item.id);
+  if(item.sourceArticleUrl !== undefined && !sourceArticleUrl(item.sourceArticleUrl)) throw new Error('Invalid source article URL: '+item.id);
+  if(item.feedContentStatus !== undefined && !['full','summary-only'].includes(item.feedContentStatus)) throw new Error('Invalid RSS content status: '+item.id);
+  if(item.feedContent !== undefined && (item.sourceId !== 'aihot' || item.feedContentStatus !== 'full' || !validFeedContent(item.feedContent))) throw new Error('Invalid RSS text: '+item.id);
   if(item.titleZh!==undefined && (typeof item.titleZh!=='string' || item.titleZh.length>100)) throw new Error('Invalid translated title');
   if(item.translations !== undefined) {
     for(const language of ['zh','en']) {

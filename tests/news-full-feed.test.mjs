@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {parseFeed, publicNewsItem, selectItems} from '../scripts/news/lib.mjs';
 import {assessRelevance, researchPriority} from '../scripts/news/relevance.mjs';
+import {mergeFeedContent, sourceArticleUrl} from '../src/utils/radar-content.mjs';
 
 const source = {id:'aihot',name:'AIHOT',hosts:['aihot.news'],aggregator:true};
 const now = new Date('2026-09-17T06:00:00Z');
@@ -31,6 +32,35 @@ test('summary-only and full-only feeds retain bounded public excerpts', async()=
     assert.ok(item.summary.length<=180);
     assert.equal(assessRelevance(item).accepted,true);
   }
+});
+
+test('RSS body is retained separately from the excerpt as safe text with an original-report link', async()=>{
+  const {items:[item]}=await parseFeed(feed('<p>Short</p><p>🔗 <a href="https://example.com/report?a=1&amp;b=2">阅读原文</a></p>','<h2>Details</h2><p>First <strong>paragraph</strong>.</p><script>bad()</script><p onclick="bad()">Second &lt;img src=x onerror=bad()&gt;.</p><p>via AIHOT · Attribution</p>'),{...source,contentMode:'full'},now);
+  assert.equal(item.feedContentStatus,'full');
+  assert.equal(item.sourceArticleUrl,'https://example.com/report?a=1&b=2');
+  assert.deepEqual(item.feedContent.paragraphs,['Details','First paragraph .','Second <img src=x onerror=bad()>.','via AIHOT · Attribution']);
+  assert.equal(item.summary,'Short');
+  assert.ok(!JSON.stringify(publicNewsItem(item)).includes('paragraphs'));
+  const summaryOnly=(await parseFeed(feed('Short'),{...source,contentMode:'full'},now)).items[0];
+  assert.equal(summaryOnly.feedContentStatus,'summary-only');
+  assert.equal(summaryOnly.feedContent,undefined);
+  assert.equal(sourceArticleUrl('javascript:bad()'),undefined);
+  assert.equal(sourceArticleUrl('https://user:password@example.com/'),undefined);
+});
+
+test('refreshing RSS text preserves intake identity, avoids timestamp-only commits and honors a full-feed downgrade', async()=>{
+  const candidate=(await parseFeed(feed('Short','<p>Details</p>'),{...source,contentMode:'full'},now)).items[0];
+  const previous={...publicNewsItem(candidate),collectedAt:'2026-09-16T00:00:00.000Z'};
+  const [refreshed]=mergeFeedContent([previous],[candidate]);
+  assert.equal(refreshed.feedContent.paragraphs[0],'Details');
+  assert.equal(refreshed.collectedAt,previous.collectedAt);
+  const [same]=mergeFeedContent([refreshed],[{...candidate,feedContent:{...candidate.feedContent,capturedAt:'2026-09-18T00:00:00Z'}}]);
+  assert.deepEqual(same,refreshed);
+  const [brief]=mergeFeedContent([refreshed],[{...publicNewsItem(candidate),feedContentStatus:undefined}]);
+  assert.deepEqual(brief.feedContent,refreshed.feedContent);
+  const [revoked]=mergeFeedContent([refreshed],[{...publicNewsItem(candidate),feedContentStatus:'summary-only'}]);
+  assert.equal(revoked.feedContent,undefined);
+  assert.equal(mergeFeedContent([previous],[{...candidate,url:'https://aihot.news/items/other'}])[0],previous);
 });
 
 test('Chinese and English engineering mechanisms qualify without a single required keyword',()=>{
@@ -75,4 +105,14 @@ test('configured full feed shares the ten-item global budget',()=>{
   assert.equal(source.dailyLimit,'shared');
   assert.equal(new URL(source.feed).pathname,'/feed/full.xml');
   assert.equal(new URL(source.feed).searchParams.get('aihot_actor'),'5a162b13-b63a-47c5-8257-ce3b0d9bc878');
+});
+
+test('concrete activation, coordination and image test protocols are not discarded as announcements or rankings',()=>{
+  for(const item of [
+    {title:'原生多模态模型发布',summary:'总参数 560B，单步激活 25B，提供视觉自检。'},
+    {title:'Agent spaces 发布',summary:'单个 Agent 自动生成和协调其他 Agent 线程。'},
+    {title:'图像模型评测榜单',summary:'在最高质量下进行基准测试，固定复杂度 high，控制渲染前规划量。'},
+    {title:'AI 模型列表无需更新',summary:'模型列表从三个来源动态刷新。'},
+  ])assert.equal(assessRelevance(item).accepted,true,item.title);
+  assert.equal(assessRelevance({title:'新模型发布',summary:'总参数大幅增加，效果更好。'}).accepted,false);
 });

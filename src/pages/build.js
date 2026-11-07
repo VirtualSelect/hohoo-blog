@@ -8,6 +8,7 @@ import s from "@lab/components/Workshop.module.css";
 import editorial from "@site/data/editorial.json";
 import GardenEntry from "@lab/components/GardenEntry";
 import DiscoveryCompass from "@lab/components/DiscoveryCompass";
+import QuestionStudio from "@lab/components/QuestionStudio";
 export default function Build() {
   const { entries } = useContent(),
     t = useText();
@@ -74,7 +75,81 @@ export default function Build() {
             </small>
           </aside>
         </header>
+        <nav
+          className="practice-paths"
+          aria-label={t(
+            "选择实践方式",
+            "Choose how to practice",
+            "選擇實作方式",
+          )}
+        >
+          <a href="#workbench">
+            <span>
+              01 / {t("浏览器教学", "BROWSER EXERCISES", "瀏覽器教學")}
+            </span>
+            <strong>
+              {t(
+                "先看一个机制怎样变化",
+                "Change a condition. See what moves.",
+                "先看一個機制怎樣變化",
+              )}
+            </strong>
+            <small>
+              {t(
+                "本地演示，帮助理解；不是研究结果。",
+                "Local teaching tools, not research results.",
+                "本機示範，幫助理解；不是研究結果。",
+              )}
+            </small>
+          </a>
+          <a href="#research-evidence">
+            <span>
+              02 / {t("可复现实验", "RECORDED EXPERIMENTS", "可重現實驗")}
+            </span>
+            <strong>
+              {t(
+                "按协议重跑，检查证据",
+                "Rerun a protocol. Inspect the evidence.",
+                "依協議重跑，檢查證據",
+              )}
+            </strong>
+            <small>
+              {t(
+                "固定版本、原始记录与适用边界。",
+                "Pinned revisions, source records and limits.",
+                "固定版本、原始紀錄與適用邊界。",
+              )}
+            </small>
+          </a>
+          <a href="#real-projects">
+            <span>03 / {t("工程代码", "PROJECT CODE", "工程程式碼")}</span>
+            <strong>
+              {t(
+                "回到完整工程与实现",
+                "Explore the implementation.",
+                "回到完整工程與實作",
+              )}
+            </strong>
+            <small>
+              {t(
+                "查看仓库结构、实现与当前交付状态。",
+                "Repository structure, implementation and delivery status.",
+                "查看倉庫結構、實作與目前交付狀態。",
+              )}
+            </small>
+          </a>
+        </nav>
         <CreativeWorkbench />
+        <details className="practice-notes" id="research-questions">
+          <summary>
+            {t(
+              "先猜，再验证 · 四个研究问题",
+              "Predict, then inspect · four research questions",
+              "先猜，再驗證 · 四個研究問題",
+            )}
+          </summary>
+          <QuestionStudio embedded />
+        </details>
         <section id="real-projects" className="hh-section">
           <p className="eyebrow">
             {t(
@@ -99,7 +174,7 @@ export default function Build() {
             {t("全部项目", "All projects", "全部專案")} →
           </Link>
         </section>
-        <section className="hh-section">
+        <section className="hh-section" id="research-evidence">
           <h2>
             {t(
               "代表实验与证据",

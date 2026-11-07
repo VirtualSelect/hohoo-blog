@@ -13,9 +13,7 @@
       "id": "aihot",
       "name": "AIHOT",
       "feed": "https://aihot.news/feed/full.xml?aihot_actor=5a162b13-b63a-47c5-8257-ce3b0d9bc878",
-      "hosts": [
-        "aihot.news"
-      ],
+      "hosts": ["aihot.news"],
       "defaultCategory": "ai-apps",
       "priority": 100,
       "dailyLimit": "shared",
@@ -24,17 +22,18 @@
       "type": "aggregator",
       "trustLevel": "medium",
       "fetchStrategy": "rss",
-      "parserVersion": "aihot-full-v2"
+      "parserVersion": "aihot-full-v2",
+      "fallbackFeeds": [
+        "https://aihot.news/feed.xml?aihot_actor=5a162b13-b63a-47c5-8257-ce3b0d9bc878"
+      ]
     },
     {
       "id": "huggingface",
       "name": "Hugging Face",
       "feed": "https://huggingface.co/blog/feed.xml",
-      "hosts": [
-        "huggingface.co"
-      ],
+      "hosts": ["huggingface.co"],
       "defaultCategory": "ai-apps",
-      "enabled": true,
+      "enabled": false,
       "type": "community",
       "trustLevel": "signal",
       "fetchStrategy": "rss",
@@ -44,13 +43,9 @@
       "id": "deepmind",
       "name": "Google DeepMind",
       "feed": "https://deepmind.google/blog/rss.xml",
-      "hosts": [
-        "deepmind.google",
-        "www.deepmind.google",
-        "blog.google"
-      ],
+      "hosts": ["deepmind.google", "www.deepmind.google", "blog.google"],
       "defaultCategory": "ai-apps",
-      "enabled": true,
+      "enabled": false,
       "type": "official",
       "trustLevel": "primary",
       "fetchStrategy": "rss",
@@ -60,12 +55,9 @@
       "id": "openai",
       "name": "OpenAI",
       "feed": "https://openai.com/news/rss.xml",
-      "hosts": [
-        "openai.com",
-        "www.openai.com"
-      ],
+      "hosts": ["openai.com", "www.openai.com"],
       "defaultCategory": "llm",
-      "enabled": true,
+      "enabled": false,
       "type": "official",
       "trustLevel": "primary",
       "fetchStrategy": "rss",
@@ -75,13 +67,11 @@
       "id": "nvidia",
       "name": "NVIDIA Technical Blog",
       "feed": "https://developer.nvidia.com/blog/feed/",
-      "hosts": [
-        "developer.nvidia.com"
-      ],
+      "hosts": ["developer.nvidia.com"],
       "defaultCategory": "ai-apps",
       "type": "official",
       "trustLevel": "primary",
-      "enabled": true,
+      "enabled": false,
       "fetchStrategy": "rss",
       "parserVersion": "rss-v1"
     },
@@ -89,14 +79,11 @@
       "id": "arxiv-ro",
       "name": "arXiv cs.RO",
       "feed": "https://rss.arxiv.org/rss/cs.RO",
-      "hosts": [
-        "rss.arxiv.org",
-        "arxiv.org"
-      ],
+      "hosts": ["rss.arxiv.org", "arxiv.org"],
       "defaultCategory": "embodied-ai",
       "type": "paper",
       "trustLevel": "signal",
-      "enabled": true,
+      "enabled": false,
       "fetchStrategy": "rss",
       "parserVersion": "arxiv-rss-v1"
     },
@@ -104,13 +91,11 @@
       "id": "simon-willison",
       "name": "Simon Willison",
       "feed": "https://simonwillison.net/atom/everything/",
-      "hosts": [
-        "simonwillison.net"
-      ],
+      "hosts": ["simonwillison.net"],
       "defaultCategory": "ai-apps",
       "type": "community",
       "trustLevel": "signal",
-      "enabled": true,
+      "enabled": false,
       "fetchStrategy": "rss",
       "parserVersion": "rss-v1"
     },
@@ -118,14 +103,11 @@
       "id": "arxiv-cl",
       "name": "arXiv cs.CL",
       "feed": "https://rss.arxiv.org/rss/cs.CL",
-      "hosts": [
-        "rss.arxiv.org",
-        "arxiv.org"
-      ],
+      "hosts": ["rss.arxiv.org", "arxiv.org"],
       "defaultCategory": "llm",
       "type": "paper",
       "trustLevel": "signal",
-      "enabled": true,
+      "enabled": false,
       "fetchStrategy": "rss",
       "parserVersion": "arxiv-rss-v1"
     }

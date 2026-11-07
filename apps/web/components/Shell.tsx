@@ -53,7 +53,7 @@ function Frame({ children }: PropsWithChildren) {
     ["about", t("关于", "About", "關於")],
   ];
   return (
-    <div className="site-shell fieldnotes-shell">
+    <div className="site-shell observatory-shell">
       <a className="skip" href="#main-content">
         {t("跳转到内容", "Skip to content", "跳至內容")}
       </a>
@@ -154,60 +154,49 @@ function Frame({ children }: PropsWithChildren) {
         </div>
       </header>
       <div id="main-content" tabIndex={-1} className="site-content">
-        <div className="folio-context">
-          <p>
-            <span aria-hidden="true">✦</span>{" "}
-            {t("Hohoo 的研究手记", "Hohoo’s field notes", "Hohoo 的研究手記")}{" "}
-            <span className="context-divider" aria-hidden="true">
-              /
-            </span>{" "}
-            {route
-              ? nav.find(([p]) => p === route)?.[1] ||
-                t("继续探索", "Explore further", "繼續探索")
-              : t("索引", "Index", "索引")}
-          </p>
-          <Link to="/reading">
-            {t("回到我的书桌", "Back to my desk", "回到我的書桌")} ↗
-          </Link>
-        </div>
         {children}
       </div>
       <footer className="site-footer">
-        <div className="footer-message">
-          <p>
-            {t(
-              "让好奇心，变成作品。",
-              "Make something of your curiosity.",
-              "讓好奇心，變成作品。",
-            )}
-          </p>
-          <a href="https://github.com/VirtualSelect">GitHub ↗</a>
-        </div>
-        <div className="footer-bottom">
-          <Link
-            className="brand-link"
-            to="/"
-            aria-label={t("Hohoo · 首页", "Hohoo · Home", "Hohoo · 首頁")}
-          >
-            <Brand />
-          </Link>
-          <span>
-            {t(
-              "公开学习，持续构建。",
-              "Learning in public. Building in public.",
-              "公開學習，持續構建。",
-            )}
-          </span>
-          <nav aria-label={t("页脚", "Footer", "頁尾")}>
-            <Link to="/now">{t("近况", "Now", "近況")}</Link>
-            <Link to="/journey">
-              {t("研究计划", "Research plan", "研究計畫")}
+        <div className="footer-inner">
+          <div className="footer-message">
+            <p>
+              {t(
+                "让好奇心，变成作品。",
+                "Make something of your curiosity.",
+                "讓好奇心，變成作品。",
+              )}
+            </p>
+            <a href="https://github.com/VirtualSelect">GitHub ↗</a>
+          </div>
+          <div className="footer-bottom">
+            <Link
+              className="brand-link"
+              to="/"
+              aria-label={t("Hohoo · 首页", "Hohoo · Home", "Hohoo · 首頁")}
+            >
+              <Brand />
             </Link>
-            <Link to="/timeline">{t("时间轴", "Timeline", "時間軸")}</Link>
-            <Link to="/subscribe">RSS</Link>
-            <Link to="/changelog">{t("更新", "Changelog", "更新")}</Link>
-          </nav>
-          <small>© Hohoo · Next.js</small>
+            <span>
+              {t(
+                "公开学习，持续构建。",
+                "Learning in public. Building in public.",
+                "公開學習，持續構建。",
+              )}
+            </span>
+            <nav aria-label={t("页脚", "Footer", "頁尾")}>
+              <Link to="/reading">
+                {t("阅读清单", "Reading list", "閱讀清單")}
+              </Link>
+              <Link to="/now">{t("近况", "Now", "近況")}</Link>
+              <Link to="/journey">
+                {t("研究计划", "Research plan", "研究計畫")}
+              </Link>
+              <Link to="/timeline">{t("时间轴", "Timeline", "時間軸")}</Link>
+              <Link to="/subscribe">RSS</Link>
+              <Link to="/changelog">{t("更新", "Changelog", "更新")}</Link>
+            </nav>
+            <small>© Hohoo · Next.js</small>
+          </div>
         </div>
       </footer>
       {search && (

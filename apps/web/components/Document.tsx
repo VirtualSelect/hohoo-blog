@@ -10,6 +10,7 @@ import DocReadingContext from "@site/src/components/DocReadingContext";
 import ReproductionGuide from "./ReproductionGuide";
 import TranslationNotice from "@site/src/components/TranslationNotice";
 import ArticleContents from "./ArticleContents";
+import ArticleBrief from "./ArticleBrief";
 const ConversationWorkbench = dynamic(() => import("./ConversationWorkbench"));
 import ReadingReflection from "./ReadingReflection";
 const RequestJourney = dynamic(() => import("./RequestJourney"));
@@ -210,8 +211,8 @@ export default function Document({ children }: PropsWithChildren) {
               )}
             </p>
           )}
-          <VisitorStats variant="article" path={d.route} />
         </header>
+        <ArticleBrief route={d.route} headings={d.headings} />
         <ArticleContents headings={d.headings} mobile />
         <nav
           className="mobile-reading-tools"
@@ -321,6 +322,7 @@ export default function Document({ children }: PropsWithChildren) {
         />
         {d.kind === "docs" && <DocReadingContext position="footer" />}
         <ArticleHistory route={d.route} />
+        <VisitorStats variant="article" path={d.route} />
         <div className="article-end">
           <Link to="/articles">
             ← {t("全部文章", "All writing", "全部文章")}

@@ -12,7 +12,78 @@ import {
   readLearningFilters,
   learningFilterUrl,
   readingGroups,
+  readResearchTrack,
+  researchTrackUrl,
+  matchesReadingQuery,
 } from "../lib/reading-paths.mjs";
+
+test("reading search matches multiple terms across fields without mixing planned content", () => {
+  assert.equal(
+    matchesReadingQuery("KV cache", "Measured KV", "Cache costs"),
+    true,
+  );
+  assert.equal(
+    matchesReadingQuery("  ＪＡＶＡ   超时 ", "Java HTTP", "超时与重试"),
+    true,
+  );
+  assert.equal(matchesReadingQuery("抓取", "MuJoCo", "接触抓取"), true);
+  assert.equal(matchesReadingQuery("no match", "no", "related subject"), false);
+  assert.equal(matchesReadingQuery("", undefined), true);
+  assert.equal(readResearchTrack("", "", tracks, "all", true), "all");
+});
+
+test("focused reading preserves legacy anchors, explicit all paths and filter state", () => {
+  assert.equal(readResearchTrack("?track=llm", "", tracks), "llm");
+  assert.equal(readResearchTrack("?track=llm", "#plans-rag", tracks), "rag");
+  const embodied = tracks
+    .find((track) => track.domain === "embodied-ai")
+    .steps.find((step) => step.doc);
+  assert.equal(
+    readResearchTrack("?track=llm", "#step-" + embodied.id, tracks),
+    "embodied-ai",
+  );
+  assert.equal(
+    readResearchTrack("?track=all", "", tracks, "ai-apps", true),
+    "all",
+  );
+  assert.equal(readResearchTrack("?track=unknown", "", tracks), "ai-apps");
+  assert.equal(
+    readResearchTrack("?question=cache", "", tracks, "ai-apps"),
+    "llm",
+  );
+  const url = researchTrackUrl(
+    "https://huhohoo.com/en/learning?q=cache&saved=1&question=java#plans-ai-apps",
+    "llm",
+  );
+  assert.equal(url, "/en/learning?q=cache&saved=1&track=llm");
+  assert.equal(
+    researchTrackUrl("https://huhohoo.com/?ref=menu#unrelated", "rag"),
+    "/?ref=menu&track=rag#unrelated",
+  );
+});
+
+test("every question entry resolves to an existing published article in all locales", () => {
+  for (const locale of ["zh-CN", "en", "zh-TW"]) {
+    const data = JSON.parse(
+      fs.readFileSync(new URL(`../generated/${locale}.json`, import.meta.url)),
+    );
+    const published = new Set(
+      data.globalData["learning-index"].entries.map((entry) => entry.stepId),
+    );
+    for (const track of tracks)
+      for (const question of track.entryQuestions) {
+        assert.ok(
+          track.steps.some((step) => step.id === question.step && step.doc),
+          `${track.domain}: ${question.step}`,
+        );
+        assert.ok(
+          published.has(question.step),
+          `${locale}: missing ${question.step}`,
+        );
+        assert.equal(question.label.length, 3);
+      }
+  }
+});
 
 for (const locale of ["zh-CN", "en", "zh-TW"]) {
   const data = JSON.parse(
