@@ -51,6 +51,23 @@
     "coverage": []
   },
   {
+    "id": "c8a0577598ddbd42caa1",
+    "title": "Microsoft Research 揭示 Lazarus 权重空间后门技术，通过重编程休眠神经元攻击 AI Agent",
+    "url": "https://aihot.news/items/womexcn3n0ijhbehvhbsxxm4f",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-10T20:52:56.000Z",
+    "collectedAt": "2026-11-11T09:48:49.693Z",
+    "category": "ai-apps",
+    "summary": "Microsoft Research 发布对 Lazarus 后门技术的研究，重编程 LLM 中少于 10 个休眠神经元即可在没有训练的情况下给基于该模型的 Agent 安装后门。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e38a0c10",
+    "coverage": []
+  },
+  {
     "id": "db5d8d4ed879f128e007",
     "title": "Google DeepMind 发布 Gemini 4 Carbon 前沿模型",
     "url": "https://aihot.news/items/w8cvkd1j2o1c3m8ikh8x2kpfx",
@@ -65,6 +82,23 @@
     "feedContentStatus": "summary-only",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-84e8f456",
+    "coverage": []
+  },
+  {
+    "id": "2b771857216e91a61f5b",
+    "title": "百度发布 ERNIE 5.5 Flash Preview，权重将于 11 月 25 日前开源",
+    "url": "https://aihot.news/items/qd3f4j2hd0t98tqf28iv7pu2j",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-10T16:00:00.000Z",
+    "collectedAt": "2026-11-11T09:48:49.693Z",
+    "category": "ai-apps",
+    "summary": "百度发布 ERNIE 5.5 Flash Preview，是基于此前 Base 模型的首个后训练版本，总参数 280B、激活参数 14B，支持 1M 上下文。模型 API 已在千帆平台上线，权重将于 11 月 25 日前开源；官方展示了游戏开发、3D 建模、知识工作、视频创作等 Agent 场景成果，并称该版本为后训练中间版本，正式版仍将持续优化。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://ernie.baidu.com/zh/release/ernie-5-5-flash-preview/",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-99be9c3b",
     "coverage": []
   },
   {
