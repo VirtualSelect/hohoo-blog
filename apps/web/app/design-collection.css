@@ -1,0 +1,2904 @@
+/* Five selected concepts extend their own visual language to the whole site.
+   These selectors deliberately exclude the existing space, clear and classic designs. */
+:root[data-design="garden"] {
+  --atlas-bg: #f7f6ed;
+  --atlas-text: #213d2d;
+  --atlas-muted: #5b6b5b;
+  --atlas-border: #cfd7c7;
+  --atlas-surface: #fffdf6;
+  --atlas-soft: #edf0df;
+  --atlas-accent: #2b6248;
+  --atlas-accent-soft: #e2ead7;
+  --collection-radius: 16px;
+  --collection-header: 76px;
+  --collection-title-weight: 500;
+  --design-title-font: Georgia, "Songti SC", "SimSun", serif;
+  --lab-width: 1400px;
+  --lab-gutter: clamp(20px, 4vw, 64px);
+}
+:root[data-design="photo"] {
+  --atlas-bg: #faf9f5;
+  --atlas-text: #292723;
+  --atlas-muted: #70675d;
+  --atlas-border: #d8d2c9;
+  --atlas-surface: #fffefa;
+  --atlas-soft: #f0ece4;
+  --atlas-accent: #78543e;
+  --atlas-accent-soft: #ece3d8;
+  --collection-radius: 0px;
+  --collection-header: 72px;
+  --collection-title-weight: 400;
+  --design-title-font: Georgia, "Iowan Old Style", "Songti SC", "SimSun", serif;
+  --lab-width: 1320px;
+  --lab-gutter: clamp(22px, 5vw, 72px);
+}
+:root[data-design="construct"] {
+  --atlas-bg: #faf9f5;
+  --atlas-text: #161715;
+  --atlas-muted: #60615a;
+  --atlas-border: #242521;
+  --atlas-surface: #faf9f5;
+  --atlas-soft: #efede6;
+  --atlas-accent: #b83b27;
+  --atlas-accent-soft: #f4e4dc;
+  --collection-radius: 0px;
+  --collection-header: 80px;
+  --collection-title-weight: 750;
+  --design-title-font: var(--hh-base-font-family-base);
+  --lab-width: 1440px;
+  --lab-gutter: clamp(20px, 4vw, 64px);
+}
+:root[data-design="map"] {
+  --atlas-bg: #f6f9fa;
+  --atlas-text: #192f38;
+  --atlas-muted: #5b7079;
+  --atlas-border: #d1e0e3;
+  --atlas-surface: #ffffff;
+  --atlas-soft: #edf4f5;
+  --atlas-accent: #076b74;
+  --atlas-accent-soft: #e0f0f1;
+  --collection-radius: 5px;
+  --collection-header: 64px;
+  --collection-title-weight: 600;
+  --design-title-font: var(--hh-base-font-family-base);
+  --lab-width: 1600px;
+  --lab-gutter: clamp(20px, 3vw, 48px);
+}
+:root[data-design="chapters"] {
+  --atlas-bg: #e8eae6;
+  --atlas-text: #302522;
+  --atlas-muted: #756962;
+  --atlas-border: #d8cfc4;
+  --atlas-surface: #fcfaf5;
+  --atlas-soft: #f1ece3;
+  --atlas-accent: #803744;
+  --atlas-accent-soft: #f0e1e0;
+  --collection-radius: 2px;
+  --collection-header: 76px;
+  --collection-title-weight: 500;
+  --design-title-font: Georgia, "Iowan Old Style", "Songti SC", "SimSun", serif;
+  --lab-width: 1320px;
+  --lab-gutter: clamp(22px, 4vw, 64px);
+}
+:root:is(
+  [data-design="garden"],
+  [data-design="photo"],
+  [data-design="construct"],
+  [data-design="map"],
+  [data-design="chapters"]
+) {
+  color-scheme: light;
+  --atlas-dock-space: 0px;
+  --atlas-shadow: none;
+  --design-accent-contrast: #fffdf8;
+  --hh-base-navbar-height: var(--collection-header);
+  --hh-base-global-radius: var(--collection-radius);
+  --hh-base-color-primary-dark: var(--atlas-accent);
+  --hh-base-color-primary-darker: var(--atlas-accent);
+  --hh-base-color-primary-darkest: var(--atlas-accent);
+  --hh-base-color-primary-light: var(--atlas-accent);
+  --hh-base-color-primary-lighter: var(--atlas-accent);
+  --hh-base-color-primary-lightest: var(--atlas-accent);
+  --hh-highlighted-code-line-bg: var(--atlas-accent-soft);
+  --obs-node-hover: var(--atlas-accent-soft);
+  --obs-selected-bg: var(--atlas-accent);
+  --obs-selected-text: var(--design-accent-contrast);
+  --obs-action-bg: var(--atlas-accent);
+  --obs-action-text: var(--design-accent-contrast);
+  --obs-action-hover: var(--atlas-text);
+  --obs-map-line: var(--atlas-border);
+  --obs-map-mark: var(--atlas-accent);
+  --folio-serif: var(--design-title-font);
+  scroll-padding-top: calc(var(--collection-header) + 24px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell {
+  display: block;
+  min-width: 0;
+  padding-bottom: 0;
+  --atlas-radius: var(--collection-radius);
+  --atlas-reading: 760px;
+}
+/* A real text navigation bar replaces the Atlas dock for these five designs. */
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .site-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: none;
+  height: var(--collection-header);
+  max-height: none;
+  margin: 0;
+  padding: 0 var(--lab-gutter);
+  gap: 22px;
+  overflow: visible;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: var(--atlas-surface);
+  box-shadow: none;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .atlas-location {
+  display: none;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .site-header
+  .brand-logo {
+  width: 122px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .site-header
+  > .brand-link {
+  flex-shrink: 0;
+  margin: 0;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  #main-nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  position: static;
+  inset: auto;
+  transform: none;
+  width: auto;
+  max-width: none;
+  height: 44px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  gap: 4px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  #main-nav
+  a,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  #main-nav
+  [aria-current="page"] {
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  width: auto;
+  padding: 8px 12px;
+  gap: 0;
+  border: 0;
+  border-radius: var(--collection-radius);
+  box-shadow: none;
+  background: transparent;
+  color: var(--atlas-text);
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-decoration: none;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  #main-nav
+  a
+  > svg,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  #main-nav
+  a::before,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  #main-nav
+  a::after {
+  display: none;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  #main-nav
+  a:is(:hover, :focus-visible),
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  #main-nav
+  [aria-current="page"] {
+  color: var(--atlas-accent);
+  background: var(--atlas-accent-soft);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  gap: 3px;
+  border: 0;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .header-actions
+  > :is(button, select) {
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--collection-radius);
+  color: var(--atlas-text);
+  background: transparent;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .header-actions
+  .theme-toggle,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .header-actions
+  > .theme-toggle:first-child {
+  color: var(--atlas-text);
+  background: var(--atlas-soft);
+  border: 1px solid var(--atlas-border);
+  border-radius: var(--collection-radius);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .theme-toggle
+  .theme-mode-id {
+  color: var(--atlas-accent);
+  border-color: var(--atlas-border);
+  border-radius: min(var(--collection-radius), 4px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .site-footer {
+  border-top: 1px solid var(--atlas-border);
+  background: var(--atlas-surface);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .footer-inner {
+  max-width: var(--lab-width);
+  padding: 32px var(--lab-gutter);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  :is(.atlas-directory, .lab-search) {
+  border-radius: var(--collection-radius);
+}
+:root[data-design="garden"] .lab-shell #main-nav a,
+:root[data-design="garden"] .lab-shell .header-actions .theme-toggle {
+  border-radius: 999px;
+}
+:root[data-design="garden"] .lab-shell .brand-logo img {
+  filter: none;
+}
+:root[data-design="photo"] .lab-shell #main-nav a,
+:root[data-design="chapters"] .lab-shell #main-nav a {
+  font-family: var(--design-title-font);
+  font-size: 15px;
+}
+:root[data-design="photo"] .lab-shell #main-nav [aria-current="page"] {
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+:root[data-design="construct"] .lab-shell .site-header {
+  border-bottom: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell #main-nav {
+  gap: 0;
+}
+:root[data-design="construct"] .lab-shell #main-nav a {
+  font-weight: 700;
+  padding-inline: 16px;
+  border-left: 1px solid var(--atlas-border);
+}
+:root[data-design="construct"] .lab-shell #main-nav [aria-current="page"] {
+  background: var(--atlas-accent);
+  color: #fff;
+}
+:root[data-design="construct"] .lab-shell .header-actions .theme-toggle {
+  border: 1px solid var(--atlas-text);
+  background: transparent;
+}
+:root[data-design="map"] .lab-shell .site-header > .brand-link {
+  padding-right: 24px;
+  border-right: 1px solid var(--atlas-border);
+}
+:root[data-design="map"] .lab-shell .site-header .brand-logo {
+  width: 110px;
+}
+:root[data-design="map"] .lab-shell #main-nav {
+  margin-left: 0;
+  margin-right: auto;
+}
+:root[data-design="map"] .lab-shell #main-nav a {
+  font-size: 12px;
+}
+:root[data-design="chapters"] .lab-shell {
+  max-width: 1480px;
+  margin: 28px auto;
+  background: var(--atlas-surface);
+  border: 1px solid #d9dcd5;
+  border-radius: 5px;
+  box-shadow: 0 16px 48px #3834260c;
+}
+:root[data-design="chapters"] .lab-shell .site-header {
+  background: var(--atlas-surface);
+}
+:root[data-design="chapters"] .lab-shell #main-nav [aria-current="page"] {
+  background: transparent;
+  border-bottom: 2px solid var(--atlas-accent);
+}
+/* Shared interior mechanics, with each design supplying its own typography and surfaces. */
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  :is(.hh-page, .radar-flow) {
+  max-width: var(--lab-width);
+  margin-inline: auto;
+  padding: 44px var(--lab-gutter) 76px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-page-heading,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .fieldwork-build
+  > .atlas-page-heading {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+  gap: 40px;
+  margin: 0 0 30px;
+  padding: 0 0 32px;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--atlas-text);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  :is(.atlas-page-title h1, .hh-page > h1),
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .fieldwork-build
+  > header
+  h1 {
+  font-family: var(--design-title-font);
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: var(--collection-title-weight);
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+  max-width: 18em;
+  margin: 0 0 20px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-page-title
+  > p {
+  font-size: 15px;
+  line-height: 1.9;
+  max-width: 48em;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-page-context
+  > p {
+  margin: 0 0 12px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-content-count::before {
+  background: var(--atlas-accent);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-explorer-tools {
+  border: 1px solid var(--atlas-border);
+  border-radius: var(--collection-radius);
+  background: var(--atlas-soft);
+  padding: 18px 22px;
+  margin-bottom: 28px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .reading-search
+  input {
+  background: var(--atlas-surface);
+  border-radius: min(var(--collection-radius), 8px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .reading-options
+  :is(button, select),
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .research-index-compact
+  > button {
+  border-radius: min(var(--collection-radius), 6px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  > li {
+  display: flex;
+  flex-direction: column;
+  grid-column: auto;
+  grid-row: auto;
+  align-items: stretch;
+  min-height: 0;
+  padding: 26px;
+  gap: 24px;
+  border: 1px solid var(--atlas-border);
+  border-radius: var(--collection-radius);
+  background: var(--atlas-surface);
+  box-shadow: none;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child {
+  grid-column: auto;
+  grid-row: auto;
+  min-height: 0;
+  background: var(--atlas-surface);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  h2,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child
+  h2 {
+  font-family: var(--design-title-font);
+  font-size: 27px;
+  font-weight: var(--collection-title-weight);
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  p:not(.hh-eyebrow) {
+  font-size: 14px;
+  line-height: 1.95;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  .hh-row-meta {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 18px;
+  margin-top: auto;
+  border-top: 1px solid var(--atlas-border);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  > li:is(:hover, :focus-within) {
+  transform: none;
+  border-color: var(--atlas-accent);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .path-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .path-picker
+  > article {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 0 20px;
+  padding: 28px;
+  border: 1px solid var(--atlas-border);
+  border-radius: var(--collection-radius);
+  background: var(--atlas-surface);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .path-picker
+  h2 {
+  font-family: var(--design-title-font);
+  font-size: 28px;
+  font-weight: var(--collection-title-weight);
+  line-height: 1.45;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .path-picker
+  article
+  > .obs-kicker {
+  width: 42px;
+  height: 42px;
+  border-radius: min(var(--collection-radius), 8px);
+  background: var(--atlas-accent-soft);
+  color: var(--atlas-accent);
+  font-size: 13px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .path-picker-actions {
+  grid-column: 2;
+  flex-wrap: wrap;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-track-switch {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-track-switch
+  button {
+  min-width: 0;
+  border: 1px solid var(--atlas-border);
+  border-radius: min(var(--collection-radius), 8px);
+  background: var(--atlas-surface);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-track-switch
+  button[aria-pressed="true"] {
+  color: var(--atlas-accent);
+  background: var(--atlas-accent-soft);
+  border-color: var(--atlas-accent);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .reading-step {
+  scroll-margin-top: calc(var(--collection-header) + 24px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .reading-step
+  > div,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .reading-step-meta
+  details[open] {
+  border-radius: var(--collection-radius);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .reading-step
+  h3 {
+  font-family: var(--design-title-font);
+  font-weight: var(--collection-title-weight);
+  font-size: 24px;
+  line-height: 1.5;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-build-layout {
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 36px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .atlas-build-layout
+  .practice-paths {
+  position: sticky;
+  top: calc(var(--collection-header) + 24px);
+  border-radius: var(--collection-radius);
+  background: var(--atlas-surface);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  #workbench
+  a[data-domain] {
+  border-radius: var(--collection-radius);
+  background: var(--atlas-surface);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .hh-section
+  > h2,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .hh-section-heading
+  h2,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .hh-rows
+  h3 {
+  font-family: var(--design-title-font);
+  font-weight: var(--collection-title-weight);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .hh-section
+  > h2 {
+  font-size: clamp(28px, 3vw, 40px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .hh-page
+  > .hh-rows:not(.hh-writing-list)
+  > li {
+  padding-block: 28px;
+  border-bottom: 1px solid var(--atlas-border);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .hh-empty {
+  border: 1px solid var(--atlas-border);
+  border-radius: var(--collection-radius);
+  background: var(--atlas-soft);
+}
+/* Sources remain explicit; changing the layout does not change signal content. */
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-header
+  h1 {
+  font-family: var(--design-title-font);
+  font-weight: var(--collection-title-weight);
+  font-size: clamp(42px, 5vw, 68px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-orbit {
+  display: none;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-search,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-card,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-focus {
+  border-radius: var(--collection-radius);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-card {
+  background: var(--atlas-surface);
+  border: 1px solid var(--atlas-border);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-card
+  > button
+  > strong {
+  font-family: var(--design-title-font);
+  font-weight: var(--collection-title-weight);
+  font-size: 24px;
+  line-height: 1.5;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-day
+  > header {
+  top: calc(var(--collection-header) + 24px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-focusbar {
+  top: var(--collection-header);
+  background: var(--atlas-surface);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .flow-focus {
+  scroll-margin-top: calc(var(--collection-header) + 24px);
+}
+/* Article content keeps its own measure and local code/table overflow. */
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .document-layout,
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .document-layout[data-reader-width="wide"] {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 760px) 170px;
+  justify-content: center;
+  max-width: 1440px;
+  gap: 32px;
+  padding: 44px var(--lab-gutter) 80px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .document-layout[data-reader-width="wide"] {
+  max-width: 1600px;
+  grid-template-columns: 140px minmax(0, 1fr) 160px;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  :is(.document-nav, .document-toc) {
+  position: sticky;
+  top: calc(var(--collection-header) + 24px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .document-nav {
+  border-radius: var(--collection-radius);
+  border-color: var(--atlas-border);
+  background: var(--atlas-surface);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .document-body {
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .document-body
+  h1 {
+  font-family: var(--design-title-font);
+  font-weight: var(--collection-title-weight);
+  font-size: clamp(32px, 3.2vw, 46px);
+  line-height: 1.4;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .prose
+  :is(h2, h3) {
+  font-family: var(--design-title-font);
+  font-weight: var(--collection-title-weight);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .prose {
+  font-size: 17px;
+  line-height: 2;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  :is(.prose pre, .prose blockquote, .article-brief) {
+  border-radius: min(var(--collection-radius), 8px);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .prose
+  pre {
+  max-width: 100%;
+  overflow-x: auto;
+  background: var(--atlas-soft);
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .prose
+  :is(figure, table, img) {
+  max-width: 100%;
+}
+:root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  )
+  .lab-shell
+  .document-toc
+  nav {
+  max-height: calc(100dvh - var(--collection-header) - 88px);
+}
+/* Garden: soft paper, plant-green labels, generous but restrained rounding. */
+:root[data-design="garden"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child {
+  grid-column: 1/-1;
+  background: var(--atlas-soft);
+  padding: 34px;
+}
+:root[data-design="garden"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child
+  h2 {
+  font-size: 36px;
+}
+:root[data-design="garden"]
+  .lab-shell
+  .hh-page
+  > .hh-rows:not(.hh-writing-list) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+:root[data-design="garden"]
+  .lab-shell
+  .hh-page
+  > .hh-rows:not(.hh-writing-list)
+  > li {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px;
+  background: var(--atlas-surface);
+  border: 1px solid var(--atlas-border);
+  border-radius: 16px;
+}
+/* Light & notes: open headline rows, fine rules and quiet serif reading. */
+:root[data-design="photo"] .lab-shell .atlas-page-heading,
+:root[data-design="photo"] .lab-shell .fieldwork-build > .atlas-page-heading {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+  padding-bottom: 40px;
+}
+:root[data-design="photo"] .lab-shell .atlas-page-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  align-items: baseline;
+  padding: 0;
+}
+:root[data-design="photo"] .lab-shell .atlas-page-context > p {
+  margin: 0;
+}
+:root[data-design="photo"] .lab-shell .atlas-content-count {
+  margin-left: auto;
+}
+:root[data-design="photo"] .lab-shell .atlas-explorer-tools,
+:root[data-design="chapters"] .lab-shell .atlas-explorer-tools {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  padding: 18px 0;
+}
+:root[data-design="photo"] .lab-shell .reading-search input,
+:root[data-design="chapters"] .lab-shell .reading-search input {
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  padding-inline: 0;
+  background: transparent;
+}
+:root[data-design="photo"] .lab-shell .focused-articles > .hh-writing-list,
+:root[data-design="photo"] .lab-shell .writing-complete .hh-writing-list,
+:root[data-design="chapters"] .lab-shell .focused-articles > .hh-writing-list,
+:root[data-design="chapters"] .lab-shell .writing-complete .hh-writing-list {
+  display: block;
+  border-top: 1px solid var(--atlas-border);
+}
+:root[data-design="photo"] .lab-shell .focused-articles .hh-writing-list > li,
+:root[data-design="photo"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child,
+:root[data-design="chapters"]
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  > li,
+:root[data-design="chapters"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 130px;
+  gap: 24px 48px;
+  padding: 30px 0;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  background: transparent;
+  border-radius: 0;
+  min-height: 0;
+}
+:root[data-design="photo"]
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  .hh-row-meta,
+:root[data-design="chapters"]
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  .hh-row-meta {
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+:root[data-design="photo"] .lab-shell .path-picker,
+:root[data-design="chapters"] .lab-shell .path-picker {
+  display: block;
+}
+:root[data-design="photo"] .lab-shell .path-picker > article,
+:root[data-design="chapters"] .lab-shell .path-picker > article {
+  grid-template-columns: 58px minmax(0, 1fr);
+  padding: 32px 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--atlas-border);
+}
+:root[data-design="photo"] .lab-shell .path-picker article > .obs-kicker,
+:root[data-design="chapters"] .lab-shell .path-picker article > .obs-kicker {
+  background: transparent;
+  font: 400 30px/1.2 var(--design-title-font);
+}
+:root[data-design="photo"] .lab-shell .atlas-build-layout,
+:root[data-design="chapters"] .lab-shell .atlas-build-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 36px;
+}
+:root[data-design="photo"] .lab-shell .atlas-build-layout .practice-paths,
+:root[data-design="chapters"] .lab-shell .atlas-build-layout .practice-paths {
+  position: static;
+  flex-direction: row;
+  border: 0;
+  border-block: 1px solid var(--atlas-border);
+  background: transparent;
+}
+:root[data-design="photo"] .lab-shell .practice-paths > a,
+:root[data-design="chapters"] .lab-shell .practice-paths > a {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 22px;
+  border: 0;
+  border-right: 1px solid var(--atlas-border);
+}
+:root[data-design="photo"] .lab-shell .practice-paths > a:last-child,
+:root[data-design="chapters"] .lab-shell .practice-paths > a:last-child {
+  border-right: 0;
+}
+:root[data-design="photo"] .lab-shell .flow-cards,
+:root[data-design="chapters"] .lab-shell .flow-cards {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+:root[data-design="photo"] .lab-shell .flow-card,
+:root[data-design="chapters"] .lab-shell .flow-card {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--atlas-border);
+}
+:root[data-design="photo"] .lab-shell .document-layout,
+:root[data-design="photo"]
+  .lab-shell
+  .document-layout[data-reader-width="wide"],
+:root[data-design="chapters"] .lab-shell .document-layout,
+:root[data-design="chapters"]
+  .lab-shell
+  .document-layout[data-reader-width="wide"] {
+  grid-template-columns: minmax(0, 780px);
+  max-width: 960px;
+  gap: 24px;
+}
+:root[data-design="photo"]
+  .lab-shell
+  .document-layout[data-reader-width="wide"],
+:root[data-design="chapters"]
+  .lab-shell
+  .document-layout[data-reader-width="wide"] {
+  grid-template-columns: minmax(0, 960px);
+  max-width: 1160px;
+}
+:root[data-design="photo"] .lab-shell .document-nav,
+:root[data-design="chapters"] .lab-shell .document-nav {
+  grid-column: 1;
+  position: static;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0 24px;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  padding: 0 0 14px;
+  background: transparent;
+  border-radius: 0;
+}
+:root[data-design="photo"] .lab-shell .document-toc,
+:root[data-design="chapters"] .lab-shell .document-toc {
+  display: none;
+}
+:root[data-design="photo"] .lab-shell .mobile-toc,
+:root[data-design="chapters"] .lab-shell .mobile-toc {
+  display: block;
+  border: 0;
+  border-block: 1px solid var(--atlas-border);
+  border-radius: 0;
+  padding-inline: 0;
+}
+/* Geometric construction: uneven cells and visible structural lines, without a separate banner. */
+:root[data-design="construct"] .lab-shell .atlas-page-heading,
+:root[data-design="construct"]
+  .lab-shell
+  .fieldwork-build
+  > .atlas-page-heading {
+  border-bottom: 2px solid var(--atlas-text);
+  padding-bottom: 28px;
+}
+:root[data-design="construct"] .lab-shell .atlas-page-context {
+  border-left: 6px solid var(--atlas-accent);
+  padding-left: 16px;
+}
+:root[data-design="construct"]
+  .lab-shell
+  :is(.atlas-page-title h1, .hh-page > h1) {
+  font-size: clamp(40px, 5vw, 70px);
+  font-weight: 750;
+  line-height: 1.18;
+}
+:root[data-design="construct"] .lab-shell .atlas-explorer-tools {
+  border: 0;
+  border-bottom: 2px solid var(--atlas-text);
+  background: transparent;
+  padding-inline: 0;
+}
+:root[data-design="construct"] .lab-shell .focused-articles > .hh-writing-list {
+  grid-template-columns: 1.4fr 1fr;
+  gap: 0;
+  border: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"]
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  > li {
+  border: 0;
+  border-right: 1px solid var(--atlas-text);
+  border-bottom: 1px solid var(--atlas-text);
+  padding: 30px;
+  background: transparent;
+}
+:root[data-design="construct"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child {
+  grid-column: 1;
+  grid-row: span 2;
+  border-right: 2px solid var(--atlas-text);
+  background: transparent;
+}
+:root[data-design="construct"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child
+  h2 {
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1.3;
+}
+:root[data-design="construct"]
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  .hh-row-meta {
+  border-top: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .path-picker {
+  gap: 0;
+  border: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .path-picker > article {
+  padding: 30px;
+  border: 0;
+  border-right: 1px solid var(--atlas-text);
+  border-bottom: 1px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .path-picker article > .obs-kicker {
+  width: auto;
+  height: auto;
+  font-size: 30px;
+  font-weight: 700;
+  background: transparent;
+}
+:root[data-design="construct"] .lab-shell .atlas-track-switch {
+  gap: 0;
+  border: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .atlas-track-switch button {
+  border: 0;
+  border-right: 1px solid var(--atlas-text);
+  padding-block: 20px;
+}
+:root[data-design="construct"] .lab-shell .reading-step > div,
+:root[data-design="construct"] .lab-shell #workbench a[data-domain] {
+  border-width: 2px;
+}
+:root[data-design="construct"] .lab-shell .reading-step-number {
+  border: 2px solid var(--atlas-text);
+  border-radius: 0;
+  color: var(--atlas-text);
+  background: var(--atlas-soft);
+  font-size: 14px;
+  font-weight: 700;
+}
+:root[data-design="construct"]
+  .lab-shell
+  .hh-page
+  > .hh-rows:not(.hh-writing-list) {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 0;
+  border-top: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"]
+  .lab-shell
+  .hh-page
+  > .hh-rows:not(.hh-writing-list)
+  > li {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-text);
+  border-right: 1px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .flow-header {
+  border-bottom: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .flow-card {
+  border-width: 2px;
+}
+:root[data-design="construct"] .lab-shell .document-body > header {
+  border-bottom: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .prose h2 {
+  padding-top: 18px;
+  border-top: 2px solid var(--atlas-text);
+}
+/* Knowledge browser: topic tools, reading pane and contextual contents. */
+:root[data-design="map"] .lab-shell .atlas-page-heading,
+:root[data-design="map"] .lab-shell .fieldwork-build > .atlas-page-heading {
+  grid-template-columns: minmax(160px, 0.3fr) minmax(0, 1fr);
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+:root[data-design="map"] .lab-shell :is(.atlas-page-title h1, .hh-page > h1) {
+  font-size: clamp(32px, 3.3vw, 46px);
+}
+:root[data-design="map"] .lab-shell .atlas-explorer-tools {
+  background: var(--atlas-surface);
+  padding: 18px;
+}
+:root[data-design="map"] .lab-shell .focused-articles .hh-writing-list > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px;
+  gap: 24px;
+  padding: 24px;
+}
+:root[data-design="map"] .lab-shell .focused-articles .hh-writing-list h2,
+:root[data-design="map"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child
+  h2 {
+  font-size: 23px;
+  font-weight: 600;
+}
+:root[data-design="map"]
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  .hh-row-meta {
+  align-items: flex-end;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-size: 9px;
+}
+:root[data-design="map"]
+  .lab-shell
+  .focused-learning:has(> .atlas-track-switch) {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 0 32px;
+}
+:root[data-design="map"] .lab-shell .focused-learning > .atlas-page-heading {
+  grid-column: 1/-1;
+}
+:root[data-design="map"] .lab-shell .focused-learning > .atlas-track-switch {
+  grid-column: 1;
+  grid-row: 2 / span 2;
+  position: sticky;
+  top: calc(var(--collection-header) + 24px);
+  align-self: start;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  padding: 12px;
+  border: 1px solid var(--atlas-border);
+  background: var(--atlas-surface);
+}
+:root[data-design="map"]
+  .lab-shell
+  .focused-learning
+  > .atlas-track-switch
+  button {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  width: 100%;
+  border: 0;
+  border-left: 3px solid transparent;
+  border-radius: 0;
+  padding: 14px 8px;
+}
+:root[data-design="map"]
+  .lab-shell
+  .focused-learning
+  > .atlas-track-switch
+  button[aria-pressed="true"] {
+  border-left-color: var(--atlas-accent);
+}
+:root[data-design="map"]
+  .lab-shell
+  .focused-learning
+  > :is(.atlas-explorer-tools, #learning-results) {
+  grid-column: 2;
+}
+:root[data-design="map"] .lab-shell .reading-step-number {
+  border-radius: 5px;
+  background: var(--atlas-accent-soft);
+}
+:root[data-design="map"] .lab-shell .document-nav {
+  border: 0;
+  border-right: 1px solid var(--atlas-border);
+  background: transparent;
+  padding: 0 20px 0 0;
+}
+:root[data-design="map"] .lab-shell .document-toc {
+  border-left: 1px solid var(--atlas-border);
+  padding-left: 20px;
+}
+:root[data-design="map"] .lab-shell .document-toc nav {
+  border-left: 0;
+}
+:root[data-design="map"] .lab-shell .document-body > header {
+  padding-bottom: 24px;
+}
+:root[data-design="map"] .lab-shell .hh-page > .hh-rows:not(.hh-writing-list) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+:root[data-design="map"]
+  .lab-shell
+  .hh-page
+  > .hh-rows:not(.hh-writing-list)
+  > li {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid var(--atlas-border);
+  border-radius: 5px;
+  background: var(--atlas-surface);
+}
+/* Chapters: an off-white sheet on a grey desk, with a restrained red reading mark. */
+:root[data-design="chapters"] .lab-shell .atlas-page-heading,
+:root[data-design="chapters"]
+  .lab-shell
+  .fieldwork-build
+  > .atlas-page-heading {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  border-bottom: 3px double var(--atlas-border);
+}
+:root[data-design="chapters"] .lab-shell .atlas-page-context {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+  padding: 0;
+}
+:root[data-design="chapters"] .lab-shell .atlas-page-context > p {
+  margin: 0;
+}
+:root[data-design="chapters"] .lab-shell .atlas-content-count {
+  margin-left: auto;
+}
+:root[data-design="chapters"] .lab-shell .focused-articles .hh-writing-list h2,
+:root[data-design="chapters"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child
+  h2 {
+  font-size: 30px;
+}
+:root[data-design="chapters"] .lab-shell .atlas-track-switch {
+  gap: 0;
+  border: 1px solid var(--atlas-border);
+}
+:root[data-design="chapters"] .lab-shell .atlas-track-switch button {
+  border: 0;
+  border-right: 1px solid var(--atlas-border);
+  border-radius: 0;
+  padding-block: 18px;
+}
+:root[data-design="chapters"] .lab-shell .atlas-track-switch button:last-child {
+  border-right: 0;
+}
+:root[data-design="chapters"]
+  .lab-shell
+  .atlas-track-switch
+  button[aria-pressed="true"] {
+  color: #fff;
+  background: var(--atlas-accent);
+}
+:root[data-design="chapters"]
+  .lab-shell
+  .atlas-track-switch
+  button[aria-pressed="true"]
+  :is(span, strong, small) {
+  color: inherit;
+}
+:root[data-design="chapters"] .lab-shell .reading-step {
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 20px;
+}
+:root[data-design="chapters"] .lab-shell .reading-step::before {
+  display: none;
+}
+:root[data-design="chapters"] .lab-shell .reading-step-number {
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: 400 28px/1.4 var(--design-title-font);
+  color: var(--atlas-accent);
+}
+:root[data-design="chapters"] .lab-shell .reading-step > div {
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: transparent;
+  padding: 0 0 26px;
+}
+:root[data-design="chapters"] .lab-shell .document-body > header {
+  border-bottom: 3px double var(--atlas-border);
+}
+:root[data-design="chapters"] .lab-shell .document-body h1 {
+  font-size: clamp(34px, 3.8vw, 48px);
+}
+:root[data-design="chapters"] .lab-shell .article-brief {
+  background: transparent;
+  border: 0;
+  border-left: 2px solid var(--atlas-accent);
+}
+:root[data-design="chapters"] .lab-shell .prose :is(h2, h3) {
+  line-height: 1.5;
+}
+@media (max-width: 1280px) {
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .site-header {
+    gap: 14px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav
+    a {
+    padding-inline: 9px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .document-layout,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .document-layout[data-reader-width="wide"] {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 960px;
+    gap: 24px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .document-nav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 24px;
+    border: 0;
+    border-bottom: 1px solid var(--atlas-border);
+    padding: 0 0 14px;
+    background: transparent;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .document-toc {
+    display: none;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .mobile-toc {
+    display: block;
+    border: 0;
+    border-block: 1px solid var(--atlas-border);
+    border-radius: 0;
+    padding-inline: 0;
+  }
+}
+@media (max-width: 1000px) {
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-build-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-build-layout
+    .practice-paths {
+    position: static;
+    flex-direction: row;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .practice-paths
+    > a {
+    flex: 1 1 0;
+    min-width: 0;
+    border: 0;
+    border-right: 1px solid var(--atlas-border);
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .practice-paths
+    > a:last-child {
+    border-right: 0;
+  }
+  :root[data-design="map"]
+    .lab-shell
+    .focused-learning:has(> .atlas-track-switch) {
+    display: block;
+  }
+  :root[data-design="map"] .lab-shell .focused-learning > .atlas-track-switch {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+@media (max-width: 900px) {
+  :root:is(
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  ) {
+    --collection-header: 104px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .site-header {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 60px 44px;
+    height: var(--collection-header);
+    gap: 0 12px;
+    padding-inline: 20px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .site-header
+    > .brand-link {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .site-header
+    .brand-logo {
+    width: 106px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .header-actions {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    margin: 0;
+    gap: 2px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav {
+    grid-column: 1/-1;
+    grid-row: 2;
+    position: static;
+    inset: auto;
+    transform: none;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: none;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border: 0;
+    border-top: 1px solid var(--atlas-border);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    scrollbar-width: none;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav
+    a,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav
+    [aria-current="page"] {
+    flex: 0 0 auto;
+    flex-direction: row;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 4px;
+    border-radius: 0;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav
+    a:focus-visible {
+    outline-offset: -4px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav
+    a
+    > svg {
+    display: none;
+  }
+  :root[data-design="map"] .lab-shell .site-header > .brand-link {
+    border: 0;
+    padding-right: 0;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .header-actions
+    .theme-toggle
+    > .theme-mode-name {
+    display: none;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .header-actions
+    .theme-toggle,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .header-actions
+    > .theme-toggle:first-child {
+    min-width: 44px;
+    padding-inline: 8px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .header-actions
+    select {
+    width: 55px;
+    max-width: 55px;
+    padding-inline: 3px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .header-actions
+    .atlas-directory-trigger
+    > span {
+    display: none;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    :is(.hh-page, .radar-flow) {
+    padding-top: 32px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-page-heading,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .fieldwork-build
+    > .atlas-page-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-page-context {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    padding-top: 0;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-page-context
+    > p {
+    margin: 0;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-content-count {
+    margin-left: 0;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-track-switch {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  :root[data-design="chapters"] .lab-shell {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  :root[data-design="construct"] .lab-shell .site-header {
+    border-bottom-width: 1px;
+  }
+}
+@media (max-width: 600px) {
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .site-header {
+    padding-inline: 18px;
+    gap: 0 8px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .site-header
+    .brand-logo {
+    width: 94px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .header-actions {
+    gap: 1px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .header-actions
+    > :is(button, select) {
+    padding-inline: 4px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav {
+    gap: 15px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav
+    a {
+    font-size: 12px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    :is(.atlas-page-title h1, .hh-page > h1),
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .fieldwork-build
+    > header
+    h1 {
+    font-size: 34px;
+    line-height: 1.3;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-content-count {
+    flex-basis: 100%;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-explorer-tools {
+    padding: 16px;
+  }
+  :root[data-design="photo"] .lab-shell .atlas-explorer-tools,
+  :root[data-design="chapters"] .lab-shell .atlas-explorer-tools,
+  :root[data-design="construct"] .lab-shell .atlas-explorer-tools {
+    padding-inline: 0;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .reading-search
+    input {
+    font-size: 16px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .focused-articles
+    > .hh-writing-list,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .writing-complete
+    .hh-writing-list,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .path-picker,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .flow-cards,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .hh-page
+    > .hh-rows:not(.hh-writing-list),
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #workbench
+    > div:has(> a[data-domain]) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .focused-articles
+    > .hh-writing-list
+    > li:first-child {
+    grid-column: 1;
+    grid-row: auto;
+    min-height: 0;
+    padding: 24px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .focused-articles
+    .hh-writing-list
+    > li {
+    display: flex;
+    padding: 24px;
+    gap: 20px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .focused-articles
+    .hh-writing-list
+    h2,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .focused-articles
+    > .hh-writing-list
+    > li:first-child
+    h2 {
+    font-size: 25px;
+  }
+  :root[data-design="photo"] .lab-shell .focused-articles .hh-writing-list > li,
+  :root[data-design="photo"]
+    .lab-shell
+    .focused-articles
+    > .hh-writing-list
+    > li:first-child,
+  :root[data-design="chapters"]
+    .lab-shell
+    .focused-articles
+    .hh-writing-list
+    > li,
+  :root[data-design="chapters"]
+    .lab-shell
+    .focused-articles
+    > .hh-writing-list
+    > li:first-child {
+    padding: 26px 0;
+    border-radius: 0;
+  }
+  :root[data-design="photo"]
+    .lab-shell
+    .focused-articles
+    .hh-writing-list
+    .hh-row-meta,
+  :root[data-design="map"]
+    .lab-shell
+    .focused-articles
+    .hh-writing-list
+    .hh-row-meta,
+  :root[data-design="chapters"]
+    .lab-shell
+    .focused-articles
+    .hh-writing-list
+    .hh-row-meta {
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  :root[data-design="construct"]
+    .lab-shell
+    .focused-articles
+    > .hh-writing-list {
+    gap: 0;
+  }
+  :root[data-design="construct"]
+    .lab-shell
+    .focused-articles
+    > .hh-writing-list
+    > li:first-child {
+    border-right-width: 1px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .path-picker
+    > article {
+    grid-template-columns: 32px minmax(0, 1fr);
+    padding: 22px 18px;
+    gap: 0 14px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .path-picker
+    h2 {
+    font-size: 25px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .path-picker
+    article
+    > .obs-kicker {
+    width: 32px;
+    height: 32px;
+  }
+  :root[data-design="photo"] .lab-shell .path-picker > article,
+  :root[data-design="chapters"] .lab-shell .path-picker > article {
+    padding: 28px 0;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .reading-step
+    h3 {
+    font-size: 21px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .atlas-build-layout
+    .practice-paths {
+    flex-direction: column;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .practice-paths
+    > a {
+    display: block;
+    padding: 18px;
+    border: 0;
+    border-bottom: 1px solid var(--atlas-border);
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .practice-paths
+    > a:last-child {
+    border-bottom: 0;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .flow-day
+    > header {
+    position: static;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .document-layout,
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .document-layout[data-reader-width="wide"] {
+    padding: 28px 20px 60px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .document-body
+    h1 {
+    font-size: 30px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .prose {
+    font-size: 16px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .prose
+    h2 {
+    font-size: 25px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .prose
+    h3 {
+    font-size: 21px;
+  }
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .footer-inner {
+    padding: 28px 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:is(
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .focused-articles
+    .hh-writing-list
+    > li {
+    transition: none;
+  }
+}

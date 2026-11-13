@@ -1,0 +1,531 @@
+/* Classic notebook and shared preset aliases. D and E have independent layouts. */
+:root[data-design="classic"] {
+  color-scheme: light;
+  --atlas-bg: #f6f5f0;
+  --atlas-text: #283632;
+  --atlas-muted: #5b6c65;
+  --atlas-border: #d6ddd6;
+  --atlas-surface: #fffef9;
+  --atlas-soft: #ecefe8;
+  --atlas-accent: #356555;
+  --atlas-accent-soft: #e2eae1;
+  --atlas-dock-space: 0px;
+  --atlas-shadow: none;
+  --design-accent-contrast: #fffef9;
+  --design-title-font:
+    "Iowan Old Style", "Palatino Linotype", "Songti SC", "SimSun", serif;
+  --lab-width: 1440px;
+  --lab-gutter: clamp(22px, 3.5vw, 56px);
+}
+:root[data-design="classic"][data-theme="dark"] {
+  color-scheme: dark;
+  --atlas-bg: #18211e;
+  --atlas-text: #e6ebe2;
+  --atlas-muted: #a4b5aa;
+  --atlas-border: #38483f;
+  --atlas-surface: #202c26;
+  --atlas-soft: #243129;
+  --atlas-accent: #b9d0af;
+  --atlas-accent-soft: #34473a;
+  --design-accent-contrast: #18211e;
+}
+:root:is(
+  [data-design="classic"],
+  [data-design="garden"],
+  [data-design="photo"],
+  [data-design="construct"],
+  [data-design="map"],
+  [data-design="chapters"]
+) {
+  --hh-base-color-primary-dark: var(--atlas-accent);
+  --hh-base-color-primary-darker: var(--atlas-accent);
+  --hh-base-color-primary-darkest: var(--atlas-accent);
+  --hh-base-color-primary-light: var(--atlas-accent);
+  --hh-base-color-primary-lighter: var(--atlas-accent);
+  --hh-base-color-primary-lightest: var(--atlas-accent);
+  --hh-highlighted-code-line-bg: var(--atlas-accent-soft);
+  --obs-node-hover: var(--atlas-accent-soft);
+  --obs-selected-bg: var(--atlas-accent);
+  --obs-selected-text: var(--design-accent-contrast);
+  --obs-action-bg: var(--atlas-accent);
+  --obs-action-text: var(--design-accent-contrast);
+  --obs-action-hover: var(--atlas-text);
+  --obs-map-line: var(--atlas-border);
+  --obs-map-mark: var(--atlas-accent);
+  --folio-serif: var(--design-title-font);
+}
+:root[data-design="classic"] .lab-shell {
+  --atlas-radius: 3px;
+}
+:root[data-design="classic"] .lab-shell .brand-logo img {
+  filter: none;
+}
+:root[data-design="classic"]
+  .lab-shell
+  :is(.atlas-page-title h1, .hh-page > h1, .document-body h1, .flow-header h1) {
+  font-family: var(--design-title-font);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+:root[data-design="classic"] .lab-shell .atlas-page-heading {
+  margin-bottom: 0;
+  padding-bottom: 32px;
+  border: 0;
+}
+:root[data-design="classic"] .lab-shell .document-body {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-design="classic"] .lab-shell .atlas-explorer-tools {
+  background: transparent;
+  border-width: 1px 0;
+  border-radius: 0;
+  padding: 18px 0;
+}
+:root[data-design="classic"] .lab-shell .reading-search input {
+  background: var(--atlas-surface);
+  border: 1px solid var(--atlas-border);
+  border-radius: 3px;
+}
+:root[data-design="classic"] .lab-shell .focused-articles > .hh-writing-list,
+:root[data-design="classic"] .lab-shell .writing-complete .hh-writing-list {
+  display: block;
+}
+:root[data-design="classic"] .lab-shell .focused-articles .hh-writing-list > li,
+:root[data-design="classic"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 125px;
+  grid-row: auto;
+  grid-column: auto;
+  gap: 24px;
+  min-height: 0;
+  padding: 26px 0;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: transparent;
+  transform: none;
+}
+:root[data-design="classic"] .lab-shell .focused-articles .hh-writing-list h2,
+:root[data-design="classic"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child
+  h2 {
+  font-size: 24px;
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+:root[data-design="classic"]
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  .hh-eyebrow {
+  margin-bottom: 10px;
+}
+:root[data-design="classic"]
+  .lab-shell
+  .focused-articles
+  .hh-writing-list
+  .hh-row-meta {
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0;
+  padding-top: 0;
+  border: 0;
+}
+:root[data-design="classic"] .lab-shell .atlas-track-switch button,
+:root[data-design="classic"] .lab-shell .path-picker > article {
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-design="classic"] .lab-shell .reading-step > div {
+  border-radius: 0;
+  background: transparent;
+  border-width: 0 0 1px;
+  padding: 8px 0 18px;
+}
+:root[data-design="classic"]
+  .lab-shell
+  :is(.article-brief, .prose pre, .prose blockquote, .flow-focus) {
+  border-radius: 0;
+}
+/* C follows the public main branch: a notebook rail and compact reading rows. */
+:root[data-design="classic"]
+  .lab-shell
+  :is(.focused-articles, .focused-learning) {
+  max-width: 1120px;
+}
+:root[data-design="classic"] .lab-shell .atlas-page-heading {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+:root[data-design="classic"] .lab-shell .atlas-page-context {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 24px;
+}
+:root[data-design="classic"] .lab-shell .atlas-page-context > p {
+  margin: 0;
+}
+:root[data-design="classic"] .lab-shell .atlas-content-count {
+  margin-left: auto;
+}
+:root[data-design="classic"] .lab-shell .atlas-page-title h1 {
+  font-size: clamp(32px, 3.5vw, 48px);
+}
+:root[data-design="classic"] .lab-shell .path-picker > article {
+  border-width: 1px 0 0;
+  padding-inline: 0;
+}
+:root[data-design="classic"] .lab-shell .path-picker h2 {
+  font-size: 24px;
+}
+:root[data-design="classic"] .lab-shell .atlas-build-layout {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+:root[data-design="classic"] .lab-shell .atlas-build-layout .practice-paths {
+  position: static;
+  flex-direction: row;
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-design="classic"] .lab-shell .practice-paths > a {
+  flex: 1 1 0;
+  min-width: 0;
+  border-bottom: 0;
+  border-right: 1px solid var(--atlas-border);
+}
+:root[data-design="classic"] .lab-shell .practice-paths > a:last-child {
+  border-right: 0;
+}
+:root[data-design="classic"] .lab-shell #workbench a[data-domain] {
+  border-radius: 0;
+  background: transparent;
+}
+/* Reset Atlas A's fixed dock for the three desktop layouts. */
+@media (min-width: 901px) {
+  :root:is(
+      [data-design="classic"],
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav {
+    position: static;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: auto;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    gap: 2px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  :root:is(
+      [data-design="classic"],
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav
+    a {
+    flex: 0 0 auto;
+    flex-direction: row;
+    gap: 6px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  :root:is(
+      [data-design="classic"],
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    #main-nav
+    a
+    > svg {
+    display: none;
+  }
+  :root:is(
+      [data-design="classic"],
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .header-actions {
+    margin-left: auto;
+  }
+}
+@media (min-width: 1101px) {
+  :root[data-design="classic"] {
+    scroll-padding-top: 24px;
+  }
+  :root[data-design="classic"] .lab-shell {
+    display: grid;
+    grid-template-columns: 196px minmax(0, 1fr);
+    padding-bottom: 0;
+  }
+  :root[data-design="classic"] .lab-shell .site-header {
+    grid-column: 1;
+    grid-row: 1/3;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: start;
+    gap: 0;
+    padding: 32px 20px 20px;
+    border: 0;
+    border-right: 1px solid var(--atlas-border);
+    background: var(--atlas-soft);
+  }
+  :root[data-design="classic"] .lab-shell .site-header .brand-logo {
+    width: 138px;
+  }
+  :root[data-design="classic"] .atlas-location {
+    display: block;
+    margin: 18px 0 0;
+    font-size: 10px;
+    line-height: 1.8;
+    white-space: normal;
+  }
+  :root[data-design="classic"] .atlas-location > span {
+    display: none;
+  }
+  :root[data-design="classic"] .lab-shell #main-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: start;
+    width: 100%;
+    margin: 30px 0;
+    gap: 0;
+    counter-reset: notebook-nav;
+  }
+  :root[data-design="classic"] .lab-shell #main-nav a,
+  :root[data-design="classic"] .lab-shell #main-nav [aria-current="page"] {
+    counter-increment: notebook-nav;
+    flex: 0 0 auto;
+    flex-direction: row;
+    justify-content: start;
+    gap: 10px;
+    width: 100%;
+    min-height: 54px;
+    padding: 12px 4px;
+    border: 0;
+    border-bottom: 1px solid var(--atlas-border);
+    border-radius: 0;
+    font-size: 13px;
+    background: transparent;
+  }
+  :root[data-design="classic"] .lab-shell #main-nav a::before {
+    content: counter(notebook-nav, decimal-leading-zero);
+    font: 10px/1.6 var(--hh-base-font-family-monospace);
+    color: var(--atlas-muted);
+  }
+  :root[data-design="classic"] .lab-shell #main-nav a::after {
+    content: "↗";
+    margin-left: auto;
+    color: var(--atlas-accent);
+  }
+  :root[data-design="classic"] .lab-shell #main-nav [aria-current="page"] {
+    background: var(--atlas-surface);
+    box-shadow: -2px 0 var(--atlas-accent);
+    padding-inline: 9px;
+  }
+  :root[data-design="classic"] .lab-shell .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto 0 0;
+    padding: 18px 0 0;
+    gap: 6px;
+    border-top: 1px solid var(--atlas-border);
+  }
+  :root[data-design="classic"] .lab-shell .header-actions > :first-child {
+    flex-basis: 100%;
+    width: 100%;
+    justify-content: start;
+  }
+  :root[data-design="classic"] .lab-shell .header-actions :is(button, select) {
+    max-width: 100%;
+    border-radius: 0;
+    font-size: 11px;
+  }
+  :root[data-design="classic"] .lab-shell .header-actions .theme-toggle {
+    width: 100%;
+  }
+  :root[data-design="classic"] .lab-shell .header-actions select {
+    width: 60px;
+    max-width: 60px;
+    min-width: 0;
+    padding-inline: 5px;
+  }
+  :root[data-design="classic"] .lab-shell .header-actions {
+    gap: 4px;
+  }
+  :root[data-design="classic"] .lab-shell .site-content,
+  :root[data-design="classic"] .lab-shell .site-footer {
+    grid-column: 2;
+  }
+  :root[data-design="classic"] .lab-shell .site-content {
+    grid-row: 1;
+  }
+  :root[data-design="classic"] .lab-shell .site-footer {
+    grid-row: 2;
+  }
+  :root[data-design="classic"]
+    .lab-shell
+    :is(.document-nav, .document-toc, .flow-day > header) {
+    top: 24px;
+  }
+  :root[data-design="classic"] .lab-shell .flow-focusbar {
+    top: 0;
+  }
+  :root[data-design="classic"]
+    .lab-shell
+    :is(
+      #reading-content,
+      #article-toc,
+      #article-top,
+      .reading-step,
+      .flow-focus
+    ) {
+    scroll-margin-top: 24px;
+  }
+}
+@media (min-width: 1281px) {
+  :root[data-design="classic"] .lab-shell .document-layout,
+  :root[data-design="classic"]
+    .lab-shell
+    .document-layout[data-reader-width="wide"] {
+    grid-template-columns: minmax(0, 760px) 160px;
+    gap: 28px 32px;
+    max-width: 1200px;
+    padding-inline: var(--lab-gutter);
+  }
+  :root[data-design="classic"] .lab-shell .document-nav {
+    grid-column: 1/-1;
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid var(--atlas-border);
+    background: transparent;
+  }
+  :root[data-design="classic"] .lab-shell .document-body {
+    grid-column: 1;
+  }
+  :root[data-design="classic"]
+    .lab-shell
+    .document-layout[data-reader-width="wide"] {
+    max-width: 1400px;
+    grid-template-columns: minmax(0, 1fr) 160px;
+  }
+  :root[data-design="classic"] .lab-shell .document-toc {
+    grid-column: 2;
+  }
+}
+@media (max-width: 900px) {
+  :root:is(
+    [data-design="classic"],
+    [data-design="garden"],
+    [data-design="photo"],
+    [data-design="construct"],
+    [data-design="map"],
+    [data-design="chapters"]
+  ) {
+    --atlas-dock-space: 112px;
+  }
+  :root:is(
+      [data-design="classic"],
+      [data-design="garden"],
+      [data-design="photo"],
+      [data-design="construct"],
+      [data-design="map"],
+      [data-design="chapters"]
+    )
+    .lab-shell
+    .flow-focusbar {
+    top: 68px;
+  }
+  :root[data-design="classic"] .lab-shell .document-body {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+  }
+}
+@media (max-width: 600px) {
+  :root[data-design="classic"]
+    .lab-shell
+    .focused-articles
+    .hh-writing-list
+    > li,
+  :root[data-design="classic"]
+    .lab-shell
+    .focused-articles
+    > .hh-writing-list
+    > li:first-child {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  :root[data-design="classic"]
+    .lab-shell
+    .focused-articles
+    .hh-writing-list
+    .hh-row-meta {
+    flex-direction: row;
+    align-items: baseline;
+  }
+  :root[data-design="classic"] .lab-shell .atlas-content-count {
+    margin-left: 0;
+  }
+  :root[data-design="classic"] .lab-shell .atlas-build-layout .practice-paths {
+    flex-direction: column;
+  }
+  :root[data-design="classic"] .lab-shell .practice-paths > a {
+    border-right: 0;
+    border-bottom: 1px solid var(--atlas-border);
+    padding: 16px;
+  }
+  :root[data-design="classic"] .lab-shell .practice-paths > a:last-child {
+    border-bottom: 0;
+  }
+}

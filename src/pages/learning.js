@@ -141,130 +141,172 @@ export default function Learning() {
         "選一個方向，從第一篇開始；也能直接查找具體問題。",
       )}
     >
-      <main className="hh-page focused-learning">
-        <header className="focused-heading">
-          {track ? (
-            <button className="reading-back" onClick={() => choose("all")}>
-              ← {t("所有方向", "All directions", "所有方向")}
-            </button>
-          ) : (
-            <p className="obs-kicker">{t("学习", "LEARN", "學習")}</p>
-          )}
-          <h1>
-            {track
-              ? t(track.title, track.en, track.titleTw)
-              : t("想从哪里开始？", "Where will you start?", "想從哪裡開始？")}
-          </h1>
-          <p>
-            {track ? (
-              <>
-                {t("先修：", "Prerequisites: ", "先修：")}
-                {t(...track.background)}
-              </>
-            ) : (
-              t(
-                "选一个方向，或直接搜索你遇到的问题。",
-                "Choose a direction, or search for the problem in front of you.",
-                "選一個方向，或直接搜尋你遇到的問題。",
-              )
-            )}
-          </p>
-        </header>
-        <div className="reading-search">
-          <label htmlFor="learning-query">
-            {t(
-              "查找文章或问题",
-              "Find an article or question",
-              "查找文章或問題",
-            )}
-          </label>
-          <input
-            id="learning-query"
-            type="search"
-            value={query}
-            onChange={(event) => update({ query: event.target.value })}
-            placeholder={
-              domain === "all"
-                ? t(
-                    "例如：超时、KV Cache、抓取",
-                    "Try: timeout, KV cache, grasp",
-                    "例如：逾時、KV Cache、抓取",
-                  )
-                : t(
-                    "在当前方向中查找",
-                    "Search this direction",
-                    "在目前方向中查找",
-                  )
-            }
-          />
-        </div>
-        {resume && !filtering && (
-          <p className="reading-resume">
-            {t("接着读：", "Continue: ", "接著讀：")}
-            <Link to={resume.permalink}>{resume.title} →</Link>
-          </p>
-        )}
-        <details
-          className="reading-options"
-          open={saved || difficulty !== "all"}
-        >
-          <summary>
-            {t(
-              "更多筛选与阅读记录",
-              "More filters and reading records",
-              "更多篩選與閱讀紀錄",
-            )}
-          </summary>
-          <div className="hh-controls">
-            <label>
-              {t("难度", "Level", "難度")}
-              <select
-                value={difficulty}
-                onChange={(event) => update({ difficulty: event.target.value })}
-              >
-                {[
-                  ["all", t("全部", "All", "全部")],
-                  ["beginner", t("入门", "Beginner", "入門")],
-                  ["intermediate", t("进阶", "Intermediate", "進階")],
-                  ["advanced", t("深入", "Advanced", "深入")],
-                ].map(([value, label]) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button
-              disabled={!progress.ready}
-              aria-pressed={saved}
-              onClick={() => update({ saved: !saved })}
-            >
-              {t("只看想读", "Saved only", "只看想讀")}
-            </button>
-            <button onClick={() => update(readLearningFilters())}>
-              {t("清除筛选", "Clear filters", "清除篩選")}
-            </button>
-            <Link to="/reading">
-              {t("打开阅读清单", "Open reading list", "開啟閱讀清單")} ↗
-            </Link>
-          </div>
-          <p className="hh-meta">
-            {t(
-              "仅搜索已发表文章；阅读标记保存在当前浏览器。",
-              "Search covers published articles. Reading records stay in this browser.",
-              "僅搜尋已發表文章；閱讀標記儲存在目前瀏覽器。",
-            )}
-          </p>
-          {progress.error && (
-            <p role="status">
+      <main className="hh-page focused-learning atlas-learning">
+        <header className="focused-heading atlas-page-heading">
+          <div className="atlas-page-context">
+            <p className="lab-page-label">LEARNING / 02</p>
+            <p>
               {t(
-                "浏览器存储不可用，标记仅本次有效。",
-                "Storage is unavailable; records last for this visit.",
-                "瀏覽器儲存不可用，標記僅本次有效。",
+                "从教程走向实践",
+                "From reading to practice",
+                "從教學走向實作",
               )}
             </p>
+            {track && (
+              <button className="reading-back" onClick={() => choose("all")}>
+                ← {t("所有方向", "All directions", "所有方向")}
+              </button>
+            )}
+          </div>
+          <div className="atlas-page-title">
+            <h1>
+              {track
+                ? t(track.title, track.en, track.titleTw)
+                : t("学习路线", "Learning paths", "學習路線")}
+            </h1>
+            <p>
+              {track ? (
+                <>
+                  {t("先修：", "Prerequisites: ", "先修：")}
+                  {t(...track.background)}
+                </>
+              ) : (
+                t(
+                  "四个研究方向。按顺序建立理解，也可以直接找到眼前的问题。",
+                  "Four research directions. Build understanding in sequence, or find the question in front of you.",
+                  "四個研究方向。依順序建立理解，也能直接找到眼前的問題。",
+                )
+              )}
+            </p>
+          </div>
+        </header>
+        {(track || filtering) && (
+          <nav
+            className="atlas-track-switch"
+            aria-label={t(
+              "选择研究方向",
+              "Choose a research direction",
+              "選擇研究方向",
+            )}
+          >
+            {tracks.map((item, index) => (
+              <button
+                key={item.domain}
+                aria-pressed={domain === item.domain}
+                onClick={() => choose(item.domain)}
+              >
+                <span aria-hidden="true">0{index + 1}</span>
+                <strong>{t(item.title, item.en, item.titleTw)}</strong>
+                <small>
+                  {item.steps.filter((step) => available.has(step.id)).length}{" "}
+                  {t("篇教程", "guides", "篇教學")}
+                </small>
+              </button>
+            ))}
+          </nav>
+        )}
+        <section
+          className="atlas-explorer-tools"
+          aria-label={t("查找教程", "Find guides", "查找教學")}
+        >
+          <div className="reading-search">
+            <label htmlFor="learning-query">
+              {t(
+                "查找文章或问题",
+                "Find an article or question",
+                "查找文章或問題",
+              )}
+            </label>
+            <input
+              id="learning-query"
+              type="search"
+              value={query}
+              onChange={(event) => update({ query: event.target.value })}
+              placeholder={
+                domain === "all"
+                  ? t(
+                      "例如：超时、KV Cache、抓取",
+                      "Try: timeout, KV cache, grasp",
+                      "例如：逾時、KV Cache、抓取",
+                    )
+                  : t(
+                      "在当前方向中查找",
+                      "Search this direction",
+                      "在目前方向中查找",
+                    )
+              }
+            />
+          </div>
+          {resume && !filtering && (
+            <p className="reading-resume">
+              {t("接着读：", "Continue: ", "接著讀：")}
+              <Link to={resume.permalink}>{resume.title} →</Link>
+            </p>
           )}
-        </details>
+          <details
+            className="reading-options"
+            open={saved || difficulty !== "all"}
+          >
+            <summary>
+              {t(
+                "更多筛选与阅读记录",
+                "More filters and reading records",
+                "更多篩選與閱讀紀錄",
+              )}
+            </summary>
+            <div className="hh-controls">
+              <label>
+                {t("难度", "Level", "難度")}
+                <select
+                  value={difficulty}
+                  onChange={(event) =>
+                    update({ difficulty: event.target.value })
+                  }
+                >
+                  {[
+                    ["all", t("全部", "All", "全部")],
+                    ["beginner", t("入门", "Beginner", "入門")],
+                    ["intermediate", t("进阶", "Intermediate", "進階")],
+                    ["advanced", t("深入", "Advanced", "深入")],
+                  ].map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <button
+                disabled={!progress.ready}
+                aria-pressed={saved}
+                onClick={() => update({ saved: !saved })}
+              >
+                {t("只看想读", "Saved only", "只看想讀")}
+              </button>
+              <button onClick={() => update(readLearningFilters())}>
+                {t("清除筛选", "Clear filters", "清除篩選")}
+              </button>
+              <Link to="/reading">
+                {t("打开阅读清单", "Open reading list", "開啟閱讀清單")} ↗
+              </Link>
+            </div>
+            <p className="hh-meta">
+              {t(
+                "仅搜索已发表文章；阅读标记保存在当前浏览器。",
+                "Search covers published articles. Reading records stay in this browser.",
+                "僅搜尋已發表文章；閱讀標記儲存在目前瀏覽器。",
+              )}
+            </p>
+            {progress.error && (
+              <p role="status">
+                {t(
+                  "浏览器存储不可用，标记仅本次有效。",
+                  "Storage is unavailable; records last for this visit.",
+                  "瀏覽器儲存不可用，標記僅本次有效。",
+                )}
+              </p>
+            )}
+          </details>
+        </section>
         <div id="learning-results">
           {filtering ? (
             <section className="reading-results">

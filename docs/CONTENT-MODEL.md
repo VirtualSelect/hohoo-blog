@@ -1,5 +1,15 @@
 # Huhohoo Content Model
 
+## 八套主题的共享内容（2026-11-13更新）
+
+A研究空间（`space`）、B清晰阅读（`clear`）、C主干手记（`classic`）、D插画花园（`garden`）、E光影随记（`photo`）、F几何构成（`construct`）、G知识地图（`map`）、H章节书册（`chapters`）共用一个内容树及阅读状态。主题只改变版式与视觉，不进入内容索引，不改文章身份、发布日期、收藏或学习进度，也不产生新的内容成果。未采纳的旧`journal/gallery`偏好分别兼容到`garden/photo`。
+
+首页共享精选区默认从 LLM 方向进入；四方向查询、旧 `question` 参数与路线锚点继续复用现有协议。精选阅读按稳定 Doc ID 关联已有已发表文章，返回原本的本地化 `href`，不能用无前缀 URL 匹配三语条目。缺少内容时显示空状态，不补造标题、日期或成果；近作继续经 `writingEntries` 过滤，项目来自同一内容索引。
+
+C / 研究手记复用主干已有的 MuJoCo 二维力控实验封面：`/media/practice/planar-gain.svg` 保留实际轨迹、原始标签与来源说明，链接 `/docs/embodied-ai/mujoco-planar-pd`，不重新绘制数据，也不代表新增仿真或实验结论。四方向简介与顺序仍来自 `data/learning-paths.json`，入口分别进入 `/learning?track=ai-apps`、`/learning?track=llm`、`/learning?track=embodied-ai`、`/learning?track=rag`；使用现有本地化链接处理，不另建路线或内容副本。
+
+D—H重新组织已有文章、项目及实验入口，保留正文中的原始图表与证据。G地图从四方向与`selectedHomeArticle`当前语言条目建立显式路线入口关系；连线不表示文章之间推断的先修关系，缺少入口时显示整理中。所有节点保留普通链接与键盘控件，手机展示分层列表。H章节签复用同一方向状态。花园与摄影风格图均为生成装饰，不冒充真实环境或实验；原概念稿中的示例日期、文案与连线不得复制到内容数据。A/B的地形、文档和缓存图继续作为概念示意，外部Radar与原创内容保持边界。最新验收见 [八主题记录](../reports/EIGHT-THEMES-20261113.md)；旧阶段报告继续保留为历史。
+
 ## 页面数据的最小投影（2026-11-08，本地）
 
 原始 JSON 与生成的完整内容索引继续作为构建期事实源，浏览器仅读取当前页面所需字段。雷达/周报使用当前信号的 `related` 加公共搜索建议；现存 `radar-digest` 的完整元数据保留在自己的地址，不与自动生成周报混同。

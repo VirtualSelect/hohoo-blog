@@ -1,0 +1,1118 @@
+/* Atlas interiors: one content model, a bright library and a midnight workspace. */
+.lab-shell {
+  --atlas-radius: 16px;
+  --atlas-reading: 760px;
+}
+.lab-shell :is(.lab-page-label, .hh-eyebrow, .eyebrow, .obs-kicker) {
+  font: 11px/1.7 var(--hh-base-font-family-monospace);
+  letter-spacing: 0.06em;
+}
+.lab-shell .lab-page-label {
+  color: var(--hh-accent);
+  margin: 0 0 14px;
+}
+.lab-shell :is(.focused-learning, .focused-articles, .fieldwork-build) {
+  max-width: 1440px;
+  padding-top: 56px;
+  padding-bottom: 80px;
+}
+.lab-shell .atlas-page-heading,
+.lab-shell .fieldwork-build > .atlas-page-heading {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.35fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 48px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--hh-text-primary);
+  padding: 0 0 44px;
+  margin: 0;
+}
+.lab-shell .atlas-page-context {
+  padding-top: 6px;
+}
+.lab-shell .atlas-page-context > p:not(.lab-page-label) {
+  max-width: 18em;
+  font-size: 13px;
+  color: var(--blog-muted);
+  line-height: 1.8;
+  margin: 0 0 14px;
+}
+.lab-shell .atlas-content-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 10px/1.8 var(--hh-base-font-family-monospace);
+  color: var(--blog-muted);
+}
+.lab-shell .atlas-content-count::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--hh-accent);
+  border-radius: 50%;
+}
+.lab-shell .atlas-page-title h1,
+.lab-shell .fieldwork-build > header h1 {
+  font-family: var(--hh-base-font-family-base);
+  font-size: clamp(34px, 4.3vw, 58px);
+  font-weight: 650;
+  line-height: 1.18;
+  letter-spacing: -0.045em;
+  max-width: 16em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+.lab-shell .atlas-page-title > p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--blog-muted);
+  max-width: 46em;
+  margin: 0;
+}
+.lab-shell .reading-back {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  min-height: 44px;
+  font-size: 12px;
+  color: var(--hh-accent);
+  background: transparent;
+}
+.lab-shell .atlas-explorer-tools {
+  padding: 18px 24px;
+  background: var(--blog-soft);
+  border: 1px solid var(--blog-border);
+  border-radius: var(--atlas-radius);
+  margin-bottom: 28px;
+}
+.lab-shell .reading-search {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-width: none;
+  margin: 0;
+}
+.lab-shell .reading-search label {
+  font-size: 12px;
+  color: var(--blog-muted);
+  flex: 0 0 auto;
+}
+.lab-shell .reading-search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--blog-surface);
+  color: var(--hh-text-primary);
+  padding: 10px 16px;
+  font-size: 15px;
+}
+.lab-shell .reading-search input::placeholder {
+  color: var(--blog-muted);
+  opacity: 0.8;
+}
+.lab-shell .reading-options {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--blog-border);
+  color: var(--blog-muted);
+  font-size: 12px;
+}
+.lab-shell .reading-options > summary {
+  min-height: 44px;
+  padding-block: 10px;
+}
+.lab-shell .reading-options .hh-controls {
+  margin-block: 16px;
+}
+.lab-shell .reading-options :is(button, select) {
+  font-size: 12px;
+  border-radius: 8px;
+}
+.lab-shell .reading-options .research-index-compact {
+  gap: 8px;
+  margin-block: 14px;
+}
+.lab-shell .research-index-compact > button {
+  border-radius: 8px;
+  font-size: 12px;
+  background: var(--blog-surface);
+  color: var(--hh-text-primary);
+}
+.lab-shell .research-index-compact > button[aria-pressed="true"] {
+  background: var(--hh-accent);
+  border-color: var(--hh-accent);
+  color: var(--obs-selected-text);
+}
+.lab-shell .reading-result-count {
+  min-height: 44px;
+  padding-block: 8px 20px;
+  border: 0;
+  font: 11px/1.8 var(--hh-base-font-family-monospace);
+}
+.lab-shell .reading-result-count button {
+  min-height: 44px;
+}
+.lab-shell .focused-articles > .hh-writing-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.lab-shell .focused-articles .hh-writing-list > li {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  padding: 26px;
+  gap: 24px;
+  border: 1px solid var(--blog-border);
+  border-radius: var(--atlas-radius);
+  background: var(--blog-surface);
+  transition:
+    border-color 200ms,
+    transform 200ms;
+}
+.lab-shell .focused-articles > .hh-writing-list > li:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 440px;
+  background: var(--blog-soft);
+}
+.lab-shell .focused-articles .hh-writing-list > li:hover,
+.lab-shell .focused-articles .hh-writing-list > li:focus-within {
+  border-color: var(--hh-accent);
+  transform: translateY(-2px);
+}
+.lab-shell .focused-articles .hh-writing-list .hh-eyebrow {
+  margin: 0 0 20px;
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--hh-accent);
+}
+.lab-shell .focused-articles .hh-writing-list h2 {
+  font-family: var(--hh-base-font-family-base);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+  margin: 0 0 16px;
+}
+.lab-shell .focused-articles > .hh-writing-list > li:first-child h2 {
+  font-size: clamp(26px, 2.6vw, 36px);
+  max-width: 22em;
+}
+.lab-shell .focused-articles .hh-writing-list h2 a {
+  display: block;
+  min-height: 44px;
+}
+.lab-shell .focused-articles .hh-writing-list p:not(.hh-eyebrow) {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--blog-muted);
+  margin: 0;
+}
+.lab-shell .focused-articles .hh-writing-list .hh-row-meta {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--blog-border);
+  font: 10px/1.8 var(--hh-base-font-family-monospace);
+  color: var(--blog-muted);
+}
+.lab-shell .writing-complete {
+  margin-top: 24px;
+}
+.lab-shell :is(.writing-complete, .writing-series) > summary {
+  font-size: 13px;
+  padding-block: 22px;
+  min-height: 48px;
+}
+.lab-shell .writing-complete .hh-writing-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.lab-shell .writing-series {
+  margin-top: 32px;
+  border-top: 1px solid var(--blog-border);
+}
+.lab-shell .atlas-track-switch {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.lab-shell .atlas-track-switch button {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: center;
+  gap: 4px 10px;
+  text-align: left;
+  padding: 16px;
+  min-height: 82px;
+  border: 1px solid var(--blog-border);
+  border-radius: 12px;
+  background: var(--blog-surface);
+  color: var(--hh-text-primary);
+}
+.lab-shell .atlas-track-switch button > span {
+  font: 10px/1.8 var(--hh-base-font-family-monospace);
+  color: var(--blog-muted);
+}
+.lab-shell .atlas-track-switch button strong {
+  font-size: 14px;
+  font-weight: 550;
+  letter-spacing: -0.02em;
+}
+.lab-shell .atlas-track-switch button small {
+  grid-column: 2;
+  font: 10px/1.8 var(--hh-base-font-family-monospace);
+  color: var(--blog-muted);
+}
+.lab-shell .atlas-track-switch button[aria-pressed="true"] {
+  color: var(--hh-accent);
+  border-color: var(--hh-accent);
+  background: var(--blog-soft);
+}
+.lab-shell .atlas-track-switch button:hover {
+  border-color: var(--hh-accent);
+}
+.lab-shell .path-picker {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 32px;
+}
+.lab-shell .path-picker > article {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 0 20px;
+  padding: 28px;
+  background: var(--blog-surface);
+  border: 1px solid var(--blog-border);
+  border-radius: var(--atlas-radius);
+}
+.lab-shell .path-picker article > .obs-kicker {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  font-size: 11px;
+  line-height: 1;
+  padding: 0;
+  background: var(--blog-soft);
+  border-radius: 10px;
+  color: var(--hh-accent);
+}
+.lab-shell .path-picker h2 {
+  font-family: var(--hh-base-font-family-base);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+  margin: 3px 0 16px;
+}
+.lab-shell .path-picker article p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--blog-muted);
+}
+.lab-shell .path-picker-actions {
+  grid-column: 2;
+  gap: 10px 24px;
+  margin-top: 20px;
+}
+.lab-shell .path-picker-actions a {
+  color: var(--hh-accent);
+}
+.lab-shell .path-picker-actions button {
+  font-size: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.lab-shell .focused-track {
+  max-width: none;
+  margin-top: 0;
+}
+.lab-shell .reading-views {
+  gap: 8px;
+  margin: 0 0 22px;
+  border: 0;
+}
+.lab-shell .reading-views button {
+  padding: 10px 18px;
+  min-height: 44px;
+  border: 1px solid var(--blog-border);
+  border-radius: 24px;
+  background: var(--blog-surface);
+  font-size: 12px;
+}
+.lab-shell .reading-views button[aria-pressed="true"] {
+  color: var(--obs-selected-text);
+  background: var(--hh-accent);
+  border-color: var(--hh-accent);
+}
+.lab-shell .reading-route {
+  position: relative;
+  padding-left: 0;
+}
+.lab-shell .reading-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 22px;
+  border: 0;
+  padding: 0 0 30px;
+  scroll-margin-top: 100px;
+}
+.lab-shell .reading-step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 46px;
+  bottom: 0;
+  width: 1px;
+  background: var(--blog-border);
+}
+.lab-shell .reading-step-number {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--blog-border);
+  border-radius: 50%;
+  background: var(--blog-surface);
+  color: var(--hh-accent);
+  padding: 0;
+  font: 11px/1.2 var(--hh-base-font-family-monospace);
+}
+.lab-shell .reading-step > div {
+  border: 1px solid var(--blog-border);
+  background: var(--blog-surface);
+  border-radius: 12px;
+  padding: 22px 26px 12px;
+  min-width: 0;
+}
+.lab-shell .reading-step h3 {
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 550;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.lab-shell .reading-step > div > p {
+  max-width: 58em;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--blog-muted);
+  margin-top: 12px;
+}
+.lab-shell .reading-step-meta {
+  margin-top: 10px;
+  font-size: 11px;
+}
+.lab-shell .reading-step-meta details[open] {
+  border-radius: 8px;
+}
+.lab-shell :is(.reading-more, .reading-plans) {
+  margin-left: 66px;
+}
+.lab-shell .atlas-build-layout {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 48px;
+  align-items: start;
+}
+.lab-shell .atlas-build-layout .practice-paths {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 100px;
+  margin: 0;
+  border: 1px solid var(--blog-border);
+  border-radius: 14px;
+  background: var(--blog-surface);
+  overflow: hidden;
+}
+.lab-shell .practice-paths > a,
+.lab-shell .practice-paths > a:first-child,
+.lab-shell .practice-paths > a:last-child {
+  padding: 20px;
+  border: 0;
+  border-bottom: 1px solid var(--blog-border);
+}
+.lab-shell .practice-paths > a:last-child {
+  border-bottom: 0;
+}
+.lab-shell .practice-paths > a:hover {
+  background: var(--blog-soft);
+}
+.lab-shell .practice-paths span {
+  font: 10px/1.8 var(--hh-base-font-family-monospace);
+  color: var(--hh-accent);
+}
+.lab-shell .practice-paths strong {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-block: 8px;
+  font-weight: 550;
+}
+.lab-shell .practice-paths small {
+  font-size: 11px;
+  line-height: 1.8;
+}
+.lab-shell .atlas-build-content {
+  min-width: 0;
+}
+.lab-shell .atlas-build-content #workbench {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.lab-shell #workbench h2 {
+  font-size: 25px;
+  line-height: 1.4;
+  letter-spacing: -0.035em;
+}
+.lab-shell #workbench > div:has(> a[data-domain]) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  border: 0;
+}
+.lab-shell #workbench a[data-domain] {
+  --tone: var(--hh-accent);
+  --wash: var(--blog-soft);
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 14px;
+  align-items: start;
+  gap: 14px;
+  border: 1px solid var(--blog-border);
+  border-radius: 12px;
+  background: var(--blog-surface);
+  padding: 22px;
+}
+.lab-shell #workbench a[data-domain]:hover {
+  background: var(--blog-soft);
+  border-color: var(--hh-accent);
+}
+.lab-shell #workbench a[data-domain] > span:first-child {
+  font-size: 21px;
+  line-height: 1.4;
+}
+.lab-shell #workbench a[data-domain] strong {
+  font-size: 16px;
+  line-height: 1.55;
+}
+.lab-shell #workbench a[data-domain] p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+.lab-shell .atlas-build-content .hh-section {
+  margin-top: 48px;
+  padding-top: 32px;
+}
+.lab-shell .atlas-build-content .hh-section > h2 {
+  font-size: 28px;
+  line-height: 1.4;
+  letter-spacing: -0.03em;
+}
+.lab-shell .hh-rows > li {
+  min-width: 0;
+}
+.lab-shell .hh-rows :is(h2, h3) {
+  overflow-wrap: anywhere;
+}
+.lab-shell .hh-empty {
+  background: var(--blog-soft);
+  border: 1px solid var(--blog-border);
+  border-radius: 12px;
+  padding: 28px;
+  font-size: 14px;
+}
+.lab-shell .hh-reading {
+  max-width: 1000px;
+}
+/* Existing standalone directories share the compact library heading scale. */
+.lab-shell :is(.hh-page > h1, .page-intro h1) {
+  font-family: var(--hh-base-font-family-base);
+  font-size: clamp(34px, 4.2vw, 56px);
+  line-height: 1.2;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+}
+.lab-shell .radar-flow {
+  max-width: 1440px;
+  padding: 56px var(--lab-gutter) 80px;
+}
+.lab-shell .flow-header {
+  align-items: start;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--blog-border);
+}
+.lab-shell .flow-header h1 {
+  font-family: var(--hh-base-font-family-base);
+  font-size: clamp(38px, 4.5vw, 60px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  margin-bottom: 18px;
+}
+.lab-shell .flow-header .obs-kicker {
+  color: var(--hh-accent);
+}
+.lab-shell .flow-orbit {
+  opacity: 0.8;
+  font-size: 68px;
+}
+.lab-shell .flow-caption {
+  padding-block: 18px;
+  margin-bottom: 12px;
+  border: 0;
+}
+.lab-shell .flow-search {
+  border-radius: 10px;
+  background: var(--blog-surface);
+}
+.lab-shell .flow-search input {
+  font-size: 15px;
+}
+.lab-shell .flow-cards {
+  gap: 18px;
+  border: 0;
+  padding-left: 0;
+}
+.lab-shell .flow-card {
+  border: 1px solid var(--blog-border);
+  border-radius: 14px;
+  background: var(--blog-surface);
+  overflow: hidden;
+}
+.lab-shell .flow-card::before {
+  display: none;
+}
+.lab-shell .flow-card > button > strong {
+  font-size: 21px;
+  font-weight: 550;
+  line-height: 1.6;
+}
+.lab-shell .flow-day {
+  gap: 28px;
+  margin-top: 32px;
+}
+.lab-shell .flow-day > header {
+  top: 100px;
+  border-top-color: var(--blog-border);
+}
+.lab-shell .flow-focus {
+  max-width: 900px;
+  background: var(--blog-surface);
+  border: 1px solid var(--blog-border);
+  border-radius: var(--atlas-radius);
+  scroll-margin-top: 100px;
+}
+.lab-shell .flow-focusbar {
+  top: 76px;
+  background: var(--blog-surface);
+}
+/* Long-form content gets its own quiet reading surface and a stable measure. */
+.lab-shell .document-layout {
+  grid-template-columns: 150px minmax(0, var(--atlas-reading)) 170px;
+  justify-content: center;
+  max-width: 1440px;
+  gap: 32px;
+  padding: 52px clamp(20px, 4vw, 64px) 80px;
+}
+.lab-shell :is(.document-nav, .document-toc) {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.lab-shell .document-nav {
+  gap: 0;
+  border: 1px solid var(--blog-border);
+  background: var(--blog-surface);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+.lab-shell .document-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 10px;
+}
+.lab-shell .document-body {
+  min-width: 0;
+}
+.lab-shell .document-body > header {
+  padding: 4px 0 32px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--blog-border);
+}
+.lab-shell .document-body > header > .eyebrow {
+  color: var(--hh-accent);
+  margin: 0 0 22px;
+}
+.lab-shell .document-body h1 {
+  font-family: var(--hh-base-font-family-base);
+  font-size: clamp(30px, 3.1vw, 44px);
+  line-height: 1.35;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+  margin: 0 0 28px;
+}
+.lab-shell .document-toc > .eyebrow {
+  margin-top: 0;
+  color: var(--blog-muted);
+}
+.lab-shell .document-toc nav {
+  gap: 0;
+  max-height: calc(100dvh - 220px);
+  border-left: 1px solid var(--blog-border);
+}
+.lab-shell .document-toc nav a {
+  padding-block: 8px;
+}
+.lab-shell .document-toc nav a[aria-current="location"] {
+  color: var(--hh-accent);
+}
+.lab-shell .article-brief {
+  background: var(--blog-soft);
+  border: 1px solid var(--blog-border);
+  border-left: 2px solid var(--hh-accent);
+  border-radius: 10px;
+  padding: 20px 24px;
+}
+.lab-shell .reader-toolbar {
+  gap: 12px 24px;
+  margin-block: 22px 32px;
+  flex-wrap: wrap;
+}
+.lab-shell .reader-toolbar button {
+  border-radius: 8px;
+}
+.lab-shell .reader-toolbar [aria-pressed="true"] {
+  color: var(--hh-accent);
+  border-color: var(--hh-accent);
+  background: var(--blog-soft);
+}
+.lab-shell .prose {
+  font-size: 17px;
+  line-height: 1.95;
+}
+.lab-shell .prose h2 {
+  font-family: var(--hh-base-font-family-base);
+  font-size: 28px;
+  line-height: 1.45;
+  letter-spacing: -0.03em;
+  margin: 52px 0 22px;
+}
+.lab-shell .prose h3 {
+  font-size: 21px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  margin-top: 34px;
+}
+.lab-shell .prose blockquote {
+  border-left: 2px solid var(--hh-accent);
+  border-radius: 0 10px 10px 0;
+  background: var(--blog-soft);
+  padding: 18px 24px;
+}
+.lab-shell .prose pre {
+  max-width: 100%;
+  border: 1px solid var(--blog-border);
+  border-radius: 10px;
+  background: var(--blog-soft);
+}
+.lab-shell .prose :is(table, figure) {
+  max-width: 100%;
+}
+.lab-shell .prose th {
+  background: var(--blog-soft);
+}
+.lab-shell .prose img {
+  border-radius: 4px;
+}
+.lab-shell .journal-cover {
+  background: var(--blog-soft);
+  border: 0;
+  border-radius: 12px;
+}
+/* A uses inset research panels; B keeps an open white library. */
+html[data-theme="dark"] .lab-shell .atlas-page-heading {
+  border-bottom: 1px solid var(--blog-border);
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+}
+html[data-theme="dark"] .lab-shell .atlas-page-title h1 {
+  font-weight: 550;
+  letter-spacing: -0.035em;
+}
+html[data-theme="dark"] .lab-shell .atlas-explorer-tools {
+  background: var(--blog-surface);
+}
+html[data-theme="dark"] .lab-shell .reading-search input {
+  background: var(--hh-bg);
+}
+html[data-theme="dark"]
+  .lab-shell
+  .focused-articles
+  > .hh-writing-list
+  > li:first-child {
+  background: var(--blog-soft);
+  border-color: var(--obs-panel-border);
+}
+html[data-theme="dark"] .lab-shell .document-body {
+  padding: 32px;
+  border: 1px solid var(--blog-border);
+  border-radius: 16px;
+  background: var(--blog-surface);
+}
+html[data-theme="dark"] .lab-shell .document-layout {
+  grid-template-columns: 150px minmax(0, 824px) 170px;
+}
+.not-found-page {
+  max-width: 1080px;
+  padding: clamp(32px, 6vw, 80px) clamp(20px, 5vw, 64px);
+}
+.not-found-page > .brand-link {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--blog-border);
+}
+.not-found-page > .eyebrow {
+  font: 400 clamp(88px, 17vw, 180px) / 1 var(--hh-base-font-family-monospace);
+  letter-spacing: -0.075em;
+  color: var(--hh-accent);
+  margin: 56px 0 28px;
+}
+.not-found-page h1 {
+  max-width: 16em;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.035em;
+}
+.not-found-page > p:not(.eyebrow) {
+  color: var(--blog-muted);
+}
+.not-found-page > a:not(.brand-link) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--hh-accent);
+  margin-block: 12px 28px;
+}
+.not-found-page .not-found-links {
+  padding-block: 22px;
+}
+@media (min-width: 1281px) {
+  .lab-shell .document-layout[data-reader-width="wide"] {
+    max-width: 1600px;
+    grid-template-columns: 140px minmax(0, 1fr) 170px;
+  }
+  .lab-shell .mobile-toc {
+    display: none;
+  }
+}
+@media (max-width: 1280px) {
+  .lab-shell .document-layout,
+  html[data-theme="dark"] .lab-shell .document-layout {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 900px;
+    gap: 24px;
+  }
+  .lab-shell .document-nav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+  }
+  .lab-shell .document-toc {
+    display: none;
+  }
+  .lab-shell .mobile-toc {
+    display: block;
+    margin-block: 20px;
+    padding-inline: 16px;
+    border: 1px solid var(--blog-border);
+    border-radius: 8px;
+  }
+  .lab-shell .atlas-build-layout {
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 28px;
+  }
+}
+@media (max-width: 1024px) {
+  .lab-shell .focused-articles > .hh-writing-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lab-shell .focused-articles > .hh-writing-list > li:first-child {
+    grid-row: auto;
+    grid-column: auto;
+    min-height: 0;
+  }
+  .lab-shell .atlas-build-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lab-shell .atlas-build-layout .practice-paths {
+    position: static;
+    flex-direction: row;
+  }
+  .lab-shell .practice-paths > a {
+    flex: 1 1 0;
+    min-width: 0;
+    border-bottom: 0;
+    border-right: 1px solid var(--blog-border);
+  }
+  .lab-shell .practice-paths > a:last-child {
+    border-right: 0;
+  }
+}
+@media (max-width: 900px) {
+  .lab-shell
+    :is(
+      .focused-learning,
+      .focused-articles,
+      .fieldwork-build,
+      .radar-flow,
+      .document-layout
+    ) {
+    padding-top: 32px;
+  }
+  .lab-shell .atlas-page-heading,
+  .lab-shell .fieldwork-build > .atlas-page-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-bottom: 28px;
+  }
+  .lab-shell .atlas-page-context {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 18px;
+    padding: 0;
+  }
+  .lab-shell .atlas-page-context > p,
+  .lab-shell .atlas-page-context > p:not(.lab-page-label) {
+    margin: 0;
+  }
+  .lab-shell .atlas-page-context > p:not(.lab-page-label) {
+    font-size: 11px;
+  }
+  .lab-shell .atlas-content-count {
+    margin-left: auto;
+  }
+  .lab-shell .atlas-page-title h1 {
+    font-size: 38px;
+    margin-bottom: 16px;
+  }
+  .lab-shell .atlas-track-switch {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lab-shell .path-picker {
+    gap: 16px;
+  }
+  .lab-shell .path-picker > article {
+    grid-template-columns: 34px minmax(0, 1fr);
+    padding: 22px;
+    gap: 0 14px;
+  }
+  .lab-shell .path-picker h2 {
+    font-size: 21px;
+  }
+  .lab-shell .flow-day {
+    gap: 16px;
+  }
+  .lab-shell .flow-day > header {
+    position: static;
+  }
+  .lab-shell .flow-focusbar {
+    top: 68px;
+  }
+}
+@media (max-width: 600px) {
+  .lab-shell .atlas-page-context {
+    gap: 6px 14px;
+  }
+  .lab-shell .atlas-content-count {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+  .lab-shell .atlas-page-title h1,
+  .lab-shell .fieldwork-build > header h1 {
+    font-size: 32px;
+    line-height: 1.3;
+    letter-spacing: -0.035em;
+  }
+  .lab-shell .atlas-page-title > p {
+    font-size: 13px;
+  }
+  .lab-shell .atlas-explorer-tools {
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .lab-shell .reading-search {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lab-shell .reading-search input {
+    width: 100%;
+    flex: 0 0 auto;
+    font-size: 16px;
+    padding-inline: 12px;
+  }
+  .lab-shell .focused-articles > .hh-writing-list,
+  .lab-shell .writing-complete .hh-writing-list,
+  .lab-shell .path-picker {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lab-shell .focused-articles > .hh-writing-list > li:first-child {
+    grid-column: auto;
+    min-height: 0;
+  }
+  .lab-shell .focused-articles .hh-writing-list > li {
+    padding: 22px;
+    gap: 24px;
+  }
+  .lab-shell .focused-articles .hh-writing-list h2,
+  .lab-shell .focused-articles > .hh-writing-list > li:first-child h2 {
+    font-size: 23px;
+  }
+  .lab-shell .atlas-track-switch {
+    gap: 8px;
+  }
+  .lab-shell .atlas-track-switch button {
+    padding: 13px 10px;
+    gap: 3px 6px;
+    grid-template-columns: 18px minmax(0, 1fr);
+  }
+  .lab-shell .atlas-track-switch button strong {
+    font-size: 12px;
+  }
+  .lab-shell .path-picker > article {
+    padding: 22px 18px;
+  }
+  .lab-shell .reading-step {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 12px;
+    padding-bottom: 22px;
+  }
+  .lab-shell .reading-step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+  .lab-shell .reading-step:not(:last-child)::before {
+    left: 14px;
+    top: 34px;
+  }
+  .lab-shell .reading-step > div {
+    padding: 18px 16px 8px;
+  }
+  .lab-shell .reading-step h3 {
+    font-size: 18px;
+  }
+  .lab-shell :is(.reading-more, .reading-plans) {
+    margin-left: 42px;
+  }
+  .lab-shell .atlas-build-layout .practice-paths {
+    flex-direction: column;
+  }
+  .lab-shell .practice-paths > a {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 0 12px;
+    padding: 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--blog-border);
+  }
+  .lab-shell .practice-paths strong {
+    font-size: 13px;
+    margin: 0;
+  }
+  .lab-shell .practice-paths small {
+    grid-column: 2;
+  }
+  .lab-shell #workbench > div:has(> a[data-domain]) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lab-shell #workbench a[data-domain] {
+    padding: 20px 16px;
+  }
+  .lab-shell .flow-header {
+    flex-wrap: wrap;
+    align-items: start;
+    gap: 18px;
+  }
+  .lab-shell .flow-header h1 {
+    font-size: 40px;
+    gap: 16px;
+  }
+  .lab-shell .flow-header nav {
+    flex-direction: row;
+    gap: 24px;
+  }
+  .lab-shell .flow-orbit {
+    font-size: 52px;
+  }
+  .lab-shell .flow-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lab-shell .flow-card > button > strong {
+    font-size: 21px;
+  }
+  .lab-shell .document-layout {
+    padding-inline: 20px;
+  }
+  html[data-theme="dark"] .lab-shell .document-body {
+    padding: 20px 16px;
+    border-radius: 12px;
+  }
+  .lab-shell .document-body h1 {
+    font-size: 30px;
+  }
+  .lab-shell .prose {
+    font-size: 16px;
+    line-height: 1.95;
+  }
+  .lab-shell .prose h2 {
+    font-size: 25px;
+    margin-top: 42px;
+  }
+  .lab-shell .prose h3 {
+    font-size: 20px;
+  }
+  .lab-shell .prose pre {
+    font-size: 12px;
+    padding-inline: 16px;
+  }
+  .lab-shell .article-brief {
+    padding: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lab-shell .focused-articles .hh-writing-list > li {
+    transition: none;
+  }
+  .lab-shell .focused-articles .hh-writing-list > li:hover {
+    transform: none;
+  }
+}
