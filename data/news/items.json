@@ -1,5 +1,22 @@
 [
   {
+    "id": "ad7dd64017d7e6bc8de9",
+    "title": "Claude Code Stop hook 技巧：用 exit code 2 让 Claude 在检查失败时自动重试",
+    "url": "https://aihot.news/items/p0jsxs2bnv6tmnmn1soi56759",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-13T18:43:37.000Z",
+    "collectedAt": "2026-11-13T23:50:28.682Z",
+    "category": "ai-apps",
+    "summary": "Lydia Hallie 分享一个 Claude Code 使用技巧：用 Stop hook 让 Claude 在检查失败后自动重试，关键是让 hook 以 exit code 2 退出。exit 2 会把 hook 的 stderr 返回给 Claude 触发重试，exit 1 则是非阻塞的，即使检查失败 Claude 也会直接结束。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/lydiahallie/status/2121313048820617645",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-57a3c646",
+    "coverage": []
+  },
+  {
     "id": "8761a0722a1fefc412c1",
     "title": "Artificial Analysis 评测 Gemini 4 Hydrogen：智能指数 54，接近 Sonnet 5.5 且成本约其 32%",
     "url": "https://aihot.news/items/ajvxvhu8bh001pourbhhjl0ir",
