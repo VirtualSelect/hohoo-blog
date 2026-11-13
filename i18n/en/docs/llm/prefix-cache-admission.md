@@ -126,7 +126,7 @@ These deterministic traces are not sampled user traffic. Their hit counts explai
 
 Start with [capacity and mechanisms](/docs/llm/kv-cache), then [equivalence](/docs/llm/kv-cache-equivalence), [invalidation](/docs/llm/prefix-cache-invalidation), [longest-prefix reuse](/docs/llm/longest-prefix-reuse) and [byte budgets](/docs/llm/prefix-cache-byte-budget). These are completed offline numerical experiments.
 
-The separate context branch has [24 real Agnes 3.0 calls](/docs/llm/context-position-paired-protocol). The later [128-case similar-distractor protocol](/docs/llm/context-similar-distractors) is offline preparation only, with no new model results. Do not combine their denominators with these numerical experiments.
+The separate context branch has [24 real Agnes 3.0 calls](/docs/llm/context-position-paired-protocol). The later [128-case similar-distractor protocol](/learning?track=llm#plans-llm) is offline preparation only, with no new model results. Do not combine their denominators with these numerical experiments.
 
 In a new directory, prepare Python 3.12 (PowerShell):
 

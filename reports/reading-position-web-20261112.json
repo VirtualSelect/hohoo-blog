@@ -1,0 +1,48 @@
+{
+  "scope": "Actual final local SSR headers and panels, scripts stripped, compared with declared published routes",
+  "checks": [
+    {
+      "locale": "zh-CN",
+      "articles": 60,
+      "core": 20,
+      "focused": 40,
+      "headersAndNeighborsMatch": true,
+      "declaredNextLinksRetained": true,
+      "atomicPositionLabel": true
+    },
+    {
+      "locale": "en",
+      "articles": 60,
+      "core": 20,
+      "focused": 40,
+      "headersAndNeighborsMatch": true,
+      "declaredNextLinksRetained": true,
+      "atomicPositionLabel": true
+    },
+    {
+      "locale": "zh-TW",
+      "articles": 60,
+      "core": 20,
+      "focused": 40,
+      "headersAndNeighborsMatch": true,
+      "declaredNextLinksRetained": true,
+      "atomicPositionLabel": true
+    }
+  ],
+  "totalArticleResponses": 180,
+  "frozenEvaluationReportSha256": "4148149f5390fef0f26f22e729ff2d7d4a84e74d30b3d7194f52d0d8b91aeeec",
+  "storage": {
+    "scope": "Local uncompressed output, not Vercel billed storage. Traces overlap; never add trace sizes together. Cache and node_modules directory sizes are not deployment sizes.",
+    "staticOutputEstimateBytes": 143590618,
+    "publicBytes": 8339594,
+    "clientAssetsBytes": 2540747
+  },
+  "finalBuildRechecked": true,
+  "sourceState": "uncommitted local branch codex/content-search-20261111",
+  "sourceFiles": {
+    "src/components/DocReadingContext.js": "287264e4eb20a29271b59b9becfb10575f1ad954ace256b74d1d97520cc9fea5",
+    "apps/web/lib/reading-paths.mjs": "d24fbec26f20cd38ea4a1b97f3792ddecd5b21d9d20e8d1c353846ce1bbc5750",
+    "apps/web/app/globals.css": "1ef253dc819524ce2886605b07d928d6d65dbe1c4231782db26632ada61a7c77",
+    "apps/web/tests/reading-position.test.mjs": "3e73ace60a216686aea5fdc335e6de40d7c8ca60e7c715d0a088833f26ddb713"
+  }
+}

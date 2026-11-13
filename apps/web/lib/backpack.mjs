@@ -7,6 +7,17 @@ const safeId = (s) =>
   s.length < 240 &&
   !["__proto__", "constructor", "prototype"].includes(s);
 const ids = (a) => Array.isArray(a) && a.length <= 5000 && a.every(safeId);
+const savedDates = (value, saved) =>
+  value !== null &&
+  typeof value === "object" &&
+  !Array.isArray(value) &&
+  Object.entries(value).every(
+    ([id, date]) =>
+      safeId(id) &&
+      saved.includes(id) &&
+      typeof date === "string" &&
+      Number.isFinite(Date.parse(date)),
+  );
 export function allowedKey(key) {
   if (typeof key !== "string") return false;
   return (
@@ -26,7 +37,7 @@ export function validateRecord(key, raw) {
       ? ["version", "completed"]
       : key === "huhohoo.reading.v2"
         ? ["version", "saved", "read", "reading", "savedAt"]
-        : ["version", "items", "saved", "lastOpened"];
+        : ["version", "items", "saved", "savedAt", "lastOpened"];
   if (Object.keys(v).some((k) => !fields.includes(k))) throw Error("fields");
   if (key.startsWith(reflectionPrefix)) {
     decodeReflection(raw);
@@ -51,16 +62,7 @@ export function validateRecord(key, raw) {
             /^(?:[a-f0-9]{20}|(?:paper|note):[\w.-]+)$/.test(id),
           ),
       ) ||
-      !v.savedAt ||
-      Array.isArray(v.savedAt) ||
-      typeof v.savedAt !== "object" ||
-      Object.entries(v.savedAt).some(
-        ([k, d]) =>
-          !safeId(k) ||
-          !v.saved.includes(k) ||
-          typeof d !== "string" ||
-          !Number.isFinite(Date.parse(d)),
-      )
+      !savedDates(v.savedAt, v.saved)
     )
       throw Error("reading");
     return;
@@ -84,6 +86,8 @@ export function validateRecord(key, raw) {
     )
   )
     throw Error("learning");
+  if (v.savedAt !== undefined && !savedDates(v.savedAt, v.saved))
+    throw Error("learning-savedAt");
   if (
     v.lastOpened !== undefined &&
     (!safeId(v.lastOpened) || !Object.hasOwn(v.items, v.lastOpened))

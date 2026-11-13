@@ -36,9 +36,9 @@ export default function OutputValidation() {
     >
       <p>
         {t(
-          "从 Demo 04 的真实响应开始：HTTP 200 通过，为什么业务仍拒绝？修改内容，看它停在哪一层。",
-          "Start with a recorded Demo 04 response. Why did the application reject HTTP 200? Edit the content to locate the failing layer.",
-          "從 Demo 04 的真實回應開始：HTTP 200 通過，為什麼業務仍拒絕？修改內容，看它停在哪一層。",
+          "从 Demo 04 的真实响应开始：HTTP 200 通过，为什么业务仍拒绝？修改内容，看它停在哪一层。此处使用浏览器原生 JSON 解析作分层示意，不逐字运行旧 Java 校验器；词法差异见本文勘误。",
+          "Start with a recorded Demo 04 response. Edit the content to locate the failing layer. This browser demonstration uses native JSON parsing; it does not execute the old Java validator. See the article’s correction for the lexical difference.",
+          "從 Demo 04 的真實回應開始：HTTP 200 通過，為什麼業務仍拒絕？修改內容，看它停在哪一層。此處使用瀏覽器原生 JSON 解析作分層示意，不逐字執行舊 Java 驗證器；詞法差異見本文勘誤。",
         )}
       </p>
       <div className={styles.controls}>

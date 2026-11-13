@@ -26,7 +26,6 @@ const instruments = {
     loading: Loading,
   }),
   retrieval: dynamic(() => import("./RetrievalDrawer"), { loading: Loading }),
-  context: dynamic(() => import("./ContextSuitcase"), { loading: Loading }),
   robot: dynamic(() => import("./GridRobot"), { loading: Loading }),
   "trust-desk": dynamic(
     () => import("./WorkbenchTools").then((m) => m.TrustDesk),
@@ -34,10 +33,6 @@ const instruments = {
   ),
   "json-desk": dynamic(
     () => import("./WorkbenchTools").then((m) => m.JsonDesk),
-    { loading: Loading },
-  ),
-  "decision-desk": dynamic(
-    () => import("./WorkbenchTools").then((m) => m.DecisionDesk),
     { loading: Loading },
   ),
 };
@@ -56,9 +51,7 @@ export default function CreativeWorkbench() {
   useEffect(() => {
     function sync() {
       const url = new URL(location.href);
-      const legacy = ["decision-desk", "trust-desk", "json-desk"].includes(
-        url.hash.slice(1),
-      )
+      const legacy = ["trust-desk", "json-desk"].includes(url.hash.slice(1))
         ? url.hash.slice(1)
         : null;
       const id = legacy || url.searchParams.get("tool");
@@ -286,13 +279,15 @@ export default function CreativeWorkbench() {
             </span>
             <div>
               <small>
-                {w.domain === "llm"
-                  ? "LLM"
-                  : w.domain === "rag"
-                    ? "RAG"
-                    : w.domain === "ai-apps"
-                      ? t("AI 应用", "AI applications", "AI 應用")
-                      : t("具身智能", "Embodied AI", "具身智慧")}
+                {w.domain === "creative"
+                  ? t("规则游戏", "Rule-based play", "規則遊戲")
+                  : w.domain === "llm"
+                    ? "LLM"
+                    : w.domain === "rag"
+                      ? "RAG"
+                      : w.domain === "ai-apps"
+                        ? t("AI 应用", "AI applications", "AI 應用")
+                        : t("具身智能", "Embodied AI", "具身智慧")}
               </small>
               <strong>{text(w.title)}</strong>
               <p>{text(w.description)}</p>

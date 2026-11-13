@@ -38,10 +38,7 @@ const pages = {
 const Detail = dynamic(() => import("@site/src/components/ContentDetail"));
 const Topic = dynamic(() => import("@site/src/components/TopicLanding"));
 const BlogTimeMachine = dynamic(() => import("./BlogTimeMachine"));
-const ContextSuitcase = dynamic(() => import("./ContextSuitcase"));
 const RetrievalDrawer = dynamic(() => import("./RetrievalDrawer"));
-const AgentPermissionQuiz = dynamic(() => import("./AgentPermissionQuiz"));
-const PromptRepair = dynamic(() => import("./PromptRepair"));
 const StreamWindow = dynamic(() => import("./StreamWindow"));
 const Weekly = dynamic(() => import("@site/src/components/RadarWeekly"));
 const Daily = dynamic(() => import("@site/src/components/NewsDigest"));
@@ -138,14 +135,6 @@ export default function Views() {
               <RetrievalDrawer />
             </TryIt>
           )}
-          {route === "docs/llm" && (
-            <TryIt
-              id="context-exercise"
-              title={t("上下文容量", "Context capacity", "上下文容量")}
-            >
-              <ContextSuitcase />
-            </TryIt>
-          )}
           {route === "docs/ai-apps" && (
             <>
               <TryIt
@@ -153,18 +142,6 @@ export default function Views() {
                 title={t("检索与排序", "Retrieval and ranking", "檢索與排序")}
               >
                 <RetrievalDrawer />
-              </TryIt>
-              <TryIt
-                id="prompt-exercise"
-                title={t("提示词修理铺", "Prompt repair shop", "提示詞修理鋪")}
-              >
-                <PromptRepair />
-              </TryIt>
-              <TryIt
-                id="permission-exercise"
-                title={t("Agent 权限", "Agent permissions", "Agent 權限")}
-              >
-                <AgentPermissionQuiz />
               </TryIt>
               <TryIt
                 id="stream-exercise"

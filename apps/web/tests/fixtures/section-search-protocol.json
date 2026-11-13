@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "locale": "zh-CN",
+  "purpose": "Development acceptance on existing blog prose; not an independent benchmark or answer-quality evaluation.",
+  "labels": "AI-authored relevance judgments anchored to source quotations; author review pending. Questions were frozen before the first evaluation run; the retriever had already been developed using other examples.",
+  "topK": 5,
+  "excludedDocumentIds": ["doc:rag/blog-passage-search"],
+  "questions": [
+    {
+      "id": "read-timeout",
+      "query": "读取超时 服务端 费用",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-transactional-history#8-在线入口与超时语义",
+          "quote": "读取超时不能证明服务端尚未处理，也不能保证没有产生费用。"
+        }
+      ]
+    },
+    {
+      "id": "cancel-io",
+      "query": "Socket.close 阻塞 线程",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-transport-cancellation#future-已取消-读取仍然没结束",
+          "quote": "Socket.close() 会使正在该 Socket I/O 操作中阻塞的线程抛出异常"
+        }
+      ]
+    },
+    {
+      "id": "quote-support",
+      "query": "QUOTE_NOT_SUPPORTING 字段 引文",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-grounded-claims#3-真实引用仍然会失败的三种方式",
+          "quote": "字段验收返回 QUOTE_NOT_SUPPORTING"
+        }
+      ]
+    },
+    {
+      "id": "cache-medians",
+      "query": "独立中位数 相加 总时长",
+      "expected": [
+        {
+          "href": "/docs/llm/cache-cost-profile#本机结果-改好了一部分-但还没有胜过重算",
+          "quote": "不能把各列中位数相加当作总时长中位数"
+        }
+      ]
+    },
+    {
+      "id": "quantized-equivalence",
+      "query": "全量解码 分块 未量化 原始KV",
+      "expected": [
+        {
+          "href": "/docs/llm/kv-block-decode-cost#先对齐比较对象",
+          "quote": "它们都不等于未量化原始KV"
+        }
+      ]
+    },
+    {
+      "id": "placement-process",
+      "query": "最终放置 过程 重力 托盘",
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-phase-contracts#5-方块进了托盘-为什么仍不能说过程正确",
+          "quote": "方块仍因重力落进了下方托盘"
+        }
+      ]
+    },
+    {
+      "id": "pd-dynamics",
+      "query": "P项 速度 动量 D项",
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-planar-pd#从误差到力-中间隔着动力学",
+          "quote": "靠近目标意味着力变小，却不意味着速度已经为零"
+        }
+      ]
+    },
+    {
+      "id": "citation-truth",
+      "query": "精确子串 引用 语义验证",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-retrieval-evidence#5-引用存在-只完成第一层检查",
+          "quote": "不能把字符串校验当作语义验证"
+        }
+      ]
+    },
+    {
+      "id": "absent-animal",
+      "query": "南极帝企鹅平均身高",
+      "expected": [],
+      "reason": "The indexed tutorials and essays contain no penguin measurements."
+    },
+    {
+      "id": "absent-refund",
+      "query": "缓存 退款到账渠道",
+      "expected": [],
+      "reason": "The corpus contains cache discussions, not a refund service or payment-channel policy."
+    },
+    {
+      "id": "absent-guarantee",
+      "query": "缓存 保证成功",
+      "expected": [],
+      "reason": "No passage supports a universal guarantee of cache success. Lexical overlap may still return passages discussing cache limits."
+    },
+    {
+      "id": "absent-contact",
+      "query": "作者私人电话号码",
+      "expected": [],
+      "reason": "The published corpus does not provide a private telephone number."
+    }
+  ]
+}

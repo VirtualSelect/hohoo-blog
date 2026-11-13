@@ -9,7 +9,7 @@ reading_minutes: 12
 domain: embodied-ai
 article_kind: mechanism
 difficulty: intermediate
-related: ["doc:llm/kv-cache", "lab:action-representation"]
+related: ["doc:llm/kv-cache", ]
 ---
 
 看到“視覺—語言—動作模型”，很容易把它想成一個會看圖、再輸出控制指令的聊天機器人。真正需要追問的是：輸出的資料是什麼？它有幾個維度？數字在什麼坐標系、什麼尺度下才有意義？
@@ -114,6 +114,6 @@ action = 0.5 × (normalized + 1) × (q99 - q01) + q01
 
 現在可以沿原始碼解釋圖像嵌入、動作離散化與反正規化，也可以獨立驗證上面的索引算例。這些是閱讀和算術層面的證據。
 
-本站尚未用該檢查點完成一次模擬閉環，因此這裡沒有成功率、軌跡圖或“實測有效”的結論。已有 [動作表示實驗計劃](/labs/action-representation) 可以接住後續工作：固定環境與動作介面，保存輸入、預測、執行後的觀測和終止原因，再討論模型表現。
+本站尚未用該檢查點完成一次模擬閉環，因此這裡沒有成功率、軌跡圖或“實測有效”的結論。已有 [動作表示實驗計劃](/learning?track=embodied-ai#plans-embodied-ai) 可以接住後續工作：固定環境與動作介面，保存輸入、預測、執行後的觀測和終止原因，再討論模型表現。
 
 若對自回歸生成中的快取感興趣，可繼續閱讀 [KV Cache 拆解](/docs/llm/kv-cache)。但不能因為相鄰動作都用了同一條任務指令，就推斷不同圖像觀測之間可以直接復用整段舊快取；輸入前綴是否相同仍需檢查。

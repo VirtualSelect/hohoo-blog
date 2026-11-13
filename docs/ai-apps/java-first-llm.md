@@ -4,7 +4,7 @@ description: 用三个真实运行的 Java Demo，理解模型请求、JSON 解�
 slug: /ai-apps/java-first-llm
 status: published
 published_at: '2026-09-12'
-updated: '2026-09-12'
+updated: "2026-11-12"
 reading_minutes: 15
 learning_step: first-call
 domain: ai-apps
@@ -196,6 +196,8 @@ try {
 因此需要分开判断：HTTP 200 表示请求成功，`finish_reason: stop` 表示生成以该状态结束，两者都不保证事实正确或完全遵守要求。遇到语言细节仍应查阅 [Java 8 默认方法说明](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html)。
 
 到这里，我已经把请求、解析、输入和历史串起来了。下一步值得做的是限制和校验输出，让程序不仅“拿到回答”，还能判断回答是否适合后续处理。先把这三个小程序读懂，再进入框架集成。
+
+这个下一步后来在[Java结构化输出实践](/docs/ai-apps/java-structured-output)中展开：从HTTP状态继续检查JSON结构、字段类型与业务约束，并保留真实响应不符合要求的例子。
 
 ---
 

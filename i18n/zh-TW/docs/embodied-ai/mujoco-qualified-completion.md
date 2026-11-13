@@ -4,12 +4,12 @@ description: "8條MuJoCo軌跡、三個旁路判定器與真實回放，區分�
 slug: "/embodied-ai/mujoco-qualified-completion"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-11-07"
+updated: "2026-11-12"
 reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-phase-recovery", "doc:embodied-ai/mujoco-completion-lifecycle"]
+related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-phase-recovery", ]
 ---
 
 
@@ -66,11 +66,11 @@ related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embod
 1. **過期檢查先於新封包處理。** E11 基類先算上一個封包的年齡。每 20ms 取樣、固定延遲 40ms、門檻 60ms 時，新封包本身未過期，但每次到達前舊封包剛好過期，視窗反覆清空，持續放置仍停在 `VERIFYING`。拒絕單次陳舊封包正確，不代表延遲連續流也正確。
 2. **釋放只有布林值，沒有釋放時間。** E14 無法拒絕「釋放前取樣、釋放後到達」的封包。2ms/tick 反例中，釋放於 tick 100，首包取樣於 90、到達於 100；tick 230 完成，最後證據取樣於 220。釋放後證據跨度僅 120 tick（240ms），小於規定的 125 tick（250ms）。
 
-「不借用釋放前證據」是**期望契約**，不是目前程式碼的普遍保證。原 7.102s / 7.302s 等時間仍屬既有固定場景觀測；本輪未改寫舊軌跡或補跑物理實驗。重用前應分別修正接收處理順序與釋放時間邊界，補上延遲、重複、亂序及時間倒退回歸，不是調大單一門檻即可解決。
+「不借用釋放前證據」是**期望契約**，不是原固定版本的普遍保證。原 7.102s / 7.302s 等時間仍屬既有固定場景觀測；本輪未改寫舊軌跡或補跑物理實驗。當時需要分別修正接收處理順序與釋放時間邊界，補上延遲、重複、亂序及時間倒退回歸，不是調大單一門檻即可解決；修復進展見文末。
 
 ## 三個判定器觀察同一條軌跡
 
-本輪重用 E13 的階段感知控制與 E11 的[完成有效期](/docs/embodied-ai/mujoco-completion-lifecycle)。只增加旁路觀察器，不讓觀察器改變動作。
+本輪重用 E13 的階段感知控制與 E11 的完成有效期判定（原七條軌跡見文末）。只增加旁路觀察器，不讓觀察器改變動作。
 
 | 判定器 | 需要什麼 | 完成後是否繼續檢查 |
 | --- | --- | --- |
@@ -84,7 +84,7 @@ related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embod
 
 不能沿用“模擬時間超過 6.5s 就算釋放”。恢復會重建後續軌跡，正常釋放的時間可能隨之改變。
 
-本輪只有當實際執行處於 `running`、當前動作階段為 `release`，且夾爪指令小於 0.005m 時，才記錄釋放意圖：
+原實驗只有當實際執行處於 `running`、當前動作階段為 `release`，且夾爪指令小於 0.005m 時，才記錄釋放意圖。下面是歷史版本的標記邏輯，單獨使用它無法排除釋放前的遲到觀測：
 
 ```python
 if gate.state == 'running' and phase == 'release' and target[3] < .005:
@@ -93,18 +93,23 @@ if gate.state == 'running' and phase == 'release' and target[3] < .005:
 
 這個標記來自下發指令，**不是硬件確認，也不證明夾爪真的打開**。物理接觸和穩定性仍要靠後續觀測驗收。抬起前提也來自收到的新鮮觀測，而不是直接讀取模擬真值替觀察器作弊。
 
-終止處理則獨立於物理判斷：
+重用時還需要明確視窗從何時開始。[2026-10-07 修正版](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/experiments/vl01_qualified_completion/completion.py)的 `Qualified.observe` 在處理終止狀態後，先記錄釋放時刻，再篩選觀測：
 
 ```python
-if aborted or self.aborted:
-    self.aborted = True
-    self.start = None
-    self.transition('ABORTED', now, 'controller-terminal')
-    return
+if not released:
+    self.release_tick = None
+elif self.release_tick is None:
+    self.release_tick = now
+if (packet is not None and self.release_tick is not None
+    and type(packet.get('capture_tick')) is int
+    and packet['capture_tick'] < self.release_tick):
+    packet = None
 self.update(now, released, lifted, packet)
 ```
 
-如果此前已經完成過，歷史時間仍保留；但當前狀態不能在終止後被新的“好觀測”重新變成成功。本次鬆爪案例此前並未取得完成資格，因此完成時間為空。
+這段是方法內部的片段，不是完整觀察器。呼叫方必須**每個控制週期**都呼叫 `observe`，即使本週期沒有新封包；若只在封包到達時呼叫，記錄的就可能是到達時刻。持續為真的釋放標記不會重啟視窗，先恢復為假、再變真才開啟下一次釋放週期。基類仍負責時間單調性、新鮮度與物理條件，不能只複製這幾行取代它。
+
+終止獨立於物理判斷：如果此前已經完成過，歷史時間仍保留；但當前狀態不能在終止後被新的“好觀測”重新變成成功。本次鬆爪案例此前並未取得完成資格，因此完成時間為空。
 
 ## 實驗設置與故障範圍
 
@@ -188,3 +193,11 @@ python experiments/vl01_qualified_completion/replay.py --evidence evidence/my-co
 2026-10-07 修正：先處理同一時刻的新觀測再判斷過期；E14 記錄釋放意圖時刻，排除釋放前採樣的遲到包。20 項判定器檢查及原 E11/E14 協議的 7/8 回合重跑通過獨立稽核。舊證據仍對應原固定版本，不據此擴大到實機或完整里程碑。
 
 [修正版程式碼與回歸指令](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md)。
+
+## 較早觀察器：保留失敗，不沿用錯誤順序
+
+E11七條軌跡已區分歷史完成與目前有效性：正常與推移組都於7.102s首次完成，推移組8.022s撤銷目前有效；靜默與舊包8.042s進入UNKNOWN。單個假壞包會誤撤銷，推移後的單個假正常包只能開始確認，不能立即恢復VALID。這些結果支持事件與持續狀態分開。
+
+但舊實作先檢查上一包過期，再處理本次新包；固定延遲下可能反覆清空本來連續的窗口。**重用程式碼應先查看2026-10-07修正版，不照抄舊順序。** 上方釋放時間缺口也已於該修訂處理。舊零延遲軌跡仍屬舊版本，不是修復後通用行為的證明。
+
+[原七條軌跡](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/cd26180e8560155d18c45d34a33dc9ef25bbcdf6/evidence/completion-lifecycle-20261003)與[修正版](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md)分開保存。舊生命週期文章併入本篇，不再把帶有缺陷的演算法說明當成另一篇必讀教程。

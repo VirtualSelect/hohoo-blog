@@ -4,7 +4,7 @@ description: "Profile 909 queries across signatures, lookup, copying and continu
 slug: "/llm/cache-cost-profile"
 status: "published"
 published_at: "2026-10-07"
-updated: "2026-10-07"
+updated: "2026-11-12"
 reading_minutes: 9
 domain: "llm"
 article_kind: "mechanism"
@@ -44,7 +44,56 @@ This does not revise the earlier 4,860-request experiment: that workload include
 
 A cache hit is copied before continuation. Removing that copy requires proving that shared state cannot be mutated across requests. The experiment deliberately does not trade request isolation for a smaller timing number.
 
-Exercise: verify that component times plus residual equal total for one raw row, then compare the sum of column medians with the median total. Try a larger input only in a new output directory and define the reused prefix carefully. Do not assume the result will favor caching.
+## Read the archived timings before rerunning
+
+This AI-assisted exercise recomputes archived statistics; it does not collect new timings. Paste the entire PowerShell block at the root of the pinned `hohoo-ai-lab` checkout below, not the blog repository. It needs only the Python standard library: no NumPy installation, model or key, and no writes to the evidence directory.
+
+It checks `profile.json` against its archived manifest fingerprint, selects only the `rehash` path, and verifies each row's five components against its total. Every output value is in nanoseconds.
+
+~~~powershell
+@'
+import hashlib
+import json
+from pathlib import Path
+from statistics import median
+
+folder = Path("experiments/10-attention-costs/evidence/20261007")
+payload = (folder / "profile.json").read_bytes()
+manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
+if hashlib.sha256(payload).hexdigest() != manifest["files"]["profile.json"]:
+    raise SystemExit("profile fingerprint mismatch")
+rows = [r for r in json.loads(payload) if r["mode"] == "rehash"]
+parts = ("signature_ns", "lookup_ns", "copy_ns", "compute_ns", "residual_ns")
+if not rows or any(sum(r[k] for k in parts) != r["total_ns"] for r in rows):
+    raise SystemExit("missing rows or inconsistent timing accounting")
+first = rows[0]
+print(json.dumps({
+    "mode": "rehash",
+    "rows": len(rows),
+    "first_seed": first["seed"],
+    "first_repeat": first["repeat"],
+    "first_parts_ns": {k: first[k] for k in parts},
+    "first_sum_ns": sum(first[k] for k in parts),
+    "first_total_ns": first["total_ns"],
+    "sum_of_column_medians_ns": sum(median(r[k] for r in rows) for k in parts),
+    "median_of_row_sums_ns": median(sum(r[k] for k in parts) for r in rows),
+    "median_total_ns": median(r["total_ns"] for r in rows),
+}, indent=2))
+'@ | python -
+~~~
+
+Expect 303 archived rows. The first has `seed=7, repeat=0`; divide nanoseconds by 1,000 to check its signature, lookup, copy, compute and residual components in that order:
+
+~~~text
+403.9 + 2.8 + 12.6 + 290.3 + 5.7
+= 715.3 microseconds
+~~~
+
+The sum of the five column medians is 676.1 microseconds. The median of per-row sums is 682.7 microseconds, equal to `median_total_ns / 1000`. Each column's middle value may come from a different request. Exact accounting in every row does not imply additive medians across columns.
+
+The 6.6-microsecond difference is not an unidentified bottleneck, and 676.1 must not replace the total-query median. Residual is already included in each row. The difference comes from the order of aggregation, not a further explanation of NumPy internals. Predict whether the two calculations must agree, then check using integer nanoseconds rather than adding rounded table values.
+
+For missing files, check the repository root and pinned commit. On a fingerprint mismatch, stop and inspect whether records from different runs were mixed; do not edit the manifest to silence it. Only rerun with a larger input in a new output directory when testing a genuinely new condition. Define the reused prefix carefully and do not assume caching will win.
 
 For timing differences check BLAS versions, threads, background work and measurement scope. For numerical disagreement check model identity and positions before discussing speed. Continue with [tiled online softmax](/docs/llm/tiled-online-softmax).
 
@@ -56,6 +105,11 @@ Python 3.12. The runner executes all three comparisons; each article discusses i
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
 git checkout 02a2660e22c969e70e3a6f095003614a7dfa448e
+~~~
+
+For archive inspection, stop here and run the exercise above. To collect new measurements, install dependencies and execute the full study below; it runs all three topics rather than merely recomputing statistics.
+
+~~~sh
 python -m pip install numpy==2.2.6
 python experiments/10-attention-costs/run.py --out outputs/my-run
 python experiments/10-attention-costs/audit.py outputs/my-run

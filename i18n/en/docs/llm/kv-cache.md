@@ -96,6 +96,7 @@ console.log(kvGiB({ ...config, sequences: 4, tokens: 32768 })); // 16 GiB
 
 Changing KV heads from 8 to 32 multiplies every value by four under otherwise identical assumptions. This is formula sensitivity, not a measurement of swapping real models.
 
+
 Total device memory also includes weights, activations, workspaces and allocator overhead. Sliding windows, mixed layers, variable lengths, quantization and sharing change the estimate. Fitting model weights on a GPU does not guarantee that arbitrarily long conversations will fit.
 
 ## 5. Optimization has a price

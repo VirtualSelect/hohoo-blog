@@ -8,6 +8,7 @@ import { useText } from "./Shell";
 import Link from "../runtime/Link";
 import DocReadingContext from "@site/src/components/DocReadingContext";
 import ReproductionGuide from "./ReproductionGuide";
+import CodeCopyDialog from "./CodeCopyDialog";
 import TranslationNotice from "@site/src/components/TranslationNotice";
 import ArticleContents from "./ArticleContents";
 import ArticleBrief from "./ArticleBrief";
@@ -32,8 +33,14 @@ export default function Document({ children }: PropsWithChildren) {
     ref = useRef<HTMLDivElement>(null);
   const [readerWidth, setReaderWidth] = useState<ReaderWidth>("standard");
   const [storageError, setStorageError] = useState(false);
+  const [manualCode, setManualCode] = useState<{
+    text: string;
+    source: string;
+  } | null>(null);
+  const manualCopyTrigger = useRef<HTMLButtonElement>(null);
   const imageDialog = useRef<HTMLDialogElement>(null);
   const imageTrigger = useRef<HTMLButtonElement>(null);
+  const [figureActualSize, setFigureActualSize] = useState(false);
   const [zoomImage, setZoomImage] = useState<{
     src: string;
     alt: string;
@@ -59,6 +66,8 @@ export default function Document({ children }: PropsWithChildren) {
     }
   }
   useEffect(() => {
+    setManualCode(null);
+    manualCopyTrigger.current = null;
     const buttons: HTMLButtonElement[] = [];
     const cleanups: (() => void)[] = [];
     const timers = new Set<ReturnType<typeof setTimeout>>();
@@ -69,19 +78,24 @@ export default function Document({ children }: PropsWithChildren) {
       b.setAttribute("aria-live", "polite");
       b.textContent = t("复制", "Copy", "複製");
       b.onclick = async () => {
-        b.disabled = true;
+        if (b.getAttribute("aria-disabled") === "true") return;
+        // Keep keyboard focus while feedback is announced. A native disabled
+        // button drops focus and sends the reader's next Tab back to the page.
+        b.setAttribute("aria-disabled", "true");
+        const text = pre.querySelector("code")?.textContent || "";
         try {
-          await navigator.clipboard.writeText(
-            pre.querySelector("code")?.textContent || "",
-          );
+          await navigator.clipboard.writeText(text);
           b.textContent = t("已复制", "Copied", "已複製");
         } catch {
-          b.textContent = t("复制失败", "Copy failed", "複製失敗");
+          if (!b.isConnected) return;
+          b.textContent = t("手动复制", "Copy manually", "手動複製");
+          manualCopyTrigger.current = b;
+          setManualCode({ text, source: d.metadata.permalink });
         }
         if (!b.isConnected) return;
         const timer = setTimeout(() => {
           b.textContent = t("复制", "Copy", "複製");
-          b.disabled = false;
+          b.removeAttribute("aria-disabled");
           timers.delete(timer);
         }, 1800);
         timers.add(timer);
@@ -89,6 +103,7 @@ export default function Document({ children }: PropsWithChildren) {
       pre.append(b);
       buttons.push(b);
       if (
+        !pre.closest(".reproduction-guide") &&
         (pre.querySelector("code")?.textContent || "").split("\n").length > 12
       ) {
         const expand = window.document.createElement("button");
@@ -122,6 +137,7 @@ export default function Document({ children }: PropsWithChildren) {
       zoom.textContent = t("放大图片", "Enlarge image", "放大圖片");
       zoom.onclick = () => {
         imageTrigger.current = zoom;
+        setFigureActualSize(false);
         setZoomImage({ src: img.currentSrc || img.src, alt: img.alt });
         imageDialog.current?.showModal();
       };
@@ -329,19 +345,64 @@ export default function Document({ children }: PropsWithChildren) {
           </Link>
         </div>
       </article>
+      <CodeCopyDialog
+        text={
+          manualCode?.source === d.metadata.permalink ? manualCode.text : null
+        }
+        onClose={() => {
+          setManualCode(null);
+          const trigger = manualCopyTrigger.current;
+          manualCopyTrigger.current = null;
+          if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+        }}
+      />
       <dialog
         ref={imageDialog}
         className="figure-dialog"
         aria-label={t("图片查看", "Image viewer", "圖片檢視")}
         onClose={() => {
           setZoomImage(null);
+          setFigureActualSize(false);
           imageTrigger.current?.focus({ preventScroll: true });
         }}
       >
-        <button onClick={() => imageDialog.current?.close()}>
-          {t("关闭", "Close", "關閉")} ×
-        </button>
-        {zoomImage && <img src={zoomImage.src} alt={zoomImage.alt} />}
+        <div className="document-figure-toolbar">
+          <button onClick={() => imageDialog.current?.close()}>
+            {t("关闭", "Close", "關閉")} ×
+          </button>
+          <button
+            aria-pressed={figureActualSize}
+            aria-controls="document-figure-scroll"
+            onClick={() => setFigureActualSize((value) => !value)}
+          >
+            {t("原尺寸", "Actual size", "原尺寸")}
+          </button>
+        </div>
+        <p className="document-figure-hint" id="document-figure-help">
+          {figureActualSize
+            ? t(
+                "滑动或用方向键查看图片，Esc关闭。",
+                "Scroll or use arrow keys to explore the image. Esc closes it.",
+                "滑動或用方向鍵檢視圖片，Esc關閉。",
+              )
+            : t(
+                "图表小字可切换原尺寸查看。",
+                "Use actual size to read small chart labels.",
+                "圖表小字可切換原尺寸檢視。",
+              )}
+        </p>
+        <div
+          key={figureActualSize ? "actual" : "fit"}
+          id="document-figure-scroll"
+          className="document-figure-scroll"
+          data-actual-size={figureActualSize || undefined}
+          role="region"
+          aria-label={t("图片", "Image", "圖片")}
+          aria-describedby="document-figure-help"
+          tabIndex={0}
+        >
+          {zoomImage && <img src={zoomImage.src} alt={zoomImage.alt} />}
+        </div>
       </dialog>
       <ArticleContents headings={d.headings} />
     </main>

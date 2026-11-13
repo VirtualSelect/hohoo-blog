@@ -1,0 +1,9 @@
+{
+  "/blog/local-llm-mac-mini-48g": "/docs/llm/kv-cache",
+  "/docs/skill": "/learning",
+  "/docs/llm/context-position-experiment": "/docs/llm/context-position-paired-protocol",
+  "/docs/llm/context-similar-distractors": "/learning?track=llm#plans-llm",
+  "/docs/embodied-ai/mujoco-exit-actions": "/docs/embodied-ai/mujoco-abort-exit",
+  "/docs/embodied-ai/mujoco-completion-lifecycle": "/docs/embodied-ai/mujoco-qualified-completion",
+  "/labs/action-representation": "/learning?track=embodied-ai#plans-embodied-ai"
+}

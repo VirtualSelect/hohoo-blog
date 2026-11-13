@@ -4,13 +4,17 @@ description: "从类型断言、unknown到原始JSON：复现22个误接收、4�
 slug: /ai-apps/typescript-output-boundary
 status: published
 published_at: "2026-09-30"
-updated: "2026-09-30"
+updated: 2026-11-13
 reading_minutes: 11
 domain: ai-apps
 article_kind: case-study
 difficulty: intermediate
 related: ["doc:ai-apps/java-structured-output", "doc:ai-apps/java-transactional-history", "lab:typescript-output-boundary", "project:hohoo-ai-lab"]
 ---
+
+<span id="published-correction"></span>
+
+> **2026-11-13 修订代码已发布。** [固定版本与运行说明](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/demos/04-structured-output)现可获取。下文“本地分支／尚未发布”的说明保留为2026-11-12复核时的状态；历史固定命令仍用于原实验归档，不能用于查找新修订。使用修订时，在配套仓库根目录执行`git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`，再按对应目录README运行，输出使用新目录。历史结果与AI辅助披露不变。
 
 在 [Java结构化输出实践](/docs/ai-apps/java-structured-output)里，程序拿到HTTP 200以后，还要检查返回值能否进入业务流程。换到TypeScript，这个问题不会自动消失。
 
@@ -28,7 +32,6 @@ const result = JSON.parse(raw) as Classification;
 
 Java仍负责既有LLM实践。TypeScript作为AI Engineering的补充，用来实现浏览器或Node.js侧的数据适配和交互，并复用相同的业务契约。
 
-本轮只增加独立实验目录，没有重写Java工程，也没有把整个博客转换为TypeScript。依赖只有开发用的TypeScript编译器；校验逻辑使用原生语言能力。这样能先回答一个具体问题，再决定是否扩大技术栈。
 
 本机实际验证：Node.js 26.8.2、TypeScript 7.0.2、Java 1.8.0_171、Gson 2.10.1。Maven使用的Java来自JAVA_HOME，可能不同于另一终端的 `java -version`。
 
@@ -103,6 +106,10 @@ return validateClassification(decoded);
 对象校验漏过的4组分别是：普通重复category、转义同名category、重复tags字段，以及超出原始长度上限的合法对象。最后一项不是类型错误，而是**对象入口已经失去了原始文本长度这个条件**。
 
 TypeScript原始入口与Java判定32/32一致。它证明这些固定用例在两个实现中符合相同契约；不能证明未来所有JSON都一致，也不能把22/32称为模型错误率。
+
+**2026-11-12 离线复核发现了原样本未覆盖的差异。** `{"category":"llm","tags":["can\'t"]}`包含非法的`\'`转义，原固定Java校验器却接受并解码为`can't`；本篇TypeScript原始入口拒绝。普通单引号不需要转义，合法的`can't`和`can\u0027t`仍由两边接受。重复键另由各自的原始文本检查拒绝，不能只看`JSON.parse`是否成功。
+
+因此保留上表的历史32组结果，但不再把Java当作完整JSON词法的参考实现。[原教程勘误与本地修订说明](/docs/ai-apps/java-structured-output#json-lexical-review)记录了原因和检查边界；Java修订尚未提交或发布。此次未改动原32组输入、旧判定或真实响应归档，也没有调用模型。
 
 ## 7. 历史真实响应重放：适配不能偷换成成功
 

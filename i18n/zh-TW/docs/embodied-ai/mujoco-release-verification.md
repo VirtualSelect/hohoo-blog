@@ -9,7 +9,7 @@ reading_minutes: 9
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:release-verification", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-exit-actions", "doc:embodied-ai/mujoco-recovery-budget"]
+related: ["lab:release-verification", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-abort-exit", "doc:embodied-ai/mujoco-recovery-budget"]
 ---
 
 [固定版本程式碼](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget) · [原始記錄與審計](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/evidence/exit-release-budget-20261003) · [實驗檔案](/labs/release-verification)
@@ -88,5 +88,5 @@ python experiments/vl01_exit_release_budget/audit.py evidence/my-release-series
 
 ## 同方向繼續閱讀
 
-- [具身智能實踐（八）：檢測到掉落以後，夾爪應該做什麼？](/docs/embodied-ai/mujoco-exit-actions)
+- [具身智能實踐（八）：檢測到掉落以後，夾爪應該做什麼？](/docs/embodied-ai/mujoco-abort-exit)
 - [具身智能實踐（十）：恢復次數受控了，為什麼任務反而沒完成？](/docs/embodied-ai/mujoco-recovery-budget)

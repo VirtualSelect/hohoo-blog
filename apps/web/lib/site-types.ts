@@ -137,6 +137,16 @@ export interface RadarSignal {
   };
 }
 export interface RadarArchive {
+  snapshot: {
+    schemaVersion: 1;
+    dataHash: string;
+    recordCount: number;
+    signalCount: number;
+    latestFeedPublishedAt: string | null;
+    latestCollectedAt: string | null;
+    dailyLimit: number;
+    enabledSources: string[];
+  };
   chunks: string[];
   contentAssets?: string[];
   weeks?: string[];
@@ -158,6 +168,7 @@ export interface SiteContent {
   dailyItems: RadarSignal[];
   radarArchive: RadarArchive;
   searchUrl: string;
+  sectionSearchUrl: string;
 }
 export type Messages = Record<
   string,
@@ -169,6 +180,7 @@ export interface SiteContextValue {
   globalData: GlobalData;
   items: RadarSignal[];
   searchUrl: string;
+  sectionSearchUrl: string;
   radarArchive: RadarArchive | null;
   messages: Messages;
   document: ClientDocument | null;

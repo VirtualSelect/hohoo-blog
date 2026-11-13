@@ -4,6 +4,7 @@
   "scripts": {
     "brand:generate": "node scripts/brand-assets.mjs",
     "prepare:content": "node scripts/content.mjs",
+    "search:evaluate": "node scripts/evaluate-section-search.mjs",
     "dev": "npm run prepare:content && next dev --webpack -p 4181",
     "build": "npm run prepare:content && node scripts/prune-generated-assets.mjs && next build --webpack && node scripts/build-budget.mjs",
     "start": "next start -p 4181",

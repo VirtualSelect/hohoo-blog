@@ -37,6 +37,7 @@ function links(markdown, doc) {
   if (!code || !evidence) throw Error(`Missing pinned source: ${doc}`);
   return { doc: `/docs/${doc}`, code, evidence };
 }
+export { table as readEvidenceTable, links as pinnedEvidenceLinks };
 export function questionEvidence(read) {
   const paths = {
     java: "ai-apps/java-idempotent-retry",
@@ -108,6 +109,40 @@ export function questionEvidence(read) {
     )
   )
     throw Error("Unexpected synthetic configuration registry");
+  const decodeDoc = "llm/kv-block-decode-cost";
+  const decode = read(`docs/${decodeDoc}.md`);
+  const array = table(decode, "数组").find(
+    (row) => row[0] === "解码后的float32 K/V",
+  );
+  const shape = decode.match(/N=(\d+)、D=(\d+)、(\d+)个Query/);
+  const block = decode.match(/每次解码(\d+)个Token/);
+  const decodeRows = table(decode, "Token数").map((row) => ({
+    tokens: number(row[0]),
+    reference: number(row[1]),
+    full: number(row[2]),
+    block: number(row[3]),
+  }));
+  if (
+    !array ||
+    !shape ||
+    !block ||
+    !decodeRows.some((row) => row.tokens === Number(shape[1]))
+  )
+    throw Error("Missing cache working-set comparison");
+  const cacheTradeoffs = {
+    source: links(decode, decodeDoc),
+    shape: {
+      tokens: number(shape[1]),
+      dimensions: number(shape[2]),
+      queries: number(shape[3]),
+      blockTokens: number(block[1]),
+    },
+    arrays: {
+      full: number(array[1].replace(/[, B]/g, "")),
+      block: number(array[2].replace(/[, B]/g, "")),
+    },
+    timing: decodeRows.find((row) => row.tokens === Number(shape[1])),
+  };
   return {
     sources: Object.fromEntries(
       Object.entries(paths).map(([key, path]) => [key, links(docs[key], path)]),
@@ -116,6 +151,7 @@ export function questionEvidence(read) {
     cache: cacheRows,
     robot,
     registry,
+    cacheTradeoffs,
   };
 }
 

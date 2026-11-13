@@ -45,7 +45,18 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
       errors.push({ route, locale, error: "RSS" });
   }
 }
-const missing = await fetch(base + "/a-route-that-does-not-exist");
-if (missing.status !== 404) errors.push({ error: "Missing 404" });
+for (const prefix of ["", "/en", "/zh-TW"]) {
+  const missing = await fetch(base + prefix + "/a-route-that-does-not-exist");
+  const html = await missing.text();
+  if (missing.status !== 404)
+    errors.push({ prefix, status: missing.status, error: "Missing 404" });
+  if (
+    !html.includes("<title>404 · Hohoo</title>") ||
+    !html.includes('name="robots" content="noindex"') ||
+    !html.includes('role="search"') ||
+    !html.includes('name="q"')
+  )
+    errors.push({ prefix, error: "Incomplete 404 recovery page" });
+}
 console.log(JSON.stringify({ pages: count, errors }, null, 2));
 if (errors.length) process.exitCode = 1;

@@ -730,6 +730,24 @@ export default function Radar() {
             "這裡是外部資訊，不代表本站觀點。摘要保留原語言與來源標記，收錄不等於事實核驗。時間線依來源 feed 發佈時間排列；原公告、聚合與本站收錄時間在詳情分開。巡航只切換既有條目，不產生摘要或自動標記已讀。",
           )}
         </p>
+        <p>
+          {t(
+            `“最近收录”是有新条目入库的时间，不是上次检查来源的时间。每日按 UTC 最多收录 ${radarArchive.snapshot.dailyLimit} 条；相关性筛选与去重后可能没有新增，不保证每天凑满。`,
+            `“Latest addition” records new intake, not the last source check. The daily ceiling is ${radarArchive.snapshot.dailyLimit} records per UTC day; relevance filtering and deduplication can leave no additions. This is a limit, not a target.`,
+            `「最近收錄」是有新條目入庫的時間，不是上次檢查來源的時間。每日依 UTC 最多收錄 ${radarArchive.snapshot.dailyLimit} 條；相關性篩選與去重後可能沒有新增，不保證每天湊滿。`,
+          )}
+        </p>
+        <p>
+          <a href="https://github.com/VirtualSelect/hohoo-blog/actions/workflows/ai-news.yml">
+            {t("采集运行记录 ↗", "Collection runs ↗", "採集執行紀錄 ↗")}
+          </a>
+          {" · "}
+          <a href="/radar/snapshot.json">
+            {t("资讯数据快照", "News data snapshot", "資訊資料快照")}
+          </a>
+          {" · "}
+          <a href="/news/rss.xml">RSS</a>
+        </p>
       </details>
     </main>
   );

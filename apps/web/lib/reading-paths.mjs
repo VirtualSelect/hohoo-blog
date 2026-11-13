@@ -67,8 +67,15 @@ export function readLearningFilters(search = "") {
   };
 }
 
-export function learningFilterUrl(href, { query, difficulty, saved }) {
+export function learningFilterUrl(
+  href,
+  { query, difficulty, saved },
+  domain = "all",
+) {
   const url = new URL(href);
+  // Old step/track anchors can be the only place the selected scope is stored.
+  // Preserve that scope before a filter or view change drops the old target.
+  if (domain && domain !== "all") url.searchParams.set("track", domain);
   for (const [key, value] of [
     ["q", query],
     ["difficulty", difficulty === "all" ? "" : difficulty],
@@ -101,12 +108,26 @@ export function readingGroups(track, available, matches = () => true) {
   };
 }
 
+// Position is relative to the same published core used by the learning page.
+// Focused studies have no ordinal in that route; their array neighbors are not prerequisites.
+export function readingPosition(track, id, available) {
+  if (!track?.steps.some((step) => step.id === id) || !available.has(id))
+    return null;
+  const core = coreSteps(track).filter((step) => available.has(step.id));
+  const index = core.findIndex((step) => step.id === id);
+  return {
+    kind: index >= 0 ? "core" : "study",
+    index: index >= 0 ? index : null,
+    core,
+  };
+}
+
 // The short route is a reading recommendation, never a replacement for prerequisites.
 export function nextReadingStep(track, id, available) {
   if (!track) return null;
-  const main = coreSteps(track).filter((step) => available.has(step.id));
-  const index = main.findIndex((step) => step.id === id);
-  if (index >= 0) return main[index + 1] || null;
+  const position = readingPosition(track, id, available);
+  if (position?.kind === "core")
+    return position.core[position.index + 1] || null;
   const step = track.steps.find((item) => item.id === id);
   return (
     (step?.followUps || [])

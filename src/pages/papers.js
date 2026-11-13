@@ -96,7 +96,6 @@ export default function Papers() {
                 <dl>
                   {[
                     ['method', en ? 'Method' : '论文方法'],
-                    ['evidence', en ? 'Reported evidence' : '作者报告的证据'],
                     ['boundary', en ? 'Reading boundary' : '阅读边界'],
                   ].map(([key, label]) => (
                     <React.Fragment key={key}>
@@ -120,7 +119,7 @@ export default function Papers() {
                       : '查看原始摘要与论文 ↗'}
                   </a>
                   {' · '}
-                  <Link to={'/labs/' + p.project}>
+                  <Link to={p.project === 'action-representation' ? '/learning?track=embodied-ai#plans-embodied-ai' : '/labs/' + p.project}>
                     {en ? 'Planned experiment →' : '关联实验计划 →'}
                   </Link>
                 </p>

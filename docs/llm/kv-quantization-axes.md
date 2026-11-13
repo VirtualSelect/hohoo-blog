@@ -4,7 +4,7 @@ description: "162组保存整数码的离线对照，比较全张量、逐Token�
 slug: "/llm/kv-quantization-axes"
 status: "published"
 published_at: "2026-10-09"
-updated: "2026-10-09"
+updated: 2026-11-13
 reading_minutes: 10
 domain: "llm"
 article_kind: "mechanism"
@@ -12,6 +12,10 @@ difficulty: "intermediate"
 prerequisites: ["doc:llm/kv-int8-error"]
 related: ["lab:kv-quantization-axes", "project:hohoo-ai-lab", "doc:llm/tiled-online-softmax"]
 ---
+
+<span id="published-correction"></span>
+
+> **2026-11-13 修订代码已发布。** [固定版本与运行说明](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/experiments/11-kv-quantization-axes)现可获取。下文“本地分支／尚未发布”的说明保留为2026-11-12复核时的状态；历史固定命令仍用于原实验归档，不能用于查找新修订。使用修订时，在配套仓库根目录执行`git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`，再按对应目录README运行，输出使用新目录。历史结果与AI辅助披露不变。
 
 > 2026-10-11 复现勘误：原固定提交 `009289d` 的 Git 换行转换改变了 `results.json` 的字节，导致检出后的哈希审计失败。以下链接及检出命令已改为保留原始证据字节的修正版；实验记录、发布日期和结论没有重写。
 
@@ -83,6 +87,10 @@ K 改变“关注谁”，V 改变“拿到什么”。本轮把量化目标拆�
 
 以下为 Windows PowerShell，明确指定虚拟环境解释器，不依赖激活脚本。
 
+先区分两件事：**核对原始归档**不需要重跑；**重新生成结果**必须使用尚不存在的新目录。下面先审计固定提交的原始证据，再将新结果写入 `target/my-run`。若该目录已存在，请另选名称，不要复用。
+
+> 2026-11-12 复核：旧 README 的无参数命令会覆盖 `evidence`，并非只读核查。本地修订要求提供 `--out` 并拒绝已有目录，**尚未发布；下方固定提交仍是旧实现**，运行时务必显式选择新目录。核对旧结果时使用旧源码，不要修改旧manifest消除哈希差异。原始数据和结论未变。
+
 ```powershell
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
@@ -90,6 +98,7 @@ git checkout fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba
 python -m venv .venv
 $py = '.\.venv\Scripts\python.exe'
 & $py -m pip install -r experiments/11-kv-quantization-axes/requirements.txt
+& $py experiments/11-kv-quantization-axes/audit.py
 & $py -m unittest discover -s experiments/11-kv-quantization-axes -p "test_*.py"
 & $py experiments/11-kv-quantization-axes/run.py --out experiments/11-kv-quantization-axes/target/my-run
 & $py experiments/11-kv-quantization-axes/audit.py experiments/11-kv-quantization-axes/target/my-run

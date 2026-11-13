@@ -18,6 +18,7 @@ export default function SeriesEntry({ domain }) {
     (item) =>
       item.id === `doc:${track.synthesisDoc || `${domain}/${track.synthesis}`}`,
   );
+  const synthesisHref = track.synthesisHref || synthesis?.href;
   const synthesisLabel = {
     "ai-apps": [
       "比较三种会话策略",
@@ -46,7 +47,9 @@ export default function SeriesEntry({ domain }) {
           {t("从主线开始", "Start the core path", "從主線開始")} →
         </Link>
       )}
-      {synthesis && <Link to={synthesis.href}>{t(...synthesisLabel)} →</Link>}
+      {synthesisHref && (
+        <Link to={synthesisHref}>{t(...synthesisLabel)} →</Link>
+      )}
       {["learning", "research"].includes(route) ? (
         <Link to={"/docs/" + domain}>
           {t("专题总览", "Topic overview", "專題總覽")} →
