@@ -46,9 +46,13 @@ function applyThemeWithPosition(next, pendingFrame) {
   let closest = Infinity;
   if (scrollTop > 64) {
     for (const element of document.querySelectorAll(
-      "#main-content main :is(h1, h2, h3, p, pre, table, li)",
+      "#main-content :is(h1, h2, h3, p, pre, table, li)",
     )) {
-      if (element.closest("nav, header, footer, dialog")) continue;
+      if (
+        element.id !== "signal-sculpture-title" &&
+        element.closest("nav, header, footer, dialog")
+      )
+        continue;
       const rect = element.getBoundingClientRect();
       if (
         rect.width < 16 ||

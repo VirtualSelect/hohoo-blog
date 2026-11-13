@@ -1,0 +1,172 @@
+.section {
+  width: min(1280px, calc(100% - 80px));
+  margin: 64px auto;
+  color: var(--atlas-text);
+  border-block: 1px solid var(--atlas-border);
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 0;
+}
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--atlas-muted);
+  font: 11px/1.5 var(--ifm-font-family-monospace, monospace);
+  letter-spacing: 0.12em;
+}
+.header h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 38px);
+  letter-spacing: -0.04em;
+}
+.header h2 span {
+  color: var(--atlas-accent);
+  font-weight: 400;
+}
+.section button {
+  min-height: 44px;
+  padding: 9px 14px;
+  border: 1px solid var(--atlas-border);
+  background: var(--atlas-surface);
+  color: var(--atlas-text);
+  border-radius: 0;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.section button:hover:not(:disabled),
+.section button[aria-pressed="true"] {
+  border-color: var(--atlas-accent);
+  color: var(--atlas-accent);
+}
+.section button:focus-visible {
+  outline: 2px solid var(--atlas-accent);
+  outline-offset: 4px;
+}
+.section button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.toggle {
+  flex-shrink: 0;
+}
+.stage {
+  position: relative;
+  height: clamp(350px, 42vw, 500px);
+  overflow: hidden;
+  background: var(--atlas-soft);
+  border: 1px solid var(--atlas-border);
+  color: var(--atlas-accent);
+}
+.stage::before,
+.stage::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.22;
+  background: var(--atlas-accent);
+}
+.stage::before {
+  top: 50%;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+}
+.stage::after {
+  left: 50%;
+  top: 24px;
+  bottom: 24px;
+  width: 1px;
+}
+.canvas,
+.fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.coordinates {
+  position: absolute;
+  z-index: 2;
+  inset: 20px 24px auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font: 10px/1.5 var(--ifm-font-family-monospace, monospace);
+  letter-spacing: 0.1em;
+  color: var(--atlas-muted);
+}
+.caption {
+  position: absolute;
+  z-index: 2;
+  bottom: 22px;
+  left: 24px;
+  right: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--atlas-muted);
+}
+.caption span {
+  color: var(--atlas-accent);
+  margin-right: 8px;
+}
+.bottom {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.description {
+  margin: 0;
+  max-width: 42ch;
+  color: var(--atlas-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.notice {
+  margin: 0 0 20px;
+  color: var(--atlas-muted);
+  font-size: 13px;
+}
+@media (max-width: 700px) {
+  .section {
+    width: calc(100% - 36px);
+    margin-block: 36px;
+  }
+  .header {
+    padding-block: 20px;
+  }
+  .stage {
+    height: 310px;
+  }
+  .coordinates {
+    inset: 16px 16px auto;
+    font-size: 9px;
+  }
+  .coordinates span:last-child {
+    display: none;
+  }
+  .bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .controls {
+    width: 100%;
+  }
+  .controls button {
+    flex: 1;
+    padding-inline: 8px;
+  }
+}
