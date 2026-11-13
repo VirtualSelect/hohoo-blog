@@ -4,12 +4,12 @@ description: "Eight MuJoCo trajectories, three passive readouts and recorded-sta
 slug: "/embodied-ai/mujoco-qualified-completion"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-11-07"
+updated: "2026-11-12"
 reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-phase-recovery", "doc:embodied-ai/mujoco-completion-lifecycle"]
+related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-phase-recovery", ]
 ---
 
 
@@ -66,7 +66,7 @@ Two reproducible boundaries are not covered by the original eight trajectories w
 
 ## Three observers, one physical trajectory
 
-The experiment reuses E13 control and E11 [completion validity](/docs/embodied-ai/mujoco-completion-lifecycle). New observers are passive and cannot change actions.
+The experiment reuses E13 control and E11 completion validity (the original seven trajectories are linked below). New observers are passive and cannot change actions.
 
 | Observer | Requirements | After completion |
 | --- | --- | --- |
@@ -78,7 +78,7 @@ There are **eight physical rollouts and three readouts per rollout**, not twenty
 
 ## Release must follow actual execution
 
-An absolute rule such as “released after 6.5s” breaks when recovery replans the remaining trajectory. Release intent is instead captured from the actual running action:
+An absolute rule such as “released after 6.5s” breaks when recovery replans the remaining trajectory. The original experiment captures release intent from the actual running action. This historical flag alone cannot exclude delayed observations captured before release:
 
 ```python
 if gate.state == 'running' and phase == 'release' and target[3] < .005:
@@ -87,18 +87,23 @@ if gate.state == 'running' and phase == 'release' and target[3] < .005:
 
 This is a command-level intent, **not hardware acknowledgement**. Contact and stability still require subsequent observations. Lift qualification also comes from received fresh packets rather than privileged simulation truth.
 
-Abort overrides current qualification:
+Reuse also needs a defined window boundary. After handling abort, `Qualified.observe` in the [2026-10-07 correction](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/experiments/vl01_qualified_completion/completion.py) records release time before filtering observations:
 
 ```python
-if aborted or self.aborted:
-    self.aborted = True
-    self.start = None
-    self.transition('ABORTED', now, 'controller-terminal')
-    return
+if not released:
+    self.release_tick = None
+elif self.release_tick is None:
+    self.release_tick = now
+if (packet is not None and self.release_tick is not None
+    and type(packet.get('capture_tick')) is int
+    and packet['capture_tick'] < self.release_tick):
+    packet = None
 self.update(now, released, lifted, packet)
 ```
 
-A past completion timestamp survives a later abort, but fresh positive observations cannot restore current qualification after termination. The lowering fault never qualified earlier, so its completion timestamp stays empty.
+This is a method fragment, not a complete observer. Call `observe` **every control tick**, including ticks without a packet; calling only on receipt can record the arrival time instead. A continuously true release flag keeps its boundary. A false-to-true transition starts the next release cycle. The base class still checks monotonic time, freshness and physical conditions; these lines cannot replace it.
+
+Abort remains independent of physical placement. A past completion timestamp survives a later abort, but fresh positive observations cannot restore current qualification after termination. The lowering fault never qualified earlier, so its completion timestamp stays empty.
 
 ## Conditions and evidence windows
 
@@ -182,3 +187,11 @@ The next useful test is how downstream actions subscribe to validity changes and
 2026-10-07 correction: incoming observations are handled before expiry at the same tick. E14 records release-intent time and excludes late packets captured before it. Twenty observer checks and reruns of the original E11/E14 protocols (7/8 episodes) passed, including independent audits. Historical evidence stays pinned to its original revision; this does not establish hardware safety or a complete milestone.
 
 [Fixed code and regression commands](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md).
+
+## Earlier observer: preserve the failure, not the incorrect update order
+
+E11's seven trajectories already separated historical completion and current validity. Normal and pushed runs first completed at 7.102s; pushing invalidated the state at 8.022s, while silence/replayed packets became UNKNOWN at 8.042s. One false-bad packet caused revocation; one false-good packet after displacement only began verification. These support separate event and state interfaces.
+
+The original implementation checked expiration of the previous packet before processing a new arrival, potentially resetting a continuous delayed stream. **Use the 2026-10-07 correction rather than copying that order.** The same revision addresses the release-timestamp gap above. Original zero-delay trajectories remain evidence of their original version, not general proof of the correction.
+
+[Original seven trajectories](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/cd26180e8560155d18c45d34a33dc9ef25bbcdf6/evidence/completion-lifecycle-20261003) and [corrected code](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md) remain separate. The older lifecycle article is consolidated here instead of remaining another required tutorial containing the defective explanation.

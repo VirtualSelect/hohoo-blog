@@ -1,16 +1,20 @@
 ---
 title: "Java LLM 实践（十）：点了取消，读取线程为什么还在运行？"
-description: "30次本地HTTP连接，区分会话取消、阻塞读取退出与远端工作，比较Future中断和主动关闭连接。"
+description: "30次本地HTTP连接，区分会话取消、读取退出与远端工作；本地补充将每轮连接归属接入完整轮日志。"
 slug: "/ai-apps/java-transport-cancellation"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-07"
-reading_minutes: 11
+updated: 2026-11-13
+reading_minutes: 16
 domain: "ai-apps"
 article_kind: "case-study"
 difficulty: "intermediate"
 related: ["lab:transport-cancellation", "project:hohoo-ai-lab", "doc:ai-apps/java-stream-session-ownership", "doc:ai-apps/java-streaming-boundary"]
 ---
+
+<span id="published-correction"></span>
+
+> **2026-11-13 修订代码已发布。** [固定版本与运行说明](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/demos/15-cancellable-turn-flow)现可获取。下文“本地分支／尚未发布”的说明保留为2026-11-12复核时的状态；历史固定命令仍用于原实验归档，不能用于查找新修订。使用修订时，在配套仓库根目录执行`git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`，再按对应目录README运行，输出使用新目录。历史结果与AI辅助披露不变。
 
 [固定版本代码](https://github.com/VirtualSelect/hohoo-ai-lab/tree/503f5271ef0d5baa12353d6eeda672dec5fc240e/demos/10-transport-cancellation) · [原始记录与审计](https://github.com/VirtualSelect/hohoo-ai-lab/tree/503f5271ef0d5baa12353d6eeda672dec5fc240e/demos/10-transport-cancellation/evidence/20261005) · [实验档案](/labs/transport-cancellation)
 
@@ -131,3 +135,65 @@ python audit.py evidence/my-run
 2026-10-07 修正：Demo08–10 增加 JSON 词法校验，三个示例各通过 53 项离线回归；运行脚本改用 Maven 参数列表，支持含空格目录。Demo10 审计补上源码指纹检查。原文固定版本与原始数据保持不变，修正版不是新增在线模型结果。
 
 [修正版代码与回归命令](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md)。
+
+## 把连接取消接到整轮落盘
+
+**2026-11-12 本地补充。** 本节是 AI 辅助编写并运行的整合参考，作者尚未独立复现。它使用固定 SSE 回复，没有模型调用；上文 30 次测量、原固定提交和原始数据保持不变。新增代码仍在配套仓库本地分支，尚无已发布的固定版本。
+
+[整轮提交的补充](/docs/ai-apps/java-durable-turns#一轮对话的整合参考)已经把请求窗口、一次发送和完整轮日志接起来，但只在检查点读取取消标记。如果读取者正等下一段 SSE，它无法执行下一次检查。于是可能出现：这一轮已经失去提交资格，连接和工作线程却仍占着资源。
+
+这里补的是连接的**归属与交接**，不是再加一个会话历史。仍只有工作线程拥有并写入 `TurnJournal`；沿用原 `TurnFlow` 的提交检查，不再叠加 Demo 10 的另一份 `Session` 历史。传输适配器复用[经过 JSON 词法修订的解析器](https://github.com/VirtualSelect/hohoo-ai-lab/blob/7fb37e8cdc7420c41fa474867b1fb268e97564e9/demos/10-transport-cancellation/src/main/java/com/hohoo/ailab/stream/StreamReader.java)，它与上文原始实验版本分开。
+
+### 一轮请求，只拥有自己的连接
+
+设 A 已经结束，B 正在读取。若“停止 A”的回调去关闭一个全局 `currentSocket`，它可能关掉 B。取消标记同样不能复位后供 B 继续使用：迟到的 A 回调仍持有它。
+
+因此每轮创建一个新的 `CancellationLease`，保存不可复位的取消标记及本轮唯一的连接。取消时先撤销提交资格，再取出自己的资源，最后在锁外关闭。以下是实际类中的方法摘录，并非可单独编译的完整程序：
+
+```java
+public void cancel() throws IOException {
+    // 即使关闭失败或资源尚未注册，也先撤销提交资格。
+    cancelled.set(true);
+    Closeable closing;
+    synchronized (this) { closing = owned; owned = null; }
+    if (closing != null) closing.close();
+}
+```
+
+资源注册也要检查这个标记。**先取消、后注册**时，注册方立即关闭迟到的 Socket；**先注册、后取消**时，取消方取出并关闭它。注册和取出在同一同步区内交接，实际关闭在同步区外完成，不用锁包住 I/O。
+
+适配器在 `socket.connect(...)` 之前注册 Socket，因此取消方能够看到已经创建、尚未连接的资源。正常结束也释放同一资源；旧 A 的 lease 不保存 B 的 Socket。[Java 8 的 `Socket.close()` 契约](https://docs.oracle.com/javase/8/docs/api/java/net/Socket.html#close--)说明，被关闭 Socket 上阻塞的 I/O 会抛出 `SocketException`。这解决的是本地等待，不是远端任务的完成确认。
+
+### 先看这个对照，再看“通过”
+
+本地服务端先发送 `fixture:`，然后停在一个继续门前。只设置取消标记的 `flag-only` 场景中，100ms 观察窗口结束时，工作线程仍未发出退出信号。随后清理代码显式关闭连接，工作线程在服务端被放行之前退出。`close-reading` 则在首段到达后直接调用 lease 的取消方法，同样在服务端放行前确认退出。
+
+退出信号来自工作线程自己的 `finally`，还要检查 `join` 后线程确实结束；不用 `Future.isDone()` 代替。100ms 是固定观察窗口，不是响应时间指标，也没有测取消延迟的分布。
+
+| 交接位置 / 场景 | 服务端收到请求 | 新增完整轮 | 这次运行说明什么 |
+| --- | ---: | ---: | --- |
+| 正常完成 | 1 | 1 | 完整 SSE 验收后提交 |
+| 启动前、注册前、注册后但连接前取消（各一场景） | 各 0 | 各 0 | 未发送；已创建的资源最终关闭 |
+| 只设置标记 `flag-only` | 1 | 0 | 观察时仍阻塞；显式关闭后才在继续门前退出 |
+| 读取中关闭 `close-reading` | 1 | 0 | 退出与拒绝提交分别得到检查 |
+| 已读完、提交检查前取消 `before-commit` | 1 | 0 | 完整回答仍只是候选，不能绕过提交检查 |
+| A 提交后，B 读取时取消旧 A lease | 2 | 2 | B 的资源与提交资格未被旧凭据撤销 |
+
+八个场景各预置一轮历史；最终 11 条保存记录中，8 条为预置、3 条为新增，不能将 11 当作成功次数。上表只计算各场景实际收到的请求和新增轮，不把已有历史混进去。
+
+服务端的继续门被放行后，仍执行剩余一步固定工作，最终每份请求记录两步。即使读取端已经退出，也不能据此说远端停止计算，更不能说停止计费。
+
+### 本地补充怎样复现
+
+先取得配套仓库本地 `codex/bounded-turn-flow-20261112` 分支中的 `demos/15-cancellable-turn-flow`。上文原固定提交和解析器修订提交都**不包含**这个新目录；它们仍用于复现各自版本。以下路径以配套仓库根目录为起点，Java 和 Gson 路径替换成本机实际位置：
+
+```sh
+python demos/15-cancellable-turn-flow/run.py --java-home /path/to/jdk8 --gson /path/to/gson-2.10.1.jar --out demos/15-cancellable-turn-flow/out/my-run
+python demos/15-cancellable-turn-flow/audit.py demos/15-cancellable-turn-flow/out/my-run --verify-sources
+```
+
+输出目录必须不存在。运行器使用已有 Java 8、Python 3 和 Gson 2.10.1，先复跑解析器的 53 项词法回归，再运行八个场景；不安装依赖、不读取模型密钥。独立检查把 `results.json`、实际请求、完整日志帧和源码指纹对起来。
+
+可以先预测：**取消发生在完整回复之后，为何仍不应该增加日志？** 然后对照 `before-commit` 的 `completeCandidate=true` 与只含预置轮的日志。再看 `flag-only` 的 `workerExitedAtControlObservation=false`、`workerExitedBeforeServerRelease=true`：两个值描述不同阶段，并不矛盾。
+
+这里的 `SocketFixtureReplyClient` 只接受回环地址、固定的 HTTP/1.1 关闭连接分帧和 SSE。没有验证 TLS、鉴权、chunked 响应、阻塞写入、真实阻塞建连或连接池，也没有把连接/读取超时升级为严格总期限。取消若发生在最后检查之后，仍可能与写盘竞争，无法撤销已经提交的记录。下一步应先选择实际客户端和提交语义，再验证对应协议，不能把这个窄适配器直接用于公网。

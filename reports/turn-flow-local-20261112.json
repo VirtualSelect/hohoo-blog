@@ -1,0 +1,175 @@
+{
+  "classification": "local-integration-fixtures-not-model-evaluation",
+  "codeState": "uncommitted local extension; not a published fixed revision",
+  "sourceBaseCommit": "fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba",
+  "completedAt": "2026-11-11T22:17:23.370102+00:00",
+  "java": "java version \"1.8.0_171\"\nJava(TM) SE Runtime Environment (build 1.8.0_171-b11)\nJava HotSpot(TM) 64-Bit Server VM (build 25.171-b11, mixed mode)",
+  "platform": "Windows-11-10.0.26120-SP0",
+  "artifactLocation": "demos/14-turn-flow/out/local-v4",
+  "protocolVersion": "turn-flow-local-v3",
+  "sourceHashes": {
+    "demos/11-bounded-assistant/src/main/java/com/hohoo/ailab/bounded/ContextBudget.java": "e8653a6b60f03272e31b275a317ec7475ac2f35e37593c8dc6415299aa4d091e",
+    "demos/11-bounded-assistant/src/main/java/com/hohoo/ailab/bounded/TurnJournal.java": "5265d92b10110f34977cd4d4f5d58739c22c50f934ff128751b2b5cd36cc1d54",
+    "demos/14-turn-flow/FixtureReplyClient.java": "ed20f6d170a6ed96e78c96f16fe0810b20c6b960bcbdf88fe49f711d28b4acab",
+    "demos/14-turn-flow/FlowChecks.java": "f3264bcce5b30c7f141aadbdcd4c44ea3ff983181e0e1f8856015ac1f34d1684",
+    "demos/14-turn-flow/TurnFlow.java": "517c6891bb5e5b91209c3cacbc8761b80729af08833ff669d4e8e14e3d06e8f5",
+    "demos/14-turn-flow/run.py": "33b6f9f592b56963db50dabdb9a99e2459cd21955ce2777073b025f393efb69e",
+    "demos/14-turn-flow/audit.py": "d5aad141ff595b1f07b314b098b7329825811a843f352b32643112a4944c5d2c",
+    "demos/14-turn-flow/protocol.json": "e574676a7e744a0a4c412607632118a7f35c4919377291cd7f65d872dad404d2"
+  },
+  "artifactHashes": {
+    "answer-bytes.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "blank.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "budget.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "cancel-after.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "cancel-before.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "commit-io-poisons-flow.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "deadline-after.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "interrupt-before.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "lost.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "malformed-utf8.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "owner-thread.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "project-not-delete.log": "301653376ec0d084c36befa7e78487d0c6d14086eeeb59cbe73da5e9e5c25664",
+    "protocol.json": "e574676a7e744a0a4c412607632118a7f35c4919377291cd7f65d872dad404d2",
+    "reopen-replay-conflict.log": "32c4bc2d0979a328d1eb303f765214d0d8febf77b855b477a2b4f9583a7edd94",
+    "requests.json": "8e82dbecd4e3ce469711ea9f3184a0484dd87e5bbcc267f658569bcaf6c522df",
+    "response-limit.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331",
+    "results.json": "0f0bda547c3bfa93b56282ff8104a31a9e22bd548fa9d2f39a5298383aab28a5",
+    "two-turns.log": "859f2f36360102e31e375a28c695296a2e5d7b9f0389321901ffa297538b6912",
+    "unavailable.log": "e0a68217e5441a0b6bebda048cb65ed300fd47cf1d155a5d43ecf54a0e84a331"
+  },
+  "summary": {
+    "scenarios": 16,
+    "acceptedHttpRequests": 13,
+    "seededRecords": 15,
+    "storedRecords": 19,
+    "newlyCommittedRecords": 4
+  },
+  "results": [
+    {
+      "name": "two-turns",
+      "outcome": "committed",
+      "httpRequests": 2,
+      "committedTurns": 2,
+      "journal": "two-turns.log"
+    },
+    {
+      "name": "project-not-delete",
+      "outcome": "committed",
+      "httpRequests": 1,
+      "committedTurns": 3,
+      "journal": "project-not-delete.log"
+    },
+    {
+      "name": "reopen-replay-conflict",
+      "outcome": "replayed-and-conflict-rejected",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "reopen-replay-conflict.log",
+      "failure": "IOException: id reused for another question"
+    },
+    {
+      "name": "budget",
+      "outcome": "rejected",
+      "httpRequests": 0,
+      "committedTurns": 1,
+      "journal": "budget.log",
+      "failure": "IllegalArgumentException: system and current message exceed wire-byte budget"
+    },
+    {
+      "name": "blank",
+      "outcome": "rejected",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "blank.log",
+      "failure": "IOException: answer rejected by the plain-text contract"
+    },
+    {
+      "name": "unavailable",
+      "outcome": "rejected",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "unavailable.log",
+      "failure": "IOException: fixture HTTP 503"
+    },
+    {
+      "name": "lost",
+      "outcome": "rejected",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "lost.log",
+      "failure": "SocketException: Unexpected end of file from server"
+    },
+    {
+      "name": "cancel-before",
+      "outcome": "rejected",
+      "httpRequests": 0,
+      "committedTurns": 1,
+      "journal": "cancel-before.log",
+      "failure": "InterruptedIOException: cancelled before commit"
+    },
+    {
+      "name": "cancel-after",
+      "outcome": "rejected",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "cancel-after.log",
+      "failure": "InterruptedIOException: cancelled before commit"
+    },
+    {
+      "name": "deadline-after",
+      "outcome": "rejected",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "deadline-after.log",
+      "failure": "InterruptedIOException: deadline before commit"
+    },
+    {
+      "name": "interrupt-before",
+      "outcome": "rejected",
+      "httpRequests": 0,
+      "committedTurns": 1,
+      "journal": "interrupt-before.log",
+      "failure": "InterruptedIOException: cancelled before commit"
+    },
+    {
+      "name": "answer-bytes",
+      "outcome": "rejected",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "answer-bytes.log",
+      "failure": "IOException: answer rejected by the plain-text contract"
+    },
+    {
+      "name": "malformed-utf8",
+      "outcome": "rejected",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "malformed-utf8.log",
+      "failure": "MalformedInputException: Input length = 1"
+    },
+    {
+      "name": "response-limit",
+      "outcome": "rejected",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "response-limit.log",
+      "failure": "IOException: fixture response exceeds 4096 bytes"
+    },
+    {
+      "name": "owner-thread",
+      "outcome": "rejected",
+      "httpRequests": 0,
+      "committedTurns": 1,
+      "journal": "owner-thread.log"
+    },
+    {
+      "name": "commit-io-poisons-flow",
+      "outcome": "reopen-required",
+      "httpRequests": 1,
+      "committedTurns": 1,
+      "journal": "commit-io-poisons-flow.log",
+      "failure": "ClosedChannelException: null"
+    }
+  ]
+}

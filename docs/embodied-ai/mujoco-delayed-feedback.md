@@ -4,7 +4,7 @@ description: "24条配对轨迹比较即时/80ms延迟、位置噪声和常速�
 slug: "/embodied-ai/mujoco-delayed-feedback"
 status: "published"
 published_at: "2026-10-07"
-updated: "2026-10-07"
+updated: "2026-11-12"
 reading_minutes: 9
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -65,7 +65,50 @@ estimated_position = captured_position
 
 audit.py独立检查每行capture_t不晚于物理时刻，再从x/y/vx/vy重算最后窗口。不要用控制器的估计位置替代真值验收，否则估计器可能“自己证明自己成功”。
 
-练习：选一个最终误差很小但失败的文件，逐行检查最后0.3秒，找出哪一项阈值被破坏。再把延迟减小，在新输出目录运行；先保留原始协议和结果，不用后验调阈值覆盖负结果。
+### 在尾段找到第一次速度越界
+
+固定选原归档中的`19-observation.csv`：0ms延迟、10mm位置噪声、hold、种子19。先预测：如果终点位置和速度都合格，为什么`success`仍是false？
+
+先准备好页首指引指定的固定提交，再在具身工程根目录运行这个只读片段。它只用Python标准库读取已有CSV，不用安装MuJoCo或NumPy，也不重跑仿真；完整归档校验仍用下方audit命令。
+
+```python
+import csv
+import json
+import math
+from pathlib import Path
+
+root = Path("evidence/planar-reach-20261007")
+protocol = json.loads((root / "manifest.json").read_text(encoding="utf-8"))["protocol"]
+records = json.loads((root / "results.json").read_text(encoding="utf-8"))
+record = next(r for r in records if r["config"]["family"] == "observation"
+              and r["config"]["mode"] == "hold" and r["config"]["delay"] == 0
+              and r["config"]["noise"] == 0.01 and r["config"]["seed"] == 19)
+with (root / record["file"]).open(encoding="utf-8", newline="") as stream:
+    rows = [{k: float(v) for k, v in r.items()} for r in csv.DictReader(stream)]
+def distance(r):
+    return math.hypot(r["x"] - protocol["goal"][0], r["y"] - protocol["goal"][1])
+def speed(r):
+    return math.hypot(r["vx"], r["vy"])
+limits = protocol["success"]
+tail = [r for r in rows if r["t"] >= protocol["duration"] - limits["last_seconds"] - 1e-9]
+first = next(r for r in tail if distance(r) >= limits["distance_m"] or speed(r) >= limits["speed_m_s"])
+print(record["file"])
+for label, row in (("first_failure", first), ("last", rows[-1])):
+    print(label, f'{row["t"]:.3f}', f'{distance(row) * 1000:.3f}', f'{speed(row) * 1000:.3f}')
+print("tail", len(tail), "position_failures", sum(distance(r) >= limits["distance_m"] for r in tail),
+      "speed_failures", sum(speed(r) >= limits["speed_m_s"] for r in tail))
+```
+
+预期选中`19-observation.csv`，输出中的位置误差和速度分别用mm、mm/s表示：
+
+| 记录 | t/s | 位置误差/mm | 速度/(mm/s) |
+| --- | ---: | ---: | ---: |
+| 尾段第一次越界 | 3.714 | 3.944 | 40.392 |
+| 最后一行 | 4.000 | 1.356 | 12.325 |
+
+终点两项都合格，却不能撤销3.714秒已经发生的速度越界。这个尾段的151个状态样本中，位置越界0个、速度越界24个。代码沿用原审计的`t >= 3.7 - 1e-9`，包含窗口两端；151是采样点数，时间区间仍是0.3秒。`1e-9`仅处理时间的浮点表示，位置15mm与速度40mm/s的阈值没有放宽。
+
+这里定位的是已有失败的原因，不把新一轮仿真当作完成练习的前提。若继续改变延迟，应使用新输出目录并保留独立协议与全部结果。
 
 ## 下一步值得验证，而不是直接宣称实现
 
@@ -73,18 +116,22 @@ audit.py独立检查每行capture_t不晚于物理时刻，再从x/y/vx/vy重算
 
 本轮把第二场景、参数、轨迹与负结果完整公开，后续应先解释具体失败机制，再决定增加哪一种估计器，避免把“算法名更多”当作能力提升。
 
+后续已发表的[速度估计篇](/docs/embodied-ai/mujoco-velocity-estimation)进一步比较位置差分与EMA；[开发集与留出集调参](/docs/embodied-ai/mujoco-controller-holdout)再检查增益和滤波参数的组合。两篇都保留了失败与适用边界；这里提出的加速度模型和其他新控制策略仍需另行验证。
+
 ## 从干净目录复现
 
-使用 Python 3.12。入口一次运行这组三个主题的对照，各篇只解读自己的子集，不把同一份记录重复当作新增回合。
+首次复现请展开页首的[固定版本指引](#reading-content)，整块执行一次。它使用Python 3.12虚拟环境，在新的带提交编号的目录中运行36回合，并审计`outputs/my-run`。这组三篇文章解释同一批记录的不同子集，不需要为每篇再次克隆或重新仿真。
 
-~~~sh
-git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
-cd hohoo-embodied-agent-study
-git checkout 831789c2a1efb4564c4cfabc2298e48e16ada879
-python -m pip install -r requirements-lock.txt
-python experiments/planar_reach/run.py --out outputs/my-run
-python experiments/planar_reach/audit.py outputs/my-run
-python experiments/planar_reach/plot.py outputs/my-run
-~~~
+若已有匹配的固定版本与环境，只想核对原归档，可在该仓库根目录运行下面的只读审计；它也是前面练习的证据来源：
 
-输出目录必须不存在。本机验证环境为 Windows，Linux/macOS尚未复测。不需要模型密钥或付费服务。manifest中的代码冻结提交早于上方含证据的归档提交，源码哈希对应实际执行文件。
+```powershell
+& .\.venv\Scripts\python.exe experiments/planar_reach/audit.py evidence/planar-reach-20261007
+```
+
+如已按页首流程生成新结果，可以为这份新结果绘图。此命令读取`outputs/my-run`，并在其中写入图像；不用于只读核验原归档：
+
+```powershell
+& .\.venv\Scripts\python.exe experiments/planar_reach/plot.py outputs/my-run
+```
+
+本机验证环境为Windows，Linux/macOS尚未复测。不需要模型密钥或付费服务。重跑时另用新目录，不覆盖已有结果。manifest中的代码冻结提交早于上方含证据的归档提交，源码哈希对应实际执行文件。

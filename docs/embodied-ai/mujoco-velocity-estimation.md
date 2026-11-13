@@ -4,7 +4,7 @@ description: "54回合真实仿真对照位置差分、指数平滑与真值速�
 slug: "/embodied-ai/mujoco-velocity-estimation"
 status: "published"
 published_at: "2026-10-09"
-updated: "2026-10-09"
+updated: 2026-11-13
 reading_minutes: 11
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -12,6 +12,10 @@ difficulty: "intermediate"
 prerequisites: ["doc:embodied-ai/mujoco-delayed-feedback", "doc:embodied-ai/mujoco-planar-pd"]
 related: ["lab:mujoco-velocity-estimation", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-qualified-completion"]
 ---
+
+<span id="published-correction"></span>
+
+> **2026-11-13 修订代码已发布。** [固定版本与运行说明](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/335e756bb7e86ded9128b7c9b978636a4069fa61/experiments/planar_velocity_estimation)现可获取。下文“本地分支／尚未发布”的说明保留为2026-11-12复核时的状态；历史固定命令仍用于原实验归档，不能用于查找新修订。使用修订时，在配套仓库根目录执行`git checkout 335e756bb7e86ded9128b7c9b978636a4069fa61`，再按对应目录README运行，输出使用新目录。历史结果与AI辅助披露不变。
 
 > 2026-10-11 复现勘误：原固定提交 `1931eff` 的 Git 换行转换改变了 `results.json` 的字节，导致检出后的哈希审计失败。以下链接及检出命令已改为保留原始证据字节的修正版；实验记录、发布日期和结论没有重写。
 
@@ -86,22 +90,52 @@ related: ["lab:mujoco-velocity-estimation", "project:hohoo-embodied-agent", "doc
 
 ## 如何复现和定位失败
 
-以下为 Windows PowerShell，明确指定虚拟环境解释器，不依赖激活脚本。
+首次复现请展开页首的[固定版本指引](#reading-content)，整块执行一次。它会在新的带提交编号的目录中安装环境，将54回合写入`outputs/my-run`并审计；这里不再提供另一套克隆或运行命令。
+
+固定提交的README无参数命令会默认覆盖evidence，即使显式指定`--out`也允许写入已有目录；不要照旧README省略参数或复用目录。本地入口已改为必填`--out`并拒绝已有目录，尚未发布。页首命令仍检出历史固定版本；准备好该版本后，可以在仓库根目录单独运行原来的4项估计器检查：
 
 ```powershell
-git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
-cd hohoo-embodied-agent-study
-git checkout 1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f
-python -m venv .venv
-$py = '.\.venv\Scripts\python.exe'
-& $py -m pip install -r requirements-lock.txt
-& $py -m unittest discover -s experiments/planar_velocity_estimation -p "test_*.py"
-& $py experiments/planar_velocity_estimation/run.py --out outputs/velocity-my-run
-& $py experiments/planar_velocity_estimation/audit.py outputs/velocity-my-run
+& .\.venv\Scripts\python.exe -m unittest discover -s experiments/planar_velocity_estimation -p "test_*.py"
 ```
 
-本机验证环境：Windows、Python 3.12.14、MuJoCo 3.3.7、NumPy 2.2.6；其他操作系统未复测。运行不打开渲染窗口，不需 GPU、模型密钥或付费服务。预期 4 个估计器测试通过，打印 54 回合、108000 行、13 个通过；审计再验证每条轨迹的哈希、时间、控制力和验收结果。
+若只想核验已有归档，无需先重新仿真。在匹配的固定版本和环境下运行下面的只读审计：
 
-`csv.gz` 是无损压缩，可用 Python `gzip.open(..., 'rt')` 阅读。复现输出请用独立目录，避免覆盖归档证据。若结果不同，先检查锁定依赖与固定提交，再看 `capture_t`、`estimated_vx/vy`、`raw_fx/fy` 与 `saturated`；不要先放宽验收阈值。如果力量长期触顶，查看速度估计是否被放大；如果曲线平滑但目标附近摆动，查看样本年龄和估计滞后。
+```powershell
+& .\.venv\Scripts\python.exe experiments/planar_velocity_estimation/audit.py evidence/planar-velocity-20261009
+```
 
-小练习：给三个连续样本手算一次差分与 EMA，观察突然减速时 EMA 为何仍保留旧速度。若要继续实验，应分别扫描采样率、τ 和控制增益，并保留全部条件。当前结果没有完成完整 VL01，也没有证明真机安全；下一步是解释并验证闭环取舍，而不是仅把算法名换成更复杂的滤波器。
+本机验证环境：Windows、Python 3.12.14、MuJoCo 3.3.7、NumPy 2.2.6；其他操作系统未复测。运行不打开渲染窗口，不需GPU、模型密钥或付费服务。原4项测试应通过；完整归档为54回合、108000行、13个通过。审计检查哈希、时间、估计、控制力和验收，但不包含下方勘误所述的新增物理核对。
+
+`csv.gz` 是无损压缩，可用 Python `gzip.open(..., 'rt')` 阅读。若结果不同，先检查锁定依赖与固定提交，再看 `capture_t`、`estimated_vx/vy`、`raw_fx/fy` 与 `saturated`；不要先放宽验收阈值。如果力量长期触顶，查看速度估计是否被放大；如果曲线平滑但目标附近摆动，查看样本年龄和估计滞后。
+
+### 参数写进协议，还要落到物理状态
+
+固定提交的`mass`没有写入MuJoCo物理模型，执行器仍受XML中的5N限幅约束；旧审计又写死了部分计数和验收值，没有检查实际加速度是否对应声明的质量。把协议质量改成2kg的受控回归中，旧程序生成了与1kg归档完全相同的轨迹，审计却仍显示通过。**PASS只能说明检查过的条件，不能替代缺失的检查。** 原默认协议的1kg与XML一致，因此前面的54回合表和结论仍有效。
+
+用原归档`00.csv.gz`的第一行手算即可理解缺口：从静止开始，步长2ms，x方向施力5N，没有接触、重力或阻尼，所以应有`Δvx = F × Δt / m`。
+
+| 首步记录的来源 | 声明质量/kg | 实际vx/(m/s) | 按声明质量计算/(m/s) |
+| --- | ---: | ---: | ---: |
+| 原默认归档 | 1 | 0.010 | 0.010 |
+| 2kg配置回归，修订前 | 2 | 0.010 | 0.005 |
+| 2kg配置回归，本地修订 | 2 | 0.005 | 0.005 |
+
+后两行仅用于验证配置接口，不计入原54回合，不是新的质量迁移研究。本地已接通质量、物理步长和实际限幅；独立审计还会从逐步状态核对捕获时刻真值、噪声、速度估计和验收。修订尚未发布，上面的命令仍使用历史固定代码。若场景存在其他外力，必须把它们计入动力学，不能直接照搬这里的式子。
+
+### 手算两次速度更新
+
+下面是**构造的手算样本**，不属于上面的54回合：`(t/ms, x/m) = (0, 0), (20, 0.04), (40, 0.04)`，y始终为0，τ=60ms。先算20ms与40ms的差分和EMA；首个样本按实现把EMA初始化为0。
+
+<details><summary>展开核对差分与EMA</summary>
+
+| 时间/ms | x/m | 差分/(m/s) | EMA/(m/s) |
+| --- | ---: | ---: | ---: |
+| 0 | 0 | 尚无前一个样本 | 0 |
+| 20 | 0.04 | 2 | 0.566937 |
+| 40 | 0.04 | 0 | 0.406228 |
+
+每次更新的`α = 1 - exp(-20/60) ≈ 0.283469`。20ms时得到`2α`；40ms时差分为0，仍保留`(1-α) × 2α`。表中只保留六位小数，计算时不要提前舍入α。这个算例展示滤波状态怎样保留上一段差分，物体是否稳定仍需用实际轨迹验收。
+
+</details>
+
+原文提出的τ与控制增益扫描，后来在[开发集与留出集调参](/docs/embodied-ai/mujoco-controller-holdout)中展开；采样率变化仍需独立协议和验证。当前结果没有完成完整VL01，也没有证明真机安全。

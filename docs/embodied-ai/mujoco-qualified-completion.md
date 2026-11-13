@@ -4,12 +4,12 @@ description: "8条MuJoCo轨迹、三个旁路判定器与真实回放，区分�
 slug: "/embodied-ai/mujoco-qualified-completion"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-11-07"
+updated: "2026-11-12"
 reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-phase-recovery", "doc:embodied-ai/mujoco-completion-lifecycle"]
+related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-phase-recovery", ]
 ---
 
 
@@ -70,7 +70,7 @@ related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embod
 
 ## 三个判定器观察同一条轨迹
 
-本轮复用 E13 的阶段感知控制与 E11 的[完成有效期](/docs/embodied-ai/mujoco-completion-lifecycle)。只增加旁路观察器，不让观察器改变动作。
+本轮复用 E13 的阶段感知控制与 E11 的完成有效期判定（原七条轨迹见文末）。只增加旁路观察器，不让观察器改变动作。
 
 | 判定器 | 需要什么 | 完成后是否继续检查 |
 | --- | --- | --- |
@@ -84,7 +84,7 @@ related: ["lab:qualified-completion", "project:hohoo-embodied-agent", "doc:embod
 
 不能沿用“仿真时间超过 6.5s 就算释放”。恢复会重建后续轨迹，正常释放的时间可能随之改变。
 
-本轮只有当实际执行处于 `running`、当前动作阶段为 `release`，且夹爪指令小于 0.005m 时，才记录释放意图：
+原实验只有当实际执行处于 `running`、当前动作阶段为 `release`，且夹爪指令小于 0.005m 时，才记录释放意图。下面是历史版本的标记逻辑，单独使用它无法排除释放前的迟到观测：
 
 ```python
 if gate.state == 'running' and phase == 'release' and target[3] < .005:
@@ -93,18 +93,23 @@ if gate.state == 'running' and phase == 'release' and target[3] < .005:
 
 这个标记来自下发指令，**不是硬件确认，也不证明夹爪真的打开**。物理接触和稳定性仍要靠后续观测验收。抬起前提也来自收到的新鲜观测，而不是直接读取仿真真值替观察器作弊。
 
-终止处理则独立于物理判断：
+复用时还需要明确窗口从哪里开始。[2026-10-07 修正版](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/experiments/vl01_qualified_completion/completion.py)的 `Qualified.observe` 在处理终止状态后，先记录释放时刻，再筛选观测：
 
 ```python
-if aborted or self.aborted:
-    self.aborted = True
-    self.start = None
-    self.transition('ABORTED', now, 'controller-terminal')
-    return
+if not released:
+    self.release_tick = None
+elif self.release_tick is None:
+    self.release_tick = now
+if (packet is not None and self.release_tick is not None
+    and type(packet.get('capture_tick')) is int
+    and packet['capture_tick'] < self.release_tick):
+    packet = None
 self.update(now, released, lifted, packet)
 ```
 
-如果此前已经完成过，历史时间仍保留；但当前状态不能在终止后被新的“好观测”重新变成成功。本次松爪案例此前并未取得完成资格，因此完成时间为空。
+这段是方法内部的片段，不是完整观察器。调用方必须**每个控制周期**都调用 `observe`，即使本周期没有新包；如果只在包到达时调用，记录的就可能是到达时刻。持续为真的释放标记不会重启窗口，先恢复为假、再变真才开启下一次释放周期。基类仍负责时间单调性、新鲜度和物理条件，不能只复制这几行替代它。
+
+终止独立于物理判断：如果此前已经完成过，历史时间仍保留；但当前状态不能在终止后被新的“好观测”重新变成成功。本次松爪案例此前并未取得完成资格，因此完成时间为空。
 
 ## 实验设置与故障范围
 
@@ -188,3 +193,11 @@ python experiments/vl01_qualified_completion/replay.py --evidence evidence/my-co
 2026-10-07 修正：先处理同一时刻的新观测再判断过期；E14 记录释放意图时刻，排除释放前采样的迟到包。20 项判定器检查及原 E11/E14 协议的 7/8 回合复跑通过独立审计。旧证据仍对应原固定版本，不据此扩大到真机或完整里程碑。
 
 [修正版代码与回归命令](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md)。
+
+## 较早观察器：保留失败，不沿用错误顺序
+
+E11的七条轨迹已经区分历史完成与当前有效性：正常和被推移组都在7.102s首次完成，推移组8.022s撤销当前有效；静默与旧包8.042s进入UNKNOWN。单个假坏包会误撤销，推移后的单个假正常包只能开始确认，不能立刻恢复VALID。这些结果支持保留事件与持续状态两层接口。
+
+但旧实现先检查上一包过期，再处理本次新包；固定延迟下可能反复清空本来连续的窗口。**复用代码应先查看2026-10-07修正版，不能照抄这个旧顺序。** 本文上方的释放时间缺口也已在该修订中处理。旧零延迟轨迹仍是旧版本记录，不能拿它们证明修复后的通用行为。
+
+[原七条轨迹](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/cd26180e8560155d18c45d34a33dc9ef25bbcdf6/evidence/completion-lifecycle-20261003)与[修正版](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/907c10a8fb25e1cec242e335b1a52b21b122fdc6/REVIEW-FIXES-20261007.md)分开保存。旧生命周期文章并入本篇，不再把已有缺陷的算法解释作为另一篇必读教程。

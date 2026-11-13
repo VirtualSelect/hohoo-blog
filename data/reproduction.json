@@ -7,22 +7,6 @@
     "run": "experiments/vl01_abort_exit/run.py",
     "audit": "experiments/vl01_abort_exit/audit.py"
   },
-  "embodied-ai/mujoco-completion-lifecycle": {
-    "repository": "hohoo-embodied-agent",
-    "commit": "cd26180e8560155d18c45d34a33dc9ef25bbcdf6",
-    "directory": "experiments/vl01_completion_lifecycle",
-    "requirements": "requirements-lock.txt",
-    "run": "experiments/vl01_completion_lifecycle/run.py",
-    "audit": "experiments/vl01_completion_lifecycle/audit.py"
-  },
-  "embodied-ai/mujoco-exit-actions": {
-    "repository": "hohoo-embodied-agent",
-    "commit": "497d0df30c1f66de50fb38b930f0c6ea069d9634",
-    "directory": "experiments/vl01_exit_release_budget",
-    "requirements": "requirements-lock.txt",
-    "run": "experiments/vl01_exit_release_budget/run.py",
-    "audit": "experiments/vl01_exit_release_budget/audit.py"
-  },
   "embodied-ai/mujoco-first-pick-place": {
     "repository": "hohoo-embodied-agent",
     "commit": "17144c47a2294f157420946b15f78c49d8d17dd5",

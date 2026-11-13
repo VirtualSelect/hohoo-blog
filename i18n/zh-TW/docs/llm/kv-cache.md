@@ -4,7 +4,7 @@ description: 從因果注意力推導 K/V 復用，用一個可計算的記憶�
 slug: /llm/kv-cache
 status: published
 published_at: '2026-09-22'
-updated: '2026-09-22'
+updated: '2026-11-12'
 reading_minutes: 10
 domain: llm
 article_kind: mechanism
@@ -104,6 +104,7 @@ console.log(kvGiB({ ...config, sequences: 4, tokens: 32768 })); // 16 GiB
 ```
 
 如果把 KV 頭數從 8 改成 32，其他假設不變，表內各值變為四倍。這是公式敏感性分析，**不是**更換真實模型後的測量結果。
+
 
 總顯示記憶體還包含模型權重、激活、執行時工作空間和分配開銷。滑動窗口、混合層、不同序列長度、快取量化與共享會改變估算方式。不能用“權重能放進顯卡”直接推導“任意長對話都能跑”。
 

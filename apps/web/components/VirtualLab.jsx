@@ -8,7 +8,6 @@ import {
 import styles from "./Journey.module.css";
 import GridRobot from "./GridRobot";
 import RobotProgram from "./RobotProgram";
-import RobotPrediction from "./RobotPrediction";
 import TryIt from "./TryIt";
 
 export default function VirtualLab({ locale }) {
@@ -50,7 +49,6 @@ export default function VirtualLab({ locale }) {
         }
       >
         <RobotProgram locale={locale} />
-        <RobotPrediction />
       </TryIt>
       <nav className={styles.links} aria-label={t("virtual.nav")}>
         {registry.labs.map((lab) => (

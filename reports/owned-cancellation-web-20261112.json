@@ -1,0 +1,29 @@
+{
+  "scope": "Local served content and a known identifier integration check; not an independent retrieval benchmark",
+  "checks": [
+    {
+      "locale": "zh-CN",
+      "ssr": true,
+      "oldRevisionPreserved": true,
+      "repairedParserLink": true,
+      "priorAnchorResolved": true,
+      "newPassageSearch": true
+    },
+    {
+      "locale": "en",
+      "ssr": true,
+      "oldRevisionPreserved": true,
+      "repairedParserLink": true,
+      "priorAnchorResolved": true,
+      "newPassageSearch": true
+    },
+    {
+      "locale": "zh-TW",
+      "ssr": true,
+      "oldRevisionPreserved": true,
+      "repairedParserLink": true,
+      "priorAnchorResolved": true,
+      "newPassageSearch": true
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Layout from "@lab/runtime/Layout";
 import Link from "@lab/runtime/Link";
 import { useContentData } from "@lab/runtime/data";
@@ -8,6 +8,7 @@ import { useText } from "@lab/components/Shell";
 import LearningLaunchpad from "@lab/components/LearningLaunchpad";
 import LearningStep from "@lab/components/LearningStep";
 import useResearchTrack from "@lab/components/useResearchTrack";
+import UrlStateSync from "@lab/components/UrlStateSync";
 import {
   coreSteps,
   readLearningFilters,
@@ -20,28 +21,20 @@ export default function Learning() {
   const { entries } = useContentData("learning-index");
   const content = useContentData("content-index").entries;
   const progress = useLearningProgress();
-  const [domain, chooseDomain] = useResearchTrack("all", true);
+  const [domain, chooseDomain, syncDomain] = useResearchTrack("all", true);
   const [filters, setFilters] = useState(() => readLearningFilters());
   const [target, setTarget] = useState("");
   const [view, setView] = useState("route");
-  useEffect(() => {
-    const sync = () => {
-      setFilters(readLearningFilters(location.search));
-      setTarget(location.hash.slice(1));
-      setView(
-        new URLSearchParams(location.search).get("view") === "questions"
-          ? "questions"
-          : "route",
-      );
-    };
-    sync();
-    window.addEventListener("popstate", sync);
-    window.addEventListener("hashchange", sync);
-    return () => {
-      window.removeEventListener("popstate", sync);
-      window.removeEventListener("hashchange", sync);
-    };
-  }, []);
+  const sync = useCallback(() => {
+    syncDomain();
+    setFilters(readLearningFilters(location.search));
+    setTarget(location.hash.slice(1));
+    setView(
+      new URLSearchParams(location.search).get("view") === "questions"
+        ? "questions"
+        : "route",
+    );
+  }, [syncDomain]);
   useEffect(() => {
     if (!target) return;
     const frame = requestAnimationFrame(() =>
@@ -105,19 +98,21 @@ export default function Learning() {
     setFilters(value);
     setTarget("");
     history.replaceState(
-      history.state,
+      null,
       "",
-      learningFilterUrl(location.href, value),
+      learningFilterUrl(location.href, value, domain),
     );
   }
   function chooseView(value) {
     setView(value);
     setTarget("");
-    const url = new URL(location.href);
-    url.hash = "";
+    const url = new URL(
+      learningFilterUrl(location.href, filters, domain),
+      location.origin,
+    );
     if (value === "questions") url.searchParams.set("view", value);
     else url.searchParams.delete("view");
-    history.pushState(history.state, "", url.pathname + url.search);
+    history.pushState(null, "", url.pathname + url.search);
   }
   const row = (step, index, question, compact = false, owner = track) => (
     <LearningStep
@@ -142,6 +137,7 @@ export default function Learning() {
       )}
     >
       <main className="hh-page focused-learning">
+        <UrlStateSync onChange={sync} />
         <header className="focused-heading">
           {track ? (
             <button className="reading-back" onClick={() => choose("all")}>

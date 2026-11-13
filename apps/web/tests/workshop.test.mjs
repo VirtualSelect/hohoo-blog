@@ -70,7 +70,10 @@ test("catalog filters all terms and directions without inventing entries", () =>
     0,
   );
   assert.equal(filterWorkshops({ query: "nonsense!" }).length, 0);
-  assert.equal(filterWorkshops({ domain: "llm" }).length, 2);
+  assert.deepEqual(
+    filterWorkshops({ domain: "llm" }).map((w) => w.id),
+    ["memory"],
+  );
 });
 for (const locale of ["zh-CN", "en", "zh-TW"])
   test(`${locale}: workshop links resolve and stay outside article/activity indexes`, () => {

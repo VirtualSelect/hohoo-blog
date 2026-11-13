@@ -6,6 +6,7 @@ export interface LearningProgress {
   version: 1;
   items: Record<string, { status: LearningStatus; updatedAt?: string }>;
   saved: string[];
+  savedAt?: Record<string, string>;
   lastOpened?: string;
 }
 export const emptyProgress = (): LearningProgress => ({
@@ -43,6 +44,16 @@ export function parseProgress(
   const ids = new Set(validIds);
   const state = emptyProgress();
   state.saved = validList(value.saved, ids);
+  if (record(value.savedAt)) {
+    const dates = value.savedAt;
+    const savedAt: Record<string, string> = {};
+    for (const id of state.saved) {
+      const date = dates[id];
+      if (typeof date === "string" && Number.isFinite(Date.parse(date)))
+        savedAt[id] = date;
+    }
+    if (Object.keys(savedAt).length) state.savedAt = savedAt;
+  }
   for (const [id, item] of Object.entries(
     record(value.items) ? value.items : {},
   )) {
@@ -86,13 +97,25 @@ export function updateProgress(
   action: LearningAction,
   now = new Date().toISOString(),
 ): LearningProgress {
-  if (action === "saved")
-    return {
+  if (action === "saved") {
+    const result: LearningProgress = {
       ...state,
       saved: state.saved.includes(id)
         ? state.saved.filter((v) => v !== id)
         : [...state.saved, id],
     };
+    const savedAt = { ...state.savedAt };
+    if (
+      result.saved.includes(id) &&
+      typeof now === "string" &&
+      Number.isFinite(Date.parse(now))
+    )
+      savedAt[id] = now;
+    else delete savedAt[id];
+    if (Object.keys(savedAt).length) result.savedAt = savedAt;
+    else delete result.savedAt;
+    return result;
+  }
   // Keep the runtime guard: JavaScript consumers and persisted data are untyped.
   if (action !== "reading" && action !== "completed") return state;
   return {

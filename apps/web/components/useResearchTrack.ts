@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import tracks from "@site/data/learning-paths.json";
 import { readResearchTrack, researchTrackUrl } from "../lib/reading-paths.mjs";
 import type { Domain } from "../lib/site-types";
@@ -9,8 +9,8 @@ export default function useResearchTrack(
   allowAll = false,
 ) {
   const [domain, setDomain] = useState<Domain | "all">(fallback);
-  useEffect(() => {
-    const sync = () =>
+  const sync = useCallback(
+    () =>
       setDomain(
         readResearchTrack(
           location.search,
@@ -19,7 +19,10 @@ export default function useResearchTrack(
           fallback,
           allowAll,
         ) as Domain | "all",
-      );
+      ),
+    [fallback, allowAll],
+  );
+  useEffect(() => {
     sync();
     window.addEventListener("popstate", sync);
     window.addEventListener("hashchange", sync);
@@ -27,14 +30,15 @@ export default function useResearchTrack(
       window.removeEventListener("popstate", sync);
       window.removeEventListener("hashchange", sync);
     };
-  }, [fallback, allowAll]);
+  }, [sync]);
   return [
     domain,
     (value: Domain | "all") => {
       if (value === domain) return;
       setDomain(value);
       const url = researchTrackUrl(location.href, value);
-      history.pushState(history.state, "", url);
+      history.pushState(null, "", url);
     },
+    sync,
   ] as const;
 }

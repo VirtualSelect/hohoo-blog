@@ -4,7 +4,7 @@ description: "54 actual simulation rollouts compare finite differences, EMA and 
 slug: "/embodied-ai/mujoco-velocity-estimation"
 status: "published"
 published_at: "2026-10-09"
-updated: "2026-10-09"
+updated: 2026-11-13
 reading_minutes: 11
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -12,6 +12,10 @@ difficulty: "intermediate"
 prerequisites: ["doc:embodied-ai/mujoco-delayed-feedback", "doc:embodied-ai/mujoco-planar-pd"]
 related: ["lab:mujoco-velocity-estimation", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-qualified-completion"]
 ---
+
+<span id="published-correction"></span>
+
+> **Correction published · 2026-11-13.** [Pinned source and run instructions](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/335e756bb7e86ded9128b7c9b978636a4069fa61/experiments/planar_velocity_estimation) are now available. Statements below about a local branch or unpublished code describe the 2026-11-12 review snapshot. Historical checkout commands still reproduce the original archive, not this correction. From the companion repository root, run `git checkout 335e756bb7e86ded9128b7c9b978636a4069fa61`, then follow the linked directory README and use a new output directory. Historical results and AI-assistance disclosures are unchanged.
 
 > Reproduction correction, 2026-10-11: Git newline conversion in the original pinned commit `1931eff` changed the bytes of `results.json`, breaking its checkout-time hash audit. Links and checkout commands below now use the byte-preserving fix. The measurements, publication date and conclusions are unchanged.
 
@@ -84,22 +88,52 @@ Velocity RMSE compares the estimate with true velocity **at capture time**. The 
 
 ## Reproduce and diagnose
 
-The following commands use Windows PowerShell and explicitly select the virtual-environment interpreter.
+For a first reproduction, open the [pinned setup guide](#reading-content) above and run the whole block once. It installs the environment in a new revision-specific directory, writes 54 episodes to `outputs/my-run` and audits them. There is no second clone or runner block here.
+
+The pinned README's argument-free command defaults to overwriting evidence; even explicit `--out` accepts an existing directory in that revision. Do not omit the argument or reuse an output directory. The local entry requires `--out` and refuses existing directories, but is not published. The setup guide still checks out the historical pin. Once it is prepared, run the original four estimator checks separately from that repository root:
 
 ```powershell
-git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
-cd hohoo-embodied-agent-study
-git checkout 1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f
-python -m venv .venv
-$py = '.\.venv\Scripts\python.exe'
-& $py -m pip install -r requirements-lock.txt
-& $py -m unittest discover -s experiments/planar_velocity_estimation -p "test_*.py"
-& $py experiments/planar_velocity_estimation/run.py --out outputs/velocity-my-run
-& $py experiments/planar_velocity_estimation/audit.py outputs/velocity-my-run
+& .\.venv\Scripts\python.exe -m unittest discover -s experiments/planar_velocity_estimation -p "test_*.py"
 ```
 
-The tested environment is Windows, Python 3.12.14, MuJoCo 3.3.7 and NumPy 2.2.6. Other operating systems were not retested. No rendering window, GPU, model key or paid service is required. Expect four estimator tests to pass, then 54 episodes, 108000 rows and 13 successes. The audit independently checks hashes, timestamps, estimates, force and acceptance.
+To inspect the existing archive, no new simulation is needed. With the matching revision and environment, run this read-only audit:
 
-`csv.gz` is lossless compression and can be read with Python's `gzip.open(..., 'rt')`. Use a separate output directory so archived evidence stays intact. If results differ, first check pinned dependencies and commit, then `capture_t`, estimated velocity, raw force and saturation. Do not start by relaxing acceptance thresholds. Persistent clipping suggests inspecting the derivative estimate; smooth oscillation near the target calls for inspecting sample age and estimator lag.
+```powershell
+& .\.venv\Scripts\python.exe experiments/planar_velocity_estimation/audit.py evidence/planar-velocity-20261009
+```
 
-Exercise: hand-calculate differences and EMA for three samples around a sudden deceleration. Observe why EMA retains old velocity. A follow-up should separately scan sampling period, τ and controller gains while retaining every condition. This round does not complete VL01 or establish hardware safety. The next question is the closed-loop tradeoff, not simply choosing a more elaborate filter name.
+The tested environment is Windows, Python 3.12.14, MuJoCo 3.3.7 and NumPy 2.2.6. Other operating systems were not retested. No rendering window, GPU, model key or paid service is required. Expect the original four tests to pass; the archive contains 54 episodes, 108000 rows and 13 successes. The audit checks hashes, timestamps, estimates, force and acceptance, but omits the additional physical checks discussed in the correction below.
+
+`csv.gz` is lossless compression and can be read with Python's `gzip.open(..., 'rt')`. If results differ, first check pinned dependencies and commit, then `capture_t`, estimated velocity, raw force and saturation. Do not start by relaxing acceptance thresholds. Persistent clipping suggests inspecting the derivative estimate; smooth oscillation near the target calls for inspecting sample age and estimator lag.
+
+### A protocol value must reach the physical state
+
+In the pinned revision, `mass` does not update the MuJoCo body and the actuator retains the XML's 5 N limit. The old audit hard-codes some counts and acceptance values and never checks acceleration against the declared mass. A controlled regression with mass set to 2 kg produced exactly the 1 kg archive's trajectories, yet the old audit passed. **PASS covers only the checks that exist.** The original default is 1 kg, matching the XML, so the 54-episode table and findings above remain valid.
+
+Check the first row of the original `00.csv.gz`: it starts from rest, takes a 2 ms step and applies 5 N on x, with no contact, gravity or damping. The expected increment is `Δvx = F × Δt / m`.
+
+| Source of the first step | Declared mass/kg | Actual vx/(m/s) | From declared mass/(m/s) |
+| --- | ---: | ---: | ---: |
+| Original default archive | 1 | 0.010 | 0.010 |
+| 2 kg configuration regression, before correction | 2 | 0.010 | 0.005 |
+| 2 kg configuration regression, local correction | 2 | 0.005 | 0.005 |
+
+The last two rows test the configuration interface; they are not part of the original 54 episodes or a new mass-transfer study. The local correction applies mass, physical timestep and actuator limits. Its independent audit also reconstructs capture-time truth, noise, velocity estimates and acceptance from the physical rows. It is not published; the commands above still use the historical pin. Additional external forces must be included in the dynamics before applying this check to another scene.
+
+### Work through two velocity updates
+
+These are **constructed arithmetic samples**, outside the 54 episodes above: `(t/ms, x/m) = (0, 0), (20, 0.04), (40, 0.04)`, y is always zero and τ=60 ms. Calculate the difference and EMA at 20 and 40 ms first. The first sample initializes EMA to zero, as in the implementation.
+
+<details><summary>Check the finite differences and EMA</summary>
+
+| Time/ms | x/m | Difference/(m/s) | EMA/(m/s) |
+| --- | ---: | ---: | ---: |
+| 0 | 0 | No previous sample | 0 |
+| 20 | 0.04 | 2 | 0.566937 |
+| 40 | 0.04 | 0 | 0.406228 |
+
+Each update uses `α = 1 - exp(-20/60) ≈ 0.283469`. At 20 ms the result is `2α`; at 40 ms the difference is zero but `(1-α) × 2α` remains. The table rounds to six decimal places; do not round α during calculation. This example shows how filter state retains the previous difference. Stable physical motion still requires trajectory-based acceptance.
+
+</details>
+
+The proposed τ and controller-gain scan was later developed in [development and holdout tuning](/docs/embodied-ai/mujoco-controller-holdout). Sampling-rate changes still need a separate protocol and validation. These results do not complete VL01 or establish hardware safety.

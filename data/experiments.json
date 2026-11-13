@@ -131,50 +131,6 @@
     "limitationsTw": "沒有模型自主選工具、策略收益或真實服務調用；不代表完整計劃完成。"
   },
   {
-    "id": "action-representation",
-    "paper": "rt2",
-    "zh": "动作表示学习记录",
-    "en": "Action representation study",
-    "goalZh": "先整理观测、动作与离散表示的对应关系，再设计仿真验证；不将其称为 RT-2 复现。",
-    "goalEn": "Map observations, actions and discrete representations before designing a simulation check; this is not an RT-2 reproduction.",
-    "number": "003",
-    "status": "planning",
-    "domain": "embodied-ai",
-    "related": [
-      "paper:2307.15818"
-    ],
-    "design": {
-      "zh": {
-        "hypothesis": "在固定动作范围的仿真任务中，离散表示的粒度会影响表示误差与可达动作的精度。",
-        "variables": {
-          "independent": "动作离散化粒度。",
-          "controlled": "动作空间、采样动作、仿真任务、初始状态、控制频率与评价方法。",
-          "dependent": "编码/解码误差、越界动作、任务成功条件与执行稳定性。"
-        },
-        "baseline": "在相同动作范围内使用连续表示；先验证编码往返测试，再尝试仿真。",
-        "metrics": "计划记录逐维重建误差、越界次数及仿真任务指标；尚未选定环境，不报告机器人效果。",
-        "successCriteria": "通过边界与往返测试后，在固定任务中比较误差和任务表现；若只有表示测试，只得出表示层结论。",
-        "risks": "表示误差不等于任务性能；仿真结果不能直接外推真实机器人，也不构成 RT-2 复现。"
-      },
-      "en": {
-        "hypothesis": "Discretization granularity may affect representation error and action precision in a fixed simulation task.",
-        "variables": {
-          "independent": "Action discretization granularity.",
-          "controlled": "Action bounds, samples, task, initial state, control frequency and evaluation method.",
-          "dependent": "Encode/decode error, out-of-range actions, task outcomes and stability."
-        },
-        "baseline": "Continuous representation over the same bounds; test round trips before simulation.",
-        "metrics": "Planned: per-dimension error, out-of-range counts and task-specific outcomes. Environment not selected.",
-        "successCriteria": "Pass boundary and round-trip tests before task comparisons. Representation-only tests support representation-only conclusions.",
-        "risks": "Representation error is not task performance; simulation does not establish real-robot performance or reproduce RT-2."
-      }
-    },
-    "experimentLog": [],
-    "titleTw": "動作表示學習紀錄",
-    "descriptionTw": "先整理觀測、動作與離散表示的對應關係，再設計模擬驗證；不將其稱為 RT-2 重現。",
-    "sourceLocale": "zh-CN"
-  },
-  {
     "id": "vl01-pickup-offset",
     "number": "004",
     "journeyLab": "VL01",
@@ -225,10 +181,9 @@
     "goalTw": "移動同一條事實，模型是否仍能找到答案？",
     "descriptionTw": "6 組虛構資料的四條件對照；29 次嘗試后停止，位置差異尚無定論。",
     "related": [
-      "doc:llm/context-position-experiment",
+      "doc:llm/context-position-paired-protocol",
       "doc:llm/kv-cache",
-      "project:hohoo-ai-lab",
-      "doc:llm/context-position-paired-protocol"
+      "project:hohoo-ai-lab"
     ],
     "repo": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/e072718c3cd66d44978612208d393ff0d3eff9e4/experiments/01-context-position",
     "method": "冻结 6 组资料、四条件、两次重复，预算 48；随机顺序但无重试，连续三次请求/协议失败停止。",
@@ -436,9 +391,9 @@
     "conclusion": "静态类型不代替运行时契约；结构正确不等于分类语义正确。",
     "conclusionEn": "Static types do not replace runtime contracts; structural validity does not establish semantic correctness.",
     "conclusionTw": "靜態型別不取代執行期契約；結構正確不等於分類語義正確。",
-    "limitations": "刻意构造的边界，不是模型错误率；扁平契约，不是通用JSON解析器。无新增API调用。",
-    "limitationsEn": "Deliberate edge cases, not a model error rate. A flat contract, not a general JSON parser. No new API calls.",
-    "limitationsTw": "刻意構造的邊界，不是模型錯誤率；扁平契約，非通用JSON解析器。無新增API呼叫。",
+    "limitations": "刻意构造的边界，不是模型错误率或通用解析证明。2026-11-12复核发现原32组未覆盖非法单引号转义：旧Java接收、TypeScript拒绝；Java修订仅在本地，详见关联教程勘误。无新增API调用。",
+    "limitationsEn": "Deliberate cases, not a model error rate or proof of a general parser. A 2026-11-12 review found an invalid apostrophe escape outside the original 32 cases: old Java accepts it; TypeScript rejects it. The Java correction is local only; see the linked tutorial. No new API calls.",
+    "limitationsTw": "刻意構造的邊界，不是模型錯誤率或通用解析證明。2026-11-12複核發現原32組未涵蓋非法單引號跳脫：舊Java接受、TypeScript拒絕；Java修訂僅在本地，詳見關聯教程勘誤。無新增API呼叫。",
     "reproduce": "类型检查、37项测试与32组差分审计通过；Node26.8.2、TypeScript7.0.2、Java1.8.0_171。",
     "reproduceEn": "Typecheck, 37 tests and a 32-case differential audit pass; Node 26.8.2, TypeScript 7.0.2, Java 1.8.0_171.",
     "reproduceTw": "型別檢查、37項測試與32組差分稽核通過；Node26.8.2、TypeScript7.0.2、Java1.8.0_171。"
@@ -650,7 +605,7 @@
     "descriptionTw": "15回合固定場景對照保持、鬆爪、鬆爪後退：報警相同，退出動作不同，最終放置也不同。",
     "repo": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget",
     "related": [
-      "doc:embodied-ai/mujoco-exit-actions",
+      "doc:embodied-ai/mujoco-abort-exit",
       "project:hohoo-embodied-agent"
     ],
     "method": "五条件×保持、松爪、松爪后退，共15个固定场景回合。",
@@ -800,7 +755,7 @@
     "descriptionTw": "七條 MuJoCo 軌跡與雙畫面回放，將歷史完成事件和當前有效狀態分開，保留傳感誤報與過期邊界。",
     "repo": "https://github.com/VirtualSelect/hohoo-embodied-agent/tree/cd26180e8560155d18c45d34a33dc9ef25bbcdf6/experiments/vl01_completion_lifecycle",
     "related": [
-      "doc:embodied-ai/mujoco-completion-lifecycle",
+      "doc:embodied-ai/mujoco-qualified-completion",
       "project:hohoo-embodied-agent",
       "doc:embodied-ai/mujoco-release-verification",
       "doc:embodied-ai/mujoco-recovery-budget"
@@ -920,8 +875,7 @@
       "doc:embodied-ai/mujoco-abort-exit",
       "project:hohoo-embodied-agent",
       "doc:embodied-ai/mujoco-recovery-budget",
-      "doc:embodied-ai/mujoco-exit-actions",
-      "doc:embodied-ai/mujoco-completion-lifecycle"
+      "doc:embodied-ai/mujoco-qualified-completion"
     ],
     "method": "四种观测条件 × 三种退出动作，12 秒/回合，2ms 物理步长，保持 E10 门控与预算不变。",
     "methodEn": "Four observation conditions × three exits, 12 seconds per rollout and 2ms physics steps, keeping E10 gates and budgets unchanged.",
@@ -1039,7 +993,7 @@
       "project:hohoo-embodied-agent",
       "doc:embodied-ai/mujoco-abort-exit",
       "doc:embodied-ai/mujoco-phase-contracts",
-      "doc:embodied-ai/mujoco-completion-lifecycle"
+      "doc:embodied-ai/mujoco-qualified-completion"
     ],
     "method": "6种固定条件×3策略，18个12秒MuJoCo回合；HOLD保留中断阶段，终止退出统一保持。",
     "methodEn": "Six fixed conditions × three policies, eighteen twelve-second MuJoCo rollouts. HOLD preserves phase; terminal exit always holds.",
@@ -1155,8 +1109,7 @@
     "related": [
       "doc:embodied-ai/mujoco-qualified-completion",
       "project:hohoo-embodied-agent",
-      "doc:embodied-ai/mujoco-phase-recovery",
-      "doc:embodied-ai/mujoco-completion-lifecycle"
+      "doc:embodied-ai/mujoco-phase-recovery"
     ],
     "method": "8个固定MuJoCo回合，各附三个旁路读数；48,000行原始记录、4,800状态与三场景回放。",
     "methodEn": "Eight fixed MuJoCo rollouts with three passive readouts each; 48,000 raw rows, 4,800 states and a three-scenario replay.",

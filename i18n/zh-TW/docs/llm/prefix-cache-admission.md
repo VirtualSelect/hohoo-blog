@@ -129,7 +129,7 @@ fresh, _ = model.full(tokens)
 
 初次閱讀可依序看 [容量與機制](/docs/llm/kv-cache)、[等價性](/docs/llm/kv-cache-equivalence)、[失效](/docs/llm/prefix-cache-invalidation)、[最長前綴](/docs/llm/longest-prefix-reuse)、[位元組預算](/docs/llm/prefix-cache-byte-budget)。這些是已完成的離線數值實驗。
 
-另一條支線為 [24 次 Agnes 3.0 真實呼叫](/docs/llm/context-position-paired-protocol)；後續的 [128 項相似干擾方案](/docs/llm/context-similar-distractors)僅完成離線準備，沒有新模型結果，不能混入本篇分母。
+另一條支線為 [24 次 Agnes 3.0 真實呼叫](/docs/llm/context-position-paired-protocol)；後續的 [128 項相似干擾方案](/learning?track=llm#plans-llm)僅完成離線準備，沒有新模型結果，不能混入本篇分母。
 
 在新目錄準備 Python 3.12 環境（PowerShell）：
 

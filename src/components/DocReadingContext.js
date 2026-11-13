@@ -11,7 +11,7 @@ import useLearningProgress from "./useLearningProgress";
 import { learningSymbols } from "@site/src/utils/learning-progress.ts";
 import WritingKind from "./WritingKind";
 import { useText } from "@lab/components/Shell";
-import { nextReadingStep } from "@lab/lib/reading-paths.mjs";
+import { nextReadingStep, readingPosition } from "@lab/lib/reading-paths.mjs";
 export default function DocReadingContext({ position }) {
   const { metadata, frontMatter: f } = useDoc();
   const en = useEnglish();
@@ -25,16 +25,14 @@ export default function DocReadingContext({ position }) {
   const recorded = useRef(null);
   const step = f.learning_step;
   const track = tracks.find((t) => t.steps.some((s) => s.id === step));
-  const routeSteps =
-    track?.steps.filter((s) => entries.some((e) => e.stepId === s.id)) || [];
-  const index = routeSteps.findIndex((s) => s.id === step);
+  const available = new Set(entries.map((entry) => entry.stepId));
+  const positionInRoute = readingPosition(track, step, available);
+  const coreRoute = positionInRoute?.core || [];
+  const index = positionInRoute?.index ?? -1;
+  const inCore = positionInRoute?.kind === "core";
   const currentStep = track?.steps.find((s) => s.id === step);
   const reviewNotice = currentStep?.reviewNotice;
-  const nextStep = nextReadingStep(
-    track,
-    step,
-    new Set(entries.map((entry) => entry.stepId)),
-  );
+  const nextStep = nextReadingStep(track, step, available);
   const nextArticle = nextStep
     ? entries.find((entry) => entry.stepId === nextStep.id)
     : null;
@@ -68,13 +66,18 @@ export default function DocReadingContext({ position }) {
           {f.reading_minutes &&
             " · " + f.reading_minutes + " " + uiLabel("MIN")}
           {f.updated && " · " + uiLabel("UPDATED") + " " + f.updated}
-          {track &&
-            " · " +
-              uiLabel("PART") +
-              " " +
-              (index + 1) +
-              " / " +
-              routeSteps.length}
+          {positionInRoute && (
+            <span className="hh-reading-position">
+              {" · "}
+              {inCore
+                ? t("主线", "CORE", "主線") +
+                  " " +
+                  (index + 1) +
+                  " / " +
+                  coreRoute.length
+                : t("专题选读", "FOCUSED READING", "專題選讀")}
+            </span>
+          )}
         </p>
         {track?.steps.find((s) => s.id === step)?.followUps?.length > 0 && (
           <details className="article-followups">
@@ -146,7 +149,7 @@ export default function DocReadingContext({ position }) {
   }
   return (
     <>
-      {track && (
+      {track && positionInRoute && (
         <section className="hh-reading-context">
           {nextArticle && (
             <p>
@@ -158,38 +161,54 @@ export default function DocReadingContext({ position }) {
           )}
           <details>
             <summary>
-              {en
-                ? "You are here"
-                : translate({ id: "ui.55d22ed084", message: "当前学习位置" })}
+              {inCore
+                ? t(
+                    "主线阅读位置",
+                    "Your place in the core path",
+                    "主線閱讀位置",
+                  )
+                : t("专题关联资料", "Related study material", "專題關聯資料")}
             </summary>
             <p className="hh-eyebrow">
               {uiLabel(track.brand)} / {t(track.title, track.en, track.titleTw)}
             </p>
-            <ol start={Math.max(0, index - 1) + 1}>
-              {routeSteps.slice(Math.max(0, index - 1), index + 2).map((s) => {
-                const article = entries.find((e) => e.stepId === s.id);
-                return (
-                  <li
-                    key={s.id}
-                    aria-current={s.id === step ? "step" : undefined}
-                  >
-                    {
-                      learningSymbols[
-                        state.items[s.id]?.status || "not-started"
-                      ]
-                    }{" "}
-                    {s.id === step ? (
-                      article?.title || (en ? s.en : s.title)
-                    ) : (
-                      <Link to={article?.permalink || "/learning#step-" + s.id}>
-                        {article?.title || (en ? s.en : s.title)}
-                      </Link>
-                    )}
-                    {!article && " · " + uiLabel("PLANNED")}
-                  </li>
-                );
-              })}
-            </ol>
+            {inCore ? (
+              <ol start={Math.max(0, index - 1) + 1}>
+                {coreRoute.slice(Math.max(0, index - 1), index + 2).map((s) => {
+                  const article = entries.find((e) => e.stepId === s.id);
+                  return (
+                    <li
+                      key={s.id}
+                      aria-current={s.id === step ? "step" : undefined}
+                    >
+                      {
+                        learningSymbols[
+                          state.items[s.id]?.status || "not-started"
+                        ]
+                      }{" "}
+                      {s.id === step ? (
+                        article?.title || (en ? s.en : s.title)
+                      ) : (
+                        <Link
+                          to={article?.permalink || "/learning#step-" + s.id}
+                        >
+                          {article?.title || (en ? s.en : s.title)}
+                        </Link>
+                      )}
+                      {!article && " · " + uiLabel("PLANNED")}
+                    </li>
+                  );
+                })}
+              </ol>
+            ) : (
+              <p>
+                {t(
+                  "本篇为专题选读，可按上方先修和已发表的后续结果继续。",
+                  "Focused reading. Use the prerequisites and published follow-ups above to choose what to read next.",
+                  "本篇為專題選讀，可依上方先修與已發表的後續結果繼續。",
+                )}
+              </p>
+            )}
             <Related ids={f.related || []} />
           </details>
           <p>
@@ -239,7 +258,7 @@ export default function DocReadingContext({ position }) {
           )}
         </section>
       )}
-      {!track && <Related ids={f.related || []} />}
+      {(!track || !positionInRoute) && <Related ids={f.related || []} />}
     </>
   );
 }

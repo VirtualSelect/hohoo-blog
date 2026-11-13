@@ -4,7 +4,7 @@ description: "24條配對軌跡比較即時/80ms延遲、位置噪聲和常速�
 slug: "/embodied-ai/mujoco-delayed-feedback"
 status: "published"
 published_at: "2026-10-07"
-updated: "2026-10-07"
+updated: "2026-11-12"
 reading_minutes: 9
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -65,7 +65,50 @@ estimated_position = captured_position
 
 audit.py獨立檢查每行capture_t不晚于物理時刻，再從x/y/vx/vy重算最後窗口。不要用控制器的估計位置替代真值驗收，否則估計器可能“自己證明自己成功”。
 
-練習：選一個最終誤差很小但失敗的檔案，逐行檢查最後0.3秒，找出哪一項閾值被破壞。再把延遲減小，在新輸出目錄運行；先保留原始協議和結果，不用後驗調閾值覆蓋負結果。
+### 在尾段找到第一次速度越界
+
+固定選原歸檔中的`19-observation.csv`：0ms延遲、10mm位置雜訊、hold、種子19。先預測：如果終點位置和速度都合格，為什麼`success`仍是false？
+
+先準備好頁首指引指定的固定提交，再在具身工程根目錄執行這個唯讀片段。它只用Python標準函式庫讀取既有CSV，不用安裝MuJoCo或NumPy，也不重跑模擬；完整歸檔校驗仍用下方audit指令。
+
+```python
+import csv
+import json
+import math
+from pathlib import Path
+
+root = Path("evidence/planar-reach-20261007")
+protocol = json.loads((root / "manifest.json").read_text(encoding="utf-8"))["protocol"]
+records = json.loads((root / "results.json").read_text(encoding="utf-8"))
+record = next(r for r in records if r["config"]["family"] == "observation"
+              and r["config"]["mode"] == "hold" and r["config"]["delay"] == 0
+              and r["config"]["noise"] == 0.01 and r["config"]["seed"] == 19)
+with (root / record["file"]).open(encoding="utf-8", newline="") as stream:
+    rows = [{k: float(v) for k, v in r.items()} for r in csv.DictReader(stream)]
+def distance(r):
+    return math.hypot(r["x"] - protocol["goal"][0], r["y"] - protocol["goal"][1])
+def speed(r):
+    return math.hypot(r["vx"], r["vy"])
+limits = protocol["success"]
+tail = [r for r in rows if r["t"] >= protocol["duration"] - limits["last_seconds"] - 1e-9]
+first = next(r for r in tail if distance(r) >= limits["distance_m"] or speed(r) >= limits["speed_m_s"])
+print(record["file"])
+for label, row in (("first_failure", first), ("last", rows[-1])):
+    print(label, f'{row["t"]:.3f}', f'{distance(row) * 1000:.3f}', f'{speed(row) * 1000:.3f}')
+print("tail", len(tail), "position_failures", sum(distance(r) >= limits["distance_m"] for r in tail),
+      "speed_failures", sum(speed(r) >= limits["speed_m_s"] for r in tail))
+```
+
+預期選中`19-observation.csv`，輸出中的位置誤差與速度分別用mm、mm/s表示：
+
+| 記錄 | t/s | 位置誤差/mm | 速度/(mm/s) |
+| --- | ---: | ---: | ---: |
+| 尾段第一次越界 | 3.714 | 3.944 | 40.392 |
+| 最後一列 | 4.000 | 1.356 | 12.325 |
+
+終點兩項都合格，卻不能撤銷3.714秒已經發生的速度越界。這個尾段的151個狀態樣本中，位置越界0個、速度越界24個。程式沿用原審計的`t >= 3.7 - 1e-9`，包含視窗兩端；151是取樣點數，時間區間仍是0.3秒。`1e-9`僅處理時間的浮點表示，位置15mm與速度40mm/s的閾值沒有放寬。
+
+這裡定位的是既有失敗的原因，不把新一輪模擬當作完成練習的前提。若繼續改變延遲，應使用新輸出目錄並保留獨立協議與全部結果。
 
 ## 下一步值得驗證，而不是直接宣稱實現
 
@@ -73,18 +116,22 @@ audit.py獨立檢查每行capture_t不晚于物理時刻，再從x/y/vx/vy重算
 
 本輪把第二場景、參數、軌跡與負結果完整公開，後續應先解釋具體失敗機制，再決定增加哪一種估計器，避免把“算法名更多”當作能力提升。
 
+後續已發表的[速度估計篇](/docs/embodied-ai/mujoco-velocity-estimation)進一步比較位置差分與EMA；[開發集與保留集調參](/docs/embodied-ai/mujoco-controller-holdout)再檢查增益和濾波參數的組合。兩篇都保留了失敗與適用邊界；這裡提出的加速度模型與其他新控制策略仍需另外驗證。
+
 ## 從干凈目錄復現
 
-使用 Python 3.12。入口一次運行這組三個主題的對照，各篇只解讀自己的子集，不把同一份記錄重復當作新增回合。
+首次重現請展開頁首的[固定版本指引](#reading-content)，整塊執行一次。它使用Python 3.12虛擬環境，在新的帶提交編號目錄中執行36回合，並稽核`outputs/my-run`。這組三篇文章解釋同一批記錄的不同子集，不需要為每篇再次複製倉庫或重新模擬。
 
-~~~sh
-git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
-cd hohoo-embodied-agent-study
-git checkout 831789c2a1efb4564c4cfabc2298e48e16ada879
-python -m pip install -r requirements-lock.txt
-python experiments/planar_reach/run.py --out outputs/my-run
-python experiments/planar_reach/audit.py outputs/my-run
-python experiments/planar_reach/plot.py outputs/my-run
-~~~
+若已有相符的固定版本與環境，只想核對原歸檔，可在該倉庫根目錄執行下面的唯讀稽核；它也是前面練習的證據來源：
 
-輸出目錄必須不存在。本機驗證環境為 Windows，Linux/macOS尚未復測。不需要模型密鑰或付費服務。manifest中的程式碼凍結提交早于上方含證據的歸檔提交，源碼哈希對應實際執行檔案。
+```powershell
+& .\.venv\Scripts\python.exe experiments/planar_reach/audit.py evidence/planar-reach-20261007
+```
+
+如已依頁首流程產生新結果，可以為這份新結果繪圖。此指令讀取`outputs/my-run`，並在其中寫入圖像；不適用於唯讀核驗原歸檔：
+
+```powershell
+& .\.venv\Scripts\python.exe experiments/planar_reach/plot.py outputs/my-run
+```
+
+本機驗證環境為Windows，Linux/macOS尚未複測。不需要模型金鑰或付費服務。重跑時另用新目錄，不覆寫既有結果。manifest中的程式碼凍結提交早於上方含證據的歸檔提交，原始碼雜湊對應實際執行檔案。

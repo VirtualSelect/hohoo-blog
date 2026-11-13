@@ -9,7 +9,11 @@ const read = (file) =>
   JSON.parse(fs.readFileSync(new URL(file, import.meta.url), "utf8"));
 const tracks = read("../../../data/learning-paths.json");
 const rag = tracks.find((track) => track.domain === "rag");
-const published = ["java-retrieval-evidence", "java-grounded-claims"];
+const published = [
+  "java-retrieval-evidence",
+  "java-grounded-claims",
+  "blog-passage-search",
+];
 
 test("RAG reuses stable article and saved-plan IDs without duplicate steps", () => {
   const steps = tracks.flatMap((track) => track.steps);
@@ -54,7 +58,10 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
       [...published].sort(),
     );
     for (const entry of articles) {
-      assert.equal(entry.href, `${prefix}/docs/ai-apps/${entry.stepId}`);
+      assert.equal(
+        entry.href,
+        `${prefix}/docs/${rag.steps.find((step) => step.id === entry.stepId).doc}`,
+      );
       assert.equal(
         entry.translationStatus,
         locale === "zh-CN" ? "ORIGINAL" : "AI_TRANSLATED",

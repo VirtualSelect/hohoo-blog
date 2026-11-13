@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useText } from "./Shell";
+import Link from "../runtime/Link";
 import type { Heading } from "../lib/site-types";
 
 export default function ArticleContents({
@@ -46,14 +47,14 @@ export default function ArticleContents({
   const navigation = (
     <nav aria-label={t("文章目录", "Table of contents", "文章目錄")}>
       {headings.map((heading) => (
-        <a
+        <Link
           key={heading.id}
           href={"#" + heading.id}
           aria-current={active === heading.id ? "location" : undefined}
           className={heading.depth === 3 ? "subheading" : ""}
         >
           {heading.text}
-        </a>
+        </Link>
       ))}
     </nav>
   );

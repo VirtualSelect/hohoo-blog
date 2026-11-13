@@ -4,7 +4,7 @@ description: "Compare stale feedback, zero force and fading in 27 episodes to di
 slug: "/embodied-ai/mujoco-stale-force"
 status: "published"
 published_at: "2026-10-11"
-updated: "2026-10-11"
+updated: 2026-11-13
 reading_minutes: 10
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -12,6 +12,10 @@ difficulty: "intermediate"
 prerequisites: ["doc:embodied-ai/mujoco-controller-holdout"]
 related: ["lab:planar-reliability", "project:hohoo-embodied-agent"]
 ---
+
+<span id="published-correction"></span>
+
+> **Correction published · 2026-11-13.** [Pinned source and run instructions](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/335e756bb7e86ded9128b7c9b978636a4069fa61/experiments/planar_reliability) are now available. Statements below about a local branch or unpublished code describe the 2026-11-12 review snapshot. Historical checkout commands still reproduce the original archive, not this correction. From the companion repository root, run `git checkout 335e756bb7e86ded9128b7c9b978636a4069fa61`, then follow the linked directory README and use a new output directory. Historical results and AI-assistance disclosures are unchanged.
 
 [Pinned code](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1d1faab57e20b352761e9abc736c6d277b505e6b/experiments/planar_reliability) · [Archived evidence](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/1d1faab57e20b352761e9abc736c6d277b505e6b/evidence/planar-reliability-20261011) · [Study protocol](/labs/planar-reliability)
 
@@ -39,7 +43,9 @@ Noise is drawn even for dropped samples, then discarded. This preserves matching
 | --- | --- | --- |
 | hold | PD and force clipping | Continue PD from last observation |
 | zero | PD and force clipping | Command zero force |
-| fade | PD and force clipping | Linearly reduce clipped force, reaching zero at 200 ms |
+| fade | PD and force clipping | Fade clipped force until observation age reaches 200 ms |
+
+The 200 ms is still measured **from sample capture**, not another 200 ms after detecting staleness. Above age 100 ms, multiply clipped force by `max(0, (0.200-age)/0.100)`: the fading interval is ages 100–200 ms. Floating-point arithmetic can leave a residual around `1e-15 N` at the boundary; use a tolerance rather than `fx == 0` to locate fade's endpoint.
 
 Hold does not hold the current physical position: it keeps a stale control computation. The actuator moves while the observed error remains fixed, potentially driving sustained acceleration.
 
@@ -69,9 +75,52 @@ The 100/200 ms thresholds are teaching parameters, not safety standards. Mass, i
 
 ### Read the trace
 
-For permanent loss under zero, locate the first zero `fx/fy` row and inspect subsequent `vx/vy`. Velocity persists in this undamped model; the independent `F=m*a` check verifies it. An immediate stop suggests state clearing or additional damping in the scene.
+Do not search the entire trace for its first zero force: before the first observation arrives, both force and velocity are already zero. Select permanent loss under the zero policy, then find the first **control row with a valid captured sample whose age exceeds the limit**, and only then inspect force and velocity.
+
+CSV `t` is recorded after the physics step. That row's command was decided at the beginning of the step, so decision time is `t - 0.002`. Check age only on `control_tick=1` rows; do not use post-step state time as decision time.
+
+Run this read-only Python 3.12 snippet from the article's pinned repository root. It needs neither MuJoCo nor a new simulation:
+
+```python
+import csv
+import gzip
+import json
+from pathlib import Path
+
+root = Path("evidence/planar-reliability-20261011")
+protocol = json.loads((root / "manifest.json").read_text(encoding="utf-8"))["protocol"]
+records = json.loads((root / "results.json").read_text(encoding="utf-8"))
+record = next(r for r in records if r["section"] == "dropout"
+              and r["dropout"] == "permanent"
+              and r["policy"] == "zero" and r["seed"] == 73)
+with gzip.open(root / record["trace"], "rt", encoding="utf-8") as stream:
+    rows = [{k: float(v) for k, v in r.items()} for r in csv.DictReader(stream)]
+dt = protocol["timestep"]
+stale = next(r for r in rows if r["control_tick"] == 1
+             and r["capture_t"] >= 0
+             and r["t"] - dt - r["capture_t"] > protocol["fresh_limit"] + 1e-9)
+later = rows[rows.index(stale) + round(0.1 / dt)]
+for label, row in (("startup", rows[0]), ("stale", stale), ("later", later)):
+    print(label, row["t"], row["fx"], row["vx"])
+```
+
+This selects `111.csv.gz` and prints startup, the first stale control, and another 100 ms later. The table rounds `vx` to six decimal places:
+
+| CSV t/s | fx/N | vx/(m/s) |
+| ---: | ---: | ---: |
+| 0.002 | 0 | 0 |
+| 0.502 | 0 | 0.853823 |
+| 0.602 | 0 | 0.853823 |
+
+The last sample was captured at 0.380 s. At decision time 0.480 s its age is exactly 100 ms, so the policy has not triggered. The 0.500 s decision reaches 120 ms, recorded after the step at 0.502 s. Force becomes zero while velocity stays nonzero: that is the intended counterexample. The original independent audit also checks `F=m*a` from physical rows. If your trajectory stops instantly, check for additional damping or cleared state rather than substituting startup's zero velocity for the post-loss result.
 
 For burst loss under fade, inspect capture times after recovery: receiving an old sample again is not fresh sensing. A future braking design must specify available observations and actuator capabilities rather than secretly reading simulator truth to replace missing sensors.
+
+## Before changing configuration, check what actually executes
+
+The pinned revision reproduces the original frozen protocol. It records `fresh_limit/fade_end` in JSON while the controller still uses fixed 100/200 ms boundaries. Physics timestep, actuator limits, position/speed acceptance and development conditions have similar mismatches. The original defaults match these constants, so the published tables remain valid. **Editing protocol.json at that revision alone does not reliably change the experiment.**
+
+The local runner, controller and independent audit now apply these settings to execution and acceptance, rejecting incompatible timestep combinations before running. Replaying the default 153 episodes produced identical results and all decompressed CSV traces. This correction is not published; the fixed links above and commands below still reference the historical version. New threshold studies require matching corrected code and a new output directory. Do not rewrite the old manifest or treat regression fixtures as research outcomes.
 
 ## Reproduce the protocol
 
@@ -91,6 +140,6 @@ $py = '.\.venv\Scripts\python.exe'
 
 Tested on Windows with Python 3.12.14 + MuJoCo 3.3.7 + NumPy 2.2.6; 3 unit tests, 153 episodes and 306000 rows. The independent audit should print `PASS`. Other operating systems have not been rechecked. To inspect the archived result without rerunning the experiment, pass `evidence/planar-reliability-20261011` to the same audit command. Source hashes normalize LF; evidence hashes use original bytes. Do not rewrite the manifest to conceal a mismatch.
 
-If an import fails, verify that installation and execution use the same `$py`. Preserve failed outputs and choose a new directory for reruns. Numeric comparisons use the frozen tolerances; timing is a local measurement, not a required speed threshold.
+If an import fails, verify that installation and execution use the same `$py`. Preserve failed outputs and choose a new directory for reruns. Seconds here refer to simulation time, not the computer's wall-clock execution time; check physical trajectories against the frozen protocol and numerical tolerances.
 
 Code and writing are AI-assisted; the findings are limited to the archived, auditable runs. No new paid model requests were made, and this does not claim author-performed manual review.

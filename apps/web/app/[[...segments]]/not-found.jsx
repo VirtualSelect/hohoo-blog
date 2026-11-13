@@ -36,6 +36,41 @@ export default function NotFound() {
           "位址可能發生了變化，從既有內容繼續探索。",
         )}
       </p>
+      <form
+        action={`${prefix}/articles`}
+        method="get"
+        role="search"
+        className="not-found-search"
+        aria-label={t(
+          "查找已发表文章",
+          "Find published writing",
+          "查找已發表文章",
+        )}
+      >
+        <label htmlFor="missing-page-query">
+          {t(
+            "还记得标题或关键词吗？",
+            "Remember a title or keyword?",
+            "還記得標題或關鍵字嗎？",
+          )}
+        </label>
+        <div>
+          <input
+            id="missing-page-query"
+            name="q"
+            type="search"
+            required
+            placeholder={t(
+              "例如：会话、缓存、抓取",
+              "e.g. session, cache, grasp",
+              "例如：會話、快取、抓取",
+            )}
+          />
+          <button type="submit">
+            {t("搜索文章", "Search writing", "搜尋文章")} →
+          </button>
+        </div>
+      </form>
       <Link href={prefix || "/"}>
         {t("返回首页", "Back home", "返回首頁")} →
       </Link>

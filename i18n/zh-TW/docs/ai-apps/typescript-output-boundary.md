@@ -4,13 +4,17 @@ description: "從型別斷言、unknown到原始JSON：重現22個誤接收、4�
 slug: /ai-apps/typescript-output-boundary
 status: published
 published_at: "2026-09-30"
-updated: "2026-09-30"
+updated: 2026-11-13
 reading_minutes: 11
 domain: ai-apps
 article_kind: case-study
 difficulty: intermediate
 related: ["doc:ai-apps/java-structured-output", "doc:ai-apps/java-transactional-history", "lab:typescript-output-boundary", "project:hohoo-ai-lab"]
 ---
+
+<span id="published-correction"></span>
+
+> **2026-11-13 修訂程式碼已發布。** [固定版本與執行說明](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/demos/04-structured-output)現可取得。下文「本機分支／尚未發布」保留為2026-11-12複核時的狀態；歷史固定命令仍用於原實驗歸檔，不用於尋找新修訂。使用修訂時，在配套倉庫根目錄執行`git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`，再按對應目錄README執行，輸出使用新目錄。歷史結果與AI輔助揭露不變。
 
 在 [Java結構化輸出實作](/docs/ai-apps/java-structured-output)中，HTTP 200之後仍要檢查結果是否能進入業務流程。換成TypeScript，這個邊界不會自動消失。
 
@@ -91,6 +95,10 @@ return validateClassification(decoded);
 物件入口漏掉普通重複category、跳脫同名category、重複tags，以及超出原始長度的合法物件。最後一項不是型別問題，而是入口已失去原始文字長度。
 
 兩語言原始入口32/32一致，只能支持這批固定案例的契約一致性，不保證所有JSON都一致，也不是模型錯誤率。
+
+**2026-11-12 離線複核發現了原樣本未涵蓋的差異。** `{"category":"llm","tags":["can\'t"]}`包含非法的`\'`跳脫，原固定Java驗證器卻接受並解碼為`can't`；本篇TypeScript原始入口拒絕。普通單引號不需要跳脫，合法的`can't`與`can\u0027t`仍由兩邊接受。重複鍵另由各自的原始文字檢查拒絕，不能只看`JSON.parse`是否成功。
+
+因此保留上表的歷史32組結果，但不再把Java當作完整JSON詞法的參考實作。[原教程勘誤與本地修訂說明](/docs/ai-apps/java-structured-output#json-lexical-review)記錄了原因與檢查邊界；Java修訂尚未提交或發布。此次未改動原32組輸入、舊判定或真實回應歸檔，也沒有呼叫模型。
 
 ## 7. 歷史真實回應的離線重放
 

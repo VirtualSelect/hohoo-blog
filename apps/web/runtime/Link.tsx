@@ -26,6 +26,7 @@ export default function LocalLink({
   href,
   children,
   autoAddBaseUrl,
+  onNavigate,
   ...props
 }: LocalLinkProps) {
   const { locale } = useSite();
@@ -36,8 +37,41 @@ export default function LocalLink({
     !/\.(svg|png|jpg|xml|json|pdf)$/.test(target)
   )
     target = "/" + locale + (target === "/" ? "" : target);
+  const navigate: NonNullable<LocalLinkProps["onNavigate"]> = (event) => {
+    let cancelled = false;
+    onNavigate?.({
+      preventDefault: () => {
+        cancelled = true;
+        event.preventDefault();
+      },
+    });
+    if (cancelled || props.scroll === false) return;
+    let id;
+    try {
+      const url = new URL(target, location.href);
+      if (!url.hash || url.href !== location.href) return;
+      id = decodeURIComponent(url.hash.slice(1));
+    } catch {
+      return;
+    }
+    const element = document.getElementById(id);
+    if (!element) return;
+    // The URL is already selected: repeat the fragment action without adding
+    // a duplicate route or relying on a router/hash-change notification.
+    event.preventDefault();
+    for (
+      let parent: HTMLElement | null = element;
+      parent;
+      parent = parent.parentElement
+    )
+      if (parent instanceof HTMLDetailsElement) parent.open = true;
+    requestAnimationFrame(() => {
+      if (element.isConnected)
+        element.scrollIntoView({ block: "start", behavior: "instant" });
+    });
+  };
   return (
-    <Link href={target} {...props}>
+    <Link href={target} {...props} onNavigate={navigate}>
       {children}
       <Pending />
     </Link>

@@ -10,6 +10,9 @@ import TopicNews from "./TopicNews";
 import { useText } from "@lab/components/Shell";
 import LabSketch from "@lab/components/LabSketch";
 import { coreSteps } from "@lab/lib/reading-paths.mjs";
+import CacheEvidenceGuide from "@lab/components/CacheEvidenceGuide";
+import EmbodiedFieldGuide from "@lab/components/EmbodiedFieldGuide";
+import SessionStrategyGuide from "@lab/components/SessionStrategyGuide";
 export default function TopicLanding({ category }) {
   const t = useText();
   const { entries } = useContent();
@@ -44,9 +47,11 @@ export default function TopicLanding({ category }) {
       <p className="hh-lead">
         {t(topic.description, topic.english, topic.descriptionTw)}
       </p>
-      <div className="topic-mark">
-        <LabSketch kind={topic.sketch} />
-      </div>
+      {!["ai-apps", "llm", "embodied-ai"].includes(category) && (
+        <div className="topic-mark">
+          <LabSketch kind={topic.sketch} />
+        </div>
+      )}
       {track.pipeline && (
         <ol className="topic-pipeline">
           {track.pipeline.map((stage) => (
@@ -58,6 +63,9 @@ export default function TopicLanding({ category }) {
         <p className="topic-boundary">{t(...track.boundary)}</p>
       )}
       <SeriesEntry domain={category} />
+      {category === "ai-apps" && <SessionStrategyGuide />}
+      {category === "llm" && <CacheEvidenceGuide entries={docs} />}
+      {category === "embodied-ai" && <EmbodiedFieldGuide entries={docs} />}
       {category === "rag" && (
         <p>
           <Link to="/docs/rag#retrieval-exercise">

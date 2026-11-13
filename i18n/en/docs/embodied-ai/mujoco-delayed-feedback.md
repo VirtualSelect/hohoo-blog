@@ -4,7 +4,7 @@ description: "Twenty-four paired traces compare delay, position noise and consta
 slug: "/embodied-ai/mujoco-delayed-feedback"
 status: "published"
 published_at: "2026-10-07"
-updated: "2026-10-07"
+updated: "2026-11-12"
 reading_minutes: 9
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -54,22 +54,69 @@ The figure shows seed seven only; all seeds are archived.
 
 The auditor checks that capture times precede current time and evaluates completion from physical x/y/vx/vy, not estimated state. Otherwise an estimator could certify its own incorrect belief.
 
-Exercise: inspect a small-final-error failure and find which tail-window sample violates which threshold. Reduce delay in a new output directory, retaining the original protocol and failures instead of moving thresholds afterward.
+### Find the first speed violation in the tail
+
+Use the original archive's `19-observation.csv`: zero delay, 10 mm position noise, hold, seed 19. Predict first: why is `success` false if both final position and speed meet the limits?
+
+Prepare the pinned revision identified in the setup guide above, then run this read-only snippet from the embodied repository root. It reads the existing CSV using only Python's standard library; no MuJoCo, NumPy or new simulation is needed. Use the audit command below for the complete archive check.
+
+```python
+import csv
+import json
+import math
+from pathlib import Path
+
+root = Path("evidence/planar-reach-20261007")
+protocol = json.loads((root / "manifest.json").read_text(encoding="utf-8"))["protocol"]
+records = json.loads((root / "results.json").read_text(encoding="utf-8"))
+record = next(r for r in records if r["config"]["family"] == "observation"
+              and r["config"]["mode"] == "hold" and r["config"]["delay"] == 0
+              and r["config"]["noise"] == 0.01 and r["config"]["seed"] == 19)
+with (root / record["file"]).open(encoding="utf-8", newline="") as stream:
+    rows = [{k: float(v) for k, v in r.items()} for r in csv.DictReader(stream)]
+def distance(r):
+    return math.hypot(r["x"] - protocol["goal"][0], r["y"] - protocol["goal"][1])
+def speed(r):
+    return math.hypot(r["vx"], r["vy"])
+limits = protocol["success"]
+tail = [r for r in rows if r["t"] >= protocol["duration"] - limits["last_seconds"] - 1e-9]
+first = next(r for r in tail if distance(r) >= limits["distance_m"] or speed(r) >= limits["speed_m_s"])
+print(record["file"])
+for label, row in (("first_failure", first), ("last", rows[-1])):
+    print(label, f'{row["t"]:.3f}', f'{distance(row) * 1000:.3f}', f'{speed(row) * 1000:.3f}')
+print("tail", len(tail), "position_failures", sum(distance(r) >= limits["distance_m"] for r in tail),
+      "speed_failures", sum(speed(r) >= limits["speed_m_s"] for r in tail))
+```
+
+It selects `19-observation.csv`. The last two printed values use mm and mm/s:
+
+| Record | t/s | Position error/mm | Speed/(mm/s) |
+| --- | ---: | ---: | ---: |
+| First tail violation | 3.714 | 3.944 | 40.392 |
+| Last row | 4.000 | 1.356 | 12.325 |
+
+Both final values pass, but they cannot erase the speed violation at 3.714 s. Among 151 tail state samples, zero violate position and 24 violate speed. The code retains the original audit's `t >= 3.7 - 1e-9`, including both endpoints; 151 counts samples, while the interval remains 0.3 s. The time tolerance handles floating-point representation; the 15 mm and 40 mm/s limits remain unchanged.
+
+This locates a recorded failure without requiring another simulation. Further delay changes need a new output directory, a separate protocol and all results retained.
 
 Acceleration models, velocity noise, filtering, lower gains or age-based stopping are candidates for new paired experiments. None is already validated here. This planar system and predictor establish no hardware-safety or articulated-arm guarantee.
 
+Published follow-ups now compare finite differences with EMA in [velocity estimation](/docs/embodied-ai/mujoco-velocity-estimation), then examine gains and filter settings in [development and holdout tuning](/docs/embodied-ai/mujoco-controller-holdout). Both retain failures and scope limits. Acceleration models and other new control policies still need separate validation.
+
 ## Reproduce from a clean checkout
 
-Python 3.12. The runner executes all three comparisons; each article discusses its own subset.
+For a first reproduction, open the [pinned setup guide](#reading-content) above and run the whole block once. It uses a Python 3.12 virtual environment, creates a new revision-specific directory, runs 36 episodes and audits `outputs/my-run`. The three articles explain different subsets of the same recording; do not clone or simulate again for each article.
 
-~~~sh
-git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
-cd hohoo-embodied-agent-study
-git checkout 831789c2a1efb4564c4cfabc2298e48e16ada879
-python -m pip install -r requirements-lock.txt
-python experiments/planar_reach/run.py --out outputs/my-run
-python experiments/planar_reach/audit.py outputs/my-run
-python experiments/planar_reach/plot.py outputs/my-run
-~~~
+If the matching revision and environment are already prepared, run this read-only archive audit from that repository root. The archive is also the source of the exercise above:
 
-Use a new output directory. Windows was exercised; Linux/macOS were not rerun. No model API or key is required. The source commit in the manifest precedes the evidence commit linked above; source hashes bind the executed files.
+```powershell
+& .\.venv\Scripts\python.exe experiments/planar_reach/audit.py evidence/planar-reach-20261007
+```
+
+After the setup guide has generated new results, this optional command plots them. It reads `outputs/my-run` and writes figures there; it is not a read-only archive check:
+
+```powershell
+& .\.venv\Scripts\python.exe experiments/planar_reach/plot.py outputs/my-run
+```
+
+Windows was exercised; Linux/macOS were not retested. No model key or paid service is needed. Use a new directory for another run and preserve existing results. The manifest's source commit precedes the evidence commit linked above; source hashes bind the executed files.

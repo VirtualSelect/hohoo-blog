@@ -47,6 +47,11 @@ export default function SeriesShelf({ entries }: { entries: ContentEntry[] }) {
               ))}
             </ol>
             <footer>
+              {track.synthesisHref && (
+                <Link to={track.synthesisHref}>
+                  {t("先看综合结论", "Read the synthesis", "先看綜合結論")} →
+                </Link>
+              )}
               <Link to={chapters[0].article!.href}>
                 {t(
                   "从第一篇开始",

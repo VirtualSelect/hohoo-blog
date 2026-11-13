@@ -4,7 +4,7 @@ description: 透過三個實際執行的 Java 範例，理解模型請求、JSON
 slug: /ai-apps/java-first-llm
 status: published
 published_at: '2026-09-12'
-updated: '2026-09-12'
+updated: "2026-11-12"
 reading_minutes: 15
 learning_step: first-call
 domain: ai-apps
@@ -176,5 +176,7 @@ try {
 HTTP 200 與 `finish_reason: stop` 都不保證事實正確或完全遵循要求。語言細節仍應查閱 [Java 8 預設方法說明](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html)。
 
 至此，請求、解析、輸入和歷史已串成一條可執行流程。下一步是限制並驗證輸出，確認回答適合後續程式處理，再進入框架整合。
+
+這個下一步後來在[Java結構化輸出實作](/docs/ai-apps/java-structured-output)中展開：從HTTP狀態繼續檢查JSON結構、欄位型別與業務約束，並保留真實回應不符合要求的例子。
 
 [專案說明](/projects/hohoo-ai-lab) · [AI 應用開發](/docs/ai-apps) · [學習路線](/learning)

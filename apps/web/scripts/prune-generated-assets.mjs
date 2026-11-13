@@ -41,6 +41,9 @@ export function pruneGeneratedAssets(app = defaultApp) {
     }
     const references = [
       ["search", manifest.searchUrl],
+      ...(manifest.sectionSearchUrl
+        ? [["search", manifest.sectionSearchUrl]]
+        : []),
       ...manifest.radarArchive.chunks.map((url) => ["radar-data", url]),
       ...(manifest.radarArchive.contentAssets || []).map((url) => [
         "radar-content",

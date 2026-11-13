@@ -81,7 +81,7 @@
     "message": "隨機探索"
   },
   "writing.empty": {
-    "message": "沒有符合目前篩選條件的文章。試試清除篩選或切換方向。"
+    "message": "沒有找到符合的已發表文章。試試其他關鍵字，或清除目前條件。"
   },
   "learning.research": {
     "message": "研究總覽"

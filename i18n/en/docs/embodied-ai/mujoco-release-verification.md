@@ -9,7 +9,7 @@ reading_minutes: 9
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:release-verification", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-exit-actions", "doc:embodied-ai/mujoco-recovery-budget"]
+related: ["lab:release-verification", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-abort-exit", "doc:embodied-ai/mujoco-recovery-budget"]
 ---
 
 [Pinned code](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget) · [Raw evidence and audit](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/evidence/exit-release-budget-20261003) · [Experiment record](/labs/release-verification)
@@ -77,5 +77,5 @@ Continue with [recovery budgets](/docs/embodied-ai/mujoco-recovery-budget), whic
 
 ## Read this series
 
-- [Embodied AI VIII: what should the gripper do after a drop alarm?](/docs/embodied-ai/mujoco-exit-actions)
+- [Embodied AI VIII: what should the gripper do after a drop alarm?](/docs/embodied-ai/mujoco-abort-exit)
 - [Embodied AI X: why can a recovery budget stop a recoverable task?](/docs/embodied-ai/mujoco-recovery-budget)

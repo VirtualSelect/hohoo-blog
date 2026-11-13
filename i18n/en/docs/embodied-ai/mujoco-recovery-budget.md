@@ -9,7 +9,7 @@ reading_minutes: 9
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:recovery-budget", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-exit-actions", "doc:embodied-ai/mujoco-release-verification"]
+related: ["lab:recovery-budget", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-abort-exit", "doc:embodied-ai/mujoco-release-verification"]
 ---
 
 [Pinned code](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget) · [Raw evidence and audit](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/evidence/exit-release-budget-20261003) · [Experiment record](/labs/recovery-budget)
@@ -70,7 +70,7 @@ else:
     resume_after_revalidation()
 ```
 
-Budget abort keeps the held target. It does not automatically incorporate the [E8 opening exit](/docs/embodied-ai/mujoco-exit-actions), which would introduce another explanation for changed placement outcomes. Combining individually tested modules requires a new integration test.
+Budget abort keeps the held target. It does not automatically incorporate the [E8 opening exit](/docs/embodied-ai/mujoco-abort-exit), which would introduce another explanation for changed placement outcomes. Combining individually tested modules requires a new integration test.
 
 ## 6. Verification and limits
 
@@ -87,5 +87,5 @@ Predict the outcome of a zero resume budget, or a cooldown longer than the hold 
 
 ## Read this series
 
-- [Embodied AI VIII: what should the gripper do after a drop alarm?](/docs/embodied-ai/mujoco-exit-actions)
+- [Embodied AI VIII: what should the gripper do after a drop alarm?](/docs/embodied-ai/mujoco-abort-exit)
 - [Embodied AI IX: a release command is not verified placement](/docs/embodied-ai/mujoco-release-verification)

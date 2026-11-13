@@ -4,12 +4,12 @@ description: "12 個 MuJoCo 回合與三畫面回放，對比保持、鬆爪、�
 slug: "/embodied-ai/mujoco-abort-exit"
 status: "published"
 published_at: "2026-10-03"
-updated: "2026-10-03"
+updated: "2026-11-12"
 reading_minutes: 12
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:abort-exit", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-recovery-budget", "doc:embodied-ai/mujoco-exit-actions", "doc:embodied-ai/mujoco-completion-lifecycle"]
+related: ["lab:abort-exit", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-recovery-budget", "doc:embodied-ai/mujoco-qualified-completion"]
 ---
 
 [固定版本程式碼](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/2cf78a9afce618ea8ce35a882f0db203b2a74f57/experiments/vl01_abort_exit) · [原始記錄與審計](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/2cf78a9afce618ea8ce35a882f0db203b2a74f57/evidence/abort-exit-20261003) · [實驗檔案](/labs/abort-exit)
@@ -119,3 +119,11 @@ python experiments/vl01_abort_exit/replay.py --evidence evidence/abort-exit-MY-R
 真正缺少的不是第四種固定動作，而是**終止時可用的環境資訊和退出約束**。例如，是否存在已確認可接觸的安全承托區域；觀測失效時允許移動多遠；物體掉落後是否應禁止再次閉爪。先把這些問題變成可檢驗條件，再比較策略，才可能從“停止以後做點什麼”走向有依據的故障處理。
 
 當前結論停留在固定模擬場景。沒有 ROS2、真實機器人、學習策略或重抓取，也沒有因此宣布完整 VL01、M4/M5 已完成。
+
+## 較早對照：退出動作也取決於停止位置
+
+E8曾於五種條件中直接報警停止，共15回合，沒有恢復預算。晚下降與下降丟包時，鬆爪和鬆爪後退消除了最終殘留手指接觸，hold沒有；搬運途中鬆爪時三種動作都未完成放置。open與open-retreat的終點驗收相同，沒有測到後退的額外收益。
+
+這與本文E12並不衝突：E8部分停止點下方恰好有托盤，E12的預算/期限終止發生於搬運階段，鬆爪讓方塊掉到地板。停止位置、門控及故障不同，不能跨實驗給三種動作排通用名次。E8的「通過」只指末端物理放置，不代表流程合格或安全。
+
+獨有結果保留於此，完整[五條件記錄與固定程式碼](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/evidence/exit-release-budget-20261003)不刪除。原獨立退出動作文章合併，不再作為額外閱讀步驟。

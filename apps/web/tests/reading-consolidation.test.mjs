@@ -220,6 +220,34 @@ test("learning filters survive a URL round trip without keeping hidden anchors",
   });
 });
 
+test("filtering an anchored step preserves its inferred research scope", () => {
+  for (const hash of ["#step-java-stream-session-ownership", "#plans-rag"]) {
+    const old = new URL("https://huhohoo.com/en/learning?ref=bookmark" + hash);
+    const domain = readResearchTrack(old.search, old.hash, tracks, "all", true);
+    const next = new URL(
+      learningFilterUrl(
+        old.href,
+        {
+          query: "缓存 & JSON",
+          saved: true,
+          difficulty: "advanced",
+        },
+        domain,
+      ),
+      old.origin,
+    );
+    assert.equal(next.hash, "");
+    assert.equal(next.searchParams.get("ref"), "bookmark");
+    assert.equal(next.searchParams.get("q"), "缓存 & JSON");
+    assert.equal(
+      readResearchTrack(next.search, next.hash, tracks, "all", true),
+      domain,
+    );
+    assert.notEqual(domain, "all");
+    assert.equal(next.pathname, "/en/learning");
+  }
+});
+
 test("filtered paths expose only matching groups and counts, including plan-only results", () => {
   const track = {
     chapters: [{ title: ["主线", "Core"], steps: ["a"] }],

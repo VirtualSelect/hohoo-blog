@@ -4,7 +4,7 @@ description: "Compare early-focused and recent-focused attention to explain uneq
 slug: "/llm/kv-residual-window"
 status: "published"
 published_at: "2026-10-11"
-updated: "2026-10-11"
+updated: "2026-11-12"
 reading_minutes: 10
 domain: "llm"
 article_kind: "mechanism"
@@ -57,6 +57,25 @@ At N=128, the full float32 cache is 32,768 bytes:
 | 64 | 18,960 B | 42.1% |
 
 Totals include padded groups, scales and shapes. N-R need not be divisible by 32, so a linear “bits times remaining elements” estimate is insufficient. The audit uses saved array sizes.
+
+### Where the 8,912 bytes come from
+
+Take the archived `s7_n128_clean_r16` record. Of 128 Tokens, the first 112 are quantized and the last 16 remain float32; D is still 32. Key groups run along each channel: 112 elements need `ceil(112/32)=4` groups, including a padded final group. Each Value row has exactly one group of 32. A group stores 32 four-bit codes in 16 bytes, plus one four-byte scale.
+
+| Quantized prefix | Code bytes | Scale bytes |
+| --- | ---: | ---: |
+| Key: 32×4 groups | 2,048 | 512 |
+| Value: 112×1 groups | 1,792 | 448 |
+
+The two int32 shape arrays add 16 bytes. The float32 tail contains 16×32 elements for each of K/V, costing `2×16×32×4=4,096 B`:
+
+```text
+(2,048 + 512) + (1,792 + 448)
++ 16 + 4,096
+= 8,912 B
+```
+
+The easily missed cost is Key padding. Reducing 128 Tokens to 112 still requires four groups per channel, so its code and scale arrays do not shrink as Value's do. Counting only the 112 valid Key elements would omit 256 code bytes and 64 scale bytes: 320 bytes in total. This checks the existing arrays' payload, rather than measuring new process memory.
 
 Sixteen Tokens are 12.5% of a 128-token cache but 3.125% of a 512-token cache. The combined averages describe this protocol; they cannot choose a production R. Multiple layers, heads, sessions, paging and moving Tokens out of the residual window introduce additional costs.
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import Layout from "@lab/runtime/Layout";
 import { useContent } from "../components/ContentUI";
 import WritingList from "../components/WritingList";
@@ -13,6 +13,7 @@ import { matchesReadingQuery } from "@lab/lib/reading-paths.mjs";
 import { useText } from "@lab/components/Shell";
 import ResearchIndex from "@lab/components/ResearchIndex";
 import SeriesShelf from "@lab/components/SeriesShelf";
+import UrlStateSync from "@lab/components/UrlStateSync";
 import type { WritingFilters } from "../utils/writing-kinds.ts";
 const defaults: WritingFilters = { kind: "all", domain: "all", type: "all" };
 export default function Articles() {
@@ -22,16 +23,11 @@ export default function Articles() {
   const [filters, setFilters] = useState(defaults);
   const [query, setQuery] = useState("");
   const [showAll, setShowAll] = useState(false);
-  useEffect(() => {
-    const sync = () => {
-      setFilters(writingFilters(location.search));
-      const params = new URLSearchParams(location.search);
-      setQuery(params.get("q") || "");
-      setShowAll(params.get("view") === "list");
-    };
-    sync();
-    window.addEventListener("popstate", sync);
-    return () => window.removeEventListener("popstate", sync);
+  const sync = useCallback(() => {
+    setFilters(writingFilters(location.search));
+    const params = new URLSearchParams(location.search);
+    setQuery(params.get("q") || "");
+    setShowAll(params.get("view") === "list");
   }, []);
   function updateFilters(next: WritingFilters) {
     setFilters(next);
@@ -41,7 +37,7 @@ export default function Articles() {
       if (value === "all") url.searchParams.delete(key);
       else url.searchParams.set(key, value);
     }
-    history.pushState(history.state, "", url.pathname + url.search);
+    history.pushState(null, "", url.pathname + url.search);
   }
   function updateQuery(value: string) {
     setQuery(value);
@@ -49,7 +45,7 @@ export default function Articles() {
     url.hash = "";
     if (value.trim()) url.searchParams.set("q", value);
     else url.searchParams.delete("q");
-    history.replaceState(history.state, "", url.pathname + url.search);
+    history.replaceState(null, "", url.pathname + url.search);
   }
   const filtered =
     !!query.trim() || Object.values(filters).some((value) => value !== "all");
@@ -66,6 +62,7 @@ export default function Articles() {
       )}
     >
       <main className="hh-page focused-articles">
+        <UrlStateSync onChange={sync} />
         <header className="focused-heading">
           <h1>{t("文章", "Writing", "文章")}</h1>
           <p>
@@ -166,7 +163,7 @@ export default function Articles() {
               if (open) url.searchParams.set("view", "list");
               else url.searchParams.delete("view");
               history.replaceState(
-                history.state,
+                null,
                 "",
                 url.pathname + url.search + url.hash,
               );

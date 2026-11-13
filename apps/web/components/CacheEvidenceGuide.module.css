@@ -1,0 +1,124 @@
+.root {
+  margin-block: 32px 48px;
+  scroll-margin-top: 80px;
+}
+.root header {
+  max-width: 72ch;
+  margin-bottom: 20px;
+}
+.root h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.35;
+  margin: 8px 0 12px;
+}
+.root header p:last-child {
+  color: var(--blog-muted);
+  line-height: 1.8;
+}
+.panel {
+  border-top: 1px solid var(--hh-border);
+}
+.panel:last-child {
+  border-bottom: 1px solid var(--hh-border);
+}
+.panel summary {
+  display: grid;
+  grid-template-columns: 30px 1fr 24px;
+  gap: 12px;
+  align-items: center;
+  padding: 18px 0;
+  min-height: 56px;
+  cursor: pointer;
+  list-style: none;
+}
+.panel summary::-webkit-details-marker {
+  display: none;
+}
+.panel summary:hover {
+  color: var(--hh-accent);
+}
+.panel summary:focus-visible {
+  outline: 2px solid var(--hh-accent);
+  outline-offset: 3px;
+}
+.number {
+  font: 12px var(--hh-base-font-family-monospace);
+  color: var(--blog-muted);
+}
+.toggle::before {
+  content: "+";
+  font-size: 22px;
+}
+.panel[open] .toggle::before {
+  content: "−";
+}
+.body {
+  padding: 0 0 24px 42px;
+  max-width: 80ch;
+}
+.body p {
+  line-height: 1.8;
+  margin: 0 0 16px;
+}
+.boundary {
+  color: var(--blog-muted);
+  border-left: 2px solid var(--hh-accent);
+  padding-left: 14px;
+}
+.body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 20px;
+  font-size: 14px;
+}
+.body caption {
+  caption-side: top;
+  text-align: left;
+  color: var(--blog-muted);
+  font-size: 12px;
+  padding-bottom: 10px;
+}
+.body th,
+.body td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--hh-border);
+  text-align: left;
+}
+.body td {
+  font-family: var(--hh-base-font-family-monospace);
+  font-size: 13px;
+  white-space: nowrap;
+}
+.body nav {
+  display: grid;
+  gap: 4px;
+}
+.body a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  line-height: 1.65;
+}
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px !important;
+  font-size: 12px;
+  color: var(--blog-muted);
+}
+@media (max-width: 600px) {
+  .body {
+    padding-left: 0;
+  }
+  .body table {
+    font-size: 12px;
+  }
+  .body th,
+  .body td {
+    padding: 10px 4px;
+  }
+  .body td {
+    font-size: 12px;
+  }
+}

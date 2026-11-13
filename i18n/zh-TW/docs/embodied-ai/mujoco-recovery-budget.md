@@ -9,7 +9,7 @@ reading_minutes: 9
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:recovery-budget", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-exit-actions", "doc:embodied-ai/mujoco-release-verification"]
+related: ["lab:recovery-budget", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-abort-exit", "doc:embodied-ai/mujoco-release-verification"]
 ---
 
 [固定版本程式碼](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/experiments/vl01_exit_release_budget) · [原始記錄與審計](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/evidence/exit-release-budget-20261003) · [實驗檔案](/labs/recovery-budget)
@@ -74,7 +74,7 @@ else:
     resume_after_revalidation()
 ```
 
-預算中止沿用保持目標，並沒有自動鬆爪。本例刻意沒有把[E8退出動作](/docs/embodied-ai/mujoco-exit-actions)直接混進來，否則最終放置變化又可能來自退出策略。下一步應將兩者明確組合，並重新驗證，而不是因為兩個模塊各自有測試，就宣布組合也可靠。
+預算中止沿用保持目標，並沒有自動鬆爪。本例刻意沒有把[E8退出動作](/docs/embodied-ai/mujoco-abort-exit)直接混進來，否則最終放置變化又可能來自退出策略。下一步應將兩者明確組合，並重新驗證，而不是因為兩個模塊各自有測試，就宣布組合也可靠。
 
 ## 6. 驗收了什麼，沒有驗收什麼
 
@@ -91,5 +91,5 @@ python experiments/vl01_exit_release_budget/audit.py evidence/my-budget-series
 
 ## 同方向繼續閱讀
 
-- [具身智能實踐（八）：檢測到掉落以後，夾爪應該做什麼？](/docs/embodied-ai/mujoco-exit-actions)
+- [具身智能實踐（八）：檢測到掉落以後，夾爪應該做什麼？](/docs/embodied-ai/mujoco-abort-exit)
 - [具身智能實踐（九）：鬆爪命令成功，不等於放置完成](/docs/embodied-ai/mujoco-release-verification)

@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import Brand from "./Brand";
 import { SiteContext, useSite } from "../runtime/context";
@@ -18,12 +19,41 @@ export function useText() {
   );
 }
 function Frame({ children }: PropsWithChildren) {
+  const router = useRouter();
   const { locale, route } = useSite(),
     t = useText(),
     [menu, setMenu] = useState(false),
     [search, setSearch] = useState(false);
   const trigger = useRef<HTMLButtonElement>(null);
   const menuTrigger = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    let frame: number | null = null;
+    const adoptNativeEntry = () => {
+      if (window.history.state !== null || frame !== null) return;
+      frame = requestAnimationFrame(() => {
+        frame = null;
+        // Native fragment entries can lack router state. Adopt only those
+        // entries through the public API, without copying Next's private
+        // fields, adding a history entry, or changing the reader's scroll.
+        if (window.history.state === null)
+          router.replace(location.pathname + location.search + location.hash, {
+            scroll: false,
+          });
+      });
+    };
+    window.addEventListener("hashchange", adoptNativeEntry);
+    window.addEventListener("popstate", adoptNativeEntry);
+    return () => {
+      window.removeEventListener("hashchange", adoptNativeEntry);
+      window.removeEventListener("popstate", adoptNativeEntry);
+      if (frame !== null) cancelAnimationFrame(frame);
+    };
+  }, [router]);
+  function closeNavigation() {
+    if (!menu) return;
+    setMenu(false);
+    menuTrigger.current?.focus({ preventScroll: true });
+  }
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -60,6 +90,7 @@ function Frame({ children }: PropsWithChildren) {
       <header className="site-header">
         <Link
           to="/"
+          onNavigate={closeNavigation}
           className="brand-link"
           aria-label={t("Hohoo · 首页", "Hohoo · Home", "Hohoo · 首頁")}
         >
@@ -81,6 +112,7 @@ function Frame({ children }: PropsWithChildren) {
             <Link
               key={p}
               to={"/" + p}
+              onNavigate={closeNavigation}
               aria-current={
                 route === p ||
                 route.startsWith(p + "/") ||
@@ -201,6 +233,7 @@ function Frame({ children }: PropsWithChildren) {
       </footer>
       {search && (
         <Search
+          key={locale}
           onClose={() => {
             setSearch(false);
             trigger.current?.focus({ preventScroll: true });

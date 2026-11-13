@@ -1,5 +1,8 @@
 {
-  "featuredProjects": ["project:hohoo-ai-lab", "project:hohoo-embodied-agent"],
+  "featuredProjects": [
+    "project:hohoo-ai-lab",
+    "project:hohoo-embodied-agent"
+  ],
   "featuredArticles": [
     "doc:ai-apps/java-recovery-reconciliation",
     "doc:llm/kv-block-decode-cost",
@@ -54,14 +57,6 @@
       "altEn": "Compare prefix recomputation, token decoding and chunk caching with output errors, projected-row counts and actual array payloads.",
       "altTw": "逐前綴重算、逐Token快取與分塊快取三路對照，記錄誤差、投影行數和真實數組字節。"
     },
-    "doc:embodied-ai/mujoco-exit-actions": {
-      "src": "/media/practice/exit-actions.png",
-      "width": 1500,
-      "height": 600,
-      "alt": "15回合固定场景对照保持、松爪、松爪后退：报警相同，退出动作不同，最终放置也不同。",
-      "altEn": "Fifteen fixed-scene rollouts compare hold, open and open-then-retreat after identical alarms.",
-      "altTw": "15回合固定場景對照保持、鬆爪、鬆爪後退：報警相同，退出動作不同，最終放置也不同。"
-    },
     "doc:embodied-ai/mujoco-recovery-budget": {
       "src": "/media/practice/recovery-budget.png",
       "width": 1500,
@@ -101,14 +96,6 @@
       "alt": "三种子、六条件，比较错误复用与带键校验的前缀缓存；数值相同也不代表允许跨作用域共享。",
       "altEn": "Three seeds and six conditions compare unchecked and keyed prefix reuse; numerical equality does not establish permission to share across scopes.",
       "altTw": "三種子、六條件，比較錯誤重用與帶鍵校驗的前綴快取；數值相同也不代表允許跨作用域共享。"
-    },
-    "doc:embodied-ai/mujoco-completion-lifecycle": {
-      "src": "/media/practice/completion-lifecycle.png",
-      "width": 1500,
-      "height": 600,
-      "alt": "七条 MuJoCo 轨迹与双画面回放，将历史完成事件和当前有效状态分开，保留传感误报与过期边界。",
-      "altEn": "Seven MuJoCo rollouts and a paired replay separate historical completion from current validity, including false alarms and expiry boundaries.",
-      "altTw": "七條 MuJoCo 軌跡與雙畫面回放，將歷史完成事件和當前有效狀態分開，保留傳感誤報與過期邊界。"
     },
     "doc:ai-apps/java-streaming-boundary": {
       "src": "/media/practice/streaming-boundary.png",

@@ -1,4 +1,5 @@
 import path from "node:path";
+import contentRedirects from "../../data/content-redirects.json" with { type: "json" };
 import { fileURLToPath } from "node:url";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../..");
@@ -24,6 +25,11 @@ export default {
   },
   async redirects() {
     return ["", "/en", "/zh-TW"].flatMap((prefix) => [
+      ...Object.entries(contentRedirects).map(([source, destination]) => ({
+        source: prefix + source,
+        destination: prefix + destination,
+        permanent: true,
+      })),
       {
         source: prefix + "/blog/a%20new%20milestone",
         destination: prefix + "/blog/a-new-milestone",
