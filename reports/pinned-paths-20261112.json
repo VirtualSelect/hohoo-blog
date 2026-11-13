@@ -1,0 +1,2192 @@
+{
+  "checkedAt": "2026-11-11T19:43:49.737Z",
+  "scope": "Current local generated Docs in zh-CN/en/zh-TW plus data/reproduction.json, only pinned tree/blob paths in VirtualSelect/hohoo-ai-lab and hohoo-embodied-agent.",
+  "method": "Read public GitHub recursive trees for each exact commit; all responses untruncated. Checks path/type existence, not experiment correctness, full binary download, or all web links.",
+  "commits": 32,
+  "checks": [
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "65e4d79528d7c6e57e96e684bc1c4dbc73b61caa",
+      "path": "demos/06-reliable-workflows",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-concurrent-history",
+        "zh-CN:ai-apps/java-retrieval-evidence",
+        "zh-CN:ai-apps/java-tool-boundary",
+        "en:ai-apps/java-concurrent-history",
+        "en:ai-apps/java-retrieval-evidence",
+        "en:ai-apps/java-tool-boundary",
+        "zh-TW:ai-apps/java-concurrent-history",
+        "zh-TW:ai-apps/java-retrieval-evidence",
+        "zh-TW:ai-apps/java-tool-boundary"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "630a275f52e69dde2e5dea7f2b0b2a83764fd73b",
+      "checkedAt": "2026-11-11T19:31:52.951Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "65e4d79528d7c6e57e96e684bc1c4dbc73b61caa",
+      "path": "demos/06-reliable-workflows/evidence/20261003-reviewed",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-concurrent-history",
+        "zh-CN:ai-apps/java-retrieval-evidence",
+        "zh-CN:ai-apps/java-tool-boundary",
+        "en:ai-apps/java-concurrent-history",
+        "en:ai-apps/java-retrieval-evidence",
+        "en:ai-apps/java-tool-boundary",
+        "zh-TW:ai-apps/java-concurrent-history",
+        "zh-TW:ai-apps/java-retrieval-evidence",
+        "zh-TW:ai-apps/java-tool-boundary"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "023554a2826ebd9ec8010799e5d15ba1e5271568",
+      "checkedAt": "2026-11-11T19:31:52.951Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "02a2660e22c969e70e3a6f095003614a7dfa448e",
+      "path": "demos/11-bounded-assistant",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-context-wire-budget",
+        "zh-CN:ai-apps/java-durable-turns",
+        "zh-CN:ai-apps/java-retry-deadline",
+        "en:ai-apps/java-context-wire-budget",
+        "en:ai-apps/java-durable-turns",
+        "en:ai-apps/java-retry-deadline",
+        "zh-TW:ai-apps/java-context-wire-budget",
+        "zh-TW:ai-apps/java-durable-turns",
+        "zh-TW:ai-apps/java-retry-deadline"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "8c0b38869268feb174dff57f87e6e9bc5411c20e",
+      "checkedAt": "2026-11-11T19:31:52.952Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "02a2660e22c969e70e3a6f095003614a7dfa448e",
+      "path": "demos/11-bounded-assistant/evidence/20261007",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-context-wire-budget",
+        "zh-CN:ai-apps/java-durable-turns",
+        "zh-CN:ai-apps/java-retry-deadline",
+        "en:ai-apps/java-context-wire-budget",
+        "en:ai-apps/java-durable-turns",
+        "en:ai-apps/java-retry-deadline",
+        "zh-TW:ai-apps/java-context-wire-budget",
+        "zh-TW:ai-apps/java-durable-turns",
+        "zh-TW:ai-apps/java-retry-deadline"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "00b83543789553bfc15f9f38ef4d2d6857145966",
+      "checkedAt": "2026-11-11T19:31:52.952Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "02a2660e22c969e70e3a6f095003614a7dfa448e",
+      "path": "demos/11-bounded-assistant/evidence/projection-20261007-verified",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-context-wire-budget",
+        "en:ai-apps/java-context-wire-budget",
+        "zh-TW:ai-apps/java-context-wire-budget"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "0b866f10ec2ec8d349550e15b81db2206e7528da",
+      "checkedAt": "2026-11-11T19:31:52.952Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "0d4009cf840052c3111bbfc40dce900326daa3ae",
+      "path": "demos/13-durable-dispatch",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-durable-idempotency",
+        "zh-CN:ai-apps/java-outbox-delivery",
+        "zh-CN:ai-apps/java-recovery-reconciliation",
+        "en:ai-apps/java-durable-idempotency",
+        "en:ai-apps/java-outbox-delivery",
+        "en:ai-apps/java-recovery-reconciliation",
+        "zh-TW:ai-apps/java-durable-idempotency",
+        "zh-TW:ai-apps/java-outbox-delivery",
+        "zh-TW:ai-apps/java-recovery-reconciliation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "da3e530a67aa57eccf2a355280411921d174d8e6",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "0d4009cf840052c3111bbfc40dce900326daa3ae",
+      "path": "demos/13-durable-dispatch/evidence",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-durable-idempotency",
+        "zh-CN:ai-apps/java-outbox-delivery",
+        "zh-CN:ai-apps/java-recovery-reconciliation",
+        "en:ai-apps/java-durable-idempotency",
+        "en:ai-apps/java-outbox-delivery",
+        "en:ai-apps/java-recovery-reconciliation",
+        "zh-TW:ai-apps/java-durable-idempotency",
+        "zh-TW:ai-apps/java-outbox-delivery",
+        "zh-TW:ai-apps/java-recovery-reconciliation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "9aa0b497ce86be07e7249c643d9117dd0229c9fa",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "845fa9f18475b77e761806d14565612680ba6fe1",
+      "path": "demos/01-first-llm-call",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-first-llm",
+        "en:ai-apps/java-first-llm",
+        "zh-TW:ai-apps/java-first-llm"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "f691ced0e3a64582411c007a1b19a101e2965055",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "845fa9f18475b77e761806d14565612680ba6fe1",
+      "path": "demos/02-parse-llm-response",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-first-llm",
+        "en:ai-apps/java-first-llm",
+        "zh-TW:ai-apps/java-first-llm"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "021f5589defb6f9958ed98dec90cf8b047792411",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "845fa9f18475b77e761806d14565612680ba6fe1",
+      "path": "demos/03-multi-turn-chat",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-first-llm",
+        "en:ai-apps/java-first-llm",
+        "zh-TW:ai-apps/java-first-llm"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "0275b15ad72497afcfd41d627c909133231e4e16",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "ba75c55c53f6f5e30ac027bbf59f28a8202708d7",
+      "path": "demos/07-grounded-claims",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-grounded-claims",
+        "en:ai-apps/java-grounded-claims",
+        "zh-TW:ai-apps/java-grounded-claims"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "988469fd8fec34d40cdc7ec0c5a5abe696879ae8",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "ba75c55c53f6f5e30ac027bbf59f28a8202708d7",
+      "path": "demos/07-grounded-claims/evidence/20261003",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-grounded-claims",
+        "en:ai-apps/java-grounded-claims",
+        "zh-TW:ai-apps/java-grounded-claims"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "0c21bef0ab2e3732f7ab9d6ae3cff76458e904cf",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba",
+      "path": "demos/12-idempotent-retry",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-idempotent-retry",
+        "en:ai-apps/java-idempotent-retry",
+        "zh-TW:ai-apps/java-idempotent-retry"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "6b1526ac7d95b6d69ed1e25bec27bfbd67ad240e",
+      "checkedAt": "2026-11-11T19:31:52.954Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba",
+      "path": "demos/12-idempotent-retry/evidence",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-idempotent-retry",
+        "en:ai-apps/java-idempotent-retry",
+        "zh-TW:ai-apps/java-idempotent-retry"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "e2020a7bf199cf97c4bea68d533b506ed96c603e",
+      "checkedAt": "2026-11-11T19:31:52.954Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "920fee3717a373dc796269ee3a4a03ec33700ae3",
+      "path": "demos/09-stream-session",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-stream-session-ownership",
+        "en:ai-apps/java-stream-session-ownership",
+        "zh-TW:ai-apps/java-stream-session-ownership"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "c2ee3388ca37b7c2f6bf9ce9d94f5b3845a0abdd",
+      "checkedAt": "2026-11-11T19:31:52.954Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "920fee3717a373dc796269ee3a4a03ec33700ae3",
+      "path": "demos/09-stream-session/evidence/20261004",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-stream-session-ownership",
+        "en:ai-apps/java-stream-session-ownership",
+        "zh-TW:ai-apps/java-stream-session-ownership"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "006bca6a90efb5d3073231004e3cb469769eda38",
+      "checkedAt": "2026-11-11T19:31:52.954Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "1d5a9fad9607ec981094c19a2381475762cd0d23",
+      "path": "REVIEW-FIXES-20261007.md",
+      "kind": "blob",
+      "articles": [
+        "zh-CN:ai-apps/java-stream-session-ownership",
+        "zh-CN:ai-apps/java-streaming-boundary",
+        "zh-CN:ai-apps/java-transport-cancellation",
+        "zh-CN:llm/prefix-cache-admission",
+        "en:ai-apps/java-stream-session-ownership",
+        "en:ai-apps/java-streaming-boundary",
+        "en:ai-apps/java-transport-cancellation",
+        "en:llm/prefix-cache-admission",
+        "zh-TW:ai-apps/java-stream-session-ownership",
+        "zh-TW:ai-apps/java-streaming-boundary",
+        "zh-TW:ai-apps/java-transport-cancellation",
+        "zh-TW:llm/prefix-cache-admission"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "a5bff2026f8ba3e2612838a4b8e23309d3b226d8",
+      "checkedAt": "2026-11-11T19:31:52.954Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "ad2929e2b2b7decdb578d16e4ccafb666496ebfd",
+      "path": "demos/08-streaming-boundary",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-streaming-boundary",
+        "en:ai-apps/java-streaming-boundary",
+        "zh-TW:ai-apps/java-streaming-boundary"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "9aba663b3b38bd51a3d0fc5c945ab1597b6d3d3a",
+      "checkedAt": "2026-11-11T19:32:21.196Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "ad2929e2b2b7decdb578d16e4ccafb666496ebfd",
+      "path": "demos/08-streaming-boundary/evidence/20261003-r2",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-streaming-boundary",
+        "en:ai-apps/java-streaming-boundary",
+        "zh-TW:ai-apps/java-streaming-boundary"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "fbe89febfb82ea9a025021980950234c1a8a6e46",
+      "checkedAt": "2026-11-11T19:32:21.196Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "0f91065aeac1cb1da22a20ec87a2ab2c14b21938",
+      "path": "demos/04-structured-output",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-structured-output",
+        "en:ai-apps/java-structured-output",
+        "zh-TW:ai-apps/java-structured-output"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "40a8e7edfb3b73a17cab451a8cd9f1620e2d82e7",
+      "checkedAt": "2026-11-11T19:32:21.197Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "0f91065aeac1cb1da22a20ec87a2ab2c14b21938",
+      "path": "demos/04-structured-output/contract.schema.json",
+      "kind": "blob",
+      "articles": [
+        "zh-CN:ai-apps/java-structured-output",
+        "en:ai-apps/java-structured-output",
+        "zh-TW:ai-apps/java-structured-output"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "0e680f43e77f7123298ce60142d5eff8f8a784e9",
+      "checkedAt": "2026-11-11T19:32:21.197Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "0f91065aeac1cb1da22a20ec87a2ab2c14b21938",
+      "path": "demos/04-structured-output/evidence/live-20260928/live-1.json",
+      "kind": "blob",
+      "articles": [
+        "zh-CN:ai-apps/java-structured-output",
+        "en:ai-apps/java-structured-output",
+        "zh-TW:ai-apps/java-structured-output"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "b09117960351bfb574be739eb0f3a4a40d214320",
+      "checkedAt": "2026-11-11T19:32:21.197Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "405c25668d9bb9aee0ccb258b258103271314300",
+      "path": "demos/05-transactional-chat",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-transactional-history",
+        "en:ai-apps/java-transactional-history",
+        "zh-TW:ai-apps/java-transactional-history"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "24d447590262a554db46d9183d0cb42045f19c9c",
+      "checkedAt": "2026-11-11T19:32:21.197Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "405c25668d9bb9aee0ccb258b258103271314300",
+      "path": "demos/05-transactional-chat/src/main/java/com/hohoo/ailab/history/Session.java",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-transactional-history",
+        "en:ai-apps/java-transactional-history",
+        "zh-TW:ai-apps/java-transactional-history"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "053ad3efe93b7702321ebc411dacd48404a6ff47",
+      "checkedAt": "2026-11-11T19:32:21.197Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "405c25668d9bb9aee0ccb258b258103271314300",
+      "path": "demos/05-transactional-chat/evidence/20260930-contract.json",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-transactional-history",
+        "en:ai-apps/java-transactional-history",
+        "zh-TW:ai-apps/java-transactional-history"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "45ac6a9510fbacf6c7305aae8d0eb2d9df09f969",
+      "checkedAt": "2026-11-11T19:32:21.197Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "503f5271ef0d5baa12353d6eeda672dec5fc240e",
+      "path": "demos/10-transport-cancellation",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-transport-cancellation",
+        "en:ai-apps/java-transport-cancellation",
+        "zh-TW:ai-apps/java-transport-cancellation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "a5bdf7f0c44ce04adc9939a55172d378ae987bb6",
+      "checkedAt": "2026-11-11T19:32:21.198Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "503f5271ef0d5baa12353d6eeda672dec5fc240e",
+      "path": "demos/10-transport-cancellation/evidence/20261005",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/java-transport-cancellation",
+        "en:ai-apps/java-transport-cancellation",
+        "zh-TW:ai-apps/java-transport-cancellation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "24a844bfb38d0fac1f7d21099daf3a05af0a0515",
+      "checkedAt": "2026-11-11T19:32:21.198Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "405c25668d9bb9aee0ccb258b258103271314300",
+      "path": "experiments/03-typescript-boundary",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/typescript-output-boundary",
+        "en:ai-apps/typescript-output-boundary",
+        "zh-TW:ai-apps/typescript-output-boundary"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "861c8f2d9cd6c5e9a7d00cd7d2f7424a188fb726",
+      "checkedAt": "2026-11-11T19:32:21.197Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "405c25668d9bb9aee0ccb258b258103271314300",
+      "path": "experiments/03-typescript-boundary/evidence/20260930-boundary",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/typescript-output-boundary",
+        "en:ai-apps/typescript-output-boundary",
+        "zh-TW:ai-apps/typescript-output-boundary"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "b6641477c7834a77ecac53fb42b286e4dd3ae9e6",
+      "checkedAt": "2026-11-11T19:32:21.197Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "405c25668d9bb9aee0ccb258b258103271314300",
+      "path": "demos/04-structured-output/src/main/java/com/hohoo/ailab/structured/Classification.java",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:ai-apps/typescript-output-boundary",
+        "en:ai-apps/typescript-output-boundary",
+        "zh-TW:ai-apps/typescript-output-boundary"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "168e62a0e82bef8525ff8df9412b9f492741e307",
+      "checkedAt": "2026-11-11T19:32:21.197Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "2cf78a9afce618ea8ce35a882f0db203b2a74f57",
+      "path": "experiments/vl01_abort_exit",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-abort-exit",
+        "en:embodied-ai/mujoco-abort-exit",
+        "zh-TW:embodied-ai/mujoco-abort-exit",
+        "guide:embodied-ai/mujoco-abort-exit"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "85245beb6d61358e92879c66e65360f5041f2a33",
+      "checkedAt": "2026-11-11T19:32:21.200Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "2cf78a9afce618ea8ce35a882f0db203b2a74f57",
+      "path": "evidence/abort-exit-20261003",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-abort-exit",
+        "en:embodied-ai/mujoco-abort-exit",
+        "zh-TW:embodied-ai/mujoco-abort-exit"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "4366329376415775c29fc29f355db11a18d7d3b8",
+      "checkedAt": "2026-11-11T19:32:21.200Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "cd26180e8560155d18c45d34a33dc9ef25bbcdf6",
+      "path": "experiments/vl01_completion_lifecycle",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-completion-lifecycle",
+        "en:embodied-ai/mujoco-completion-lifecycle",
+        "zh-TW:embodied-ai/mujoco-completion-lifecycle",
+        "guide:embodied-ai/mujoco-completion-lifecycle"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "6b4c9f10524a308c439f805b16ff436c4ff6103e",
+      "checkedAt": "2026-11-11T19:32:21.203Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "cd26180e8560155d18c45d34a33dc9ef25bbcdf6",
+      "path": "evidence/completion-lifecycle-20261003",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-completion-lifecycle",
+        "en:embodied-ai/mujoco-completion-lifecycle",
+        "zh-TW:embodied-ai/mujoco-completion-lifecycle"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "f57f61e877bb5b9653140bd7501985833aeafa55",
+      "checkedAt": "2026-11-11T19:32:21.203Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "907c10a8fb25e1cec242e335b1a52b21b122fdc6",
+      "path": "REVIEW-FIXES-20261007.md",
+      "kind": "blob",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-completion-lifecycle",
+        "zh-CN:embodied-ai/mujoco-qualified-completion",
+        "en:embodied-ai/mujoco-completion-lifecycle",
+        "en:embodied-ai/mujoco-qualified-completion",
+        "zh-TW:embodied-ai/mujoco-completion-lifecycle",
+        "zh-TW:embodied-ai/mujoco-qualified-completion"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "6a176ec10ef75752fbd4206bb8a53c3338a5bde0",
+      "checkedAt": "2026-11-11T19:32:21.205Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1d1faab57e20b352761e9abc736c6d277b505e6b",
+      "path": "experiments/planar_reliability",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-controller-holdout",
+        "zh-CN:embodied-ai/mujoco-mass-transfer",
+        "zh-CN:embodied-ai/mujoco-stale-force",
+        "en:embodied-ai/mujoco-controller-holdout",
+        "en:embodied-ai/mujoco-mass-transfer",
+        "en:embodied-ai/mujoco-stale-force",
+        "zh-TW:embodied-ai/mujoco-controller-holdout",
+        "zh-TW:embodied-ai/mujoco-mass-transfer",
+        "zh-TW:embodied-ai/mujoco-stale-force",
+        "guide:embodied-ai/mujoco-controller-holdout",
+        "guide:embodied-ai/mujoco-stale-force",
+        "guide:embodied-ai/mujoco-mass-transfer"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "7173fbbf3415b7a9754a678ccb7ae260a7a32323",
+      "checkedAt": "2026-11-11T19:31:30.867Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1d1faab57e20b352761e9abc736c6d277b505e6b",
+      "path": "evidence/planar-reliability-20261011",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-controller-holdout",
+        "zh-CN:embodied-ai/mujoco-mass-transfer",
+        "zh-CN:embodied-ai/mujoco-stale-force",
+        "en:embodied-ai/mujoco-controller-holdout",
+        "en:embodied-ai/mujoco-mass-transfer",
+        "en:embodied-ai/mujoco-stale-force",
+        "zh-TW:embodied-ai/mujoco-controller-holdout",
+        "zh-TW:embodied-ai/mujoco-mass-transfer",
+        "zh-TW:embodied-ai/mujoco-stale-force"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "59e72cf2d795ebc51ac485e59a3208f588ed8f41",
+      "checkedAt": "2026-11-11T19:31:30.867Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "831789c2a1efb4564c4cfabc2298e48e16ada879",
+      "path": "experiments/planar_reach",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-delayed-feedback",
+        "zh-CN:embodied-ai/mujoco-obstacle-clearance",
+        "zh-CN:embodied-ai/mujoco-planar-pd",
+        "en:embodied-ai/mujoco-delayed-feedback",
+        "en:embodied-ai/mujoco-obstacle-clearance",
+        "en:embodied-ai/mujoco-planar-pd",
+        "zh-TW:embodied-ai/mujoco-delayed-feedback",
+        "zh-TW:embodied-ai/mujoco-obstacle-clearance",
+        "zh-TW:embodied-ai/mujoco-planar-pd",
+        "guide:embodied-ai/mujoco-planar-pd",
+        "guide:embodied-ai/mujoco-obstacle-clearance",
+        "guide:embodied-ai/mujoco-delayed-feedback"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "dbea122868b75fa21431845f1d080bafbe5344c1",
+      "checkedAt": "2026-11-11T19:32:21.208Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "831789c2a1efb4564c4cfabc2298e48e16ada879",
+      "path": "evidence/planar-reach-20261007",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-delayed-feedback",
+        "zh-CN:embodied-ai/mujoco-obstacle-clearance",
+        "zh-CN:embodied-ai/mujoco-planar-pd",
+        "en:embodied-ai/mujoco-delayed-feedback",
+        "en:embodied-ai/mujoco-obstacle-clearance",
+        "en:embodied-ai/mujoco-planar-pd",
+        "zh-TW:embodied-ai/mujoco-delayed-feedback",
+        "zh-TW:embodied-ai/mujoco-obstacle-clearance",
+        "zh-TW:embodied-ai/mujoco-planar-pd"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "4c0ec23815a828dee08aed8d79d425e0fb7c481a",
+      "checkedAt": "2026-11-11T19:32:21.208Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "497d0df30c1f66de50fb38b930f0c6ea069d9634",
+      "path": "experiments/vl01_exit_release_budget",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-exit-actions",
+        "zh-CN:embodied-ai/mujoco-recovery-budget",
+        "zh-CN:embodied-ai/mujoco-release-verification",
+        "en:embodied-ai/mujoco-exit-actions",
+        "en:embodied-ai/mujoco-recovery-budget",
+        "en:embodied-ai/mujoco-release-verification",
+        "zh-TW:embodied-ai/mujoco-exit-actions",
+        "zh-TW:embodied-ai/mujoco-recovery-budget",
+        "zh-TW:embodied-ai/mujoco-release-verification",
+        "guide:embodied-ai/mujoco-exit-actions",
+        "guide:embodied-ai/mujoco-recovery-budget",
+        "guide:embodied-ai/mujoco-release-verification"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "4e597995fcbe5128b23a9e646ab181164d4ab8ac",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "497d0df30c1f66de50fb38b930f0c6ea069d9634",
+      "path": "evidence/exit-release-budget-20261003",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-exit-actions",
+        "zh-CN:embodied-ai/mujoco-recovery-budget",
+        "zh-CN:embodied-ai/mujoco-release-verification",
+        "en:embodied-ai/mujoco-exit-actions",
+        "en:embodied-ai/mujoco-recovery-budget",
+        "en:embodied-ai/mujoco-release-verification",
+        "zh-TW:embodied-ai/mujoco-exit-actions",
+        "zh-TW:embodied-ai/mujoco-recovery-budget",
+        "zh-TW:embodied-ai/mujoco-release-verification"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "b3b7abe3e0e41dd8bb8526d498f12418e3b4cfbc",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "17144c47a2294f157420946b15f78c49d8d17dd5",
+      "path": "experiments/vl01_pick_place",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-first-pick-place",
+        "en:embodied-ai/mujoco-first-pick-place",
+        "zh-TW:embodied-ai/mujoco-first-pick-place",
+        "guide:embodied-ai/mujoco-first-pick-place"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "adecc5690621d80d4c27774b3aa16625c9a9cb53",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "17144c47a2294f157420946b15f78c49d8d17dd5",
+      "path": "evidence/vl01-20260928-v2",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-first-pick-place",
+        "en:embodied-ai/mujoco-first-pick-place",
+        "zh-TW:embodied-ai/mujoco-first-pick-place"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "f37e2ee239dbc1a4683daabfbfa803ea3434d06c",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "eb186ee4927da99d4ba48e334fabf9442c929507",
+      "path": "experiments/vl01_grasp_guard",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-grasp-guard",
+        "en:embodied-ai/mujoco-grasp-guard",
+        "zh-TW:embodied-ai/mujoco-grasp-guard",
+        "guide:embodied-ai/mujoco-grasp-guard"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "8381ce62e158fe79488654797d3402ad729d3903",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "eb186ee4927da99d4ba48e334fabf9442c929507",
+      "path": "evidence/grasp-guard-20260929",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-grasp-guard",
+        "en:embodied-ai/mujoco-grasp-guard",
+        "zh-TW:embodied-ai/mujoco-grasp-guard"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "ea6911010e5e7b1fcb9ca4ef4f12ad322a81a1ae",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86",
+      "path": "experiments/vl01_observation_freshness",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-observation-freshness",
+        "en:embodied-ai/mujoco-observation-freshness",
+        "zh-TW:embodied-ai/mujoco-observation-freshness",
+        "guide:embodied-ai/mujoco-observation-freshness"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "cdadf3b509ec96d1f72a3846fafd9132fb6f18c5",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86",
+      "path": "evidence/freshness-20260929",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-observation-freshness",
+        "en:embodied-ai/mujoco-observation-freshness",
+        "zh-TW:embodied-ai/mujoco-observation-freshness"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "8edeea1a366c0ea5811f1d41d819ab7881883955",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86",
+      "path": "experiments/vl01_observation_freshness/README.md",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-observation-freshness",
+        "en:embodied-ai/mujoco-observation-freshness",
+        "zh-TW:embodied-ai/mujoco-observation-freshness"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "eb95d0ead7f4300ed03113d89c44638554703f38",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86",
+      "path": "evidence/freshness-20260929/audit.json",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-observation-freshness",
+        "en:embodied-ai/mujoco-observation-freshness",
+        "zh-TW:embodied-ai/mujoco-observation-freshness"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "e1af5f9b01e6b9190d20ed58a68ebcbc42202330",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "43dacf4bbe72e0eecc288c1dc46692f51be2b43e",
+      "path": "experiments/vl01_phase_contracts",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-phase-contracts",
+        "en:embodied-ai/mujoco-phase-contracts",
+        "zh-TW:embodied-ai/mujoco-phase-contracts",
+        "guide:embodied-ai/mujoco-phase-contracts"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "36852784f4837385bfa0f696701a425fbaf1d81a",
+      "checkedAt": "2026-11-11T19:32:42.243Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "43dacf4bbe72e0eecc288c1dc46692f51be2b43e",
+      "path": "evidence/phase-contracts-20261001",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-phase-contracts",
+        "en:embodied-ai/mujoco-phase-contracts",
+        "zh-TW:embodied-ai/mujoco-phase-contracts"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "869b7a148b7af7fbc963840a207ebeae617dc346",
+      "checkedAt": "2026-11-11T19:32:42.243Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "43dacf4bbe72e0eecc288c1dc46692f51be2b43e",
+      "path": "evidence/phase-contracts-20261001/audit.json",
+      "kind": "blob",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-phase-contracts",
+        "en:embodied-ai/mujoco-phase-contracts",
+        "zh-TW:embodied-ai/mujoco-phase-contracts"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "996babed864d9c1c3d5ae9838f9db1592716102a",
+      "checkedAt": "2026-11-11T19:32:42.243Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "43dacf4bbe72e0eecc288c1dc46692f51be2b43e",
+      "path": "experiments/vl01_phase_contracts/README.md",
+      "kind": "blob",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-phase-contracts",
+        "en:embodied-ai/mujoco-phase-contracts",
+        "zh-TW:embodied-ai/mujoco-phase-contracts"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "7a916057e8c307edd61f361a45d7277648ca6d4a",
+      "checkedAt": "2026-11-11T19:32:42.243Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "ad2e33523e8e5580da90ae914e1cccf765c8d1b1",
+      "path": "experiments/vl01_phase_recovery",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-phase-recovery",
+        "en:embodied-ai/mujoco-phase-recovery",
+        "zh-TW:embodied-ai/mujoco-phase-recovery",
+        "guide:embodied-ai/mujoco-phase-recovery"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "fa35180258ce446fc19aba690d7c7cd9d31938d4",
+      "checkedAt": "2026-11-11T19:32:42.244Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "ad2e33523e8e5580da90ae914e1cccf765c8d1b1",
+      "path": "evidence/phase-recovery-20261004",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-phase-recovery",
+        "en:embodied-ai/mujoco-phase-recovery",
+        "zh-TW:embodied-ai/mujoco-phase-recovery"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "bfa6336cf58bdf143a1fcab687e00d0ac92728df",
+      "checkedAt": "2026-11-11T19:32:42.244Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "9800095689ce3893f9e7a6ec681355e76c6fcff6",
+      "path": "experiments/vl01_qualified_completion",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-qualified-completion",
+        "en:embodied-ai/mujoco-qualified-completion",
+        "zh-TW:embodied-ai/mujoco-qualified-completion",
+        "guide:embodied-ai/mujoco-qualified-completion"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "dca22ccf75a5ca3e9d404c06c3ad05b213ace52d",
+      "checkedAt": "2026-11-11T19:32:42.245Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "9800095689ce3893f9e7a6ec681355e76c6fcff6",
+      "path": "evidence/qualified-completion-20261005",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-qualified-completion",
+        "en:embodied-ai/mujoco-qualified-completion",
+        "zh-TW:embodied-ai/mujoco-qualified-completion"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "54a011016f828cc7a8f3c7b75b8eafe67a1f371f",
+      "checkedAt": "2026-11-11T19:32:42.245Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "31166a333a51e9ca580c6c2dff9edcfca1dacb90",
+      "path": "experiments/vl01_recovery_ablation",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-recovery-ablation",
+        "en:embodied-ai/mujoco-recovery-ablation",
+        "zh-TW:embodied-ai/mujoco-recovery-ablation",
+        "guide:embodied-ai/mujoco-recovery-ablation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "0823bac70d2cd2f197738251b1402387ae0e6101",
+      "checkedAt": "2026-11-11T19:32:42.246Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "31166a333a51e9ca580c6c2dff9edcfca1dacb90",
+      "path": "evidence/recovery-ablation-20260930/e6-final",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-recovery-ablation",
+        "en:embodied-ai/mujoco-recovery-ablation",
+        "zh-TW:embodied-ai/mujoco-recovery-ablation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "2ed549fdfc2396ad8dad160209e15bd1809ce6f6",
+      "checkedAt": "2026-11-11T19:32:42.246Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "31166a333a51e9ca580c6c2dff9edcfca1dacb90",
+      "path": "evidence/recovery-ablation-20260930/e6-final/metrics.json",
+      "kind": "blob",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-recovery-ablation",
+        "en:embodied-ai/mujoco-recovery-ablation",
+        "zh-TW:embodied-ai/mujoco-recovery-ablation"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "e1d09c5882c99fedb6e5e7ce7075c0226e407775",
+      "checkedAt": "2026-11-11T19:32:42.246Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "020db41b883221afde673e33ff6f322e004f12ad",
+      "path": "experiments/vl01_recovery_gate",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-recovery-gate",
+        "en:embodied-ai/mujoco-recovery-gate",
+        "zh-TW:embodied-ai/mujoco-recovery-gate",
+        "guide:embodied-ai/mujoco-recovery-gate"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "b59738ec3f98bf135ecc848b752070736c158985",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "020db41b883221afde673e33ff6f322e004f12ad",
+      "path": "evidence/recovery-20260930",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-recovery-gate",
+        "en:embodied-ai/mujoco-recovery-gate",
+        "zh-TW:embodied-ai/mujoco-recovery-gate"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "97284d864afbb0ab2d47f62fd5370824154145db",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "020db41b883221afde673e33ff6f322e004f12ad",
+      "path": "evidence/recovery-20260930/audit.json",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-recovery-gate",
+        "en:embodied-ai/mujoco-recovery-gate",
+        "zh-TW:embodied-ai/mujoco-recovery-gate"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "3e8e4598d33c870b48cd2d98daac808fabaa1886",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "581e8e383b397eff947880d888f5c089204bba98",
+      "path": "experiments/vl01_transfer_monitor",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-transfer-monitor",
+        "en:embodied-ai/mujoco-transfer-monitor",
+        "zh-TW:embodied-ai/mujoco-transfer-monitor",
+        "guide:embodied-ai/mujoco-transfer-monitor"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "f73f1e9b5080439cd7e46ac264a1a7ed541397c2",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "581e8e383b397eff947880d888f5c089204bba98",
+      "path": "evidence/transfer-monitor-20260929",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-transfer-monitor",
+        "en:embodied-ai/mujoco-transfer-monitor",
+        "zh-TW:embodied-ai/mujoco-transfer-monitor"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "c38f5b79e18518e793d3796604687f3834f31a71",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "581e8e383b397eff947880d888f5c089204bba98",
+      "path": "experiments/vl01_transfer_monitor/protocol.json",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-transfer-monitor",
+        "en:embodied-ai/mujoco-transfer-monitor",
+        "zh-TW:embodied-ai/mujoco-transfer-monitor"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "bb3dfc7d2712b2ef16bc81592aa865f4b6f03fbf",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "581e8e383b397eff947880d888f5c089204bba98",
+      "path": "experiments/vl01_transfer_monitor/README.md",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-transfer-monitor",
+        "en:embodied-ai/mujoco-transfer-monitor",
+        "zh-TW:embodied-ai/mujoco-transfer-monitor"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "484d2bd684f9136947de0416ffd4fc9213e5cd91",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f",
+      "path": "experiments/planar_velocity_estimation",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-velocity-estimation",
+        "en:embodied-ai/mujoco-velocity-estimation",
+        "zh-TW:embodied-ai/mujoco-velocity-estimation",
+        "guide:embodied-ai/mujoco-velocity-estimation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "3474f7abdb6deff52e2cb8023045d8d9672de35b",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f",
+      "path": "evidence/planar-velocity-20261009",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:embodied-ai/mujoco-velocity-estimation",
+        "en:embodied-ai/mujoco-velocity-estimation",
+        "zh-TW:embodied-ai/mujoco-velocity-estimation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "4fb1cf229c5d132ad02f9b82d8553ec7926cb146",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "02a2660e22c969e70e3a6f095003614a7dfa448e",
+      "path": "experiments/10-attention-costs",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/cache-cost-profile",
+        "zh-CN:llm/kv-int8-error",
+        "zh-CN:llm/tiled-online-softmax",
+        "en:llm/cache-cost-profile",
+        "en:llm/kv-int8-error",
+        "en:llm/tiled-online-softmax",
+        "zh-TW:llm/cache-cost-profile",
+        "zh-TW:llm/kv-int8-error",
+        "zh-TW:llm/tiled-online-softmax"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "53c066d759913e6731535318c21b04c935dd14ec",
+      "checkedAt": "2026-11-11T19:31:52.952Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "02a2660e22c969e70e3a6f095003614a7dfa448e",
+      "path": "experiments/10-attention-costs/evidence/20261007",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/cache-cost-profile",
+        "zh-CN:llm/kv-int8-error",
+        "zh-CN:llm/tiled-online-softmax",
+        "en:llm/cache-cost-profile",
+        "en:llm/kv-int8-error",
+        "en:llm/tiled-online-softmax",
+        "zh-TW:llm/cache-cost-profile",
+        "zh-TW:llm/kv-int8-error",
+        "zh-TW:llm/tiled-online-softmax"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "e5337d8f935751e3e94f9460525df6460c52a912",
+      "checkedAt": "2026-11-11T19:31:52.952Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "65e4d79528d7c6e57e96e684bc1c4dbc73b61caa",
+      "path": "experiments/05-attention-lab",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/causal-mask-lab",
+        "zh-CN:llm/kv-cache-equivalence",
+        "zh-CN:llm/sliding-cache-positions",
+        "en:llm/causal-mask-lab",
+        "en:llm/kv-cache-equivalence",
+        "en:llm/sliding-cache-positions",
+        "zh-TW:llm/causal-mask-lab",
+        "zh-TW:llm/kv-cache-equivalence",
+        "zh-TW:llm/sliding-cache-positions"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "590025f850d9af5728e579f201587093d7d43c2e",
+      "checkedAt": "2026-11-11T19:31:52.951Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "65e4d79528d7c6e57e96e684bc1c4dbc73b61caa",
+      "path": "experiments/05-attention-lab/evidence/20261003",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/causal-mask-lab",
+        "zh-CN:llm/kv-cache-equivalence",
+        "zh-CN:llm/sliding-cache-positions",
+        "en:llm/causal-mask-lab",
+        "en:llm/kv-cache-equivalence",
+        "en:llm/sliding-cache-positions",
+        "zh-TW:llm/causal-mask-lab",
+        "zh-TW:llm/kv-cache-equivalence",
+        "zh-TW:llm/sliding-cache-positions"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "84f0b05654aebe201e20192a30d5f1309071acf1",
+      "checkedAt": "2026-11-11T19:31:52.951Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "e072718c3cd66d44978612208d393ff0d3eff9e4",
+      "path": "experiments/01-context-position",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/context-position-experiment",
+        "en:llm/context-position-experiment",
+        "zh-TW:llm/context-position-experiment"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "aa4281f2de40a35c5c9112a04ace8570acfc1062",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "e072718c3cd66d44978612208d393ff0d3eff9e4",
+      "path": "experiments/01-context-position/evidence/20260928-l1",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/context-position-experiment",
+        "en:llm/context-position-experiment",
+        "zh-TW:llm/context-position-experiment"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "6a6c979c3cc43d74e4f71d760bd2e884ee979baa",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "dae0b8c50cd786b1bced8686f265f7560430d4f1",
+      "path": "experiments/02-context-position-paced",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/context-position-paired-protocol",
+        "en:llm/context-position-paired-protocol",
+        "zh-TW:llm/context-position-paired-protocol"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "1eb2fdbc827f62f5301819c8fd37f0e062f6567d",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "dae0b8c50cd786b1bced8686f265f7560430d4f1",
+      "path": "experiments/02-context-position-paced/evidence/20260929-l1v2-offline/plan.json",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/context-position-paired-protocol",
+        "en:llm/context-position-paired-protocol",
+        "zh-TW:llm/context-position-paired-protocol"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "58de0476ebaf13e9d2c607bf4fc0d2b683d8b373",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "dae0b8c50cd786b1bced8686f265f7560430d4f1",
+      "path": "experiments/02-context-position-paced/evidence/20260929-l1v2-offline/manifest.json",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/context-position-paired-protocol",
+        "en:llm/context-position-paired-protocol",
+        "zh-TW:llm/context-position-paired-protocol"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "710468624d71d4b476259012199b6d613a2e63e4",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1",
+      "path": "experiments/02-context-position-paced",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/context-position-paired-protocol",
+        "en:llm/context-position-paired-protocol",
+        "zh-TW:llm/context-position-paired-protocol"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "8795f0cd3c4b4a2089c4991f71272ec77858872f",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1",
+      "path": "experiments/02-context-position-paced/evidence/20260930-agnes3-live/audit.json",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/context-position-paired-protocol",
+        "en:llm/context-position-paired-protocol",
+        "zh-TW:llm/context-position-paired-protocol"
+      ],
+      "status": "file-route-redirect",
+      "actualType": "blob",
+      "blobSha": "2d8a0d0e23af326b09d738228f3df366a27aed3a",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1",
+      "path": "experiments/02-context-position-paced/evidence/20260930-agnes3-live",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/context-position-paired-protocol",
+        "en:llm/context-position-paired-protocol",
+        "zh-TW:llm/context-position-paired-protocol"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "c725d750582d95d2d6766668fed538909ca6cc8d",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "987c9f06e3f6db01cc274ea17cfe9a1e2ffe854a",
+      "path": "experiments/04-context-position-similar",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/context-similar-distractors",
+        "en:llm/context-similar-distractors",
+        "zh-TW:llm/context-similar-distractors"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "564316b01c19e0834e4cebb7fc942117c64ff82b",
+      "checkedAt": "2026-11-11T19:33:03.270Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "987c9f06e3f6db01cc274ea17cfe9a1e2ffe854a",
+      "path": "experiments/04-context-position-similar/evidence/20260930-offline-prepared/plan.json",
+      "kind": "blob",
+      "articles": [
+        "zh-CN:llm/context-similar-distractors",
+        "en:llm/context-similar-distractors",
+        "zh-TW:llm/context-similar-distractors"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "c13356de372522a5da42711b3ee5cdd6a17926a4",
+      "checkedAt": "2026-11-11T19:33:03.270Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "987c9f06e3f6db01cc274ea17cfe9a1e2ffe854a",
+      "path": "experiments/04-context-position-similar/VERIFICATION-WINDOWS.md",
+      "kind": "blob",
+      "articles": [
+        "zh-CN:llm/context-similar-distractors",
+        "en:llm/context-similar-distractors",
+        "zh-TW:llm/context-similar-distractors"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "38a52f8c130319b5262c7c9932dc360bcc16554e",
+      "checkedAt": "2026-11-11T19:33:03.270Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "0d4009cf840052c3111bbfc40dce900326daa3ae",
+      "path": "experiments/12-packed-kv",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/kv-block-decode-cost",
+        "zh-CN:llm/kv-packed-groups",
+        "zh-CN:llm/kv-residual-window",
+        "en:llm/kv-block-decode-cost",
+        "en:llm/kv-packed-groups",
+        "en:llm/kv-residual-window",
+        "zh-TW:llm/kv-block-decode-cost",
+        "zh-TW:llm/kv-packed-groups",
+        "zh-TW:llm/kv-residual-window"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "3abcc1d49f41c7e9e2fd2db93e1ad188e42f5c2d",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "0d4009cf840052c3111bbfc40dce900326daa3ae",
+      "path": "experiments/12-packed-kv/evidence",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/kv-block-decode-cost",
+        "zh-CN:llm/kv-packed-groups",
+        "zh-CN:llm/kv-residual-window",
+        "en:llm/kv-block-decode-cost",
+        "en:llm/kv-packed-groups",
+        "en:llm/kv-residual-window",
+        "zh-TW:llm/kv-block-decode-cost",
+        "zh-TW:llm/kv-packed-groups",
+        "zh-TW:llm/kv-residual-window"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "d1736386c9e83b765deda4957b3e71a794f2ec41",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba",
+      "path": "experiments/11-kv-quantization-axes",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/kv-quantization-axes",
+        "en:llm/kv-quantization-axes",
+        "zh-TW:llm/kv-quantization-axes"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "04b67f584bcf1ee96b252f1df2972b8eede7c7ca",
+      "checkedAt": "2026-11-11T19:31:52.954Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba",
+      "path": "experiments/11-kv-quantization-axes/evidence",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/kv-quantization-axes",
+        "en:llm/kv-quantization-axes",
+        "zh-TW:llm/kv-quantization-axes"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "7396a3f5b50a8e9e9088aa49d2b5ae8d81916829",
+      "checkedAt": "2026-11-11T19:31:52.954Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "ad2929e2b2b7decdb578d16e4ccafb666496ebfd",
+      "path": "experiments/07-prefix-reuse",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/longest-prefix-reuse",
+        "en:llm/longest-prefix-reuse",
+        "zh-TW:llm/longest-prefix-reuse"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "edd8f838aa2aeaaf7e7f29dcdaf9f6e1de3bb885",
+      "checkedAt": "2026-11-11T19:32:21.196Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "ad2929e2b2b7decdb578d16e4ccafb666496ebfd",
+      "path": "experiments/07-prefix-reuse/evidence/20261003",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/longest-prefix-reuse",
+        "en:llm/longest-prefix-reuse",
+        "zh-TW:llm/longest-prefix-reuse"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "c8d8aa97f9bb43dda375eff62de6c8693e565247",
+      "checkedAt": "2026-11-11T19:32:21.196Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "503f5271ef0d5baa12353d6eeda672dec5fc240e",
+      "path": "experiments/09-cache-admission",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/prefix-cache-admission",
+        "en:llm/prefix-cache-admission",
+        "zh-TW:llm/prefix-cache-admission"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "ff2f165d60237f87a7f49333ca0b796d4de0d4ae",
+      "checkedAt": "2026-11-11T19:32:21.198Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "503f5271ef0d5baa12353d6eeda672dec5fc240e",
+      "path": "experiments/09-cache-admission/evidence/20261005",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/prefix-cache-admission",
+        "en:llm/prefix-cache-admission",
+        "zh-TW:llm/prefix-cache-admission"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "66b4d69bf79ea545265b96bd3870b145e2a90f11",
+      "checkedAt": "2026-11-11T19:32:21.198Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "920fee3717a373dc796269ee3a4a03ec33700ae3",
+      "path": "experiments/08-cache-budget",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/prefix-cache-byte-budget",
+        "en:llm/prefix-cache-byte-budget",
+        "zh-TW:llm/prefix-cache-byte-budget"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "67efdcf7360cf61a7dcc3cf9ba342aa80c207f8c",
+      "checkedAt": "2026-11-11T19:31:52.954Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "920fee3717a373dc796269ee3a4a03ec33700ae3",
+      "path": "experiments/08-cache-budget/evidence/20261004",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/prefix-cache-byte-budget",
+        "en:llm/prefix-cache-byte-budget",
+        "zh-TW:llm/prefix-cache-byte-budget"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "8386fa3a7b7ca839fb740ad4503b1f6a3370bbc1",
+      "checkedAt": "2026-11-11T19:31:52.954Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "ba75c55c53f6f5e30ac027bbf59f28a8202708d7",
+      "path": "experiments/06-prefix-cache",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/prefix-cache-invalidation",
+        "en:llm/prefix-cache-invalidation",
+        "zh-TW:llm/prefix-cache-invalidation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "94f77ccd72935ba77aa77bc48f6b1c8f15c457b7",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-ai-lab",
+      "commit": "ba75c55c53f6f5e30ac027bbf59f28a8202708d7",
+      "path": "experiments/06-prefix-cache/evidence/20261003",
+      "kind": "tree",
+      "articles": [
+        "zh-CN:llm/prefix-cache-invalidation",
+        "en:llm/prefix-cache-invalidation",
+        "zh-TW:llm/prefix-cache-invalidation"
+      ],
+      "status": "present",
+      "actualType": "tree",
+      "blobSha": "9882e1593e77f5960a14cb4eb1daf5cb46aafec4",
+      "checkedAt": "2026-11-11T19:31:52.953Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "2cf78a9afce618ea8ce35a882f0db203b2a74f57",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-abort-exit"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:21.200Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "2cf78a9afce618ea8ce35a882f0db203b2a74f57",
+      "path": "experiments/vl01_abort_exit/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-abort-exit"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "e93cc95970e489dc1ba86a3af15593651ef36e14",
+      "checkedAt": "2026-11-11T19:32:21.200Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "2cf78a9afce618ea8ce35a882f0db203b2a74f57",
+      "path": "experiments/vl01_abort_exit/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-abort-exit"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "4d8f23895d66cae9636e3c5d1592823d70cba360",
+      "checkedAt": "2026-11-11T19:32:21.200Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "cd26180e8560155d18c45d34a33dc9ef25bbcdf6",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-completion-lifecycle"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:21.203Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "cd26180e8560155d18c45d34a33dc9ef25bbcdf6",
+      "path": "experiments/vl01_completion_lifecycle/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-completion-lifecycle"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "a7d6eee5fc54ec9dcc164043a285742ae2e6baa9",
+      "checkedAt": "2026-11-11T19:32:21.203Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "cd26180e8560155d18c45d34a33dc9ef25bbcdf6",
+      "path": "experiments/vl01_completion_lifecycle/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-completion-lifecycle"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d6910952106a67bb5abcbbeedc5388538472742a",
+      "checkedAt": "2026-11-11T19:32:21.203Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "497d0df30c1f66de50fb38b930f0c6ea069d9634",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-exit-actions",
+        "guide:embodied-ai/mujoco-recovery-budget",
+        "guide:embodied-ai/mujoco-release-verification"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "497d0df30c1f66de50fb38b930f0c6ea069d9634",
+      "path": "experiments/vl01_exit_release_budget/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-exit-actions",
+        "guide:embodied-ai/mujoco-recovery-budget",
+        "guide:embodied-ai/mujoco-release-verification"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "84769cc4362ccb1f5b3c3c2adeff94659f473944",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "497d0df30c1f66de50fb38b930f0c6ea069d9634",
+      "path": "experiments/vl01_exit_release_budget/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-exit-actions",
+        "guide:embodied-ai/mujoco-recovery-budget",
+        "guide:embodied-ai/mujoco-release-verification"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "99843d8de0b5c5dc130db2fae30e07b5c0bcff54",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "17144c47a2294f157420946b15f78c49d8d17dd5",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-first-pick-place"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "17144c47a2294f157420946b15f78c49d8d17dd5",
+      "path": "experiments/vl01_pick_place/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-first-pick-place"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "bcd0b5c8f292d14a07beeed888acf3c5bc74c604",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "17144c47a2294f157420946b15f78c49d8d17dd5",
+      "path": "experiments/vl01_pick_place/analyze.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-first-pick-place"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "af142a60c813b29b4698becca3d4a7c62fe73105",
+      "checkedAt": "2026-11-11T19:32:42.241Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "eb186ee4927da99d4ba48e334fabf9442c929507",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-grasp-guard"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "eb186ee4927da99d4ba48e334fabf9442c929507",
+      "path": "experiments/vl01_grasp_guard/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-grasp-guard"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "b252937f1032c6611bed6b056c778d7bdb811b0e",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "eb186ee4927da99d4ba48e334fabf9442c929507",
+      "path": "experiments/vl01_grasp_guard/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-grasp-guard"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "0a936413c9d12c63dc0253e3b807d93dfde978ab",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-observation-freshness"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86",
+      "path": "experiments/vl01_observation_freshness/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-observation-freshness"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "3f755281b6507c620d9b87487aa37f4b923697fe",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "53cc6cbf3fbb3b734b8c5dddfc7e4f0dbddf3f86",
+      "path": "experiments/vl01_observation_freshness/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-observation-freshness"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "bfde980b548a0ccaa175e650e4b634e223d07beb",
+      "checkedAt": "2026-11-11T19:32:42.242Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "43dacf4bbe72e0eecc288c1dc46692f51be2b43e",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-phase-contracts"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:42.243Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "43dacf4bbe72e0eecc288c1dc46692f51be2b43e",
+      "path": "experiments/vl01_phase_contracts/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-phase-contracts"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "a2792d03ee5368a542eb298734e2781e5e001438",
+      "checkedAt": "2026-11-11T19:32:42.243Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "43dacf4bbe72e0eecc288c1dc46692f51be2b43e",
+      "path": "experiments/vl01_phase_contracts/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-phase-contracts"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "e8ed324e8ff98b02ffb28c7462d26fa87261a96d",
+      "checkedAt": "2026-11-11T19:32:42.243Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "ad2e33523e8e5580da90ae914e1cccf765c8d1b1",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-phase-recovery"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:42.244Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "ad2e33523e8e5580da90ae914e1cccf765c8d1b1",
+      "path": "experiments/vl01_phase_recovery/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-phase-recovery"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "0d3a8ef52f1b14032534cd9e58b1139aa42ef7b5",
+      "checkedAt": "2026-11-11T19:32:42.244Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "ad2e33523e8e5580da90ae914e1cccf765c8d1b1",
+      "path": "experiments/vl01_phase_recovery/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-phase-recovery"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "28cb96507f2b44db0f1633b8dab290ca0991b581",
+      "checkedAt": "2026-11-11T19:32:42.244Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "9800095689ce3893f9e7a6ec681355e76c6fcff6",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-qualified-completion"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:42.245Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "9800095689ce3893f9e7a6ec681355e76c6fcff6",
+      "path": "experiments/vl01_qualified_completion/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-qualified-completion"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "db4ffb3df582e63a008349105e6f584015f6a700",
+      "checkedAt": "2026-11-11T19:32:42.245Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "9800095689ce3893f9e7a6ec681355e76c6fcff6",
+      "path": "experiments/vl01_qualified_completion/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-qualified-completion"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "629c26149ffc3b0fe20faabc13e0412d8b3661c2",
+      "checkedAt": "2026-11-11T19:32:42.245Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "31166a333a51e9ca580c6c2dff9edcfca1dacb90",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-recovery-ablation"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:42.246Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "31166a333a51e9ca580c6c2dff9edcfca1dacb90",
+      "path": "experiments/vl01_recovery_ablation/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-recovery-ablation"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "b0746798ceaf445f693d0463e1486389f16515cf",
+      "checkedAt": "2026-11-11T19:32:42.246Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "31166a333a51e9ca580c6c2dff9edcfca1dacb90",
+      "path": "experiments/vl01_recovery_ablation/portable-audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-recovery-ablation"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "015bbe36bf1432c6eb915c32d1da491146c02fa1",
+      "checkedAt": "2026-11-11T19:32:42.246Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "020db41b883221afde673e33ff6f322e004f12ad",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-recovery-gate"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "020db41b883221afde673e33ff6f322e004f12ad",
+      "path": "experiments/vl01_recovery_gate/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-recovery-gate"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "701cbe75245282e6a635379624112be5b0aa6db9",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "020db41b883221afde673e33ff6f322e004f12ad",
+      "path": "experiments/vl01_recovery_gate/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-recovery-gate"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "63ff87cb088ede5b10d19cce22497d27584de4ec",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "581e8e383b397eff947880d888f5c089204bba98",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-transfer-monitor"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "581e8e383b397eff947880d888f5c089204bba98",
+      "path": "experiments/vl01_transfer_monitor/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-transfer-monitor"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "8c275bea44844c5f8de5ae5d0b310d9b089f6d74",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "581e8e383b397eff947880d888f5c089204bba98",
+      "path": "experiments/vl01_transfer_monitor/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-transfer-monitor"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "a1b4e0db0881a1d46d882b19bd5b7be44b669ec9",
+      "checkedAt": "2026-11-11T19:33:03.266Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "831789c2a1efb4564c4cfabc2298e48e16ada879",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-planar-pd",
+        "guide:embodied-ai/mujoco-obstacle-clearance",
+        "guide:embodied-ai/mujoco-delayed-feedback"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:32:21.208Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "831789c2a1efb4564c4cfabc2298e48e16ada879",
+      "path": "experiments/planar_reach/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-planar-pd",
+        "guide:embodied-ai/mujoco-obstacle-clearance",
+        "guide:embodied-ai/mujoco-delayed-feedback"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "87aaf2fea4acfa8b5b2d95219d58cf32b89f1878",
+      "checkedAt": "2026-11-11T19:32:21.208Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "831789c2a1efb4564c4cfabc2298e48e16ada879",
+      "path": "experiments/planar_reach/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-planar-pd",
+        "guide:embodied-ai/mujoco-obstacle-clearance",
+        "guide:embodied-ai/mujoco-delayed-feedback"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "a43df2be7b6a49d9b75f46a80e2427a765a37456",
+      "checkedAt": "2026-11-11T19:32:21.208Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-velocity-estimation"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f",
+      "path": "experiments/planar_velocity_estimation/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-velocity-estimation"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "e5365d99fed297194cbc047f0e93fdce96e1b8b3",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1c2f0198564c4b8ff7a62d74ae51d7a13e038b1f",
+      "path": "experiments/planar_velocity_estimation/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-velocity-estimation"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "b980406edb2656c97589fac6a9226cb353bc67b0",
+      "checkedAt": "2026-11-11T19:33:03.269Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1d1faab57e20b352761e9abc736c6d277b505e6b",
+      "path": "requirements-lock.txt",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-controller-holdout",
+        "guide:embodied-ai/mujoco-stale-force",
+        "guide:embodied-ai/mujoco-mass-transfer"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "d0dfef0bd7af3e8884037691fe6db4099a896f9e",
+      "checkedAt": "2026-11-11T19:31:30.867Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1d1faab57e20b352761e9abc736c6d277b505e6b",
+      "path": "experiments/planar_reliability/run.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-controller-holdout",
+        "guide:embodied-ai/mujoco-stale-force",
+        "guide:embodied-ai/mujoco-mass-transfer"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "fdb5b63f762b603e42dcdf4ff18af07fbf3f6b02",
+      "checkedAt": "2026-11-11T19:31:30.867Z"
+    },
+    {
+      "repository": "hohoo-embodied-agent",
+      "commit": "1d1faab57e20b352761e9abc736c6d277b505e6b",
+      "path": "experiments/planar_reliability/audit.py",
+      "kind": "blob",
+      "articles": [
+        "guide:embodied-ai/mujoco-controller-holdout",
+        "guide:embodied-ai/mujoco-stale-force",
+        "guide:embodied-ai/mujoco-mass-transfer"
+      ],
+      "status": "present",
+      "actualType": "blob",
+      "blobSha": "5ecdf5dcfe0f1307fdfc734dd0e925faac0779a0",
+      "checkedAt": "2026-11-11T19:31:30.867Z"
+    }
+  ]
+}

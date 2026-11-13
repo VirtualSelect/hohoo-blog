@@ -4,7 +4,7 @@ description: "21 MuJoCo rollouts separate stage-specific grasp checks, stop acti
 slug: /embodied-ai/mujoco-phase-contracts
 status: published
 published_at: "2026-10-01"
-updated: "2026-10-01"
+updated: "2026-11-12"
 reading_minutes: 13
 domain: embodied-ai
 article_kind: case-study
@@ -116,6 +116,20 @@ With forced opening at 6.2 s, `phase-aware` stops at 6.242 s. At the 9.2 s endpo
 
 The gripper holds a low target. When the 240 ms opening fault ends, its held closed-grip target applies again, leaving residual contact. This is not a designed regrasp or evidence that the system rescued the cube. Recorded targets and contacts support this explanation; contact forces and every collision event were not separately analyzed.
 
+**Why can the gripper open and then close while holding a target?** Each 2 ms control step first selects the scheduled or held target, then applies the fault override to the gripper command. Physics advances before the monitor consumes observations and updates the alarm. A new alarm stores the pre-override `target` for holding from the next step; fault injection still applies.
+
+<img src="/media/practice/phase-contract-command-timing.svg" alt="Recorded late-lowering phases and gripper commands: reuse-transfer falsely stops at 6.002 seconds before the fault; phase-aware alarms at 6.242 seconds. Its held closed target differs from the forced-open command, and applies again at 6.440 seconds." width="1050" height="680" loading="lazy" />
+
+The figure redraws the three archived late-lowering runs. Blue denotes lowering, brown holding and green scheduled release. Shading marks their shared forced-open window. Commands are aligned to step start; crosses mark step-end alarm decisions. The separate right column reports placement at 9.2 s, not at alarm time.
+
+- **6.200 s:** the fault forces the applied gripper command to 0, meaning open. The target remains 0.033 m.
+- **6.242 s:** the stage-aware policy alarms and stores the closed target. The next step holds it, but the override remains active: the applied command is still 0.
+- **6.440 s:** injection ends and the held 0.033 m target applies again. No new recovery decision occurs.
+
+The 0/33 mm values in panel B are actuator commands, **not measured finger spacing or contact force**. To change gripper behavior after an alarm, first examine target selection and override priority; a monitoring threshold alone cannot specify it. This command trace does not establish which exit action is safer.
+
+> Teaching supplement, 2026-11-12: AI-assisted checking and redrawing of existing CSVs, events and outcomes. No new simulation; the original 21 runs, pinned commit and acceptance rules remain unchanged.
+
 Meanwhile, `reuse-transfer` stops at 6.002 s—before the 6.2 s fault—because of the height rule. The cube later falls into the tray and passes placement. That earlier stop must not be counted as faster fault detection.
 
 Thus, one policy falsely alarms and passes the endpoint check, while another correctly detects the fault and fails it. Monitoring decisions and exit actions need separate evaluation.
@@ -174,8 +188,25 @@ python experiments/vl01_phase_contracts/plot.py runs/e7-my-run --out runs/e7-my-
 
 `control.csv` records every 2 ms decision step; `states.jsonl` and `trajectory.csv` retain 20 ms physical samples. Inspect `events.json` for stops and `summary.json` for outcomes. The [experiment README](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/43dacf4bbe72e0eecc288c1dc46692f51be2b43e/experiments/vl01_phase_contracts/README.md) includes `E7_EVIDENCE` setup for all tests.
 
+<details>
+<summary>Redraw the command timeline without running MuJoCo</summary>
+
+Run this from the blog repository root using a Python environment with Matplotlib 3.10.6 from the embodied project's `requirements.txt`. Adjust the companion checkout path as needed. That checkout must contain the pinned commit and original archive; downloading this article alone is insufficient.
+
+```powershell
+python scripts/research/plot-phase-contract-timing.py `
+  "../hohoo-embodied-agent" `
+  --out "runs/phase-contract-command-timing.svg"
+```
+
+The script reads the protocol and `raw-sha256.json` from the pinned commit and verifies nine archived files across the three runs. It then plots recorded phases, targets, applied commands, first stops and final outcomes. A mismatch aborts the redraw. For missing files, check the path and version; do not edit fingerprints to bypass validation. It only writes the new figure, leaves the archive unchanged and does not import MuJoCo.
+
+</details>
+
 ## 10. Define what happens after stopping
 
 The next useful step is to specify exit actions after lowering faults, conditions after commanded release, and bounded recovery. Holding, controlled release and retreat may produce different outcomes; freeze their preconditions and compare identical fault times.
+
+Later results are recorded in [exit-action comparisons](/docs/embodied-ai/mujoco-abort-exit) and [windowed release verification](/docs/embodied-ai/mujoco-release-verification). They have their own fixed protocols and archives; their capabilities are not retroactively attributed to this experiment.
 
 This remains a fixed schedule with one clock and privileged simulated observations. There is no vision, ROS2, learned policy, hardware validation or whole-task safety proof. VL01 and the full M4/M5 milestones remain open. The supported lesson is specific: **interpret evidence by stage, and keep separate evidence for the alarm, the action and the endpoint.**

@@ -1,10 +1,10 @@
 ---
 title: Java LLM 实践（二）：HTTP 200 之后，怎样验收模型的 JSON？
-description: 从一次真实的代码围栏响应和三次超时出发，用 Java 8 实现严格结构校验、受限格式适配与可追溯的失败处理。
+description: 从一次真实的代码围栏响应和三次超时出发，用 Java 8 检查字段契约、适配受限格式，并核对原校验器的词法缺口。
 slug: /ai-apps/java-structured-output
 status: published
 published_at: '2026-09-28'
-updated: '2026-09-28'
+updated: 2026-11-13
 reading_minutes: 16
 learning_step: structured-output
 domain: ai-apps
@@ -13,6 +13,10 @@ difficulty: intermediate
 prerequisites: ["doc:ai-apps/java-first-llm"]
 related: ["project:hohoo-ai-lab", "doc:ai-apps/java-first-llm"]
 ---
+
+<span id="published-correction"></span>
+
+> **2026-11-13 修订代码已发布。** [固定版本与运行说明](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/demos/04-structured-output)现可获取。下文“本地分支／尚未发布”的说明保留为2026-11-12复核时的状态；历史固定命令仍用于原实验归档，不能用于查找新修订。使用修订时，在配套仓库根目录执行`git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`，再按对应目录README运行，输出使用新目录。历史结果与AI辅助披露不变。
 
 [打开输出验收台：编辑真实响应，逐层观察拒绝原因 →](#output-validation)
 
@@ -107,7 +111,7 @@ system 消息列出了分类和标签规则，明确要求“只返回一个 JSO
 
 先检查外层的角色、结束原因和正文。如果 `finish_reason=length`，即使眼前的 JSON 看上去完整，本例也选择拒绝，避免把未完整结束的生成当作确定结果。
 
-内层使用 Gson 的 `JsonReader` 逐个检查 token，而不只是把任意响应反序列化成 DTO。下面摘自核心逻辑：
+内层使用 Gson 的 `JsonReader` 逐个检查 token，而不只是把任意响应反序列化成 DTO。下面是**原固定版本**的字段验收片段；`setLenient(false)`仍有词法缺口，不能据此宣称拒绝所有非法 JSON，见本节勘误：
 
 ```java
 JsonReader reader = new JsonReader(new StringReader(text));
@@ -136,6 +140,53 @@ while (reader.hasNext()) {
 ```
 
 不能让后面的值悄悄覆盖前面的值，再假装输入没有问题。完整源码也检查尾随内容：合法对象之后再接一个对象，同样拒绝。
+
+<span id="json-lexical-review"></span>
+
+### 2026-11-12 复核：字段契约不等于合法 JSON
+
+用文章的原固定代码离线解析下面的**非法输入**，会被接受，标签变成`can't`：
+
+```text
+{"category":"llm","tags":["can\'t"]}
+```
+
+普通单引号可以直接放在 JSON 双引号字符串内；非法的是额外加上的`\'`转义。[RFC 8259 第7节](https://www.rfc-editor.org/rfc/rfc8259#section-7)不包含这种写法，而[Gson 2.10.1 的 `readEscapeCharacter`](https://github.com/google/gson/blob/gson-parent-2.10.1/gson/src/main/java/com/google/gson/stream/JsonReader.java#L1567)会处理它，且该分支没有检查`lenient`。因此，解码后的字段和标签都合法，也不能倒推出原文是合法 JSON。
+
+配套工程本地已在`JsonReader`之前补充字符串词法检查：只接受 JSON 规定的转义，Unicode转义需要四个ASCII十六进制数字，拒绝未转义控制字符；之后仍执行原字段、重复键、类型和标签检查。正常的`can't`、`can\u0027t`和合法反斜杠/双引号继续接受，不能用“禁止单引号”代替修复。单一围栏适配后也走同一入口。这项词法修订此前通过41项离线检查，其中6项覆盖此次补充；后续HTTP边界复核见下节。这不是完整JSON Schema实现。
+
+**这份修订尚未提交或发布，本文链接的旧固定提交仍有该缺陷。** 原35项检查及原32组Java/TypeScript对照没有覆盖这个输入，归档成绩保留，不改写成修复后的成绩。四次真实模型请求也没有重跑。复用旧代码时，必须先补齐这层边界，不能仅依赖`setLenient(false)`。
+
+<span id="response-json-review"></span>
+
+### HTTP 200 的正文，可能在解码时已经变了
+
+上面的修订保护内层字符串，外层响应仍要另查。用本机回环HTTP构造响应，把标签`a?b`中的问号字节换成非法UTF-8字节`FF`：旧`ChatClient`没有报错，而是解码成`a�b`，最后仍通过分类契约。它检查的是替换后的字符串，已经不是收到的原始文本。
+
+原因在[Java 8的`String(byte[], Charset)`解码行为](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#String-byte:A-java.nio.charset.Charset-)：坏序列会被替换。当前本地修订改用显式报错的解码器，在构建JSON树之前拒绝坏字节：
+
+```java
+String json = StandardCharsets.UTF_8.newDecoder()
+    .onMalformedInput(CodingErrorAction.REPORT)
+    .onUnmappableCharacter(CodingErrorAction.REPORT)
+    .decode(ByteBuffer.wrap(responseBytes)).toString();
+```
+
+不能用“禁止`�`字符”代替它。合法字符U+FFFD的UTF-8字节是`EF BF BD`，与坏字节`FF`不同；合法的`a�b`在修订前后都应原样接受。
+
+| 回环响应中的输入 | 旧客户端 | 本地修订 |
+| --- | --- | --- |
+| 标签里的坏字节`FF` | 替换后接受 | UTF-8阶段拒绝 |
+| 合法`�`（`EF BF BD`） | 接受 | 保留并接受 |
+| 外层注释、单引号/无引号字段 | 接受 | 外层JSON阶段拒绝 |
+| 同一message重复`content` | 后值覆盖后接受 | 重复字段拒绝 |
+| 外层`TrUe`、`NULL` | 接受 | 词法阶段拒绝 |
+
+这也解释了为什么不能只把`JsonReader`设为false后交给树解析器：[Gson 2.10.1的`JsonParser`会临时启用宽松模式](https://github.com/google/gson/blob/gson-parent-2.10.1/gson/src/main/java/com/google/gson/JsonParser.java#L96)。当前本地新增`JsonInput`，复用已有词法检查，并先用流式读取核对结构、同一对象内解码后的字段名与文档结束，再构建Gson树。旧reader还会识别大小写混合关键字，因此额外核对其原始拼写；不是看到错误后修补成合法值。不同对象可以各有`content`字段。
+
+这是本例客户端的输入边界，不是通用JSON Schema实现：沿用1MB响应上限，新增最多64层对象/数组容器（根容器计一层）；允许开头UTF-8 BOM，依据[RFC 8259第8.1节](https://www.rfc-editor.org/rfc/rfc8259.html#section-8.1)的解析兼容选择。预检后再构树的开销本轮没有测量。正文里的浏览器验收台接收的是已解码字符串，不能用它模拟原始坏字节。
+
+本地工程的60项离线检查通过，包含此前41项与19项新增回环响应检查；中文、合法替换字符、合法数字/布尔值、不同对象同名字段和64层边界保留，65层拒绝。原32组字符串对照仍逐项符合原预期。**修订尚未提交发布，固定链接仍是旧实现**；原35项记录、32组归档和四次真实模型请求不改写。本轮仅连接127.0.0.1，没有访问模型服务，也不据此推断线上提供商的可靠性。
 
 ## 5. 明确适配格式，而不是修补所有坏回答
 

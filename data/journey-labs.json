@@ -99,8 +99,8 @@
           "titleKey": "journey.lab.VL01.phaseArticle"
         },
         {
-          "href": "/docs/embodied-ai/mujoco-exit-actions",
-          "titleKey": "journey.lab.VL01.mujoco-exit-actions"
+          "href": "/docs/embodied-ai/mujoco-abort-exit",
+          "titleKey": "journey.lab.VL01.abortArticle"
         },
         {
           "href": "/docs/embodied-ai/mujoco-recovery-budget",
@@ -111,20 +111,12 @@
           "titleKey": "journey.lab.VL01.mujoco-release-verification"
         },
         {
-          "href": "/docs/embodied-ai/mujoco-completion-lifecycle",
-          "titleKey": "journey.lab.VL01.lifecycleArticle"
-        },
-        {
-          "href": "/docs/embodied-ai/mujoco-abort-exit",
-          "titleKey": "journey.lab.VL01.abortArticle"
+          "href": "/docs/embodied-ai/mujoco-qualified-completion",
+          "titleKey": "journey.lab.VL01.qualifiedCompletionArticle"
         },
         {
           "href": "/docs/embodied-ai/mujoco-phase-recovery",
           "titleKey": "journey.lab.VL01.phaseRecoveryArticle"
-        },
-        {
-          "href": "/docs/embodied-ai/mujoco-qualified-completion",
-          "titleKey": "journey.lab.VL01.qualifiedCompletionArticle"
         }
       ],
       "demos": [

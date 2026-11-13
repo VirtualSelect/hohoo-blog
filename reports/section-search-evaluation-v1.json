@@ -1,0 +1,502 @@
+{
+  "version": 1,
+  "classification": "development-acceptance-not-independent-benchmark",
+  "labels": "AI-authored relevance judgments anchored to source quotations; author review pending. Questions were frozen before the first evaluation run; the retriever had already been developed using other examples.",
+  "snapshot": {
+    "version": 1,
+    "protocolHash": "7e3298f2ad5272b5fd68c8f3036355d30c5120be3ff398a78465c40e2b6f4423",
+    "algorithmHash": "eb0f9402171c934622c73d5bdd7a8c307c7da38700fc52ed47dbfb30a93c315e",
+    "corpusHash": "0b48da5ef8af7d5d96705278fd46fc8cec0cffb9a39e7f68fa5ae27e05dcd06b",
+    "passages": 513,
+    "documentIds": [
+      "blog:a-new-milestone",
+      "blog:local-llm-mac-mini-48g",
+      "doc:ai-apps/java-concurrent-history",
+      "doc:ai-apps/java-context-wire-budget",
+      "doc:ai-apps/java-durable-idempotency",
+      "doc:ai-apps/java-durable-turns",
+      "doc:ai-apps/java-first-llm",
+      "doc:ai-apps/java-grounded-claims",
+      "doc:ai-apps/java-idempotent-retry",
+      "doc:ai-apps/java-outbox-delivery",
+      "doc:ai-apps/java-recovery-reconciliation",
+      "doc:ai-apps/java-retrieval-evidence",
+      "doc:ai-apps/java-retry-deadline",
+      "doc:ai-apps/java-stream-session-ownership",
+      "doc:ai-apps/java-streaming-boundary",
+      "doc:ai-apps/java-structured-output",
+      "doc:ai-apps/java-tool-boundary",
+      "doc:ai-apps/java-transactional-history",
+      "doc:ai-apps/java-transport-cancellation",
+      "doc:ai-apps/radar-publishing-pipeline",
+      "doc:ai-apps/typescript-output-boundary",
+      "doc:embodied-ai/mujoco-abort-exit",
+      "doc:embodied-ai/mujoco-completion-lifecycle",
+      "doc:embodied-ai/mujoco-controller-holdout",
+      "doc:embodied-ai/mujoco-delayed-feedback",
+      "doc:embodied-ai/mujoco-exit-actions",
+      "doc:embodied-ai/mujoco-first-pick-place",
+      "doc:embodied-ai/mujoco-grasp-guard",
+      "doc:embodied-ai/mujoco-mass-transfer",
+      "doc:embodied-ai/mujoco-observation-freshness",
+      "doc:embodied-ai/mujoco-obstacle-clearance",
+      "doc:embodied-ai/mujoco-phase-contracts",
+      "doc:embodied-ai/mujoco-phase-recovery",
+      "doc:embodied-ai/mujoco-planar-pd",
+      "doc:embodied-ai/mujoco-qualified-completion",
+      "doc:embodied-ai/mujoco-recovery-ablation",
+      "doc:embodied-ai/mujoco-recovery-budget",
+      "doc:embodied-ai/mujoco-recovery-gate",
+      "doc:embodied-ai/mujoco-release-verification",
+      "doc:embodied-ai/mujoco-stale-force",
+      "doc:embodied-ai/mujoco-transfer-monitor",
+      "doc:embodied-ai/mujoco-velocity-estimation",
+      "doc:embodied-ai/openvla-action-pipeline",
+      "doc:llm/cache-cost-profile",
+      "doc:llm/causal-mask-lab",
+      "doc:llm/context-position-experiment",
+      "doc:llm/context-position-paired-protocol",
+      "doc:llm/context-similar-distractors",
+      "doc:llm/kv-block-decode-cost",
+      "doc:llm/kv-cache",
+      "doc:llm/kv-cache-equivalence",
+      "doc:llm/kv-int8-error",
+      "doc:llm/kv-packed-groups",
+      "doc:llm/kv-quantization-axes",
+      "doc:llm/kv-residual-window",
+      "doc:llm/longest-prefix-reuse",
+      "doc:llm/prefix-cache-admission",
+      "doc:llm/prefix-cache-byte-budget",
+      "doc:llm/prefix-cache-invalidation",
+      "doc:llm/sliding-cache-positions",
+      "doc:llm/tiled-online-softmax"
+    ]
+  },
+  "topK": 5,
+  "summary": {
+    "answerable": 8,
+    "hitAtK": 8,
+    "noAnswer": 4,
+    "noAnswerWithCandidates": 1
+  },
+  "rows": [
+    {
+      "id": "read-timeout",
+      "query": "读取超时 服务端 费用",
+      "answerable": true,
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-transactional-history#8-在线入口与超时语义",
+          "quote": "读取超时不能证明服务端尚未处理，也不能保证没有产生费用。"
+        }
+      ],
+      "firstRelevantRank": 1,
+      "retrieved": [
+        {
+          "id": "doc:ai-apps/java-transactional-history:c706cf56f6f933f7dc8f",
+          "href": "/docs/ai-apps/java-transactional-history#8-在线入口与超时语义",
+          "heading": "8. 在线入口与超时语义",
+          "text": "Demo也提供 --live，使用 agnes-3.0-flash，从AGNES_API_KEY环境变量读取密钥；本轮没有执行这个入口。 连接超时10s、读取等待90s，响应正文上限256KiB；不打印错误响应正文、不自动重试。读取超时不能证明服务端尚未处理，也不能保证没有产生费用。 按照 Java 8 URLConnection文档，读取超时约束读取等待，并不是整个请求的绝对耗时上限。若要提供用户可依赖的整体deadline，需要另外设计取消与状态处理。",
+          "contentHash": "c169e25c03d7237beba8f87f5327680d2dc1b123d049afc08f814181c817bf66"
+        },
+        {
+          "id": "doc:ai-apps/java-retry-deadline:a52682739cc47aa809dd",
+          "href": "/docs/ai-apps/java-retry-deadline",
+          "heading": "",
+          "text": "固定版本代码 · 原始证据 · 实验档案 给每次请求设五秒超时，再重试三次，并不能得到“最多五秒”。连接、读取和等待都会消耗时间。更危险的是，客户端超时并不能证明服务端没有执行；把所有异常重试可能重复产生答案、费用或副作用。 本篇实现 RetryBudget，用本地 HTTP 服务验证决策。它只对调用方明确认定可安全重试的 GET 操作开放重试，不把这套规则自动套到模型生成 POST。七个条件都有真实连接，但响应文字是固定 fixture，不是模型输出。",
+          "contentHash": "4ec2e7a3e71cd322c76aa0190adc74a1c5b68c7ac7ce58ebf0078282733c7a68"
+        },
+        {
+          "id": "doc:ai-apps/java-first-llm:265e9e69c3b955d73565",
+          "href": "/docs/ai-apps/java-first-llm#中途遇到的-read-timed-out",
+          "heading": "中途遇到的 Read timed out",
+          "text": "这次练习并非每次都顺利。输入 Java 接口问题后，程序曾输出： Demo 02 当时的读取等待上限是 30 秒，后来改成 90 秒，连接等待保持 10 秒。调整后手动重试成功。 两者含义不同：连接超时控制建立连接的等待，读取超时控制读取响应数据时的等待；90 秒不是整个请求的总时限。Java 8 URLConnection 文档说明了这两个设置的语义。 这次成功不能证明上次一定是模型生成慢，也可能与网络或服务端状态有关。超时不代表服务端没有处理请求，因此程序没有自动重试。IDEA 的 Disconnected from the target VM 则是进程退出后的调试连接提示。",
+          "contentHash": "6715bdcde8f5858d681e4ca673320a5f67a1d60f0f05714c7f33d284d07c3554"
+        },
+        {
+          "id": "doc:llm/context-similar-distractors:66ba4419c46a8204eb78",
+          "href": "/docs/llm/context-similar-distractors#8-开始线上实验前还缺什么",
+          "heading": "8. 开始线上实验前还缺什么？",
+          "text": "本篇的128项新协议尚无真实模型运行记录。离线复现不需要密钥；若要执行在线对照，应先核对服务费率、总请求预算和金额上限。 工程要求明确请求预算、已冻结准备目录和服务端进程环境中的密钥；不在博客提供公共调用入口。每次请求完成后至少等20秒，429/401/403立即停止，其他请求或协议失败连续两次停止，不重试。读取超时不等于服务端没有执行；缺失usage保持未知，不能报零费用。 下一步是审定预算后执行冻结计划，保留全部失败与未执行项，再补逐题结果和不确定性。如果需要32次探索档，应另建协议版本并重新冻结材料；不能执行到一半挑选看起来“更有意思”的题目。 这一轮推进的价值是：把“再做难一点”变成可核对的变量、输入、顺序和评分；模型结论要等真实数据，而不是等文章排版完成。",
+          "contentHash": "93f5270ed13b15e80cc5bef5961ea3060a9b63cc414bf3cafb43f1dacc6397a8"
+        },
+        {
+          "id": "doc:llm/context-position-experiment:4b55bb118e48ef58bcb8",
+          "href": "/docs/llm/context-position-experiment#3-请求-评分和预算怎样冻结",
+          "heading": "3. 请求、评分和预算怎样冻结",
+          "text": "本轮配置为 Agnes 的 agnes-2.5-flash、temperature 0、max_tokens 512。请求约为 4298–4301 个 UTF-16 字符，这里统计的是序列化后的请求 JSON，包含提示、字段与材料，绝不是上下文 token 长度。 代码和材料先提交，再发请求。运行清单记录代码版本、JDK 版本及输入 SHA256。完整的 48 项顺序保存在 plan.json，使用固定 seed 20260928 打乱条件顺序。 6 个事实 × 4 个条件 × 2 次重复，共 48 次上限。 连接超时 10 秒，读取超时 90 秒。 接口正常返回后，先检查 assistant 和 finish_reason=stop，再评分正文。 读取超时限制单次阻塞读取，不是整个请求的硬截止时间。temperature 0 也不能保证托管服务每次位级一致。 正文评分前只移除首尾空白，不自动抽取编号或修复回答。HTTP 429、协议异常、网络失败走另一条路径，不会计入模型答错。记录中 transport_error 是较宽泛的程序分类，要结合 errorCode 读；本轮三个错误均为 http_429。",
+          "contentHash": "6f8a1158679abda2c92d3a9d676f1d1b38963cf8e02f2b8bb358c69486299fd4"
+        }
+      ]
+    },
+    {
+      "id": "cancel-io",
+      "query": "Socket.close 阻塞 线程",
+      "answerable": true,
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-transport-cancellation#future-已取消-读取仍然没结束",
+          "quote": "Socket.close() 会使正在该 Socket I/O 操作中阻塞的线程抛出异常"
+        }
+      ],
+      "firstRelevantRank": 1,
+      "retrieved": [
+        {
+          "id": "doc:ai-apps/java-transport-cancellation:75e84dc43113f8aab1b9",
+          "href": "/docs/ai-apps/java-transport-cancellation#future-已取消-读取仍然没结束",
+          "heading": "Future 已取消，读取仍然没结束",
+          "text": "下表测量的是“取消动作开始 → 读取任务 finally 记录时间”，单位毫秒。每格为三次运行的中位数和最小—最大范围。 两幅图的横轴尺度不同，请比较数值，不要比较柱子的视觉长度。这是本机 Java 1.8.0_171 的固定条件测量，不是网络 SLA，也不是所有 Java HTTP 客户端的统一行为。 仅中断的静默组最终收到 SocketTimeoutException；持续发送组反而一直读到了完整回答，之后由 Session 拒绝提交，结果为 STALE_COMPLETE。关闭连接的十二次故障运行都以 SocketException 退出。 Socket.close() 会使正在该 Socket I/O 操作中阻塞的线程抛出异常，这是此处主动唤醒读取的机制。Java 8 Socket 文档",
+          "contentHash": "526a5a68b26b49808a316c5f910985f5043bc9db9a03b89e1903561de9cab3e2"
+        },
+        {
+          "id": "doc:ai-apps/java-transport-cancellation:2fac6450c02eaea52d59",
+          "href": "/docs/ai-apps/java-transport-cancellation#实验如何排除-只是改了一个标志",
+          "heading": "实验如何排除“只是改了一个标志”",
+          "text": "使用 Java 8 的经典阻塞 Socket，服务端绑定 loopback 随机端口。响应为 text/event-stream，通过关闭连接结束 HTTP 响应；没有 TLS、代理、HTTP/2 或 chunked 编码。A6 的 SSE 解析器与 A7 的 Session 原样复用。 五种条件各执行两种策略，每组重复三次，共 30 次真实本地连接。六次正常完成作为控制组，其余 24 次触发取消或截止。 两种策略都会先 session.cancel()，撤销旧请求的归属。差别只有：仅执行 future.cancel(true)，还是再执行 socket.close()。读取空闲超时统一为 500ms。 持续发送条件中的 80ms 是请求的休眠时间，不保证真实发包间隔精确为 80ms。调度、缓冲和运行环境都会影响时间，因此表中使用实际记录，不能用八乘八十替代测量。",
+          "contentHash": "0404018e710b31ae770bbe69bac8e35c7d55555cf0771ca1a2893c61e61676e9"
+        },
+        {
+          "id": "doc:ai-apps/java-streaming-boundary:a1e0f08bc3802e808e62",
+          "href": "/docs/ai-apps/java-streaming-boundary#资源上限也是协议的一部分",
+          "heading": "资源上限也是协议的一部分",
+          "text": "示例限制单行 8,192、单事件 8,192、总输入 65,536、输出 4,096 个 Java UTF-16 字符单元；最多 256 个数据事件，JSON 深度不超过 16。图中预览长度使用 Unicode 码点计数，与 Java 的长度单位不同，emoji 尤其要注意。 字符处理期限为 2 秒，但检查只发生在读取字符之后。因此它不是能中断任意阻塞操作的严格总截止时间；连接与 socket 读取超时仍然分别设置。限长案例覆盖了行和输出上限，不能把这 22 个案例说成所有资源边界的穷尽测试。",
+          "contentHash": "6c9a77cd7e1d6037bf2a0db35415542a206de317a53a577020e89301d4586036"
+        }
+      ]
+    },
+    {
+      "id": "quote-support",
+      "query": "QUOTE_NOT_SUPPORTING 字段 引文",
+      "answerable": true,
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-grounded-claims#3-真实引用仍然会失败的三种方式",
+          "quote": "字段验收返回 QUOTE_NOT_SUPPORTING"
+        }
+      ],
+      "firstRelevantRank": 1,
+      "retrieved": [
+        {
+          "id": "doc:ai-apps/java-grounded-claims:24b988c331b066b9c824",
+          "href": "/docs/ai-apps/java-grounded-claims#3-真实引用仍然会失败的三种方式",
+          "heading": "3. 真实引用仍然会失败的三种方式",
+          "text": "第一种是值不一致。保留上面的引文，只把 value 改成 2000，结果是 VALUE_MISMATCH。原文真实性不能替代声明正确性。 第二种是范围不一致。引用 dev-v2 的 12000，即使值和引文完全相同，也会因为请求查的是 prod 而返回 SCOPE_MISMATCH。旧版 prod-v1 则返回 STALE_REVISION。 第三种是引文与字段无关。将第一条声明的引文改为同一资料中的 retry_enabled=false，引用检查仍然通过，但字段验收返回 QUOTE_NOT_SUPPORTING。 核心代码的顺序如下，完整实现见固定版本仓库： 这里故意使用严格的规范表示 field=value。5s 与 5000 不自动视为相同，也不接受同义改写。对于闭合配置表，这是可解释的取舍；对于普通文章问答，它过于严格，需要另一套有标注的语义支持评估。",
+          "contentHash": "588c2e88efac4ab60f7a220bfaad1527b7121d4a63e8b84aa03943aef9849b7c"
+        },
+        {
+          "id": "doc:ai-apps/java-grounded-claims:464f006d0eb7595e08ea",
+          "href": "/docs/ai-apps/java-grounded-claims#1-把-有依据-拆成可以核对的条件",
+          "heading": "1. 把“有依据”拆成可以核对的条件",
+          "text": "假设应用要查询 payments 服务、prod 环境、v2 修订的两个字段：读取超时和是否重试。教学注册表包含四份原创合成配置： 这些不是任何真实服务的配置。当前修订由受信任的请求指定，不能让候选回答自己选择“哪一版算当前”。默认提供前三份资料；另一个测试专门提供 billing 文档，验证数值相同也不能跨服务借用证据。 一次通过需要同时满足：文档确实提供过、引文确实存在、服务和环境匹配、修订匹配、字段在请求范围内、值一致、引文支持当前字段，且没有遗漏或重复声明。",
+          "contentHash": "014dc33982e986e3db7bf95db7c2ecccd712eaadccae7f812d70f51ee57b7e86"
+        }
+      ]
+    },
+    {
+      "id": "cache-medians",
+      "query": "独立中位数 相加 总时长",
+      "answerable": true,
+      "expected": [
+        {
+          "href": "/docs/llm/cache-cost-profile#本机结果-改好了一部分-但还没有胜过重算",
+          "quote": "不能把各列中位数相加当作总时长中位数"
+        }
+      ],
+      "firstRelevantRank": 1,
+      "retrieved": [
+        {
+          "id": "doc:llm/cache-cost-profile:039e12b50d4853c604ed",
+          "href": "/docs/llm/cache-cost-profile#本机结果-改好了一部分-但还没有胜过重算",
+          "heading": "本机结果：改好了一部分，但还没有胜过重算",
+          "text": "下表各列是该片段独立中位数，单位微秒，不能把各列中位数相加当作总时长中位数。 在这个永远命中的小工作负载里，避免每次计算源码/权重签名明显缩短了查询。但frozen中位数仍比full多20.9微秒。数组较小、调用与分段计算成本仍存在；本轮没有继续分解NumPy内部开销，因此不能给出更细的确定归因。 这也不是上一轮4860次请求结果的“更正”：上一轮含冷启动、工作集和淘汰，本轮故意排除了它们。两者的分母和测量边界不同，不应直接拼成加速图。",
+          "contentHash": "96126e3618029e7a5bf4faab74b5db1ab5140e60e4fe6452abc83e3194202c24"
+        },
+        {
+          "id": "doc:llm/cache-cost-profile:158aa4044521f452a1d6",
+          "href": "/docs/llm/cache-cost-profile#小练习",
+          "heading": "小练习",
+          "text": "从profile.json任选一行，验证各段加residual恰好等于total；再对整列分别求中位数，观察“中位数的和”和“和的中位数”通常不相同。然后增大输入长度，在新目录重新运行；不要预写“长序列一定更快”，先检查当前固定前缀长度是否仍合理。 若不同机器数值变化，先检查NumPy/BLAS版本、线程环境、后台负载与计时范围。若结果不等价，先检查模型身份和绝对位置，不应先讨论速度。下一篇研究不保存完整注意力分数矩阵，换一个内存问题。",
+          "contentHash": "83025e73be3bc091cc7a5a2aa8c5095974afff61358ec57fbb02a9b19fb4eaa8"
+        },
+        {
+          "id": "doc:llm/prefix-cache-admission:9d06e47477fc76babc35",
+          "href": "/docs/llm/prefix-cache-admission#16kib-下-计算量减少-时间没有跟着下降",
+          "heading": "16KiB 下：计算量减少，时间没有跟着下降",
+          "text": "下表均为一条 12 请求轨迹，包含首次冷缓存请求。耗时为 15 条实测轨迹的中位数，括号是最小—最大范围。 三 scope 组是准入变化最有解释力的对照：all 淘汰 20 次，longest 淘汰零次，投影行由 864 降到 432，查询时间中位数也由 10.263ms 降到 6.723ms。但无缓存基线只需 1.697ms，因此不能把相对另一种缓存策略的改善说成相对直接重算的加速。 热点组也没有“只存最长必然更快”：两种缓存策略都命中十一回，最长组的中位数反而略高，范围明显重叠。没有统计显著性分析，也没有对某次更快的运行挑选展示。",
+          "contentHash": "e637a59f44dced706a5a69d8a923bbcf9f620a4bf70e6071c5d0883a9ab15919"
+        },
+        {
+          "id": "doc:llm/kv-block-decode-cost:af02f17f87251d8e97cf",
+          "href": "/docs/llm/kv-block-decode-cost#本机计时-更小的块没有带来更快的执行",
+          "heading": "本机计时：更小的块没有带来更快的执行",
+          "text": "每份输入预热3轮、正式15轮，轮换三种方法的执行顺序，总共810条正式观测。下表为每种长度、每种方法的135条原始耗时中位数，单位微秒： 计时包含反量化、转换、Softmax和乘法，排除预打包、输入生成、磁盘保存和模型投影。本机未绑核，没有多进程隔离或统计显著性检验；重跑会改变具体数字。不能把中位数当作SLA或推广到GPU。 Python循环、重复分配和小矩阵调用都是可能的开销来源，但本轮没有分别剖析它们，不能给每项编一个占比。能确认的结论只有：在这个实现和规模下，分块方案没有取得端到端局部计算加速。",
+          "contentHash": "4fc907844142498bbd89b580bfb70f7d4e44cc2bb4c4272c674bdaa5edbb0d4d"
+        },
+        {
+          "id": "doc:ai-apps/java-transport-cancellation:58e88fc90562e7258336",
+          "href": "/docs/ai-apps/java-transport-cancellation#空闲超时与截止时间也不是一回事",
+          "heading": "空闲超时与截止时间也不是一回事",
+          "text": "500ms 的空闲超时约束一次阻塞读取等待数据的时间。对方持续发送时，任务总时长仍可以继续增加。200ms 截止由独立调度器触发，不依赖下一段数据到达。 不过本 Demo 的计时起点在连接建立并发出请求之后，因此它只覆盖读取阶段，不包括 DNS、建连或写请求。如果要升级为完整请求截止，需要把时间预算传播到这些阶段，并处理取消与连接创建之间的竞态。本篇没有验证这一扩展。",
+          "contentHash": "cd55de4286f27512f4f86dc56a9fe147e0ac452f8afd0b546a0d4bd4bfaad00a"
+        }
+      ]
+    },
+    {
+      "id": "quantized-equivalence",
+      "query": "全量解码 分块 未量化 原始KV",
+      "answerable": true,
+      "expected": [
+        {
+          "href": "/docs/llm/kv-block-decode-cost#先对齐比较对象",
+          "quote": "它们都不等于未量化原始KV"
+        }
+      ],
+      "firstRelevantRank": 1,
+      "retrieved": [
+        {
+          "id": "doc:llm/kv-block-decode-cost:36379f28a227c51e4127",
+          "href": "/docs/llm/kv-block-decode-cost#先对齐比较对象",
+          "heading": "先对齐比较对象",
+          "text": "数值对照使用同一组4-bit、group=32的数据。全量解码和按32 Token分块使用相同分组边界，因此可以比较两种执行方式；它们都不等于未量化原始KV。18份输入的两种输出均通过最大绝对误差小于 1e-10 的冻结阈值。 未量化float32缓存作为另一个速度参考。三条路径都使用float64注意力运算，所以表中的“float32缓存”说的是存储，不是全程float32算术。",
+          "contentHash": "7705df2930cff5dcf006f24a2636da266b2409aec097db090223b53f4c7fa467"
+        },
+        {
+          "id": "doc:llm/kv-block-decode-cost:ca5931aeed7b0711bb5d",
+          "href": "/docs/llm/kv-block-decode-cost",
+          "heading": "",
+          "text": "压缩缓存后，最简单的计算方式是先把整个K/V解码回浮点，再做注意力。这会重新分配大块临时数组。按块解码看上去更节省空间，但它是否也更快？本篇把数值一致、工作区尺寸和实测耗时分开验证。 结果先说清楚：固定协议中，分块输出与同一量化缓存的全量解码结果一致；指定解码数组变小，但本机NumPy路径更慢。这里没有GPU内核，也没有完整模型推理。",
+          "contentHash": "8317f15fd4cc0e3c6f84d5d73c0de5c81f31b3a158562c6775d9ba5082f7e84b"
+        },
+        {
+          "id": "blog:local-llm-mac-mini-48g:95ea35c1b4fff63d1644",
+          "href": "/blog/local-llm-mac-mini-48g#5-接下来可以用哪份已有证据",
+          "heading": "5. 接下来可以用哪份已有证据",
+          "text": "缓存成本拆分展示了怎样区分计算减少与实际计时；分块 KV 解码成本保留了容量、误差和耗时之间的取舍。它们是独立的教学实验，不能替这台 Mac 的实际部署背书。 本文目前能带走的是预算方法：从模型配置算 KV，给未计入的开销留出测量位置，再用失败记录寻找边界。具体量化方案和 64K 稳定性，留待完整运行记录支持。",
+          "contentHash": "1bd38668c8cb7b90389a31cf142e688ca8db55903ab5ee9d839e886bd7196742"
+        },
+        {
+          "id": "doc:llm/kv-quantization-axes:593e3e309cfaf940a9cb",
+          "href": "/docs/llm/kv-quantization-axes#为什么-k-误差与-v-误差不能混着看",
+          "heading": "为什么 K 误差与 V 误差不能混着看",
+          "text": "K 改变“关注谁”，V 改变“拿到什么”。本轮把量化目标拆成 K-only、V-only 和 KV，而不是只展示二者同时变化后的一个数字。注意力使用稳定 Softmax 和 float64 计算；输入与未量化的缓存基准为 float32，不能把不同精度的存储账混在一起。 协议固定种子 7、19、41，长度 64、256，D=32，8 个 Query。每份基础数组再构造三个条件：保持干净；K 的第 0 列乘 40；V 的第 0 行乘 40。相同输入比较三种方案，三个量化目标，共 18 份输入、162 个输出对照。改变条件不重新抽随机数，尽量减少无关差异。",
+          "contentHash": "230daedb0673d264d8da037c3e0b76dd50b1dc38440dd8184714a7f22b39df5b"
+        },
+        {
+          "id": "doc:llm/kv-residual-window:f9b2f83a597f40b602c8",
+          "href": "/docs/llm/kv-residual-window#看误差之前-先看注意力权重总量落在哪里",
+          "heading": "看误差之前，先看注意力权重总量落在哪里",
+          "text": "每份输入先使用未量化参考计算最近窗口获得的注意力权重总和，再观察量化输出误差。下表是六份输入（3种子×2长度）的均值；误差为逐输入相对L2的平均，不能当成回答正确率。 关注近期时，保留16个高精度Token显著降低局部输出误差；继续扩到64只有较小变化。关注早期时，相同内存投入几乎没有改善，因为主要被使用的早期K/V仍然量化着。这不是“窗口越大越好”的论证，而是“空间应保护与当前计算有关的信息”的反例。 表中的注意力权重总量来自未量化参考，是解释工具，不是在线可免费获得的先知指标。不能据此宣布已经实现内容感知的缓存分配器。",
+          "contentHash": "dd3f49914c8fa93927b8853f7fa38527d28719a7c459f8e02d01b5f88035395f"
+        }
+      ]
+    },
+    {
+      "id": "placement-process",
+      "query": "最终放置 过程 重力 托盘",
+      "answerable": true,
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-phase-contracts#5-方块进了托盘-为什么仍不能说过程正确",
+          "quote": "方块仍因重力落进了下方托盘"
+        }
+      ],
+      "firstRelevantRank": 1,
+      "retrieved": [
+        {
+          "id": "doc:embodied-ai/mujoco-phase-contracts:945a68d06d6832853998",
+          "href": "/docs/embodied-ai/mujoco-phase-contracts#5-方块进了托盘-为什么仍不能说过程正确",
+          "heading": "5. 方块进了托盘，为什么仍不能说过程正确？",
+          "text": "早下降松爪条件中，三种策略的最终放置都通过。但仅搬运策略完全没有监测下降，不曾报警；另外两种策略在5.642s检出接触异常，随后保持目标，方块仍因重力落进了下方托盘。 若只汇总“成功次数”，这三种明显不同的过程会被记成一样。最终放置验收只能回答：末尾0.5s是否在目标范围、静止、没有手指接触，而且此前曾抬升；它没有要求方块必须以计划动作落地，也没有衡量碰撞冲击。 这不是应该偷偷调整验收规则、让结果更漂亮的理由。原规则和原结果都保留，再把缺失的过程要求写出来，才知道下一轮要验证什么。",
+          "contentHash": "925d826e08e5f9cb82419e7ac31608fa97b84b0ebbe357d2f3c25391d2f91e14"
+        },
+        {
+          "id": "doc:embodied-ai/mujoco-phase-contracts:d0ae7084ff0207b0e4e8",
+          "href": "/docs/embodied-ai/mujoco-phase-contracts#8-完整矩阵-不要只看最后一列",
+          "heading": "8. 完整矩阵：不要只看最后一列",
+          "text": "单元格分别记录“首次停止 / 最终放置”。“不停止”表示没有报警，不等于已验证过程安全。 两个下降松爪条件中，分阶段策略从首个故障后采样到停止均为40ms。本矩阵没有证明增加监测提高了放置成功率；它暴露的是旧监测范围的空缺、机械复制判据的误报，以及保持动作的不足。",
+          "contentHash": "d2aa861df6c8ff1b9dc5ee7ab0f08d906902815de359a1047b45ba81c1600734"
+        },
+        {
+          "id": "doc:embodied-ai/mujoco-completion-lifecycle:e072246f294ee3af3ba8",
+          "href": "/docs/embodied-ai/mujoco-completion-lifecycle",
+          "heading": "",
+          "text": "固定版本代码 · 原始记录与审计 · 实验档案 上一轮释放验收有一个很具体的反例：物体先在托盘目标区域稳定了足够久，程序报告完成；随后外力把它推离合格区域，最终放置失败，但已经锁存的完成标志仍然为真。 这个标志没有记录错历史。错误在于上层把“曾经通过验收”当成“现在仍然可用”。本篇将两者拆开：completed_at 保留第一次完成事件，state 根据持续观测更新。新增七条真实 MuJoCo 轨迹，直接检查推力、静默、旧包重送和单帧错误报告。",
+          "contentHash": "8d530e77e1591eed08ac3d6a3d76f0633a984097e31444c91839f29a5041f038"
+        },
+        {
+          "id": "doc:embodied-ai/mujoco-release-verification:820580d1521f967b0047",
+          "href": "/docs/embodied-ai/mujoco-release-verification#4-持续窗口挡住了什么-又没挡住什么",
+          "heading": "4. 持续窗口挡住了什么，又没挡住什么",
+          "text": "在伪造观测对照中，手指实际保持闭合，但6.602s的单份报告被改成：位于托盘中心、速度0、只接触托盘底。这是明确注入的错误测量，不是说现实传感器必然产生这种噪声。原始物理状态另外保存，便于核对真假。 单帧判据立即接受；持续窗口在下一份真实的不合格观测到来后被打断，未报告完成。这只支持它对本次孤立错误报告的容忍能力，不能推断它能抵御持续错误或有系统偏差的传感器。 外力对照则完全不同：方块先真的稳定放好，两种判据都正确报告了当时的状态。随后8.0–8.08s施加沿X方向1N外力，最终状态不再满足放置要求。不能倒过来称早先的报告必定是假阳性；它暴露的是锁存事件和持续保证之间的范围差别。",
+          "contentHash": "5b3062462fa4abde2b203367777a4d1484cc64a58a0cc35ebb2921bd8a659521"
+        },
+        {
+          "id": "doc:embodied-ai/mujoco-exit-actions:6b8c61470a35e724c022",
+          "href": "/docs/embodied-ai/mujoco-exit-actions#6-复现与原始过程",
+          "heading": "6. 复现与原始过程",
+          "text": "运行命令会执行E8–E10完整32回合。每回合保存压缩的2ms控制记录、20ms状态快照与摘要。环境为Python3.12.14、MuJoCo3.3.7、NumPy2.2.6。审计核对控制目标、采样投影、状态坐标、接触与最终验收；没有独立重算接触力。 下一篇将“发出松爪命令”与“已经完成放置”分开，给释放后的观察建立判据。",
+          "contentHash": "de6d9d367ff241f7fe211677c68ef1b1f8647b313ac3f6c4af37e597a713997e"
+        }
+      ]
+    },
+    {
+      "id": "pd-dynamics",
+      "query": "P项 速度 动量 D项",
+      "answerable": true,
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-planar-pd#从误差到力-中间隔着动力学",
+          "quote": "靠近目标意味着力变小，却不意味着速度已经为零"
+        }
+      ],
+      "firstRelevantRank": 1,
+      "retrieved": [
+        {
+          "id": "doc:embodied-ai/mujoco-planar-pd:aa3d05966f8818031b28",
+          "href": "/docs/embodied-ai/mujoco-planar-pd#从误差到力-中间隔着动力学",
+          "heading": "从误差到力，中间隔着动力学",
+          "text": "本轮控制律为 F = Kp × (目标位置−观测位置) − Kd × 观测速度。Kp=80固定，Kd比较0、18、36；质量比较1kg和2kg。每轴力限制±5N，物理步长2ms，控制每20ms更新一次，运行4秒。 只有P项时，靠近目标意味着力变小，却不意味着速度已经为零。穿过目标后才产生反向力，可能已经积累了很大动量。D项根据速度提前“刹车”；过大的D也可能让响应变慢。质量变化则改变同样力下的加速度。 经典连续线性模型中，临界阻尼与2√(质量×Kp)相关。但本例还有限幅和离散采样，不应直接把这个公式当成所有条件的最优参数。本篇只比较三个冻结值，不做自动调参。",
+          "contentHash": "c93cfb68ad523ccf521ef9a5313c5c6d580ca912ad905d22743d6e1659c5e2d8"
+        },
+        {
+          "id": "doc:embodied-ai/openvla-action-pipeline:e63f982a0778b64845c7",
+          "href": "/docs/embodied-ai/openvla-action-pipeline#3-图像不会先被翻译成一段自然语言",
+          "heading": "3. 图像不会先被翻译成一段自然语言",
+          "text": "在 模型实现 的多模态路径中，图像经过视觉骨干和投影后，以嵌入的形式接在首个文本 Token 之后。注意力遮罩也相应扩展。它不需要先写出“桌上有一个杯子”再把这句话交给另一个模型。 用形状理解这个接口更直接：设文本有 N 个位置，图像产生 P 个 patch 嵌入，语言隐藏宽度为 D，那么拼接后的输入长度是 N + P，宽度仍为 D。这里 N、P、D 是符号，不是假设某个检查点的真实数值。 如果投影输出宽度不等于 D，拼接就不成立；如果遮罩仍是 N 个位置，注意力输入也不一致。图像进入模型是一份张量契约，不只是一个图片上传控件。",
+          "contentHash": "b04d6c89c6e10a967e81790458b33eb2e763f8b39529ea1cb2bb85948bf65d23"
+        },
+        {
+          "id": "doc:embodied-ai/mujoco-delayed-feedback:ab9daf924e7cfeb2c46d",
+          "href": "/docs/embodied-ai/mujoco-delayed-feedback#两种估计器",
+          "heading": "两种估计器",
+          "text": "hold直接使用最后到达的位置，直到下个包出现。predict使用： 两种策略的D项都使用旧速度。predict没有更新速度、没有加速度模型，也没有Kalman滤波。控制力在变化时，常速度近似本来就会偏离真实运动；延迟还会让速度反馈滞后。",
+          "contentHash": "6f79d371bb6f62d02812464a378d4adaea4eba33eea8c16a8b881c89968c8c08"
+        },
+        {
+          "id": "doc:embodied-ai/mujoco-stale-force:6141050eb9aa7ff47b2c",
+          "href": "/docs/embodied-ai/mujoco-stale-force#短暂丢包和永久失联-结论不同",
+          "heading": "短暂丢包和永久失联，结论不同",
+          "text": "下表为三个种子的最后300ms位置RMS均值，单位毫米，不是成功率： 正常组结果完全相同，因为样本年龄没有跨过阈值。短暂丢包后，重新获得观测，尾段位置误差又变小；但表格只描述尾段，不应掩盖中间路径。 永久失联时，hold继续推着系统走远；zero停止施力后仍按已有动量滑行；fade改变了力的撤出过程，也没有制动保证。本轮全部27回合都未满足“位置和速度逐步同时达标”的完整契约，包含位置误差看上去很小的正常组。不能把任何一列称作安全赢家。",
+          "contentHash": "3a005acb39804f4d1c69a1c892733bf2e5d2df9ca613eb8196b4707de63db0e9"
+        }
+      ]
+    },
+    {
+      "id": "citation-truth",
+      "query": "精确子串 引用 语义验证",
+      "answerable": true,
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-retrieval-evidence#5-引用存在-只完成第一层检查",
+          "quote": "不能把字符串校验当作语义验证"
+        }
+      ],
+      "firstRelevantRank": 1,
+      "retrieved": [
+        {
+          "id": "doc:ai-apps/java-retrieval-evidence:fa6047ea30f656ee1545",
+          "href": "/docs/ai-apps/java-retrieval-evidence#5-引用存在-只完成第一层检查",
+          "heading": "5. 引用存在，只完成第一层检查",
+          "text": "本例要求文档ID存在于已装配集合中，且引用文字是非空的精确子串。伪造ID、伪造句子、引用被预算省略的文档都被拒绝。 但它不会理解引用是否支持答案。例如“读取超时不证明服务器未执行”确实在文档里，模型却回答“超时表示服务器一定没执行”；即使引用文本是真实的，答案依旧相反。下一步需要独立的蕴含/事实一致性验收，不能把字符串校验当作语义验证。 语料也可能包含命令式文本。检索模块只把它作为资料输出，不给它工具权限。后续接入模型时，应在请求中清楚分隔系统指令与引用资料。",
+          "contentHash": "841c976de296d19faf717e74d3397017f24a9254d517a336fb20e80a26a32064"
+        },
+        {
+          "id": "doc:ai-apps/java-grounded-claims:24b988c331b066b9c824",
+          "href": "/docs/ai-apps/java-grounded-claims#3-真实引用仍然会失败的三种方式",
+          "heading": "3. 真实引用仍然会失败的三种方式",
+          "text": "第一种是值不一致。保留上面的引文，只把 value 改成 2000，结果是 VALUE_MISMATCH。原文真实性不能替代声明正确性。 第二种是范围不一致。引用 dev-v2 的 12000，即使值和引文完全相同，也会因为请求查的是 prod 而返回 SCOPE_MISMATCH。旧版 prod-v1 则返回 STALE_REVISION。 第三种是引文与字段无关。将第一条声明的引文改为同一资料中的 retry_enabled=false，引用检查仍然通过，但字段验收返回 QUOTE_NOT_SUPPORTING。 核心代码的顺序如下，完整实现见固定版本仓库： 这里故意使用严格的规范表示 field=value。5s 与 5000 不自动视为相同，也不接受同义改写。对于闭合配置表，这是可解释的取舍；对于普通文章问答，它过于严格，需要另一套有标注的语义支持评估。",
+          "contentHash": "588c2e88efac4ab60f7a220bfaad1527b7121d4a63e8b84aa03943aef9849b7c"
+        },
+        {
+          "id": "doc:ai-apps/java-retrieval-evidence:ced72a087501a0af41ce",
+          "href": "/docs/ai-apps/java-retrieval-evidence#6-复现-审计与后续实验",
+          "heading": "6. 复现、审计与后续实验",
+          "text": "Java Suite的10项检索边界检查，加上Python独立重算全部14题分数与排序，构成这次验收。原始文件保留每题查询、gold、命中文档、分数和top1/top3结果，不能只展示总分。 下一轮值得测试的是：固定同一问题集，加入明确版本的中文分词或语义检索，再比较候选召回变化；之后才在获批预算内接入同一生成模型，检查引用支持与回答正确性。当前不把这两项未做的工作写成成果。",
+          "contentHash": "3fa96c2aa0d36f2770e176809a32516ff547172b1cb777550ae63bbbf3ead3b3"
+        },
+        {
+          "id": "doc:llm/prefix-cache-invalidation:cf1e1d426c81d7f2c963",
+          "href": "/docs/llm/prefix-cache-invalidation#2-命中-未命中分别做什么",
+          "heading": "2. 命中、未命中分别做什么",
+          "text": "remember 从仓库自己的输入计算缓存，调用者不能直接塞入一份任意 K/V。容量固定为两个条目，按插入顺序淘汰；这是 FIFO，不宣称 LRU。 继续生成时先验证 Token 类型，再查键。这个顺序很重要：若先转整数再判断，浮点 ID 可能意外与整数 ID 共享键。 未命中不是异常，而是重新计算完整输入，再取后缀表示。这个版本要求整个前缀精确匹配，不查最长公共前缀，也没有分页缓存、磁盘持久化或跨进程共享。",
+          "contentHash": "c60b7f4f917b090229c80ec7cf2ef18477d2b51ae5e5e2963d63dc504dd2b560"
+        },
+        {
+          "id": "doc:ai-apps/typescript-output-boundary:8c8a68e697599c662217",
+          "href": "/docs/ai-apps/typescript-output-boundary#8-为什么运行-ts仍要单独typecheck",
+          "heading": "8. 为什么运行.ts仍要单独typecheck？",
+          "text": "Node可以执行本例中可擦除的类型语法，但直接执行不等于类型检查。Node官方文档明确区分这两件事。 编译期检查用 @ts-expect-error 验证unknown不能直接当作Classification使用；运行期37项测试检查输入边界、冻结结果、围栏适配与语义边界。任何一项都不能替代另外一项。",
+          "contentHash": "31baaedd5868a7b65f6fb49d4c503c9103870410a4eeaf581fade6951a98d469"
+        }
+      ]
+    },
+    {
+      "id": "absent-animal",
+      "query": "南极帝企鹅平均身高",
+      "answerable": false,
+      "expected": [],
+      "firstRelevantRank": null,
+      "retrieved": []
+    },
+    {
+      "id": "absent-refund",
+      "query": "缓存 退款到账渠道",
+      "answerable": false,
+      "expected": [],
+      "firstRelevantRank": null,
+      "retrieved": []
+    },
+    {
+      "id": "absent-guarantee",
+      "query": "缓存 保证成功",
+      "answerable": false,
+      "expected": [],
+      "firstRelevantRank": null,
+      "retrieved": [
+        {
+          "id": "doc:ai-apps/java-concurrent-history:e100c68c37241c0e8026",
+          "href": "/docs/ai-apps/java-concurrent-history",
+          "heading": "",
+          "text": "固定版本代码 · 原始记录与审计 · 实验档案 上一版事务式历史把一次问答看成一个整体：响应验证成功才提交，失败时不留下半轮消息。但它的 ask 方法带着 synchronized 等待整个请求。同一个会话因此按顺序工作，代价是慢请求会挡住后来的操作。 如果为了响应速度，把网络调用移到锁外，会出现一个新的问题：回答生成时使用的历史，提交时可能已经过时。 本篇实现这个边界，代码不调用在线模型；响应由受控本地线程提供，验证的是会话并发行为。",
+          "contentHash": "3c9f2d7f2d2616560af55dc33521b98a072065a016ca499fa9e7c28ebcb07e87"
+        },
+        {
+          "id": "doc:llm/sliding-cache-positions:7f2cf21f592c52392a15",
+          "href": "/docs/llm/sliding-cache-positions#5-三个索引不要挤成一个变量",
+          "heading": "5. 三个索引不要挤成一个变量",
+          "text": "工程上分别保留：已处理Token数量、每个缓存条目的绝对位置、当前数组槽位。序列长度可能增长，缓存长度保持上限，这不是矛盾。 单元测试覆盖窗口1、4和不裁剪，输入长度1、2、8、17，三种种子与分块输入，共36种组合。错误的窗口值、非法Token与全屏蔽查询会被拒绝。测试通过只约束这个简化实现；不保证其他架构具有相同性质。",
+          "contentHash": "03b55234fb4ca4e422c55ce2730b4c84bdc6825b7b2837c553f8c15e91b3cc51"
+        },
+        {
+          "id": "doc:llm/prefix-cache-admission:9f56ae81fbb0b804d459",
+          "href": "/docs/llm/prefix-cache-admission",
+          "heading": "",
+          "text": "固定版本代码 · 原始记录与审计 · 实验档案 上一轮发现，8KiB 缓存遇到两个轮流访问的前缀，会发生零命中的反复淘汰。自然的下一步是少存一些检查点，把容量留给真正有用的前缀。 这次同时测量计算量和耗时。结果并不等于“缓存优化成功”：准入策略改善了某些访问轨迹，但在这个小型 NumPy 模型上，缓存查询仍然比直接重算慢。",
+          "contentHash": "31184f297ea059be0d64f7d8002bf84024db12efd5384de157f9b83b40cf137d"
+        },
+        {
+          "id": "doc:embodied-ai/mujoco-release-verification:983f08b6633f1ded8e4e",
+          "href": "/docs/embodied-ai/mujoco-release-verification#5-成功应该是事件-还是持续状态",
+          "heading": "5. 成功应该是事件，还是持续状态？",
+          "text": "如果任务只负责把物体放下，完成事件可以交接给下一阶段。如果任务还要保证物体在等待期间不被碰走，那么验收之后仍应监测，必要时撤销当前状态或发出新事件。 一个实用的接口可以分别保留 completedAt、currentlyValid与 invalidatedAt。本篇只实现前者，后两者仍是下一步，不在界面上伪装成已有安全功能。 也不要把连续合格窗口看成统计置信度。相邻采样高度相关，13个间隔不是13个独立证明。",
+          "contentHash": "331d5f499f7d89cbc491cc022f114eb49998accf992af96e4b64b525a07dad9c"
+        },
+        {
+          "id": "doc:ai-apps/java-transactional-history:a01bd6582842a5e31067",
+          "href": "/docs/ai-apps/java-transactional-history#3-哪些结果可以提交",
+          "heading": "3. 哪些结果可以提交？",
+          "text": "本例是普通文本聊天，不处理tool_calls。因此没有把工具调用结束状态当作完整助手回答。未来增加Tool Calling时，应定义工具循环的提交边界，而不是简单扩大“成功状态”名单。 stop只满足本例的完整性约定，不保证回答事实正确。语义判断仍然是另一项工作。",
+          "contentHash": "ced839c5b37aa97c254e6f8269d1f1d201da4346305b056b6245a8b4fc83e608"
+        }
+      ]
+    },
+    {
+      "id": "absent-contact",
+      "query": "作者私人电话号码",
+      "answerable": false,
+      "expected": [],
+      "firstRelevantRank": null,
+      "retrieved": []
+    }
+  ]
+}

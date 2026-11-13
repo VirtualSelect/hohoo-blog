@@ -4,13 +4,17 @@ description: "Assertions, unknown and raw JSON: 22 false accepts, four object-va
 slug: /ai-apps/typescript-output-boundary
 status: published
 published_at: "2026-09-30"
-updated: "2026-09-30"
+updated: 2026-11-13
 reading_minutes: 11
 domain: ai-apps
 article_kind: case-study
 difficulty: intermediate
 related: ["doc:ai-apps/java-structured-output", "doc:ai-apps/java-transactional-history", "lab:typescript-output-boundary", "project:hohoo-ai-lab"]
 ---
+
+<span id="published-correction"></span>
+
+> **Correction published · 2026-11-13.** [Pinned source and run instructions](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/demos/04-structured-output) are now available. Statements below about a local branch or unpublished code describe the 2026-11-12 review snapshot. Historical checkout commands still reproduce the original archive, not this correction. From the companion repository root, run `git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`, then follow the linked directory README and use a new output directory. Historical results and AI-assistance disclosures are unchanged.
 
 [The Java structured-output article](/docs/ai-apps/java-structured-output) checks a response after HTTP 200. TypeScript does not remove that boundary.
 
@@ -89,6 +93,10 @@ Six cases should pass; 26 should fail. They are constructed counterexamples, not
 The object-only misses are duplicate category, escaped duplicate category, duplicate tags field and an oversized but otherwise valid object. Raw text length, like duplicate-key evidence, is unavailable at that entry.
 
 The raw TypeScript and Java decisions agree on 32/32 fixtures. This is a bounded differential check, not proof for every JSON input, and certainly not a model error rate.
+
+**An offline review on 2026-11-12 found a difference outside those fixtures.** `{"category":"llm","tags":["can\'t"]}` contains the invalid `\'` escape. The pinned Java validator accepts it as `can't`; this article's raw TypeScript entry rejects it. Plain apostrophes need no escape: valid `can't` and `can\u0027t` remain accepted by both. Duplicate keys require separate raw-text checks, beyond a successful `JSON.parse`.
+
+The historical 32-case table remains unchanged, but Java is not a complete reference for JSON lexical validity. [The original tutorial's correction](/docs/ai-apps/java-structured-output#json-lexical-review) explains the cause and local revision, which is not yet committed or published. No original fixtures, archived decisions or captured responses were changed, and no model was called.
 
 ## 7. Replaying a real historical response
 

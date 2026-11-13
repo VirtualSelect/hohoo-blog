@@ -129,7 +129,7 @@ fresh, _ = model.full(tokens)
 
 第一次读缓存可先看 [容量与机制](/docs/llm/kv-cache)，再顺序检查 [等价性](/docs/llm/kv-cache-equivalence) → [失效](/docs/llm/prefix-cache-invalidation) → [最长前缀](/docs/llm/longest-prefix-reuse) → [字节预算](/docs/llm/prefix-cache-byte-budget)。这些是已完成的离线数值实验。
 
-另一条研究支线是 [24 次 Agnes 3.0 真实调用](/docs/llm/context-position-paired-protocol)。之后的 [128 项相似干扰方案](/docs/llm/context-similar-distractors)只有离线准备，没有新的真实模型结果，不能混入本篇数值实验的分母。
+另一条研究支线是 [24 次 Agnes 3.0 真实调用](/docs/llm/context-position-paired-protocol)。之后的 [128 项相似干扰方案](/learning?track=llm#plans-llm)只有离线准备，没有新的真实模型结果，不能混入本篇数值实验的分母。
 
 在新的目录中准备 Python 3.12 环境（下列为 PowerShell）：
 

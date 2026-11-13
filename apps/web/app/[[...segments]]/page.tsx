@@ -155,6 +155,7 @@ export default async function Page({ params }: RouteProps) {
         ),
         items,
         searchUrl: data.searchUrl,
+        sectionSearchUrl: data.sectionSearchUrl,
         radarArchive: ["radar", "radar/weekly"].includes(route)
           ? data.radarArchive
           : null,

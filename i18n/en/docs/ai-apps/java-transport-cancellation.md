@@ -1,16 +1,20 @@
 ---
 title: "Java LLM practice (10): why is the reader still running after cancellation?"
-description: "30 local HTTP connections separate conversation invalidation, reader exit and server work, comparing Future interruption with socket closure."
+description: "30 local HTTP connections separate conversation invalidation, reader exit and server work; a local supplement connects per-turn socket ownership to a complete-turn journal."
 slug: "/ai-apps/java-transport-cancellation"
 status: "published"
 published_at: "2026-10-05"
-updated: "2026-10-07"
-reading_minutes: 11
+updated: 2026-11-13
+reading_minutes: 16
 domain: "ai-apps"
 article_kind: "case-study"
 difficulty: "intermediate"
 related: ["lab:transport-cancellation", "project:hohoo-ai-lab", "doc:ai-apps/java-stream-session-ownership", "doc:ai-apps/java-streaming-boundary"]
 ---
+
+<span id="published-correction"></span>
+
+> **Correction published · 2026-11-13.** [Pinned source and run instructions](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/demos/15-cancellable-turn-flow) are now available. Statements below about a local branch or unpublished code describe the 2026-11-12 review snapshot. Historical checkout commands still reproduce the original archive, not this correction. From the companion repository root, run `git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`, then follow the linked directory README and use a new output directory. Historical results and AI-assistance disclosures are unchanged.
 
 [Pinned code](https://github.com/VirtualSelect/hohoo-ai-lab/tree/503f5271ef0d5baa12353d6eeda672dec5fc240e/demos/10-transport-cancellation) · [Raw evidence and audit](https://github.com/VirtualSelect/hohoo-ai-lab/tree/503f5271ef0d5baa12353d6eeda672dec5fc240e/demos/10-transport-cancellation/evidence/20261005) · [Experiment record](/labs/transport-cancellation)
 
@@ -120,3 +124,65 @@ This is a classic Socket teaching experiment. SDK connection pools, concurrent r
 2026-10-07 correction: Demo08–10 now validate JSON lexical spelling; each passes 53 offline checks. Maven argument lists preserve output paths containing spaces, and Demo10 audits source fingerprints. The article’s pinned revision and original data remain unchanged; these fixes are not new online model results.
 
 [Fixed code and regression commands](https://github.com/VirtualSelect/hohoo-ai-lab/blob/1d5a9fad9607ec981094c19a2381475762cd0d23/REVIEW-FIXES-20261007.md).
+
+## Connecting cancellation to durable turns
+
+**Local supplement · 2026-11-12.** This is an AI-assisted integration reference that was run locally; the author has not independently reproduced it. Replies are fixed SSE fixtures, with no model calls. The original 30 measurements, pinned revision and evidence above remain unchanged. The new code is on a local companion-repository branch and has no published pinned revision yet.
+
+The [whole-turn supplement](/docs/ai-apps/java-durable-turns#composing-one-complete-turn) connects request projection, one send and a complete-turn journal, but only reads the cancellation flag at checkpoints. A reader waiting for the next SSE fragment cannot reach the next check. The turn can therefore lose permission to commit while its connection and worker remain occupied.
+
+The missing piece is **resource ownership and handoff**, not another history store. The worker remains the sole owner and writer of `TurnJournal`; the existing `TurnFlow` commit checks remain in place. Demo 10's separate `Session` history is not layered on top. The adapter reuses the [reader with the JSON lexical correction](https://github.com/VirtualSelect/hohoo-ai-lab/blob/7fb37e8cdc7420c41fa474867b1fb268e97564e9/demos/10-transport-cancellation/src/main/java/com/hohoo/ailab/stream/StreamReader.java), separately from the original experiment revision above.
+
+### One turn owns its own connection
+
+Suppose A has finished and B is reading. A delayed “stop A” callback that closes a global `currentSocket` could close B instead. Reusing a resettable cancellation flag has the same ownership problem: A's callback still holds it.
+
+Each turn therefore gets a fresh `CancellationLease`, containing a flag that is never reset and its single connection. Cancellation first revokes commit eligibility, detaches the owned resource, then closes it outside the monitor. This is an excerpt from the actual class, not a standalone compilable program:
+
+```java
+public void cancel() throws IOException {
+    // Revoke eligibility even if close fails or registration arrives later.
+    cancelled.set(true);
+    Closeable closing;
+    synchronized (this) { closing = owned; owned = null; }
+    if (closing != null) closing.close();
+}
+```
+
+Registration checks the flag too. If cancellation happens first, registration immediately closes the late Socket. If registration wins, cancellation detaches and closes it. Registration and detachment share a monitor; actual close happens outside it, so I/O does not hold the handoff lock.
+
+The adapter registers the Socket before `socket.connect(...)`, making a created but unconnected resource visible to cancellation. Normal completion releases the same resource; A's old lease never contains B's Socket. The [Java 8 `Socket.close()` contract](https://docs.oracle.com/javase/8/docs/api/java/net/Socket.html#close--) specifies `SocketException` for blocked I/O on the closed socket. This addresses a local wait, not acknowledgment of remote task completion.
+
+### Read the control before reading “passed”
+
+The local server emits `fixture:` and waits at a continuation gate. In `flag-only`, the cancellation flag alone is set. At the end of a 100ms observation window, the worker has not signaled exit. Explicit cleanup then closes the connection, and the worker exits before the server is released. In `close-reading`, cancellation through the lease after the first fragment likewise confirms exit before server release.
+
+The exit signal comes from the worker's own `finally`; a subsequent `join` checks actual termination. `Future.isDone()` is not a substitute. The 100ms window is a fixed control observation, not a response-time target or cancellation-latency distribution.
+
+| Handoff / case | Requests received by server | New complete turns | What this run establishes |
+| --- | ---: | ---: | --- |
+| Normal completion | 1 | 1 | Commit after complete SSE validation |
+| Cancel before start, before registration, or after registration but before connect (one case each) | 0 each | 0 each | No send; any created resource ends closed |
+| Flag only: `flag-only` | 1 | 0 | Still blocked at observation; explicit close precedes exit before gate release |
+| Close during read: `close-reading` | 1 | 0 | Exit and commit rejection are checked separately |
+| Reply complete, cancelled before commit check: `before-commit` | 1 | 0 | A complete candidate cannot bypass the commit check |
+| A committed; cancel old A lease while B reads | 2 | 2 | The old handle does not revoke B's resource or eligibility |
+
+Each of the eight cases seeds one history turn. Of 11 final stored records, eight are seeds and three are new commits; 11 is not a success count. The table counts actual received requests and newly committed turns, excluding prior history.
+
+Once the server's gate is released, it still executes the remaining fixed work step, recording two steps per request in total. A terminated reader does not establish stopped remote computation, much less stopped billing.
+
+### Running the local supplement
+
+First obtain `demos/15-cancellable-turn-flow` from the companion repository's local `codex/bounded-turn-flow-20261112` branch. Neither the original pinned revision nor the reader-correction revision above contains this new directory; those revisions still reproduce their own versions. Run from the companion repository root, replacing Java and Gson paths with local paths:
+
+```sh
+python demos/15-cancellable-turn-flow/run.py --java-home /path/to/jdk8 --gson /path/to/gson-2.10.1.jar --out demos/15-cancellable-turn-flow/out/my-run
+python demos/15-cancellable-turn-flow/audit.py demos/15-cancellable-turn-flow/out/my-run --verify-sources
+```
+
+The output directory must not exist. Using existing Java 8, Python 3 and Gson 2.10.1, the runner first repeats the reader's 53 lexical checks, then runs eight cases. It installs nothing and reads no model credentials. Independent checks reconcile `results.json`, actual requests, complete journal frames and source fingerprints.
+
+Predict this first: **why should cancellation after a complete reply still leave the journal unchanged?** Compare `before-commit`'s `completeCandidate=true` with its seed-only journal. Then inspect `flag-only`: `workerExitedAtControlObservation=false` and `workerExitedBeforeServerRelease=true` describe different stages, so they do not conflict.
+
+`SocketFixtureReplyClient` accepts only loopback, narrow HTTP/1.1 close framing and SSE. TLS, authentication, chunked responses, blocked writes, real blocked connects and connection pools are untested. Connect/read timeouts are not a strict total deadline. Cancellation after the final check can still race with persistence and cannot undo committed records. Choose the actual client and commit semantics before testing those protocols; this narrow adapter is not ready for public endpoints.

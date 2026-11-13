@@ -1,5 +1,44 @@
 [
   {
+    "id": "8761a0722a1fefc412c1",
+    "title": "Artificial Analysis 评测 Gemini 4 Hydrogen：智能指数 54，接近 Sonnet 5.5 且成本约其 32%",
+    "url": "https://aihot.news/items/ajvxvhu8bh001pourbhhjl0ir",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-12T18:07:16.000Z",
+    "collectedAt": "2026-11-12T18:33:50.237Z",
+    "category": "ai-apps",
+    "summary": "Artificial Analysis 评测 Google 新发布的 Gemini 4 Hydrogen：新增 xhigh 推理档在 Intelligence Index 得 54 分，比 Claude Sonnet 5.5 (max) 和 GPT-6.1 Sol (max) 低 1 分，每任务成本约为 Sonnet 的 32%，但约为 GPT-6.1…",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/ArtificialAnlys/status/2120941511223185722",
+    "feedContentStatus": "full",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d302eb04",
+    "coverage": [],
+    "feedContent": {
+      "format": "aihot-rss-text-v1",
+      "language": "zh-CN",
+      "capturedAt": "2026-11-12T18:33:50.237Z",
+      "paragraphs": [
+        "Google 的新 Gemini 4 Hydrogen 智能水平略低于 Claude Sonnet 5.5 和 GPT-6.1 Sol，成本为 Sonnet 的三分之一，但约为 GPT-6.1 Sol 的 2.5 倍",
+        "@GoogleDeepMind 在六周内发布了他们的第三款新模型。Gemini 4 Hydrogen 引入了 xhigh 推理级别，在 Artificial Analysis 智能指数上得分 54，在视觉推理和抗幻觉方面表现突出。这使其落后 Claude Sonnet 5.5（max）和 GPT-6.1 Sol（max）1 分，成本约为 Sonnet 的 32%，但约为 GPT-6.1 Sol 的 2.5 倍。在 high 推理下，Gemini 4 Hydrogen 的智能水平与 Gemini 4 Argon 相当，而每任务成本约为其 19%",
+        "要点：",
+        "新的 xhigh 推理级别在智能指数上得分 54：xhigh 是 Gemini 模型上首个高于 high 的推理级别，使 Hydrogen 落后 Claude Sonnet 5.5（max）和 GPT-6.1 Sol（max）1 分，领先 Gemini 4 Argon（high）4 分。在默认（high）推理下，Gemini 4 Hydrogen 得分 51，略低于 GPT-6.1 Sol（xhigh，52）和 Claude Opus 5.5（high，52）",
+        "视觉推理、演示和抗幻觉能力强：在 GDP.pdf 这一长文档视觉推理基准上，它在 medium 推理下全通过率达到 33%，为该基准并列第一。在 AA-Omniscience 上，Hydrogen 的幻觉率为 8%，是有记录以来最低之一，而 Claude Sonnet 5.5（max）为 43%，GPT-6.1 Sol（max）为 52%。在 AA-Briefcase 这一智能体知识工作评估中，评分者认为 Hydrogen 的演示优于其他 Gemini 模型，包括 Carbon",
+        "在智能体终端任务上较弱：Hydrogen 在 Terminal-Bench 4.0 上得分 54%，在 Terminal-Bench-Science 0.1 上得分 50%，这两项涵盖终端中的智能体编程和科研工作流。Claude Sonnet 5.5（max）得分 64% 和 53%，GPT-6.1 Sol（max）得分 56% 和 58%。xhigh 推理对科学任务有帮助，将 Terminal-Bench-Science 从 high 下的 41% 提升至 50%，但对 Terminal-Bench 4.0 没有影响（两者均为 54%）。科学得分在各领域间较为均衡，从地球科学的 46% 到物理科学的 53%",
+        "相对其智能水平成本较低，但 xhigh 下 token 用量高：Hydrogen 定价为每百万输入/输出 token 1.50/7.50 美元。在 xhigh 下，其每任务成本约为 Claude Sonnet 5.5（max）的 32%，智能水平接近，但约为 GPT-6.1 Sol（max）的 2.5 倍。与 high 相比，xhigh 的输出 token 几乎翻倍，换来智能提升 3 分，每任务成本从 xhigh 的 3.16 美元降至 high 的 1.87 美元。medium（0.80 美元）和 low（0.29 美元）成本更低，但智能指数得分分别为 41 和 27",
+        "在每任务时间与智能的帕累托前沿上：Gemini 4 Hydrogen 的输出速度约为每秒 200 个输出 token。在 high、medium 和 low 推理强度下，Gemini 4 Hydrogen 位于每任务时间与智能的帕累托前沿上，意味着没有模型同时具备更高智能和更低每任务时间",
+        "关键模型细节：",
+        "上下文窗口：100 万 token",
+        "多模态：文本、图像、视频和语音输入，文本输出",
+        "推理强度：Gemini 4 Hydrogen 提供四个推理级别（low、medium、high 和 xhigh），其中 xhigh 为本次发布新增",
+        "定价：每 100 万输入/输出 token 1.50/7.50 美元。缓存输入 token 享受 95% 折扣（0.075 美元）",
+        "祝贺 @GoogleDeepMind 团队发布！",
+        "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/ajvxvhu8bh001pourbhhjl0ir"
+      ]
+    }
+  },
+  {
     "id": "452f89f2c8c66ec63c1a",
     "title": "OpenRouter 实测六模型并给出四层防护，解决 AI Agent 无限循环烧钱问题",
     "url": "https://aihot.news/items/vq9nwgwhtm31cgoliyb7ydyde",

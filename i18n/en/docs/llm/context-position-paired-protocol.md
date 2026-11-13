@@ -4,192 +4,37 @@ description: A Java 8 paired-block protocol with 24 live Agnes 3.0 requests, ind
 slug: /llm/context-position-paired-protocol
 status: published
 published_at: '2026-09-29'
-updated: "2026-09-30"
-reading_minutes: 16
+updated: "2026-11-12"
+reading_minutes: 9
 domain: llm
 article_kind: case-study
 difficulty: intermediate
-related: ["doc:llm/context-position-experiment", "doc:llm/kv-cache", "project:hohoo-ai-lab", "lab:context-position"]
+related: ["doc:llm/kv-cache", "project:hohoo-ai-lab", "lab:context-position"]
 ---
 
-The [first context-position trial](/docs/llm/context-position-experiment) planned 48 requests but attempted 29, ending with three HTTP 429 responses. Its 26 normal responses met expectations, yet conditions had unequal numbers of observations.
+Why cannot 26 expected answers establish that context position has no effect? The original run stopped early, leaving different missing conditions. On 2026-09-30, a newly frozen Agnes 3.0 protocol completed 24 real requests: six complete blocks, 18 correct identifiers with an answer present, and six UNKNOWN responses when absent. **These materials did not distinguish a position effect; they do not establish universal position independence.**
 
-Simply waiting and running it again would not resolve the design problem. This article asks: **how can the experiment enforce a budget, stop appropriately, and identify which observations can actually be compared?**
+AI-assisted documentation. Actual calls and limitations remain intact. The interrupted earlier run is summarized below; its evidence is neither rewritten nor pooled with this run.
 
-The initial September 29 release provided Java code with 80 passing offline assertions and a frozen 24-job plan. **The September 30 update adds 24 live Agnes 3.0 requests forming six complete blocks. Sections 1–8 preserve the original preparation; section 9 records the separately frozen model run. Historical materials remain unchanged.**
+## What makes the comparison paired
 
-[Code and reproduction](https://github.com/VirtualSelect/hohoo-ai-lab/tree/dae0b8c50cd786b1bced8686f265f7560430d4f1/experiments/02-context-position-paced) · [Full request plan](https://github.com/VirtualSelect/hohoo-ai-lab/tree/dae0b8c50cd786b1bced8686f265f7560430d4f1/experiments/02-context-position-paced/evidence/20260929-l1v2-offline/plan.json) · [Validation manifest](https://github.com/VirtualSelect/hohoo-ai-lab/tree/dae0b8c50cd786b1bced8686f265f7560430d4f1/experiments/02-context-position-paced/evidence/20260929-l1v2-offline/manifest.json)
+Each block fixes one fictional project and one material length, changing only the target line's beginning/middle/end position or absence. Three projects × two lengths (60/240 distractor lines) × four conditions yield 24 requests. Four protocol-usable responses form a complete block; wrong answers must still be scored.
 
-## 1. Why can rate limiting compromise a comparison?
+The three answer-present versions contain identical line lists in different orders. The target identifier occurs once; the absent version contains neither the target project nor identifier. Other lines also contain identifiers. The question follows the material, so position and distance from the question remain coupled; this experiment does not isolate internal attention mechanisms.
 
-A position comparison should keep the question, evidence and scoring fixed. If successful beginning-position requests happen to contain easier cases than successful middle-position requests, comparing their raw accuracy mixes position with case difficulty.
+## Record pacing, failures and scoring separately
 
-The first trial shuffled all jobs globally. Early termination left authentic records, but not necessarily all conditions for the same case.
+The actual model is agnes-3.0-flash with temperature=0 and max_tokens=1024. Wait at least 20 seconds after each completed request; do not retry. Stop immediately on 429/401/403, or after two consecutive other request/protocol failures. Unexecuted requests, unusable responses and wrong answers are distinct outcomes.
 
-Randomization remains useful for distributing time effects. It does not eliminate the need to handle missing observations. The new design groups four conditions for one case and one length into a consecutive block:
+Block lengths alternate and starting conditions rotate, without a fully balanced ordering. Scoring trims outer whitespace only, then compares the identifier or UNKNOWN exactly. These are fixed teaching questions, not sampled user tasks.
 
-```text
-same case + same material length
-    beginning → middle → end → absent
-    four usable responses form a complete comparison block
-```
-
-“Usable” means the request and response protocol can be evaluated, **not that the answer is correct**. Wrong answers, abstentions and formatting errors must stay in the scores.
-
-## 2. Freeze the new protocol
-
-The table below describes the September 29 preparation. The September 30 live run uses the separately frozen L1v2-agnes3, version 3, with agnes-3.0-flash. The remaining comparison design is unchanged; see section 9.
-
-| Item        | Setting                                                                           |
-| ----------- | --------------------------------------------------------------------------------- |
-| Facts       | Three fictional projects with explicit handoff codes                              |
-| Distractors | 60 / 240 lines using four fixed archive templates                                 |
-| Conditions  | beginning / middle / end / absent                                                 |
-| Budget      | 3 × 2 × 4 = 24 requests; no retries                                               |
-| Model       | agnes-2.5-flash                                                                   |
-| Parameters  | temperature=0; max_tokens=1024                                                    |
-| Pacing      | At least 20 s after the previous attempt finishes                                 |
-| Stop        | Immediately on 429/401/403; after two consecutive other request/protocol failures |
-| Scoring     | Trim outer whitespace; exact code or UNKNOWN comparison                           |
-
-Materials, sample count, ordering, output budget and pacing changed. Old and new observations therefore **must not be pooled as one homogeneous larger experiment**. Each protocol and evidence directory remains separate.
-
-Twenty-four is a ceiling, not a target that overrides stopping rules. Unsent jobs remain unsent.
-
-## 3. Longer material needs leakage checks first
-
-Positive conditions contain the same N+1 lines, moving only the target fact:
-
-| Condition | Zero-based target index |             N=60 |            N=240 |
-| --------- | ----------------------: | ---------------: | ---------------: |
-| beginning |                       0 |                0 |                0 |
-| middle    |                     N/2 |               30 |              120 |
-| end       |                       N |               60 |              240 |
-| absent    |          No target fact | Missing evidence | Missing evidence |
-
-Four distractor templates contain other project names and codes such as NX-4000. The target must not be the only code in the document.
-
-Offline checks compare sorted **line lists**, not sets: a set could conceal changed duplicate counts. They verify a single occurrence of the answer at the intended index, and no target project name or code in the absent material.
-
-The question always follows the records. Moving the fact also changes its distance from the question; this design does not isolate attention or another internal mechanism.
-
-Four times as many distractor lines is not exactly four times as many tokens. Serialized requests contain 3,689–13,912 UTF-16 characters, including JSON and instructions. These are character counts, not token measurements. Returned usage, if available during a real run, follows the provider's accounting.
-
-## 4. Block ordering: benefits and remaining bias
-
-The six frozen blocks are:
-
-| Block | Case | Distractor lines | Order                             |
-| ----- | ---- | ---------------: | --------------------------------- |
-| 1     | F1   |               60 | beginning / middle / end / absent |
-| 2     | F2   |              240 | middle / end / absent / beginning |
-| 3     | F3   |               60 | end / absent / beginning / middle |
-| 4     | F1   |              240 | absent / beginning / middle / end |
-| 5     | F2   |               60 | beginning / middle / end / absent |
-| 6     | F3   |              240 | middle / end / absent / beginning |
-
-Lengths alternate and starting conditions rotate. Six blocks cannot perfectly balance four orders, so temporal and ordering effects remain.
-
-If request 7 fails and triggers termination, block 1 may be complete while block 2 is incomplete. All records remain available, but incomplete fragments cannot be used to pad another group's denominator.
-
-Restricting comparisons to complete blocks can itself introduce selection bias. A report must therefore show **all attempts, failures, unsent jobs, complete blocks and incomplete blocks**, not only its analysis subset.
-
-## 5. A 20-second pause is not a provider guarantee
-
-The runner waits between attempts:
-
-```java
-for (JsonElement el : jobs) {
-    if (index > 0) sleeper.pause(number("minPauseMs"));
-    // Record request identity, then call transport.send(...)
-    // Save the response or failure and evaluate stopping rules
-}
-```
-
-The delay begins after the previous attempt has been processed and saved. An 8-second generation therefore puts request starts at least roughly 28 seconds apart, rather than launching on a fixed 20-second clock.
-
-HTTP 429 means too many requests and may include Retry-After. It does not identify whether the underlying limit concerns requests, tokens, concurrency or something else. See [RFC 6585, section 4](https://www.rfc-editor.org/rfc/rfc6585#section-4).
-
-The local delay is **not a verified Agnes quota and does not guarantee that 429 disappears**. This trial stops immediately on 429. A syntactically valid Retry-After duration or HTTP date is recorded, but does not trigger an automatic retry.
-
-401/403 also stop immediately. Other request/protocol failures stop after two consecutive occurrences. Connect timeout is 10 s and read timeout 90 s; the read timeout is not a total request deadline and does not prove that the server did no work.
-
-## 6. Test the runner separately from the model
-
-The implementation exposes two small interfaces:
-
-```java
-interface Transport {
-    JsonObject send(JsonObject request, String key) throws IOException;
-}
-interface Sleeper {
-    void pause(long millis) throws InterruptedException;
-}
-```
-
-Production uses HTTP and Thread.sleep. Tests substitute a fake transport and sleeper while exercising the same execute loop, without network calls or real delays.
-
-| Injected condition           | Verified runner behavior                                       |
-| ---------------------------- | -------------------------------------------------------------- |
-| First response is 429        | One attempt, no subsequent wait or request                     |
-| First response is 401 or 403 | One attempt, status retained, stop                             |
-| Consecutive 500 responses    | Two attempts with one intervening pause, then stop             |
-| 24 usable responses          | 24 attempts and 23 pauses, within budget                       |
-| Simulated UNKNOWN output     | Abstention when evidence exists; correct abstention for absent |
-
-The 80 passing assertions validate these paths and material constraints. A fake UNKNOWN response is not an Agnes response, and those simulated outputs cannot measure model performance. Temporary test files are removed; the public preparation directory contains no attempt response files.
-
-Scoring remains strict: wrong valid codes are incorrect, explanatory prose is format_error, and UNKNOWN on positive evidence is abstention. HTTP and protocol failures are separate. A 1024-token output cap does not guarantee 1024 tokens of visible final text.
-
-## 7. Export, audit, then call
-
-From experiments/02-context-position-paced, using JDK 8 and Maven:
-
-```powershell
-mvn -q compile
-mvn -q exec:java "-Dexec.args=--self-test"
-mvn -q exec:java "-Dexec.args=--dry-run"
-mvn -q exec:java "-Dexec.args=--prepare evidence/my-preparation"
-node audit.mjs evidence/my-preparation --prepared
-```
-
-These commands send no model requests. The output directory must be new.
-
-| File          | Inspectable evidence                                   |
-| ------------- | ------------------------------------------------------ |
-| protocol.json | Model, budget, lengths, pacing and stopping rules      |
-| cases.json    | Fictional facts and expected codes                     |
-| plan.json     | Full messages and exact job order                      |
-| manifest.json | Source commit, hashes, JDK version and assertion count |
-
-The recorded preparation used Java 1.8.0_171 and source commit ee081ef. The independent Node auditor verified all 24 unique case/length/condition combinations and material constraints.
-
-For a live run, configure AGNES_API_KEY in the local process environment and choose **another new directory**:
-
-```powershell
-mvn -q exec:java "-Dexec.args=--run evidence/my-live-run"
-node audit.mjs evidence/my-live-run
-```
-
-Only --run sends requests, up to 24. The program does not read IDE configuration, print credentials or preserve reasoning_content. Preparation files must not be presented as live response records.
-
-## 8. What would justify the next research conclusion?
-
-At minimum: real timestamps, request hashes, response text, protocol status, individual scores, denominators, stop reasons and returned usage. Usage totals cover only responses containing usage and are not account bills.
-
-Even a completed 24-request run would contain only three fixed synthetic cases, one model, one endpoint and no repeats. A 240-line context is not the model's context limit and cannot establish immunity to middle-position failures.
-
-[Lost in the Middle](https://arxiv.org/abs/2307.03172) investigated position effects in particular tasks and models. This small exercise borrows a comparison idea; it is not a reproduction of that paper.
-
-This article completes an auditable experiment entry point. Its next result report should execute the frozen protocol and inspect each observation before choosing whether to expand tasks, lengths or retrieval. A comparison must be valid before its outcome can be interpreted.
-
-## 9. Agnes 3.0: what do 24 expected answers establish?
+## Agnes 3.0: what do 24 expected answers establish?
 
 On September 30, 2026, all 24 live calls ran under the separately frozen L1v2-agnes3 protocol. Every response identified its model as agnes-3.0-flash. The runtime was Java 1.8.0_171, at code revision b352a38. The request plan exactly matches the saved preparation: no post-result question edits, retries or replacement observations.
 
 [Code and reproduction](https://github.com/VirtualSelect/hohoo-ai-lab/tree/e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1/experiments/02-context-position-paced) · [Independent audit](https://github.com/VirtualSelect/hohoo-ai-lab/tree/e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1/experiments/02-context-position-paced/evidence/20260930-agnes3-live/audit.json) · [Individual responses](https://github.com/VirtualSelect/hohoo-ai-lab/tree/e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1/experiments/02-context-position-paced/evidence/20260930-agnes3-live)
 
-### 9.1 Separate request availability from answer correctness
+### Separate request availability from answer correctness
 
 | Measure | Observed |
 | --- | ---: |
@@ -209,7 +54,7 @@ Scoring trims only surrounding whitespace. It does not extract a code from an ex
 
 These denominators count fixed requests, not independently sampled business questions. Three projects recur across conditions: 24 requests are not 24 independent tasks.
 
-### 9.2 Trace a score back to a response
+### Trace a score back to a response
 
 Attempt 1 is F1 with 60 distractors and the answer at the beginning. Its saved record contains HTTP 200, finishReason=stop and final content QX-7319. Reported usage is 2323 input, 8 output and 2331 total tokens.
 
@@ -222,13 +67,13 @@ node audit.mjs evidence/20260930-agnes3-live
 node --test audit.test.mjs
 ```
 
-### 9.3 Verify usage and pacing
+### Verify usage and pacing
 
 Returned usage sums to **134,614 input**, **144 output**, and **134,758 total tokens**. Per-request reported input ranges from 2,320 to 8,898 tokens. These are this endpoint's usage fields, not a verified bill or price estimate. Short answers do not eliminate the input cost of long material.
 
 The run spans UTC 05:06:52.476–05:17:12.120, or approximately 13:06:52–13:17:12 in Beijing. Start times and elapsed durations yield a minimum observed pause of **20.001 seconds**, consistent with the 20-second rule. No 429 occurred in this run; that does not establish a guaranteed provider quota.
 
-### 9.4 A perfect observed score does not establish position independence
+### A perfect observed score does not establish position independence
 
 No answer difference was observed across positions. The narrower interpretation is that **three fixed cases, two material lengths and one run per cell did not distinguish position-dependent performance**.
 
@@ -237,3 +82,23 @@ All cells reached the scoring ceiling. The target sentence and project names are
 Do not pool these responses with the 26 older Agnes 2.5 responses, or attribute cross-run differences to the model upgrade: materials, order, lengths and stopping rules differ.
 
 A useful next protocol could freeze similar project names, conflicting historical/current records or naturally paraphrased questions, retain absent-evidence controls and add repeats. That extension has not run. This authorization ended at 24 calls.
+
+## Why the interrupted run is no longer a separate article
+
+The 2026-09-28 Agnes 2.5 plan contained 48 requests. It attempted 29: 26 usable expected answers, then three HTTP 429 failures, leaving 19 unexecuted. Beginning/middle/end/absent attempted 8/8/7/6 requests, with 8/6/6/6 usable responses. Unequal denominators cannot support a position comparison or be pooled with the new 24 requests.
+
+[Original attempts and unfinished plan](https://github.com/VirtualSelect/hohoo-ai-lab/tree/e072718c3cd66d44978612208d393ff0d3eff9e4/experiments/01-context-position/evidence/20260928-l1) remain available. The distinct failure record survives here without duplicating the protocol as another article. The later 128-request distractor design has zero executions and remains a [future plan](/learning?track=llm#plans-llm), not a research result.
+
+## Check archived results without sending requests
+
+Clone into a fresh directory and check out the evidence-bearing revision below. Node.js audits the archived results without a model key. No automatic online run is part of this verification.
+
+
+```powershell
+git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-position
+cd hohoo-ai-lab-position
+git checkout e3cd8fdfdabdd7df3838b3ecb3d79e3db7e5e9d1
+cd experiments/02-context-position-paced
+node audit.mjs evidence/20260930-agnes3-live
+node --test audit.test.mjs
+```

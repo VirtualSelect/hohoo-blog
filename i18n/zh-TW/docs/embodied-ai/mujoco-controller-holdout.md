@@ -4,7 +4,7 @@ description: "54個開發回合選擇參數，36個留出回合復核位置誤�
 slug: "/embodied-ai/mujoco-controller-holdout"
 status: "published"
 published_at: "2026-10-11"
-updated: "2026-10-11"
+updated: "2026-11-12"
 reading_minutes: 10
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -39,6 +39,8 @@ kp取20/40/80，kd取8/18，tau取20/60/120ms，共18組。開發條件固定80m
 
 更值得保留的是：**54個開發回合沒有一個通過完整尾段契約**。選擇規則仍能挑出位置RMS更低的候選，但“最佳候選”並不等於“已經成功”。我們沒有因此調整驗收閾值。
 
+這裡先為每個回合計算尾段位置RMS，再對同一候選的三個開發種子取均值；不是把所有物理步混在一起算一次RMS。選中參數的開發分數是1.888mm，它與下表的保留集均值3.61mm來自不同資料，不能混用。
+
 ## 留出檢查確實更好，卻仍有邊界
 
 留出種子為73/97/131；條件擴展為0/80ms延遲與0/3/10mm噪聲。每組參數18回合，兩組共36回合。
@@ -47,6 +49,23 @@ kp取20/40/80，kd取8/18，tau取20/60/120ms，共18組。開發條件固定80m
 | --- | ---: | ---: |
 | 上輪固定基線 | 3/18 | 54.70mm |
 | 本輪開發集選中參數 | 7/18 | 3.61mm |
+
+把總數拆開看：選中參數的7個通過回合中，6個來自無位置雜訊的條件。只看有雜訊的12個保留回合，基線為0/12，選中參數為1/12。位置誤差明顯降低，並不表示有雜訊觀測下已經穩定完成。
+
+<details><summary>展開六組保留條件</summary>
+
+| 延遲 / 位置雜訊σ | 基線通過 | 選中參數通過 |
+| --- | ---: | ---: |
+| 0ms / 0mm | 3/3 | 3/3 |
+| 0ms / 3mm | 0/3 | 1/3 |
+| 0ms / 10mm | 0/3 | 0/3 |
+| 80ms / 0mm | 0/3 | 3/3 |
+| 80ms / 3mm | 0/3 | 0/3 |
+| 80ms / 10mm | 0/3 | 0/3 |
+
+每格保留三個種子73/97/131的原始回合數。對同一控制器和延遲，σ=0時三份解壓CSV逐字相同，種子沒有產生新的擾動。因此選中參數的無雜訊6/6是兩個固定條件各重複三次，不是六個獨立隨機成功樣本；原7/18仍作為原始記錄計數保留。
+
+</details>
 
 ![開發參數掃描與留出條件中的位置誤差](/img/research/20261011/controller-holdout.zh-TW.svg)
 
@@ -62,28 +81,72 @@ kp取20/40/80，kd取8/18，tau取20/60/120ms，共18組。開發條件固定80m
 
 ### 一個能自己驗證的練習
 
-從 `selection.json` 找出選中參數，再從 `results.json` 只篩選 `section=tuning` 重算18組均值。不得混入holdout結果。接著選一個位置RMS很小卻 `success=false` 的回合，檢查最後300ms的最大速度；它會教你為什么平均誤差和到達後穩定性不是同一個指標。
+先預測兩個結果：只用開發集能否重選出20/8/20ms？把無雜訊記錄分開後，7/18還是否足以說明抗雜訊能力？
 
-若結果不同，先確認鎖定MuJoCo/NumPy版本、2ms物理步長和20ms取樣間隔，再檢查分組與種子。不要先放寬閾值。原始 `csv.gz` 為無損壓縮，每個物理步都保留，不用平滑後的展示曲線替代驗收。
+準備好頁首指引指定的固定提交後，在具身倉庫根目錄用Python 3.12執行下面的唯讀片段。它只用標準函式庫讀取既有JSON，不安裝MuJoCo、不重跑模擬；每組先核對開發種子，參數選擇不讀取保留回合。
+
+```python
+import itertools
+import json
+import math
+from pathlib import Path
+from statistics import fmean
+
+root = Path('evidence/planar-reliability-20261011')
+rows = json.loads((root / 'results.json').read_text(encoding='utf-8'))
+p = json.loads((root / 'manifest.json').read_text(encoding='utf-8'))['protocol']
+selection = json.loads((root / 'selection.json').read_text(encoding='utf-8'))
+tuning = [r for r in rows if r['section'] == 'tuning']
+scores = []
+for params in itertools.product(p['kp'], p['kd'], p['tau']):
+    group = [r for r in tuning if (r['kp'], r['kd'], r['tau']) == params]
+    assert len(group) == len(p['dev_seeds'])
+    assert {r['seed'] for r in group} == set(p['dev_seeds'])
+    scores.append((fmean(r['tail_rms_m'] for r in group), *params))
+score, kp, kd, tau = min(scores)
+assert {'kp': kp, 'kd': kd, 'tau': tau} == selection['selected']
+assert math.isclose(score, selection['dev_score_m'], rel_tol=0, abs_tol=1e-12)
+print('selected', kp, kd, tau, 'score_mm', f'{score * 1000:.3f}')
+print('tuning', len(tuning), 'passed', sum(r['success'] for r in tuning))
+for method in ('baseline', 'selected'):
+    noisy = [r for r in rows if r['section'] == 'holdout' and r['method'] == method and r['noise'] > 0]
+    assert {r['seed'] for r in noisy}.isdisjoint(p['dev_seeds'])
+    print('noisy_holdout', method, sum(r['success'] for r in noisy), '/', len(noisy))
+```
+
+預期輸出中tau用秒、score用mm：
+
+```text
+selected 20 8 0.02 score_mm 1.888
+tuning 54 passed 0
+noisy_holdout baseline 0 / 12
+noisy_holdout selected 1 / 12
+```
+
+再看選中參數的開發回合`000.csv.gz`（種子7）：尾段位置RMS只有1.813mm，最大速度卻是61.341mm/s，超過40mm/s門檻。這就是「選參指標更好」仍不滿足完整契約的具體反例，不是看到失敗後另換一個閾值。這個窗口的最大位置誤差也只有2.641mm，失敗來自速度項。
+
+從CSV複算時，沿用本篇原實作的`t > 3.7 + 1e-9`：取3.702–4.000秒的150個步後狀態。它與延遲觀測篇包含3.7秒端點的151點窗口不同；不要改了取樣約定，再要求RMS逐值一致。
+
+片段只複算既有彙總與分組，不取代下方逐行軌跡稽核。若結果不同，先檢查固定版本、開發/保留種子與分組；不要先放寬閾值。無損壓縮CSV保留每個物理步，展示曲線不能取代驗收。
 
 ## 最小重現與排錯
 
-從干凈檢出目錄運行以下PowerShell命令。輸出目錄必須尚不存在。同組的三篇文章共用一份凍結協議，只需運行一次，再按各篇的證據分組查看。
+首次重現請展開頁首的[固定版本指引](#reading-content)，整塊執行一次。它建立新的固定版本目錄，將結果寫入`outputs/my-run`並稽核。同組三篇文章共用一份凍結協議，只需執行一次，再依各篇的證據分組查看。
+
+準備好這個固定版本與環境後，可以在倉庫根目錄單獨執行原3項檢查：
 
 ```powershell
-git clone https://github.com/VirtualSelect/hohoo-embodied-agent.git hohoo-embodied-agent-study
-cd hohoo-embodied-agent-study
-git checkout 1d1faab57e20b352761e9abc736c6d277b505e6b
-python -m venv .venv
-$py = '.\.venv\Scripts\python.exe'
-& $py -m pip install -r requirements-lock.txt
-& $py -m unittest discover -s experiments/planar_reliability -p "test_*.py"
-& $py experiments/planar_reliability/run.py --out outputs/reliability-my-run
-& $py experiments/planar_reliability/audit.py outputs/reliability-my-run
+& .\.venv\Scripts\python.exe -m unittest discover -s experiments/planar_reliability -p "test_*.py"
 ```
 
-本機Windows已驗證：Python 3.12.14 + MuJoCo 3.3.7 + NumPy 2.2.6；3項單測、153回合、306000行；獨立審計預期輸出 `PASS`。其他操作系統未復測。若只想核驗歸檔，不重新實驗，可將審計參數換為 `evidence/planar-reliability-20261011`。原始碼哈希統一LF，證據哈希按原位元組；不要改寫manifest掩蓋差異。
+若只想核驗既有歸檔，無需先重新模擬。在相符的固定版本與環境下執行下面的唯讀稽核，預期輸出`PASS`：
 
-若導入失敗，先檢查安裝與運行是否使用同一個 `$py`。失敗輸出保留，重跑時換新目錄。數值按協議容差復核，耗時是本機觀察，不要求重現相同速度。
+```powershell
+& .\.venv\Scripts\python.exe experiments/planar_reliability/audit.py evidence/planar-reliability-20261011
+```
+
+本機Windows已驗證：Python 3.12.14 + MuJoCo 3.3.7 + NumPy 2.2.6；原歸檔153回合、306000行。其他作業系統未複測。原始碼雜湊統一LF，證據雜湊依原始位元組；不要改寫manifest掩蓋差異。頁首已說明該版本的協議參數限制，本機修訂尚未發布，原稽核通過不表示任意變更設定也有效。
+
+若匯入失敗，先檢查安裝與執行是否都使用該目錄的`.venv`解譯器。失敗輸出保留，重跑時換新目錄。數值依協議容差複核，耗時是本機觀察，不要求重現相同速度。
 
 程式碼與文章由AI輔助整理，結論以歸檔且可審計的實際運行記錄為限。本輪沒有新增付費模型請求，也不代表作者已親手重現或完成人工審校。

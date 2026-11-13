@@ -18,12 +18,17 @@ function fixture(t) {
   const current = [];
   for (const locale of ["zh-CN", "zh-TW", "en"]) {
     const searchUrl = `/search/${locale}-${"a".repeat(16)}.json`;
+    const sectionSearchUrl = `/search/${locale}-${"e".repeat(16)}.json`;
     const chunk = `/radar-data/${locale}-${"b".repeat(16)}.json`;
     fs.writeFileSync(
       path.join(app, "generated", `${locale}.json`),
-      JSON.stringify({ searchUrl, radarArchive: { chunks: [chunk] } }),
+      JSON.stringify({
+        searchUrl,
+        sectionSearchUrl,
+        radarArchive: { chunks: [chunk] },
+      }),
     );
-    for (const url of [searchUrl, chunk]) {
+    for (const url of [searchUrl, sectionSearchUrl, chunk]) {
       const file = path.join(app, "public", url.slice(1));
       fs.writeFileSync(file, "[1]");
       current.push(file);

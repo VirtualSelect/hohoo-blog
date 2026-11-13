@@ -1,10 +1,10 @@
 ---
 title: "Java LLM Practice II: How to validate model JSON after HTTP 200"
-description: Build a Java 8 output boundary from a real fenced response and three timeouts, with strict validation, a bounded format adapter and reproducible evidence.
+description: Check a field contract in Java 8 using a real fenced response and three timeouts, with bounded adaptation and a verified lexical gap in the original validator.
 slug: /ai-apps/java-structured-output
 status: published
 published_at: '2026-09-28'
-updated: '2026-09-28'
+updated: 2026-11-13
 reading_minutes: 16
 learning_step: structured-output
 domain: ai-apps
@@ -13,6 +13,10 @@ difficulty: intermediate
 prerequisites: ["doc:ai-apps/java-first-llm"]
 related: ["project:hohoo-ai-lab", "doc:ai-apps/java-first-llm"]
 ---
+
+<span id="published-correction"></span>
+
+> **Correction published · 2026-11-13.** [Pinned source and run instructions](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/demos/04-structured-output) are now available. Statements below about a local branch or unpublished code describe the 2026-11-12 review snapshot. Historical checkout commands still reproduce the original archive, not this correction. From the companion repository root, run `git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`, then follow the linked directory README and use a new output directory. Historical results and AI-assistance disclosures are unchanged.
 
 [Open the validation bench: edit a recorded response and inspect rejection layers →](#output-validation)
 
@@ -103,7 +107,7 @@ The implementation separates four responsibilities:
 
 The envelope must contain an assistant message, normal stop and nonempty content. This example rejects `finish_reason=length` even if the visible fragment resembles complete JSON.
 
-For the inner object, Gson's `JsonReader` checks token types explicitly:
+For the inner object, Gson's `JsonReader` checks token types explicitly. This excerpt is from the **original pinned revision**. `setLenient(false)` still has a lexical gap; it does not establish rejection of every invalid JSON text. See the review below:
 
 ```java
 JsonReader reader = new JsonReader(new StringReader(text));
@@ -130,6 +134,53 @@ Duplicate keys are rejected too:
 ```
 
 The parser must not silently let a later value overwrite an earlier one. It also requires the end of the document, rejecting another object after an otherwise valid one.
+
+<span id="json-lexical-review"></span>
+
+### 2026-11-12 review: a field contract does not establish valid JSON syntax
+
+The article's unchanged pinned code accepts this **invalid input** offline, decoding its tag to `can't`:
+
+```text
+{"category":"llm","tags":["can\'t"]}
+```
+
+A plain apostrophe is allowed inside a double-quoted JSON string. The extra backslash in `\'` is the problem: [RFC 8259 section 7](https://www.rfc-editor.org/rfc/rfc8259#section-7) does not include that escape. [Gson 2.10.1's `readEscapeCharacter`](https://github.com/google/gson/blob/gson-parent-2.10.1/gson/src/main/java/com/google/gson/stream/JsonReader.java#L1567) handles it without checking `lenient`. Valid decoded fields therefore do not prove valid original JSON spelling.
+
+The local correction checks string spelling before `JsonReader`: only JSON escapes, four ASCII hexadecimal digits after a Unicode escape, and no unescaped control characters. Field names, duplicate keys, types and business rules still use the original checks. Plain `can't`, `can\u0027t`, and valid escaped backslashes/quotes remain accepted; banning apostrophes would be an incorrect repair. Fence adaptation uses the same entry. That lexical correction passed 41 offline checks, including six added regressions. The following review extends the HTTP boundary. This is not a full JSON Schema implementation.
+
+**The correction is local, uncommitted and unpublished. The linked historical revision still has this defect.** The original 35 checks and 32-case Java/TypeScript comparison did not include this counterexample. Their archived results remain unchanged, and the four real model calls were not repeated. Do not reuse the old boundary with `setLenient(false)` as its only lexical safeguard.
+
+<span id="response-json-review"></span>
+
+### The response text can change before JSON validation
+
+The correction above protects inner strings; the response envelope needs a separate check. In a loopback HTTP fixture, replace the question-mark byte in tag `a?b` with invalid UTF-8 byte `FF`. The old `ChatClient` silently decodes it as `a�b`, which still satisfies the classification contract. It validates replacement text rather than the original response.
+
+[Java 8's `String(byte[], Charset)`](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#String-byte:A-java.nio.charset.Charset-) replaces malformed sequences. The local correction instead reports decoding errors before building a JSON tree:
+
+```java
+String json = StandardCharsets.UTF_8.newDecoder()
+    .onMalformedInput(CodingErrorAction.REPORT)
+    .onUnmappableCharacter(CodingErrorAction.REPORT)
+    .decode(ByteBuffer.wrap(responseBytes)).toString();
+```
+
+Banning `�` would be wrong. A valid U+FFFD character is encoded as `EF BF BD`, unlike the malformed byte `FF`. Valid `a�b` must remain accepted unchanged.
+
+| Loopback response input | Old client | Local correction |
+| --- | --- | --- |
+| Bad `FF` byte in a tag | Replaces, then accepts | Rejects during UTF-8 decoding |
+| Valid `�` (`EF BF BD`) | Accepts | Preserves and accepts |
+| Comments or single/unquoted envelope fields | Accepts | Rejects outer JSON |
+| Repeated `content` in one message | Accepts the later value | Rejects duplicate names |
+| Envelope `TrUe` or `NULL` | Accepts | Rejects the spelling |
+
+Setting a reader to false and passing it to the tree parser is insufficient: [Gson 2.10.1's `JsonParser` temporarily enables leniency](https://github.com/google/gson/blob/gson-parent-2.10.1/gson/src/main/java/com/google/gson/JsonParser.java#L96). The new local `JsonInput` reuses lexical checks, verifies structure, decoded names within each object and end-of-document with the streaming reader, then builds the Gson tree. The legacy reader also recognizes mixed-case keywords, so their original spelling is checked separately, without repairing invalid values. Separate objects may each have a `content` field.
+
+This is the demo client's input boundary, not a general JSON Schema implementation. The existing 1 MB response limit remains; object/array nesting is capped at 64 containers including the root. An initial UTF-8 BOM remains allowed, a parser compatibility choice permitted by [RFC 8259 section 8.1](https://www.rfc-editor.org/rfc/rfc8259.html#section-8.1). The cost of prevalidation followed by tree construction was not measured. The browser validator below receives decoded strings and cannot reproduce malformed wire bytes.
+
+All 60 local offline checks pass: the earlier 41 plus 19 loopback-response cases. Chinese text, valid U+FFFD, valid numbers/booleans, identical names in separate objects and the 64-container boundary remain accepted; 65 containers are rejected. All original 32 string cases still match their expectations. **This correction is uncommitted and unpublished; pinned links retain the old implementation.** The original 35-check records, 32-case archive and four real model requests are unchanged. This round connects only to 127.0.0.1, not a model provider, and establishes no provider reliability result.
 
 ## 5. Adapt one wrapper without repairing arbitrary content
 

@@ -11,7 +11,13 @@ import { articleVideo } from "../lib/article-media.mjs";
 import { canonicalPath } from "../lib/visitor-stats.mjs";
 import { questionEvidence } from "../lib/question-evidence.mjs";
 import { radarContentAsset } from "../lib/radar-content.mjs";
+import { radarSnapshot } from "../lib/radar-snapshot.mjs";
+import { buildSearchSections } from "../lib/search-sections-build.mjs";
+import { stripMdxImports } from "../lib/markdown-source.mjs";
+import { embodiedGuideEvidence } from "../lib/embodied-guide.mjs";
+import { sessionStrategyEvidence } from "../lib/session-evidence.mjs";
 const require = createRequire(import.meta.url);
+const topics = require("../../../data/topics.js").default;
 const here = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const root = path.resolve(here, "../..");
 const {
@@ -44,6 +50,18 @@ put(
   questionEvidence((file) => fs.readFileSync(path.join(root, file), "utf8")),
 );
 put("manifest.json", resolveManifest());
+put(
+  "session-evidence.json",
+  sessionStrategyEvidence((file) =>
+    fs.readFileSync(path.join(root, file), "utf8"),
+  ),
+);
+put(
+  "embodied-guide.json",
+  embodiedGuideEvidence((file) =>
+    fs.readFileSync(path.join(root, file), "utf8"),
+  ),
+);
 const journey = validateJourney(json("data/journey.json"));
 const virtualLabs = validateVirtualLabs(
   json("data/journey-labs.json"),
@@ -76,14 +94,22 @@ const basePages = [
 ];
 const contentAssets = [];
 fs.mkdirSync(path.join(here, "public", "radar-content"), { recursive: true });
-const rawNews = json("data/news/items.json").map((item) => {
+const newsRecords = json("data/news/items.json");
+const newsConfig = json("config/news-sources.json");
+const snapshot = radarSnapshot(newsRecords, newsConfig);
+fs.mkdirSync(path.join(here, "public", "radar"), { recursive: true });
+fs.writeFileSync(
+  path.join(here, "public", "radar", "snapshot.json"),
+  JSON.stringify(snapshot),
+);
+const rawNews = newsRecords.map((item) => {
   const asset = radarContentAsset(item);
   if (!asset) return item;
   fs.writeFileSync(path.join(here, "public", asset.url.slice(1)), asset.json);
   contentAssets.push(asset.url);
   return { ...item, feedContentUrl: asset.url };
 });
-const rawSignals = signals(rawNews, json("config/news-sources.json"));
+const rawSignals = signals(rawNews, newsConfig);
 for (const locale of ["zh-CN", "zh-TW", "en"]) {
   const prefix = locale === "zh-CN" ? "" : "/" + locale;
   const documents = [];
@@ -115,6 +141,18 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
         (kind === "blog" ? f.slug : undefined) ||
         relative.replace(/\.(md|mdx)$/, "");
       const slug = String(f.slug || id).replace(/^\//, "");
+      // Component-based topic pages already translate their body from this registry.
+      // Use that same copy for metadata when no localized Markdown shell exists.
+      const topic =
+        kind === "docs" && f.landing && local === source && locale !== "zh-CN"
+          ? topics.find((topic) => topic.id === slug)
+          : null;
+      if (topic)
+        f = {
+          ...f,
+          title: locale === "en" ? topic.en : topic.titleTw,
+          description: locale === "en" ? topic.english : topic.descriptionTw,
+        };
       if (kind === "docs") f = learningMetadata(id, f);
       const route = kind + "/" + slug;
       const description =
@@ -181,7 +219,7 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
           headings.push({ id, text: text.replace(/<[^>]*>/g, ""), depth });
         return `<h${depth} id="${id}">${text}</h${depth}>`;
       };
-      let body = local.content.replace(/^import .*;?\s*$/gm, "").replace(
+      let body = stripMdxImports(local.content).replace(
         /^:::\w+[^\S\r\n]*(.*)\r?\n([\s\S]*?)^:::[^\S\r\n]*$/gm,
         (_, title, content) =>
           "> **" +
@@ -333,6 +371,12 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
   const searchName = `${locale}-${createHash("sha256").update(searchJSON).digest("hex").slice(0, 16)}.json`;
   fs.mkdirSync(path.join(here, "public", "search"), { recursive: true });
   fs.writeFileSync(path.join(here, "public", "search", searchName), searchJSON);
+  const sectionJSON = JSON.stringify(buildSearchSections(documents, entries));
+  const sectionName = `${locale}-${createHash("sha256").update(sectionJSON).digest("hex").slice(0, 16)}.json`;
+  fs.writeFileSync(
+    path.join(here, "public", "search", sectionName),
+    sectionJSON,
+  );
   const radarChunks = [];
   fs.mkdirSync(path.join(here, "public", "radar-data"), { recursive: true });
   for (let offset = 12; offset < items.length; offset += 24) {
@@ -349,18 +393,17 @@ for (const locale of ["zh-CN", "zh-TW", "en"]) {
     globalData,
     items,
     radarArchive: {
+      snapshot,
       chunks: radarChunks,
       contentAssets,
       weeks,
       total: items.length,
       sources: [...new Map(items.map((i) => [i.sourceId, i.sourceName]))],
-      lastCollected: items
-        .map((i) => i.collectedAt)
-        .sort()
-        .at(-1),
+      lastCollected: snapshot.latestCollectedAt || undefined,
     },
     search,
     searchUrl: "/search/" + searchName,
+    sectionSearchUrl: "/search/" + sectionName,
     weeks,
   });
   const escape = (s) =>

@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import Brand from "./Brand";
 import { SiteContext, useSite } from "../runtime/context";
@@ -65,6 +66,7 @@ function NavigationIcon({ kind }: { kind: string }) {
   );
 }
 function Frame({ children }: PropsWithChildren) {
+  const router = useRouter();
   const { locale, route } = useSite();
   const t = useText();
   const [search, setSearch] = useState(false);
@@ -72,6 +74,29 @@ function Frame({ children }: PropsWithChildren) {
   const searchTrigger = useRef<HTMLButtonElement>(null);
   const directoryTrigger = useRef<HTMLButtonElement>(null);
   const directory = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    let frame: number | null = null;
+    const adoptNativeEntry = () => {
+      if (window.history.state !== null || frame !== null) return;
+      frame = requestAnimationFrame(() => {
+        frame = null;
+        // Native fragment entries can lack router state. Adopt only those
+        // entries through the public API, without copying Next's private
+        // fields, adding a history entry, or changing the reader's scroll.
+        if (window.history.state === null)
+          router.replace(location.pathname + location.search + location.hash, {
+            scroll: false,
+          });
+      });
+    };
+    window.addEventListener("hashchange", adoptNativeEntry);
+    window.addEventListener("popstate", adoptNativeEntry);
+    return () => {
+      window.removeEventListener("hashchange", adoptNativeEntry);
+      window.removeEventListener("popstate", adoptNativeEntry);
+      if (frame !== null) cancelAnimationFrame(frame);
+    };
+  }, [router]);
   const nav = [
     { path: "learning", label: t("学习", "Learn", "學習") },
     { path: "build", label: t("实践", "Build", "實作") },
@@ -134,6 +159,7 @@ function Frame({ children }: PropsWithChildren) {
       <header className="site-header">
         <Link
           to="/"
+          onNavigate={closeDirectory}
           className="brand-link"
           aria-label={t("Hohoo · 首页", "Hohoo · Home", "Hohoo · 首頁")}
         >
@@ -151,6 +177,7 @@ function Frame({ children }: PropsWithChildren) {
             <Link
               key={path}
               to={"/" + path}
+              onNavigate={closeDirectory}
               aria-current={isCurrent(path) ? "page" : undefined}
             >
               <NavigationIcon kind={path} />

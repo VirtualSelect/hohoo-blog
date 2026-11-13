@@ -4,7 +4,7 @@ description: "162 archived INT8 comparisons examine tensor, token and K-channel/
 slug: "/llm/kv-quantization-axes"
 status: "published"
 published_at: "2026-10-09"
-updated: "2026-10-09"
+updated: 2026-11-13
 reading_minutes: 10
 domain: "llm"
 article_kind: "mechanism"
@@ -12,6 +12,10 @@ difficulty: "intermediate"
 prerequisites: ["doc:llm/kv-int8-error"]
 related: ["lab:kv-quantization-axes", "project:hohoo-ai-lab", "doc:llm/tiled-online-softmax"]
 ---
+
+<span id="published-correction"></span>
+
+> **Correction published · 2026-11-13.** [Pinned source and run instructions](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/experiments/11-kv-quantization-axes) are now available. Statements below about a local branch or unpublished code describe the 2026-11-12 review snapshot. Historical checkout commands still reproduce the original archive, not this correction. From the companion repository root, run `git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`, then follow the linked directory README and use a new output directory. Historical results and AI-assistance disclosures are unchanged.
 
 > Reproduction correction, 2026-10-11: Git newline conversion in the original pinned commit `009289d` changed the bytes of `results.json`, breaking its checkout-time hash audit. Links and checkout commands below now use the byte-preserving fix. The measurements, publication date and conclusions are unchanged.
 
@@ -83,6 +87,10 @@ This implementation restores INT8 to float64 before multiplication. It establish
 
 The following commands use Windows PowerShell and explicitly select the virtual-environment interpreter.
 
+Separate **checking the original archive**, which needs no new run, from **generating results**, which needs a directory that does not yet exist. The block first audits the pinned archive, then writes a new run to `target/my-run`. Choose another name if that directory already exists.
+
+> 2026-11-12 review: the old README's command without arguments overwrites `evidence`; it is not a read-only check. A local revision requires `--out` and rejects existing directories, but **has not been published: the pinned checkout below still contains the old implementation**. Always specify a new output directory. Check historical results with their original source rather than editing the old manifest to suppress hash differences. The original data and conclusions are unchanged.
+
 ```powershell
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
@@ -90,6 +98,7 @@ git checkout fd8102724ee8dcf45cfa55fe580cbbc6fcefd7ba
 python -m venv .venv
 $py = '.\.venv\Scripts\python.exe'
 & $py -m pip install -r experiments/11-kv-quantization-axes/requirements.txt
+& $py experiments/11-kv-quantization-axes/audit.py
 & $py -m unittest discover -s experiments/11-kv-quantization-axes -p "test_*.py"
 & $py experiments/11-kv-quantization-axes/run.py --out experiments/11-kv-quantization-axes/target/my-run
 & $py experiments/11-kv-quantization-axes/audit.py experiments/11-kv-quantization-axes/target/my-run

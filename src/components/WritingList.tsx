@@ -55,7 +55,7 @@ export default function WritingList({ items }: { items: ContentEntry[] }) {
     <p className="hh-empty">
       {translate({
         id: "writing.empty",
-        message: "当前语言暂无匹配的已发布内容。",
+        message: "没有找到匹配的已发表文章。试试其他关键词，或清除当前条件。",
       })}
     </p>
   );

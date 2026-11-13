@@ -105,6 +105,6 @@ These are engineering checks, not safety guarantees supplied by the model. First
 
 The source explains visual embedding, action discretization and unnormalization. The small indexing example can be independently checked. These are reading and arithmetic evidence.
 
-This site has not completed a simulation loop using that checkpoint. There are no claimed success rates, trajectories or measured effectiveness. The existing [action-representation experiment plan](/labs/action-representation) provides a next step: fix an environment and interface, retain inputs, predictions, resulting observations and termination reasons, then discuss performance.
+This site has not completed a simulation loop using that checkpoint. There are no claimed success rates, trajectories or measured effectiveness. The existing [action-representation experiment plan](/learning?track=embodied-ai#plans-embodied-ai) provides a next step: fix an environment and interface, retain inputs, predictions, resulting observations and termination reasons, then discuss performance.
 
 For the autoregressive caching mechanism, continue to [KV Cache](/docs/llm/kv-cache). Repeating a task instruction across actions does not by itself justify reusing the entire cache across different camera observations. The input prefix still needs to match.

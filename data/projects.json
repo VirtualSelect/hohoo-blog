@@ -98,14 +98,12 @@
     "related": [
       "doc:ai-apps/java-first-llm",
       "doc:ai-apps/java-structured-output",
-      "doc:llm/context-position-experiment",
-      "lab:context-position",
       "doc:llm/context-position-paired-protocol",
+      "lab:context-position",
       "doc:ai-apps/java-transactional-history",
       "doc:ai-apps/typescript-output-boundary",
       "lab:transactional-history",
       "lab:typescript-output-boundary",
-      "doc:llm/context-similar-distractors",
       "doc:llm/causal-mask-lab",
       "doc:ai-apps/java-concurrent-history",
       "doc:ai-apps/java-retrieval-evidence",
@@ -176,15 +174,15 @@
       },
       {
         "heading": "Validation",
-        "zh": "各篇保留独立协议、固定提交与原始记录。真实模型调用、合成检索、线程调度和未训练 NumPy 模型分别解读，不合并为成功率；最近结果见流式取消与缓存准入实验。",
-        "en": "Each study retains its protocol, pinned revision and raw evidence. Real model calls, synthetic retrieval, thread schedules and the untrained NumPy model are interpreted separately, not pooled into a success rate. See transport cancellation and cache admission for the latest results.",
-        "tw": "各篇保留獨立協議、固定提交與原始記錄。真實模型呼叫、合成檢索、執行緒調度與未訓練 NumPy 模型分別解讀，不合併為成功率；最近結果見串流取消與快取準入實驗。"
+        "zh": "各篇保留独立协议、固定提交与原始记录。模型调用、合成输入和数值模型分开解读。本地补充将请求窗口、完整轮日志与每轮 Socket 取消串联，固定 SSE 对照核对阻塞退出及旧凭据归属；代码现已发布，固定版本见原文，不代表完整在线助手。",
+        "en": "Each study retains its protocol, pinned revision and raw evidence. Model calls, synthetic inputs and numerical models are interpreted separately. Local supplements compose request projection, complete-turn journals and per-turn Socket cancellation, using fixed SSE replies to check reader exit and stale-handle ownership. The code is published in the linked revision; it does not deliver a complete online assistant.",
+        "tw": "各篇保留獨立協議、固定提交與原始記錄。模型呼叫、合成輸入與數值模型分開解讀。本地補充串聯請求窗口、完整輪日誌與每輪 Socket 取消，以固定 SSE 對照核對阻塞退出及舊憑據歸屬；程式碼現已發布，固定版本見原文，不代表完整線上助手。"
       },
       {
         "heading": "Limitations",
-        "zh": "没有自动重试或自动发布；超时不能证明服务端未执行。结构合法不代表分类正确，JSON模式支持情况尚未验证。",
-        "en": "No automatic retries or publishing. A timeout does not prove the server did no work. Structural validity does not establish semantic correctness; JSON-mode support remains unverified.",
-        "tw": "沒有自動重試或自動發布；逾時不能證明伺服器未執行。結構合法不代表分類正確，JSON模式支援情況尚未驗證。"
+        "zh": "已有本地重试、幂等与持久化实验，尚无完整在线助手或跨设备历史。重试依赖对应操作语义，超时不证明远端未执行；结构合法也不证明事实正确。JSON模式的提供商支持仍未验证。",
+        "en": "Local retry, idempotency and persistence studies exist; a complete online assistant and cross-device history do not. Retry safety depends on the operation, and a timeout does not prove no remote work occurred. Valid structure does not establish factual correctness; provider JSON-mode support remains unverified.",
+        "tw": "已有本地重試、冪等與持久化實驗，尚無完整線上助手或跨裝置歷史。重試取決於對應操作語義，逾時不證明遠端未執行；結構合法也不證明事實正確。JSON模式的提供商支援仍未驗證。"
       }
     ],
     "resources": [
@@ -253,12 +251,12 @@
       },
       {
         "href": "/docs/llm/context-position-paired-protocol",
-        "label": "L1v2：成组对照与请求节流",
-        "labelEn": "L1v2: paired blocks and pacing",
-        "labelTw": "L1v2：成組對照與請求節流",
-        "description": "Agnes 3.0完成24次真实请求、6组对照；原始响应、用量与独立审计均可复核。",
-        "descriptionEn": "24 live Agnes 3.0 requests in six complete blocks, with responses, usage and independent auditing.",
-        "descriptionTw": "Agnes 3.0完成24次真實請求、6組對照；原始回應、用量與獨立稽核均可複核。"
+        "label": "LLM 实验（二）：先让对照成立，再谈上下文位置",
+        "labelEn": "LLM experiment II: make the comparison valid before interpreting position",
+        "labelTw": "LLM 實驗（二）：先讓對照成立，再談上下文位置",
+        "description": "用 Java 8 实现成组对照与节流，完成 Agnes 3.0 的24次真实请求；公开逐项评分、服务端用量，并解释全对结果的边界。",
+        "descriptionEn": "A Java 8 paired-block protocol with 24 live Agnes 3.0 requests, independently audited scores and reported token usage, including the limits of a perfect observed score.",
+        "descriptionTw": "以 Java 8 實作成組對照與節流，完成 Agnes 3.0 的24次真實請求；公開逐項評分、服務端用量，並解釋全對結果的邊界。"
       },
       {
         "href": "https://github.com/VirtualSelect/hohoo-ai-lab/tree/405c25668d9bb9aee0ccb258b258103271314300/demos/05-transactional-chat",
@@ -279,7 +277,7 @@
         "descriptionTw": "32組對照 · 原始JSON與unknown · 無模型呼叫"
       },
       {
-        "href": "/docs/llm/context-similar-distractors",
+        "href": "/learning?track=llm#plans-llm",
         "label": "L1v3：相似干扰实验设计",
         "labelEn": "L1v3: similar-distractor design",
         "labelTw": "L1v3：相似干擾實驗設計",
@@ -445,9 +443,9 @@
         "label": "Java 对话历史落盘：程序崩溃后，半轮记录怎么办？",
         "labelEn": "Durable Java turns: what survives a process crash?",
         "labelTw": "Java 對話歷史落盤：程序崩潰後，半輪記錄怎么辦？",
-        "description": "校验追加日志、142种截断前缀和三个真实异常退出子进程，明确本地提交与远端幂等的边界。",
-        "descriptionEn": "Checksummed append records, 142 truncated prefixes and three halted JVMs distinguish local recovery from remote exactly-once execution.",
-        "descriptionTw": "校驗追加日志、142種截斷前綴和三個真實異常退出子進程，明確本地提交與遠端冪等的邊界。"
+        "description": "校验追加日志、142种截断前缀和三个真实异常退出子进程，明确本地提交与远端幂等的边界。 本地补充把请求投影、回环HTTP与整轮提交串起来，代码现已发布，固定版本见原文。",
+        "descriptionEn": "Checksummed append records, 142 truncated prefixes and three halted JVMs distinguish local recovery from remote exactly-once execution. A local supplement composes request projection, loopback HTTP and whole-turn commit; its code is published in the linked revision.",
+        "descriptionTw": "校驗追加日志、142種截斷前綴和三個真實異常退出子進程，明確本地提交與遠端冪等的邊界。 本地補充串聯請求投影、回環HTTP與整輪提交，程式碼現已發布，固定版本見原文。"
       },
       {
         "href": "/docs/llm/cache-cost-profile",
@@ -516,7 +514,7 @@
     "titleTw": "Java LLM 實作集",
     "descriptionTw": "Java 會話、請求重試與持久化邊界，以及注意力、快取成本和量化誤差的可復現實驗。",
     "sourceLocale": "zh-CN",
-    "updated": "2026-10-11"
+    "updated": "2026-11-12"
   },
   {
     "id": "project:hohoo-embodied-agent",
@@ -554,19 +552,17 @@
       "lab:recovery-ablation",
       "doc:embodied-ai/mujoco-phase-contracts",
       "lab:phase-contracts",
-      "doc:embodied-ai/mujoco-exit-actions",
+      "doc:embodied-ai/mujoco-abort-exit",
       "doc:embodied-ai/mujoco-recovery-budget",
       "doc:embodied-ai/mujoco-release-verification",
       "lab:exit-actions",
       "lab:recovery-budget",
       "lab:release-verification",
-      "doc:embodied-ai/mujoco-completion-lifecycle",
+      "doc:embodied-ai/mujoco-qualified-completion",
       "lab:completion-lifecycle",
-      "doc:embodied-ai/mujoco-abort-exit",
       "lab:abort-exit",
       "doc:embodied-ai/mujoco-phase-recovery",
       "lab:phase-recovery",
-      "doc:embodied-ai/mujoco-qualified-completion",
       "lab:qualified-completion",
       "doc:embodied-ai/mujoco-planar-pd",
       "doc:embodied-ai/mujoco-obstacle-clearance",
@@ -710,13 +706,13 @@
         "descriptionTw": "固定程式碼、逐步控制紀錄、狀態、完整矩陣與獨立稽核"
       },
       {
-        "href": "/docs/embodied-ai/mujoco-exit-actions",
-        "label": "具身智能实践（八）：检测到掉落以后，夹爪应该做什么？",
-        "labelEn": "Embodied AI VIII: what should the gripper do after a drop alarm?",
-        "labelTw": "具身智能實踐（八）：檢測到掉落以後，夾爪應該做什麼？",
-        "description": "15回合固定场景对照保持、松爪、松爪后退：报警相同，退出动作不同，最终放置也不同。",
-        "descriptionEn": "Fifteen fixed-scene rollouts compare hold, open and open-then-retreat after identical alarms.",
-        "descriptionTw": "15回合固定場景對照保持、鬆爪、鬆爪後退：報警相同，退出動作不同，最終放置也不同。"
+        "href": "/docs/embodied-ai/mujoco-abort-exit",
+        "label": "具身智能实践（十二）：恢复预算耗尽之后，夹爪应该做什么？",
+        "labelEn": "Embodied AI practice (12): what should the gripper do after recovery is exhausted?",
+        "labelTw": "具身智能實踐（十二）：恢復預算耗盡之後，夾爪應該做什麼？",
+        "description": "12 个 MuJoCo 回合与三画面回放，对比保持、松爪、松爪后退，区分终止决定与实际退出后果。",
+        "descriptionEn": "12 MuJoCo rollouts and synchronized three-view replay compare hold, open and open-retreat, separating terminal decisions from physical consequences.",
+        "descriptionTw": "12 個 MuJoCo 回合與三畫面回放，對比保持、鬆爪、鬆爪後退，區分終止決定與實際退出後果。"
       },
       {
         "href": "/docs/embodied-ai/mujoco-recovery-budget",
@@ -737,22 +733,13 @@
         "descriptionTw": "五條真實軌跡同時檢查單幀與持續窗口：錯誤觀測、延遲鬆爪和完成後的外力揭示驗收範圍。"
       },
       {
-        "href": "/docs/embodied-ai/mujoco-completion-lifecycle",
-        "label": "具身智能实践（十一）：已经放好了，为什么还要撤销“完成”？",
-        "labelEn": "Embodied AI practice (11): placement completed, but is it still valid?",
-        "labelTw": "具身智能實踐（十一）：已經放好了，為什麼還要撤銷“完成”？",
-        "description": "七条 MuJoCo 轨迹与双画面回放，将历史完成事件和当前有效状态分开，保留传感误报与过期边界。",
-        "descriptionEn": "Seven MuJoCo rollouts and a paired replay separate historical completion from current validity, including false alarms and expiry boundaries.",
-        "descriptionTw": "七條 MuJoCo 軌跡與雙畫面回放，將歷史完成事件和當前有效狀態分開，保留傳感誤報與過期邊界。"
-      },
-      {
-        "href": "/docs/embodied-ai/mujoco-abort-exit",
-        "label": "具身智能实践（十二）：恢复预算耗尽之后，夹爪应该做什么？",
-        "labelEn": "Embodied AI practice (12): what should the gripper do after recovery is exhausted?",
-        "labelTw": "具身智能實踐（十二）：恢復預算耗盡之後，夾爪應該做什麼？",
-        "description": "12 个 MuJoCo 回合与三画面回放，对比保持、松爪、松爪后退，区分终止决定与实际退出后果。",
-        "descriptionEn": "12 MuJoCo rollouts and synchronized three-view replay compare hold, open and open-retreat, separating terminal decisions from physical consequences.",
-        "descriptionTw": "12 個 MuJoCo 回合與三畫面回放，對比保持、鬆爪、鬆爪後退，區分終止決定與實際退出後果。"
+        "href": "/docs/embodied-ai/mujoco-qualified-completion",
+        "label": "具身智能实践（十四）：方块落进盒子，就能宣布任务完成吗？",
+        "labelEn": "Embodied AI practice (14): does landing in the bin mean the task is complete?",
+        "labelTw": "具身智能實踐（十四）：方塊落進盒子，就能宣布任務完成嗎？",
+        "description": "8条MuJoCo轨迹、三个旁路判定器与真实回放，区分历史放置、当前证据和恢复流程中的完成资格。",
+        "descriptionEn": "Eight MuJoCo trajectories, three passive readouts and recorded-state replay separate historical placement, current evidence and qualified completion.",
+        "descriptionTw": "8條MuJoCo軌跡、三個旁路判定器與真實回放，區分歷史放置、當前證據和恢復流程中的完成資格。"
       },
       {
         "href": "/docs/embodied-ai/mujoco-phase-recovery",
@@ -762,15 +749,6 @@
         "description": "18 个 MuJoCo 回合与同步回放，将阶段契约接入恢复预算，区分正常下降误停、物理放置和控制器终止。",
         "descriptionEn": "18 MuJoCo rollouts and synchronized replay connect phase contracts to recovery budgets, separating false holds, physical placement and controller abort.",
         "descriptionTw": "18 個 MuJoCo 回合與同步回放，將階段契約接入恢復預算，區分正常下降誤停、物理放置和控制器終止。"
-      },
-      {
-        "href": "/docs/embodied-ai/mujoco-qualified-completion",
-        "label": "具身智能实践（十四）：方块落进盒子，就能宣布任务完成吗？",
-        "labelEn": "Embodied AI practice (14): does landing in the bin mean the task is complete?",
-        "labelTw": "具身智能實踐（十四）：方塊落進盒子，就能宣布任務完成嗎？",
-        "description": "8条MuJoCo轨迹、三个旁路判定器与真实回放，区分历史放置、当前证据和恢复流程中的完成资格。",
-        "descriptionEn": "Eight MuJoCo trajectories, three passive readouts and recorded-state replay separate historical placement, current evidence and qualified completion.",
-        "descriptionTw": "8條MuJoCo軌跡、三個旁路判定器與真實回放，區分歷史放置、當前證據和恢復流程中的完成資格。"
       },
       {
         "href": "/docs/embodied-ai/mujoco-planar-pd",

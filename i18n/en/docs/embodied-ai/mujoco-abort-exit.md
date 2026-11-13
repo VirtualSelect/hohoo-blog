@@ -4,12 +4,12 @@ description: "12 MuJoCo rollouts and synchronized three-view replay compare hold
 slug: "/embodied-ai/mujoco-abort-exit"
 status: "published"
 published_at: "2026-10-03"
-updated: "2026-10-03"
+updated: "2026-11-12"
 reading_minutes: 12
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:abort-exit", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-recovery-budget", "doc:embodied-ai/mujoco-exit-actions", "doc:embodied-ai/mujoco-completion-lifecycle"]
+related: ["lab:abort-exit", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-recovery-budget", "doc:embodied-ai/mujoco-qualified-completion"]
 ---
 
 [Pinned code](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/2cf78a9afce618ea8ce35a882f0db203b2a74f57/experiments/vl01_abort_exit) · [Raw evidence and audit](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/2cf78a9afce618ea8ce35a882f0db203b2a74f57/evidence/abort-exit-20261003) · [Experiment record](/labs/abort-exit)
@@ -109,3 +109,11 @@ The archive records Python 3.12.14, NumPy 2.2.6 and MuJoCo 3.3.7. Plotting uses 
 The missing component is not a fourth fixed movement. It is evidence and constraints available at abort: a confirmed support area, permitted motion under stale observations, and rules preventing a new closure after a drop. Those must become testable conditions before choosing an exit.
 
 These findings remain limited to a fixed simulation. There is no ROS2 bridge, physical robot, learned policy or regrasp, and this study does not complete VL01 or milestones M4/M5.
+
+## Earlier comparison: exit behavior depends on where stopping occurs
+
+E8 stopped directly on alarms in five conditions, totaling 15 episodes without recovery budgets. Opening, with or without retreat, removed final finger contact in late lowering and lowering communication loss; holding did not. During transfer drops all three failed. Opening and opening-plus-retreat had identical endpoint acceptance, without measured additional retreat benefit.
+
+This does not conflict with E12: some E8 stopping locations had a tray underneath, whereas the budget/deadline aborts here occurred during transfer and opening dropped the cube onto the floor. Location, gating and faults differ; these experiments do not establish a universal ranking. E8 acceptance measured endpoint placement, not qualified completion or safety.
+
+The distinct result remains here, with [original records and fixed code](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/497d0df30c1f66de50fb38b930f0c6ea069d9634/evidence/exit-release-budget-20261003) preserved. The duplicate standalone exit article is consolidated.

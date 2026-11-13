@@ -11,7 +11,7 @@ for (const locale of ["zh-CN", "en", "zh-TW"]) {
     for (const id of [
       ...editorial.featuredProjects,
       ...editorial.featuredArticles,
-      "doc:llm/context-position-experiment",
+      "doc:llm/context-position-paired-protocol",
       "lab:context-position",
       "lab:vl01-pickup-offset",
       "lab:grasp-guard",
@@ -33,9 +33,13 @@ for (const locale of ["zh-CN", "en", "zh-TW"]) {
       "inconclusive",
     );
     const doc = data.documents.find(
-      (d) => d.route === "docs/llm/context-position-experiment",
+      (d) => d.route === "docs/llm/context-position-paired-protocol",
     );
-    assert.ok(doc.html.includes("429") && doc.html.includes("77,043"));
+    assert.ok(
+      doc.html.includes("429") &&
+        doc.html.includes("134,758") &&
+        doc.html.includes("e072718c3cd66d44978612208d393ff0d3eff9e4"),
+    );
     assert.ok(doc.headings.length >= 7);
     const learning = data.globalData["learning-index"].entries;
     assert.ok(learning.some((e) => e.stepId === "structured-output"));

@@ -1,0 +1,61 @@
+{
+  "scope": "Actual generated learning metadata and locally served header before the correction",
+  "rows": [
+    {
+      "id": "java-durable-turns",
+      "route": "/docs/ai-apps/java-durable-turns",
+      "oldOrdinal": 13,
+      "oldTotal": 17,
+      "coreOrdinal": 5,
+      "coreTotal": 6,
+      "oldNeighbors": [
+        "java-retry-deadline",
+        "java-durable-turns",
+        "java-idempotent-retry"
+      ],
+      "recommendedNext": "java-recovery-reconciliation"
+    },
+    {
+      "id": "java-transport-cancellation",
+      "route": "/docs/ai-apps/java-transport-cancellation",
+      "oldOrdinal": 8,
+      "oldTotal": 17,
+      "coreOrdinal": null,
+      "coreTotal": 6,
+      "oldNeighbors": [
+        "java-stream-session-ownership",
+        "java-transport-cancellation",
+        "typescript-output-boundary"
+      ],
+      "recommendedNext": "java-retry-deadline"
+    },
+    {
+      "id": "kv-cache-equivalence",
+      "route": "/docs/llm/kv-cache-equivalence",
+      "oldOrdinal": 3,
+      "oldTotal": 18,
+      "coreOrdinal": 2,
+      "coreTotal": 6,
+      "oldNeighbors": [
+        "causal-mask-lab",
+        "kv-cache-equivalence",
+        "sliding-cache-positions"
+      ],
+      "recommendedNext": "prefix-cache-invalidation"
+    },
+    {
+      "id": "mujoco-recovery-ablation",
+      "route": "/docs/embodied-ai/mujoco-recovery-ablation",
+      "oldOrdinal": 6,
+      "oldTotal": 22,
+      "coreOrdinal": null,
+      "coreTotal": 6,
+      "oldNeighbors": [
+        "mujoco-recovery-gate",
+        "mujoco-recovery-ablation",
+        "mujoco-phase-contracts"
+      ],
+      "recommendedNext": "mujoco-phase-contracts"
+    }
+  ]
+}

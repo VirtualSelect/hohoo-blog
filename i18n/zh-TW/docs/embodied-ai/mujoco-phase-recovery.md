@@ -9,7 +9,7 @@ reading_minutes: 13
 domain: "embodied-ai"
 article_kind: "case-study"
 difficulty: "intermediate"
-related: ["lab:phase-recovery", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-abort-exit", "doc:embodied-ai/mujoco-phase-contracts", "doc:embodied-ai/mujoco-completion-lifecycle"]
+related: ["lab:phase-recovery", "project:hohoo-embodied-agent", "doc:embodied-ai/mujoco-abort-exit", "doc:embodied-ai/mujoco-phase-contracts", "doc:embodied-ai/mujoco-qualified-completion"]
 ---
 
 [固定版本程式碼](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/ad2e33523e8e5580da90ae914e1cccf765c8d1b1/experiments/vl01_phase_recovery) · [原始記錄與審計](https://github.com/VirtualSelect/hohoo-embodied-agent/tree/ad2e33523e8e5580da90ae914e1cccf765c8d1b1/evidence/phase-recovery-20261004) · [實驗檔案](/labs/phase-recovery)

@@ -499,7 +499,7 @@
     "message": "Random explore"
   },
   "writing.empty": {
-    "message": "No articles match these filters. Clear filters or choose another track."
+    "message": "No published articles match. Try different keywords or clear the current conditions."
   },
   "learning.research": {
     "message": "Research overview"

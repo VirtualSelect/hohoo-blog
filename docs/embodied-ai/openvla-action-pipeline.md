@@ -9,7 +9,7 @@ reading_minutes: 12
 domain: embodied-ai
 article_kind: mechanism
 difficulty: intermediate
-related: ["doc:llm/kv-cache", "lab:action-representation"]
+related: ["doc:llm/kv-cache", ]
 ---
 
 看到“视觉—语言—动作模型”，很容易把它想成一个会看图、再输出控制指令的聊天机器人。真正需要追问的是：输出的数据是什么？它有几个维度？数字在什么坐标系、什么尺度下才有意义？
@@ -114,6 +114,6 @@ action = 0.5 × (normalized + 1) × (q99 - q01) + q01
 
 现在可以沿源码解释图像嵌入、动作离散化与反归一化，也可以独立验证上面的索引算例。这些是阅读和算术层面的证据。
 
-本站尚未用该检查点完成一次仿真闭环，因此这里没有成功率、轨迹图或“实测有效”的结论。已有 [动作表示实验计划](/labs/action-representation) 可以接住后续工作：固定环境与动作接口，保存输入、预测、执行后的观测和终止原因，再讨论模型表现。
+本站尚未用该检查点完成一次仿真闭环，因此这里没有成功率、轨迹图或“实测有效”的结论。已有 [动作表示实验计划](/learning?track=embodied-ai#plans-embodied-ai) 可以接住后续工作：固定环境与动作接口，保存输入、预测、执行后的观测和终止原因，再讨论模型表现。
 
 若对自回归生成中的缓存感兴趣，可继续阅读 [KV Cache 拆解](/docs/llm/kv-cache)。但不能因为相邻动作都用了同一条任务指令，就推断不同图像观测之间可以直接复用整段旧缓存；输入前缀是否相同仍需检查。

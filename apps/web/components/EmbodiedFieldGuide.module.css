@@ -1,0 +1,166 @@
+.root {
+  margin-block: 32px 48px;
+  scroll-margin-top: 80px;
+}
+.root h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.4;
+  margin: 8px 0 24px;
+}
+.scenes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-block: 1px solid var(--hh-border);
+}
+.scenes a {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  line-height: 1.6;
+  min-height: 80px;
+}
+.scenes a:first-child {
+  border-right: 1px solid var(--hh-border);
+}
+.scenes span {
+  font-size: 12px;
+  color: var(--blog-muted);
+}
+.scenes a:hover {
+  background: var(--blog-soft);
+}
+.scope {
+  font-size: 12px;
+  color: var(--blog-muted);
+  line-height: 1.8;
+  margin-block: 14px;
+}
+.case {
+  margin-block: 24px;
+  padding: 22px 0;
+  border-block: 1px solid var(--hh-border);
+}
+.case label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.case select {
+  width: 100%;
+  max-width: 520px;
+  min-height: 44px;
+}
+.readings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-block: 24px;
+}
+.readings div {
+  padding: 14px;
+  border-left: 2px solid var(--hh-accent);
+  background: var(--blog-soft);
+}
+.readings dt {
+  font-size: 12px;
+  color: var(--blog-muted);
+  line-height: 1.7;
+}
+.readings dd {
+  margin: 12px 0 0;
+  font: 22px var(--hh-base-font-family-monospace);
+}
+.explanation {
+  line-height: 1.85;
+  min-height: 4em;
+}
+.architecture summary {
+  min-height: 44px;
+  cursor: pointer;
+}
+.architecture dl {
+  display: grid;
+  gap: 18px;
+}
+.tableWrap {
+  overflow-x: auto;
+  max-width: 100%;
+  margin-block: 14px 24px;
+}
+.tableWrap table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.tableWrap caption {
+  text-align: left;
+  color: var(--blog-muted);
+  padding-bottom: 12px;
+  line-height: 1.7;
+}
+.tableWrap th,
+.tableWrap td {
+  text-align: left;
+  border-bottom: 1px solid var(--hh-border);
+  padding: 12px 8px;
+}
+.architecture dt {
+  font-weight: 600;
+}
+.architecture dd {
+  margin: 6px 0 0;
+  line-height: 1.8;
+  color: var(--blog-muted);
+}
+.version {
+  margin-block: 24px;
+  border-left: 2px solid var(--hh-accent);
+  padding-left: 16px;
+}
+.version p {
+  line-height: 1.8;
+  font-size: 13px;
+  margin: 10px 0;
+}
+.version a,
+.sources a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  line-height: 1.6;
+}
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.root :global(.reproduction-guide) {
+  margin-top: 18px;
+}
+@media (max-width: 600px) {
+  .scenes {
+    grid-template-columns: 1fr;
+  }
+  .scenes a:first-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--hh-border);
+  }
+  .readings {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .readings div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+  .readings dd {
+    margin: 0;
+    font-size: 18px;
+  }
+  .explanation {
+    min-height: 0;
+  }
+}

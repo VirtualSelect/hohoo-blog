@@ -4,7 +4,7 @@ description: Three runnable Java demos explain HTTP requests, JSON parsing, time
 slug: /ai-apps/java-first-llm
 status: published
 published_at: '2026-09-12'
-updated: '2026-09-12'
+updated: "2026-11-12"
 reading_minutes: 15
 learning_step: first-call
 domain: ai-apps
@@ -176,5 +176,7 @@ The first request asked for two sentences but returned one; a later call returne
 HTTP 200 and `finish_reason: stop` do not guarantee factual accuracy or instruction following. Check language details against references such as the [Java 8 default methods tutorial](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html).
 
 Requests, parsing, console input and history now form one working path. The next useful step is to constrain and validate output before consuming it in other code, then move on to framework integration.
+
+That next step is developed in [Java structured-output practice](/docs/ai-apps/java-structured-output): continue from HTTP status to JSON structure, field types and business constraints, including real responses that failed the requested format.
 
 [Project](/projects/hohoo-ai-lab) · [AI Applications](/docs/ai-apps) · [Learning](/learning)

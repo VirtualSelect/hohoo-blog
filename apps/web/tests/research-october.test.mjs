@@ -11,12 +11,12 @@ const routes = [
   "llm/causal-mask-lab",
   "llm/kv-cache-equivalence",
   "llm/sliding-cache-positions",
-  "embodied-ai/mujoco-exit-actions",
+  "embodied-ai/mujoco-abort-exit",
   "embodied-ai/mujoco-release-verification",
   "embodied-ai/mujoco-recovery-budget",
   "ai-apps/java-grounded-claims",
   "llm/prefix-cache-invalidation",
-  "embodied-ai/mujoco-completion-lifecycle",
+  "embodied-ai/mujoco-qualified-completion",
 ];
 
 for (const locale of ["zh-CN", "en", "zh-TW"]) {

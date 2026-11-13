@@ -4,7 +4,7 @@ description: "对909次查询做分段计时，验证源码签名、查找、复
 slug: "/llm/cache-cost-profile"
 status: "published"
 published_at: "2026-10-07"
-updated: "2026-10-07"
+updated: "2026-11-12"
 reading_minutes: 9
 domain: "llm"
 article_kind: "mechanism"
@@ -60,7 +60,54 @@ related: ["lab:cache-cost-profile", "project:hohoo-ai-lab", "doc:llm/prefix-cach
 
 ## 小练习
 
-从profile.json任选一行，验证各段加residual恰好等于total；再对整列分别求中位数，观察“中位数的和”和“和的中位数”通常不相同。然后增大输入长度，在新目录重新运行；不要预写“长序列一定更快”，先检查当前固定前缀长度是否仍合理。
+先读已有记录，再决定是否重新测量。下面是AI辅助整理的归档读数练习，不新增性能采样。在下方固定提交的`hohoo-ai-lab`工程根目录运行整个PowerShell代码块；只用Python标准库，无需安装NumPy、模型或密钥，也不会写入证据目录。注意这里不是博客仓库。
+
+它先核对`profile.json`与归档manifest的指纹，只选择`rehash`路径，再逐行验证总时长与五段之和相等。所有输出单位都是纳秒。
+
+~~~powershell
+@'
+import hashlib
+import json
+from pathlib import Path
+from statistics import median
+
+folder = Path("experiments/10-attention-costs/evidence/20261007")
+payload = (folder / "profile.json").read_bytes()
+manifest = json.loads((folder / "manifest.json").read_text(encoding="utf-8"))
+if hashlib.sha256(payload).hexdigest() != manifest["files"]["profile.json"]:
+    raise SystemExit("profile fingerprint mismatch")
+rows = [r for r in json.loads(payload) if r["mode"] == "rehash"]
+parts = ("signature_ns", "lookup_ns", "copy_ns", "compute_ns", "residual_ns")
+if not rows or any(sum(r[k] for k in parts) != r["total_ns"] for r in rows):
+    raise SystemExit("missing rows or inconsistent timing accounting")
+first = rows[0]
+print(json.dumps({
+    "mode": "rehash",
+    "rows": len(rows),
+    "first_seed": first["seed"],
+    "first_repeat": first["repeat"],
+    "first_parts_ns": {k: first[k] for k in parts},
+    "first_sum_ns": sum(first[k] for k in parts),
+    "first_total_ns": first["total_ns"],
+    "sum_of_column_medians_ns": sum(median(r[k] for r in rows) for k in parts),
+    "median_of_row_sums_ns": median(sum(r[k] for k in parts) for r in rows),
+    "median_total_ns": median(r["total_ns"] for r in rows),
+}, indent=2))
+'@ | python -
+~~~
+
+固定归档的预期结果是303行，第一行`seed=7, repeat=0`。把纳秒除以1000，依次核对签名、查找、复制、续算与residual：
+
+~~~text
+403.9 + 2.8 + 12.6 + 290.3 + 5.7
+= 715.3 微秒
+~~~
+
+但逐列中位数相加得到676.1微秒；先对每行求和、再取中位数得到682.7微秒，与`median_total_ns / 1000`一致。各列的中间位置可能来自不同请求，所以“每一行都算得平”不能推出“各列中位数也算得平”。
+
+不能把两者之差6.6微秒叫作“尚未发现的瓶颈”，也不能用676.1替换总查询中位数。`residual`已经逐行计入，差别来自统计顺序；它没有进一步解释NumPy内部成本。自检时先预测两种求法是否一定相等，再用这些整数纳秒读数验证，避免先把各列四舍五入后相加。
+
+若找不到文件，先确认工程根目录与固定提交；指纹不一致时停止，检查是否混入另一次运行的记录，不要改manifest去消除提示。需要真正测新条件时，才增大输入长度并在新目录重新运行；不要预写“长序列一定更快”，先检查固定前缀长度是否仍合理。
 
 若不同机器数值变化，先检查NumPy/BLAS版本、线程环境、后台负载与计时范围。若结果不等价，先检查模型身份和绝对位置，不应先讨论速度。下一篇研究[不保存完整注意力分数矩阵](/docs/llm/tiled-online-softmax)，换一个内存问题。
 
@@ -72,6 +119,11 @@ related: ["lab:cache-cost-profile", "project:hohoo-ai-lab", "doc:llm/prefix-cach
 git clone https://github.com/VirtualSelect/hohoo-ai-lab.git hohoo-ai-lab-study
 cd hohoo-ai-lab-study
 git checkout 02a2660e22c969e70e3a6f095003614a7dfa448e
+~~~
+
+只核对归档时，停在这里并运行上方练习即可。需要重新采样时，再安装依赖和执行下面的完整实验；这会重跑三个主题，而不是只做读数核对。
+
+~~~sh
 python -m pip install numpy==2.2.6
 python experiments/10-attention-costs/run.py --out outputs/my-run
 python experiments/10-attention-costs/audit.py outputs/my-run

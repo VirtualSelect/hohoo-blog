@@ -1,10 +1,10 @@
 ---
 title: Java LLM 實踐（二）：HTTP 200 之后，怎樣驗收模型的 JSON？
-description: 從一次真實的代碼圍欄響應和三次超時出發，用 Java 8 實現嚴格結構校驗、受限格式適配與可追溯的失敗處理。
+description: 從一次真實的程式碼圍欄回應和三次逾時出發，用 Java 8 檢查欄位契約、適配受限格式，並核對原驗證器的詞法缺口。
 slug: /ai-apps/java-structured-output
 status: published
 published_at: '2026-09-28'
-updated: '2026-09-28'
+updated: 2026-11-13
 reading_minutes: 16
 learning_step: structured-output
 domain: ai-apps
@@ -13,6 +13,10 @@ difficulty: intermediate
 prerequisites: ["doc:ai-apps/java-first-llm"]
 related: ["project:hohoo-ai-lab", "doc:ai-apps/java-first-llm"]
 ---
+
+<span id="published-correction"></span>
+
+> **2026-11-13 修訂程式碼已發布。** [固定版本與執行說明](https://github.com/VirtualSelect/hohoo-ai-lab/tree/fdea0d8cc8c0a986deee47718cddbe1288afabed/demos/04-structured-output)現可取得。下文「本機分支／尚未發布」保留為2026-11-12複核時的狀態；歷史固定命令仍用於原實驗歸檔，不用於尋找新修訂。使用修訂時，在配套倉庫根目錄執行`git checkout fdea0d8cc8c0a986deee47718cddbe1288afabed`，再按對應目錄README執行，輸出使用新目錄。歷史結果與AI輔助揭露不變。
 
 [開啟輸出驗證台：編輯真實回應，逐層觀察拒絕原因 →](#output-validation)
 
@@ -107,7 +111,7 @@ system 消息列出了分類和標簽規則，明確要求“只返回一個 JSO
 
 先檢查外層的角色、結束原因和正文。如果 `finish_reason=length`，即使眼前的 JSON 看上去完整，本例也選擇拒絕，避免把未完整結束的生成當作確定結果。
 
-內層使用 Gson 的 `JsonReader` 逐個檢查 token，而不只是把任意響應反序列化成 DTO。下面摘自核心邏輯：
+內層使用 Gson 的 `JsonReader` 逐個檢查 token，而不只是把任意回應反序列化成 DTO。下面是**原固定版本**的欄位驗收片段；`setLenient(false)`仍有詞法缺口，不能據此宣稱拒絕所有非法 JSON，見本節勘誤：
 
 ```java
 JsonReader reader = new JsonReader(new StringReader(text));
@@ -136,6 +140,53 @@ while (reader.hasNext()) {
 ```
 
 不能讓后面的值悄悄覆蓋前面的值，再假裝輸入沒有問題。完整原始碼也檢查尾隨內容：合法對象之后再接一個對象，同樣拒絕。
+
+<span id="json-lexical-review"></span>
+
+### 2026-11-12 複核：欄位契約不等於合法 JSON
+
+用文章的原固定程式碼離線解析下面的**非法輸入**，會被接受，標籤變成`can't`：
+
+```text
+{"category":"llm","tags":["can\'t"]}
+```
+
+普通單引號可以直接放在 JSON 雙引號字串內；非法的是額外加上的`\'`跳脫。[RFC 8259 第7節](https://www.rfc-editor.org/rfc/rfc8259#section-7)不包含這種寫法，而[Gson 2.10.1 的 `readEscapeCharacter`](https://github.com/google/gson/blob/gson-parent-2.10.1/gson/src/main/java/com/google/gson/stream/JsonReader.java#L1567)會處理它，且該分支沒有檢查`lenient`。因此，解碼後的欄位與標籤都合法，也不能倒推出原文是合法 JSON。
+
+配套工程本地已在`JsonReader`之前補充字串詞法檢查：只接受 JSON 規定的跳脫，Unicode跳脫需要四個ASCII十六進位數字，拒絕未跳脫控制字元；之後仍執行原欄位、重複鍵、型別與標籤檢查。正常的`can't`、`can\u0027t`與合法反斜線/雙引號繼續接受，不能用「禁止單引號」取代修復。單一圍欄適配後也走同一入口。這項詞法修訂先前通過41項離線檢查，其中6項涵蓋此次補充；後續HTTP邊界複核見下節。這不是完整JSON Schema實作。
+
+**這份修訂尚未提交或發布，本文連結的舊固定提交仍有該缺陷。** 原35項檢查與原32組Java/TypeScript對照沒有涵蓋這個輸入，歸檔成績保留，不改寫成修復後的成績。四次真實模型請求也沒有重跑。重用舊程式碼時，必須先補齊這層邊界，不能僅依賴`setLenient(false)`。
+
+<span id="response-json-review"></span>
+
+### HTTP 200的正文，可能在解碼時已經變了
+
+上面的修訂保護內層字串，外層回應仍要另外檢查。用本機回環HTTP構造回應，把標籤`a?b`中的問號位元組換成非法UTF-8位元組`FF`：舊`ChatClient`沒有報錯，而是解碼成`a�b`，最後仍通過分類契約。它檢查的是替換後的字串，已經不是收到的原始文字。
+
+原因在[Java 8的`String(byte[], Charset)`解碼行為](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#String-byte:A-java.nio.charset.Charset-)：壞序列會被替換。目前本機修訂改用明確報錯的解碼器，在建立JSON樹之前拒絕壞位元組：
+
+```java
+String json = StandardCharsets.UTF_8.newDecoder()
+    .onMalformedInput(CodingErrorAction.REPORT)
+    .onUnmappableCharacter(CodingErrorAction.REPORT)
+    .decode(ByteBuffer.wrap(responseBytes)).toString();
+```
+
+不能用「禁止`�`字元」取代它。合法字元U+FFFD的UTF-8位元組是`EF BF BD`，與壞位元組`FF`不同；合法的`a�b`在修訂前後都應原樣接受。
+
+| 回環回應中的輸入 | 舊客戶端 | 本機修訂 |
+| --- | --- | --- |
+| 標籤裡的壞位元組`FF` | 替換後接受 | UTF-8階段拒絕 |
+| 合法`�`（`EF BF BD`） | 接受 | 保留並接受 |
+| 外層註解、單引號/無引號欄位 | 接受 | 外層JSON階段拒絕 |
+| 同一message重複`content` | 後值覆寫後接受 | 重複欄位拒絕 |
+| 外層`TrUe`、`NULL` | 接受 | 詞法階段拒絕 |
+
+這也解釋了為何不能只把`JsonReader`設為false後交給樹解析器：[Gson 2.10.1的`JsonParser`會暫時啟用寬鬆模式](https://github.com/google/gson/blob/gson-parent-2.10.1/gson/src/main/java/com/google/gson/JsonParser.java#L96)。目前本機新增`JsonInput`，重用既有詞法檢查，並先用串流讀取核對結構、同一物件內解碼後的欄位名稱與文件結束，再建立Gson樹。舊reader還會辨識大小寫混合關鍵字，因此額外核對其原始拼寫；不是看到錯誤後修補成合法值。不同物件可以各有`content`欄位。
+
+這是本例客戶端的輸入邊界，不是通用JSON Schema實作：沿用1MB回應上限，新增最多64層物件/陣列容器（根容器計一層）；允許開頭UTF-8 BOM，依據[RFC 8259第8.1節](https://www.rfc-editor.org/rfc/rfc8259.html#section-8.1)的解析相容選擇。預檢後再建樹的開銷本輪沒有測量。正文裡的瀏覽器驗收台接收的是已解碼字串，不能用它模擬原始壞位元組。
+
+本機工程的60項離線檢查通過，包含先前41項與19項新增回環回應檢查；中文、合法替換字元、合法數字/布林值、不同物件同名欄位與64層邊界保留，65層拒絕。原32組字串對照仍逐項符合原預期。**修訂尚未提交發布，固定連結仍是舊實作**；原35項記錄、32組歸檔與四次真實模型請求不改寫。本輪僅連接127.0.0.1，沒有存取模型服務，也不據此推斷線上提供商的可靠性。
 
 ## 5. 明確適配格式，而不是修補所有壞回答
 

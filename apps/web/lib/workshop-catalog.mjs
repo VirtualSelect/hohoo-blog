@@ -2,7 +2,7 @@
 export const workshops = [
   {
     id: "emergence",
-    domain: "embodied-ai",
+    domain: "creative",
     mark: "✳",
     title: [
       "简单规则，能长出怎样的花园？",
@@ -99,28 +99,6 @@ export const workshops = [
     tags: ["RAG", "retrieval", "检索", "排序"],
   },
   {
-    id: "context",
-    domain: "llm",
-    mark: "▤",
-    title: [
-      "上下文满了，先放下什么？",
-      "What goes when context is full?",
-      "上下文滿了，先放下什麼？",
-    ],
-    description: [
-      "在有限容量里取舍历史、资料和输出空间。",
-      "Balance history, references and output space within a limited budget.",
-      "在有限容量裡取捨歷史、資料和輸出空間。",
-    ],
-    task: [
-      "缩小容量，再切换压缩资料，观察哪些信息被保留。容量是教学单位，不是 Token 测量。",
-      "Reduce capacity and compress references. Units illustrate trade-offs; they are not measured tokens.",
-      "縮小容量，再切換壓縮資料，觀察哪些資訊被保留。容量是教學單位，不是 Token 測量。",
-    ],
-    href: "/docs/llm",
-    tags: ["context", "Token", "上下文"],
-  },
-  {
     id: "robot",
     domain: "embodied-ai",
     mark: "⌁",
@@ -185,28 +163,6 @@ export const workshops = [
     ],
     href: "/docs/ai-apps/java-first-llm",
     tags: ["JSON", "schema", "结构化", "解析"],
-  },
-  {
-    id: "decision-desk",
-    domain: "ai-apps",
-    mark: "≠",
-    title: [
-      "有把握，就能自动执行吗？",
-      "Does confidence grant permission?",
-      "有把握，就能自動執行嗎？",
-    ],
-    description: [
-      "改变置信度、权限和操作风险，观察决策规则。",
-      "Vary confidence, permission and risk to inspect a decision rule.",
-      "改變信心程度、權限和操作風險，觀察決策規則。",
-    ],
-    task: [
-      "把置信度拉满，再撤销权限；观察哪个条件优先。",
-      "Maximize confidence, then revoke permission. Which condition wins?",
-      "把信心程度拉滿，再撤銷權限；觀察哪個條件優先。",
-    ],
-    href: "/docs/ai-apps",
-    tags: ["Agent", "permission", "权限", "安全"],
   },
 ];
 export const workshopText = (value, locale) =>

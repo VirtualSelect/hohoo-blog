@@ -10,6 +10,10 @@ import "./design-picker.css";
 import NotFound from "./[[...segments]]/not-found";
 import { themeScript } from "../lib/theme-init.mjs";
 import { brandIcons } from "../lib/brand";
+export const metadata = {
+  title: "404 · Hohoo",
+  description: "页面未找到。继续查找 Hohoo 已发表的文章与学习路线。",
+};
 export default function GlobalNotFound() {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
