@@ -7,6 +7,7 @@ import "./lab-pages.css";
 import "./design-layouts.css";
 import "./design-collection.css";
 import "./design-picker.css";
+import "./theme-passage.css";
 import NotFound from "./[[...segments]]/not-found";
 import { themeScript } from "../lib/theme-init.mjs";
 import { brandIcons } from "../lib/brand";

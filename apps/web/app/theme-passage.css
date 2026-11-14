@@ -1,0 +1,209 @@
+/* A single decoration, removed after 340ms; it never captures input or focus. */
+.theme-passage {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  contain: strict;
+  animation: theme-passage-dismiss 340ms ease-out both;
+}
+.theme-passage > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.theme-passage[data-passage="space"] {
+  color: #b8ceff;
+}
+.theme-passage-orbits {
+  opacity: 0.3;
+  transform-origin: 600px 400px;
+  animation: theme-passage-orbit 340ms ease-out both;
+}
+.theme-passage-stars {
+  opacity: 0.55;
+}
+.theme-passage[data-passage="clear"] {
+  color: #7690a9;
+}
+.theme-passage-lines {
+  opacity: 0.25;
+  animation: theme-passage-reading 340ms ease-out both;
+}
+.theme-passage-margin {
+  stroke-width: 3;
+}
+.theme-passage[data-passage="classic"] {
+  color: #476957;
+}
+.theme-passage-ink {
+  opacity: 0.22;
+  stroke-width: 3;
+  stroke-linecap: round;
+  transform-origin: 140px 400px;
+  animation: theme-passage-ink 340ms ease-out both;
+}
+.theme-passage[data-passage="garden"] {
+  color: #517944;
+}
+.theme-passage-leaves {
+  opacity: 0.15;
+  transform-origin: 100% 0;
+  animation: theme-passage-leaves 340ms ease-out both;
+}
+.theme-passage-veins {
+  fill: none;
+  stroke: #f4f5e8;
+  stroke-width: 3;
+}
+.theme-passage[data-passage="photo"] {
+  color: #826c55;
+}
+.theme-passage-aperture {
+  opacity: 0.2;
+  stroke-width: 100;
+  transform-origin: 600px 400px;
+  animation: theme-passage-aperture 340ms cubic-bezier(0.2, 0.65, 0.3, 1) both;
+}
+.theme-passage-aperture-edge {
+  stroke-width: 1.5;
+}
+.theme-passage[data-passage="construct"] {
+  color: #252422;
+}
+.theme-passage-blocks {
+  opacity: 0.14;
+  transform-origin: 600px 400px;
+  animation: theme-passage-blocks 340ms ease-out both;
+}
+.theme-passage-quarter {
+  fill: #c94e32;
+  stroke: #c94e32;
+}
+.theme-passage[data-passage="map"] {
+  color: #267d85;
+}
+.theme-passage-routes {
+  opacity: 0.35;
+  stroke-dasharray: 1;
+  animation: theme-passage-route 340ms ease-out both;
+}
+.theme-passage-nodes {
+  opacity: 0.35;
+}
+.theme-passage[data-passage="chapters"] {
+  color: #957d6d;
+  perspective: 1000px;
+}
+.theme-passage-page {
+  opacity: 0.35;
+  transform-origin: 600px 400px;
+  animation: theme-passage-page 340ms ease-out both;
+}
+.theme-passage-paper {
+  fill: #eee5d6;
+  stroke-width: 1;
+}
+.theme-passage-page-lines {
+  fill: none;
+  stroke-width: 2;
+}
+.theme-passage-spine {
+  fill: none;
+  stroke-width: 3;
+}
+@keyframes theme-passage-dismiss {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes theme-passage-orbit {
+  from {
+    transform: rotate(-12deg) scale(0.96);
+  }
+  to {
+    transform: rotate(0) scale(1.04);
+  }
+}
+@keyframes theme-passage-reading {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes theme-passage-ink {
+  from {
+    transform: scaleX(0.45);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes theme-passage-leaves {
+  from {
+    transform: translate(10px, -22px) rotate(-8deg);
+  }
+  to {
+    transform: translate(-6px, 14px) rotate(0);
+  }
+}
+@keyframes theme-passage-aperture {
+  from {
+    transform: scale(0.85);
+  }
+  to {
+    transform: scale(3);
+  }
+}
+@keyframes theme-passage-blocks {
+  from {
+    transform: translateX(-24px) rotate(-2deg);
+  }
+  to {
+    transform: translateX(12px) rotate(0);
+  }
+}
+@keyframes theme-passage-route {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes theme-passage-page {
+  from {
+    transform: perspective(1000px) rotateY(-42deg);
+  }
+  to {
+    transform: perspective(1000px) rotateY(-120deg);
+  }
+}
+@media (max-width: 600px) {
+  .theme-passage > svg {
+    width: 160%;
+    max-width: none;
+    margin-left: -30%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-passage {
+    display: none;
+  }
+  .theme-passage,
+  .theme-passage * {
+    animation: none;
+  }
+}
