@@ -131,7 +131,7 @@ Docs / Blog 可选 `article_kind`：`tutorial`（实战教程）、`case-study`�
 - 背包文件：`{version:1,kind:"huhohoo-backpack",records:{[storageKey]:rawJsonString}}`，最大 2 MB / 1000 份记录。白名单仅 reading.v2 / learning.v1 / reflection.v1 与上述 practice.v1。未知版本、字段和非法记录拒绝导入，不静默降级。已有阅读和学习旧键迁移沿用原 hook；备份格式未来升级须新增显式迁移。
 - 当前背包校验允许学习记录省略`savedAt`，若提供则每个键必须为已收藏的安全ID、每个值必须为可解析日期；资讯v2的必需时间映射规则保持原样。新增时间字段作为原始记录一并导出和还原，不合并推造缺失日期。旧备份可以导入当前实现；含新增字段的备份不能保证导入尚未更新的旧站点，其严格字段白名单会拒绝。旧网页重写学习记录时也可能丢掉它不识别的可选日期，不能承诺新旧版本之间完整保留日期。
 - 导入冲突按整份记录处理，默认保留本地；覆盖为读者显式选择。执行前再次校验预览快照。存储失败尝试回滚，回滚失败明确提示；不宣称浏览器存储具有事务保证或跨设备自动同步。
-- `data/article-history.json`：以无语言前缀 route 为键，记录真实 date / commit / 三语言 summary。当前仅核实 Java 首篇发布提交。日期不是部署时间或再次核验时间，无记录的文章隐藏此模块。
+- `data/article-history.json`：以无语言前缀 route 为键，记录真实 date / commit / 三语言 summary。包含已核实的首次发表，以及有实际提交依据的 Java 首篇后续阅读、MuJoCo 计时边界、持久化整轮问答修订；不由 `updated` 推测完整修订历史。日期不是部署时间或再次核验时间，无记录的文章隐藏此模块。
 - `data/radar-practice.json`：显式 signalId / 三语言 question / 本站 href / 三语言 label。它是维护者可编辑的阅读问题，不是 HOOHOO'S TAKE、论文复现结果或自动生成的结论；来源记录不改动。
 
 ## Journey 计划模型

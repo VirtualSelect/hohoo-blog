@@ -2,6 +2,7 @@ import { uiLabel } from "@site/src/utils/ui-labels";
 import React from "react";
 import Link from "@lab/runtime/Link";
 import { translate } from "@lab/runtime/Translate";
+import { useText } from "@lab/components/Shell";
 import WritingKind from "./WritingKind";
 import type { ContentEntry, Domain } from "@lab/lib/site-types";
 const trackLabels: Record<Domain, string> = {
@@ -10,11 +11,25 @@ const trackLabels: Record<Domain, string> = {
   "embodied-ai": "EXPLORE",
   rag: "RETRIEVE",
 };
-export default function WritingList({ items }: { items: ContentEntry[] }) {
+export default function WritingList({
+  items,
+  onPreview,
+  selectedId,
+  previewId,
+}: {
+  items: ContentEntry[];
+  onPreview?: (id: string) => void;
+  selectedId?: string;
+  previewId?: string;
+}) {
+  const t = useText();
   return items.length ? (
     <ol className="hh-rows hh-writing-list">
       {items.map((item, index) => (
-        <li key={item.id}>
+        <li
+          key={item.id}
+          data-selected={onPreview ? selectedId === item.id : undefined}
+        >
           <div>
             <p className="hh-eyebrow">
               {String(index + 1).padStart(2, "0")} /{" "}
@@ -38,6 +53,19 @@ export default function WritingList({ items }: { items: ContentEntry[] }) {
             <p>{item.description}</p>
           </div>
           <div className="hh-row-meta">
+            {onPreview && (
+              <button
+                type="button"
+                className="writing-preview-trigger"
+                aria-pressed={selectedId === item.id}
+                aria-controls={previewId}
+                aria-label={t("预览：", "Preview: ", "預覽：") + item.title}
+                onClick={() => onPreview(item.id)}
+              >
+                {t("预览", "Preview", "預覽")}
+                <span aria-hidden="true"> →</span>
+              </button>
+            )}
             {item.date && <time dateTime={item.date}>{item.date}</time>}
             {item.minutes && (
               <span>

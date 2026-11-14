@@ -1,0 +1,384 @@
+.page {
+  min-width: 0;
+}
+.page :global(.changelog-heading) {
+  display: block;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0;
+}
+.page :global(.changelog-heading h1) {
+  margin: 0.4rem 0 0.7rem;
+  font-family: var(--design-title-font, inherit);
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  line-height: 1.12;
+}
+.page :global(.changelog-heading > p:last-child) {
+  color: var(--blog-muted);
+  max-width: 48rem;
+  font-size: 1.08rem;
+}
+.page :global(.changelog-toolbar) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--blog-border);
+}
+.page :global(.changelog-categories) {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 24rem;
+  gap: 0.25rem;
+}
+.page :global(.changelog-categories button),
+.page :global(.changelog-result-bar button) {
+  min-height: 44px;
+  padding: 0.6rem 0.85rem;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.page :global(.changelog-categories button[aria-pressed="true"]) {
+  border-color: var(--hh-accent);
+  color: var(--hh-accent);
+  font-weight: 650;
+}
+.page :global(.changelog-search) {
+  flex: 1 1 13rem;
+  min-width: 0;
+}
+.page :global(.changelog-month-filter) {
+  flex: 0 1 10rem;
+}
+.page :global(.changelog-toolbar label) {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--blog-muted);
+  margin-bottom: 0.35rem;
+}
+.page :global(.changelog-toolbar input),
+.page :global(.changelog-toolbar select) {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid var(--blog-border);
+  border-radius: 4px;
+  color: inherit;
+  background: var(--blog-surface);
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  font-size: 0.88rem;
+}
+.page :global(.changelog-result-bar) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 48px;
+  color: var(--blog-muted);
+  font-size: 0.8rem;
+}
+.page :global(.changelog-result-bar p) {
+  margin: 0;
+}
+.page :global(.changelog-date-note) {
+  color: var(--blog-muted);
+  font-size: 0.86rem;
+  margin: 0.5rem 0 2rem;
+}
+.page :global(.changelog-layout) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  gap: clamp(1.75rem, 4vw, 4rem);
+}
+.page :global(.changelog-main),
+.page :global(.changelog-entry),
+.page :global(.changelog-sidebar) {
+  min-width: 0;
+}
+.page :global(.changelog-preview) {
+  border: 1px solid var(--hh-accent);
+  border-left-width: 3px;
+  background: var(--blog-soft);
+  padding: 1.3rem 1.5rem;
+  margin-bottom: 2.4rem;
+}
+.page :global(.changelog-preview-label) {
+  color: var(--hh-accent);
+  font: 0.7rem/1.6 var(--hh-base-font-family-monospace);
+  letter-spacing: 0.05em;
+}
+.page :global(.changelog-preview h2) {
+  font-size: 1.3rem;
+  margin: 0.55rem 0;
+}
+.page :global(.changelog-preview p) {
+  color: var(--blog-muted);
+  font-size: 0.88rem;
+  margin: 0;
+}
+.page :global(.changelog-month) {
+  margin-bottom: 2.8rem;
+}
+.page :global(.changelog-month-heading) {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--blog-border);
+  padding-bottom: 0.8rem;
+}
+.page :global(.changelog-month-heading h2) {
+  margin: 0;
+  font-family: var(--design-title-font, inherit);
+  font-size: 1.65rem;
+}
+.page :global(.changelog-month-heading > span) {
+  font-size: 0.7rem;
+  color: var(--blog-muted);
+}
+.page :global(.changelog-month > ol) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.page :global(.changelog-row) {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 1.15rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--blog-border);
+}
+.page :global(.changelog-date) {
+  display: flex;
+  flex-direction: column;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--hh-base-font-family-monospace);
+  font-size: 1rem;
+}
+.page :global(.changelog-date small) {
+  color: var(--blog-muted);
+  font-size: 0.68rem;
+  margin-top: 0.2rem;
+}
+.page :global(.changelog-entry-meta) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.68rem;
+}
+.page :global(.changelog-kind) {
+  color: var(--hh-accent);
+  background: var(--blog-soft);
+  padding: 0.15rem 0.45rem;
+}
+.page :global(.changelog-branch-label) {
+  color: var(--blog-muted);
+  border: 1px solid var(--blog-border);
+  padding: 0.1rem 0.4rem;
+}
+.page :global(.changelog-entry h3) {
+  margin: 0;
+  font-family: var(--design-title-font, inherit);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.page :global(.changelog-summary) {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--blog-muted);
+  margin: 0.55rem 0;
+  overflow-wrap: anywhere;
+}
+.page :global(.changelog-modules) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.74rem;
+  margin: 0.7rem 0;
+}
+.page :global(.changelog-modules > span) {
+  color: var(--blog-muted);
+}
+.page :global(.changelog-evidence) {
+  margin-top: 0.65rem;
+  font-size: 0.8rem;
+}
+.page :global(.changelog-evidence > summary) {
+  min-height: 44px;
+  padding: 0.6rem 0;
+  cursor: pointer;
+  color: var(--hh-accent);
+}
+.page :global(.changelog-evidence > summary code) {
+  margin-left: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--blog-muted);
+}
+.page :global(.changelog-evidence-body) {
+  background: var(--blog-soft);
+  padding: 1rem;
+  overflow-wrap: anywhere;
+}
+.page :global(.changelog-evidence-body > p) {
+  margin: 0 0 0.8rem;
+  color: var(--blog-muted);
+}
+.page :global(.changelog-evidence-body dl) {
+  margin: 0;
+}
+.page :global(.changelog-evidence-body dl > div) {
+  margin: 0.6rem 0;
+}
+.page :global(.changelog-evidence-body dt) {
+  color: var(--blog-muted);
+  font-size: 0.7rem;
+}
+.page :global(.changelog-evidence-body dd) {
+  margin: 0.15rem 0 0;
+}
+.page :global(.changelog-evidence-body code) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.page :global(.changelog-source-links) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+}
+.page :global(.changelog-source-links a),
+.page :global(.changelog-related a) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.page :global(.changelog-sidebar) {
+  border-left: 1px solid var(--blog-border);
+  padding-left: 1.6rem;
+}
+.page :global(.changelog-sidebar > section) {
+  border-bottom: 1px solid var(--blog-border);
+  padding-bottom: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+.page :global(.changelog-sidebar h2) {
+  font-family: var(--design-title-font, inherit);
+  font-size: 1.1rem;
+  margin: 0 0 0.8rem;
+}
+.page :global(.changelog-explainer) {
+  margin: 0;
+}
+.page :global(.changelog-explainer > div + div) {
+  margin-top: 1.2rem;
+}
+.page :global(.changelog-explainer dt) {
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+.page :global(.changelog-explainer dd) {
+  margin: 0.3rem 0 0;
+  color: var(--blog-muted);
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+.page :global(.changelog-release-empty p),
+.page :global(.changelog-maintenance-note),
+.page :global(.changelog-maintenance p) {
+  font-size: 0.78rem;
+  line-height: 1.9;
+  color: var(--blog-muted);
+}
+.page :global(.changelog-release-empty p) {
+  background: var(--blog-soft);
+  padding: 1rem;
+}
+.page :global(.changelog-related) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 0.86rem;
+}
+.page :global(.changelog-empty) {
+  padding: 2.5rem 1.5rem;
+  background: var(--blog-soft);
+}
+.page :global(.changelog-empty h2) {
+  font-size: 1.4rem;
+  margin-top: 0;
+}
+.page :global(.changelog-empty p) {
+  color: var(--blog-muted);
+  margin-bottom: 0;
+}
+.page :global(button:focus-visible),
+.page :global(input:focus-visible),
+.page :global(select:focus-visible),
+.page :global(summary:focus-visible),
+.page :global(a:focus-visible) {
+  outline: 2px solid var(--hh-accent);
+  outline-offset: 4px;
+}
+@media (max-width: 1050px) {
+  .page :global(.changelog-layout) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .page :global(.changelog-sidebar) {
+    border-left: 0;
+    border-top: 1px solid var(--blog-border);
+    padding: 1.5rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .page :global(.changelog-toolbar) {
+    gap: 0.8rem;
+  }
+  .page :global(.changelog-categories) {
+    flex-basis: 100%;
+    gap: 0;
+  }
+  .page :global(.changelog-categories button) {
+    flex: 1 1 auto;
+    padding-inline: 0.45rem;
+    font-size: 0.78rem;
+  }
+  .page :global(.changelog-search) {
+    flex: 1 1 11rem;
+  }
+  .page :global(.changelog-month-filter) {
+    flex: 1 1 7rem;
+  }
+  .page :global(.changelog-month-heading) {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .page :global(.changelog-row) {
+    grid-template-columns: 45px minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-block: 1.25rem;
+  }
+  .page :global(.changelog-date) {
+    font-size: 0.8rem;
+  }
+  .page :global(.changelog-entry h3) {
+    font-size: 1.05rem;
+  }
+  .page :global(.changelog-preview) {
+    padding: 1rem;
+  }
+  .page :global(.changelog-sidebar) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+}

@@ -30,9 +30,9 @@ export default function ArticleHistory({ route }) {
       </ol>
       <p className={styles.muted}>
         {t(
-          "当前只有已核实的首次发布记录；日期来自 Git 提交，不代表部署时间或今天重新验证。服务端状态、模型行为及费用以实际调用为准。",
-          "Only the verified first-publication record is available. Dates come from Git commits, not deployment time or revalidation today. Provider state, model behaviour and costs depend on actual calls.",
-          "目前只有已核實的首次發佈記錄；日期來自 Git 提交，不代表部署時間或今天重新驗證。伺服器狀態、模型行為及費用以實際呼叫為準。",
+          "这里只展示已核实的发表与修订记录；日期来自 Git 提交，不代表部署时间或今天重新验证。服务端状态、模型行为及费用以实际调用为准。",
+          "Only verified publication and revision records appear here. Dates come from Git commits, not deployment time or revalidation today. Provider state, model behaviour and costs depend on actual calls.",
+          "這裡只展示已核實的發表與修訂記錄；日期來自 Git 提交，不代表部署時間或今天重新驗證。伺服器狀態、模型行為及費用以實際呼叫為準。",
         )}
       </p>
     </details>

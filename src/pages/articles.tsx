@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import Layout from "@lab/runtime/Layout";
 import { useContent } from "../components/ContentUI";
 import WritingList from "../components/WritingList";
+import WritingExplorer from "@lab/components/WritingExplorer";
 import { writingEntries } from "../utils/localization.cjs";
 import {
   writingKinds,
@@ -171,7 +172,7 @@ export default function Articles() {
             </button>
           )}
         </div>
-        <WritingList items={filtered ? visible : visible.slice(0, 6)} />
+        <WritingExplorer items={filtered ? visible : visible.slice(0, 6)} />
         {!filtered && visible.length > 6 && (
           <details
             className="writing-complete"

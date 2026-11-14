@@ -3,30 +3,150 @@
     "project": "project:hohoo-blog",
     "commit": "64fbc8247924434f71ca838f507847e36bce46b3",
     "date": "2026-09-11",
-    "title": "feat:版本升级"
+    "title": "feat:版本升级",
+    "headline": [
+      "升级当时的站点框架与预览流程",
+      "Upgrade the earlier site framework and preview flow",
+      "升級當時的網站框架與預覽流程"
+    ],
+    "summary": [
+      "历史改动：升级当时使用的 Docusaurus 版本，整理本地预览流程。",
+      "A historical change to the then-current Docusaurus version and local preview flow.",
+      "歷史改動：升級當時使用的 Docusaurus 版本，整理本機預覽流程。"
+    ],
+    "modules": ["site"],
+    "scope": "repository"
   },
   {
     "project": "project:hohoo-blog",
     "commit": "436f096ff551019b72a3a68ad304668c3c381e9f",
     "date": "2026-09-11",
-    "title": "test: 补齐响应式交互验收与升级维护报告"
+    "title": "test: 补齐响应式交互验收与升级维护报告",
+    "headline": [
+      "补齐响应式与交互验收说明",
+      "Document responsive and interaction checks",
+      "補齊響應式與互動驗收說明"
+    ],
+    "summary": [
+      "增加当时的响应式、交互验收与内容维护报告，保留检查依据。",
+      "Add the responsive, interaction and content-maintenance reports for that revision.",
+      "增加當時的響應式、互動驗收與內容維護報告，保留檢查依據。"
+    ],
+    "modules": ["site", "navigation"],
+    "scope": "repository"
   },
   {
     "project": "project:hohoo-blog",
     "commit": "6b45da1f6aae23f05ab8ee12e7da751516a75b6f",
     "date": "2026-09-11",
-    "title": "feat: 完善三轨学习进度与原生阅读上下文"
+    "title": "feat: 完善三轨学习进度与原生阅读上下文",
+    "headline": [
+      "衔接学习进度与正文阅读",
+      "Connect learning progress and article reading",
+      "銜接學習進度與正文閱讀"
+    ],
+    "summary": [
+      "完善学习进度、收藏操作与正文阅读上下文，让学习入口与阅读衔接。",
+      "Improve learning progress, saved items and article context so reading follows the learning path.",
+      "完善學習進度、收藏操作與正文閱讀脈絡，讓學習入口與閱讀銜接。"
+    ],
+    "modules": ["learning", "reading"],
+    "scope": "repository"
   },
   {
     "project": "project:hohoo-blog",
     "commit": "b243befe76ca3105b0313a0680b012bc73c067c9",
     "date": "2026-09-11",
-    "title": "feat: 用近况真实更新与专题入口重组首页"
+    "title": "feat: 用近况真实更新与专题入口重组首页",
+    "headline": [
+      "整理首页近况与专题入口",
+      "Reorganize Now and topic entry points on Home",
+      "整理首頁近況與專題入口"
+    ],
+    "summary": [
+      "用已有近况与专题内容重组首页入口，调整阅读导航。",
+      "Reorganize Home around existing Now and topic content, and adjust reading navigation.",
+      "用已有近況與專題內容重組首頁入口，調整閱讀導覽。"
+    ],
+    "modules": ["home", "navigation"],
+    "scope": "repository"
   },
   {
     "project": "project:hohoo-blog",
     "commit": "41a93e979902ea04a7bbcc89f6f67498b1ca2bd8",
     "date": "2026-09-11",
-    "title": "feat: 建立真实内容索引与项目实验和 Radar 路由"
+    "title": "feat: 建立真实内容索引与项目实验和 Radar 路由",
+    "headline": [
+      "建立内容索引与实践入口",
+      "Create the content index and practice entry points",
+      "建立內容索引與實作入口"
+    ],
+    "summary": [
+      "建立真实内容索引，连接项目、实验与 Radar 的已有入口。",
+      "Create the real-content index and connect existing project, lab and Radar routes.",
+      "建立真實內容索引，連接專案、實驗與 Radar 的已有入口。"
+    ],
+    "modules": ["learning", "build", "radar"],
+    "scope": "repository"
+  },
+  {
+    "project": "project:hohoo-blog",
+    "date": "2026-11-13",
+    "commit": "84722880383d5f51b88895a044c1d6124eb9d400",
+    "committedAt": "2026-11-13T16:02:14+08:00",
+    "title": "feat: 保存八套已选博客主题",
+    "headline": [
+      "保存八套主题的分支检查点",
+      "Save the eight-theme branch checkpoint",
+      "儲存八套主題的分支檢查點"
+    ],
+    "summary": [
+      "在开发分支保存八套主题布局，作为继续改造与验证的检查点。",
+      "Save the eight layouts on the development branch as a checkpoint for further redesign and validation.",
+      "在開發分支儲存八套主題版面，作為繼續改造與驗證的檢查點。"
+    ],
+    "modules": ["site", "navigation"],
+    "scope": "branch",
+    "branch": "codex/ai-lab-reimagined-20261112"
+  },
+  {
+    "project": "project:hohoo-blog",
+    "date": "2026-11-13",
+    "commit": "745834814213e0fa0cae9637485e02d5f0d623ae",
+    "committedAt": "2026-11-13T16:22:12+08:00",
+    "title": "merge: 合入最新主干并适配八套主题",
+    "headline": [
+      "将主干更新整合到主题分支",
+      "Integrate main into the theme branch",
+      "將主幹更新整合到主題分支"
+    ],
+    "summary": [
+      "主干内容与功能更新合入主题开发分支；这不表示主题已经合入主干。",
+      "Bring main-branch content and features into the theme branch. This does not mean the themes were merged to main.",
+      "主幹內容與功能更新合入主題開發分支；這不表示主題已經合入主幹。"
+    ],
+    "modules": ["site", "learning", "reading"],
+    "scope": "branch",
+    "branch": "codex/ai-lab-reimagined-20261112"
+  },
+  {
+    "project": "project:hohoo-blog",
+    "date": "2026-11-13",
+    "commit": "ad168370c37ee49568d1847ccc222ea77fb472d1",
+    "committedAt": "2026-11-13T17:13:07+08:00",
+    "title": "feat: 添加Astra信号环3D装置并验证主干适配",
+    "headline": [
+      "加入早期信号环3D装置",
+      "Add the earlier signal-ring 3D work",
+      "加入早期訊號環3D裝置"
+    ],
+    "summary": [
+      "在主题开发分支加入早期 Astra 信号环，保留这一阶段的代码记录；不代表本轮新设计已发布。",
+      "Add the earlier Astra signal ring on the theme branch. This historical code record does not establish a release of the new designs.",
+      "在主題開發分支加入早期 Astra 訊號環，保留這一階段的程式碼記錄；不代表本輪新設計已發佈。"
+    ],
+    "modules": ["home", "build"],
+    "scope": "branch",
+    "branch": "codex/ai-lab-reimagined-20261112"
   }
 ]

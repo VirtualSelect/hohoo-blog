@@ -1,0 +1,1058 @@
+/* Shared content, eight editorial compositions. Decorative treatments never alter evidence media. */
+.module-directory {
+  display: none;
+  min-width: 0;
+}
+.module-directory-label,
+.module-topics > p {
+  font: 11px/1.6 var(--hh-base-font-family-monospace, monospace);
+  letter-spacing: 0.12em;
+  color: var(--atlas-muted);
+}
+.module-directory nav {
+  display: grid;
+  gap: 3px;
+}
+.module-directory nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 12px;
+  color: var(--atlas-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.module-directory nav a > span:first-child {
+  font: 10px monospace;
+}
+.module-directory nav a > span:last-child {
+  margin-left: auto;
+}
+.module-directory nav a[aria-current],
+.module-directory nav a:hover {
+  color: var(--atlas-accent);
+  background: var(--atlas-accent-soft);
+}
+.module-directory .module-topics {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--atlas-border);
+}
+.writing-explorer {
+  min-width: 0;
+}
+.writing-preview,
+.writing-preview-trigger {
+  display: none;
+}
+.writing-preview {
+  min-width: 0;
+  align-self: start;
+  padding: 32px;
+  background: var(--atlas-surface);
+  border: 1px solid var(--atlas-border);
+}
+.writing-preview h2 {
+  font-size: clamp(25px, 2.5vw, 38px);
+  line-height: 1.4;
+  margin: 24px 0;
+  overflow-wrap: anywhere;
+}
+.writing-preview > p:not(.hh-eyebrow) {
+  color: var(--atlas-muted);
+  font-size: 15px;
+  line-height: 1.9;
+}
+.writing-preview time {
+  display: block;
+  margin: 24px 0;
+  font: 12px monospace;
+  color: var(--atlas-muted);
+}
+.writing-preview > a {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 24px;
+  margin-top: 28px;
+  border-top: 1px solid var(--atlas-border);
+  font-size: 14px;
+}
+.writing-preview-trigger {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--atlas-border);
+  border-radius: 0;
+  color: var(--atlas-muted);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.writing-preview-trigger[aria-pressed="true"] {
+  color: var(--atlas-accent);
+  border-color: var(--atlas-accent);
+}
+.writing-explorer .hh-writing-list {
+  margin: 0;
+  padding: 0;
+}
+.writing-explorer .hh-writing-list > li {
+  min-width: 0;
+}
+.writing-explorer .hh-writing-list h2 {
+  overflow-wrap: anywhere;
+}
+.lab-shell[data-page] .hh-empty {
+  padding: 32px;
+  border: 1px dashed var(--atlas-border);
+  color: var(--atlas-muted);
+  font-size: 15px;
+  line-height: 1.9;
+}
+.lab-shell[data-page] :is(input[type="search"], select) {
+  min-height: 44px;
+  max-width: 100%;
+}
+.lab-shell[data-page] :is(.hh-row-meta, .hh-meta) {
+  flex-wrap: wrap;
+}
+
+/* A — the queue and selected reading occupy separate research panels. */
+:root[data-design="space"] .lab-shell .writing-explorer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+  gap: 32px;
+}
+:root[data-design="space"] .lab-shell .writing-explorer .hh-writing-list {
+  display: block;
+}
+:root[data-design="space"] .lab-shell .writing-explorer .hh-writing-list > li {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--atlas-border);
+  border-bottom: 0;
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-design="space"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li:last-child {
+  border-bottom: 1px solid var(--atlas-border);
+}
+:root[data-design="space"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li[data-selected="true"] {
+  box-shadow: inset 3px 0 var(--atlas-accent);
+  background: var(--atlas-surface);
+}
+:root[data-design="space"] .lab-shell .writing-explorer .hh-writing-list h2 {
+  font-size: 21px;
+  line-height: 1.5;
+}
+:root[data-design="space"] .lab-shell .writing-explorer .hh-row-meta {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 16px;
+}
+:root[data-design="space"] .writing-preview {
+  display: block;
+  position: sticky;
+  top: 28px;
+}
+:root[data-design="space"] .writing-preview-trigger {
+  display: inline-flex;
+}
+:root[data-design="space"] .path-picker {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+:root[data-design="space"] .path-picker > article {
+  display: grid;
+  grid-template-columns: 55px minmax(0, 1fr) minmax(160px, 0.55fr);
+  align-items: center;
+  gap: 28px;
+  border: 1px solid var(--atlas-border);
+  padding: 32px;
+  border-radius: 0;
+  background: var(--atlas-surface);
+}
+:root[data-design="space"] .path-picker > article + article {
+  border-top: 0;
+}
+:root[data-design="space"] .path-picker .obs-kicker {
+  font-size: 24px;
+}
+:root[data-design="space"] .lab-shell .document-body {
+  background: var(--atlas-surface);
+  border: 1px solid var(--atlas-border);
+  padding: clamp(24px, 4vw, 60px);
+}
+
+/* B — a clear product reading system: direction tiles, paired articles, broad body. */
+:root[data-design="clear"] .lab-shell .writing-explorer .hh-writing-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+:root[data-design="clear"] .lab-shell .writing-explorer .hh-writing-list > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  min-height: 270px;
+  padding: 30px;
+  grid-row: auto;
+  grid-column: auto;
+  border: 1px solid var(--atlas-border);
+  border-radius: 4px;
+  background: var(--atlas-surface);
+}
+:root[data-design="clear"] .lab-shell .writing-explorer .hh-writing-list h2 {
+  font-size: 25px;
+  line-height: 1.45;
+}
+:root[data-design="clear"] .lab-shell .writing-explorer .hh-row-meta {
+  flex-direction: row;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--atlas-border);
+}
+:root[data-design="clear"] .path-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+:root[data-design="clear"] .lab-shell .document-layout {
+  column-gap: 40px;
+}
+
+/* C — a notebook directory, with metadata in the outer margin. */
+:root[data-design="classic"] .lab-shell .writing-explorer .hh-writing-list {
+  display: block;
+}
+:root[data-design="classic"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px;
+  gap: 28px;
+  min-height: 0;
+  margin: 0;
+  padding: 30px 0;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-design="classic"] .lab-shell .writing-explorer .hh-writing-list h2 {
+  font:
+    500 27px/1.55 Georgia,
+    "Songti SC",
+    "SimSun",
+    serif;
+}
+:root[data-design="classic"] .lab-shell .writing-explorer .hh-row-meta {
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 32px;
+}
+:root[data-design="classic"] .path-picker {
+  display: block;
+}
+:root[data-design="classic"] .path-picker > article {
+  display: grid;
+  grid-template-columns: 45px minmax(0, 1fr) 180px;
+  align-items: start;
+  gap: 24px;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  padding: 30px 0;
+  background: transparent;
+}
+:root[data-design="classic"] .document-body > header {
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--atlas-border);
+}
+
+/* D — the garden guides the entrance; long prose has uninterrupted paper. */
+:root[data-design="garden"]
+  .lab-shell
+  :is(.focused-heading, .atlas-page-heading) {
+  position: relative;
+  padding-right: min(15vw, 180px);
+}
+:root[data-design="garden"]
+  .lab-shell
+  :is(.focused-heading, .atlas-page-heading)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: min(14vw, 160px);
+  height: 100%;
+  max-height: 170px;
+  opacity: 0.65;
+  background: url("/media/design/garden-scene.webp") 91% 42% / auto 185%
+    no-repeat;
+  mask-image: radial-gradient(ellipse, #000 22%, transparent 73%);
+  pointer-events: none;
+}
+:root[data-design="garden"] .lab-shell .writing-explorer .hh-writing-list {
+  display: block;
+}
+:root[data-design="garden"] .lab-shell .writing-explorer .hh-writing-list > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px;
+  gap: 24px;
+  min-height: 0;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  padding: 36px 0;
+  margin: 0;
+  background: transparent;
+}
+:root[data-design="garden"] .lab-shell .writing-explorer .hh-writing-list h2 {
+  font-family: var(--design-title-font);
+  font-weight: 500;
+  font-size: 29px;
+  line-height: 1.5;
+}
+:root[data-design="garden"] .lab-shell .path-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 44px;
+}
+:root[data-design="garden"] .lab-shell .path-picker > article {
+  border: 0;
+  border-top: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: transparent;
+  padding: 28px 0;
+}
+:root[data-design="garden"] .lab-shell .path-picker .obs-kicker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50% 50% 45% 20%;
+  background: var(--atlas-accent-soft);
+  color: var(--atlas-accent);
+}
+:root[data-design="garden"] .lab-shell .document-body {
+  background: var(--atlas-surface);
+  padding: clamp(24px, 4vw, 56px);
+  border-radius: 0;
+}
+:root[data-design="garden"] .lab-shell .document-body h2 {
+  border-bottom: 1px solid var(--atlas-border);
+  padding-bottom: 16px;
+}
+
+/* E — wide lead, marginal recent work, then quiet editorial rows. */
+:root[data-design="photo"] .lab-shell .writing-explorer .hh-writing-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 0 48px;
+}
+:root[data-design="photo"] .lab-shell .writing-explorer .hh-writing-list > li {
+  display: block;
+  grid-column: auto;
+  grid-row: auto;
+  min-height: 0;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  padding: 28px 0;
+  background: transparent;
+}
+:root[data-design="photo"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li:first-child {
+  grid-row: span 2;
+  padding-top: 0;
+}
+:root[data-design="photo"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li:first-child::before {
+  content: "";
+  display: block;
+  height: 190px;
+  margin-bottom: 28px;
+  background: url("/media/design/light-cover.webp") center/cover;
+}
+:root[data-design="photo"] .lab-shell .writing-explorer .hh-writing-list h2 {
+  font: 400 27px/1.5 var(--design-title-font);
+}
+:root[data-design="photo"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li:first-child
+  h2 {
+  font-size: clamp(30px, 3vw, 43px);
+}
+:root[data-design="photo"] .lab-shell .writing-explorer .hh-row-meta {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 24px;
+}
+:root[data-design="photo"] .lab-shell .path-picker {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 0 48px;
+}
+:root[data-design="photo"] .lab-shell .path-picker > article {
+  display: block;
+  padding: 30px 0;
+  border: 0;
+  border-top: 1px solid var(--atlas-border);
+  background: transparent;
+}
+:root[data-design="photo"] .lab-shell .path-picker > article:first-child {
+  grid-row: span 3;
+  padding: 32px;
+  background: var(--atlas-soft) url("/media/design/photo-detail.webp") bottom
+    right/100% auto no-repeat;
+}
+:root[data-design="photo"] .lab-shell .path-picker > article:first-child h2 {
+  font-size: 38px;
+}
+:root[data-design="photo"] .lab-shell .document-layout {
+  max-width: 1320px;
+  width: 100%;
+  padding-inline: 32px;
+  grid-template-columns: 170px minmax(0, 760px) 150px;
+  justify-content: center;
+  column-gap: 32px;
+}
+@media (min-width: 901px) {
+  :root[data-design="photo"] .lab-shell .document-toc {
+    display: block;
+  }
+}
+:root[data-design="photo"] .lab-shell .document-body {
+  font-family: Georgia, "Songti SC", "SimSun", serif;
+  line-height: 2;
+}
+:root[data-design="photo"]
+  .lab-shell
+  .document-body
+  :is(pre, code, button, input, select) {
+  font-family: var(--hh-base-font-family-monospace, monospace);
+}
+
+/* F — every block belongs to a hard, asymmetric content grid. */
+:root[data-design="construct"] .lab-shell .writing-explorer .hh-writing-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 0;
+  border-top: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li {
+  display: block;
+  grid-column: auto;
+  grid-row: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 32px;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-text);
+  background: transparent;
+  border-radius: 0;
+}
+:root[data-design="construct"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li:nth-child(odd) {
+  border-right: 1px solid var(--atlas-text);
+}
+:root[data-design="construct"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  h2 {
+  font-size: 28px;
+  line-height: 1.35;
+  font-weight: 750;
+}
+:root[data-design="construct"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li:first-child
+  h2 {
+  font-size: clamp(32px, 3.5vw, 46px);
+}
+:root[data-design="construct"] .lab-shell .path-picker {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 0;
+  border-top: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .path-picker > article {
+  border: 0;
+  border-bottom: 1px solid var(--atlas-text);
+  padding: 32px;
+  background: transparent;
+}
+:root[data-design="construct"]
+  .lab-shell
+  .path-picker
+  > article:nth-child(odd) {
+  border-right: 1px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .path-picker .obs-kicker {
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  font-weight: 800;
+  color: var(--atlas-accent);
+}
+:root[data-design="construct"] .lab-shell .document-body > header {
+  display: block;
+  border-bottom: 2px solid var(--atlas-text);
+  padding-bottom: 28px;
+}
+:root[data-design="construct"] .lab-shell .document-body h1 {
+  font-weight: 800;
+  font-size: clamp(36px, 4vw, 68px);
+  letter-spacing: -0.045em;
+}
+:root[data-design="construct"] .lab-shell .document-body h2 {
+  border-top: 1px solid var(--atlas-text);
+  padding-top: 28px;
+}
+:root[data-design="construct"] .lab-shell .changelog-page [data-category] {
+  border-radius: 0;
+}
+
+/* G — actual directories, results and previews form a spatial information browser. */
+@media (min-width: 1180px) {
+  :root[data-design="map"] .lab-shell .site-content:has(> .module-directory) {
+    display: grid;
+    grid-template-columns: 185px minmax(0, 1fr);
+    align-items: start;
+    max-width: 1720px;
+    margin-inline: auto;
+  }
+  :root[data-design="map"] .lab-shell .module-directory {
+    display: block;
+    position: sticky;
+    top: 90px;
+    margin: 38px 0 36px;
+    padding: 10px 16px 30px;
+    border-right: 1px solid var(--atlas-border);
+  }
+  :root[data-design="map"]
+    .lab-shell
+    .site-content:has(> .module-directory)
+    > main {
+    min-width: 0;
+    width: 100%;
+  }
+  :root[data-design="map"] .lab-shell .writing-explorer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(235px, 0.75fr);
+    gap: 24px;
+  }
+  :root[data-design="map"] .lab-shell .writing-preview {
+    display: block;
+    position: sticky;
+    top: 90px;
+    border: 0;
+    border-left: 1px solid var(--atlas-border);
+    padding: 4px 0 28px 26px;
+    background: transparent;
+  }
+  :root[data-design="map"] .writing-preview-trigger {
+    display: inline-flex;
+  }
+}
+:root[data-design="map"] .lab-shell .writing-explorer .hh-writing-list {
+  display: block;
+}
+:root[data-design="map"] .lab-shell .writing-explorer .hh-writing-list > li {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  padding: 24px 20px;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-design="map"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li[data-selected="true"] {
+  background: var(--atlas-accent-soft);
+  box-shadow: inset 2px 0 var(--atlas-accent);
+}
+:root[data-design="map"] .lab-shell .writing-explorer .hh-writing-list h2 {
+  font-size: 22px;
+  line-height: 1.5;
+}
+:root[data-design="map"] .lab-shell .writing-explorer .hh-row-meta {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 16px;
+}
+:root[data-design="map"] .lab-shell .path-picker {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+:root[data-design="map"] .lab-shell .path-picker > article {
+  display: grid;
+  grid-template-columns: 35px minmax(0, 1fr) 160px;
+  gap: 20px;
+  padding: 24px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-design="map"] .lab-shell .document-body {
+  border-inline: 1px solid var(--atlas-border);
+  padding-inline: clamp(24px, 3vw, 48px);
+}
+
+/* H — index and preview form facing pages; long text stays on one generous page. */
+:root[data-design="chapters"] .lab-shell .writing-explorer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.8fr);
+  gap: 48px;
+}
+:root[data-design="chapters"] .lab-shell .writing-explorer .hh-writing-list {
+  display: block;
+}
+:root[data-design="chapters"]
+  .lab-shell
+  .writing-explorer
+  .hh-writing-list
+  > li {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  padding: 26px 0;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-design="chapters"] .lab-shell .writing-explorer .hh-writing-list h2 {
+  font: 500 25px/1.6 var(--design-title-font);
+}
+:root[data-design="chapters"] .lab-shell .writing-preview {
+  display: block;
+  position: sticky;
+  top: 110px;
+  padding: 4px 0 30px 36px;
+  border: 0;
+  border-left: 1px solid var(--atlas-border);
+  background: transparent;
+}
+:root[data-design="chapters"] .writing-preview-trigger {
+  display: inline-flex;
+}
+:root[data-design="chapters"] .lab-shell .path-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 56px;
+}
+:root[data-design="chapters"] .lab-shell .path-picker > article {
+  background: transparent;
+  padding: 32px 0;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+}
+:root[data-design="chapters"] .lab-shell .path-picker .obs-kicker {
+  color: var(--atlas-accent);
+  font-family: Georgia, serif;
+  font-size: 32px;
+}
+:root[data-design="chapters"] .lab-shell .document-body {
+  padding: clamp(24px, 4vw, 60px);
+  background: var(--atlas-surface);
+}
+:root[data-design="chapters"] .lab-shell .document-body > header::before {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 30px;
+  margin-bottom: 30px;
+  background: var(--atlas-accent);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
+}
+
+/* Real project/lab lists inherit the module's composition, including honest empty states. */
+:root[data-design="construct"] .lab-shell[data-page="projects"] .hh-rows,
+:root[data-design="construct"] .lab-shell[data-page="labs"] .hh-rows {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 0;
+  border-top: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell[data-page="projects"] .hh-rows > li,
+:root[data-design="construct"] .lab-shell[data-page="labs"] .hh-rows > li {
+  display: block;
+  padding: 32px;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-text);
+  border-right: 1px solid var(--atlas-text);
+}
+:root[data-design="photo"] .lab-shell[data-page="projects"] .hh-rows > li {
+  padding-block: 38px;
+  gap: 60px;
+}
+:root[data-design="photo"] .lab-shell[data-page="projects"] .hh-rows h3 {
+  font: 400 36px/1.4 var(--design-title-font);
+}
+:root[data-design="garden"] .lab-shell[data-page="notes"] .hh-empty {
+  background: var(--atlas-surface);
+  border-color: var(--atlas-accent);
+  border-radius: 12px 0 12px 0;
+}
+:root[data-design="chapters"] .lab-shell[data-page="notes"] .hh-empty {
+  max-width: 650px;
+  margin: 40px auto;
+  padding: 48px;
+  border: 0;
+  border-block: 1px solid var(--atlas-border);
+  font-family: var(--design-title-font);
+}
+
+/* Site evolution uses the same evidence, with theme-specific chronology. */
+:root[data-design="space"] .lab-shell .changelog-page .changelog-month-heading {
+  border-color: var(--atlas-accent);
+}
+:root[data-design="space"] .lab-shell .changelog-page .changelog-preview {
+  background: var(--atlas-surface);
+}
+:root[data-design="classic"] .lab-shell .changelog-page .changelog-date {
+  font-family: Georgia, serif;
+  font-size: 22px;
+}
+:root[data-design="garden"] .lab-shell .changelog-page .changelog-month > ol {
+  border-left: 1px solid var(--atlas-border);
+  margin-left: 7px;
+  padding-left: 28px;
+}
+:root[data-design="garden"] .lab-shell .changelog-page .changelog-row {
+  position: relative;
+}
+:root[data-design="garden"] .lab-shell .changelog-page .changelog-row::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  left: -33px;
+  top: 30px;
+  border-radius: 50% 50% 0 50%;
+  background: var(--atlas-accent);
+}
+:root[data-design="photo"]
+  .lab-shell
+  .changelog-page
+  .changelog-month-heading
+  h2 {
+  font-size: 34px;
+  font-weight: 400;
+}
+:root[data-design="photo"] .lab-shell .changelog-page .changelog-entry h3 {
+  font-family: var(--design-title-font);
+  font-weight: 400;
+  font-size: 25px;
+}
+:root[data-design="construct"]
+  .lab-shell
+  .changelog-page
+  .changelog-month-heading {
+  border-bottom: 2px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .changelog-page .changelog-row {
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 30px;
+  border-bottom: 1px solid var(--atlas-text);
+}
+:root[data-design="construct"] .lab-shell .changelog-page .changelog-date {
+  font-size: 24px;
+  font-weight: 750;
+}
+:root[data-design="chapters"] .lab-shell .changelog-page .changelog-main {
+  padding-right: 32px;
+  border-right: 1px solid var(--atlas-border);
+}
+:root[data-design="chapters"]
+  .lab-shell
+  .changelog-page
+  .changelog-month-heading
+  h2 {
+  color: var(--atlas-accent);
+}
+@media (min-width: 1050px) {
+  :root[data-design="map"] .lab-shell .changelog-page .changelog-layout {
+    grid-template-columns: 250px minmax(0, 1fr);
+  }
+  :root[data-design="map"] .lab-shell .changelog-page .changelog-main {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  :root[data-design="map"] .lab-shell .changelog-page .changelog-sidebar {
+    grid-column: 1;
+    grid-row: 1;
+    padding-right: 28px;
+    border-right: 1px solid var(--atlas-border);
+  }
+}
+
+/* The external-input desk retains sources and summary labels across all themes. */
+:root[data-design="space"] .flow-card {
+  background: var(--atlas-surface);
+  border-radius: 0;
+}
+:root[data-design="garden"] .flow-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+:root[data-design="garden"] .flow-card {
+  padding: 28px 0;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  background: transparent;
+}
+:root[data-design="garden"] .flow-day > h2 {
+  font-family: var(--design-title-font);
+}
+:root[data-design="photo"] .flow-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 0 36px;
+}
+:root[data-design="photo"] .flow-card {
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  border-radius: 0;
+  padding: 28px 0;
+  background: transparent;
+}
+:root[data-design="photo"] .flow-card:first-child {
+  grid-row: span 2;
+}
+:root[data-design="photo"] .flow-card:first-child h3 {
+  font-size: 30px;
+  font-family: var(--design-title-font);
+}
+:root[data-design="construct"] .flow-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+:root[data-design="construct"] .flow-card {
+  border: 0;
+  border-top: 1px solid var(--atlas-text);
+  border-radius: 0;
+  padding: 28px 0;
+  background: transparent;
+}
+:root[data-design="construct"] .flow-day > h2 {
+  border-top: 2px solid var(--atlas-text);
+  padding-top: 22px;
+}
+:root[data-design="map"] .flow-card {
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  background: transparent;
+}
+:root[data-design="chapters"] .flow-card {
+  border-radius: 0;
+  box-shadow: none;
+  border: 0;
+  border-bottom: 1px solid var(--atlas-border);
+  background: transparent;
+}
+:root[data-design="chapters"] .flow-day > h2 {
+  font: 500 28px/1.5 var(--design-title-font);
+  color: var(--atlas-accent);
+}
+
+@media (max-width: 1179px) {
+  :root[data-design="map"] .lab-shell .module-directory {
+    display: block;
+    margin: 24px var(--lab-gutter);
+    border-block: 1px solid var(--atlas-border);
+    padding: 10px 0;
+  }
+  :root[data-design="map"] .lab-shell .module-directory-label,
+  :root[data-design="map"] .lab-shell .module-topics {
+    display: none;
+  }
+  :root[data-design="map"] .lab-shell .module-directory > nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  :root[data-design="map"] .lab-shell .module-directory > nav a {
+    flex: 1 1 auto;
+  }
+  :root[data-design="photo"] .lab-shell .document-layout {
+    grid-template-columns: minmax(0, 1fr) 160px;
+  }
+  :root[data-design="photo"] .lab-shell .document-nav {
+    display: none;
+  }
+}
+@media (max-width: 900px) {
+  :root:is([data-design="space"], [data-design="chapters"])
+    .lab-shell
+    .writing-explorer {
+    display: block;
+  }
+  :root:is([data-design="space"], [data-design="chapters"]) .writing-preview,
+  :root:is([data-design="space"], [data-design="chapters"])
+    .writing-preview-trigger {
+    display: none;
+  }
+  :root:is([data-design="space"], [data-design="classic"], [data-design="map"])
+    .lab-shell
+    .path-picker
+    > article {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 16px;
+  }
+  :root:is([data-design="space"], [data-design="classic"], [data-design="map"])
+    .path-picker-actions {
+    grid-column: 2;
+  }
+  :root[data-design="photo"] .lab-shell .document-layout {
+    display: block;
+  }
+  :root[data-design="photo"] .lab-shell .document-body {
+    max-width: 100%;
+  }
+}
+@media (max-width: 650px) {
+  :root[data-design="chapters"] .lab-shell .changelog-page .changelog-main {
+    border: 0;
+    padding-right: 0;
+  }
+  :root[data-design="construct"] .lab-shell .changelog-page .changelog-row {
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 16px;
+  }
+  :root[data-design] .lab-shell .writing-explorer .hh-writing-list {
+    display: block;
+  }
+  :root[data-design] .lab-shell .writing-explorer .hh-writing-list > li {
+    display: block;
+    min-height: 0;
+    padding: 28px 0;
+    border: 0;
+    border-bottom: 1px solid var(--atlas-border);
+  }
+  :root[data-design] .lab-shell .writing-explorer .hh-writing-list h2 {
+    font-size: 25px;
+    line-height: 1.5;
+  }
+  :root[data-design] .lab-shell .writing-explorer .hh-row-meta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  :root[data-design] .lab-shell .path-picker {
+    display: block;
+  }
+  :root[data-design] .lab-shell .path-picker > article {
+    padding: 28px 0;
+    border: 0;
+    border-bottom: 1px solid var(--atlas-border);
+  }
+  :root[data-design="photo"] .lab-shell .path-picker > article:first-child {
+    padding: 28px;
+    background-size: 100% auto;
+  }
+  :root[data-design="photo"] .lab-shell .path-picker > article:first-child h2 {
+    font-size: 30px;
+  }
+  :root[data-design="construct"] .lab-shell .path-picker .obs-kicker {
+    font-size: 36px;
+  }
+  :root[data-design="garden"]
+    .lab-shell
+    :is(.focused-heading, .atlas-page-heading) {
+    padding-right: 0;
+  }
+  :root[data-design="garden"]
+    .lab-shell
+    :is(.focused-heading, .atlas-page-heading)::after {
+    display: none;
+  }
+  :root[data-design="photo"]
+    .lab-shell
+    .writing-explorer
+    .hh-writing-list
+    > li:first-child::before {
+    height: 150px;
+  }
+  :root[data-design] .lab-shell[data-page="projects"] .hh-rows,
+  :root[data-design] .lab-shell[data-page="labs"] .hh-rows,
+  :root[data-design] .flow-cards {
+    display: block;
+  }
+  :root[data-design] .lab-shell[data-page="projects"] .hh-rows > li,
+  :root[data-design] .lab-shell[data-page="labs"] .hh-rows > li {
+    padding: 28px 0;
+    border-right: 0;
+  }
+  :root[data-design] .lab-shell .document-body {
+    padding: 20px 0;
+    border-inline: 0;
+  }
+  :root[data-design] .flow-card:first-child h3 {
+    font-size: 23px;
+  }
+  :root[data-design="map"] .lab-shell .module-directory {
+    margin: 20px var(--lab-gutter);
+  }
+  :root[data-design="map"] .lab-shell .module-directory nav a {
+    padding: 9px 8px;
+    font-size: 12px;
+  }
+}

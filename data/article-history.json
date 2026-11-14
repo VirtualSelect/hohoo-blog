@@ -3,10 +3,45 @@
     {
       "date": "2026-09-12",
       "commit": "35a395153c3645cdc1f9e1e4e4e82e0961e213af",
+      "kind": "publication",
       "summary": [
         "首次发布：从请求、解析到多轮对话，关联已验证的 Demo 提交。",
         "First publication: requests, parsing and multi-turn conversation, linked to the verified demo commit.",
         "首次發佈：從請求、解析到多輪對話，關聯已驗證的 Demo 提交。"
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "commit": "d0e650ef1198fe39743badd671f6a308dbc1b49f",
+      "kind": "revision",
+      "summary": [
+        "补充结构化输出的后续阅读入口，衔接 JSON、字段类型与业务约束检查。",
+        "Added the structured-output follow-up, connecting JSON, field-type and business-rule checks.",
+        "補充結構化輸出的後續閱讀入口，銜接 JSON、欄位型別與業務約束檢查。"
+      ]
+    }
+  ],
+  "docs/ai-apps/java-durable-turns": [
+    {
+      "date": "2026-11-13",
+      "commit": "d0e650ef1198fe39743badd671f6a308dbc1b49f",
+      "kind": "revision",
+      "summary": [
+        "补充整轮对话协调器的离线参考与固定修订代码入口，说明历史归档和 AI 辅助、尚未经作者人工复现的边界。",
+        "Added an offline turn-coordinator reference and a fixed revision-code link, distinguishing historical evidence from AI-assisted work not yet manually reproduced by the author.",
+        "補充整輪對話協調器的離線參考與固定修訂程式碼入口，說明歷史歸檔和 AI 輔助、尚未經作者人工重現的邊界。"
+      ]
+    }
+  ],
+  "docs/embodied-ai/mujoco-stale-force": [
+    {
+      "date": "2026-11-13",
+      "commit": "d0e650ef1198fe39743badd671f6a308dbc1b49f",
+      "kind": "revision",
+      "summary": [
+        "澄清样本年龄与衰减区间，补充控制时刻和 CSV 时间的区别、只读核验步骤与修订代码说明。",
+        "Clarified sample age and the decay interval, adding the distinction between control and CSV time, read-only verification steps and revision-code notes.",
+        "釐清樣本年齡與衰減區間，補充控制時刻和 CSV 時間的區別、唯讀核驗步驟與修訂程式碼說明。"
       ]
     }
   ]

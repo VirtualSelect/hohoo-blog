@@ -10,6 +10,7 @@ import "../home-presets.css";
 import "../design-collection.css";
 import "../home-concepts.css";
 import "../design-picker.css";
+import "../module-themes.css";
 import { resolveSegments } from "../../lib/content";
 import VisitAnalytics from "../../components/VisitAnalytics";
 import { themeScript } from "../../lib/theme-init.mjs";

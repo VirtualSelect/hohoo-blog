@@ -5,8 +5,6 @@ import { useText } from "./Shell";
 import Link from "../runtime/Link";
 import Home from "./Home";
 import TryIt from "./TryIt";
-import ProfileCard from "./ProfileCard";
-import CurrentFocus from "@site/src/components/CurrentFocus";
 import { ContentRows } from "@site/src/components/ContentUI";
 import { isoWeek } from "@site/src/utils/radar.cjs";
 const Document = dynamic(() => import("./Document"), { loading: PageLoading });
@@ -42,72 +40,7 @@ const RetrievalDrawer = dynamic(() => import("./RetrievalDrawer"));
 const StreamWindow = dynamic(() => import("./StreamWindow"));
 const Weekly = dynamic(() => import("@site/src/components/RadarWeekly"));
 const Daily = dynamic(() => import("@site/src/components/NewsDigest"));
-const AstraParticleHero = dynamic(
-  () => import("@site/src/components/AstraParticleHero"),
-);
-function About() {
-  const t = useText(),
-    { globalData, locale } = useSite();
-  return (
-    <main>
-      <AstraParticleHero en={locale === "en"} />
-      <div id="about-content" className="hh-page about-page">
-        <div className="about-intro-grid">
-          <header className="page-intro">
-            <p className="eyebrow">Hohoo / {t("关于我", "About", "關於我")}</p>
-            <h2>
-              {t("保持好奇，", "Stay curious.", "保持好奇，")}
-              <br />
-              {t("也动手去做。", "Keep building.", "也動手去做。")}
-            </h2>
-            <p>
-              {t(
-                "平时主要写 Java，喜欢把感兴趣的想法做出来。这里记录 AI 应用的代码边界、LLM 机制对照和 MuJoCo 仿真实验，也保留失败与尚未验证的问题。",
-                "I usually write Java and enjoy turning ideas into small projects. Here I document AI application boundaries, LLM mechanism comparisons and MuJoCo experiments, including failures and open questions.",
-                "平時主要寫 Java，喜歡把感興趣的想法做出來。這裡記錄 AI 應用的程式碼邊界、LLM 機制比較和 MuJoCo 模擬實驗，也保留失敗與尚未驗證的問題。",
-              )}
-            </p>
-          </header>
-          <ProfileCard />
-        </div>
-        <CurrentFocus />
-        <section className="hh-section about-work-note">
-          <h2>{t("我怎样学习与构建", "How I work", "我怎樣學習與構建")}</h2>
-          <p>
-            {t(
-              "遇到问题 → 查阅资料 → 小步实验 → 做成作品 → 写下经验。",
-              "Ask a question → Read → Experiment → Build → Write.",
-              "遇到問題 → 查閱資料 → 小步實驗 → 做成作品 → 寫下經驗。",
-            )}
-          </p>
-          <p>
-            {t(
-              "这里记录查过的资料和验证过的方法，也保留暂时没有答案的问题。",
-              "This site records sources, tested methods and questions that remain open.",
-              "這裡記錄查過的資料和驗證過的方法，也保留暫時沒有答案的問題。",
-            )}
-          </p>
-        </section>
-        <section className="hh-section">
-          <h2>{t("可以查看的作品", "Selected builds", "可以查看的作品")}</h2>
-          <ContentRows
-            items={globalData["content-index"].entries.filter(
-              (e) => e.type === "project",
-            )}
-          />
-        </section>
-        <section className="hh-section">
-          <h2>{t("在其他地方", "Elsewhere", "在其他地方")}</h2>
-          <div className="inline-links">
-            <a href="https://github.com/VirtualSelect">GitHub ↗</a>
-            <a href="https://x.com/HuHohoo1997">X ↗</a>
-            <Link to="/subscribe">RSS ↗</Link>
-          </div>
-        </section>
-      </div>
-    </main>
-  );
-}
+const About = dynamic(() => import("./AboutPage"), { loading: PageLoading });
 export default function Views() {
   const { route, document, globalData, items, locale } = useSite(),
     t = useText();

@@ -1,0 +1,21 @@
+{
+  "method": "built-in image_gen",
+  "usage": "PBR material albedo, not a rendered object",
+  "materials": [
+    {
+      "key": "obsidian",
+      "file": "obsidian-albedo.png",
+      "prompt": "Create a seamless tileable physically plausible material BASE COLOR ALBEDO texture of natural black obsidian. This is a texture map for a real-time PBR 3D sculpture, NOT a render of an object. Square1024x1024. Completely flat orthographic uniform macro surface, evenly lit cross-polarized diffuse appearance, NO lighting gradients, shadows, specular highlights, border, text, facets, whole rocks or objects. Mostly very dark neutral charcoal/blue-black with subtle smoked gray flowing mineral striations, fine tiny natural pores and very fine irregular fracture streaks. Highly realistic photography-derived material variation, restrained contrast and micro scale: do not put large bold white marble veins, neon or busy clouds. Continuous texture edge to edge, seamless on all sides. Dark obsidian glass-rock material should retain physically believable very fine soft natural streaks when used on a separately lit faceted mesh. No composition, just a high-quality unlit material texture."
+    },
+    {
+      "key": "paper",
+      "file": "paper-albedo.png",
+      "prompt": "Create a seamless tileable PBR material BASE COLOR ALBEDO texture for beautiful thick natural cotton artist's paper. Square1024x1024. Flat orthographic uniformly illuminated macro surface, creamy ivory offwhite, exceptionally realistic fine organic paper fibers, subtle random grain, occasional tiny pale fiber threads, tactile matte handmade paper but NOT coarse cardboard or dirty parchment. Very low contrast natural detail that will provide a sophisticated real paper surface on an independently modeled and lit folded 3D mesh. NO folds, creases, stars, perforations, text, lines, drawings, page borders, stains, shadows, lighting gradients, highlights or objects. No image of a sheet of paper: a seamless edge-to-edge homogeneous unlit material map, physically plausible subtle photographic microtexture, neutral warm ivory. Fine fibers should be resolved but not create artificial repeating grid."
+    },
+    {
+      "key": "linen",
+      "file": "linen-albedo.png",
+      "prompt": "Create a seamless tileable physically plausible PBR BASE COLOR ALBEDO macrotexture of fine natural undyed beige LINEN fabric. Square1024x1024. Flat orthographic face-on material surface, uniform cross-polarized diffuse light, highly realistic visibly interlaced warp and weft with small irregular natural linen fibers and subtle thread-thickness variation. Dense fine natural weave, warm greige/stone beige, no gold shine, no synthetic plastic mesh, no checkerboard blocks or regular dotted holes. Use small-scale realistic textile detail with nuanced soft color variation rather than exaggerated high-contrast stripes. NO draping, folds, shadows, lighting gradients, stars, holes, text, borders, cloth edges or objects. This image will be wrapped on an existing 3D draped sculpture and independently physically lit. Continuous textile edge-to-edge with all sides seamless, only a superb neutral unlit photographic material texture."
+    }
+  ]
+}

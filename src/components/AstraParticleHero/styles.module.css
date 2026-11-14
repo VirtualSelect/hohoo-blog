@@ -411,6 +411,64 @@
   font-size: 0.8rem;
   margin: 8px 16px;
 }
+/* Embedded About keeps the original sky, controls and constellation landmarks. */
+.embedded {
+  width: 100%;
+  min-width: 0;
+  background: var(--astra-sky);
+  color: var(--astra-ink);
+}
+.embedded .sticky {
+  max-width: none;
+  padding: 0;
+  gap: 0;
+}
+.embedded .observatory {
+  width: 100%;
+  box-shadow: none;
+}
+.embedded .plateHeader > span:first-child::before {
+  content: none;
+}
+.embedded[data-active="true"] .canvasWrap {
+  height: clamp(
+    240px,
+    calc(100svh - 410px - var(--atlas-dock-space, 0px)),
+    460px
+  );
+}
+.embedded .bottom {
+  grid-template-columns: minmax(0, 1fr);
+  text-align: center;
+}
+.embedded .controls {
+  justify-content: center;
+}
+.embedded .bottom .secretMessage {
+  text-align: center;
+}
+.embedded[data-active="false"] .bottom p,
+.embedded[data-active="false"] .controls button {
+  color: var(--astra-ink);
+}
+.embedded[data-active="false"] .bottom,
+.embedded[data-active="false"] .disclosure {
+  border-color: var(--astra-line);
+}
+.embedded .error {
+  color: var(--astra-ink);
+}
+@media (max-height: 780px) and (min-width: 701px) {
+  .embedded .constellations {
+    width: 108px;
+    height: 78px;
+  }
+  .embedded .constellations[data-constellation="lyra"] {
+    left: calc(50% - 42px);
+    width: 84px;
+    height: 61px;
+  }
+}
 @media (max-width: 1024px) {
   .bottom {
     grid-template-columns: 1fr;
@@ -425,6 +483,13 @@
   }
 }
 @media (max-width: 700px) {
+  .embedded[data-active="true"] .canvasWrap {
+    height: clamp(
+      220px,
+      calc(100svh - 430px - var(--atlas-dock-space, 0px)),
+      340px
+    );
+  }
   .sticky {
     padding: 24px 20px 0;
     gap: 18px;

@@ -428,6 +428,33 @@
 :root[data-design="garden"] .lab-shell .brand-logo img {
   filter: none;
 }
+:root[data-design="garden"] .lab-shell .header-actions .design-picker {
+  border-radius: 22px;
+  box-shadow: 0 24px 80px #213d2d30;
+}
+:root[data-design="garden"] :is(.design-picker, .atlas-directory)::backdrop {
+  background: #142b20a6;
+}
+:root[data-design="garden"] :is(.design-picker-header h2, .atlas-directory h2) {
+  font-family: var(--design-title-font);
+  font-weight: 500;
+}
+:root[data-design="garden"] .design-picker-name {
+  font-family: var(--design-title-font);
+  font-weight: 500;
+}
+:root[data-design="garden"] .atlas-directory-main > a {
+  border-radius: 10px;
+  padding-inline: 8px;
+}
+:root[data-design="garden"]
+  .atlas-directory-main
+  > a:is(:hover, [aria-current="page"]) {
+  background: var(--atlas-accent-soft);
+}
+:root[data-design="garden"] .atlas-directory-main > a:focus-visible {
+  outline-offset: 2px;
+}
 :root[data-design="photo"] .lab-shell #main-nav a,
 :root[data-design="chapters"] .lab-shell #main-nav a {
   font-family: var(--design-title-font);
@@ -2457,7 +2484,7 @@
     )
     .lab-shell
     #main-nav {
-    gap: 15px;
+    gap: 4px;
   }
   :root:is(
       [data-design="garden"],
@@ -2901,4 +2928,12 @@
     > li {
     transition: none;
   }
+}
+
+/* Garden keeps the same soft controls at compact widths as on desktop. */
+:root[data-design="garden"] .lab-shell #main-nav a,
+:root[data-design="garden"] .lab-shell #main-nav [aria-current="page"],
+:root[data-design="garden"] .atlas-directory-close,
+:root[data-design="garden"] .lab-shell .header-actions .design-picker-close {
+  border-radius: 999px;
 }

@@ -1,0 +1,694 @@
+/* About is a single content tree; the artwork and its space belong to each theme. */
+.about-fusion {
+  --about-hero-bg: var(--atlas-bg);
+  --about-hero-ink: var(--atlas-text);
+  --about-hero-muted: var(--atlas-muted);
+  --about-title-font: var(--hh-base-font-family-base);
+  min-width: 0;
+}
+.about-hero {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  background: var(--about-hero-bg);
+  color: var(--about-hero-ink);
+}
+.about-experience-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  max-width: 1520px;
+  margin-inline: auto;
+  padding: 24px var(--lab-gutter) 0;
+}
+.about-experience-bar > p {
+  margin: 0;
+  font: 11px/1.6 var(--hh-base-font-family-monospace);
+  color: var(--about-hero-muted);
+}
+.about-experiences {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--atlas-border);
+}
+.about-experiences button {
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--about-hero-muted);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.about-experiences button[aria-pressed="true"] {
+  border-color: var(--atlas-accent);
+  background: var(--atlas-accent-soft);
+  color: var(--atlas-accent);
+}
+.about-experiences button:hover {
+  color: var(--atlas-accent);
+}
+.about-hero-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.38fr) minmax(0, 0.62fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+  min-width: 0;
+  max-width: 1520px;
+  margin-inline: auto;
+  padding: 36px var(--lab-gutter) 56px;
+}
+.about-hero-copy {
+  width: 100%;
+  max-width: 500px;
+  min-width: 0;
+}
+.about-eyebrow,
+.about-section-number {
+  font: 10px/1.8 var(--hh-base-font-family-monospace);
+  letter-spacing: 0.09em;
+  color: var(--atlas-muted);
+}
+.about-hero .about-eyebrow {
+  color: var(--about-hero-muted);
+  margin: 0 0 34px;
+}
+.about-hero .about-eyebrow::after {
+  content: "";
+  display: block;
+  width: 28px;
+  border-top: 2px solid var(--atlas-accent);
+  margin-top: 18px;
+}
+.about-hero h1 {
+  font-family: var(--about-title-font);
+  font-size: clamp(64px, 6.5vw, 100px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+  color: var(--about-hero-ink);
+  margin: 0 0 24px;
+}
+.about-hero h2 {
+  max-width: 17em;
+  font-family: var(--about-title-font);
+  font-size: clamp(24px, 2.65vw, 36px);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  margin: 0 0 30px;
+}
+.about-bio {
+  max-width: 32em;
+  margin: 0;
+  color: var(--about-hero-muted);
+  font-size: 16px;
+  line-height: 1.85;
+}
+.about-visual-note {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--about-hero-muted);
+  font: 10px/1.8 var(--hh-base-font-family-monospace);
+  letter-spacing: 0.03em;
+  margin: 36px 0 0;
+}
+.about-visual-note > span:first-child {
+  width: 3px;
+  height: 12px;
+  background: var(--atlas-accent);
+}
+.about-map-boundary {
+  display: none;
+}
+.about-art-stage {
+  position: relative;
+  width: 100%;
+  height: clamp(
+    400px,
+    calc(100svh - 230px - var(--atlas-dock-space, 0px)),
+    640px
+  );
+  min-width: 0;
+}
+.about-art-stage[data-experience="stars"] {
+  height: auto;
+}
+.about-fusion[data-experience="stars"] .about-hero-inner {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+  padding-top: 24px;
+}
+.about-fusion[data-experience="stars"] .about-art-stage {
+  grid-row: 1;
+}
+.about-fusion[data-experience="stars"] .about-hero-copy {
+  grid-row: 2;
+  max-width: 760px;
+}
+.about-fusion[data-experience="stars"] .about-hero-copy::before {
+  display: none;
+}
+.about-scene-placeholder {
+  display: grid;
+  place-items: center;
+  height: 640px;
+  margin: 0;
+  color: var(--about-hero-muted);
+  font-size: 14px;
+}
+.about-art-stage .about-theme-artwork:not(:fullscreen) {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.about-content {
+  max-width: 1520px;
+  margin-inline: auto;
+  padding: 0 var(--lab-gutter) 64px;
+  min-width: 0;
+}
+.about-content h2 {
+  font-family: var(--about-title-font);
+  font-size: clamp(23px, 2.3vw, 32px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.035em;
+  margin: 0 0 18px;
+}
+.about-directory {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 0.7fr;
+  padding: 32px 0 38px;
+  border-top: 1px solid var(--atlas-border);
+  gap: 32px;
+}
+.about-directory > section {
+  min-width: 0;
+}
+.about-directory > section + section {
+  border-left: 1px solid var(--atlas-border);
+  padding-left: 32px;
+}
+.about-directory .about-section-number {
+  margin: 0 0 12px;
+}
+.about-directory h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+.about-directory nav,
+.about-project-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 18px;
+}
+.about-directory a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  min-height: 44px;
+  padding-block: 9px;
+  font-size: 14px;
+  line-height: 1.8;
+  border-bottom: 1px solid transparent;
+}
+.about-directory a:hover {
+  border-bottom-color: var(--atlas-accent);
+}
+.about-directory a > span {
+  color: var(--atlas-accent);
+}
+.about-current {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.35fr);
+  gap: 64px;
+  padding: 48px 0;
+  border-top: 1px solid var(--atlas-border);
+}
+.about-current .about-section-number {
+  margin: 0 0 12px;
+}
+.about-current-date {
+  color: var(--atlas-muted);
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 0 0 18px;
+}
+.about-current-date time {
+  font-family: var(--hh-base-font-family-monospace);
+  white-space: nowrap;
+}
+.about-current header > a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--atlas-accent);
+}
+.about-current ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.about-current li {
+  padding: 0 0 23px;
+}
+.about-current li + li {
+  border-top: 1px solid var(--atlas-border);
+  padding-top: 23px;
+}
+.about-current li:last-child {
+  padding-bottom: 0;
+}
+.about-current li > .about-section-number {
+  display: block;
+  margin: 0 0 9px;
+  color: var(--atlas-accent);
+}
+.about-current li > a {
+  font-size: 15px;
+  line-height: 1.9;
+}
+.about-current li > a > span {
+  color: var(--atlas-accent);
+}
+.about-method {
+  border-top: 1px solid var(--atlas-border);
+  padding-top: 48px;
+}
+.about-method header {
+  max-width: 700px;
+}
+.about-method header > .about-section-number {
+  margin: 0 0 12px;
+}
+.about-method header > p:last-child {
+  color: var(--atlas-muted);
+  font-size: 15px;
+  line-height: 1.9;
+  margin: 0;
+}
+.about-method ol {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 32px 0 20px;
+}
+.about-method li {
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.9;
+  padding-top: 18px;
+  border-top: 1px solid var(--atlas-border);
+}
+.about-method li > span {
+  display: block;
+  color: var(--atlas-accent);
+  font: 10px/1.8 var(--hh-base-font-family-monospace);
+  margin-bottom: 12px;
+}
+.about-record-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.about-record-links a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--atlas-muted);
+}
+.about-fusion :is(a, button):focus-visible {
+  outline: 2px solid var(--atlas-accent);
+  outline-offset: 4px;
+}
+
+/* The artwork occupies its own grid column; no text is masked over the canvas. */
+:root[data-design="space"] .about-fusion {
+  --about-title-font: Georgia, "Songti SC", "SimSun", serif;
+}
+:root[data-design="space"] .about-hero h1 {
+  font-weight: 500;
+}
+/* B: a daylight gallery with a clear typographic margin. */
+:root[data-design="clear"] .about-hero h1 {
+  font-weight: 650;
+}
+/* C: paper, deep green and the existing notebook rail. */
+:root[data-design="classic"] .about-fusion {
+  --about-title-font: var(--design-title-font);
+}
+:root[data-design="classic"] .about-directory {
+  padding-top: 28px;
+}
+/* D: an open cream field for the stellar canopy. */
+:root[data-design="garden"] .about-fusion {
+  --about-title-font: var(--design-title-font);
+  --about-hero-bg: #fbfaf3;
+}
+:root[data-design="garden"] .about-directory h2::before {
+  content: "✧";
+  color: var(--atlas-accent);
+  margin-right: 10px;
+  font-family: serif;
+}
+:root[data-design="garden"] .about-current {
+  column-gap: 72px;
+}
+/* E: broad, quiet light around the translucent fabric. */
+:root[data-design="photo"] .about-fusion {
+  --about-title-font: var(--design-title-font);
+  --about-hero-bg: #f3eee5;
+}
+:root[data-design="photo"] .about-hero h1 {
+  font-size: clamp(60px, 5.5vw, 86px);
+  font-weight: 500;
+}
+:root[data-design="photo"] .about-hero h2 {
+  font-size: clamp(28px, 3vw, 42px);
+}
+:root[data-design="photo"] .about-directory {
+  border-top-color: var(--atlas-accent);
+}
+/* F: the title and objects share one structural grid. */
+:root[data-design="construct"] .about-hero {
+  border-bottom: 1px solid var(--atlas-text);
+}
+:root[data-design="construct"] .about-hero h1 {
+  font-size: clamp(66px, 7vw, 108px);
+  font-weight: 750;
+  letter-spacing: -0.07em;
+}
+:root[data-design="construct"] .about-hero h2 {
+  font-weight: 650;
+  line-height: 1.35;
+}
+:root[data-design="construct"] .about-directory {
+  border-top: 0;
+}
+:root[data-design="construct"] :is(.about-current, .about-method) {
+  border-top-color: var(--atlas-text);
+}
+/* G: this is an art study, separate from the site's actual knowledge links. */
+:root[data-design="map"] .about-hero h1 {
+  font-weight: 600;
+}
+:root[data-design="map"]
+  .about-fusion[data-experience="theme"]
+  .about-map-boundary {
+  display: block;
+  flex-basis: 100%;
+  color: var(--atlas-muted);
+  padding-left: 11px;
+  letter-spacing: 0;
+}
+:root[data-design="map"] .about-directory {
+  gap: 28px;
+}
+:root[data-design="map"] .about-directory > section + section {
+  padding-left: 28px;
+}
+:root[data-design="map"] .about-section-number {
+  color: var(--atlas-accent);
+}
+/* H: the paper stage is the spread itself, with a fine seam and a bookmark. */
+:root[data-design="chapters"] .about-fusion {
+  --about-title-font: var(--design-title-font);
+  --about-hero-bg: var(--atlas-surface);
+  max-width: 1520px;
+  margin: 28px auto 0;
+}
+:root[data-design="chapters"] .about-hero-copy::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15px;
+  height: 34px;
+  background: var(--atlas-accent);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+}
+:root[data-design="chapters"] .about-hero h1 {
+  color: var(--atlas-accent);
+  font-weight: 500;
+}
+:root[data-design="chapters"] .about-hero h2 {
+  font-weight: 500;
+}
+:root[data-design="chapters"] .about-content {
+  background: var(--atlas-surface);
+}
+
+@media (max-width: 1280px) {
+  .about-hero-inner {
+    padding-block: 32px 48px;
+  }
+  .about-hero h1 {
+    font-size: 72px;
+  }
+  .about-hero h2 {
+    font-size: 29px;
+  }
+  .about-directory {
+    gap: 24px;
+  }
+  .about-directory > section + section {
+    padding-left: 24px;
+  }
+  .about-directory h2 {
+    font-size: 22px;
+  }
+  .about-current {
+    gap: 40px;
+  }
+}
+@media (max-width: 1024px) {
+  .about-hero-inner {
+    gap: 28px;
+    padding-block: 32px 40px;
+  }
+  .about-hero h1 {
+    font-size: 65px;
+  }
+  .about-hero h2 {
+    font-size: 26px;
+  }
+  .about-visual-note {
+    margin-top: 26px;
+    font-size: 9px;
+  }
+  .about-directory {
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 30px;
+  }
+  :root .about-fusion .about-directory > section:nth-child(3) {
+    grid-column: 1/-1;
+    border: 0;
+    border-top: 1px solid var(--atlas-border);
+    padding: 22px 0 0;
+  }
+  .about-directory > section:nth-child(3) nav {
+    gap: 24px;
+  }
+}
+@media (max-width: 900px) {
+  .about-experience-bar {
+    justify-content: space-between;
+  }
+  .about-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+    padding: 36px var(--lab-gutter) 40px;
+  }
+  :root .about-fusion .about-hero-copy {
+    width: 100%;
+    max-width: 660px;
+  }
+  .about-hero .about-eyebrow {
+    margin-bottom: 22px;
+  }
+  .about-hero .about-eyebrow::after {
+    margin-top: 12px;
+  }
+  :root .about-fusion .about-hero h1 {
+    font-size: 64px;
+    margin-bottom: 16px;
+  }
+  :root .about-fusion .about-hero h2 {
+    max-width: none;
+    font-size: 30px;
+    margin-bottom: 18px;
+  }
+  .about-bio {
+    max-width: 52em;
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .about-visual-note {
+    margin-top: 22px;
+  }
+  :root .about-fusion .about-art-stage {
+    width: 100%;
+    height: 480px;
+    margin: 0;
+  }
+  :root .about-fusion .about-art-stage[data-experience="stars"] {
+    height: auto;
+  }
+  .about-content {
+    padding-bottom: 44px;
+  }
+  .about-directory {
+    padding-top: 25px;
+  }
+  .about-current {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding-block: 34px;
+  }
+  .about-current h2 {
+    margin-bottom: 12px;
+  }
+  .about-current-date {
+    margin-bottom: 6px;
+  }
+  .about-current header > a {
+    min-height: 40px;
+  }
+  .about-current li > a {
+    font-size: 14px;
+  }
+  .about-method {
+    padding-top: 34px;
+  }
+  .about-method ol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  :root[data-design="chapters"] .about-fusion {
+    margin-top: 0;
+  }
+  :root[data-design="chapters"] .about-hero-copy::before {
+    display: none;
+  }
+}
+@media (max-width: 540px) {
+  .about-experience-bar {
+    justify-content: flex-start;
+    gap: 8px;
+    padding-top: 16px;
+  }
+  .about-experience-bar > p {
+    display: none;
+  }
+  .about-experiences {
+    width: 100%;
+  }
+  .about-experiences button {
+    flex: 1;
+    min-width: 0;
+    padding-inline: 10px;
+    font-size: 13px;
+  }
+  .about-hero-inner {
+    padding-top: 28px;
+    gap: 30px;
+  }
+  .about-fusion[data-experience="stars"] .about-hero-inner {
+    gap: 32px;
+    padding-top: 20px;
+  }
+  .about-hero .about-eyebrow {
+    font-size: 9px;
+    margin-bottom: 18px;
+  }
+  :root .about-fusion .about-hero h1 {
+    font-size: 50px;
+    margin-bottom: 14px;
+  }
+  :root .about-fusion .about-hero h2 {
+    font-size: 25px;
+    line-height: 1.45;
+    margin-bottom: 18px;
+  }
+  .about-bio {
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .about-visual-note {
+    margin-top: 20px;
+    font-size: 9px;
+  }
+  .about-directory {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding-block: 24px 30px;
+  }
+  :root .about-fusion .about-directory > section + section,
+  :root .about-fusion .about-directory > section:nth-child(3) {
+    grid-column: 1;
+    padding: 24px 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--atlas-border);
+  }
+  .about-directory h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .about-directory .about-section-number {
+    margin-bottom: 8px;
+    font-size: 9px;
+  }
+  .about-directory nav {
+    gap: 0 22px;
+  }
+  .about-directory a {
+    font-size: 14px;
+  }
+  .about-current {
+    padding-block: 30px;
+  }
+  .about-current li {
+    padding-bottom: 20px;
+  }
+  .about-current li + li {
+    padding-top: 20px;
+  }
+  .about-method header > p:last-child {
+    font-size: 15px;
+  }
+  .about-method ol {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 25px;
+    gap: 14px 22px;
+  }
+  .about-method li {
+    padding-top: 13px;
+    font-size: 14px;
+  }
+  .about-method li > span {
+    margin-bottom: 8px;
+  }
+}
+@media (max-height: 500px) and (min-aspect-ratio: 3/2) {
+  :root .about-fusion .about-art-stage[data-experience="theme"] {
+    height: clamp(220px, calc(100svh - 150px), 340px);
+  }
+}

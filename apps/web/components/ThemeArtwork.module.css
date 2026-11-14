@@ -1,0 +1,210 @@
+.root {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 320px;
+  scroll-margin-block-end: var(--atlas-dock-space, 0px);
+  color: var(--atlas-accent, #6999ff);
+  isolation: isolate;
+}
+.stage {
+  position: relative;
+  min-height: 0;
+  min-width: 0;
+}
+.canvas,
+.surface,
+.fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.canvas {
+  touch-action: pan-y;
+  cursor: grab;
+  visibility: hidden;
+}
+.root[data-status="ready"][data-enabled="true"] .canvas {
+  visibility: visible;
+}
+.root[data-free-drag="true"] .canvas,
+.root:fullscreen .canvas {
+  touch-action: none;
+}
+.canvas:focus-visible {
+  outline: 2px solid var(--atlas-accent);
+  outline-offset: -4px;
+}
+.canvas:active {
+  cursor: grabbing;
+}
+.fallback {
+  pointer-events: none;
+}
+.footer {
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+  padding: 12px 20px 16px;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.fixedCaption {
+  margin: 0 0 12px;
+  text-align: center;
+  color: var(--atlas-muted);
+  font: 12px/1.6 var(--hh-base-font-family-monospace, monospace);
+}
+.interaction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 26px;
+  margin: 0 0 10px;
+  gap: 8px;
+  color: var(--atlas-muted);
+}
+.interaction p {
+  margin: 0;
+  font: 11px/1.6 var(--hh-base-font-family-base);
+  text-align: center;
+}
+.touchHint,
+.root .touchToggle,
+.root[data-enabled="false"] .interaction {
+  display: none;
+}
+.root button {
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.3;
+  min-height: 44px;
+  padding: 9px 12px;
+  color: var(--atlas-text, #e8eef9);
+  background: var(--atlas-surface, #102039);
+  border: 1px solid var(--atlas-border, #52617b);
+  border-radius: 2px;
+  cursor: pointer;
+}
+.root button:hover:not(:disabled),
+.root button[aria-pressed="true"] {
+  border-color: var(--atlas-accent, #9ab9ff);
+  color: var(--atlas-accent, #9ab9ff);
+}
+.root button:focus-visible {
+  outline: 2px solid var(--atlas-accent, #9ab9ff);
+  outline-offset: 3px;
+}
+.root button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.root .primary {
+  background: var(--atlas-accent, #9ab9ff);
+  color: var(--atlas-bg, #102039);
+  border-color: var(--atlas-accent, #9ab9ff);
+}
+.root .primary:hover:not(:disabled),
+.root .primary[aria-pressed="true"] {
+  color: var(--atlas-bg, #102039);
+  filter: brightness(1.08);
+}
+.root:is([data-artwork="garden"], [data-artwork="growth"]) button {
+  border-radius: 999px;
+}
+.root:is([data-artwork="garden"], [data-artwork="growth"]) .footer {
+  border-top: 1px solid var(--atlas-border);
+}
+.notice,
+.secret {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--atlas-muted, #aebbd0);
+  text-align: center;
+  margin: 10px 0 0;
+}
+.secret {
+  margin: 0 0 12px;
+}
+.root:fullscreen {
+  height: 100dvh;
+  width: 100vw;
+  min-height: 0;
+  padding: 20px;
+  background: var(--atlas-bg, #0d1727);
+}
+@media (max-width: 700px) {
+  .root {
+    min-height: 360px;
+  }
+  .footer {
+    padding: 8px 8px 12px;
+  }
+  .controls {
+    gap: 6px;
+  }
+  .root button {
+    padding: 9px 8px;
+    font-size: 12px;
+    min-width: 0;
+  }
+  .root[data-context="about"] .controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+  .root[data-context="home"] .controls {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .root[data-context="home"] .controls > button {
+    grid-column: span 2;
+  }
+  .root[data-context="home"] .controls > button:nth-last-child(-n + 2) {
+    grid-column: span 3;
+  }
+  .root:fullscreen {
+    padding: 0;
+  }
+}
+@media (max-height: 500px) and (min-aspect-ratio: 3/2) {
+  .root {
+    min-height: 0;
+  }
+  .footer {
+    padding-block: 8px 12px;
+  }
+}
+@media (max-width: 700px), (pointer: coarse) {
+  .mouseHint {
+    display: none;
+  }
+  .touchHint {
+    display: inline;
+  }
+  .root .touchToggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .interaction {
+    min-height: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .root * {
+    scroll-behavior: auto;
+  }
+}

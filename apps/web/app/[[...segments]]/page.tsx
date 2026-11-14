@@ -69,7 +69,7 @@ export async function generateMetadata({
     timeline: ["学习活动", "Learning activity", "學習活動"],
     now: ["近况", "Now", "近況"],
     subscribe: ["RSS 订阅", "RSS subscriptions", "RSS 訂閱"],
-    changelog: ["更新记录", "Changelog", "更新紀錄"],
+    changelog: ["站点演进", "Site evolution", "網站演進"],
     blog: ["随笔", "Journal", "隨筆"],
   };
   const title =

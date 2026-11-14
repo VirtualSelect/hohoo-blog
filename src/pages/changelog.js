@@ -1,44 +1,22 @@
-import { uiLabel } from '@site/src/utils/ui-labels';
-import React from 'react';
-import Layout from '@lab/runtime/Layout';
-import logs from '@site/data/build-log.json';
-import projects from '@site/data/projects.json';
-import { useEnglish } from '@site/src/components/ContentUI';
+import React from "react";
+import Layout from "@lab/runtime/Layout";
+import { useText } from "@lab/components/Shell";
+import ChangelogTimeline from "@lab/components/ChangelogTimeline";
 export default function Changelog() {
-  const en = useEnglish();
+  const t = useText();
+  const includePreview =
+    process.env.NODE_ENV !== "production" ||
+    process.env.NEXT_PUBLIC_SITE_PREVIEW === "1";
   return (
-    <Layout title="Changelog" description="可追溯到代码提交的站点演进记录。">
-      <main className="hh-page">
-        <p className="hh-eyebrow">{uiLabel("BEHIND THE LAB")}</p>
-        <h1>Changelog</h1>
-        <p className="hh-lead">
-          {en
-            ? 'Repository history, not a production deployment log.'
-            : '可追溯的代码演进，不等同于生产部署记录。'}
-        </p>
-        <ol className="hh-rows">
-          {logs.map((l) => (
-            <li key={l.commit}>
-              <time dateTime={l.date}>{l.date}</time>
-              <div>
-                <h2>
-                  <a
-                    href={
-                      projects.find((p) => p.id === l.project).repo +
-                      '/commit/' +
-                      l.commit
-                    }
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    {l.title} ↗
-                  </a>
-                </h2>
-                <code>{l.commit.slice(0, 7)}</code>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </main>
+    <Layout
+      title={t("站点演进", "Site evolution", "網站演進")}
+      description={t(
+        "内容与体验的变化，保留可追溯的记录。",
+        "Traceable changes to the site's content and reading experience.",
+        "內容與體驗的變化，保留可追溯的記錄。",
+      )}
+    >
+      <ChangelogTimeline includePreview={includePreview} />
     </Layout>
   );
 }

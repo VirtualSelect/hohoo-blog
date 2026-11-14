@@ -4,7 +4,11 @@ import useBaseUrl from "@lab/runtime/base-url";
 import { useSite } from "@lab/runtime/context";
 import styles from "./styles.module.css";
 import Constellations from "./Constellations";
-export default function AstraParticleHero({ en = false }) {
+export default function AstraParticleHero({
+  en = false,
+  embedded = false,
+  className = "",
+}) {
   const { locale, messages } = useSite();
   // Translation lookup is pure: conditional controls must not call context hooks.
   const translate = ({ id, message }) => messages[id]?.message || message || id;
@@ -59,7 +63,18 @@ export default function AstraParticleHero({ en = false }) {
           },
           {
             pathUrl,
-            navHeight: 72,
+            navHeight: embedded
+              ? 0
+              : (() => {
+                  const header = document
+                    .querySelector(".site-header")
+                    ?.getBoundingClientRect();
+                  return header &&
+                    header.width >= innerWidth * 0.6 &&
+                    header.height < innerHeight * 0.5
+                    ? header.height
+                    : 0;
+                })(),
             fadeOnScroll: false,
             themeRoot: section.current,
             secretPathUrl,
@@ -86,7 +101,7 @@ export default function AstraParticleHero({ en = false }) {
       scene.current?.dispose();
       scene.current = null;
     };
-  }, [active, attempt, pathUrl, secretPathUrl]);
+  }, [active, attempt, pathUrl, secretPathUrl, embedded]);
   const ready = active && (status === "ready" || status === "fallback");
   function close() {
     setSecret(false);
@@ -182,7 +197,8 @@ export default function AstraParticleHero({ en = false }) {
   return (
     <section
       ref={section}
-      className={styles.scrollSection}
+      className={`${styles.scrollSection} ${embedded ? styles.embedded : ""} ${className}`}
+      data-astra-embedded={embedded || undefined}
       data-active={active}
       data-reduced={reduced}
       data-status={status}
@@ -204,19 +220,23 @@ export default function AstraParticleHero({ en = false }) {
       )}
     >
       <div className={styles.sticky}>
-        <div className={styles.eyebrow}>
-          <span>{uiLabel("ABOUT / HOOHOO")}</span>
-          <span>{uiLabel("LEARNING IN PUBLIC. BUILDING IN PUBLIC.")}</span>
-        </div>
-        <h1 className={styles.hidden}>
-          {t(
-            translate({
-              id: "ui.a3910125df",
-              message: "\u5173\u4E8E Hohoo",
-            }),
-            "About Hohoo",
-          )}
-        </h1>
+        {!embedded && (
+          <div className={styles.eyebrow}>
+            <span>{uiLabel("ABOUT / HOOHOO")}</span>
+            <span>{uiLabel("LEARNING IN PUBLIC. BUILDING IN PUBLIC.")}</span>
+          </div>
+        )}
+        {!embedded && (
+          <h1 className={styles.hidden}>
+            {t(
+              translate({
+                id: "ui.a3910125df",
+                message: "\u5173\u4E8E Hohoo",
+              }),
+              "About Hohoo",
+            )}
+          </h1>
+        )}
         <div className={styles.observatory}>
           {active && (
             <div className={styles.plateHeader}>
@@ -466,16 +486,18 @@ export default function AstraParticleHero({ en = false }) {
             </p>
           )}
         </div>
-        <a className={styles.scrollLink} href="#about-content">
-          {t(
-            translate({
-              id: "ui.67e90169b8",
-              message: "\u4E86\u89E3\u6211",
-            }),
-            "Get to know me",
-          )}{" "}
-          ↓
-        </a>
+        {!embedded && (
+          <a className={styles.scrollLink} href="#about-content">
+            {t(
+              translate({
+                id: "ui.67e90169b8",
+                message: "\u4E86\u89E3\u6211",
+              }),
+              "Get to know me",
+            )}{" "}
+            ↓
+          </a>
+        )}
       </div>
     </section>
   );

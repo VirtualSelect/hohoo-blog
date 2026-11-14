@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import Brand from "./Brand";
+import ModuleDirectory from "./ModuleDirectory";
 import { SiteContext, useSite } from "../runtime/context";
 import Link from "../runtime/Link";
 import { languageUrl } from "../lib/navigation.ts";
@@ -62,6 +63,12 @@ function NavigationIcon({ kind }: { kind: string }) {
           <path d="m12 12 6-6M3 12h2m14 0h2M12 3v2m0 14v2" />
         </>
       )}
+      {kind === "about" && (
+        <>
+          <circle cx="12" cy="8" r="3" />
+          <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
+        </>
+      )}
     </svg>
   );
 }
@@ -103,6 +110,7 @@ function Frame({ children }: PropsWithChildren) {
     { path: "notes", label: t("知识", "Knowledge", "知識") },
     { path: "articles", label: t("文章", "Articles", "文章") },
     { path: "radar", label: t("雷达", "Radar", "雷達") },
+    { path: "about", label: t("关于", "About", "關於") },
   ];
   function isCurrent(path: string) {
     return (
@@ -116,17 +124,15 @@ function Frame({ children }: PropsWithChildren) {
   }
   const current =
     nav.find(({ path }) => isCurrent(path))?.label ??
-    (route === "about"
-      ? t("关于", "About", "關於")
-      : route === "reading"
-        ? t("阅读清单", "Reading list", "閱讀清單")
-        : route
-          ? t("研究档案", "Archive", "研究檔案")
-          : t(
-              "独立 AI 研究与实践",
-              "Independent AI research & practice",
-              "獨立 AI 研究與實作",
-            ));
+    (route === "reading"
+      ? t("阅读清单", "Reading list", "閱讀清單")
+      : route
+        ? t("研究档案", "Archive", "研究檔案")
+        : t(
+            "独立 AI 研究与实践",
+            "Independent AI research & practice",
+            "獨立 AI 研究與實作",
+          ));
   function closeDirectory() {
     directory.current?.close();
   }
@@ -152,7 +158,10 @@ function Frame({ children }: PropsWithChildren) {
     document.documentElement.lang = locale;
   }, [route, locale]);
   return (
-    <div className="site-shell observatory-shell lab-shell atlas-shell">
+    <div
+      className="site-shell observatory-shell lab-shell atlas-shell"
+      data-page={route || "home"}
+    >
       <a className="skip" href="#main-content">
         {t("跳转到内容", "Skip to content", "跳至內容")}
       </a>
@@ -265,6 +274,7 @@ function Frame({ children }: PropsWithChildren) {
         </div>
       </header>
       <div id="main-content" tabIndex={-1} className="site-content">
+        <ModuleDirectory />
         {children}
       </div>
       <footer className="site-footer">
@@ -350,9 +360,6 @@ function Frame({ children }: PropsWithChildren) {
           >
             <Link to="/" onClick={closeDirectory}>
               {t("首页", "Home", "首頁")}
-            </Link>
-            <Link to="/about" onClick={closeDirectory}>
-              {t("关于 Hohoo", "About Hohoo", "關於 Hohoo")}
             </Link>
             <Link to="/reading" onClick={closeDirectory}>
               {t("阅读清单", "Reading list", "閱讀清單")}
