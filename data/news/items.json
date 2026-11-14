@@ -17,6 +17,23 @@
     "coverage": []
   },
   {
+    "id": "d70045995088eba9ae88",
+    "title": "Cursor 披露安全事件调查结果，恶意 Claude Code 扩展波及最多 5000 用户",
+    "url": "https://aihot.news/items/e9o5h2c1o5f0xuh2bgqtc2w7k",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-13T12:00:00.000Z",
+    "collectedAt": "2026-11-14T06:57:55.124Z",
+    "category": "ai-apps",
+    "summary": "Cursor 发布安全事件完整调查：攻击者利用 Fireworks 暴露的访问密钥读取用于模型训练的 coding agent trace，少于 0.01% 客户的 API 凭证暴露。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://cursor.com/blog/security-incident-update",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b9a93113",
+    "coverage": []
+  },
+  {
     "id": "8761a0722a1fefc412c1",
     "title": "Artificial Analysis 评测 Gemini 4 Hydrogen：智能指数 54，接近 Sonnet 5.5 且成本约其 32%",
     "url": "https://aihot.news/items/ajvxvhu8bh001pourbhhjl0ir",
