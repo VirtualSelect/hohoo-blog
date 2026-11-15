@@ -9,12 +9,15 @@ import { fileURLToPath } from "node:url";
 import { themeScript } from "../lib/theme-init.mjs";
 import {
   roamingPreferenceKey,
+  documentThemeVisitKey,
+  visitThemePreferenceKey,
   readRoamingState,
   recordDesignVisit,
 } from "../lib/theme-roaming.mjs";
 
 const designKey = "huhohoo.design.v1";
 const legacyKey = "huhohoo.theme.v1";
+const fixedPreference = JSON.stringify({ version: 1, mode: "fixed" });
 const designs = [
   ["space", "dark"],
   ["clear", "light"],
@@ -29,7 +32,9 @@ const designs = [
 function initialize({
   design = null,
   legacyTheme = null,
-  roaming = null,
+  // Compatibility resolver cases explicitly use fixed mode. New visit-mode
+  // tests pass null to exercise the actual no-preference default.
+  roaming = fixedPreference,
   systemDark = false,
   stored = new Map(
     [
@@ -45,6 +50,9 @@ function initialize({
   allowWrites = false,
   now = new Date(2026, 10, 14, 12).getTime(),
   script = themeScript,
+  random = () => 0,
+  sessionStored = new Map(),
+  sessionStorageStatus = "available",
 } = {}) {
   const reads = [];
   const writes = [];
@@ -57,6 +65,7 @@ function initialize({
   };
   const location = { href: `https://huhohoo.com${path}` };
   const scope = {
+    Math: Object.assign(Object.create(Math), { random }),
     Date: class extends Date {
       constructor(...args) {
         super(...(args.length ? args : [now]));
@@ -69,6 +78,26 @@ function initialize({
       return { matches: systemDark };
     },
   };
+  if (sessionStorageStatus === "blocked") {
+    Object.defineProperty(scope, "sessionStorage", {
+      get() {
+        throw new Error("Session storage blocked");
+      },
+    });
+  } else if (sessionStorageStatus !== "missing") {
+    scope.sessionStorage = {
+      getItem(key) {
+        if (sessionStorageStatus === "read-error")
+          throw new Error("Session read failed");
+        return sessionStored.get(key) ?? null;
+      },
+      setItem(key, value) {
+        if (sessionStorageStatus === "write-error")
+          throw new Error("Session write failed");
+        sessionStored.set(key, value);
+      },
+    };
+  }
   if (storage === "blocked") {
     Object.defineProperty(scope, "localStorage", {
       get() {
@@ -104,14 +133,26 @@ function initialize({
   }
   // No DOM-ready event, React hydration or timer is provided: both attributes
   // must be set immediately when the real head script finishes.
-  vm.runInNewContext(script, scope, { timeout: 100 });
+  vm.runInNewContext(script, scope, { timeout: 1000 });
   if (!allowWrites)
     assert.deepEqual(
       writes,
       [],
       "Default initialization must not mutate storage",
     );
-  return { root, reads, writes, stored, location };
+  return {
+    root,
+    reads,
+    writes,
+    stored,
+    sessionStored,
+    location,
+    document: scope.document,
+    rerun: () => vm.runInNewContext(script, scope, { timeout: 1000 }),
+    setNow: (nextNow) => {
+      now = nextNow;
+    },
+  };
 }
 
 test("all eight saved designs set both attributes before paint despite conflicting legacy preferences", () => {
@@ -196,6 +237,26 @@ test("the real bundled head script remains self-contained in development and pro
         "2026-11-14",
         mode,
       );
+      const automatic = initialize({
+        script,
+        roaming: null,
+        allowWrites: true,
+      });
+      assert.equal(
+        automatic.document[documentThemeVisitKey].state.mode,
+        "visit",
+        mode,
+      );
+      const chosen = automatic.root.dataset.design;
+      automatic.rerun();
+      assert.equal(automatic.root.dataset.design, chosen, mode);
+      const revisit = initialize({
+        script,
+        stored: automatic.stored,
+        sessionStored: automatic.sessionStored,
+        allowWrites: true,
+      });
+      assert.notEqual(revisit.root.dataset.design, chosen, mode);
     }
   } finally {
     // Only remove this test's newly created directory under the OS temp root.
@@ -229,7 +290,7 @@ test("opted-in daily scenery changes once before paint and survives new document
   assert.equal(result.stored.get(designKey), next);
   assert.deepEqual(
     result.writes.map(([, key]) => key),
-    [designKey, roamingPreferenceKey],
+    [roamingPreferenceKey, designKey],
   );
   const sameDay = initialize({
     stored: result.stored,
@@ -279,11 +340,11 @@ test("an explicit selection wins over an older daily record even on a new day", 
   );
   assert.deepEqual(
     result.writes.map(([, key]) => key),
-    [roamingPreferenceKey],
+    [roamingPreferenceKey, designKey],
   );
 });
 
-test("a failed daily theme write retains the existing view and does not advance its record", () => {
+test("a failed daily theme write still applies this Document's visit and records the persistence failure", () => {
   const before = dailyPreference();
   const result = initialize({
     design: "garden",
@@ -291,16 +352,26 @@ test("a failed daily theme write retains the existing view and does not advance 
     storage: "design-write-error",
     allowWrites: true,
   });
-  assert.equal(result.root.dataset.design, "garden");
+  assert.notEqual(result.root.dataset.design, "garden");
   assert.equal(result.stored.get(designKey), "garden");
-  assert.equal(result.stored.get(roamingPreferenceKey), before);
+  assert.equal(
+    readRoamingState(result.stored.get(roamingPreferenceKey)).dailyId,
+    result.root.dataset.design,
+  );
+  assert.equal(result.document[documentThemeVisitKey].unsaved, true);
   assert.deepEqual(
     result.writes.map(([, key]) => key),
-    [designKey],
+    [roamingPreferenceKey, designKey],
+  );
+  const reload = initialize({ stored: result.stored, allowWrites: true });
+  assert.equal(reload.root.dataset.design, "garden");
+  assert.equal(
+    readRoamingState(reload.stored.get(roamingPreferenceKey)).mode,
+    "fixed",
   );
 });
 
-test("a partial daily write cannot roll back the saved view on a subsequent visit", () => {
+test("a failed automatic record write leaves the shared theme unchanged while the Document uses the new view", () => {
   const result = initialize({
     design: "garden",
     roaming: dailyPreference(),
@@ -309,20 +380,21 @@ test("a partial daily write cannot roll back the saved view on a subsequent visi
   });
   const next = result.root.dataset.design;
   assert.notEqual(next, "garden");
-  assert.equal(result.stored.get(designKey), next);
+  assert.equal(result.stored.get(designKey), "garden");
   assert.equal(
     readRoamingState(result.stored.get(roamingPreferenceKey)).dailyId,
     "garden",
   );
-  const reload = initialize({ stored: result.stored, allowWrites: true });
-  assert.equal(reload.root.dataset.design, next);
-  assert.equal(
-    readRoamingState(result.stored.get(roamingPreferenceKey)).daily,
-    false,
+  assert.equal(result.document[documentThemeVisitKey].unsaved, true);
+  assert.deepEqual(
+    result.writes.map(([, key]) => key),
+    [roamingPreferenceKey],
   );
+  result.rerun();
+  assert.equal(result.root.dataset.design, next);
 });
 
-test("malformed daily data cannot enable rotation or overwrite saved preferences", () => {
+test("malformed legacy daily data falls back to visit mode without enabling the daily scheduler", () => {
   for (const roaming of [
     "{",
     '{"daily":true}',
@@ -346,9 +418,10 @@ test("malformed daily data cannot enable rotation or overwrite saved preferences
       dailyId: "unknown",
     }),
   ]) {
-    const result = initialize({ design: "garden", roaming });
-    assert.equal(result.root.dataset.design, "garden");
-    assert.deepEqual(result.writes, []);
+    const result = initialize({ design: "garden", roaming, allowWrites: true });
+    assert.notEqual(result.root.dataset.design, "garden");
+    assert.equal(result.document[documentThemeVisitKey].state.mode, "visit");
+    assert.equal(result.document[documentThemeVisitKey].state.daily, false);
   }
 });
 
@@ -405,12 +478,19 @@ test("absent or invalid new and legacy values fall back to the system without sa
 test("unavailable storage still selects a complete readable design before hydration", () => {
   for (const storage of ["blocked", "read-error", "missing"])
     for (const systemDark of [false, true]) {
-      const result = initialize({ storage, systemDark });
-      assert.deepEqual(result.root.dataset, {
-        design: systemDark ? "space" : "clear",
-        theme: systemDark ? "dark" : "light",
-        hasHydrated: "false",
-      });
+      const result = initialize({ storage, systemDark, allowWrites: true });
+      assert.ok(
+        designs.some(
+          ([id, mode]) =>
+            id === result.root.dataset.design &&
+            mode === result.root.dataset.theme,
+        ),
+      );
+      assert.equal(result.document[documentThemeVisitKey].state.mode, "visit");
+      assert.equal(result.root.dataset.hasHydrated, "false");
+      const chosen = result.root.dataset.design;
+      result.rerun();
+      assert.equal(result.root.dataset.design, chosen);
     }
 });
 
@@ -430,6 +510,7 @@ test("reloads and new route documents restore every design without changing read
     const stored = new Map([
       [designKey, design],
       [legacyKey, "dark"],
+      [roamingPreferenceKey, fixedPreference],
       ["huhohoo.learning.v1", '{"saved":["first-call"]}'],
       ["huhohoo.reading.v1", '{"items":{"doc:example":{"status":"read"}}}'],
     ]);
@@ -454,6 +535,7 @@ test("later documents read the latest shared design and legacy values rather tha
   const stored = new Map([
     [designKey, "classic"],
     [legacyKey, "dark"],
+    [roamingPreferenceKey, fixedPreference],
   ]);
   assert.equal(initialize({ stored }).root.dataset.design, "classic");
   stored.set(designKey, "photo");
@@ -478,4 +560,189 @@ test("later documents read the latest shared design and legacy values rather tha
       .design,
     "space",
   );
+});
+
+test("fresh Documents visit all eight themes before repeating without inventing a first visit", () => {
+  const stored = new Map([
+    ["huhohoo.reading.v1", '{"items":{"doc:example":{"status":"read"}}}'],
+  ]);
+  const sessionStored = new Map();
+  const chosen = [];
+  for (let i = 0; i < 8; i++) {
+    const visit = initialize({ stored, sessionStored, allowWrites: true });
+    const id = visit.root.dataset.design;
+    assert.ok(!chosen.includes(id));
+    chosen.push(id);
+    const record = visit.document[documentThemeVisitKey];
+    assert.equal(record.designId, id);
+    assert.equal(record.state.mode, "visit");
+    assert.equal(record.state.source, "automatic");
+    assert.equal(record.state.visited.length, i + 1);
+    assert.equal(record.unsaved, false);
+    assert.equal(sessionStored.get(visitThemePreferenceKey), id);
+    assert.deepEqual(
+      visit.writes.map(([, key]) => key),
+      [roamingPreferenceKey, designKey],
+    );
+  }
+  const ninth = initialize({ stored, sessionStored, allowWrites: true });
+  assert.notEqual(ninth.root.dataset.design, chosen.at(-1));
+  assert.equal(
+    stored.get("huhohoo.reading.v1"),
+    '{"items":{"doc:example":{"status":"read"}}}',
+  );
+  assert.equal(stored.has(legacyKey), false);
+});
+
+test("repeated execution, hydration and a new calendar day in one Document restore its original view without writes", () => {
+  const visit = initialize({ roaming: null, allowWrites: true });
+  const id = visit.root.dataset.design;
+  const reads = [...visit.reads],
+    writes = [...visit.writes];
+  visit.document.documentElement = {
+    dataset: { design: "clear", theme: "light" },
+  };
+  visit.location.href = "https://huhohoo.com/articles?q=rag#results";
+  visit.setNow(new Date(2026, 10, 15, 0, 1).getTime());
+  visit.rerun();
+  assert.equal(visit.document.documentElement.dataset.design, id);
+  assert.deepEqual(visit.reads, reads);
+  assert.deepEqual(visit.writes, writes);
+  assert.equal(
+    visit.location.href,
+    "https://huhohoo.com/articles?q=rag#results",
+  );
+  assert.equal(visit.document[documentThemeVisitKey].designId, id);
+});
+
+test("legacy off records opt into visit mode while old daily records keep their daily schedule", () => {
+  const oldOff = JSON.stringify({
+    version: 1,
+    daily: false,
+    visited: ["garden"],
+  });
+  const visit = initialize({
+    design: "garden",
+    roaming: oldOff,
+    allowWrites: true,
+  });
+  assert.notEqual(visit.root.dataset.design, "garden");
+  assert.equal(visit.document[documentThemeVisitKey].state.mode, "visit");
+  const oldDaily = JSON.stringify({
+    version: 1,
+    daily: true,
+    day: "2026-11-14",
+    dailyId: "garden",
+  });
+  const daily = initialize({ design: "garden", roaming: oldDaily });
+  assert.equal(daily.root.dataset.design, "garden");
+  assert.equal(daily.document[documentThemeVisitKey].state.mode, "daily");
+});
+
+test("manual choices in visit mode remain for this Document but the next arrival explores another view", () => {
+  const first = initialize({ roaming: null, allowWrites: true });
+  const state = recordDesignVisit(
+    first.document[documentThemeVisitKey].state,
+    "photo",
+    first.root.dataset.design,
+  );
+  first.stored.set(designKey, "photo");
+  first.stored.set(roamingPreferenceKey, JSON.stringify(state));
+  first.document[documentThemeVisitKey] = {
+    designId: "photo",
+    state,
+    unsaved: false,
+  };
+  first.sessionStored.set(visitThemePreferenceKey, "photo");
+  first.rerun();
+  assert.equal(first.root.dataset.design, "photo");
+  const next = initialize({
+    stored: first.stored,
+    sessionStored: first.sessionStored,
+    allowWrites: true,
+  });
+  assert.notEqual(next.root.dataset.design, "photo");
+  assert.equal(next.document[documentThemeVisitKey].state.mode, "visit");
+});
+
+test("visit persistence failures still retain the chosen view in the current Document", () => {
+  for (const storage of [
+    "blocked",
+    "missing",
+    "design-write-error",
+    "roaming-write-error",
+  ]) {
+    const visit = initialize({
+      design: "garden",
+      roaming: null,
+      storage,
+      allowWrites: true,
+    });
+    const id = visit.root.dataset.design;
+    assert.equal(visit.document[documentThemeVisitKey].unsaved, true, storage);
+    assert.equal(visit.document[documentThemeVisitKey].designId, id, storage);
+    if (storage === "roaming-write-error")
+      assert.equal(visit.stored.get(designKey), "garden");
+    const writes = [...visit.writes];
+    visit.rerun();
+    assert.equal(visit.root.dataset.design, id, storage);
+    assert.deepEqual(visit.writes, writes, storage);
+  }
+});
+
+test("refreshing a tab excludes its previous view even after a different tab changed the shared preference", () => {
+  const stored = new Map([
+    [designKey, "clear"],
+    [
+      roamingPreferenceKey,
+      JSON.stringify({
+        version: 1,
+        mode: "visit",
+        source: "automatic",
+        visited: designs.map(([id]) => id),
+      }),
+    ],
+  ]);
+  const sessionStored = new Map([[visitThemePreferenceKey, "space"]]);
+  const visit = initialize({ stored, sessionStored, allowWrites: true });
+  assert.notEqual(visit.root.dataset.design, "space");
+  assert.notEqual(visit.root.dataset.design, "clear");
+  assert.equal(
+    sessionStored.get(visitThemePreferenceKey),
+    visit.root.dataset.design,
+  );
+});
+
+test("missing, denied and malformed tab-local markers never prevent a complete visit", () => {
+  for (const sessionStorageStatus of [
+    "missing",
+    "blocked",
+    "read-error",
+    "write-error",
+  ]) {
+    const visit = initialize({
+      roaming: null,
+      sessionStorageStatus,
+      allowWrites: true,
+    });
+    assert.ok(designs.some(([id]) => id === visit.root.dataset.design));
+    assert.equal(visit.document[documentThemeVisitKey].unsaved, false);
+  }
+  for (const marker of [
+    "{}",
+    "unknown",
+    "__proto__",
+    '{"version":1,"id":"space"}',
+  ]) {
+    const visit = initialize({
+      roaming: null,
+      sessionStored: new Map([[visitThemePreferenceKey, marker]]),
+      allowWrites: true,
+    });
+    assert.equal(visit.root.dataset.design, "space");
+    assert.deepEqual(
+      [...visit.document[documentThemeVisitKey].state.visited],
+      ["space"],
+    );
+  }
 });

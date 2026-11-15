@@ -3,19 +3,25 @@ import assert from "node:assert/strict";
 import { designThemes } from "../lib/design-themes.mjs";
 import {
   roamingPreferenceKey,
+  documentThemeVisitKey,
+  visitThemePreferenceKey,
   validRoamingDay,
   readRoamingState,
   localDayKey,
   chooseRoamingTheme,
   recordDesignVisit,
   resolveDailyDesign,
+  resolveVisitDesign,
 } from "../lib/theme-roaming.mjs";
 
 const ids = designThemes.map((theme) => theme.id);
 
-test("roaming is opt-in and malformed or future-version browser records stay disabled", () => {
+test("visit mode is the default and malformed records never enable the daily scheduler", () => {
   assert.equal(roamingPreferenceKey, "huhohoo.roaming.v1");
+  assert.equal(documentThemeVisitKey, "__huhohooThemeVisit");
+  assert.equal(visitThemePreferenceKey, "huhohoo.visit.v1");
   const empty = readRoamingState(null);
+  assert.equal(empty.mode, "visit");
   assert.equal(empty.daily, false);
   for (const raw of [
     undefined,
@@ -44,6 +50,8 @@ test("roaming is opt-in and malformed or future-version browser records stay dis
   );
   assert.deepEqual(restored, {
     version: 1,
+    mode: "daily",
+    source: "manual",
     daily: true,
     day: "2026-11-14",
     dailyId: "garden",
@@ -53,7 +61,7 @@ test("roaming is opt-in and malformed or future-version browser records stay dis
   for (const update of [
     { day: "2026-02-30" },
     { dailyId: "__proto__" },
-    { daily: 1 },
+    { mode: "visit", daily: 1 },
   ]) {
     const invalid = readRoamingState(
       JSON.stringify({ ...restored, ...update }),
@@ -162,4 +170,122 @@ test("a newer explicit theme defeats an older daily record instead of silently r
   const tomorrow = resolveDailyDesign(result.state, "map", "2026-11-15");
   assert.equal(tomorrow.designId, "map");
   assert.equal(tomorrow.changed, false);
+});
+
+test("old roaming records migrate to visit while explicit fixed and valid daily modes remain available", () => {
+  for (const raw of [
+    null,
+    JSON.stringify({ version: 1, daily: false, visited: ["photo"] }),
+  ])
+    assert.equal(readRoamingState(raw).mode, "visit");
+  const oldDaily = readRoamingState(
+    JSON.stringify({
+      version: 1,
+      daily: true,
+      day: "2026-11-14",
+      dailyId: "garden",
+    }),
+  );
+  assert.equal(oldDaily.mode, "daily");
+  assert.equal(oldDaily.source, "manual");
+  const fixed = readRoamingState(
+    JSON.stringify({
+      version: 1,
+      mode: "fixed",
+      daily: true,
+      day: "2026-11-14",
+      dailyId: "garden",
+    }),
+  );
+  assert.equal(fixed.mode, "fixed");
+  assert.equal(fixed.daily, false);
+  assert.equal(
+    resolveVisitDesign(fixed, "garden", "2026-11-15").designId,
+    "garden",
+  );
+});
+
+test("manual selection preserves visit mode but can explicitly pin or enter daily mode", () => {
+  const automatic = resolveVisitDesign(
+    readRoamingState(null),
+    null,
+    "2026-11-15",
+    () => 0,
+  );
+  assert.equal(automatic.state.source, "automatic");
+  assert.equal(automatic.state.mode, "visit");
+  assert.deepEqual(automatic.state.visited, [automatic.designId]);
+  const manual = recordDesignVisit(
+    automatic.state,
+    "garden",
+    automatic.designId,
+  );
+  assert.equal(manual.mode, "visit");
+  assert.equal(manual.source, "manual");
+  assert.notEqual(
+    resolveVisitDesign(manual, "garden", "2026-11-15", () => 0).designId,
+    "garden",
+  );
+  for (const options of [{ mode: "fixed" }, { daily: false }]) {
+    const fixed = recordDesignVisit(manual, "garden", "garden", options);
+    assert.equal(fixed.mode, "fixed");
+    assert.equal(
+      resolveVisitDesign(fixed, "garden", "2026-11-15").changed,
+      false,
+    );
+  }
+  for (const options of [
+    { mode: "daily", day: "2026-11-15" },
+    { daily: true, day: "2026-11-15" },
+  ]) {
+    const daily = recordDesignVisit(manual, "garden", "garden", options);
+    assert.equal(daily.mode, "daily");
+    assert.equal(
+      resolveVisitDesign(daily, "garden", "2026-11-15").changed,
+      false,
+    );
+    assert.equal(
+      resolveVisitDesign(daily, "garden", "2026-11-16").state.source,
+      "automatic",
+    );
+    assert.equal(recordDesignVisit(daily, "photo", "garden").mode, "fixed");
+  }
+});
+
+test("automatic visits cover all eight real views before repeating and exclude the latest shared and tab views", () => {
+  let state = readRoamingState(null),
+    current = null;
+  const journey = [];
+  for (let i = 0; i < 8; i++) {
+    const next = resolveVisitDesign(state, current, "2026-11-15", () => 0);
+    assert.notEqual(next.designId, current);
+    assert.ok(!journey.includes(next.designId));
+    state = next.state;
+    current = next.designId;
+    journey.push(current);
+    assert.equal(state.visited.length, i + 1);
+    assert.equal(state.source, "automatic");
+  }
+  for (const tab of ids)
+    for (const shared of ids) {
+      const next = resolveVisitDesign(
+        state,
+        shared,
+        "2026-11-15",
+        () => 0,
+        tab,
+      );
+      assert.notEqual(next.designId, shared);
+      assert.notEqual(next.designId, tab);
+    }
+  assert.equal(
+    chooseRoamingTheme(
+      "space",
+      [],
+      () => 0,
+      [{ id: "space" }, { id: "clear" }],
+      "clear",
+    ),
+    "clear",
+  );
 });

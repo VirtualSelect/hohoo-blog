@@ -1,6 +1,8 @@
 import { designThemes } from "./design-themes.mjs";
 
 export const roamingPreferenceKey = "huhohoo.roaming.v1";
+export const documentThemeVisitKey = "__huhohooThemeVisit";
+export const visitThemePreferenceKey = "huhohoo.visit.v1";
 
 // This factory is deliberately self-contained: the same functions run in the
 // bundled client and in a serialized before-paint script with an inline registry.
@@ -18,6 +20,8 @@ export function createRoamingHelpers(registry) {
   function readRoamingState(raw, themes = registry) {
     const empty = {
       version: 1,
+      mode: "visit",
+      source: "manual",
       daily: false,
       visited: [],
       previousId: null,
@@ -29,12 +33,22 @@ export function createRoamingHelpers(registry) {
       const value = JSON.parse(raw);
       if (!value || Array.isArray(value) || value.version !== 1) return empty;
       const supported = (id) => themes.some((theme) => theme.id === id);
-      const daily =
-        value.daily === true &&
-        validRoamingDay(value.day) &&
-        supported(value.dailyId);
+      const validDaily = validRoamingDay(value.day) && supported(value.dailyId);
+      const mode =
+        value.mode === "fixed" || value.mode === "visit"
+          ? value.mode
+          : value.mode === "daily"
+            ? validDaily
+              ? "daily"
+              : "fixed"
+            : value.daily === true && validDaily
+              ? "daily"
+              : "visit";
+      const daily = mode === "daily";
       return {
         version: 1,
+        mode,
+        source: value.source === "automatic" ? "automatic" : "manual",
         daily,
         visited: Array.isArray(value.visited)
           ? [...new Set(value.visited.filter(supported))]
@@ -63,11 +77,14 @@ export function createRoamingHelpers(registry) {
     visited,
     random = Math.random,
     themes = registry,
+    excludeId = null,
   ) {
     const others = themes.filter((theme) => theme.id !== currentId);
+    const differentFromTab = others.filter((theme) => theme.id !== excludeId);
+    const available = differentFromTab.length ? differentFromTab : others;
     const seen = new Set(Array.isArray(visited) ? visited : []);
-    const unseen = others.filter((theme) => !seen.has(theme.id));
-    const candidates = unseen.length ? unseen : others;
+    const unseen = available.filter((theme) => !seen.has(theme.id));
+    const candidates = unseen.length ? unseen : available;
     if (!candidates.length) return currentId;
     const value = random();
     const sample = Number.isFinite(value)
@@ -76,12 +93,7 @@ export function createRoamingHelpers(registry) {
     return candidates[Math.floor(sample * candidates.length)].id;
   }
 
-  function recordDesignVisit(
-    state,
-    nextId,
-    currentId,
-    { daily = false, day = null } = {},
-  ) {
+  function recordDesignVisit(state, nextId, currentId, options = {}) {
     const clean = readRoamingState(JSON.stringify(state));
     const supported = (id) => registry.some((theme) => theme.id === id);
     if (!supported(nextId)) return clean;
@@ -91,9 +103,25 @@ export function createRoamingHelpers(registry) {
         : clean.previousId === nextId
           ? null
           : clean.previousId;
-    const dailyEnabled = daily === true && validRoamingDay(day);
+    const day = options.day ?? null;
+    const requestedMode = ["visit", "daily", "fixed"].includes(options.mode)
+      ? options.mode
+      : options.daily === true
+        ? "daily"
+        : options.daily === false
+          ? "fixed"
+          : clean.mode === "visit"
+            ? "visit"
+            : "fixed";
+    const mode =
+      requestedMode === "daily" && !validRoamingDay(day)
+        ? "fixed"
+        : requestedMode;
+    const dailyEnabled = mode === "daily";
     return {
       version: 1,
+      mode,
+      source: "manual",
       daily: dailyEnabled,
       visited: [
         ...new Set([...clean.visited, currentId, nextId].filter(supported)),
@@ -131,10 +159,43 @@ export function createRoamingHelpers(registry) {
     );
     return {
       designId,
-      state: recordDesignVisit(clean, designId, currentId, {
-        daily: true,
-        day,
-      }),
+      state: {
+        ...recordDesignVisit(clean, designId, currentId, {
+          mode: "daily",
+          day,
+        }),
+        source: "automatic",
+      },
+      changed: true,
+    };
+  }
+  // A visit means a fresh Document, not a client-side route change. The head
+  // bootstrap holds its result on that Document for hydration and navigation.
+  function resolveVisitDesign(
+    state,
+    currentId,
+    day,
+    random = Math.random,
+    excludeId = null,
+  ) {
+    const clean = readRoamingState(JSON.stringify(state));
+    if (clean.mode === "daily")
+      return resolveDailyDesign(clean, currentId, day);
+    if (clean.mode === "fixed")
+      return { designId: currentId, state: clean, changed: false };
+    const designId = chooseRoamingTheme(
+      currentId,
+      clean.visited,
+      random,
+      registry,
+      excludeId,
+    );
+    return {
+      designId,
+      state: {
+        ...recordDesignVisit(clean, designId, currentId, { mode: "visit" }),
+        source: "automatic",
+      },
       changed: true,
     };
   }
@@ -145,6 +206,7 @@ export function createRoamingHelpers(registry) {
     chooseRoamingTheme,
     recordDesignVisit,
     resolveDailyDesign,
+    resolveVisitDesign,
   };
 }
 
@@ -155,4 +217,5 @@ export const {
   chooseRoamingTheme,
   recordDesignVisit,
   resolveDailyDesign,
+  resolveVisitDesign,
 } = createRoamingHelpers(designThemes);

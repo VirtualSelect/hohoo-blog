@@ -6,6 +6,8 @@ import ThemeWindows from "./ThemeWindows";
 import { runThemePassage } from "../lib/theme-passage.mjs";
 import {
   roamingPreferenceKey,
+  documentThemeVisitKey,
+  visitThemePreferenceKey,
   readRoamingState,
   localDayKey,
   chooseRoamingTheme,
@@ -18,9 +20,14 @@ import {
   resolveDesignPreference,
 } from "../lib/design-themes.mjs";
 
-// Catch-all routes may remount the header. Keep unsaved/deferred choices for
-// this Document only; a real reload starts a fresh visit.
-const sessionDesignChoices = new WeakMap();
+// Share the before-paint choice with remounted route headers. A new Document
+// starts a new visit; client navigation and other tabs cannot advance this one.
+function rememberDocumentChoice(designId, state, unsaved = false) {
+  document[documentThemeVisitKey] = { designId, state, unsaved };
+  try {
+    sessionStorage.setItem(visitThemePreferenceKey, designId);
+  } catch {}
+}
 
 function setDesignAttributes(design) {
   const root = document.documentElement;
@@ -55,7 +62,9 @@ function storedDesign(fallbackDesign) {
 
 function consistentRoaming(state, currentId) {
   if (!state.daily || state.dailyId === currentId) return state;
-  const repaired = { ...state, daily: false, day: null, dailyId: null };
+  const repaired = recordDesignVisit(state, currentId, state.dailyId, {
+    mode: "fixed",
+  });
   try {
     localStorage.setItem(roamingPreferenceKey, JSON.stringify(repaired));
   } catch {}
@@ -130,13 +139,10 @@ export default function ThemeToggle() {
   const arrivalTimer = useRef(0);
   const [roaming, setRoaming] = useState(() => readRoamingState(null));
   const roamingState = useRef(roaming);
-  const unpersistedRoaming = useRef(null);
-  const deferredDaily = useRef(null);
   const storageTimer = useRef(0);
   const cancelPassage = useRef(null);
   const pendingThemeFrame = useRef(0);
   const selectedDesign = useRef(null);
-  const unpersistedDesign = useRef(null);
   const trigger = useRef(null);
   const picker = useRef(null);
   const selected =
@@ -149,24 +155,20 @@ export default function ThemeToggle() {
     cancelPassage.current?.();
     clearTimeout(arrivalTimer.current);
     setArrival(null);
-    const session = sessionDesignChoices.get(document);
-    deferredDaily.current ||= session || null;
+    const session = document[documentThemeVisitKey];
     setSaveError(Boolean(session?.unsaved));
     // Restore the full design before paint when a static root is replaced.
-    // An unsaved choice remains active in this mounted session.
-    const sessionChoice =
-      unpersistedDesign.current || deferredDaily.current?.designId;
+    const sessionChoice = session?.designId;
     const next = sessionChoice
       ? resolveDesignPreference(sessionChoice, null, false)
       : storedDesign(selectedDesign.current);
     const savedRoaming = consistentRoaming(
-      unpersistedRoaming.current ||
-        deferredDaily.current?.state ||
-        storedRoaming(),
+      session?.state || storedRoaming(),
       next.id,
     );
     roamingState.current = savedRoaming;
     setRoaming(savedRoaming);
+    rememberDocumentChoice(next.id, savedRoaming, Boolean(session?.unsaved));
     setDesignAttributes(next);
     selectedDesign.current = next.id;
     setSelectedId(next.id);
@@ -202,26 +204,14 @@ export default function ThemeToggle() {
       // events before interpreting a partly written daily record.
       clearTimeout(storageTimer.current);
       storageTimer.current = window.setTimeout(() => {
+        // Only explicit choices sync to another reader. A new tab's automatic
+        // arrival keeps the existing document and its next navigation stable.
+        // Inspect the source before repairing a partially written preference.
+        const savedRoaming = storedRoaming();
+        if (savedRoaming.source === "automatic") return;
         const next = storedDesign(selectedDesign.current);
-        const nextRoaming = consistentRoaming(storedRoaming(), next.id);
-        // Another fresh tab may advance daily scenery. Keep this ongoing reading
-        // session stable, including its next client-side navigation.
-        if (
-          nextRoaming.daily &&
-          nextRoaming.day !== roamingState.current.day &&
-          next.id !== selectedDesign.current
-        ) {
-          deferredDaily.current = {
-            designId: selectedDesign.current,
-            state: roamingState.current,
-          };
-          sessionDesignChoices.set(document, deferredDaily.current);
-          return;
-        }
-        deferredDaily.current = null;
-        sessionDesignChoices.delete(document);
-        unpersistedDesign.current = null;
-        unpersistedRoaming.current = null;
+        const nextRoaming = consistentRoaming(savedRoaming, next.id);
+        rememberDocumentChoice(next.id, nextRoaming);
         roamingState.current = nextRoaming;
         setRoaming(nextRoaming);
         cancelPassage.current?.();
@@ -247,8 +237,6 @@ export default function ThemeToggle() {
 
   function saveChoice(design, nextRoaming) {
     clearTimeout(storageTimer.current);
-    deferredDaily.current = null;
-    sessionDesignChoices.delete(document);
     selectedDesign.current = design.id;
     setSelectedId(design.id);
     roamingState.current = nextRoaming;
@@ -266,15 +254,7 @@ export default function ThemeToggle() {
       localStorage.setItem(roamingPreferenceKey, JSON.stringify(nextRoaming));
       roamingSaved = true;
     } catch {}
-    unpersistedDesign.current = saved && roamingSaved ? null : design.id;
-    unpersistedRoaming.current = roamingSaved ? null : nextRoaming;
-    if (!saved || !roamingSaved) {
-      sessionDesignChoices.set(document, {
-        designId: design.id,
-        state: nextRoaming,
-        unsaved: true,
-      });
-    }
+    rememberDocumentChoice(design.id, nextRoaming, !saved || !roamingSaved);
     setSaveError(!saved || !roamingSaved);
   }
 
@@ -299,12 +279,12 @@ export default function ThemeToggle() {
     }
   }
 
-  function toggleDaily(enabled) {
+  function changeArrivalMode(mode) {
     saveChoice(
       selected,
       recordDesignVisit(roamingState.current, selected.id, selected.id, {
-        daily: enabled,
-        day: enabled ? localDayKey() : null,
+        mode,
+        day: mode === "daily" ? localDayKey() : null,
       }),
     );
   }
@@ -433,34 +413,54 @@ export default function ThemeToggle() {
             </button>
           </div>
           <div className="theme-roaming-settings">
-            <label className="theme-roaming-daily">
-              <input
-                type="checkbox"
-                checked={roaming.daily}
-                onChange={(event) => toggleDaily(event.target.checked)}
-              />
-              <span>
-                <strong>{t("每日风景", "A daily view", "每日風景")}</strong>
-                <small>
-                  {roaming.daily
+            <fieldset className="theme-roaming-frequency">
+              <legend>
+                {t("到访时的风景", "Your arrival view", "到訪時的風景")}
+              </legend>
+              <div className="theme-roaming-modes">
+                {[
+                  ["visit", ["每次访问", "Every visit", "每次訪問"]],
+                  ["daily", ["每日风景", "Daily view", "每日風景"]],
+                  ["fixed", ["固定主题", "Keep theme", "固定主題"]],
+                ].map(([mode, copy]) => (
+                  <label key={mode} className="theme-roaming-mode">
+                    <input
+                      type="radio"
+                      name="theme-arrival-mode"
+                      value={mode}
+                      checked={roaming.mode === mode}
+                      onChange={() => changeArrivalMode(mode)}
+                      aria-describedby="theme-arrival-hint"
+                    />
+                    <span>{t(...copy)}</span>
+                  </label>
+                ))}
+              </div>
+              <p id="theme-arrival-hint" className="theme-roaming-hint">
+                {roaming.mode === "visit"
+                  ? t(
+                      "重新打开或刷新时换一扇窗，站内翻页保持当前风景。",
+                      "A new view when you reopen or refresh. Keep it while browsing the site.",
+                      "重新開啟或重新整理時換一扇窗，站內翻頁保持目前風景。",
+                    )
+                  : roaming.mode === "daily"
                     ? t(
                         "今天留在这里，明天首次到访再换新风景。",
                         "Stay here today. Discover a new view on tomorrow’s first visit.",
                         "今天留在這裡，明天首次到訪再換新風景。",
                       )
                     : t(
-                        "可选：每天首次到访，遇见不同的主题。",
-                        "Optional: a different theme on each day’s first visit.",
-                        "可選：每天首次到訪，遇見不同的主題。",
+                        "下次到访也保留当前主题，随时可以手动更换。",
+                        "Keep this theme on future visits. You can still change it anytime.",
+                        "下次到訪也保留目前主題，隨時可以手動更換。",
                       )}
-                </small>
-              </span>
-            </label>
-            {roaming.daily && (
+              </p>
+            </fieldset>
+            {roaming.mode !== "fixed" && (
               <button
                 type="button"
                 className="theme-roaming-pin"
-                onClick={() => toggleDaily(false)}
+                onClick={() => changeArrivalMode("fixed")}
               >
                 {t("留在这里", "Stay here", "留在這裡")}
                 <span aria-hidden="true">⌁</span>
