@@ -1,5 +1,22 @@
 [
   {
+    "id": "2a25d12e4267dab6354b",
+    "title": "Databricks 推出 AI Index：追踪企业级 AI 采用与 token 成本",
+    "url": "https://aihot.news/items/ctdbuq2r9l6dakhxrm4pmd8ru",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-16T17:00:00.000Z",
+    "collectedAt": "2026-11-16T18:51:58.975Z",
+    "category": "ai-apps",
+    "summary": "Databricks 推出 AI Index，将 Unity Gateway 上 10,000+ 家企业的匿名用量数据与基于私有代码库的编码 Agent 评测结合，每周更新并首次公开其内部评测套件。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://www.databricks.com/blog/introducing-databricks-ai-index-state-enterprise-ai-tokenomics",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e95a193b",
+    "coverage": []
+  },
+  {
     "id": "c8ff32250d242286e4a8",
     "title": "腾讯混元发布 Hy4 flash：224B 总参数、1M 上下文的日常高性价比模型",
     "url": "https://aihot.news/items/u36vxmxeopbsx4if4lap30899",
@@ -56,6 +73,23 @@
         "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/r9e7azie93xzxxdf6yyd1jmqe"
       ]
     }
+  },
+  {
+    "id": "91328f1b2ed35d04ffb9",
+    "title": "Hugging Face Inference Providers 语言模型路由切换为 OpenRouter",
+    "url": "https://aihot.news/items/v9a6479l3xc0c2m5xsd9bzo9o",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-16T00:00:00.000Z",
+    "collectedAt": "2026-11-16T18:51:58.975Z",
+    "category": "llm",
+    "summary": "Hugging Face 与 OpenRouter 合作，将语言模型的 Inference Providers 从自有路由切换到 OpenRouter，按实时价格、速度和可靠性为每次请求挑选最佳 provider，失败时自动重试到其他 provider，代码无需更改。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://huggingface.co/blog/openrouter",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-63355a93",
+    "coverage": []
   },
   {
     "id": "ad7dd64017d7e6bc8de9",
