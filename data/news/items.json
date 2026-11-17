@@ -1,5 +1,65 @@
 [
   {
+    "id": "91d1c44ee36542258b43",
+    "title": "Claude Code 推出实验性 Code Mode 工具调用方式",
+    "url": "https://aihot.news/items/z3n160k1v5vsc90udwjd8x7pp",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-17T21:18:55.000Z",
+    "collectedAt": "2026-11-17T22:36:54.697Z",
+    "category": "ai-apps",
+    "summary": "Claude Code 推出实验性 Code Mode，一种新的工具使用方式：Claude 会编写脚本以复杂方式串联多个工具，并能在长命令仍在运行时回复用户。可通过设置环境变量 CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 开启，文档见 http://code.claude.com/docs/en/code-mode。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/ClaudeDevs/status/2122801681939234950",
+    "feedContentStatus": "full",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-86cfdac9",
+    "coverage": [],
+    "feedContent": {
+      "format": "aihot-rss-text-v1",
+      "language": "zh-CN",
+      "capturedAt": "2026-11-17T22:36:54.697Z",
+      "paragraphs": [
+        "来看看 Code Mode，这是 Claude Code 与工具协作的一种全新实验性方式。Claude 会编写脚本，以精巧的方式将你的工具串联起来，并且能在长命令仍在运行时回答你。",
+        "通过 CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 启用 code.claude.com/docs/en/code-…",
+        "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/z3n160k1v5vsc90udwjd8x7pp"
+      ]
+    }
+  },
+  {
+    "id": "3f012563889806750522",
+    "title": "OpenAI GPT-6.2 Astra 和 GPT-6.2 Sol 上线 OpenRouter",
+    "url": "https://aihot.news/items/tww8adkmqsbjxg8u6m16vuzta",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-17T18:10:00.000Z",
+    "collectedAt": "2026-11-17T22:36:54.697Z",
+    "category": "ai-apps",
+    "summary": "OpenRouter 宣布 OpenAI 的 GPT-6.2 Astra 和 GPT-6.2 Sol 上线。Astra 面向最难的项目，评测成绩创新高且每任务成本不到 GPT-6 Astra 的三分之一，价格为 $8/M 输入、$40/M 输出；Sol 面向日常智能体工作，价格为 $2/M 输入、$10/M 输出，两者均有 Pro 版本。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/OpenRouter/status/2122754139533066653",
+    "feedContentStatus": "full",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d139944d",
+    "coverage": [],
+    "feedContent": {
+      "format": "aihot-rss-text-v1",
+      "language": "zh-CN",
+      "capturedAt": "2026-11-17T22:36:54.697Z",
+      "paragraphs": [
+        "来自 @OpenAI 的 GPT-6.2 Astra 和 GPT-6.2 Sol 已在 OpenRouter 上线！",
+        "Astra 用于你最困难的项目，Sol 用于日常的智能体工作。两者的 Pro 版本也都可用。",
+        "关注 @ModelsOnOR 获取每一次模型发布。",
+        "引用 @ModelsOnOR：",
+        "来自 @OpenAI 的 GPT-6.2 Astra 和 GPT-6.2 Sol 已在 OpenRouter 上线！",
+        "Astra 创下新的评测高分，而每任务成本不到 GPT-6 Astra 的三分之一。Astra 为每百万输入 $8、每百万输出 $40，Sol 为每百万输入 $2、每百万输出 $10。",
+        "各自用途如下 🧵",
+        "https://x.com/ModelsOnOR/status/2122752232513053136",
+        "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/tww8adkmqsbjxg8u6m16vuzta"
+      ]
+    }
+  },
+  {
     "id": "2a25d12e4267dab6354b",
     "title": "Databricks 推出 AI Index：追踪企业级 AI 采用与 token 成本",
     "url": "https://aihot.news/items/ctdbuq2r9l6dakhxrm4pmd8ru",
