@@ -1,5 +1,32 @@
 [
   {
+    "id": "9ec885b26d705ee87f99",
+    "title": "OpenAI Codex 团队成员解释 6.2 Sol/Astra 评测视频与现场反馈的差异",
+    "url": "https://aihot.news/items/sah26a5ofgvrxd76bgj9t77wf",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-18T05:47:21.000Z",
+    "collectedAt": "2026-11-18T07:53:46.674Z",
+    "category": "ai-apps",
+    "summary": "Tibo 解释 6.2 Sol/Astra 上评测视频与现场人群反馈氛围不同的原因：部分人较早获得访问权限，而团队在过去 3-4 天做了大量改动，视频是上周制作的，之后大概率没有重新测试。他称这两个模型相比 GPT 前代有明显提升，但仍不完美，团队希望在后续迭代的品味和使用体验上改进，并表示欢迎反馈。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/thsottiaux/status/2122929634916679820",
+    "feedContentStatus": "full",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6f65cb2e",
+    "coverage": [],
+    "feedContent": {
+      "format": "aihot-rss-text-v1",
+      "language": "zh-CN",
+      "capturedAt": "2026-11-18T07:53:46.674Z",
+      "paragraphs": [
+        "今天在 6.2 Sol/Astra 上，网红和普通用户之间氛围差异的一个有趣原因是，我们不久前给了少数人访问权限，然后在过去 3-4 天里做了很多改动，我很确定这几天内没有重新测试，而视频是上周制作的。",
+        "别误会，虽然这些模型相比它们的 GPT 前代是巨大的飞跃，但它们绝非完美，团队也很期待模型在未来的迭代中在品味和使用体验上变得更好。喜欢所有的反馈，我们听到了！",
+        "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/sah26a5ofgvrxd76bgj9t77wf"
+      ]
+    }
+  },
+  {
     "id": "91d1c44ee36542258b43",
     "title": "Claude Code 推出实验性 Code Mode 工具调用方式",
     "url": "https://aihot.news/items/z3n160k1v5vsc90udwjd8x7pp",
@@ -25,6 +52,23 @@
         "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/z3n160k1v5vsc90udwjd8x7pp"
       ]
     }
+  },
+  {
+    "id": "06905cf0a85f6b8310fe",
+    "title": "Microsoft AI 发布首个语音到语音模型 MAI Realtime 1，定价 $0.01 每音频分钟",
+    "url": "https://aihot.news/items/eewx1bbnzfmbj6r40v7b6s6nb",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-17T18:16:17.000Z",
+    "collectedAt": "2026-11-18T07:53:46.674Z",
+    "category": "ai-apps",
+    "summary": "Microsoft AI 发布首个语音到语音模型 MAI Realtime 1，起价 $0.01 每音频分钟，称在公开基准和内部评测中质量、速度和价格均优于 GPT Realtime 2.1，处于 Big Bench Audio 语音推理和 τ-Voice 智能体任务完成基准的性能价格 Pareto 前沿。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://microsoft.ai/news/introducing-mai-realtime-1/",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-719055c7",
+    "coverage": []
   },
   {
     "id": "3f012563889806750522",
@@ -58,6 +102,23 @@
         "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/tww8adkmqsbjxg8u6m16vuzta"
       ]
     }
+  },
+  {
+    "id": "136aaed201f0960d89b7",
+    "title": "Anthropic 工程师复盘用 chaos loop 强化 Claude Docs 上线：20 亿次请求仅 60 次服务器错误",
+    "url": "https://aihot.news/items/snkvsiff90slvj17hf9i5u4do",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-17T12:00:00.000Z",
+    "collectedAt": "2026-11-18T07:53:46.674Z",
+    "category": "ai-apps",
+    "summary": "Anthropic 工程师 Vivek Nair 复盘 Claude Docs 9 月 16 日上线前的 chaos loop 实践：让 Claude Code 会话在镜像生产的 staging 集群上以每天超 100 万合成 docs 持续压测并修复故障，峰值时同时运行 30 个 sub-agents。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://claude.dev/blog/chaos-loop-claude-docs-launch/",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-a57cb69e",
+    "coverage": []
   },
   {
     "id": "2a25d12e4267dab6354b",
