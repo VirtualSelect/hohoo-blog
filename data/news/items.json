@@ -1,5 +1,35 @@
 [
   {
+    "id": "c5d8e65c0c345781035b",
+    "title": "Perplexity Computer 的 Brain 智能体可自动编写和更新个人技能",
+    "url": "https://aihot.news/items/cty34utgc5ppbdnayf7cnjqlv",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-19T16:19:15.000Z",
+    "collectedAt": "2026-11-19T20:56:27.328Z",
+    "category": "ai-apps",
+    "summary": "Perplexity CEO Aravind Srinivas 分享 Computer 中 Brain 智能体的自我改进技能研究：Brain 会读取历史会话轨迹（工具调用、推理、结果），识别重复模式，仅在证据足够时提议新技能或更新。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/AravSrinivas/status/2123451045657690627",
+    "feedContentStatus": "full",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-4312c91d",
+    "coverage": [],
+    "feedContent": {
+      "format": "aihot-rss-text-v1",
+      "language": "zh-CN",
+      "capturedAt": "2026-11-19T20:56:27.328Z",
+      "paragraphs": [
+        "分享关于 Perplexity Computer 中自我提升技能的新研究。Brain 已经会维护一个关于你工作的知识 wiki，现在还会根据你过去的会话为你编写和更新智能体技能。一个改进智能体会读取完整的会话轨迹（工具调用、推理、结果），找出反复出现的模式，并且只有在证据充分时才会提出新技能或更新。每位用户都会获得的内置技能，在任何变更上线前都要经过失败场景的配对回放和工程师审核。在生产流量上进行的一项为期 8 周的随机测试中，72.9% 的用户至少获得了一项新的个人技能，而手动添加技能的用户仅占 6.5%。工具调用失败率下降了 11%，不满意对话线程下降了 7.6%，成本或延迟没有可测量的变化。",
+        "引用 @perplexity_ai：",
+        "计算机的个性化自我提升代理 Brain，现在会自动为你创建自我提升的代理技能。",
+        "Brain 会从过去的会话和记忆中学习你的工作方式，然后为未来的任务编写和更新个性化技能。",
+        "https://x.com/perplexity_ai/status/2123449395882701224",
+        "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/cty34utgc5ppbdnayf7cnjqlv"
+      ]
+    }
+  },
+  {
     "id": "24eca6b3aefde34cfad8",
     "title": "Vals AI 评测：Anthropic、OpenAI 和 Google 模型易将医护人员与投降士兵标记为自杀式无人机目标",
     "url": "https://aihot.news/items/yf91syits6gqn8qvtksix0kdj",
