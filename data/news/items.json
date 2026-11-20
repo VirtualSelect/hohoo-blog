@@ -1,5 +1,39 @@
 [
   {
+    "id": "de2107e5e6dbb3332227",
+    "title": "腾讯混元开放 Hy4 权重",
+    "url": "https://aihot.news/items/jl6m0eymz9z0kleh54c3guowx",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-20T03:52:40.000Z",
+    "collectedAt": "2026-11-20T13:31:49.852Z",
+    "category": "llm",
+    "summary": "腾讯混元发布 Hy4 开放权重，定位原生多模态旗舰 MoE 模型，总参数 770B、激活 49B，支持 1M 上下文。同步发布含安全评估报告的 Hy4 System Card，并提供 GitHub、Hugging Face 权重与 GGUF 下载链接，团队将于本周五 8–10 AM PT 在 r/LocalLLaMA 举行 AMA。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/TencentHunyuan/status/2123625549147070538",
+    "feedContentStatus": "full",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-318e9ce7",
+    "coverage": [],
+    "feedContent": {
+      "format": "aihot-rss-text-v1",
+      "language": "zh-CN",
+      "capturedAt": "2026-11-20T13:31:49.852Z",
+      "paragraphs": [
+        "今天，我们发布 Hy4 的开放权重。",
+        "我们的原生多模态旗舰 MoE（总参数 770B / 激活 49B，1M 上下文）。",
+        "同时发布包含全面安全评估报告的 Hy4 System Card。",
+        "➡️ 本周五太平洋时间上午 8–10 点，来 r/LocalLLaMA 参加 Hy 团队的直播 AMA——欢迎提出任何关于 Hy 模型的问题，与我们直接交流！",
+        "GitHub: github.com/Tencent-Hunyuan/Hy4",
+        "Weights: huggingface.co/tencent/Hy4",
+        "GGUF： huggingface.co/AngelSlim/Hy4-…",
+        "License: huggingface.co/tencent/Hy4/bl…",
+        "System Card: hy.tencent.ai/Hy4_system_card…",
+        "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/jl6m0eymz9z0kleh54c3guowx"
+      ]
+    }
+  },
+  {
     "id": "c5d8e65c0c345781035b",
     "title": "Perplexity Computer 的 Brain 智能体可自动编写和更新个人技能",
     "url": "https://aihot.news/items/cty34utgc5ppbdnayf7cnjqlv",
