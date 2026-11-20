@@ -1,5 +1,22 @@
 [
   {
+    "id": "271376c0f8c208ccd728",
+    "title": "Thinking Machines Lab 发布可跑在笔记本上的开源权重模型 Inkling 2 Mini",
+    "url": "https://aihot.news/items/y7nk77dxae51qwi826gpmvbho",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-20T07:00:00.000Z",
+    "collectedAt": "2026-11-20T21:56:37.009Z",
+    "category": "llm",
+    "summary": "Thinking Machines Lab 发布开源权重模型 Inkling 2 Mini，采用循环 Transformer 架构，将中间 12 层每 token 运行三次，总参数 26.4B、激活 3.4B，内存占用约 20GB，可在 32GB 内存以上的 Mac 本地运行。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://thinkingmachines.ai/news/inkling-2-mini/",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-e7d75e4e",
+    "coverage": []
+  },
+  {
     "id": "de2107e5e6dbb3332227",
     "title": "腾讯混元开放 Hy4 权重",
     "url": "https://aihot.news/items/jl6m0eymz9z0kleh54c3guowx",
