@@ -88,7 +88,7 @@ function applyThemeWithPosition(next, pendingFrame) {
       "#main-content :is(h1, h2, h3, p, pre, table, li)",
     )) {
       if (
-        element.id !== "signal-sculpture-title" &&
+        element.id !== "home-artwork-title" &&
         element.closest("nav, header, footer, dialog")
       )
         continue;

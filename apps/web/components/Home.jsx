@@ -7,6 +7,7 @@ import { selectedHomeArticle } from "../lib/home-selection.mjs";
 import ResearchPortal from "./ResearchPortal";
 import useResearchTrack from "./useResearchTrack";
 import SignalSculpture from "./SignalSculpture";
+import ExhibitionIndex from "./ExhibitionIndex";
 import { ResearchTerrain, DocumentFlow, ArticleSketch } from "./AtlasArtwork";
 import tracks from "@site/data/learning-paths.json";
 import { ClassicRecord } from "./HomeVariations";
@@ -172,6 +173,7 @@ export default function Home() {
             )}
           </p>
         </section>
+        <ExhibitionIndex />
         <div className="atlas-dashboard" id="research-routes">
           <PhotoIntroduction description={introduction} />
           <ResearchPortal domain={domain} onSelect={selectDomain} />

@@ -1,0 +1,475 @@
+/* The home exhibit belongs to the page's theme; both poses can be read without a GPU. */
+.rev3-exhibition {
+  --object-ground: var(--atlas-surface);
+  --object-line: var(--atlas-border);
+  width: min(1320px, calc(100% - 2 * var(--lab-gutter, 36px)));
+  margin: clamp(42px, 6vw, 100px) auto;
+  color: var(--atlas-text);
+  border-block: 1px solid var(--object-line);
+}
+.rev3-exhibition .theme-artwork:not(:fullscreen) {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.72fr) minmax(0, 1.28fr);
+  grid-template-rows: auto auto;
+  height: auto;
+  min-height: 0;
+  column-gap: clamp(22px, 4.5vw, 84px);
+  padding: clamp(24px, 3vw, 50px) 0;
+  align-items: center;
+}
+.rev3-caption {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  align-self: center;
+}
+.rev3-caption .rev3-kicker {
+  font: 550 12px/1.6 var(--hh-base-font-family-monospace, monospace);
+  letter-spacing: 0.11em;
+  color: var(--atlas-muted);
+  margin: 0 0 18px;
+}
+.rev3-caption h2 {
+  font: 550 clamp(40px, 4.4vw, 78px) / 1.17
+    var(--design-title-font, "Helvetica Neue", sans-serif);
+  letter-spacing: -0.055em;
+  color: var(--atlas-text);
+  margin: 0 0 18px;
+  text-wrap: balance;
+}
+.rev3-caption .rev3-description {
+  margin: 0;
+  color: var(--atlas-muted);
+  font-size: clamp(14px, 1.12vw, 18px);
+  line-height: 1.9;
+  max-width: 25em;
+}
+.rev3-exhibition .rev3-stage {
+  grid-column: 2;
+  grid-row: 1;
+  height: clamp(280px, 31vw, 490px);
+  background: var(--object-ground);
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+.rev3-exhibition .rev3-console {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 12px 0 0;
+  color: var(--atlas-text);
+  border-top: 0;
+}
+.rev3-exhibition .rev3-console > div {
+  justify-content: flex-start;
+}
+.rev3-console p {
+  line-height: 1.65;
+}
+.rev3-poster {
+  object-fit: contain;
+}
+.rev3-travel {
+  display: grid;
+  grid-template-columns: auto minmax(45px, 1fr) 4ch;
+  align-items: center;
+  gap: 12px;
+  min-height: 42px;
+  font: 12px/1.5 var(--hh-base-font-family-monospace, monospace);
+  color: var(--atlas-muted);
+  margin: 0 auto 10px;
+  max-width: 620px;
+}
+.rev3-travel output {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.rev3-travel input {
+  width: 100%;
+  min-height: 44px;
+  accent-color: var(--atlas-accent);
+  margin: 0;
+  cursor: ew-resize;
+}
+.rev3-travel input:focus-visible {
+  outline: 2px solid var(--atlas-accent);
+  outline-offset: 1px;
+}
+.rev3-name {
+  color: var(--atlas-text);
+  font: 550 clamp(18px, 1.5vw, 25px) / 1.4 var(--design-title-font, serif);
+  text-align: center;
+  letter-spacing: -0.025em;
+  margin: 0 0 7px;
+}
+.about-fusion .rev3-stage {
+  background: var(--object-ground, var(--atlas-surface));
+  isolation: isolate;
+  overflow: hidden;
+}
+.about-art-stage .rev3-console {
+  border-top: 1px solid var(--atlas-border);
+  background: var(--atlas-bg);
+  padding: 8px clamp(9px, 1.4vw, 22px) 13px;
+}
+.about-fusion .about-art-stage[data-experience="theme"] {
+  height: clamp(520px, 43vw, 655px);
+}
+:root[data-design="space"] {
+  --object-ground: #13263b;
+}
+:root[data-design="space"] .rev3-exhibition {
+  border-top-color: #526881;
+}
+:root[data-design="space"] .rev3-stage {
+  background: radial-gradient(
+    ellipse at 50% 68%,
+    #273a52,
+    #132539 53%,
+    #0b182a 88%
+  );
+}
+:root[data-design="space"] .rev3-caption h2 {
+  color: #dbeaff;
+  font-weight: 650;
+}
+:root[data-design="space"] .rev3-caption .rev3-kicker {
+  color: #94bcdf;
+}
+:root[data-design="clear"] {
+  --object-ground: #edf3fa;
+}
+:root[data-design="clear"] .rev3-caption {
+  padding-left: 24px;
+  border-left: 3px solid #3762b9;
+}
+:root[data-design="clear"] .rev3-caption h2 {
+  font-weight: 620;
+}
+:root[data-design="clear"] .rev3-stage {
+  border: 1px solid #d8e2f0;
+}
+:root[data-design="classic"] {
+  --object-ground: #eae5d5;
+}
+:root[data-design="classic"] .rev3-exhibition {
+  border-top: 3px double #9f9a81;
+}
+:root[data-design="classic"] .rev3-stage {
+  background-color: #eae5d5;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent 0 30px,
+    #9c94751c 31px,
+    transparent 32px
+  );
+}
+:root[data-design="garden"] {
+  --object-ground: #f1eedf;
+}
+:root[data-design="garden"] .rev3-exhibition {
+  border-block: 1px solid #b7ba98;
+  background: #f6f5e9;
+  padding-inline: clamp(16px, 3vw, 49px);
+}
+:root[data-design="garden"] .rev3-stage {
+  background: radial-gradient(ellipse at 55% 64%, #f9f5e6 18%, #e9ead6 90%);
+  border: 0;
+}
+:root[data-design="garden"] .rev3-caption h2,
+:root[data-design="garden"] .rev3-name {
+  font-family: var(--design-title-font, Georgia, serif);
+  color: #35533b;
+}
+:root[data-design="garden"] .rev3-caption .rev3-kicker {
+  color: #66714e;
+}
+:root[data-design="garden"] .rev3-console {
+  background: transparent;
+}
+:root[data-design="photo"] {
+  --object-ground: #eae2d3;
+}
+:root[data-design="photo"] .rev3-stage {
+  background: linear-gradient(115deg, #ded4c2, #f7f1e4 57%, #e4ddcc 88%);
+}
+:root[data-design="photo"] .rev3-exhibition {
+  border-bottom: 0;
+}
+:root[data-design="construct"] {
+  --object-ground: #ece9df;
+}
+:root[data-design="construct"] .rev3-exhibition {
+  border: 2px solid #2b2925;
+}
+:root[data-design="construct"]
+  .rev3-exhibition
+  .theme-artwork:not(:fullscreen) {
+  gap: 0;
+  padding: 0;
+}
+:root[data-design="construct"] .rev3-caption {
+  padding: clamp(16px, 2.7vw, 44px);
+}
+:root[data-design="construct"] .rev3-exhibition .rev3-stage {
+  border-left: 2px solid #292722;
+}
+:root[data-design="construct"] .rev3-exhibition .rev3-console {
+  grid-column: 1/-1;
+  border-top: 2px solid #292722;
+  padding: 10px 16px;
+}
+:root[data-design="construct"] .rev3-exhibition .rev3-console > div {
+  justify-content: center;
+}
+:root[data-design="map"] {
+  --object-ground: #e5eee7;
+}
+:root[data-design="map"] .rev3-stage {
+  border: 1px solid #b2c7c3;
+  background-color: var(--object-ground);
+  background-image: radial-gradient(#8ca99f61 0.7px, transparent 0.9px);
+  background-size: 15px 15px;
+}
+:root[data-design="map"] .rev3-caption {
+  border-left: 2px solid #5c8c84;
+  padding-left: 21px;
+}
+:root[data-design="chapters"] {
+  --object-ground: #e9e3d6;
+}
+:root[data-design="chapters"] .rev3-exhibition {
+  background: #faf7ed;
+  border: 1px solid #c6bdab;
+  padding: 0 clamp(18px, 3vw, 48px);
+  box-shadow:
+    0 3px 0 #e9e2d3,
+    0 4px 0 #c5bda9;
+}
+:root[data-design="chapters"] .rev3-caption .rev3-kicker {
+  color: #7a4050;
+}
+@media (min-width: 901px) {
+  :root[data-design="garden"] .atlas-hero {
+    min-height: clamp(535px, 43vw, 700px);
+    background-position: center 54%;
+  }
+  :root[data-design="garden"] .atlas-hero-inner {
+    min-height: clamp(535px, 43vw, 700px);
+    padding-top: clamp(70px, 6vw, 104px);
+  }
+  :root[data-design="garden"] .atlas-hero .atlas-intro h1 {
+    font-size: clamp(38px, 3.75vw, 62px);
+    font-weight: 500;
+    letter-spacing: -0.055em;
+    color: #324b32;
+  }
+  :root[data-design="garden"] .atlas-hero .atlas-intro .atlas-description {
+    display: block;
+    margin: 0.7em auto 0;
+    max-width: 28em;
+    color: #425641;
+    font-size: clamp(13px, 1vw, 16px);
+    line-height: 1.65;
+  }
+  :root[data-design="garden"] .atlas-map-node {
+    padding: 7px 16px;
+    min-height: 44px;
+    background: #fff8e5;
+    border: 1px solid #9d845a;
+    box-shadow: 2px 3px 0 #9c896c40;
+    font-size: clamp(14px, 1.2vw, 18px);
+    color: #40513a;
+  }
+  :root[data-design="garden"] .atlas-map-node[aria-pressed="true"] {
+    color: #fff9df;
+    background: #416143;
+    border-color: #40583e;
+    box-shadow:
+      inset 0 0 0 2px #89976c,
+      2px 3px 0 #9c896c40;
+  }
+  :root[data-design="garden"] .atlas-dashboard {
+    gap: 30px 48px;
+    padding-top: clamp(28px, 3.1vw, 53px);
+  }
+  :root[data-design="clear"] .atlas-dashboard {
+    row-gap: clamp(20px, 2.2vw, 38px);
+  }
+  :root[data-design="classic"] .atlas-classic-masthead {
+    border-bottom: 3px double var(--atlas-border);
+  }
+  :root[data-design="photo"] .atlas-featured {
+    padding-bottom: 20px;
+  }
+  :root[data-design="construct"] .atlas-section-heading {
+    padding-bottom: 8px;
+  }
+  :root[data-design="map"] .concept-map-canvas {
+    background-image: radial-gradient(#85a9a333 0.8px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  :root[data-design="chapters"] .about-hero-inner {
+    column-gap: clamp(30px, 5vw, 88px);
+  }
+}
+@media (max-width: 760px) {
+  .rev3-exhibition {
+    width: calc(100% - 32px);
+    margin-block: 36px;
+  }
+  .rev3-exhibition .theme-artwork:not(:fullscreen) {
+    display: block;
+    padding: 22px 0;
+  }
+  .rev3-caption {
+    margin-bottom: 16px;
+  }
+  .rev3-caption .rev3-kicker {
+    margin-bottom: 7px;
+  }
+  .rev3-caption h2 {
+    font-size: clamp(32px, 7.2vw, 46px);
+    margin-bottom: 9px;
+  }
+  .rev3-caption .rev3-description {
+    font-size: 14px;
+    max-width: 36em;
+  }
+  .rev3-exhibition .rev3-stage {
+    height: clamp(242px, 62vw, 390px);
+  }
+  .rev3-exhibition .rev3-console {
+    padding: 8px 0 0;
+  }
+  :root[data-design="construct"] .rev3-exhibition .rev3-stage {
+    border-left: 0;
+    border-top: 2px solid #292722;
+  }
+  :root[data-design="construct"] .rev3-caption {
+    padding: 18px;
+    margin: 0;
+  }
+  .about-fusion .about-art-stage[data-experience="theme"] {
+    height: clamp(490px, 105vw, 600px);
+  }
+  .rev3-travel {
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+  .rev3-name {
+    font-size: 18px;
+  }
+}
+.rev3-exhibition .theme-artwork:fullscreen {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+}
+.rev3-exhibition .theme-artwork:fullscreen .rev3-caption {
+  display: none;
+}
+.rev3-exhibition .theme-artwork:fullscreen .rev3-stage {
+  grid-column: 1;
+  grid-row: 1;
+  height: 100%;
+  min-height: 0;
+}
+.rev3-exhibition .theme-artwork:fullscreen .rev3-console {
+  grid-column: 1;
+  grid-row: 2;
+}
+.rev3-index {
+  width: min(1320px, calc(100% - 2 * var(--lab-gutter, 36px)));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(15px, 2.5vw, 40px);
+  min-height: 56px;
+  border-bottom: 1px solid var(--atlas-border);
+  color: var(--atlas-muted);
+}
+.rev3-index a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 560;
+}
+.rev3-index a:hover,
+.rev3-index a:focus-visible {
+  color: var(--atlas-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.rev3-index .rev3-index-object {
+  margin-left: auto;
+  gap: 8px;
+  color: var(--atlas-text);
+}
+.rev3-index-object img {
+  width: 64px;
+  height: 44px;
+  object-fit: contain;
+}
+.rev3-index-object span:last-child {
+  color: var(--atlas-accent);
+}
+.atlas-home :is(#atlas-recent-heading, #atlas-project-heading),
+#theme-object {
+  scroll-margin-top: 84px;
+}
+:root[data-design="space"] .rev3-index {
+  color: #b1c7dd;
+  border-color: #405b75;
+}
+:root[data-design="classic"] .rev3-index {
+  border-block: 1px solid var(--atlas-border);
+  font-family: var(--design-title-font);
+}
+:root[data-design="garden"] .rev3-index {
+  border-bottom: 1px dashed #a9ad8d;
+  color: #495c42;
+}
+:root[data-design="garden"] .rev3-index a {
+  font-family: var(--design-title-font);
+  font-size: 15px;
+}
+:root[data-design="photo"] .rev3-index {
+  font-family: var(--design-title-font);
+  border-bottom: 1px solid #b6a995;
+}
+:root[data-design="construct"] .rev3-index {
+  width: 100%;
+  padding-inline: var(--lab-gutter);
+  border-block: 2px solid var(--atlas-text);
+}
+:root[data-design="map"] .rev3-index {
+  border-color: #a3bdb7;
+  color: #335f59;
+}
+:root[data-design="chapters"] .rev3-index {
+  border-bottom: 3px double var(--atlas-border);
+  font-family: var(--design-title-font);
+}
+@media (max-width: 600px) {
+  .rev3-index {
+    width: calc(100% - 32px);
+    gap: 12px;
+    min-height: 48px;
+  }
+  .rev3-index a,
+  :root[data-design="garden"] .rev3-index a {
+    font-size: 12px;
+  }
+  .rev3-index .rev3-index-object {
+    gap: 3px;
+  }
+  .rev3-index-object img {
+    width: 36px;
+    height: 31px;
+  }
+}

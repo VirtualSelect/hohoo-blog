@@ -30,7 +30,7 @@ export function ResearchTerrain() {
           fill="none"
           stroke="currentColor"
           strokeWidth="0.8"
-          opacity={0.12 + Math.sin((index / 51) * Math.PI) * 0.47}
+          opacity={(0.12 + Math.sin((index / 51) * Math.PI) * 0.47).toFixed(6)}
         />
       ))}
     </svg>

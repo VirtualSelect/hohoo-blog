@@ -2,17 +2,20 @@ import * as T from "three";
 import { createArtworkSecret } from "./theme-artwork-secrets";
 import { artworkBounds, fitArtworkCamera } from "./theme-artwork-framing";
 import { createSculpture } from "./theme-artwork-models";
-import { artworkTextureSources } from "./theme-artwork-textures";
 import { artworkPixelRatio } from "./theme-artwork-rendering";
-import type { ArtworkDesign, ArtworkKind } from "./theme-artwork-config";
+import type { ArtworkDesign } from "./theme-artwork-config";
 
 export interface ArtworkScene {
   pause(value: boolean): void;
   transform(value: boolean): void;
+  setAmount(value: number): void;
   turn(delta?: number): void;
   orbit(dx: number, dy: number): void;
   resetView(): void;
   secret(value: boolean): void;
+  replaySecret(): void;
+  seekSecret(phase: number): void;
+  secretProgress(): number;
   dispose(): void;
 }
 interface Lease {
@@ -35,7 +38,6 @@ export function createArtworkScene(
   host: HTMLElement,
   options: {
     design: ArtworkDesign;
-    kind: ArtworkKind;
     context: "home" | "about";
     dark: boolean;
     onFailure: () => void;
@@ -46,12 +48,10 @@ export function createArtworkScene(
     frame = 0;
   let ready = false;
   let renders = 0,
-    textureRefreshes = 0,
     animationTicks = 0;
   const cleanup: Array<() => void> = [];
   cleanup.push(() => host.removeAttribute("data-artwork-framing"));
   cleanup.push(() => {
-    host.removeAttribute("data-artwork-textures");
     host.removeAttribute("data-artwork-render-stats");
   });
   const keep = <V extends { dispose(): void }>(value: V): V => {
@@ -179,50 +179,8 @@ export function createArtworkScene(
     world.add(fill);
     const sculpture = createSculpture(
       options.design,
-      options.kind,
       options.context === "about",
-      small,
       keep,
-      {
-        textureSources: artworkTextureSources,
-        maxAnisotropy: renderer.capabilities.getMaxAnisotropy(),
-        onTextureReady: () => {
-          if (disposed) return;
-          textureRefreshes++;
-          if (process.env.NODE_ENV !== "production") {
-            const maps: Array<{
-              source: string;
-              width: number;
-              height: number;
-              uv: boolean;
-            }> = [];
-            sculpture.root.traverse((object) => {
-              if (!(object instanceof T.Mesh)) return;
-              const materials = Array.isArray(object.material)
-                ? object.material
-                : [object.material];
-              for (const material of materials) {
-                if (!(material instanceof T.MeshStandardMaterial)) continue;
-                const image = material.map?.image as
-                  | HTMLImageElement
-                  | undefined;
-                if (!image?.src?.includes("/media/artwork/")) continue;
-                const uv = object.geometry.getAttribute("uv");
-                maps.push({
-                  source: image.src,
-                  width: image.naturalWidth,
-                  height: image.naturalHeight,
-                  uv:
-                    !!uv &&
-                    uv.count === object.geometry.getAttribute("position").count,
-                });
-              }
-            });
-            host.dataset.artworkTextures = JSON.stringify(maps);
-          }
-          draw();
-        },
-      },
     );
     const pivot = new T.Group();
     pivot.add(sculpture.root);
@@ -244,8 +202,7 @@ export function createArtworkScene(
     floor.rotation.x = -Math.PI / 2;
     floor.position.y = -2.35;
     floor.receiveShadow = false;
-    if (options.context === "about" && options.design === "space")
-      floor.visible = false;
+
     world.add(floor);
     // A faint geometric projection preserves the sculpture's silhouette;
     // the radial contact layer above supplies the softer distance falloff.
@@ -280,22 +237,13 @@ export function createArtworkScene(
     };
     projection.position.y = -2.34;
     projection.receiveShadow = true;
-    projection.visible = !(
-      options.context === "about" && options.design === "space"
-    );
+    projection.visible = true;
     world.add(projection);
     const camera = new T.PerspectiveCamera(35, 1, 0.1, 80);
     camera.position.set(0, 0.5, 11);
     camera.lookAt(0, 0, 0);
-    const secretArtwork = createArtworkSecret(options.design, keep, {
-      textureSources: artworkTextureSources,
-      maxAnisotropy: renderer.capabilities.getMaxAnisotropy(),
-      onTextureReady: () => {
-        if (!disposed) draw();
-      },
-    });
+    let secretArtwork: ReturnType<typeof createArtworkSecret> | undefined;
     const secretPivot = new T.Group();
-    secretPivot.add(secretArtwork.root);
     secretPivot.visible = false;
     world.add(secretPivot);
     const component = host.closest<HTMLElement>(".theme-artwork");
@@ -303,7 +251,7 @@ export function createArtworkScene(
     const motion = matchMedia("(prefers-reduced-motion:reduce)");
     let visible = false,
       paused = false,
-      expanded = false,
+      targetAmount = 0,
       amount = 0,
       time = 0,
       last = 0,
@@ -311,6 +259,9 @@ export function createArtworkScene(
       secret = false,
       slow = 0,
       lowQuality = false;
+    let reveal = 0,
+      revealing = false;
+    const subjectOrientation = new T.Quaternion();
     const orientation = new T.Quaternion();
     const rotationStep = new T.Quaternion();
     const rotationAxis = new T.Vector3();
@@ -336,7 +287,7 @@ export function createArtworkScene(
     function draw() {
       if (disposed || !visible || document.hidden) return;
       try {
-        sculpture.update(time, amount);
+        if (!secret) sculpture.update(time, amount);
         pivot.rotation.set(0, Math.sin(time * 0.12) * 0.07, responsiveTilt);
         pivot.quaternion.premultiply(orientation);
         // Rotate the filtered studio map without rebuilding PMREM.
@@ -354,7 +305,12 @@ export function createArtworkScene(
           2 + Math.sin(time * 0.11) * 0.6,
           -4 + Math.cos(time * 0.17) * 0.7,
         );
-        secretArtwork.update(time, amount);
+        if (secret && secretArtwork) {
+          secretArtwork.update(time, reveal);
+          const display = reveal.toFixed(3);
+          if (host.dataset.secretProgress !== display)
+            host.dataset.secretProgress = display;
+        }
         secretPivot.quaternion.copy(orientation);
         const bounds = artworkBounds(secret ? secretPivot : pivot);
         const diagnostic = fitArtworkCamera(
@@ -392,7 +348,6 @@ export function createArtworkScene(
         if (process.env.NODE_ENV !== "production") {
           host.dataset.artworkRenderStats = JSON.stringify({
             renders: ++renders,
-            textureRefreshes,
             animationTicks,
           });
         }
@@ -409,7 +364,11 @@ export function createArtworkScene(
       if (elapsed >= 1000 / 30 || !last) {
         const dt = Math.min(elapsed / 1000, 0.08);
         time += dt;
-        amount = T.MathUtils.damp(amount, expanded ? 1 : 0, 4, dt);
+        if (secret && revealing) {
+          reveal = Math.min(1, reveal + elapsed / 3000);
+          if (reveal === 1) revealing = false;
+        }
+        amount = T.MathUtils.damp(amount, targetAmount, 4, dt);
         last = now;
         const before = performance.now();
         draw();
@@ -462,16 +421,7 @@ export function createArtworkScene(
         }
       });
       camera.aspect = width / height;
-      const flowing =
-        (options.context === "home" && options.kind === "weave") ||
-        (options.context === "about" &&
-          ["space", "map"].includes(options.design));
-      responsiveTilt =
-        flowing && matchMedia("(max-width:700px)").matches
-          ? Math.min(0.55, Math.max(0, 1.5 - camera.aspect) * 0.9)
-          : 0;
-
-      camera.updateProjectionMatrix();
+      responsiveTilt = 0;
       draw();
     }
     const observer = new IntersectionObserver(([entry]) => {
@@ -493,7 +443,13 @@ export function createArtworkScene(
     };
     listen(document, "visibilitychange", sync);
     listen(motion, "change", () => {
-      if (motion.matches) amount = expanded ? 1 : 0;
+      if (motion.matches) {
+        amount = targetAmount;
+        if (revealing) {
+          reveal = 1;
+          revealing = false;
+        }
+      }
       sync();
     });
     listen(canvas, "webglcontextlost", (event) => {
@@ -535,6 +491,16 @@ export function createArtworkScene(
     listen(canvas, "pointerup", releasePointer);
     listen(canvas, "pointercancel", releasePointer);
     listen(canvas, "lostpointercapture", releasePointer);
+    function replaySecret() {
+      if (!secret) return;
+      revealing = !paused && !motion.matches;
+      reveal = revealing ? 0 : 1;
+      last = 0;
+      draw();
+    }
+    cleanup.push(() => {
+      delete host.dataset.secretProgress;
+    });
     resize();
     return {
       pause(value) {
@@ -542,9 +508,14 @@ export function createArtworkScene(
         sync();
       },
       transform(value) {
-        expanded = value;
+        targetAmount = value ? 1 : 0;
         if (paused || motion.matches) amount = value ? 1 : 0;
         else if (owner !== lease) reconcile(lease);
+        draw();
+      },
+      setAmount(value) {
+        if (!Number.isFinite(value)) return;
+        targetAmount = amount = Math.min(1, Math.max(0, value));
         draw();
       },
       turn(delta = 0.35) {
@@ -556,19 +527,35 @@ export function createArtworkScene(
         draw();
       },
       secret(value) {
+        if (secret === value || options.context !== "about") return;
+        if (value && !secretArtwork) {
+          secretArtwork = createArtworkSecret(options.design, keep);
+          secretPivot.add(secretArtwork.root);
+        }
         secret = value;
-        secretPivot.visible = secret;
+        secretPivot.visible = value;
+        pivot.visible = !value;
         if (component)
-          component.dataset.secretDesign = secret ? options.design : "none";
-        pivot.visible = !secret;
-        const grounded = secret
-          ? !["space", "map"].includes(options.design)
-          : !(options.context === "about" && options.design === "space");
-        floor.visible = grounded;
-        projection.visible = grounded;
-        orientation.identity();
+          component.dataset.secretDesign = value ? options.design : "none";
+        if (value) {
+          subjectOrientation.copy(orientation);
+          orientation.identity();
+          replaySecret();
+        } else {
+          revealing = false;
+          delete host.dataset.secretProgress;
+          orientation.copy(subjectOrientation);
+          draw();
+        }
+      },
+      replaySecret,
+      seekSecret(value) {
+        if (!secret || !Number.isFinite(value)) return;
+        revealing = false;
+        reveal = T.MathUtils.clamp(value, 0, 1);
         draw();
       },
+      secretProgress: () => reveal,
       dispose,
     };
   } catch (error) {

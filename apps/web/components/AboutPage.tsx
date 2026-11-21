@@ -2,6 +2,7 @@
 
 import {
   useCallback,
+  useEffect,
   useLayoutEffect,
   useState,
   useSyncExternalStore,
@@ -16,7 +17,7 @@ import tracks from "@site/data/learning-paths.json";
 import current from "@site/data/current.json";
 import "./about-page.css";
 
-type Experience = "stars" | "theme";
+type Experience = "stars" | "theme" | "secret";
 function subscribeDesign(onChange: () => void) {
   const observer = new MutationObserver(onChange);
   observer.observe(document.documentElement, {
@@ -41,19 +42,67 @@ export default function AboutPage() {
   const [initialized, setInitialized] = useState(false);
   const syncExperience = useCallback(() => {
     const value = new URLSearchParams(location.search).get("experience");
-    setExperience(value === "stars" || value === "theme" ? value : null);
+    setExperience(
+      value === "stars" || value === "theme" || value === "secret"
+        ? value
+        : null,
+    );
     setInitialized(true);
   }, []);
   useLayoutEffect(syncExperience, [syncExperience]);
   const experience =
     selectedExperience || (design === "space" ? "stars" : "theme");
-  function chooseExperience(value: Experience) {
+  const chooseExperience = useCallback((value: Experience) => {
     setExperience(value);
     const url = new URL(location.href);
     if (url.searchParams.get("experience") === value) return;
     url.searchParams.set("experience", value);
     history.pushState(null, "", url.pathname + url.search + url.hash);
-  }
+  }, []);
+  useEffect(() => {
+    let sequence = "";
+    let lastKeyAt = 0;
+    function onKey(event: KeyboardEvent) {
+      const target = event.target;
+      if (
+        event.defaultPrevented ||
+        document.querySelector("dialog[open]") ||
+        (target instanceof HTMLElement &&
+          (target.closest("#about-astra-canvas canvas") ||
+            target.isContentEditable ||
+            target.matches("input:not([type=range]), textarea, select")))
+      ) {
+        sequence = "";
+        return;
+      }
+      if (event.key === "Escape") {
+        sequence = "";
+        if (experience === "secret") chooseExperience("theme");
+        return;
+      }
+      if (
+        event.ctrlKey ||
+        event.altKey ||
+        event.metaKey ||
+        event.isComposing ||
+        event.repeat ||
+        event.key.length !== 1 ||
+        target instanceof HTMLInputElement
+      ) {
+        sequence = "";
+        return;
+      }
+      const now = Date.now();
+      sequence = (
+        (now - lastKeyAt > 2000 ? "" : sequence) + event.key.toLowerCase()
+      ).slice(-5);
+      lastKeyAt = now;
+      if (sequence === "hohoo" && experience !== "secret")
+        chooseExperience("secret");
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [experience, chooseExperience]);
   const projects = globalData["content-index"].entries.filter(
     (entry) => entry.type === "project" && entry.status !== "archived",
   );
@@ -74,7 +123,10 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="about-fusion" data-experience={experience}>
+    <main
+      className="about-fusion"
+      data-experience={experience === "stars" ? "stars" : "theme"}
+    >
       <UrlStateSync onChange={syncExperience} />
       <section className="about-hero" aria-labelledby="about-title">
         <div className="about-experience-bar">
@@ -104,6 +156,14 @@ export default function AboutPage() {
             >
               <span aria-hidden="true">✦</span>{" "}
               {t("原版星空", "Original star field", "原版星空")}
+            </button>
+            <button
+              type="button"
+              aria-pressed={experience === "secret"}
+              aria-controls="about-visual-stage"
+              onClick={() => chooseExperience("secret")}
+            >
+              {t("主题彩蛋", "Secret", "主題彩蛋")}
             </button>
           </div>
         </div>
@@ -148,7 +208,7 @@ export default function AboutPage() {
           <div
             id="about-visual-stage"
             className="about-art-stage"
-            data-experience={experience}
+            data-experience={experience === "stars" ? "stars" : "theme"}
           >
             {initialized ? (
               experience === "stars" ? (
@@ -158,7 +218,14 @@ export default function AboutPage() {
                   className="about-original-stars"
                 />
               ) : (
-                <ThemeArtwork context="about" className="about-theme-artwork" />
+                <ThemeArtwork
+                  context="about"
+                  className="about-theme-artwork"
+                  secret={experience === "secret"}
+                  onSecretChange={(active) =>
+                    chooseExperience(active ? "secret" : "theme")
+                  }
+                />
               )
             ) : (
               <p className="about-scene-placeholder">
