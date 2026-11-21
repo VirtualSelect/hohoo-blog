@@ -1,5 +1,22 @@
 [
   {
+    "id": "44481426dbc619649eb7",
+    "title": "Figma 演示用 Specs 与 Figma agent 把上下文变成可实现的开发计划",
+    "url": "https://aihot.news/items/w612ivonntodntv1ydkt2lqwh",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-20T22:17:00.000Z",
+    "collectedAt": "2026-11-21T03:25:33.494Z",
+    "category": "ai-apps",
+    "summary": "Figma 在 Workflow lab 中演示一个完整工作流：工程师用 Specs 在画布上汇集 PRD、Hex 数据、FigJam 图、标注设计和组件说明，再让 Figma agent 生成供编码智能体使用的实现计划。文中还提到 Specs 与 code layers 已开放 beta、覆盖所有套餐，最后通过 Figma MCP 把计划链接交给 C…",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://www.figma.com/blog/workflow-lab-specs-and-the-figma-agent/",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-11c48de",
+    "coverage": []
+  },
+  {
     "id": "271376c0f8c208ccd728",
     "title": "Thinking Machines Lab 发布可跑在笔记本上的开源权重模型 Inkling 2 Mini",
     "url": "https://aihot.news/items/y7nk77dxae51qwi826gpmvbho",
