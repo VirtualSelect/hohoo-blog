@@ -29,7 +29,7 @@ export default function LocalLink({
   onNavigate,
   ...props
 }: LocalLinkProps) {
-  const { locale } = useSite();
+  const { locale, route } = useSite();
   let target = to || href || "/";
   if (
     locale !== "zh-CN" &&
@@ -71,7 +71,13 @@ export default function LocalLink({
     });
   };
   return (
-    <Link href={target} {...props} onNavigate={navigate}>
+    // Give the About exhibit and its poster the bandwidth before fetching other pages.
+    <Link
+      href={target}
+      prefetch={route === "about" ? false : undefined}
+      {...props}
+      onNavigate={navigate}
+    >
       {children}
       <Pending />
     </Link>

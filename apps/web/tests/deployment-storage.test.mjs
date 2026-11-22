@@ -297,6 +297,30 @@ test("scoped lab/project details retain every detail field and related summary",
   }
 });
 
+test("about keeps its localized project links and the three writing suggestions used by search", () => {
+  for (const locale of ["zh-CN", "en", "zh-TW"]) {
+    const { globalData } = JSON.parse(
+      fs.readFileSync(new URL(`../generated/${locale}.json`, import.meta.url)),
+    );
+    const full = clientGlobalData(globalData, locale, "about")["content-index"]
+      .entries;
+    const scoped = pageGlobalData(globalData, locale, "about", null);
+    const entries = scoped["content-index"].entries;
+    const projects = full.filter(
+      (entry) => entry.type === "project" && entry.status !== "archived",
+    );
+    const suggestions = writingEntries(full).slice(0, 3);
+    assert.deepEqual(
+      entries.filter((entry) => entry.type === "project"),
+      projects,
+    );
+    assert.deepEqual(writingEntries(entries), suggestions);
+    assert.equal(entries.length, projects.length + suggestions.length);
+    assert.deepEqual(scoped["content-index"].activity, []);
+    assert.deepEqual(scoped["learning-index"].entries, []);
+  }
+});
+
 test("daily archive preserves every pre-clustering collected record", () => {
   const raw = JSON.parse(
     fs.readFileSync(new URL("../../../data/news/items.json", import.meta.url)),

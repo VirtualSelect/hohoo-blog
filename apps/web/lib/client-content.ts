@@ -90,8 +90,8 @@ export function clientGlobalData(
   };
 }
 
-// Keep exactly the article's discovery links. Search loads its full index on
-// demand; serializing that catalogue again into every article is unnecessary.
+// Search loads its full index on demand. Its empty state uses the latest three
+// writing entries alongside the discovery links needed by the current page.
 export function pageGlobalData(
   data: GlobalData,
   locale: Locale,
@@ -112,7 +112,11 @@ export function pageGlobalData(
         ),
     );
   const radar = route === "radar" || route.startsWith("radar/weekly");
-  if ((!document && !detail && !radar) || document?.frontMatter.landing)
+  const about = route === "about";
+  if (
+    (!document && !detail && !radar && !about) ||
+    document?.frontMatter.landing
+  )
     return compact;
   const selected = new Set<string>(
     writingEntries(entries)
@@ -156,7 +160,11 @@ export function pageGlobalData(
   }
   return {
     "content-index": {
-      entries: entries.filter((e) => selected.has(e.id)),
+      entries: entries.filter(
+        (entry) =>
+          selected.has(entry.id) ||
+          (about && entry.type === "project" && entry.status !== "archived"),
+      ),
       activity: [],
     },
     // Reading context needs the complete current route (numbering, neighbors,
