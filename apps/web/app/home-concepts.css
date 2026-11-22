@@ -392,13 +392,17 @@
 :root[data-design="construct"] .atlas-home {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  grid-template-areas: "intro feature" "directions feature" "projects recent" "signal signal";
+  grid-template-areas: "intro feature" "directions feature" "index index" "projects recent" "signal signal";
   max-width: 1440px;
   margin: auto;
   padding: 0 var(--lab-gutter) 48px;
 }
 :root[data-design="construct"] .atlas-dashboard {
   display: contents;
+}
+:root:is([data-design="construct"], [data-design="chapters"]) .rev3-index {
+  grid-area: index;
+  width: 100%;
 }
 :root[data-design="construct"] .atlas-hero {
   grid-area: intro;
@@ -532,6 +536,9 @@
 }
 :root[data-design="construct"] .atlas-feature-art .atlas-article-sketch {
   max-height: 120px;
+}
+:root[data-design="construct"] .atlas-feature-read {
+  order: 4;
 }
 :root[data-design="construct"] .atlas-projects {
   grid-area: projects;
@@ -877,7 +884,7 @@
   max-width: 1440px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-areas: "intro feature" "directions feature" "tabs tabs" "recent recent" "projects projects" "signal signal";
+  grid-template-areas: "intro feature" "directions feature" "tabs tabs" "index index" "recent recent" "projects projects" "signal signal";
   margin: auto;
   padding: 48px var(--lab-gutter);
 }
@@ -1028,7 +1035,8 @@
   font: 400 14px/1.95 var(--design-title-font);
 }
 :root[data-design="chapters"] .atlas-feature-read {
-  margin-top: 28px;
+  grid-column: 1/-1;
+  margin-top: 8px;
   color: var(--atlas-accent);
   font-size: 12px;
   min-height: 44px;
@@ -1462,7 +1470,7 @@
   }
   :root[data-design="chapters"] .atlas-home {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "tabs" "intro" "feature" "recent" "projects" "signal";
+    grid-template-areas: "tabs" "intro" "index" "feature" "recent" "projects" "signal";
     padding-top: 18px;
   }
   :root[data-design="chapters"] .atlas-directions {

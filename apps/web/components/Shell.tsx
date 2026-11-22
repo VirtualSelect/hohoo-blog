@@ -116,7 +116,8 @@ function Frame({ children }: PropsWithChildren) {
     return (
       route === path ||
       route.startsWith(path + "/") ||
-      (path === "learning" && /^(research|journey)(\/|$)/.test(route)) ||
+      (path === "learning" &&
+        /^(research|journey|timeline)(\/|$)/.test(route)) ||
       (path === "build" && /^(projects|labs)(\/|$)/.test(route)) ||
       (path === "notes" && /^(notes|papers)(\/|$)/.test(route)) ||
       (path === "articles" && /^(blog|docs)(\/|$)/.test(route))

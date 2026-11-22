@@ -1,0 +1,50 @@
+.entries {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(20px, 3.5vw, 44px);
+  margin-block: 28px 36px;
+}
+
+.entries > a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  gap: 5px 12px;
+  min-height: 44px;
+  padding: 14px 0;
+  border-block-start: 1px solid var(--atlas-border);
+  color: var(--atlas-text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.entries > a:is(:hover, :focus-visible) {
+  border-color: var(--atlas-accent);
+}
+
+.entries > a:is(:hover, :focus-visible) strong {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.entries p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--atlas-muted);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.entries > a > span {
+  color: var(--atlas-accent);
+}
+
+.notes > h2 {
+  margin-block-end: 12px;
+}
+
+@media (max-width: 560px) {
+  .entries {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -81,7 +81,7 @@
   margin: 0 auto 10px;
   max-width: 620px;
 }
-.rev3-travel output {
+.rev3-travel :is(output, .rev3-travel-value) {
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
@@ -112,9 +112,6 @@
   border-top: 1px solid var(--atlas-border);
   background: var(--atlas-bg);
   padding: 8px clamp(9px, 1.4vw, 22px) 13px;
-}
-.about-fusion .about-art-stage[data-experience="theme"] {
-  height: clamp(520px, 43vw, 655px);
 }
 :root[data-design="space"] {
   --object-ground: #13263b;
@@ -351,9 +348,6 @@
     padding: 18px;
     margin: 0;
   }
-  .about-fusion .about-art-stage[data-experience="theme"] {
-    height: clamp(490px, 105vw, 600px);
-  }
   .rev3-travel {
     gap: 8px;
     margin-bottom: 3px;
@@ -417,10 +411,6 @@
 }
 .rev3-index-object span:last-child {
   color: var(--atlas-accent);
-}
-.atlas-home :is(#atlas-recent-heading, #atlas-project-heading),
-#theme-object {
-  scroll-margin-top: 84px;
 }
 :root[data-design="space"] .rev3-index {
   color: #b1c7dd;

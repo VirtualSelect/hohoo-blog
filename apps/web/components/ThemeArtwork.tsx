@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useId, useRef, useState } from "react";
-import type { KeyboardEvent as ReactKeyboardEvent } from "react";
+import type { KeyboardEvent as ReactKeyboardEvent, Ref } from "react";
 import { useText } from "./Shell";
 import { defaults, designs, type ArtworkDesign } from "./theme-artwork-config";
 import type { ArtworkScene } from "./theme-artwork-scene";
@@ -14,11 +14,13 @@ export default function ThemeArtwork({
   className = "",
   secret = false,
   onSecretChange,
+  secretTriggerRef,
 }: {
   context: "home" | "about";
   className?: string;
   secret?: boolean;
   onSecretChange?: (active: boolean) => void;
+  secretTriggerRef?: Ref<HTMLButtonElement>;
 }) {
   const t = useText();
   const root = useRef<HTMLDivElement>(null),
@@ -41,7 +43,7 @@ export default function ThemeArtwork({
     [notice, setNotice] = useState("");
   const hintId = useId();
   const progress = useRef<HTMLInputElement>(null);
-  const progressLabel = useRef<HTMLOutputElement>(null);
+  const progressLabel = useRef<HTMLSpanElement>(null);
   const note = secretNotes[design];
   const live = enabled && status === "ready";
   const posterPose =
@@ -182,7 +184,8 @@ export default function ThemeArtwork({
         Number(host.dataset.secretProgress || 0) * 100,
       );
       if (progress.current) progress.current.value = String(percent);
-      if (progressLabel.current) progressLabel.current.value = percent + "%";
+      if (progressLabel.current)
+        progressLabel.current.textContent = percent + "%";
     };
     sync();
     const observer = new MutationObserver(sync);
@@ -390,7 +393,13 @@ export default function ThemeArtwork({
               }}
               onInput={(event) => scrubReveal(event.currentTarget)}
             />
-            <output ref={progressLabel}>0%</output>
+            <span
+              className="rev3-travel-value"
+              ref={progressLabel}
+              aria-hidden="true"
+            >
+              0%
+            </span>
           </label>
         )}
         {!secret && status === "ready" && enabled && (
@@ -417,8 +426,22 @@ export default function ThemeArtwork({
           role="group"
           aria-label={t("三维装置操作", "Artwork controls", "三維裝置操作")}
         >
+          {context === "about" && (
+            <button
+              type="button"
+              ref={secretTriggerRef}
+              className={secret ? undefined : styles.primary}
+              onClick={() => onSecretChange?.(!secret)}
+            >
+              {secret
+                ? t("返回主题场景", "Back to the scene", "返回主題場景")
+                : t(...note.trigger)}
+            </button>
+          )}
           <button
-            className={styles.primary}
+            className={
+              context === "home" || secret ? styles.primary : undefined
+            }
             aria-pressed={secret ? undefined : expanded}
             onClick={() => {
               if (secret) {
@@ -464,27 +487,18 @@ export default function ThemeArtwork({
                 : t("暂停", "Pause", "暫停")}
           </button>
           <button
+            className={styles.utility}
             disabled={!enabled || status !== "ready"}
             onClick={() => scene.current?.resetView()}
           >
             {t("复位视角", "Reset view", "復位視角")}
           </button>
-          <button onClick={toggleFullscreen}>
+          <button className={styles.utility} onClick={toggleFullscreen}>
             {fullscreen
               ? t("退出全屏", "Exit full screen", "退出全螢幕")
               : t("全屏", "Full screen", "全螢幕")}{" "}
             <span aria-hidden="true">↗</span>
           </button>
-          {context === "about" && (
-            <button
-              aria-pressed={secret}
-              onClick={() => onSecretChange?.(!secret)}
-            >
-              {secret
-                ? t("返回主题场景", "Back to the scene", "返回主題場景")
-                : t(...note.trigger)}
-            </button>
-          )}
           <button
             onClick={() => {
               setEnabled(!enabled);

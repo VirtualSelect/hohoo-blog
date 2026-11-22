@@ -4,20 +4,44 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useRef,
   useState,
   useSyncExternalStore,
 } from "react";
+import dynamic from "next/dynamic";
 import { useSite } from "../runtime/context";
 import Link from "../runtime/Link";
 import { useText } from "./Shell";
 import ThemeArtwork from "./ThemeArtwork";
 import UrlStateSync from "./UrlStateSync";
-import AstraParticleHero from "@site/src/components/AstraParticleHero";
 import tracks from "@site/data/learning-paths.json";
 import current from "@site/data/current.json";
 import "./about-page.css";
 
 type Experience = "stars" | "theme" | "secret";
+
+function AboutScenePoster({ stars = false }: { stars?: boolean }) {
+  return (
+    <div className="about-scene-poster rev3-stage" aria-hidden="true">
+      <img
+        src={
+          stars
+            ? "/img/hohoo-particles.svg"
+            : "/media/theme-objects-v3/space-about.webp"
+        }
+        alt=""
+        width={1080}
+        height={720}
+      />
+    </div>
+  );
+}
+
+const AstraParticleHero = dynamic(
+  () => import("@site/src/components/AstraParticleHero"),
+  { ssr: false, loading: () => <AboutScenePoster stars /> },
+);
+
 function subscribeDesign(onChange: () => void) {
   const observer = new MutationObserver(onChange);
   observer.observe(document.documentElement, {
@@ -40,6 +64,8 @@ export default function AboutPage() {
   );
   const [selectedExperience, setExperience] = useState<Experience | null>(null);
   const [initialized, setInitialized] = useState(false);
+  const stage = useRef<HTMLDivElement>(null);
+  const secretTrigger = useRef<HTMLButtonElement>(null);
   const syncExperience = useCallback(() => {
     const value = new URLSearchParams(location.search).get("experience");
     setExperience(
@@ -51,7 +77,8 @@ export default function AboutPage() {
   }, []);
   useLayoutEffect(syncExperience, [syncExperience]);
   const experience =
-    selectedExperience || (design === "space" ? "stars" : "theme");
+    selectedExperience ||
+    (initialized && design === "space" ? "stars" : "theme");
   const chooseExperience = useCallback((value: Experience) => {
     setExperience(value);
     const url = new URL(location.href);
@@ -59,6 +86,21 @@ export default function AboutPage() {
     url.searchParams.set("experience", value);
     history.pushState(null, "", url.pathname + url.search + url.hash);
   }, []);
+  const revealSecret = useCallback(() => {
+    chooseExperience("secret");
+    requestAnimationFrame(() => {
+      const artwork = stage.current;
+      if (!artwork) return;
+      const { top } = artwork.getBoundingClientRect();
+      const inset =
+        Number.parseFloat(
+          getComputedStyle(document.documentElement).scrollPaddingTop,
+        ) || 0;
+      if (top >= inset && top < innerHeight * 0.45) return;
+      artwork.focus({ preventScroll: true });
+      artwork.scrollIntoView({ block: "start", behavior: "instant" });
+    });
+  }, [chooseExperience]);
   useEffect(() => {
     let sequence = "";
     let lastKeyAt = 0;
@@ -77,7 +119,11 @@ export default function AboutPage() {
       }
       if (event.key === "Escape") {
         sequence = "";
-        if (experience === "secret") chooseExperience("theme");
+        if (experience === "secret" && !document.fullscreenElement) {
+          chooseExperience("theme");
+          if (target instanceof Node && stage.current?.contains(target))
+            requestAnimationFrame(() => secretTrigger.current?.focus());
+        }
         return;
       }
       if (
@@ -97,12 +143,11 @@ export default function AboutPage() {
         (now - lastKeyAt > 2000 ? "" : sequence) + event.key.toLowerCase()
       ).slice(-5);
       lastKeyAt = now;
-      if (sequence === "hohoo" && experience !== "secret")
-        chooseExperience("secret");
+      if (sequence === "hohoo" && experience !== "secret") revealSecret();
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [experience, chooseExperience]);
+  }, [experience, chooseExperience, revealSecret]);
   const projects = globalData["content-index"].entries.filter(
     (entry) => entry.type === "project" && entry.status !== "archived",
   );
@@ -129,44 +174,46 @@ export default function AboutPage() {
     >
       <UrlStateSync onChange={syncExperience} />
       <section className="about-hero" aria-labelledby="about-title">
-        <div className="about-experience-bar">
-          <p>{t("选择互动体验", "Choose an experience", "選擇互動體驗")}</p>
-          <div
-            className="about-experiences"
-            role="group"
-            aria-label={t(
-              "关于页互动体验",
-              "About page experience",
-              "關於頁互動體驗",
-            )}
-          >
-            <button
-              type="button"
-              aria-pressed={experience === "theme"}
-              aria-controls="about-visual-stage"
-              onClick={() => chooseExperience("theme")}
+        {initialized && (
+          <div className="about-experience-bar">
+            <p>{t("选择互动体验", "Choose an experience", "選擇互動體驗")}</p>
+            <div
+              className="about-experiences"
+              role="group"
+              aria-label={t(
+                "关于页互动体验",
+                "About page experience",
+                "關於頁互動體驗",
+              )}
             >
-              {t("主题场景", "Theme scene", "主題場景")}
-            </button>
-            <button
-              type="button"
-              aria-pressed={experience === "stars"}
-              aria-controls="about-visual-stage"
-              onClick={() => chooseExperience("stars")}
-            >
-              <span aria-hidden="true">✦</span>{" "}
-              {t("原版星空", "Original star field", "原版星空")}
-            </button>
-            <button
-              type="button"
-              aria-pressed={experience === "secret"}
-              aria-controls="about-visual-stage"
-              onClick={() => chooseExperience("secret")}
-            >
-              {t("主题彩蛋", "Secret", "主題彩蛋")}
-            </button>
+              <button
+                type="button"
+                aria-pressed={experience === "theme"}
+                aria-controls="about-visual-stage"
+                onClick={() => chooseExperience("theme")}
+              >
+                {t("主题场景", "Theme scene", "主題場景")}
+              </button>
+              <button
+                type="button"
+                aria-pressed={experience === "stars"}
+                aria-controls="about-visual-stage"
+                onClick={() => chooseExperience("stars")}
+              >
+                <span aria-hidden="true">✦</span>{" "}
+                {t("原版星空", "Original star field", "原版星空")}
+              </button>
+              <button
+                type="button"
+                aria-pressed={experience === "secret"}
+                aria-controls="about-visual-stage"
+                onClick={revealSecret}
+              >
+                {t("主题彩蛋", "Secret", "主題彩蛋")}
+              </button>
+            </div>
           </div>
-        </div>
+        )}
         <div className="about-hero-inner">
           <header className="about-hero-copy">
             <p className="about-eyebrow">
@@ -206,9 +253,17 @@ export default function AboutPage() {
             </p>
           </header>
           <div
+            ref={stage}
             id="about-visual-stage"
             className="about-art-stage"
             data-experience={experience === "stars" ? "stars" : "theme"}
+            tabIndex={-1}
+            role="region"
+            aria-label={
+              experience === "secret"
+                ? t("主题彩蛋", "Theme secret", "主題彩蛋")
+                : t("互动展台", "Interactive exhibit", "互動展臺")
+            }
           >
             {initialized ? (
               experience === "stars" ? (
@@ -222,19 +277,14 @@ export default function AboutPage() {
                   context="about"
                   className="about-theme-artwork"
                   secret={experience === "secret"}
+                  secretTriggerRef={secretTrigger}
                   onSecretChange={(active) =>
                     chooseExperience(active ? "secret" : "theme")
                   }
                 />
               )
             ) : (
-              <p className="about-scene-placeholder">
-                {t(
-                  "星空与好奇心。",
-                  "A space for curiosity.",
-                  "星空與好奇心。",
-                )}
-              </p>
+              <AboutScenePoster />
             )}
           </div>
         </div>

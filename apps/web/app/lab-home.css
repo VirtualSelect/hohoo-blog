@@ -239,6 +239,9 @@
   grid-area: feature;
   min-width: 0;
 }
+.atlas-featured article > a {
+  display: block;
+}
 .atlas-feature-art {
   position: relative;
   background: #f0f4fd;

@@ -42,8 +42,8 @@ export default function Home() {
     article: selectedHomeArticle(entries, track.domain),
   }));
   return (
-    <>
-      <main className="atlas-home">
+    <main>
+      <div className="atlas-home">
         <section className="atlas-hero" aria-labelledby="atlas-title">
           <div className="atlas-classic-masthead">
             <span>
@@ -197,7 +197,7 @@ export default function Home() {
             </header>
             {featured ? (
               <article>
-                <Link to={featured.href}>
+                <Link to={featured.href} aria-labelledby="atlas-feature-title">
                   <div className="atlas-feature-art">
                     <ArticleSketch domain={domain} />
                     <span className="atlas-sketch-caption">
@@ -210,16 +210,16 @@ export default function Home() {
                   <p className="atlas-eyebrow">
                     {t(activeTrack.title, activeTrack.en, activeTrack.titleTw)}
                   </p>
-                  <h3>
+                  <h3 id="atlas-feature-title">
                     {featured.title}
                     <span aria-hidden="true"> ↗</span>
                   </h3>
                   <p className="atlas-feature-description">
                     {featured.description}
                   </p>
-                </Link>
-                <Link className="atlas-feature-read" to={featured.href}>
-                  {t("展开阅读", "Read the article", "展開閱讀")} →
+                  <span className="atlas-feature-read" aria-hidden="true">
+                    {t("展开阅读", "Read the article", "展開閱讀")} →
+                  </span>
                 </Link>
               </article>
             ) : (
@@ -324,20 +324,20 @@ export default function Home() {
             </span>
             <strong>
               {t("外部信号", "Outside signals", "外部訊號")}{" "}
-              <small>AI SUMMARY</small>
+              <small>AI RADAR</small>
             </strong>
             <span>
               {t(
-                "保留出处，阅读摘要，关联已有知识。",
-                "Sources, summaries, and connections to existing knowledge.",
-                "保留出處，閱讀摘要，關聯既有知識。",
+                "阅读外部 AI 资讯，查看每条信号的出处。",
+                "Read external AI news and follow each signal to its source.",
+                "閱讀外部 AI 資訊，查看每條訊號的出處。",
               )}
             </span>
             <span aria-hidden="true">→</span>
           </Link>
         </aside>
-      </main>
+      </div>
       <SignalSculpture />
-    </>
+    </main>
   );
 }

@@ -3,8 +3,11 @@ import assert from "node:assert/strict";
 import * as T from "three";
 import {
   artworkBounds,
+  createArtworkFramer,
   fitArtworkCamera,
 } from "../components/theme-artwork-framing.ts";
+import { makeMachineSecret } from "../components/encore-machine.ts";
+import { makePaperSecret } from "../components/encore-paper.ts";
 
 function verifyVertices(root, camera, margin = 0.84) {
   const frustum = new T.Frustum().setFromProjectionMatrix(
@@ -187,4 +190,64 @@ test("deep twisted geometry fits real vertices without shrinking for empty box c
       fitArtworkCamera(camera, artworkBounds(root), 0.84, root);
       verifyVertices(root, camera);
     }
+});
+
+function compareFraming(camera, update, root) {
+  const reference = camera.clone();
+  const bounds = artworkBounds(root);
+  const diagnostic = fitArtworkCamera(reference, bounds, 0.84, root);
+  assert.deepEqual(update(root), { bounds, diagnostic });
+  assert.deepEqual(camera.position.toArray(), reference.position.toArray());
+  assert.equal(camera.near, reference.near);
+  assert.equal(camera.far, reference.far);
+}
+
+test("cached framing skips settled poses and refits on playback, orbit, resize, reset, and subject switches", (t) => {
+  const keep = (value) => {
+    t.after(() => value.dispose());
+    return value;
+  };
+  const garden = makePaperSecret("garden", keep);
+  const machine = makeMachineSecret("clear", keep);
+  const camera = new T.PerspectiveCamera(35, 1.8, 0.1, 80);
+  const update = createArtworkFramer(camera, 0.84);
+  for (const progress of [0, 0.6, 1]) {
+    garden.update(1, progress);
+    compareFraming(camera, update, garden.root);
+  }
+  garden.update(2, 1);
+  assert.equal(update(garden.root), undefined);
+  garden.root.rotation.y = 0.9;
+  compareFraming(camera, update, garden.root);
+  camera.aspect = 0.65;
+  compareFraming(camera, update, garden.root);
+  garden.root.rotation.y = 0;
+  compareFraming(camera, update, garden.root);
+  for (const time of [1, 2]) {
+    machine.update(time, 1);
+    compareFraming(camera, update, machine.root);
+  }
+  compareFraming(camera, update, garden.root);
+});
+
+test("cached framing invalidates edited positions, instance transforms, and visibility", (t) => {
+  const mesh = box(t, 2, 1, 1);
+  const root = new T.Group();
+  const instances = new T.InstancedMesh(mesh.geometry, mesh.material, 2);
+  t.after(() => instances.dispose());
+  root.add(instances);
+  const camera = new T.PerspectiveCamera(35, 1, 0.1, 80);
+  const update = createArtworkFramer(camera, 0.84);
+  compareFraming(camera, update, root);
+  instances.setMatrixAt(1, new T.Matrix4().makeTranslation(30, 0, 0));
+  compareFraming(camera, update, root);
+  const positions = mesh.geometry.getAttribute("position");
+  positions.setXYZ(0, 4, 3, 7);
+  positions.needsUpdate = true;
+  compareFraming(camera, update, root);
+  instances.visible = false;
+  compareFraming(camera, update, root);
+  assert.equal(update(root), undefined);
+  instances.visible = true;
+  compareFraming(camera, update, root);
 });

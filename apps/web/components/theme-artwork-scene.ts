@@ -1,6 +1,6 @@
 import * as T from "three";
 import { createArtworkSecret } from "./theme-artwork-secrets";
-import { artworkBounds, fitArtworkCamera } from "./theme-artwork-framing";
+import { createArtworkFramer } from "./theme-artwork-framing";
 import { createSculpture } from "./theme-artwork-models";
 import { artworkPixelRatio } from "./theme-artwork-rendering";
 import type { ArtworkDesign } from "./theme-artwork-config";
@@ -242,6 +242,7 @@ export function createArtworkScene(
     const camera = new T.PerspectiveCamera(35, 1, 0.1, 80);
     camera.position.set(0, 0.5, 11);
     camera.lookAt(0, 0, 0);
+    const updateFraming = createArtworkFramer(camera, 0.84);
     let secretArtwork: ReturnType<typeof createArtworkSecret> | undefined;
     const secretPivot = new T.Group();
     secretPivot.visible = false;
@@ -312,33 +313,30 @@ export function createArtworkScene(
             host.dataset.secretProgress = display;
         }
         secretPivot.quaternion.copy(orientation);
-        const bounds = artworkBounds(secret ? secretPivot : pivot);
-        const diagnostic = fitArtworkCamera(
-          camera,
-          bounds,
-          0.84,
-          secret ? secretPivot : pivot,
-        );
-        if (diagnostic)
-          host.dataset.artworkFraming = JSON.stringify({
-            ...diagnostic,
-            secret: secret ? options.design : null,
-          });
-        if (!bounds.isEmpty()) {
-          const center = bounds.getCenter(new T.Vector3()),
-            size = bounds.getSize(new T.Vector3());
-          floor.position.set(center.x, bounds.min.y - 0.06, center.z);
-          floor.scale.set(
-            Math.max(0.3, size.x / 5),
-            Math.max(0.3, size.z / 3),
-            1,
-          );
-          projection.position.set(center.x, bounds.min.y - 0.055, center.z);
-          projection.scale.set(
-            Math.max(3.5, size.x * 1.6) / 12,
-            Math.max(3.5, size.z * 1.6) / 10,
-            1,
-          );
+        const framing = updateFraming(secret ? secretPivot : pivot);
+        if (framing) {
+          const { bounds, diagnostic } = framing;
+          if (diagnostic)
+            host.dataset.artworkFraming = JSON.stringify({
+              ...diagnostic,
+              secret: secret ? options.design : null,
+            });
+          if (!bounds.isEmpty()) {
+            const center = bounds.getCenter(new T.Vector3()),
+              size = bounds.getSize(new T.Vector3());
+            floor.position.set(center.x, bounds.min.y - 0.06, center.z);
+            floor.scale.set(
+              Math.max(0.3, size.x / 5),
+              Math.max(0.3, size.z / 3),
+              1,
+            );
+            projection.position.set(center.x, bounds.min.y - 0.055, center.z);
+            projection.scale.set(
+              Math.max(3.5, size.x * 1.6) / 12,
+              Math.max(3.5, size.z * 1.6) / 10,
+              1,
+            );
+          }
         }
         renderer.render(world, camera);
         if (!ready) {

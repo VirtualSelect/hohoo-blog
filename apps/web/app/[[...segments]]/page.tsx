@@ -8,6 +8,7 @@ import {
 } from "../../lib/content";
 import Shell from "../../components/Shell";
 import RouteContent from "../../components/RouteContent";
+import AboutPage from "../../components/AboutPage";
 import Journey from "../../components/Journey";
 import VirtualLab from "../../components/VirtualLab";
 import type { Metadata } from "next";
@@ -62,7 +63,7 @@ export async function generateMetadata({
     about: ["关于 Hohoo", "About Hohoo", "關於 Hohoo"],
     projects: ["项目", "Projects", "專案"],
     labs: ["实验", "Labs", "實驗"],
-    notes: ["笔记", "Notes", "筆記"],
+    notes: ["知识与阅读", "Knowledge and reading", "知識與閱讀"],
     papers: ["论文", "Papers", "論文"],
     reading: ["阅读清单", "Reading list", "閱讀清單"],
     research: ["学习路线", "Learning paths", "學習路線"],
@@ -77,6 +78,18 @@ export async function generateMetadata({
     entry?.title ||
     titles[route]?.[locale === "en" ? 1 : locale === "zh-TW" ? 2 : 0] ||
     (route ? route : "Hohoo's AI Lab");
+  const descriptions: Record<string, [string, string, string]> = {
+    notes: [
+      "查阅学习路线、论文导引和本站的短笔记。",
+      "Browse learning paths, paper guides and short notes from the site.",
+      "查閱學習路線、論文導讀和本站的短筆記。",
+    ],
+    timeline: [
+      "按日期回看已发布的文章、笔记、实验、项目与周汇总。",
+      "Browse published articles, notes, experiments, projects, and weekly digests by date.",
+      "按日期回顧已發表的文章、筆記、實驗、專案與每週彙整。",
+    ],
+  };
   const description =
     (route === "journey/virtual-lab"
       ? getMessages(locale)["journey.virtual.intro"]?.message
@@ -86,6 +99,7 @@ export async function generateMetadata({
       : null) ||
     doc?.metadata.description ||
     entry?.description ||
+    descriptions[route]?.[locale === "en" ? 1 : locale === "zh-TW" ? 2 : 0] ||
     (locale === "en"
       ? "Learning, experimenting and building, from Java to AI."
       : "从 Java 到 AI，公开学习、实验与构建。");
@@ -172,6 +186,8 @@ export default async function Page({ params }: RouteProps) {
             dangerouslySetInnerHTML={{ __html: document.html }}
           />
         </RouteContent>
+      ) : route === "about" ? (
+        <AboutPage />
       ) : route === "journey" ? (
         <Journey locale={locale} />
       ) : route === "journey/virtual-lab" ? (

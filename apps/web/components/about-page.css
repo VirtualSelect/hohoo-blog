@@ -4,6 +4,7 @@
   --about-hero-ink: var(--atlas-text);
   --about-hero-muted: var(--atlas-muted);
   --about-title-font: var(--hh-base-font-family-base);
+  --about-canvas-height: clamp(285px, 30vw, 460px);
   min-width: 0;
 }
 .about-hero {
@@ -133,15 +134,11 @@
 .about-art-stage {
   position: relative;
   width: 100%;
-  height: clamp(
-    400px,
-    calc(100svh - 230px - var(--atlas-dock-space, 0px)),
-    640px
-  );
   min-width: 0;
 }
-.about-art-stage[data-experience="stars"] {
-  height: auto;
+.about-art-stage:focus-visible {
+  outline: 2px solid var(--atlas-accent);
+  outline-offset: 4px;
 }
 .about-fusion[data-experience="stars"] .about-hero-inner {
   grid-template-columns: minmax(0, 1fr);
@@ -158,18 +155,22 @@
 .about-fusion[data-experience="stars"] .about-hero-copy::before {
   display: none;
 }
-.about-scene-placeholder {
+.about-scene-poster {
   display: grid;
   place-items: center;
-  height: 640px;
-  margin: 0;
-  color: var(--about-hero-muted);
-  font-size: 14px;
+  height: var(--about-canvas-height);
+}
+.about-scene-poster img {
+  width: 100%;
+  height: 100%;
+  max-height: var(--about-canvas-height);
+  object-fit: contain;
 }
 .about-art-stage .about-theme-artwork:not(:fullscreen) {
   width: 100%;
-  height: 100%;
+  height: auto;
   min-height: 0;
+  grid-template-rows: var(--about-canvas-height) auto;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -509,6 +510,9 @@
   }
 }
 @media (max-width: 900px) {
+  .about-fusion {
+    --about-canvas-height: clamp(240px, 56vw, 385px);
+  }
   .about-experience-bar {
     justify-content: space-between;
   }
@@ -544,13 +548,9 @@
   .about-visual-note {
     margin-top: 22px;
   }
-  :root .about-fusion .about-art-stage {
-    width: 100%;
-    height: 480px;
-    margin: 0;
-  }
-  :root .about-fusion .about-art-stage[data-experience="stars"] {
-    height: auto;
+  .about-fusion[data-experience="stars"] .about-hero-copy,
+  .about-fusion[data-experience="stars"] .about-art-stage {
+    grid-row: auto;
   }
   .about-content {
     padding-bottom: 44px;
@@ -688,7 +688,7 @@
   }
 }
 @media (max-height: 500px) and (min-aspect-ratio: 3/2) {
-  :root .about-fusion .about-art-stage[data-experience="theme"] {
-    height: clamp(220px, calc(100svh - 150px), 340px);
+  .about-fusion {
+    --about-canvas-height: clamp(180px, 52svh, 260px);
   }
 }

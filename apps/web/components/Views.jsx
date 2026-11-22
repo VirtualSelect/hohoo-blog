@@ -40,12 +40,10 @@ const RetrievalDrawer = dynamic(() => import("./RetrievalDrawer"));
 const StreamWindow = dynamic(() => import("./StreamWindow"));
 const Weekly = dynamic(() => import("@site/src/components/RadarWeekly"));
 const Daily = dynamic(() => import("@site/src/components/NewsDigest"));
-const About = dynamic(() => import("./AboutPage"), { loading: PageLoading });
 export default function Views() {
   const { route, document, globalData, items, locale } = useSite(),
     t = useText();
   if (!route) return <Home />;
-  if (route === "about") return <About />;
   if (route === "radar") return <Radar />;
   if (document) {
     if (document.kind === "news/daily")

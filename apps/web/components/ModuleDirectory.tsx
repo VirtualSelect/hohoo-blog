@@ -35,7 +35,7 @@ export default function ModuleDirectory() {
       ["/labs", t("实验记录", "Lab records", "實驗記錄")],
     ],
     knowledge: [
-      ["/notes", t("短笔记", "Notes", "短筆記")],
+      ["/notes", t("知识与阅读", "Knowledge and reading", "知識與閱讀")],
       ["/papers", t("论文阅读", "Papers", "論文閱讀")],
       ["/reading", t("阅读清单", "Reading list", "閱讀清單")],
     ],
