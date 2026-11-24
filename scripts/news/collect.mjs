@@ -13,6 +13,11 @@ import {
 import { assessRelevance } from "./relevance.mjs";
 import radar from "../../src/utils/radar.cjs";
 import { mergeFeedContent } from "../../src/utils/radar-content.mjs";
+import {
+  collectionDiagnostics,
+  formatCollectionReport,
+  isQuotaReason,
+} from "./diagnostics.mjs";
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -37,7 +42,8 @@ if (!sources.length || sources.length > 10)
   throw new Error("Enable between 1 and 10 sources");
 for (const source of sources) {
   canonicalUrl(source.feed, source.hosts);
-  for (const feed of source.fallbackFeeds || []) canonicalUrl(feed, source.hosts);
+  for (const feed of source.fallbackFeeds || [])
+    canonicalUrl(feed, source.hosts);
   if (
     source.priority !== undefined &&
     (!Number.isInteger(source.priority) ||
@@ -78,8 +84,11 @@ for (const source of sources) {
     const result = await fetchSource(source, now, config.lookbackDays);
     candidates.push(...result.items);
     report.sources.push({
+      sourceId: source.id,
       source: source.name,
       status: "ok",
+      parserVersion: source.parserVersion || null,
+      feedCoverage: result.feedCoverage,
       fallback: result.fallback,
       feedAttempts: result.attempts,
       eligible: result.items.length,
@@ -95,6 +104,7 @@ for (const source of sources) {
     });
   } catch (error) {
     report.sources.push({
+      sourceId: source.id,
       source: source.name,
       status: "failed",
       error: error.message,
@@ -133,14 +143,7 @@ let selected = selectItems(
 // Preserve a bounded public-safe proposal when quotas, rather than feeds, block updates.
 const byId = new Map(relevant.map((item) => [item.id, item]));
 report.deferred = report.notSelected
-  .filter((item) =>
-    [
-      "daily-limit",
-      "source-limit",
-      "reserved-for-later",
-      "source-reserved-for-later",
-    ].includes(item.reason),
-  )
+  .filter((item) => isQuotaReason(item.reason))
   .slice(0, 10)
   .map((item) => ({
     ...publicNewsItem(byId.get(item.id)),
@@ -172,6 +175,7 @@ report.selected = selected.map(
     publishedAt,
   }),
 );
+report.diagnostics = collectionDiagnostics(report, relevant, existing, config);
 const outputRoot = process.argv.includes("--write")
   ? root
   : path.join(root, ".cache-loader/news-preview");
@@ -214,7 +218,7 @@ await save(
 const successful = report.sources.filter(
   (source) => source.status === "ok",
 ).length;
-const body = `## AI 资讯自动检查报告\n\n新增 ${selected.length} 条；来源成功 ${successful}/${sources.length}。主题筛选与数据检查后，需双语构建通过才能提交发布。规则不核验原始报道事实。详细原因见 news-report.json。\n`;
+const body = formatCollectionReport(report);
 await save(path.join(root, ".cache-loader/news-pr.md"), body);
 console.log(JSON.stringify(report, null, 2));
 if (!successful) process.exitCode = 1;

@@ -4,19 +4,19 @@ description: "用本站中文正文實作可追溯段落檢索，沿著一個真
 slug: "/rag/blog-passage-search"
 status: "published"
 published_at: "2026-11-11"
-updated: "2026-11-12"
+updated: "2026-11-24"
 domain: "rag"
 article_kind: "case-study"
 difficulty: "intermediate"
 reading_minutes: 8
-related: ["doc:ai-apps/java-retrieval-evidence", "doc:ai-apps/java-grounded-claims", "project:hohoo-blog"]
+related: ["doc:ai-apps/java-retrieval-evidence", "doc:ai-apps/java-grounded-claims", "lab:retrieval-eval", "project:hohoo-blog", "project:hohoo-ai-lab"]
 ---
 
 在v1凍結驗收輸入 `缓存 保证成功`，前五個候選中出現了一篇會話並行文章。命中的文字講的是「響應驗證成功才提交」，並沒有回答快取能否保證成功。這裡保留簡體查詢字串，因為v1驗收使用的是簡體語料，不是繁體查詢評測。
 
 這不是頁面沒有載入，也不是來源連結失效。**檢索確實找到了文字，卻沒有找到問題所要求的依據。** 這個反例比「搜尋框能回傳結果」更能說明原型還缺什麼。
 
-本文對應尚未上線的本地預覽：開啟全站搜尋，選擇「正文段落」。實作和驗收腳本在部落格倉庫，原有Java教學工程不受影響。AI輔助整理；問題相關性標註待作者複核。
+開啟全站搜尋，選擇「正文段落」，輸入文章裡的關鍵字就能找到原文小節。[部落格專案](/projects/hohoo-blog)保存這套搜尋的實作與驗收程式；[檢索品質實驗](/labs/retrieval-eval)記錄之前的 Java 檢索與引文校驗。本文由 AI 協助整理，問題的相關性標註待作者複核。
 
 ## 「保證成功」和「驗證成功」共享了什麼
 
@@ -55,21 +55,22 @@ console.log(searchTerms("验证成功")); // 验证、证成、成功
 
 結果清單只顯示短摘錄；「複製引用」保留完整段落、文章與小節、正式來源位址、帶雜湊的索引快照位址及完整內容指紋。複製失敗時顯示可選取的文字，不把失敗偽裝成「已複製」。
 
-來源連結方便繼續閱讀，指紋便於核對文字有沒有變化。但索引快照不是永久存檔：舊雜湊資源可能在後續部署清理，文章也可能修訂。需要長期使用時應保留引用文字與指紋。目前預覽未發佈，相應的線上快照位址尚不可存取。
+來源連結指向原文小節，內容指紋用來核對摘錄是否改變。後續建置可能清理舊的索引快照；若需長期引用，請同時保存段落文字與指紋。
 
 瀏覽器只在切換到正文模式時載入目前語言索引；問題不傳送給模型，也不會上傳第三方。英文與繁體使用各自正文，缺少翻譯時不悄悄混入簡體中文。
 
 ## 在固定版本重現驗收
 
-以下指令在**本次預覽工程的倉庫根目錄**執行。目前線上主幹尚未包含這些檔案，需先取得對應改動。依賴已安裝時跳過第一行：
+在部落格儲存庫根目錄執行以下指令。初次使用時依兩個鎖定檔安裝相依套件；若已安裝，可從產生內容的指令開始。
 
 ```powershell
+npm ci
 npm ci --prefix apps/web
 npm run prepare:content --prefix apps/web
 npm run search:evaluate --prefix apps/web
 ```
 
-執行環境為Windows、Node.js 26.8.2。輸出檔案是 `reports/section-search-evaluation-v1.json`，包含每個問題的原始候選、相關依據、排名與內容指紋。
+v1 封存紀錄使用 Windows 與 Node.js 26.8.2。指令會重算 `reports/section-search-evaluation-v1.json`；可用[固定版本的報告](https://github.com/VirtualSelect/hohoo-blog/blob/d0e650ef1198fe39743badd671f6a308dbc1b49f/reports/section-search-evaluation-v1.json)核對每一題的候選、標註引文、排名與指紋。
 
 協議位於`apps/web/tests/fixtures/section-search-protocol.json`，快照為同目錄的`section-search-snapshot.json`。原始513塊文字保存在`section-search-corpus-v1.json`，已核對到原語料指紋；後續正文修訂不覆蓋這份測試語料。預設命令重跑原問題、演算法與凍結語料，版本不符便停止，不能靜默沿用舊結論。本篇仍被排除，避免把解釋驗收問題的文章重新當成證據。
 
@@ -85,9 +86,22 @@ npm run search:evaluate --prefix apps/web
 
 4個無答案問題中，3個回傳空清單；`缓存 保证成功` 仍回傳5個候選。原始記錄保留這次誤命中，沒有提高閾值後重新挑選好看的結果。檢索器回傳候選本身不是生成錯誤回答；它暴露的是：後續問答層不能把「有候選」當作「有足夠依據」。
 
+## v2 對照：多一道詞項篩選，會漏掉什麼？
+
+另取 20 道簡體中文問題，沿用 v1 凍結的 513 個段落。12 題有標註引文，8 題在語料中缺少依據。問題與規則在比較前確定，標籤由 AI 對照封存引文整理，待作者複核。
+
+| 以同一批候選比較 | 有依據題：前 5 名找到標註段落 | 無依據題：傳回了候選 |
+| --- | --- | --- |
+| 原檢索排序 | 8/12 | 5/8 |
+| 要求小節標題或正文涵蓋至少一半的不重複查詢詞項 | 0/12 | 0/8 |
+
+例如 `lexical-gap` 換個說法，詢問為何增加候選數仍找不到並行處理的文件，原排序的前五名就漏了標註段落。加上門檻後，原本會傳回候選的五道無依據題都回到空清單，原本命中的八道有依據題也全部遺失。因此本站保留原排序。這裡衡量的是能否找回一段指定文字，生成答案的正確性仍待另外評估。
+
+在儲存庫根目錄執行 `node apps/web/scripts/compare-section-search.mjs`，可將標準輸出與儲存庫內的 `reports/section-search-comparison-v2.json` 逐題核對。
+
 ## 自己改出一個反例
 
-先不要調閾值。在本次預覽倉庫根目錄，貼上下面整個PowerShell程式碼區塊執行；它只讀取v1凍結協議與語料，不需要安裝模型或產生索引，也不會覆寫驗收報告。查詢從協議讀取，避免手動改寫原問題。這裡使用簡體歷史語料，不保證與目前語言的線上搜尋結果相同。
+先保留原排序規則，在部落格儲存庫根目錄的 PowerShell 執行下面的程式碼。它直接讀取 v1 的問題與簡體中文凍結語料，不會寫入報告，也不需要模型或建置索引。目前的文章內容或搜尋語言不同，結果可能隨之改變。
 
 ```powershell
 @'
@@ -135,4 +149,4 @@ console.log(JSON.stringify({
 
 若要研究分塊，應先獨立標註哪些段落真正支持問題，再凍結問題、分詞器與檢索器，只改變分塊方式。問答還需要回答生成、資料不足時的處理與引用支持驗收。這些仍是[RAG後續路線](/learning?track=rag)中的計畫。
 
-可以先讀[檢索證據驗收](/docs/ai-apps/java-retrieval-evidence)，再看[引用真實但聲明錯誤](/docs/ai-apps/java-grounded-claims)。這次原型把資料換成真實部落格正文，並沒有完成向量檢索、語義重排或完整RAG產品。
+回到[Java LLM 實作集](/projects/hohoo-ai-lab)，可以對照前兩步的程式碼：先[重算候選排序](/docs/ai-apps/java-retrieval-evidence)，再[查清引文支持哪個設定欄位](/docs/ai-apps/java-grounded-claims)。

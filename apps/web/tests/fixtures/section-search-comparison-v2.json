@@ -1,0 +1,177 @@
+{
+  "version": 2,
+  "locale": "zh-CN",
+  "labels": "AI 整理并按归档引文核对，待作者人工复核。题目、证据和对照规则在比较运行前确定，不用于宣称真实读者准确率。",
+  "topK": 5,
+  "minimumBodyTermCoverage": 0.5,
+  "questions": [
+    {
+      "id": "lexical-gap",
+      "query": "为什么扩到前三名也找不到描述并发冲突的那篇文档？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-retrieval-evidence#3-真实结果没有全对",
+          "quote": "它连候选集都没进入，因此把top1改成top3没有帮助。"
+        }
+      ]
+    },
+    {
+      "id": "partial-config",
+      "query": "配置只校对通过了一项，接口会把正确的那一项交给调用方吗？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-grounded-claims#5-失败时不返回半份可用结果",
+          "quote": "本例选择整次拒绝，accepted 为空。"
+        }
+      ]
+    },
+    {
+      "id": "revision-authority",
+      "query": "回答里自行指定查询旧版本的配置，可以改变请求使用的修订吗？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-grounded-claims#1-把-有依据-拆成可以核对的条件",
+          "quote": "当前修订由受信任的请求指定，不能让候选回答自己选择"
+        }
+      ]
+    },
+    {
+      "id": "same-process-lock",
+      "query": "把多个 JVM 进程换成一个 JVM 的多线程，文件锁之外还要做什么？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-durable-idempotency#同一个锁里完成查找-判断与追加",
+          "quote": "Java 的文件锁以 JVM 为单位，同进程还需要线程级串行化。"
+        }
+      ]
+    },
+    {
+      "id": "delivery-identity",
+      "query": "发完请求还没存回执就退出，再送一次时靠什么让接收端识别同一意图？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-outbox-delivery#稳定身份必须跨过http边界",
+          "quote": "Workflow.deliver 把意图的key写进 Idempotency-Key，每次重试保持同一正文。"
+        }
+      ]
+    },
+    {
+      "id": "remote-duplication",
+      "query": "本地只有一条历史和一个回执，能推断外部工具只跑过一次吗？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-outbox-delivery#五个场景-三个不同的答案",
+          "quote": "观察自己的历史没有重复，不能推出工具没有重复。"
+        }
+      ]
+    },
+    {
+      "id": "packed-reserved-code",
+      "query": "4-bit 分组量化打包时，为什么只用编号 0 到 14？",
+      "expected": [
+        {
+          "href": "/docs/llm/kv-packed-groups#一个字节里到底装了什么",
+          "quote": "保存前加7，映射到 [0,14]，15保留不用。"
+        }
+      ]
+    },
+    {
+      "id": "group-size-cost",
+      "query": "缩短 KV 量化组长，为什么 scale 数组反而更大？",
+      "expected": [
+        {
+          "href": "/docs/llm/kv-packed-groups#为什么分组要同时看方向与长度",
+          "quote": "更小的组通常能减弱组内幅值差异，但需要更多scale。"
+        }
+      ]
+    },
+    {
+      "id": "residual-age",
+      "query": "注意力主要看开头时，多给最近 Token 留高精度为什么几乎无效？",
+      "expected": [
+        {
+          "href": "/docs/llm/kv-residual-window#看误差之前-先看注意力权重总量落在哪里",
+          "quote": "主要被使用的早期K/V仍然量化着。"
+        }
+      ]
+    },
+    {
+      "id": "flagged-stale-samples",
+      "query": "一直收到内容正常的旧包，机械臂监测器为什么还是报警？",
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-observation-freshness#1-先看一个实际失效过程",
+          "quote": "带新鲜度检查的策略在最后一行报警，原因是 stale，而不是 contact。"
+        }
+      ]
+    },
+    {
+      "id": "check-in-silence",
+      "query": "传感器长时间没有发消息，监测器在哪里检查观测过期？",
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-observation-freshness#2-把采样-接收与控制拆开",
+          "quote": "如果只把它写在接收回调里，完全静默时就没有机会检查超时。本例在每个控制步执行检查"
+        }
+      ]
+    },
+    {
+      "id": "release-packet-order",
+      "query": "E14 怎么处理松开夹爪前采样、松开后才送到的观测？",
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-qualified-completion#修复进展-2026-10-07",
+          "quote": "E14 记录释放意图时刻，排除释放前采样的迟到包。"
+        }
+      ]
+    },
+    {
+      "id": "absent-payment-deployment",
+      "query": "payments 的 prod-v2 配置在真实生产部署的访问域名是什么？",
+      "expected": [],
+      "reason": "文章的 payments 配置为合成教学资料，未给出真实部署域名。"
+    },
+    {
+      "id": "absent-hardware-safety",
+      "query": "把 MuJoCo 的 60ms 阈值用于真实机械臂，通过了哪项硬件安全认证？",
+      "expected": [],
+      "reason": "语料描述的是仿真实验参数，没有该阈值的真机安全认证。"
+    },
+    {
+      "id": "absent-nfs-durability",
+      "query": "Java 幂等日志在多台机器共享的 NFS 上，掉电恢复的实测成功率是多少？",
+      "expected": [],
+      "reason": "幂等日志只验证受控的本机文件系统场景，没有 NFS 掉电数据。"
+    },
+    {
+      "id": "absent-packed-benchmark",
+      "query": "4-bit KV 缓存在 RTX 4090 上跑 32K 上下文的吞吐量是多少？",
+      "expected": [],
+      "reason": "现有打包资料为合成输入上的本地对照，没有这组 GPU 和上下文吞吐量。"
+    },
+    {
+      "id": "absent-answer-quality",
+      "query": "本站的在线 RAG 问答在人类盲测中的回答准确率是多少？",
+      "expected": [],
+      "reason": "段落检索与教学声明校验的记录没有给出线上生成问答的盲测成绩。"
+    },
+    {
+      "id": "absent-calibration",
+      "query": "现场夹爪力传感器的校准证书编号是什么？",
+      "expected": [],
+      "reason": "现有仿真实验没有真实硬件校准证书。"
+    },
+    {
+      "id": "absent-library-hours",
+      "query": "市立图书馆周一的开放时间",
+      "expected": [],
+      "reason": "归档文章不含市立图书馆的开放时间。"
+    },
+    {
+      "id": "absent-weather",
+      "query": "火星明天的地表天气预报",
+      "expected": [],
+      "reason": "归档文章不含火星天气预报。"
+    }
+  ]
+}

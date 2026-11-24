@@ -9,56 +9,6 @@
 .atlas-direction-copy strong {
   font: inherit;
 }
-.atlas-direction-route {
-  display: none;
-}
-:root[data-design="classic"] .atlas-home .atlas-direction-buttons button {
-  display: none;
-}
-:root[data-design="classic"] .atlas-direction-route {
-  display: grid;
-  grid-template-columns: 23px minmax(0, 1fr);
-  gap: 9px;
-  align-items: start;
-  min-height: 158px;
-  padding: 20px 15px;
-  border-left: 1px solid var(--hh-border);
-  font-size: 13px;
-}
-:root[data-design="classic"] .atlas-direction-route:first-of-type {
-  border-left: 0;
-  padding-left: 0;
-}
-:root[data-design="classic"] .atlas-direction-route:hover {
-  background: var(--blog-soft);
-}
-.atlas-classic-route-label {
-  display: block;
-  font-size: 10px;
-  line-height: 1.8;
-  margin-top: 12px;
-  color: var(--hh-accent);
-}
-@media (max-width: 800px) {
-  :root[data-design="classic"] .atlas-direction-route {
-    border-bottom: 1px solid var(--hh-border);
-    min-height: 150px;
-  }
-  :root[data-design="classic"] .atlas-direction-route:nth-of-type(3) {
-    border-left: 0;
-    padding-left: 0;
-  }
-  :root[data-design="classic"] .atlas-direction-route:nth-of-type(n + 3) {
-    border-bottom: 0;
-  }
-}
-@media (max-width: 500px) {
-  :root[data-design="classic"] .atlas-direction-route {
-    padding: 16px 10px;
-    gap: 7px;
-    font-size: 12px;
-  }
-}
 :root[data-design="classic"] .atlas-title-default {
   display: none;
 }
@@ -217,12 +167,22 @@
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas: "directions" "recent";
+  grid-template-areas: "directions" "feature" "recent" "projects";
   gap: 34px;
+}
+:root[data-design="classic"] .atlas-feature-art {
+  display: none;
 }
 :root[data-design="classic"] .atlas-featured,
 :root[data-design="classic"] .atlas-projects {
-  display: none;
+  display: block;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+:root[data-design="classic"] .atlas-featured article {
+  border-left: 2px solid var(--hh-accent);
+  padding-inline-start: 18px;
 }
 :root[data-design="classic"] .atlas-directions {
   display: block;

@@ -4,7 +4,7 @@ description: "27回合比較舊觀測控制、超時置零與衰減，展示觀�
 slug: "/embodied-ai/mujoco-stale-force"
 status: "published"
 published_at: "2026-10-11"
-updated: 2026-11-13
+updated: 2026-11-24
 reading_minutes: 10
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -77,7 +77,15 @@ zero和fade都不是閉環剎車。它們沒有新速度觀測，也不加入未
 
 不能直接搜尋整條軌跡的「第一次零力」：啟動時尚未收到觀測，力與速度本來都是零。應先選永久失聯、zero策略，再找**已有有效樣本且年齡超限的控制列**，最後觀察力與速度。
 
-CSV的`t`記錄的是物理步結束時刻；這列命令在該步開始時決定，所以控制時刻為 `t - 0.002`。只在`control_tick=1`的列檢查年齡，不能把步後的狀態時間直接當作控制判定時間。
+[封存軌跡 111.csv.gz](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/1d1faab57e20b352761e9abc736c6d277b505e6b/evidence/planar-reliability-20261011/111.csv.gz)記錄了種子 73 永久失聯的 2,000 個物理步。圖中擷取 340–620 ms，三個面板共用同一個模擬時鐘。上方的圓點表示控制器每 20 ms 檢查一次取樣年齡；中間階梯線上的力從物理步開始時生效；下方速度來自步後的 CSV 時間 `t`。最後一份樣本於 380 ms 擷取，420 ms 才送達控制器。
+
+![在同一模擬時間軸上讀取樣年齡、x 方向施力與速度：500 ms 控制力歸零，502 ms 步後的速度仍為 0.853823 m/s。](/img/research/20261011/stale-force-clock.zh-TW.svg)
+
+若要重畫，請先依文末指令檢出配套實驗儲存庫。以下指令從部落格儲存庫根目錄執行，假設兩個儲存庫位於同一母目錄。製圖環境使用 Matplotlib 3.10.8 及可用的中日韓字型（如 Noto Sans CJK SC）；程式核對封存檔案指紋後，從原始 CSV 產生三語 SVG。
+
+```sh
+python scripts/research/plot-stale-force-clock.py ../hohoo-embodied-agent-study/evidence/planar-reliability-20261011 --out figures
+```
 
 在本文固定提交的工程根目錄，用Python 3.12執行以下唯讀片段即可，不需要啟動MuJoCo或重新模擬：
 

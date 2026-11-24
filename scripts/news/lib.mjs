@@ -30,8 +30,9 @@ export async function parseFeed(xml, source, now = new Date(), lookbackDays = 14
   if (/<!DOCTYPE|<!ENTITY/i.test(xml)) throw new Error('DTD/entity declarations are not supported');
   const feed = await new Parser().parseString(xml);
   if (!Array.isArray(feed.items)) throw new Error('Invalid feed format');
+  const inspected = feed.items.slice(0, 200);
   const items = []; let skipped = 0;
-  for (const item of feed.items.slice(0, 200)) {
+  for (const item of inspected) {
     try {
       const url = canonicalUrl(item.link || item.guid, source.hosts);
       const title = plainText(item.title).slice(0, 240);
@@ -63,7 +64,17 @@ export async function parseFeed(xml, source, now = new Date(), lookbackDays = 14
         ...(content ? {feedContent:content} : {})});
     } catch {skipped++;}
   }
-  return {items, skipped};
+  // Describe the actual returned feed, not an assumed lookback-sized history.
+  const dates = inspected
+    .map((item) => Date.parse(item.isoDate || item.pubDate || ''))
+    .filter(Number.isFinite);
+  return {items, skipped, feedCoverage: {
+    itemCount: feed.items.length,
+    inspectedCount: inspected.length,
+    truncated: inspected.length < feed.items.length,
+    oldestPublishedAt: dates.length ? new Date(Math.min(...dates)).toISOString() : null,
+    newestPublishedAt: dates.length ? new Date(Math.max(...dates)).toISOString() : null,
+  }};
 }
 export function publicNewsItem({relevanceText, feedContent, ...item}) {
   return item;

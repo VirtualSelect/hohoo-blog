@@ -4,7 +4,7 @@ description: "Compare stale feedback, zero force and fading in 27 episodes to di
 slug: "/embodied-ai/mujoco-stale-force"
 status: "published"
 published_at: "2026-10-11"
-updated: 2026-11-13
+updated: 2026-11-24
 reading_minutes: 10
 domain: "embodied-ai"
 article_kind: "case-study"
@@ -77,7 +77,15 @@ The 100/200 ms thresholds are teaching parameters, not safety standards. Mass, i
 
 Do not search the entire trace for its first zero force: before the first observation arrives, both force and velocity are already zero. Select permanent loss under the zero policy, then find the first **control row with a valid captured sample whose age exceeds the limit**, and only then inspect force and velocity.
 
-CSV `t` is recorded after the physics step. That row's command was decided at the beginning of the step, so decision time is `t - 0.002`. Check age only on `control_tick=1` rows; do not use post-step state time as decision time.
+[Archived trace 111.csv.gz](https://github.com/VirtualSelect/hohoo-embodied-agent/blob/1d1faab57e20b352761e9abc736c6d277b505e6b/evidence/planar-reliability-20261011/111.csv.gz) records 2,000 physics steps for permanent loss with seed 73. The panels below share one simulation clock and show 340–620 ms. Each dot in the top panel is a sample-age check on a 20 ms control tick. The force in the middle panel takes effect at the start of a physics step; velocity in the bottom panel is recorded at the end of that step, at CSV time `t`. The last sample was captured at 380 ms and reached the controller at 420 ms.
+
+![Sample age, applied x-force and x-velocity on one simulation clock. The force drops to zero at 500 ms; the post-step velocity at 502 ms is still 0.853823 m/s.](/img/research/20261011/stale-force-clock.en.svg)
+
+To redraw the figure, check out the companion repository at the revision in the reproduction section below. Run this command from the blog repository, with both checkouts in the same parent directory. The plots use Matplotlib 3.10.8 and a CJK font such as Noto Sans CJK SC. The script checks the archive hashes before generating the three SVGs from the original CSV.
+
+```sh
+python scripts/research/plot-stale-force-clock.py ../hohoo-embodied-agent-study/evidence/planar-reliability-20261011 --out figures
+```
 
 Run this read-only Python 3.12 snippet from the article's pinned repository root. It needs neither MuJoCo nor a new simulation:
 

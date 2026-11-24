@@ -85,30 +85,7 @@ jobs:
           echo 'Rules, content checks and all-locale build passed; content published.' >> "$GITHUB_STEP_SUMMARY"
       - name: Summarize collection outcome
         if: always()
-        run: |
-          node <<'NODE'
-          const fs = require('node:fs');
-          const file = '.cache-loader/news-report.json';
-          if (!fs.existsSync(file)) {
-            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '\nCollection report unavailable; check the preceding setup/install steps.\n');
-          } else {
-            const report = JSON.parse(fs.readFileSync(file, 'utf8'));
-            const lines = ['\n## Collection outcome', `Run: ${report.runAt}`, `Selected: ${report.selected.length}`, `Rejected by relevance rules: ${report.rejected?.length || 0}`];
-            if (report.budget) lines.push(`UTC intake day: ${report.budget.day}; used before run: ${report.budget.used}/${report.budget.limit}; released now: ${report.budget.released}; available now: ${report.budget.available}.`);
-            lines.push(`Publication window: ${report.since} → ${report.runAt}`);
-            for (const source of report.sources) lines.push(`- ${source.source}: ${source.status}; in window: ${source.inWindow ?? 0}; newest: ${source.newestPublishedAt || 'none'}; ${source.error || ''}`);
-            const reasons = {};
-            for (const item of report.notSelected || []) reasons[item.reason] = (reasons[item.reason] || 0) + 1;
-            for (const [reason, count] of Object.entries(reasons)) lines.push(`- ${reason}: ${count}`);
-            for (const source of report.sources.filter(s => s.status === 'failed')) console.log(`::warning::News source failed: ${source.source}`);
-            if (!report.selected.length) {
-              if (report.budget?.remaining === 0) lines.push('Daily intake quota exhausted: later eligible updates are deferred, not a fetch or deployment failure.');
-              else if (reasons['reserved-for-later'] || reasons['source-reserved-for-later']) lines.push('Some daily slots are reserved for a later UTC time window.');
-              else lines.push('No new eligible items after filtering and deduplication. This does not mean the feed is empty.');
-            }
-            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
-          }
-          NODE
+        run: node scripts/news/report.mjs
       - name: Preserve collection diagnostics
         if: always()
         uses: actions/upload-artifact@v4

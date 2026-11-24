@@ -32,9 +32,9 @@ export default function SeriesEntry({ domain }) {
       "理解任務完成判據",
     ],
     rag: [
-      "看引用校验的边界",
-      "Explore citation validation",
-      "看引用校驗的邊界",
+      "复现本站的检索误命中",
+      "Reproduce the blog search false positive",
+      "重現本站的檢索誤命中",
     ],
   }[domain];
   return (

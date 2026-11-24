@@ -1,0 +1,808 @@
+{
+  "version": 2,
+  "locale": "zh-CN",
+  "classification": "offline-comparison-author-review-pending",
+  "labels": "AI 整理并按归档引文核对，待作者人工复核。题目、证据和对照规则在比较运行前确定，不用于宣称真实读者准确率。",
+  "protocolHash": "3df769d6e344ed86ac79952682b67a1f8102c67963fb8575a68dfff4ad47f8c9",
+  "corpusHash": "0b48da5ef8af7d5d96705278fd46fc8cec0cffb9a39e7f68fa5ae27e05dcd06b",
+  "algorithmHash": "eb0f9402171c934622c73d5bdd7a8c307c7da38700fc52ed47dbfb30a93c315e",
+  "passages": 513,
+  "topK": 5,
+  "variants": {
+    "baseline": "Archived lexical ranking and existing per-document cap.",
+    "bodyCoverage": "Same ranked candidates and per-document cap, then filter by distinct query terms present in heading or body before taking top K.",
+    "minimumBodyTermCoverage": 0.5
+  },
+  "summary": {
+    "answerable": 12,
+    "noAnswer": 8,
+    "baseline": {
+      "hitAtK": 8,
+      "misses": [
+        "lexical-gap",
+        "group-size-cost",
+        "flagged-stale-samples",
+        "check-in-silence"
+      ],
+      "noAnswerWithCandidates": [
+        "absent-payment-deployment",
+        "absent-hardware-safety",
+        "absent-packed-benchmark",
+        "absent-answer-quality",
+        "absent-calibration"
+      ]
+    },
+    "bodyCoverage": {
+      "hitAtK": 0,
+      "misses": [
+        "lexical-gap",
+        "partial-config",
+        "revision-authority",
+        "same-process-lock",
+        "delivery-identity",
+        "remote-duplication",
+        "packed-reserved-code",
+        "group-size-cost",
+        "residual-age",
+        "flagged-stale-samples",
+        "check-in-silence",
+        "release-packet-order"
+      ],
+      "noAnswerWithCandidates": []
+    }
+  },
+  "rows": [
+    {
+      "id": "lexical-gap",
+      "query": "为什么扩到前三名也找不到描述并发冲突的那篇文档？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-retrieval-evidence#3-真实结果没有全对",
+          "quote": "它连候选集都没进入，因此把top1改成top3没有帮助。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "partial-config",
+      "query": "配置只校对通过了一项，接口会把正确的那一项交给调用方吗？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-grounded-claims#5-失败时不返回半份可用结果",
+          "quote": "本例选择整次拒绝，accepted 为空。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": 1,
+        "retrieved": [
+          {
+            "id": "doc:ai-apps/java-grounded-claims:644ce57addfcfdfa6e18",
+            "href": "/docs/ai-apps/java-grounded-claims#5-失败时不返回半份可用结果",
+            "heading": "5. 失败时不返回半份可用结果",
+            "contentHash": "4f3b8b205f3c7902b791beb0f974e9238359f88462487ce415a143e0f3387130"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "revision-authority",
+      "query": "回答里自行指定查询旧版本的配置，可以改变请求使用的修订吗？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-grounded-claims#1-把-有依据-拆成可以核对的条件",
+          "quote": "当前修订由受信任的请求指定，不能让候选回答自己选择"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": 1,
+        "retrieved": [
+          {
+            "id": "doc:ai-apps/java-grounded-claims:464f006d0eb7595e08ea",
+            "href": "/docs/ai-apps/java-grounded-claims#1-把-有依据-拆成可以核对的条件",
+            "heading": "1. 把“有依据”拆成可以核对的条件",
+            "contentHash": "014dc33982e986e3db7bf95db7c2ecccd712eaadccae7f812d70f51ee57b7e86"
+          },
+          {
+            "id": "doc:ai-apps/java-grounded-claims:644ce57addfcfdfa6e18",
+            "href": "/docs/ai-apps/java-grounded-claims#5-失败时不返回半份可用结果",
+            "heading": "5. 失败时不返回半份可用结果",
+            "contentHash": "4f3b8b205f3c7902b791beb0f974e9238359f88462487ce415a143e0f3387130"
+          },
+          {
+            "id": "blog:local-llm-mac-mini-48g:8ce9ec62a87694b96a3f",
+            "href": "/blog/local-llm-mac-mini-48g#3-为什么-kv-表格不能证明服务可用",
+            "heading": "3. 为什么 KV 表格不能证明服务可用",
+            "contentHash": "9b8cb8d01ec70c8738ec3fe017b2a6feab02f08b9a976b171ea8016aaae48834"
+          },
+          {
+            "id": "doc:llm/prefix-cache-invalidation:cee9ecbde1145572c90e",
+            "href": "/docs/llm/prefix-cache-invalidation#1-缓存的身份不只是八个-token",
+            "heading": "1. 缓存的身份不只是八个 Token",
+            "contentHash": "5c45186e8787acb01cfa22c2c2f64bb5cb416ccac29f06682e7ecd4d92ac215f"
+          },
+          {
+            "id": "doc:llm/sliding-cache-positions:f318169362e1090215f0",
+            "href": "/docs/llm/sliding-cache-positions#6-复现与可继续做的研究",
+            "heading": "6. 复现与可继续做的研究",
+            "contentHash": "01659fc01ccabf5e423a6a12f65cd01fbb919f64ab8a718c59247894b9051129"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "same-process-lock",
+      "query": "把多个 JVM 进程换成一个 JVM 的多线程，文件锁之外还要做什么？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-durable-idempotency#同一个锁里完成查找-判断与追加",
+          "quote": "Java 的文件锁以 JVM 为单位，同进程还需要线程级串行化。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": 1,
+        "retrieved": [
+          {
+            "id": "doc:ai-apps/java-durable-idempotency:24d295facf9ded3bad4d",
+            "href": "/docs/ai-apps/java-durable-idempotency#同一个锁里完成查找-判断与追加",
+            "heading": "同一个锁里完成查找、判断与追加",
+            "contentHash": "42340c4f9bfaf535260ea4f07dd20418bb2ccab855d158d723db7c0c12437a66"
+          },
+          {
+            "id": "doc:ai-apps/java-outbox-delivery:103a2b021c4c31821167",
+            "href": "/docs/ai-apps/java-outbox-delivery#为什么还需要单一dispatcher",
+            "heading": "为什么还需要单一dispatcher",
+            "contentHash": "994bc0427a120a6f8edc89306e42af6eb094c5db3744cc1466a974d4bca8b3a7"
+          },
+          {
+            "id": "doc:ai-apps/java-durable-turns:de7669c674d4156eedbb",
+            "href": "/docs/ai-apps/java-durable-turns",
+            "heading": "",
+            "contentHash": "4c15f24c897113b2a2fa367fb993cc0e3e732a6a8de7299c8f6ba1e3a116cc4b"
+          },
+          {
+            "id": "doc:ai-apps/java-durable-turns:ad3d96b2f84373d5ecf3",
+            "href": "/docs/ai-apps/java-durable-turns#恢复规则必须保守",
+            "heading": "恢复规则必须保守",
+            "contentHash": "82bf8e1e2fd7bf59e692775c4d4bbe54302d7d8f72b89e253328c1a2235415d1"
+          },
+          {
+            "id": "doc:ai-apps/java-outbox-delivery:98abd02f2433cd79d5cf",
+            "href": "/docs/ai-apps/java-outbox-delivery",
+            "heading": "",
+            "contentHash": "55cb38cab107a6d5b14c66032237e1150dabdab2a825848911e17f6572970470"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "delivery-identity",
+      "query": "发完请求还没存回执就退出，再送一次时靠什么让接收端识别同一意图？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-outbox-delivery#稳定身份必须跨过http边界",
+          "quote": "Workflow.deliver 把意图的key写进 Idempotency-Key，每次重试保持同一正文。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": 2,
+        "retrieved": [
+          {
+            "id": "doc:ai-apps/java-outbox-delivery:f979b20aa894e2350e05",
+            "href": "/docs/ai-apps/java-outbox-delivery#outbox不是执行成功的证明",
+            "heading": "Outbox不是执行成功的证明",
+            "contentHash": "d8dc664640601021228e160a8004bb9838964faccdc54a549b0eb601fee9bf6e"
+          },
+          {
+            "id": "doc:ai-apps/java-outbox-delivery:5d9b0b21dbe4963a62a0",
+            "href": "/docs/ai-apps/java-outbox-delivery#稳定身份必须跨过http边界",
+            "heading": "稳定身份必须跨过HTTP边界",
+            "contentHash": "82d477818aefda289039c0bc9d9dc37930832efbeb64fae7a030c33114747d9a"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "remote-duplication",
+      "query": "本地只有一条历史和一个回执，能推断外部工具只跑过一次吗？",
+      "expected": [
+        {
+          "href": "/docs/ai-apps/java-outbox-delivery#五个场景-三个不同的答案",
+          "quote": "观察自己的历史没有重复，不能推出工具没有重复。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": 1,
+        "retrieved": [
+          {
+            "id": "doc:ai-apps/java-outbox-delivery:1d26796473efbbc7ddbf",
+            "href": "/docs/ai-apps/java-outbox-delivery#五个场景-三个不同的答案",
+            "heading": "五个场景，三个不同的答案",
+            "contentHash": "3369b4e8bb3d4ea0242ee8da81881ed87935b252df393e279b26ebb74b9e3fe3"
+          },
+          {
+            "id": "doc:ai-apps/java-outbox-delivery:98abd02f2433cd79d5cf",
+            "href": "/docs/ai-apps/java-outbox-delivery",
+            "heading": "",
+            "contentHash": "55cb38cab107a6d5b14c66032237e1150dabdab2a825848911e17f6572970470"
+          },
+          {
+            "id": "doc:ai-apps/java-concurrent-history:fe6f6eef478528944680",
+            "href": "/docs/ai-apps/java-concurrent-history#2-网络在锁外-提交在锁内",
+            "heading": "2. 网络在锁外，提交在锁内",
+            "contentHash": "0300fd818ef92ca23bac028a571d68c523cf22ac66638cef43367db0d8b4e4fe"
+          },
+          {
+            "id": "doc:ai-apps/typescript-output-boundary:e0decc1c88c53ae90e69",
+            "href": "/docs/ai-apps/typescript-output-boundary#10-本轮可以带进真实项目的规则",
+            "heading": "10. 本轮可以带进真实项目的规则",
+            "contentHash": "40cbcce8b68dbb0c66b3d817eddc323f7e90a6991c3756b1f495085f58c79cb8"
+          },
+          {
+            "id": "doc:ai-apps/java-recovery-reconciliation:dcb5b065beb14eb44316",
+            "href": "/docs/ai-apps/java-recovery-reconciliation#给状态起名之前-先定义证据",
+            "heading": "给状态起名之前，先定义证据",
+            "contentHash": "f1dcc13d4f4832ec2c573c6c8ab196f5c24774fe7713deb03ee59e56a8418744"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "packed-reserved-code",
+      "query": "4-bit 分组量化打包时，为什么只用编号 0 到 14？",
+      "expected": [
+        {
+          "href": "/docs/llm/kv-packed-groups#一个字节里到底装了什么",
+          "quote": "保存前加7，映射到 [0,14]，15保留不用。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": 2,
+        "retrieved": [
+          {
+            "id": "doc:llm/kv-packed-groups:cba07cae719836178765",
+            "href": "/docs/llm/kv-packed-groups",
+            "heading": "",
+            "contentHash": "3dd817651f58b9142a6a65eb9fe4997bff06e6622f00401f63c4935d49f85cda"
+          },
+          {
+            "id": "doc:llm/kv-packed-groups:12532dc5b4409b55a13a",
+            "href": "/docs/llm/kv-packed-groups#一个字节里到底装了什么",
+            "heading": "一个字节里到底装了什么",
+            "contentHash": "06fb0670eaa77db30149ea8e1ee9566c1c950ae9a56df752e630bf29d69676e1"
+          },
+          {
+            "id": "doc:llm/kv-residual-window:4fc88b6f0576fbaf3667",
+            "href": "/docs/llm/kv-residual-window#残差窗口也会吃掉压缩收益",
+            "heading": "残差窗口也会吃掉压缩收益",
+            "contentHash": "b75656b77f422ad2effea6cd19860121c30a69f97ca6b6b8cebc2d656cd220c7"
+          },
+          {
+            "id": "doc:llm/kv-block-decode-cost:36379f28a227c51e4127",
+            "href": "/docs/llm/kv-block-decode-cost#先对齐比较对象",
+            "heading": "先对齐比较对象",
+            "contentHash": "7705df2930cff5dcf006f24a2636da266b2409aec097db090223b53f4c7fa467"
+          },
+          {
+            "id": "doc:llm/sliding-cache-positions:c9306f821b757bc3e403",
+            "href": "/docs/llm/sliding-cache-positions#4-第二个差别-上层缓存已经带着更早的信息",
+            "heading": "4. 第二个差别：上层缓存已经带着更早的信息",
+            "contentHash": "62b29f1745b162b72183c3730f520cc52a94ad7515e431e4b77a484e0bd5c0b1"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "group-size-cost",
+      "query": "缩短 KV 量化组长，为什么 scale 数组反而更大？",
+      "expected": [
+        {
+          "href": "/docs/llm/kv-packed-groups#为什么分组要同时看方向与长度",
+          "quote": "更小的组通常能减弱组内幅值差异，但需要更多scale。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": [
+          {
+            "id": "doc:llm/kv-int8-error:e819886563ed39abf216",
+            "href": "/docs/llm/kv-int8-error",
+            "heading": "",
+            "contentHash": "7a57b8947e69063c03c4a5fd5ede304f02ac307cfb5b065cbb895c0a947a7a30"
+          },
+          {
+            "id": "doc:llm/kv-quantization-axes:263ddf75abe91a096c70",
+            "href": "/docs/llm/kv-quantization-axes#scale-也需要占空间",
+            "heading": "scale 也需要占空间",
+            "contentHash": "ce6289366d40e2d4edbe584060bcf1b914aeab122814a756e3e77377ebb656c5"
+          },
+          {
+            "id": "doc:llm/kv-int8-error:44f83e7a0bd37047f9e3",
+            "href": "/docs/llm/kv-int8-error#先把一个数怎样变化讲清楚",
+            "heading": "先把一个数怎样变化讲清楚",
+            "contentHash": "f8ac9207c8b1c92f484b24469d863c30e32becd31f59895f0823ee535d4e46a1"
+          },
+          {
+            "id": "doc:llm/kv-packed-groups:03f48c23dc0c378fde41",
+            "href": "/docs/llm/kv-packed-groups#同一输入上的精度与空间交换",
+            "heading": "同一输入上的精度与空间交换",
+            "contentHash": "6c12ef2819d6fd013cc26ea83551623e778a698598b27508c4868a0bbf1446a7"
+          },
+          {
+            "id": "doc:llm/kv-quantization-axes:9a6a4a14e3524387cb20",
+            "href": "/docs/llm/kv-quantization-axes#从干净目录复现",
+            "heading": "从干净目录复现",
+            "contentHash": "7e34befc03908f93ab4f81ff5919de149088eca474f718c26d7ff5eabaf7f257"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "residual-age",
+      "query": "注意力主要看开头时，多给最近 Token 留高精度为什么几乎无效？",
+      "expected": [
+        {
+          "href": "/docs/llm/kv-residual-window#看误差之前-先看注意力权重总量落在哪里",
+          "quote": "主要被使用的早期K/V仍然量化着。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": 1,
+        "retrieved": [
+          {
+            "id": "doc:llm/kv-residual-window:f9b2f83a597f40b602c8",
+            "href": "/docs/llm/kv-residual-window#看误差之前-先看注意力权重总量落在哪里",
+            "heading": "看误差之前，先看注意力权重总量落在哪里",
+            "contentHash": "dd3f49914c8fa93927b8853f7fa38527d28719a7c459f8e02d01b5f88035395f"
+          },
+          {
+            "id": "doc:llm/kv-residual-window:3ba3afe0264aa995ab00",
+            "href": "/docs/llm/kv-residual-window#小练习与排错",
+            "heading": "适用边界：本轮没有测在线更新 / 小练习与排错",
+            "contentHash": "3199794b90ed620fb9bf58a504b8006d88688c96eb1163d90629c3c03cd46055"
+          },
+          {
+            "id": "doc:llm/kv-packed-groups:03f48c23dc0c378fde41",
+            "href": "/docs/llm/kv-packed-groups#同一输入上的精度与空间交换",
+            "heading": "同一输入上的精度与空间交换",
+            "contentHash": "6c12ef2819d6fd013cc26ea83551623e778a698598b27508c4868a0bbf1446a7"
+          },
+          {
+            "id": "doc:llm/kv-cache-equivalence:983f52ea8387aa19a02e",
+            "href": "/docs/llm/kv-cache-equivalence#5-等价到什么程度",
+            "heading": "5. 等价到什么程度",
+            "contentHash": "791d1c4cb3cb36eb96ad444691ad249d6a428df0bce7439bbba2c0c3425c9f06"
+          },
+          {
+            "id": "doc:llm/kv-quantization-axes:593e3e309cfaf940a9cb",
+            "href": "/docs/llm/kv-quantization-axes#为什么-k-误差与-v-误差不能混着看",
+            "heading": "为什么 K 误差与 V 误差不能混着看",
+            "contentHash": "230daedb0673d264d8da037c3e0b76dd50b1dc38440dd8184714a7f22b39df5b"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "flagged-stale-samples",
+      "query": "一直收到内容正常的旧包，机械臂监测器为什么还是报警？",
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-observation-freshness#1-先看一个实际失效过程",
+          "quote": "带新鲜度检查的策略在最后一行报警，原因是 stale，而不是 contact。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": [
+          {
+            "id": "doc:embodied-ai/mujoco-observation-freshness:e01388bfea0c8fc577ff",
+            "href": "/docs/embodied-ai/mujoco-observation-freshness",
+            "heading": "",
+            "contentHash": "67c7dda050e0407fd634e499bc22e354ef7c893427fa665fd984594b94d3227e"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-exit-actions:dde6d411e00790d1281e",
+            "href": "/docs/embodied-ai/mujoco-exit-actions",
+            "heading": "",
+            "contentHash": "d8db637ffa6e843460c7662a7b41adcacddb397f7d5d29c16aca0f4c6709ccd4"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-observation-freshness:25eab8af0616400e5c52",
+            "href": "/docs/embodied-ai/mujoco-observation-freshness#3-三种策略-分别补一条约束",
+            "heading": "3. 三种策略，分别补一条约束",
+            "contentHash": "9fa80b3185d95906b55b48ccd9e84acb29285a6ea3e6f7fd0db43221d963656a"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-phase-contracts:d0ae7084ff0207b0e4e8",
+            "href": "/docs/embodied-ai/mujoco-phase-contracts#8-完整矩阵-不要只看最后一列",
+            "heading": "8. 完整矩阵：不要只看最后一列",
+            "contentHash": "d2aa861df6c8ff1b9dc5ee7ab0f08d906902815de359a1047b45ba81c1600734"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-phase-contracts:876240c90fbd72a127db",
+            "href": "/docs/embodied-ai/mujoco-phase-contracts#7-丢包和重送-到达时间不能替代捕获时间",
+            "heading": "7. 丢包和重送：到达时间不能替代捕获时间",
+            "contentHash": "c857fd27f787bb6584382b1472f9b16c1d200109ab058c4b26333bdd10405864"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "check-in-silence",
+      "query": "传感器长时间没有发消息，监测器在哪里检查观测过期？",
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-observation-freshness#2-把采样-接收与控制拆开",
+          "quote": "如果只把它写在接收回调里，完全静默时就没有机会检查超时。本例在每个控制步执行检查"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": [
+          {
+            "id": "doc:embodied-ai/mujoco-observation-freshness:e01388bfea0c8fc577ff",
+            "href": "/docs/embodied-ai/mujoco-observation-freshness",
+            "heading": "",
+            "contentHash": "67c7dda050e0407fd634e499bc22e354ef7c893427fa665fd984594b94d3227e"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-observation-freshness:25eab8af0616400e5c52",
+            "href": "/docs/embodied-ai/mujoco-observation-freshness#3-三种策略-分别补一条约束",
+            "heading": "3. 三种策略，分别补一条约束",
+            "contentHash": "9fa80b3185d95906b55b48ccd9e84acb29285a6ea3e6f7fd0db43221d963656a"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-phase-contracts:12d6822683431d7cd8a9",
+            "href": "/docs/embodied-ai/mujoco-phase-contracts#2-先把恢复关闭-隔离这一个问题",
+            "heading": "2. 先把恢复关闭，隔离这一个问题",
+            "contentHash": "1317ff0fd2e538d5bdcad978b2dd059d2a0fbd91e75929a4c544f47b6b09e29f"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-delayed-feedback:ea10a1fccd23de470284",
+            "href": "/docs/embodied-ai/mujoco-delayed-feedback#先分清三个时间",
+            "heading": "先分清三个时间",
+            "contentHash": "153a155c2d27defd07bb15d4bdaac69150905d32508c2e3b0c9e609d65ab3195"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-transfer-monitor:4243f6edb8a171c285d4",
+            "href": "/docs/embodied-ai/mujoco-transfer-monitor#2-先把两种故障分开",
+            "heading": "2. 先把两种故障分开",
+            "contentHash": "bd1f28fc97ed89452635cfd2e220a6b01dc3f0f64793aff8cd0a6e893e77787a"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "release-packet-order",
+      "query": "E14 怎么处理松开夹爪前采样、松开后才送到的观测？",
+      "expected": [
+        {
+          "href": "/docs/embodied-ai/mujoco-qualified-completion#修复进展-2026-10-07",
+          "quote": "E14 记录释放意图时刻，排除释放前采样的迟到包。"
+        }
+      ],
+      "baseline": {
+        "firstRelevantRank": 2,
+        "retrieved": [
+          {
+            "id": "doc:embodied-ai/mujoco-completion-lifecycle:375dd92a276ac36ceeb0",
+            "href": "/docs/embodied-ai/mujoco-completion-lifecycle#修复进展-2026-10-07",
+            "heading": "修复进展 · 2026-10-07",
+            "contentHash": "5201407f64dc8c0e033b8d0bc1211c31ce713a156a8eca5d11904f4ba174cb7f"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-qualified-completion:4fa13d0a39f08e7a5e46",
+            "href": "/docs/embodied-ai/mujoco-qualified-completion#修复进展-2026-10-07",
+            "heading": "修复进展 · 2026-10-07",
+            "contentHash": "5201407f64dc8c0e033b8d0bc1211c31ce713a156a8eca5d11904f4ba174cb7f"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-qualified-completion:f17759bb9af5e3236b59",
+            "href": "/docs/embodied-ai/mujoco-qualified-completion#历史勘误-2026-10-06-原版本的两处契约缺口",
+            "heading": "历史勘误 · 2026-10-06：原版本的两处契约缺口",
+            "contentHash": "1b5ae293b977ae52623e3619380b02146d29597cd7408b84a3da68dfda79696d"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-recovery-gate:468fc36f1292bf56be5f",
+            "href": "/docs/embodied-ai/mujoco-recovery-gate#1-从-应该停-到-何时能继续",
+            "heading": "1. 从“应该停”到“何时能继续”",
+            "contentHash": "a9432b784a2a8713a4f860d68e3e85975df3df642595b33b81377ae06e455539"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "absent-payment-deployment",
+      "query": "payments 的 prod-v2 配置在真实生产部署的访问域名是什么？",
+      "expected": [],
+      "reason": "文章的 payments 配置为合成教学资料，未给出真实部署域名。",
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": [
+          {
+            "id": "doc:ai-apps/java-grounded-claims:464f006d0eb7595e08ea",
+            "href": "/docs/ai-apps/java-grounded-claims#1-把-有依据-拆成可以核对的条件",
+            "heading": "1. 把“有依据”拆成可以核对的条件",
+            "contentHash": "014dc33982e986e3db7bf95db7c2ecccd712eaadccae7f812d70f51ee57b7e86"
+          },
+          {
+            "id": "doc:ai-apps/java-grounded-claims:24b988c331b066b9c824",
+            "href": "/docs/ai-apps/java-grounded-claims#3-真实引用仍然会失败的三种方式",
+            "heading": "3. 真实引用仍然会失败的三种方式",
+            "contentHash": "588c2e88efac4ab60f7a220bfaad1527b7121d4a63e8b84aa03943aef9849b7c"
+          },
+          {
+            "id": "doc:ai-apps/radar-publishing-pipeline:7815b3da996c56fa9458",
+            "href": "/docs/ai-apps/radar-publishing-pipeline#7-从这个案例带走什么",
+            "heading": "7. 从这个案例带走什么？",
+            "contentHash": "a4fe354b998d980a4e324648bd644b588affd1255929d8b84d2ad0009bea621e"
+          },
+          {
+            "id": "doc:llm/prefix-cache-byte-budget:053e22a02a39b30033e8",
+            "href": "/docs/llm/prefix-cache-byte-budget#从这个实验能推到哪里",
+            "heading": "从这个实验能推到哪里",
+            "contentHash": "2cc99e91134655d29f22dd8e190c7f2baf217891a0948f466ab672f4388cf657"
+          },
+          {
+            "id": "doc:llm/prefix-cache-admission:8865d66665a300e68b46",
+            "href": "/docs/llm/prefix-cache-admission#测量边界-到底把什么算进了耗时",
+            "heading": "测量边界：到底把什么算进了耗时",
+            "contentHash": "a9bc8db1fade9c0accc437c8f72a98471ed288a5bcf7637c4ba84b7b7f0bd2ad"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "absent-hardware-safety",
+      "query": "把 MuJoCo 的 60ms 阈值用于真实机械臂，通过了哪项硬件安全认证？",
+      "expected": [],
+      "reason": "语料描述的是仿真实验参数，没有该阈值的真机安全认证。",
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": [
+          {
+            "id": "doc:embodied-ai/mujoco-observation-freshness:c6e695e9da6070ade99c",
+            "href": "/docs/embodied-ai/mujoco-observation-freshness#8-如何确认不是程序自己给自己打分",
+            "heading": "8. 如何确认不是程序自己给自己打分？",
+            "contentHash": "efde3d68c9ffa45cb02944276c56dd25e98f0d1bd2725bef0510c93f1191d628"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-delayed-feedback:a077b8a892834685d4c3",
+            "href": "/docs/embodied-ai/mujoco-delayed-feedback#下一步值得验证-而不是直接宣称实现",
+            "heading": "下一步值得验证，而不是直接宣称实现",
+            "contentHash": "f19f28d0c32ba92a105e07c0fc22de56065b7f87f5ffc7e7348b3ce954d9a2d9"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-recovery-ablation:3b002d71d2edebb81c48",
+            "href": "/docs/embodied-ai/mujoco-recovery-ablation#3-目标跳变-不是-夹爪瞬移",
+            "heading": "3. “目标跳变”不是“夹爪瞬移”",
+            "contentHash": "73a3a6016bd4f59bb6fe301155d012232c8415b4fc67681f46de59f8e4c46041"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-first-pick-place:dc049288fb60e807bcf4",
+            "href": "/docs/embodied-ai/mujoco-first-pick-place#2-为什么第一课不用复杂机械臂",
+            "heading": "2. 为什么第一课不用复杂机械臂？",
+            "contentHash": "689cdfa0deb655f0a80d058bb0ee64d10d637880bb9328b20983e248e20ea7ae"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-controller-holdout:b4020d84f29d99e53f82",
+            "href": "/docs/embodied-ai/mujoco-controller-holdout",
+            "heading": "",
+            "contentHash": "626dfa2c8f9ecfdc9fed85225de56ba6c53305384736d45b724bf09cf561323a"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "absent-nfs-durability",
+      "query": "Java 幂等日志在多台机器共享的 NFS 上，掉电恢复的实测成功率是多少？",
+      "expected": [],
+      "reason": "幂等日志只验证受控的本机文件系统场景，没有 NFS 掉电数据。",
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "absent-packed-benchmark",
+      "query": "4-bit KV 缓存在 RTX 4090 上跑 32K 上下文的吞吐量是多少？",
+      "expected": [],
+      "reason": "现有打包资料为合成输入上的本地对照，没有这组 GPU 和上下文吞吐量。",
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": [
+          {
+            "id": "blog:local-llm-mac-mini-48g:7aa9bb745ac7b601bf40",
+            "href": "/blog/local-llm-mac-mini-48g#2-kv-缓存-上下文真正的成本中心",
+            "heading": "2. KV 缓存：上下文真正的成本中心",
+            "contentHash": "beefde2df2172490c261975cfb63f9ee31d0fd16190b15eb8575e96911678296"
+          },
+          {
+            "id": "blog:local-llm-mac-mini-48g:d80e2acb192202c4910c",
+            "href": "/blog/local-llm-mac-mini-48g",
+            "heading": "",
+            "contentHash": "c607ebbaaf3ee16193f280fa79327eff6854786828b153e0400233af6fa52347"
+          },
+          {
+            "id": "doc:llm/kv-packed-groups:9e887ac7b9e4e4788da7",
+            "href": "/docs/llm/kv-packed-groups#小练习与常见错误",
+            "heading": "如何知道文件里真的存了4-bit / 小练习与常见错误",
+            "contentHash": "71e2c19083f044269ba5df2ecd8d3d4a89bb826cd0374bedfdccfa3911175726"
+          },
+          {
+            "id": "doc:llm/kv-packed-groups:cba07cae719836178765",
+            "href": "/docs/llm/kv-packed-groups",
+            "heading": "",
+            "contentHash": "3dd817651f58b9142a6a65eb9fe4997bff06e6622f00401f63c4935d49f85cda"
+          },
+          {
+            "id": "doc:llm/kv-cache:6e8ced9bbbe8d0329599",
+            "href": "/docs/llm/kv-cache#6-用三个反例检查理解",
+            "heading": "6. 用三个反例检查理解",
+            "contentHash": "4d65b13b6074af620740d7dcdcc216f461542bc04cf01ca18a49b93032b9bd24"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "absent-answer-quality",
+      "query": "本站的在线 RAG 问答在人类盲测中的回答准确率是多少？",
+      "expected": [],
+      "reason": "段落检索与教学声明校验的记录没有给出线上生成问答的盲测成绩。",
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": [
+          {
+            "id": "doc:ai-apps/java-grounded-claims:85c28bd2dc26861125da",
+            "href": "/docs/ai-apps/java-grounded-claims#4-22-个案例实际留下了什么",
+            "heading": "4. 22 个案例实际留下了什么",
+            "contentHash": "8d4db0cd24bccf1ad5de405e518b3fea93b66c41d5d5392de0e1101f50222e5d"
+          },
+          {
+            "id": "doc:ai-apps/java-concurrent-history:1d119273f33282e03bcb",
+            "href": "/docs/ai-apps/java-concurrent-history#4-这次到底验证了什么",
+            "heading": "4. 这次到底验证了什么",
+            "contentHash": "c1fc71df8af19a5ba62439968c28650b125260236cc6e4a4bb01511e8dc612c9"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "absent-calibration",
+      "query": "现场夹爪力传感器的校准证书编号是什么？",
+      "expected": [],
+      "reason": "现有仿真实验没有真实硬件校准证书。",
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": [
+          {
+            "id": "doc:embodied-ai/mujoco-grasp-guard:1ae5c21a2b50044f7c75",
+            "href": "/docs/embodied-ai/mujoco-grasp-guard#8-这离真正的闭环机器人还有多远",
+            "heading": "8. 这离真正的闭环机器人还有多远？",
+            "contentHash": "24ca3b7ef64bfe75c588c542c095c81ac3e041af25f7bae99e6e0c3eae7af1e9"
+          },
+          {
+            "id": "doc:llm/context-similar-distractors:e6fe8588b4a051358c33",
+            "href": "/docs/llm/context-similar-distractors#2-高相似干扰具体长什么样",
+            "heading": "2. 高相似干扰具体长什么样？",
+            "contentHash": "3ac9dd2c81ec8d23126619f6ed796163300d4a770b242845a62b43b56f530266"
+          },
+          {
+            "id": "doc:ai-apps/typescript-output-boundary:e0decc1c88c53ae90e69",
+            "href": "/docs/ai-apps/typescript-output-boundary#10-本轮可以带进真实项目的规则",
+            "heading": "10. 本轮可以带进真实项目的规则",
+            "contentHash": "40cbcce8b68dbb0c66b3d817eddc323f7e90a6991c3756b1f495085f58c79cb8"
+          },
+          {
+            "id": "doc:embodied-ai/mujoco-transfer-monitor:4243f6edb8a171c285d4",
+            "href": "/docs/embodied-ai/mujoco-transfer-monitor#2-先把两种故障分开",
+            "heading": "2. 先把两种故障分开",
+            "contentHash": "bd1f28fc97ed89452635cfd2e220a6b01dc3f0f64793aff8cd0a6e893e77787a"
+          }
+        ]
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "absent-library-hours",
+      "query": "市立图书馆周一的开放时间",
+      "expected": [],
+      "reason": "归档文章不含市立图书馆的开放时间。",
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    },
+    {
+      "id": "absent-weather",
+      "query": "火星明天的地表天气预报",
+      "expected": [],
+      "reason": "归档文章不含火星天气预报。",
+      "baseline": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      },
+      "bodyCoverage": {
+        "firstRelevantRank": null,
+        "retrieved": []
+      }
+    }
+  ]
+}

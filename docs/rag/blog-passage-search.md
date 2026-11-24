@@ -4,19 +4,19 @@ description: "用本站中文正文实现可追溯段落检索，沿着一个真
 slug: "/rag/blog-passage-search"
 status: "published"
 published_at: "2026-11-11"
-updated: "2026-11-12"
+updated: "2026-11-24"
 domain: "rag"
 article_kind: "case-study"
 difficulty: "intermediate"
 reading_minutes: 8
-related: ["doc:ai-apps/java-retrieval-evidence", "doc:ai-apps/java-grounded-claims", "project:hohoo-blog"]
+related: ["doc:ai-apps/java-retrieval-evidence", "doc:ai-apps/java-grounded-claims", "lab:retrieval-eval", "project:hohoo-blog", "project:hohoo-ai-lab"]
 ---
 
 在v1冻结验收中输入 `缓存 保证成功`，前五个候选中出现了一篇会话并发文章。命中的文字讲的是“响应验证成功才提交”，并没有回答缓存能否保证成功。
 
 这不是页面没有加载，也不是来源链接失效。**检索确实找到了文字，却没有找到问题所要求的依据。** 这个反例比“搜索框能返回结果”更能说明原型还缺什么。
 
-本文对应尚未上线的本地预览：打开全站搜索，选择“正文段落”。实现和验收脚本在博客仓库，原有 Java 教学工程不受影响。AI辅助整理；问题相关性标注待作者复核。
+打开全站搜索，选择“正文段落”，输入文章里的关键词就能查看原文小节。[博客项目](/projects/hohoo-blog)保存这套搜索的实现与验收脚本；[检索质量实验](/labs/retrieval-eval)记录此前的 Java 检索与引文校验。本文由 AI 辅助整理，问题的相关性标注待作者复核。
 
 ## “保证成功”和“验证成功”共享了什么
 
@@ -55,21 +55,22 @@ console.log(searchTerms("验证成功")); // 验证、证成、成功
 
 结果列表只显示短摘录；“复制引用”保留完整段落、文章与小节、正式来源地址、带哈希的索引快照地址和完整内容指纹。复制失败时显示可选中的文本，不把失败伪装成“已复制”。
 
-来源链接方便继续阅读，指纹便于核对文本有没有变化。但索引快照不是永久存档：旧哈希资源可能在后续部署中清理，文章也可能修订。需要长期使用时应保留引用文本与指纹。当前预览未发布，相应的线上快照地址尚不可访问。
+来源链接指向原文小节，内容指纹用于核对摘录是否改变。后续构建可能清理旧的索引快照；如需长期引用，请同时保存段落文字和指纹。
 
 浏览器只在切换到正文模式时加载当前语言索引；问题不发送给模型，也不上传给第三方。英文与繁体使用各自的正文，缺少翻译时不悄悄混入中文。
 
 ## 在固定版本上复现验收
 
-以下命令在**本次预览工程的仓库根目录**运行。当前线上主干尚未包含这些文件；需先取得对应改动。依赖已经安装时跳过第一行：
+在博客仓库根目录运行以下命令。首次使用时按两个锁文件安装依赖；已经安装时可从生成内容的命令开始。
 
 ```powershell
+npm ci
 npm ci --prefix apps/web
 npm run prepare:content --prefix apps/web
 npm run search:evaluate --prefix apps/web
 ```
 
-运行环境为Windows、Node.js 26.8.2。输出文件为 `reports/section-search-evaluation-v1.json`，包含每个问题的原始候选、相关依据、排名和内容指纹。
+v1 归档记录使用 Windows 和 Node.js 26.8.2。命令会重算 `reports/section-search-evaluation-v1.json`；可用[固定版本的报告](https://github.com/VirtualSelect/hohoo-blog/blob/d0e650ef1198fe39743badd671f6a308dbc1b49f/reports/section-search-evaluation-v1.json)核对每个问题的候选、标注引文、排名与指纹。
 
 协议在`apps/web/tests/fixtures/section-search-protocol.json`，快照在同目录的`section-search-snapshot.json`。原始513块文本保存在`section-search-corpus-v1.json`，已逐字核对到原语料指纹；正文后续修订不覆盖这份测试语料。默认命令重跑原问题、算法和冻结语料，发现版本不一致就停止，不能静默沿用旧结论。本篇被排除，避免把解释验收问题的文章重新当作检索答案。
 
@@ -85,9 +86,22 @@ npm run search:evaluate --prefix apps/web
 
 4个无答案问题中，3个返回空列表；`缓存 保证成功` 仍返回5个候选。原始记录保留了这次误命中，没有提高阈值后重新挑选好看的结果。检索器返回候选本身不是生成了错误回答；它暴露的是：后续问答层不能把“有候选”当作“有足够依据”。
 
+## v2 对照：多一道词项过滤，会漏掉什么？
+
+另取 20 道简体中文问题，沿用 v1 冻结的 513 个段落。12 题有标注引文，8 题在语料中缺少依据。问题和规则在比较前确定，标签由 AI 对照归档引文整理，待作者复核。
+
+| 在同一批候选上比较 | 有依据题：前 5 名找到标注段落 | 无依据题：返回了候选 |
+| --- | --- | --- |
+| 原检索排序 | 8/12 | 5/8 |
+| 要求小节标题或正文覆盖至少一半的不同查询词项 | 0/12 | 0/8 |
+
+例如 `lexical-gap` 用另一种说法询问为什么扩大候选数仍找不到并发文档，原排序的前五名就漏了标注段落。加上覆盖门槛后，原本会返回候选的五道无依据题都回到了空列表，原本命中的八道有依据题也全部丢失。因此本站保留原排序。这里衡量的是能否找回一段指定文字，生成回答的正确性仍待单独评估。
+
+在仓库根目录运行 `node apps/web/scripts/compare-section-search.mjs`，标准输出可与仓库中的 `reports/section-search-comparison-v2.json` 逐题核对。
+
 ## 自己改出一个反例
 
-先不要调阈值。在本次预览仓库根目录，把下面整个PowerShell代码块粘贴运行；它只读取v1冻结协议和语料，不需要安装模型或生成索引，也不会覆盖验收报告。查询从协议读取，避免手动重写原问题。这里用的是简体历史语料，与当前语言的在线搜索结果不保证相同。
+先保留原排序规则，在博客仓库根目录的 PowerShell 执行下面的代码。它直接读取 v1 的问题和简体中文冻结语料，不写入报告，也不需要模型或构建索引。当前文章内容或搜索语言不同，结果可能随之改变。
 
 ```powershell
 @'
@@ -135,4 +149,4 @@ console.log(JSON.stringify({
 
 若要继续研究分块，应先独立标注哪些段落真的支持问题，再冻结问题、分词器和检索器，只改变分块方式。若要研究问答，还需要回答生成、资料不足时的处理和引用支持验收。这些仍是[RAG后续路线](/learning?track=rag)中的计划。
 
-可以先读[检索证据验收](/docs/ai-apps/java-retrieval-evidence)，再看[引用真实但声明错误](/docs/ai-apps/java-grounded-claims)。这次原型把资料换成真实博客正文，并没有完成向量检索、语义重排或完整RAG产品。
+回到[Java LLM 实践集](/projects/hohoo-ai-lab)，可以对照前两步的代码：先[复算候选排序](/docs/ai-apps/java-retrieval-evidence)，再[查清引文支持哪个配置字段](/docs/ai-apps/java-grounded-claims)。

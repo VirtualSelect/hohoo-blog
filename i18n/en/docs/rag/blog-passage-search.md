@@ -4,19 +4,19 @@ description: "Build traceable retrieval over real blog prose and use a false pos
 slug: "/rag/blog-passage-search"
 status: "published"
 published_at: "2026-11-11"
-updated: "2026-11-12"
+updated: "2026-11-24"
 domain: "rag"
 article_kind: "case-study"
 difficulty: "intermediate"
 reading_minutes: 7
-related: ["doc:ai-apps/java-retrieval-evidence", "doc:ai-apps/java-grounded-claims", "project:hohoo-blog"]
+related: ["doc:ai-apps/java-retrieval-evidence", "doc:ai-apps/java-grounded-claims", "lab:retrieval-eval", "project:hohoo-blog", "project:hohoo-ai-lab"]
 ---
 
 The frozen v1 acceptance run returns a concurrency article among its top five candidates for `缓存 保证成功`—roughly, “cache guarantee success.” The retrieved text says to commit only after response validation succeeds. It does not establish that caching guarantees success.
 
 The page loaded, and its source link works. **Retrieval found text without finding the support the question requires.** This counterexample reveals more than a search box that merely returns results.
 
-This article describes an unpublished local preview: open site search and choose “Article passages.” The implementation and acceptance runner belong to the blog repository; the existing Java teaching project is unchanged. AI-assisted preparation; relevance judgments await author review.
+Open site search, choose “Article passages” and enter terms from an article to find the original section. The [blog project](/projects/hohoo-blog) contains this search and its evaluation scripts. The [retrieval experiment](/labs/retrieval-eval) holds the earlier Java retrieval and citation checks. AI assisted with this article and its relevance labels. The labels await author review.
 
 ## Where the false overlap comes from
 
@@ -55,21 +55,22 @@ An unrelated article does not change that ID; editing the passage does. **Text i
 
 Search results show a shortened excerpt. “Copy citation” preserves the full passage, article and section, public source URL, hashed index-snapshot URL and complete content fingerprint. A clipboard failure exposes selectable text instead of claiming success.
 
-The source URL supports continued reading; the fingerprint supports version checks. Snapshot assets are not permanent archives: later deployments may prune old hashes, and articles may be revised. Retain the quoted text and fingerprint for long-term use. This preview is unpublished, so its public snapshot URLs are not available yet.
+The source URL opens the article section. The fingerprint lets you check whether the excerpt has changed. Later builds may prune older index snapshots, so keep the passage and its fingerprint when you need a lasting citation.
 
 The browser loads only the current language's passage index when that mode is selected. Queries are not sent to a model or uploaded to third parties. English and Traditional Chinese use their own prose rather than silently falling back to Simplified Chinese.
 
 ## Reproduce on the matching checkout
 
-Run these commands from the root of **this preview checkout**. Production main does not yet contain the new files; obtain the corresponding changes first. Skip installation when dependencies are already installed:
+Run the commands from the root of the blog repository. A fresh checkout needs dependencies from both lockfiles. If both are installed, start with content preparation.
 
 ```powershell
+npm ci
 npm ci --prefix apps/web
 npm run prepare:content --prefix apps/web
 npm run search:evaluate --prefix apps/web
 ```
 
-The recorded environment is Windows with Node.js 26.8.2. `reports/section-search-evaluation-v1.json` contains each query's raw candidates, expected evidence, rank and fingerprints.
+The archived v1 run used Windows and Node.js 26.8.2. The command recomputes `reports/section-search-evaluation-v1.json`. Compare each candidate, labeled quotation, rank and fingerprint with the [archived report](https://github.com/VirtualSelect/hohoo-blog/blob/d0e650ef1198fe39743badd671f6a308dbc1b49f/reports/section-search-evaluation-v1.json).
 
 The protocol is `apps/web/tests/fixtures/section-search-protocol.json`; its neighboring `section-search-snapshot.json` freezes the question, algorithm and corpus hashes. The original 513 text blocks are retained in `section-search-corpus-v1.json`, verified against the original corpus fingerprint. Later article edits do not replace that test corpus. The default command replays the frozen evaluation and stops on a version mismatch. This explanatory article stays excluded to avoid retrieving its own explanation as evidence.
 
@@ -85,9 +86,22 @@ All eight supported queries retrieved their designated passage in the top five, 
 
 Three of the four unsupported queries returned no candidates. `缓存 保证成功` still returned five. The raw false positive is retained; thresholds were not raised to rerun for a cleaner result. Candidate retrieval is not itself a wrong generated answer. It exposes the boundary a future answer layer must enforce: candidates do not establish sufficient support.
 
+## What did a stricter filter lose in v2?
+
+A separate set of 20 Simplified Chinese questions used the same 513 archived passages. Twelve questions have a labeled supporting quotation. Eight lack supporting evidence in the corpus. The questions and comparison rule were fixed before the run. AI prepared the labels against the archived quotations, and the author has yet to review them.
+
+| Variant | Answerable questions with a labeled passage in the top five | Unanswerable questions returning any candidate |
+| --- | --- | --- |
+| Original ranking | 8/12 | 5/8 |
+| Require at least half the distinct query terms in the heading or body | 0/12 | 0/8 |
+
+For example, `lexical-gap` rephrases a question about a concurrency document missing from a larger candidate set. Its labeled passage was already absent from the original top five. The filter emptied the results for the five unanswerable questions that had returned candidates. It also lost all eight previously successful matches. The site keeps its original ranking. Evaluating generated answers requires a separate study.
+
+Run `node apps/web/scripts/compare-section-search.mjs` from the repository root and compare its output, question by question, with `reports/section-search-comparison-v2.json` in the checkout.
+
 ## Try changing the meaning without changing the source
 
-Before changing a threshold, paste this entire PowerShell block at the root of the preview checkout. It only reads the frozen v1 protocol and corpus: no model installation, index generation or report overwrite. It reads the original query from the protocol rather than asking you to retype it. This historical corpus is Simplified Chinese, so its results need not match live search in the current language.
+Keep the original ranking rule and run the PowerShell block below from the root of the blog repository. It reads the frozen v1 questions and Simplified Chinese corpus directly, without a model, index build or report write. Search in another language or against newer articles can produce different results.
 
 ```powershell
 @'
@@ -135,4 +149,4 @@ First search for source keywords, then paraphrase the question with different vo
 
 A chunking comparison needs separately labeled supporting evidence, frozen questions, tokenization and retrieval, with only chunking varied. Answering adds generation, missing-evidence handling and support verification. These remain future work in the [RAG path](/learning?track=rag).
 
-Start with [retrieval evidence validation](/docs/ai-apps/java-retrieval-evidence), then [real citations with unsupported claims](/docs/ai-apps/java-grounded-claims). This prototype uses real blog prose; it does not complete vector retrieval, semantic reranking or a full RAG product.
+The [Java LLM project](/projects/hohoo-ai-lab) contains the preceding examples. First [recompute the ranking](/docs/ai-apps/java-retrieval-evidence), then [check which configuration field a quotation supports](/docs/ai-apps/java-grounded-claims).

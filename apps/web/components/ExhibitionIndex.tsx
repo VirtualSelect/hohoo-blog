@@ -1,6 +1,5 @@
 "use client";
 import { useSyncExternalStore } from "react";
-import Link from "../runtime/Link";
 import { designs, type ArtworkDesign } from "./theme-artwork-config";
 import { objectNotes } from "./theme-artwork-catalog";
 import { useText } from "./Shell";
@@ -32,9 +31,9 @@ export default function ExhibitionIndex() {
       <a href="#atlas-recent-heading">
         {t("最近写下", "Recent writing", "最近寫下")}
       </a>
-      <Link to={theme === "classic" ? "/build" : "#atlas-project-heading"}>
+      <a href="#atlas-project-heading">
         {t("项目与实验", "Projects and labs", "專案與實驗")}
-      </Link>
+      </a>
       <a href="#theme-object" className="rev3-index-object">
         <img
           src={`/media/theme-objects-v3/${theme}-home.webp`}

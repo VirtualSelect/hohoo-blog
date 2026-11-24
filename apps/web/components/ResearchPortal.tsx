@@ -1,6 +1,5 @@
 "use client";
 import Link from "../runtime/Link";
-import { Fragment } from "react";
 import { useText } from "./Shell";
 import tracks from "@site/data/learning-paths.json";
 import type { Domain } from "../lib/site-types";
@@ -19,58 +18,40 @@ export default function ResearchPortal({
     >
       <header className="atlas-section-heading">
         <h2 id="atlas-directions-heading">
-          {t("研究方向", "Research directions", "研究方向")}
+          {t("按方向选读", "Browse by topic", "按方向選讀")}
         </h2>
       </header>
       <div
         className="atlas-direction-buttons"
         role="group"
         aria-label={t(
-          "选择研究方向",
-          "Choose a research direction",
-          "選擇研究方向",
+          "切换推荐的研究方向",
+          "Filter recommendations by research direction",
+          "切換推薦的研究方向",
         )}
       >
         {tracks.map((track, index) => (
-          <Fragment key={track.id}>
-            <button
-              type="button"
-              key={track.id}
-              aria-pressed={track.domain === domain}
-              aria-controls="atlas-feature"
-              onClick={() => onSelect(track.domain as Domain)}
-            >
-              <span className="atlas-direction-number" aria-hidden="true">
-                0{index + 1}
-              </span>
-              <span className="atlas-direction-copy">
-                <strong>{t(track.title, track.en, track.titleTw)}</strong>
-                <small className="atlas-direction-detail">
-                  {t(...(track.entryDescription as [string, string, string]))}
-                </small>
-              </span>
-              <span className="atlas-direction-arrow" aria-hidden="true">
-                →
-              </span>
-            </button>
-            <Link
-              className="atlas-direction-route"
-              to={`/learning?track=${track.domain}`}
-            >
-              <span className="atlas-direction-number" aria-hidden="true">
-                0{index + 1}
-              </span>
-              <span className="atlas-direction-copy">
-                <strong>{t(track.title, track.en, track.titleTw)}</strong>
-                <small className="atlas-direction-detail">
-                  {t(...(track.entryDescription as [string, string, string]))}
-                </small>
-                <span className="atlas-classic-route-label">
-                  {t("看路线", "View path", "看路線")} ↗
-                </span>
-              </span>
-            </Link>
-          </Fragment>
+          <button
+            type="button"
+            key={track.id}
+            aria-pressed={track.domain === domain}
+            aria-label={`${t("切换推荐", "Filter recommendations", "切換推薦")} · ${t(track.title, track.en, track.titleTw)}`}
+            aria-controls="atlas-feature"
+            onClick={() => onSelect(track.domain as Domain)}
+          >
+            <span className="atlas-direction-number" aria-hidden="true">
+              0{index + 1}
+            </span>
+            <span className="atlas-direction-copy">
+              <strong>{t(track.title, track.en, track.titleTw)}</strong>
+              <small className="atlas-direction-detail">
+                {t(...(track.entryDescription as [string, string, string]))}
+              </small>
+            </span>
+            <span className="atlas-direction-arrow" aria-hidden="true">
+              {track.domain === domain ? "✓" : ""}
+            </span>
+          </button>
         ))}
       </div>
       <Link className="atlas-all-directions" to="/learning">

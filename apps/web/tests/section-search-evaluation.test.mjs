@@ -135,3 +135,20 @@ test("the explicitly constructed negation example disproves full token overlap a
   const snapshot = read("./fixtures/section-search-snapshot.json");
   assert.ok(!snapshot.documentIds.includes("doc:rag/blog-passage-search"));
 });
+
+test("the offline comparison reproduces the recorded trade-off on the frozen corpus", () => {
+  const result = spawnSync(
+    process.execPath,
+    [
+      fileURLToPath(
+        new URL("../scripts/compare-section-search.mjs", import.meta.url),
+      ),
+    ],
+    { encoding: "utf8", timeout: 10000 },
+  );
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(
+    JSON.parse(result.stdout),
+    read("../../../reports/section-search-comparison-v2.json"),
+  );
+});

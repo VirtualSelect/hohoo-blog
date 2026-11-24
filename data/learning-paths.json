@@ -1515,12 +1515,27 @@
           "再驗證回答依據"
         ],
         "goal": [
-          "区分引用存在和声明得到支持；后续六阶段另列为计划。",
-          "Separate citation presence from claim support; six future stages remain plans.",
-          "區分引用存在與聲明受到支持；後續六階段另列為計畫。"
+          "用固定配置检查引文是否支持声明里的字段、环境和版本。",
+          "Check each claimed field, environment and revision against a quoted configuration.",
+          "用固定設定檢查引文是否支持聲明裡的欄位、環境和版本。"
         ],
         "steps": [
           "java-grounded-claims"
+        ]
+      },
+      {
+        "title": [
+          "在本站正文复现一次误命中",
+          "Reproduce a false hit in the blog",
+          "在本站正文重現一次誤命中"
+        ],
+        "goal": [
+          "查看“缓存 保证成功”的原始候选，沿引用回到原文，找出匹配词与问题含义的差异。",
+          "Read the candidates for “cache guarantee success” and follow a quotation back to its context to explain what matched.",
+          "查看「缓存 保证成功」的原始候選，沿著引文回到原文，找出匹配詞和問題含義的差異。"
+        ],
+        "steps": [
+          "blog-passage-search"
         ]
       }
     ],
@@ -1537,11 +1552,11 @@
       "Java, HTTP and JSON basics; distinguish retrieved candidates from evidence sufficient for an answer.",
       "Java、HTTP 與 JSON 基礎；先理解檢索候選與回答證據的區別。"
     ],
-    "synthesisDoc": "ai-apps/java-grounded-claims",
+    "synthesisDoc": "rag/blog-passage-search",
     "boundary": [
-      "已发布两篇离线实践：BM25 检索基线、闭合字段的引用校验。它们尚不能证明真实模型的回答质量，也不是完整的博客问答系统。",
-      "Two offline practices are published: a BM25 retrieval baseline and citation checks for closed fields. They do not establish real-model answer quality or constitute a complete blog Q&A system.",
-      "已發布兩篇離線實作：BM25 檢索基線、閉合欄位的引用校驗。它們尚不能證明真實模型的回答品質，也不是完整的部落格問答系統。"
+      "Java 实验使用合成资料验证排序和配置引文，博客案例使用已发表的教程与随笔复现一次误命中。有无检索的生成模型回答对照仍待进行。",
+      "The Java experiments use synthetic documents to check ranking and citations. The blog case reproduces a false hit in published prose. Comparing generated answers with and without retrieval remains future work.",
+      "Java 實驗使用合成資料驗證排序和設定引文，部落格案例使用已發表的教學與隨筆重現一次誤命中。有無檢索的生成模型回答對照仍待進行。"
     ],
     "pipeline": [
       [
@@ -1621,7 +1636,7 @@
         "domain": "rag",
         "status": "planning",
         "difficulty": "intermediate",
-        "previousStep": "java-grounded-claims",
+        "previousStep": "blog-passage-search",
         "plan": {
           "before": [
             "完成 BM25 基线；能区分文档、片段和引用。",
@@ -1849,12 +1864,20 @@
           "Validate cited claims",
           "有引用，就能接受答案嗎？"
         ]
+      },
+      {
+        "step": "blog-passage-search",
+        "label": [
+          "博客搜到了这段话，它能回答我的问题吗？",
+          "Does this blog passage answer my question?",
+          "部落格搜到了這段話，它能回答我的問題嗎？"
+        ]
       }
     ],
     "entryDescription": [
-      "从检索证据到回答引用，分清“找到”和“答对”。",
-      "From retrieved evidence to citations: finding is not answering.",
-      "從檢索證據到回答引用，分清「找到」與「答對」。"
+      "从合成资料的检索与引文校验，走到本站正文中的一次误命中。",
+      "Follow a retrieval hit from a synthetic Java example to a false positive in the blog.",
+      "從合成資料的檢索與引文校驗，走到本站正文中的一次誤命中。"
     ]
   }
 ]

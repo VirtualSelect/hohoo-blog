@@ -147,7 +147,7 @@ test('classification prioritizes embodied topics, then application use cases',()
 
 test('empty valid RSS is a successful no-update response',async()=>{
  const result=await parseFeed('<rss version="2.0"><channel><title>Weekend</title></channel></rss>',source,now);
- assert.deepEqual(result,{items:[],skipped:0});
+ assert.deepEqual(result,{items:[],skipped:0,feedCoverage:{itemCount:0,inspectedCount:0,truncated:false,oldestPublishedAt:null,newestPublishedAt:null}});
  await assert.rejects(parseFeed('<not-rss>broken',source,now));
 });
 test('recent window prevents old backlog consuming daily quota and explains exclusions',()=>{

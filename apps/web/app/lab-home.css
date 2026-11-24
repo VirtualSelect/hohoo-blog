@@ -164,6 +164,10 @@
   align-items: center;
   white-space: nowrap;
 }
+.atlas-featured .atlas-section-heading > a,
+.atlas-projects .atlas-section-heading > a {
+  min-height: 44px;
+}
 .atlas-section-heading > a:hover {
   color: var(--hh-accent);
 }
@@ -374,6 +378,12 @@
 .atlas-project > span {
   margin-left: auto;
   color: var(--hh-accent);
+}
+.atlas-work-kind {
+  display: block;
+  color: var(--blog-muted);
+  font: 11px/1.6 var(--hh-base-font-family-monospace);
+  margin-bottom: 3px;
 }
 .atlas-project h3 {
   font-size: 16px;

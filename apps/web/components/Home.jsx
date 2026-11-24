@@ -27,9 +27,9 @@ export default function Home() {
   const writing = writingEntries(entries);
   const featured = selectedHomeArticle(entries, domain);
   const recent = writing.slice(0, 3);
-  const projects = entries
-    .filter((entry) => entry.type === "project")
-    .slice(0, 2);
+  const work = ["project", "lab"]
+    .map((type) => entries.find((entry) => entry.type === type))
+    .filter(Boolean);
   const introduction = t(
     "我是 Hohoo。记录 AI 学习、代码实验与真实项目。",
     "I’m Hohoo. Notes on learning AI, experiments in code, and real projects.",
@@ -113,8 +113,8 @@ export default function Home() {
                   {t("开始学习", "Start learning", "開始學習")}{" "}
                   <span aria-hidden="true">↗</span>
                 </Link>
-                <Link to="/build">
-                  {t("查看项目", "Explore the work", "查看專案")}{" "}
+                <Link to="/projects">
+                  {t("查看项目", "View projects", "查看專案")}{" "}
                   <span aria-hidden="true">→</span>
                 </Link>
               </div>
@@ -146,9 +146,9 @@ export default function Home() {
             className="atlas-map-controls"
             role="group"
             aria-label={t(
-              "探索研究方向",
-              "Explore research directions",
-              "探索研究方向",
+              "按研究方向切换推荐",
+              "Filter recommendations by research direction",
+              "按研究方向切換推薦",
             )}
           >
             {tracks.map((track) => (
@@ -189,10 +189,13 @@ export default function Home() {
           >
             <header className="atlas-section-heading">
               <h2 id="atlas-feature-heading">
-                {t("从一个问题开始", "Follow a question", "從一個問題開始")}
+                {t("方向推荐", "Recommended reading", "方向推薦")}
               </h2>
-              <Link to={"/learning?track=" + domain}>
-                {t("看路线", "View path", "看路線")} ↗
+              <Link
+                to={"/learning?track=" + domain}
+                aria-label={`${t("看学习路线", "View learning path", "看學習路線")} · ${t(activeTrack.title, activeTrack.en, activeTrack.titleTw)}`}
+              >
+                {t("看学习路线", "View learning path", "看學習路線")} ↗
               </Link>
             </header>
             {featured ? (
@@ -269,14 +272,13 @@ export default function Home() {
               <h2 id="atlas-project-heading">
                 {t("项目与实验", "Projects & experiments", "專案與實驗")}
               </h2>
+              <Link to="/projects">
+                {t("查看项目", "View projects", "查看專案")} ↗
+              </Link>
             </header>
-            {projects.length ? (
-              projects.map((project) => (
-                <Link
-                  className="atlas-project"
-                  to={project.href}
-                  key={project.id}
-                >
+            {work.length ? (
+              work.map((entry) => (
+                <Link className="atlas-project" to={entry.href} key={entry.id}>
                   <svg
                     width="24"
                     height="24"
@@ -286,11 +288,22 @@ export default function Home() {
                     strokeWidth="1.4"
                     aria-hidden="true"
                   >
-                    <path d="M3 6h7l2 3h9v11H3Z" />
+                    <path
+                      d={
+                        entry.type === "lab"
+                          ? "M9 3h6m-5 0v6L4 19a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2L14 9V3M8 15h8"
+                          : "M3 6h7l2 3h9v11H3Z"
+                      }
+                    />
                   </svg>
                   <div>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
+                    <span className="atlas-work-kind">
+                      {entry.type === "lab"
+                        ? t("实验", "Experiment", "實驗")
+                        : t("项目", "Project", "專案")}
+                    </span>
+                    <h3>{entry.title}</h3>
+                    <p>{entry.description}</p>
                   </div>
                   <span aria-hidden="true">→</span>
                 </Link>
@@ -298,13 +311,13 @@ export default function Home() {
             ) : (
               <p>
                 {t(
-                  "项目记录正在整理中。",
-                  "Project notes are being prepared.",
-                  "專案記錄正在整理中。",
+                  "项目与实验记录正在整理中。",
+                  "Project and experiment records are being prepared.",
+                  "專案與實驗記錄正在整理中。",
                 )}
               </p>
             )}
-            <Link className="atlas-workbench-link" to="/build">
+            <Link className="atlas-workbench-link" to="/labs">
               {t("进入实验室", "Enter the lab", "進入實驗室")} ↗
             </Link>
           </section>

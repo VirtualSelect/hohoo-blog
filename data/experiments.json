@@ -13,7 +13,8 @@
       "paper:2005.11401",
       "doc:ai-apps/java-retrieval-evidence",
       "project:hohoo-ai-lab",
-      "doc:ai-apps/java-grounded-claims"
+      "doc:ai-apps/java-grounded-claims",
+      "doc:rag/blog-passage-search"
     ],
     "design": {
       "zh": {
@@ -65,7 +66,8 @@
     "resultTw": "A4：12 道有答案題中 11 題命中 top1/top3，一道無答案題仍返回候選。A5：引用存在基線接受 13/22，其中 10 個違反契約；完整契約的 22 個狀態均符合凍結標籤。",
     "limitations": "没有生成模型或在线请求；字段规范匹配不是通用语义蕴含。完整有无 RAG 回答对照仍未执行，注册表与请求范围是可信前提。",
     "limitationsEn": "No generation model or online requests. Canonical field matching is not general entailment. The complete RAG/no-RAG answer comparison remains pending; registry and requested scope are trusted inputs.",
-    "limitationsTw": "沒有生成模型或在線請求；欄位規範匹配不是通用語義蘊含。完整有無 RAG 回答對照仍未執行，註冊表與請求範圍是可信前提。"
+    "limitationsTw": "沒有生成模型或在線請求；欄位規範匹配不是通用語義蘊含。完整有無 RAG 回答對照仍未執行，註冊表與請求範圍是可信前提。",
+    "goalTw": "固定一組問題與資料，記錄命中文件、引用與回答正確性，比較有無檢索的差異。"
   },
   {
     "id": "tool-eval",
