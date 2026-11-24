@@ -1,5 +1,37 @@
 [
   {
+    "id": "960e34aed45616aa2e0a",
+    "title": "OpenAI 与 Cisco 发布开源 Linux 运行时 Shirudo，让 Agent 无停机防御系统",
+    "url": "https://aihot.news/items/d41p6k2h48zm8u2kl5xdzqx5h",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-24T08:15:44.000Z",
+    "collectedAt": "2026-11-24T15:12:35.122Z",
+    "category": "ai-apps",
+    "summary": "OpenAI 宣布与 Cisco 合作推出开源 Linux 运行时 Shirudo，让 Agent 编写动态 eBPF 控制来抵御漏洞利用，同时保持服务不中断，为防御方争取测试和部署补丁的时间。作者称这是迈向自适应自防御基础设施的第一步，目标是让防御者与 AI Agent 协作定位受影响系统、测试并共享 shield、在不干扰工作负载的情况下部署。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/thsottiaux/status/2125141302501417232",
+    "feedContentStatus": "full",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-ab8f444",
+    "coverage": [],
+    "feedContent": {
+      "format": "aihot-rss-text-v1",
+      "language": "zh-CN",
+      "capturedAt": "2026-11-24T15:12:35.122Z",
+      "paragraphs": [
+        "我们正与 Cisco 合作，共同打造我们认为将成为网络安全新时代关键基础设施原语的东西。",
+        "一切都需要被构建成能够由对齐的智能体以机器速度安全运行。",
+        "引用 @OpenAI：",
+        "我们推出 Shirudo，一个开源的 Linux 运行时，让智能体能够在不中断服务的情况下防御系统。它允许智能体编写动态 eBPF 控制策略，保护系统免受漏洞利用，为防御者争取更多时间测试和推出补丁。由 @cisco 与 OpenAI 共同打造。",
+        "Shirudo 是迈向自防御基础设施的第一步，这类基础设施能够适应新威胁，同时保持服务持续运行。我们的目标是让防御者与 AI 智能体协作，找到受影响的系统、测试并共享防护策略，并在不干扰工作负载的情况下部署它们。",
+        "openai.com/index/introducing-…",
+        "https://x.com/OpenAI/status/2124980590717911527",
+        "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/d41p6k2h48zm8u2kl5xdzqx5h"
+      ]
+    }
+  },
+  {
     "id": "fc3293cbc95dfcce40e3",
     "title": "Google DeepMind 用 Gemini 4 智能体团队与 Lean 形式化验证改进量子算法",
     "url": "https://aihot.news/items/pjpgapf3mbvmy98cywxhwf07n",
