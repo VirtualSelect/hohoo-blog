@@ -4,6 +4,7 @@ import fs from "node:fs";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { evaluateReviewedHoldout } from "../../../scripts/research/section-search-holdout.mjs";
 import { createSectionSearcher, searchTerms } from "../lib/section-search.mjs";
 const read = (name) =>
   JSON.parse(fs.readFileSync(new URL(name, import.meta.url), "utf8"));
@@ -151,4 +152,138 @@ test("the offline comparison reproduces the recorded trade-off on the frozen cor
     JSON.parse(result.stdout),
     read("../../../reports/section-search-comparison-v2.json"),
   );
+});
+
+const trialPassage = {
+  id: "trial:camera",
+  documentId: "trial",
+  href: "/trial#camera",
+  title: "Viewport settings",
+  heading: "Camera width",
+  text: "Camera width is measured in pixels.",
+  contentHash: hash("Camera width is measured in pixels."),
+};
+const trialHoldout = {
+  topK: 5,
+  questions: [
+    { id: "answerable", query: "camera width" },
+    { id: "miss", query: "horizontal resolution unit" },
+    { id: "boundary", query: "camera width range" },
+    { id: "empty", query: "satellite cost" },
+  ],
+};
+const trialHash = hash(JSON.stringify(trialHoldout));
+const trialReview = {
+  holdoutHash: trialHash,
+  reviewedAt: "2024-02-29",
+  questions: [
+    {
+      id: "miss",
+      evidence: [{ id: trialPassage.id, quote: "measured in pixels" }],
+    },
+    {
+      id: "answerable",
+      evidence: [{ id: trialPassage.id, quote: "measured in pixels" }],
+    },
+    {
+      id: "boundary",
+      evidence: [],
+      missing: "No supported range is recorded.",
+    },
+    {
+      id: "empty",
+      evidence: [],
+      missing: "No satellite costs are recorded.",
+    },
+  ],
+};
+const evaluateTrial = (review, corpus = [trialPassage]) =>
+  evaluateReviewedHoldout({
+    holdout: trialHoldout,
+    holdoutHash: trialHash,
+    corpus,
+    review,
+  });
+
+test("reviewed holdout counts retrieval and leaves the first-candidate boundary verdict for human review", () => {
+  const { summary, rows } = evaluateTrial(trialReview);
+  assert.deepEqual(summary, {
+    answerableHitAtK: { hits: 1, total: 2 },
+    unanswerableWithCandidates: { withCandidates: 1, total: 2 },
+    unanswerableFirstCandidateExplainsBoundary: {
+      count: null,
+      total: 1,
+      status: "awaiting-review",
+    },
+  });
+  assert.deepEqual(
+    rows.map(({ id, firstRelevantRank, candidates }) => [
+      id,
+      firstRelevantRank,
+      candidates.length,
+    ]),
+    [
+      ["answerable", 1, 1],
+      ["miss", null, 0],
+      ["boundary", null, 1],
+      ["empty", null, 0],
+    ],
+  );
+  assert.deepEqual(rows[2].candidates[0], {
+    id: trialPassage.id,
+    href: trialPassage.href,
+    heading: trialPassage.heading,
+    text: trialPassage.text,
+    contentHash: trialPassage.contentHash,
+  });
+  const noBoundaryCandidate = evaluateTrial(trialReview, [
+    {
+      ...trialPassage,
+      heading: "Measurement unit",
+      text: "Width is measured in pixels.",
+      contentHash: hash("Width is measured in pixels."),
+    },
+  ]);
+  assert.deepEqual(
+    noBoundaryCandidate.summary.unanswerableFirstCandidateExplainsBoundary,
+    { count: null, total: 0, status: "not-applicable" },
+  );
+});
+
+test("holdout rejects invalid or partial review data before creating the searcher", () => {
+  const unreadableHeading = [
+    {
+      ...trialPassage,
+      get heading() {
+        throw new Error("search index should not be created");
+      },
+    },
+  ];
+  const cases = [
+    [(review) => (review.holdoutHash = "stale"), /指纹/],
+    [(review) => (review.reviewedAt = "2025-02-29"), /日期/],
+    [(review) => review.questions.pop(), /覆盖/],
+    [(review) => (review.questions[3].id = review.questions[2].id), /重复/],
+    [(review) => (review.questions[3].id = "unknown-question"), /缺少复核证据/],
+    [
+      (review) => (review.questions[0].evidence[0].id = "unknown-passage"),
+      /引文/,
+    ],
+    [
+      (review) => (review.questions[0].evidence[0].quote = "no such quote"),
+      /引文/,
+    ],
+    [
+      (review) =>
+        review.questions[0].evidence.push(review.questions[0].evidence[0]),
+      /重复的证据/,
+    ],
+    [(review) => (review.questions[1].missing = ""), /不应填写/],
+    [(review) => (review.questions[3].missing = "  "), /必须填写/],
+  ];
+  for (const [change, message] of cases) {
+    const review = structuredClone(trialReview);
+    change(review);
+    assert.throws(() => evaluateTrial(review, unreadableHeading), message);
+  }
 });

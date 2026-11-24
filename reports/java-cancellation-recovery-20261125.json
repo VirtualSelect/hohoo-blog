@@ -1,0 +1,825 @@
+{
+  "study": "java-cancellation-recovery",
+  "version": 1,
+  "date": "2026-11-25",
+  "scope": "One keyed loopback effect, cooperative local JVM processes and serialized cancellation. Each recovery runs in a new JVM. No asynchronous in-flight interruption, compensation or power-loss test.",
+  "policy": "Persist dispatch-started before sending. A cancelled intent never resends or writes new successful history. With no durable receipt, a started attempt has unknown outcome. A durable receipt is preserved.",
+  "upstream": {
+    "repository": "https://github.com/VirtualSelect/hohoo-ai-lab",
+    "commit": "0d4009cf840052c3111bbfc40dce900326daa3ae",
+    "directory": "demos/13-durable-dispatch",
+    "sha256LF": {
+      "Ledger.java": "a06b28aaad7dd6f22b498ed65ed833380ec96862370a09a4b0383ebc54c12177",
+      "Workflow.java": "d3f44793d63184d8e707941ad40c08b9e9b20c9c80af8846a1dfb89767715b2e",
+      "audit.py": "455f7f27badccb49bb480b9af5a07fa6ee1ddacdef58e42c5c10ba161f0d5852"
+    }
+  },
+  "method": "The unmodified baseline receives the same cancellation marker but never reads it. An independent loopback relay logs actual POSTs. Only the auditor reads the keyed receiver's WAL. The dispatcher derives its reported status from its own durable files.",
+  "studySourcesSha256LF": {
+    "protocol.json": "37389f71a47b53945167c929299dc9cd714bd048f541dcbe5862b4fc57b171d6",
+    "CancellationStudy.java": "89b8e0fd7059335cc7087517dfe21d20d15e2dcb435dbb1615ea0135e2cc3409",
+    "run.py": "b4f7f576818f51b62ba49c79bd99f3ee1449c4a532f3e23d59bdee32dab1bc03"
+  },
+  "environment": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "machine": "arm64",
+    "java": [
+      "openjdk version \"1.8.0_514\"",
+      "OpenJDK Runtime Environment Corretto-8.514.01.1 (build 1.8.0_514-b01)",
+      "OpenJDK 64-Bit Server VM Corretto-8.514.01.1 (build 25.514-b01, mixed mode)"
+    ],
+    "python": "3.12.14"
+  },
+  "cases": [
+    {
+      "id": "baseline-before-send",
+      "statusAfterRecovery": "BASELINE_RETURNED",
+      "observed": {
+        "posts": 1,
+        "effects": 1,
+        "receipts": 1,
+        "history": 1
+      },
+      "checkpoints": [
+        {
+          "stage": "before-cancellation",
+          "posts": 0,
+          "intents": 1,
+          "started": 0,
+          "cancellations": 0,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "before-recovery",
+          "posts": 0,
+          "intents": 1,
+          "started": 0,
+          "cancellations": 1,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "recovery-1",
+          "posts": 1,
+          "intents": 1,
+          "started": 0,
+          "cancellations": 1,
+          "receiver": 1,
+          "receipts": 1,
+          "history": 1
+        },
+        {
+          "stage": "recovery-2",
+          "posts": 1,
+          "intents": 1,
+          "started": 0,
+          "cancellations": 1,
+          "receiver": 1,
+          "receipts": 1,
+          "history": 1
+        }
+      ],
+      "httpPosts": [
+        {
+          "key": "turn-1",
+          "body": "add-one"
+        }
+      ],
+      "journals": {
+        "intents": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "cancellations": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "cancel-requested",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "receipts": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "1",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "d1ec7e5eb997c8de87ca1ebac949d10924f4a5b1b0f91a5407af56b7dc532382"
+        },
+        "history": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one => 1",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "2c46583656ca4519dd506d69a5a1317048c86d147ad3601c1db646cadea5b5f8"
+        }
+      },
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recovery-1",
+          "exit": 0,
+          "output": ""
+        },
+        {
+          "stage": "recovery-2",
+          "exit": 0,
+          "output": ""
+        }
+      ]
+    },
+    {
+      "id": "guarded-before-send",
+      "statusAfterRecovery": "CANCELLED_BEFORE_SEND",
+      "observed": {
+        "posts": 0,
+        "effects": 0,
+        "receipts": 0,
+        "history": 0
+      },
+      "checkpoints": [
+        {
+          "stage": "before-cancellation",
+          "posts": 0,
+          "intents": 1,
+          "started": 0,
+          "cancellations": 0,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "before-recovery",
+          "posts": 0,
+          "intents": 1,
+          "started": 0,
+          "cancellations": 1,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "recovery-1",
+          "posts": 0,
+          "intents": 1,
+          "started": 0,
+          "cancellations": 1,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "recovery-2",
+          "posts": 0,
+          "intents": 1,
+          "started": 0,
+          "cancellations": 1,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        }
+      ],
+      "httpPosts": [],
+      "journals": {
+        "intents": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "cancellations": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "cancel-requested",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "receipts": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recovery-1",
+          "exit": 0,
+          "output": "CANCELLED_BEFORE_SEND"
+        },
+        {
+          "stage": "recovery-2",
+          "exit": 0,
+          "output": "CANCELLED_BEFORE_SEND"
+        }
+      ]
+    },
+    {
+      "id": "guarded-start-before-network",
+      "statusAfterRecovery": "CANCELLED_OUTCOME_UNKNOWN",
+      "observed": {
+        "posts": 0,
+        "effects": 0,
+        "receipts": 0,
+        "history": 0
+      },
+      "checkpoints": [
+        {
+          "stage": "before-cancellation",
+          "posts": 0,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 0,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "before-recovery",
+          "posts": 0,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 1,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "recovery-1",
+          "posts": 0,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 1,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "recovery-2",
+          "posts": 0,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 1,
+          "receiver": 0,
+          "receipts": 0,
+          "history": 0
+        }
+      ],
+      "httpPosts": [],
+      "journals": {
+        "intents": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "cancel-requested",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "receipts": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recovery-1",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        },
+        {
+          "stage": "recovery-2",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "id": "guarded-after-effect",
+      "statusAfterRecovery": "CANCELLED_OUTCOME_UNKNOWN",
+      "observed": {
+        "posts": 1,
+        "effects": 1,
+        "receipts": 0,
+        "history": 0
+      },
+      "checkpoints": [
+        {
+          "stage": "before-cancellation",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 0,
+          "receiver": 1,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "before-recovery",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 1,
+          "receiver": 1,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "recovery-1",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 1,
+          "receiver": 1,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "recovery-2",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 1,
+          "receiver": 1,
+          "receipts": 0,
+          "history": 0
+        }
+      ],
+      "httpPosts": [
+        {
+          "key": "turn-1",
+          "body": "add-one"
+        }
+      ],
+      "journals": {
+        "intents": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "cancel-requested",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "receipts": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recovery-1",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        },
+        {
+          "stage": "recovery-2",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        }
+      ]
+    },
+    {
+      "id": "guarded-after-receipt",
+      "statusAfterRecovery": "CANCELLED_WITH_RECEIPT",
+      "observed": {
+        "posts": 1,
+        "effects": 1,
+        "receipts": 1,
+        "history": 0
+      },
+      "checkpoints": [
+        {
+          "stage": "before-cancellation",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 0,
+          "receiver": 1,
+          "receipts": 1,
+          "history": 0
+        },
+        {
+          "stage": "before-recovery",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 1,
+          "receiver": 1,
+          "receipts": 1,
+          "history": 0
+        },
+        {
+          "stage": "recovery-1",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 1,
+          "receiver": 1,
+          "receipts": 1,
+          "history": 0
+        },
+        {
+          "stage": "recovery-2",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 1,
+          "receiver": 1,
+          "receipts": 1,
+          "history": 0
+        }
+      ],
+      "httpPosts": [
+        {
+          "key": "turn-1",
+          "body": "add-one"
+        }
+      ],
+      "journals": {
+        "intents": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "cancel-requested",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "receipts": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "1",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "d1ec7e5eb997c8de87ca1ebac949d10924f4a5b1b0f91a5407af56b7dc532382"
+        },
+        "history": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recovery-1",
+          "exit": 0,
+          "output": "CANCELLED_WITH_RECEIPT"
+        },
+        {
+          "stage": "recovery-2",
+          "exit": 0,
+          "output": "CANCELLED_WITH_RECEIPT"
+        }
+      ]
+    },
+    {
+      "id": "uncancelled-recovery",
+      "statusAfterRecovery": "COMPLETED",
+      "observed": {
+        "posts": 2,
+        "effects": 1,
+        "receipts": 1,
+        "history": 1
+      },
+      "checkpoints": [
+        {
+          "stage": "before-cancellation",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 0,
+          "receiver": 1,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "before-recovery",
+          "posts": 1,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 0,
+          "receiver": 1,
+          "receipts": 0,
+          "history": 0
+        },
+        {
+          "stage": "recovery-1",
+          "posts": 2,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 0,
+          "receiver": 1,
+          "receipts": 1,
+          "history": 1
+        },
+        {
+          "stage": "recovery-2",
+          "posts": 2,
+          "intents": 1,
+          "started": 1,
+          "cancellations": 0,
+          "receiver": 1,
+          "receipts": 1,
+          "history": 1
+        }
+      ],
+      "httpPosts": [
+        {
+          "key": "turn-1",
+          "body": "add-one"
+        },
+        {
+          "key": "turn-1",
+          "body": "add-one"
+        }
+      ],
+      "journals": {
+        "intents": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "records": [],
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "receiver": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "receipts": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "1",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "d1ec7e5eb997c8de87ca1ebac949d10924f4a5b1b0f91a5407af56b7dc532382"
+        },
+        "history": {
+          "records": [
+            {
+              "key": "turn-1",
+              "body": "add-one => 1",
+              "ordinal": 1
+            }
+          ],
+          "sha256": "2c46583656ca4519dd506d69a5a1317048c86d147ad3601c1db646cadea5b5f8"
+        }
+      },
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "recovery-1",
+          "exit": 0,
+          "output": "COMPLETED"
+        },
+        {
+          "stage": "recovery-2",
+          "exit": 0,
+          "output": "COMPLETED"
+        }
+      ]
+    }
+  ]
+}

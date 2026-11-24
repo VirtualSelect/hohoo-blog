@@ -15,7 +15,10 @@ export default function RadarPractice({ id, expanded = false }) {
       </summary>
       <p>{item.question[language]}</p>
       <p>
-        <a href={(locale === "zh-CN" ? "" : "/" + locale) + item.href}>
+        <a
+          className="radar-practice-link"
+          href={(locale === "zh-CN" ? "" : "/" + locale) + item.href}
+        >
           {item.label[language]} →
         </a>
       </p>

@@ -652,6 +652,9 @@ html[data-theme="dark"] {
 .radar-connections p {
   font-size: 13px;
 }
+.radar-practice-link {
+  display: inline-block;
+}
 .radar-connections .hh-meta {
   font-size: 10px;
 }

@@ -2003,25 +2003,25 @@
   },
   "doc:ai-apps/java-recovery-reconciliation": {
     "sourceLocale": "zh-CN",
-    "sourceUpdatedAt": "2026-10-11",
+    "sourceUpdatedAt": "2026-11-25",
     "file": "docs/ai-apps/java-recovery-reconciliation.md",
     "translations": {
       "en": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-11",
+        "translatedAt": "2026-11-25",
         "file": "i18n/en/docs/ai-apps/java-recovery-reconciliation.md",
-        "sourceRevision": "2c07a6dfa98f1404da6709712d93ff86d44801cd3eeb527e508c5f237c156c06",
-        "translationRevision": "5a870080c53e952258d6eab10fc63a0244bcc1edee08675ea552f069aea44418"
+        "sourceRevision": "08f0d589215b59e98fa697f32d8dc7e53eb9cb61d4762d6135932ad0c81a4c38",
+        "translationRevision": "6ff22cc4c43d65ee8414cbd497aa1ffd0aa252d29c9c80b49dbd0a9d647b6670"
       },
       "zh-TW": {
         "status": "AI_TRANSLATED",
-        "translatedAt": "2026-10-11",
+        "translatedAt": "2026-11-25",
         "file": "i18n/zh-TW/docs/ai-apps/java-recovery-reconciliation.md",
-        "sourceRevision": "2c07a6dfa98f1404da6709712d93ff86d44801cd3eeb527e508c5f237c156c06",
-        "translationRevision": "5d7c1edfa2d75b9bb9d0d57e5c9b8f7cad39ee34efa8ddec1292020fc9b1c186"
+        "sourceRevision": "08f0d589215b59e98fa697f32d8dc7e53eb9cb61d4762d6135932ad0c81a4c38",
+        "translationRevision": "c92c12f55990f6d20550739f1dce9766cdf597ca35e5f4bff022009b1f8cfa3f"
       }
     },
-    "sourceRevision": "2c07a6dfa98f1404da6709712d93ff86d44801cd3eeb527e508c5f237c156c06"
+    "sourceRevision": "08f0d589215b59e98fa697f32d8dc7e53eb9cb61d4762d6135932ad0c81a4c38"
   },
   "doc:llm/kv-packed-groups": {
     "sourceLocale": "zh-CN",

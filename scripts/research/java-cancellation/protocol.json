@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "date": "2026-11-25",
+  "source": {
+    "repository": "https://github.com/VirtualSelect/hohoo-ai-lab",
+    "commit": "0d4009cf840052c3111bbfc40dce900326daa3ae",
+    "directory": "demos/13-durable-dispatch",
+    "sha256LF": {
+      "Ledger.java": "a06b28aaad7dd6f22b498ed65ed833380ec96862370a09a4b0383ebc54c12177",
+      "Workflow.java": "d3f44793d63184d8e707941ad40c08b9e9b20c9c80af8846a1dfb89767715b2e",
+      "audit.py": "455f7f27badccb49bb480b9af5a07fa6ee1ddacdef58e42c5c10ba161f0d5852"
+    }
+  },
+  "input": { "key": "turn-1", "body": "add-one" },
+  "recoveryRuns": 2,
+  "faultExit": 23,
+  "scope": "One keyed loopback effect, cooperative local JVM processes and serialized cancellation. Each recovery runs in a new JVM. No asynchronous in-flight interruption, compensation or power-loss test.",
+  "policy": "Persist dispatch-started before sending. A cancelled intent never resends or writes new successful history. With no durable receipt, a started attempt has unknown outcome. A durable receipt is preserved.",
+  "scenarios": [
+    {
+      "id": "baseline-before-send",
+      "mode": "baseline",
+      "fault": null,
+      "cancel": true,
+      "status": "BASELINE_RETURNED",
+      "expected": { "posts": 1, "effects": 1, "receipts": 1, "history": 1 }
+    },
+    {
+      "id": "guarded-before-send",
+      "mode": "guarded",
+      "fault": null,
+      "cancel": true,
+      "status": "CANCELLED_BEFORE_SEND",
+      "expected": { "posts": 0, "effects": 0, "receipts": 0, "history": 0 }
+    },
+    {
+      "id": "guarded-start-before-network",
+      "mode": "guarded",
+      "fault": "start",
+      "cancel": true,
+      "status": "CANCELLED_OUTCOME_UNKNOWN",
+      "expected": { "posts": 0, "effects": 0, "receipts": 0, "history": 0 }
+    },
+    {
+      "id": "guarded-after-effect",
+      "mode": "guarded",
+      "fault": "delivery",
+      "cancel": true,
+      "status": "CANCELLED_OUTCOME_UNKNOWN",
+      "expected": { "posts": 1, "effects": 1, "receipts": 0, "history": 0 }
+    },
+    {
+      "id": "guarded-after-receipt",
+      "mode": "guarded",
+      "fault": "receipt",
+      "cancel": true,
+      "status": "CANCELLED_WITH_RECEIPT",
+      "expected": { "posts": 1, "effects": 1, "receipts": 1, "history": 0 }
+    },
+    {
+      "id": "uncancelled-recovery",
+      "mode": "guarded",
+      "fault": "delivery",
+      "cancel": false,
+      "status": "COMPLETED",
+      "expected": { "posts": 2, "effects": 1, "receipts": 1, "history": 1 }
+    }
+  ]
+}

@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "signalId": "13aaeb7f84a286e13aa2",
+    "question": [
+      "两种校验器在32组输入上完全一致，就能证明它们都正确吗？对照本站的差分结果与非法转义反例，检查参考实现和测试样本各自的盲区。这里是方法对照，不是对 Claude Code 验证流程的复现。",
+      "If two validators agree on all 32 inputs, does that establish that both are correct? Compare this site's differential results with the invalid-escape counterexample to inspect the limits of the reference implementation and the test cases. This is a methodological comparison, not a reproduction of Claude Code's verification workflow.",
+      "兩種校驗器在32組輸入上完全一致，就能證明它們都正確嗎？對照本站的差分結果與非法跳脫反例，檢查參考實作和測試樣本各自的盲區。這裡是方法對照，不是對 Claude Code 驗證流程的重現。"
+    ],
+    "href": "/docs/ai-apps/typescript-output-boundary#published-correction",
+    "label": [
+      "阅读既有差分实验与校验器勘误",
+      "Read the existing differential experiment and validator correction",
+      "閱讀既有差分實驗與校驗器勘誤"
+    ]
+  }
+]

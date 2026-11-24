@@ -6,13 +6,28 @@ const read = (p) =>
 test("curated Radar exercises point to existing signals and all locale routes", () => {
   const registry = read("../../../data/radar-practice.json");
   const signals = read("../../../data/news/items.json");
+  assert(
+    registry.length > 0,
+    "the curated signal-to-evidence loop must not be empty",
+  );
   for (const locale of ["zh-CN", "en", "zh-TW"]) {
     const data = read("../generated/" + locale + ".json");
     for (const item of registry) {
-      assert(signals.some((s) => s.id === item.signalId));
-      assert(data.routes.includes(item.href.slice(1).split("#")[0]));
+      const signal = signals.find((s) => s.id === item.signalId);
+      assert(signal);
+      assert.match(signal.sourceArticleUrl, /^https:\/\//);
+      const [route, fragment] = item.href.slice(1).split("#");
+      assert(data.routes.includes(route));
+      const document = data.documents.find((d) => d.route === route);
+      assert(
+        document,
+        "the related evidence must have readable content in every locale",
+      );
+      if (fragment) assert(document.html.includes(`id="${fragment}"`));
       assert.equal(item.question.length, 3);
       assert.equal(item.label.length, 3);
+      for (const value of [...item.question, ...item.label])
+        assert(typeof value === "string" && value.trim());
     }
   }
 });

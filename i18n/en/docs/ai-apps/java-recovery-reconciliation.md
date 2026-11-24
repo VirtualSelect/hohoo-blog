@@ -4,7 +4,7 @@ description: "Halt the JVM at three commit boundaries and rebuild whole-turn his
 slug: "/ai-apps/java-recovery-reconciliation"
 status: "published"
 published_at: "2026-10-11"
-updated: "2026-10-11"
+updated: "2026-11-25"
 reading_minutes: 10
 domain: "ai-apps"
 article_kind: "tutorial"
@@ -58,7 +58,7 @@ The first three terminate a real JVM and recover in a new process. The last vali
 
 ## What remains missing
 
-The implementation serially processes durable intentions. It does not implement cancellation, expiration, user edits or revoked permission. A revoked intention would still execute after restart. Before connecting risky tools, cancellation records and downstream stop semantics need a separate design; deleting local history does not undo a remote effect.
+The original Demo13 serially processes durable intents. Recovery checks the intent, receipt and history. With no cancellation record to consult, it still executes a cancelled intent after restart. To support cancellation, recovery needs a separate record of the user's decision and a way to preserve downstream evidence.
 
 Conversation concurrency semantics also remain independent. Serial execution, first-committer wins and latest-request wins serve different products. This workflow does not replace them. Integration must determine whether a turn still owns write permission, while reconciling remote operations that may already have happened.
 
@@ -70,7 +70,33 @@ Start with `recover-receipt` and locate the first exit code 23 in `processes.jso
 
 A useful exercise is a read-only status view showing pending delivery, confirmed result awaiting history and completed turn. It should not modify records or turn uncertainty into failure. Duplicate history suggests a changed turn key. A conflicting receipt should stop recovery with retained evidence, not trigger a fresh key to bypass the conflict.
 
-These three articles provide one inspectable local chain: commit boundary, remote redelivery and final conversation reconciliation. Model quality, authorization and cancellation remain separate work.
+Together the three articles cover the local commit, remote redelivery and conversation reconciliation. The follow-up below uses the same receiver to test how a cancellation record changes recovery.
+
+## Will a cancelled intent still run after restart?
+
+The follow-up uses the same idempotency key throughout each case. It writes cancellations to a separate durable journal under the same local lock as the dispatcher. The guarded version checks for cancellation before sending or adding conversation history. It records a dispatch marker before sending the HTTP request. Each case recovers twice in fresh JVMs and checks the observed requests, receiver effects, receipts and conversation history independently.
+
+| Condition before recovery | HTTP POSTs | Receiver effects | Receipts | Conversation turns |
+| --- | ---: | ---: | ---: | ---: |
+| Cancel before sending, original recovery | 1 | 1 | 1 | 1 |
+| Cancel before sending, guarded recovery | 0 | 0 | 0 | 0 |
+| Exit after the marker and before sending, then cancel | 0 | 0 | 0 | 0 |
+| Exit after the effect and before the receipt, then cancel | 1 | 1 | 0 | 0 |
+| Exit after the receipt and before history, then cancel | 1 | 1 | 1 | 0 |
+| Exit after the effect and before the receipt, no cancellation | 2 | 1 | 1 | 1 |
+
+Rows three and four have the same local evidence: a dispatch marker, a cancellation and no receipt. The receiver and request logs tell us whether the effect actually occurred. Recovery reports the outcome as unknown in both cases and stops redelivery. Row five keeps the existing receipt and stops before adding a normal turn. In row six, the dispatcher resends with the original key, and the receiver returns the original result after deduplication.
+
+The follow-up used macOS, JDK 8 and a loopback receiver. Cancellation and recovery are serialized, and a cancellation takes effect once it has been recorded under the lock. Interrupting an active request, compensating for a completed effect and reconciling a real service require separate tests.
+
+Run the following from the blog repository root. Use a companion repository that contains the commit listed in the next section and choose a new output directory. The script reads the pinned files from Git, checks their fingerprints and records the evidence for the same key on each recovery. The completed run is in `reports/java-cancellation-recovery-20261125.json` in the blog repository.
+
+```bash
+python3 scripts/research/java-cancellation/run.py \
+  --repo /path/to/hohoo-ai-lab-study \
+  --java-home /path/to/jdk8 \
+  --run-dir /tmp/java-cancellation-study
+```
 
 ## Reproduce the protocol
 
@@ -86,7 +112,7 @@ $py = '.\.venv\Scripts\python.exe'
 & $py demos/13-durable-dispatch/audit.py demos/13-durable-dispatch/target/my-run
 ```
 
-Tested on Windows with Java JDK 1.8.0_171 + Python 3.12.14; 17 scenarios and 193 child-process records. The independent audit should print `PASS`. Other operating systems have not been rechecked. To inspect the archived result without rerunning the experiment, pass `demos/13-durable-dispatch/evidence` to the same audit command. Source hashes normalize LF; evidence hashes use original bytes. Do not rewrite the manifest to conceal a mismatch.
+The original full matrix ran on Windows with JDK 1.8.0_171 and Python 3.12.14. It produced 17 scenarios and 193 child-process records. The independent audit should print `PASS`. To inspect the archive, pass `demos/13-durable-dispatch/evidence` to the same audit command. Source hashes normalize line endings to LF. Evidence hashes use the original bytes.
 
 Replace the JDK path with a JDK 8 installation containing `javac`. Child exit code 23 is an intentional fault injection; a different unexpected exit is a failure. Do not expose the teaching HTTP server publicly.
 

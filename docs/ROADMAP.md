@@ -1,5 +1,15 @@
 # Huhohoo.com Roadmap
 
+## 2026-11-25 · 检索盲审、雷达线索与撤销恢复
+
+准备了 12 道段落判读题，涵盖 9 道待复核题和 3 道对照题。参与者表只提供题目和打乱顺序的段落。另冻结了 6 道新题，等待作者核对证据。人工判读、留出评估与线上排序调整仍待完成。[参与者表](../reports/section-search-review/participant.md) · [主持人手册](../reports/section-search-review/README.md)
+
+补齐留出题的独立题面、人工复核模板和离线评估命令。命令核对题目、语料和检索源码的指纹，记录前五命中与无据候选，把首条是否说明证据边界交给人工判读。使用 v2 开发集比较单篇候选上限，上限为 1 时命中 6/12，其余方案均为 8/12，继续使用每篇两段。留出评估等待人工复核稿。[留出题面](../reports/section-search-review/holdout-questions.md)
+
+将一条关于 Claude Code 验证方法的雷达信号接到站内已有的 TypeScript 差分实验与非法转义勘误。读者可以沿着 32 组原始对照和后续反例检查校验器的覆盖范围。移动端链接换行后可点击整块区域。[差分实验勘误](ai-apps/typescript-output-boundary.md#published-correction)
+
+在 JDK 8 上补做 Java 撤销恢复实验。六种时序分别用新 JVM 恢复两遍。投递前持久撤销时不发送请求。有投递标记而无回执时，保留结果未知并停止重送。已有回执继续保留。验证范围为串行本机进程和回环接收端。[Java 恢复教程](ai-apps/java-recovery-reconciliation.md) · [复现实验记录](../reports/java-cancellation-recovery-20261125.json)
+
 ## 2026-11-24 · 轨迹复盘与检索复核
 
 在已有 MuJoCo 失联案例补充同一仿真时钟下的观测、施力和速度图，并提供只读复算入口。图表来自原归档的永久失联样本，原实验协议、统计结果和复现版本继续作为证据依据。[失联案例](embodied-ai/mujoco-stale-force.md)

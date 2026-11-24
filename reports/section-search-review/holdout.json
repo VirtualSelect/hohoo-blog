@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "locale": "zh-CN",
+  "status": "author-review-pending",
+  "corpusHash": "0b48da5ef8af7d5d96705278fd46fc8cec0cffb9a39e7f68fa5ae27e05dcd06b",
+  "algorithmHash": "eb0f9402171c934622c73d5bdd7a8c307c7da38700fc52ed47dbfb30a93c315e",
+  "topK": 5,
+  "questions": [
+    {
+      "id": "equally-long-blocks",
+      "query": "两块注意力分数一样长，分别归一化再平均，块与块之间会丢掉哪项信息？",
+      "support": ["doc:llm/tiled-online-softmax:8f6a68f9108ec2420100"],
+      "pointer": "doc:llm/tiled-online-softmax:8f6a68f9108ec2420100",
+      "quote": "两块即使长度相同，概率质量也未必一半一半。分块独立归一化会把每块都强制加到1，平均又给各块相同权重，丢失块之间的相对分数。"
+    },
+    {
+      "id": "inferred-payload-mass",
+      "query": "在负载迁移的 36 个回合中，把轨迹推算的质量和设定质量对照，误差最大的回合是哪一个？",
+      "support": [],
+      "pointer": "doc:embodied-ai/mujoco-mass-transfer:dc442dad8d0ff90ea692",
+      "quote": "本篇比较固定增益与按已知质量缩放增益。它是MuJoCo参数迁移对照，不是在线质量辨识",
+      "missing": "基于各条轨迹的质量预测、与设定质量逐回合对应的误差及最大值。"
+    },
+    {
+      "id": "provider-tool-choices",
+      "query": "在 ReadOnlyTools 工具实验中，模型先选错了工具，下一回合靠哪条策略改选？",
+      "support": [],
+      "pointer": "doc:ai-apps/java-tool-boundary:27991f092d91c68808e1",
+      "quote": "结果不涉及真实模型工具选择质量、重试策略收益或生产超时分布。",
+      "missing": "模型选错工具及下一回合改选的记录，和触发改选的策略。"
+    },
+    {
+      "id": "smooth-late-velocity",
+      "query": "观测延迟 80ms、没有位置噪声时，把差分速度再平滑，尾段位置误差如何改变？",
+      "support": [
+        "doc:embodied-ai/mujoco-velocity-estimation:56d07766b6c723ab14ae"
+      ],
+      "pointer": "doc:embodied-ai/mujoco-velocity-estimation:56d07766b6c723ab14ae",
+      "quote": "80ms 延迟、无噪声时，差分的尾段位置 RMS 为 30.32mm，EMA 为 93.66mm"
+    },
+    {
+      "id": "append-log-budget",
+      "query": "Java 会话裁剪时，第一轮放得下、最新一轮放不下，下次请求最终保留哪几轮？",
+      "support": ["doc:ai-apps/java-context-wire-budget:f8b795c1c97c77dad70e"],
+      "pointer": "doc:ai-apps/java-context-wire-budget:f8b795c1c97c77dad70e",
+      "quote": "最新一轮放不下时，选择器会最终只保留必需输入，不回头拼接第一轮。"
+    },
+    {
+      "id": "prefix-service-tail",
+      "query": "启用最长前缀复用后，首个 token 延迟的第 99 百分位相较于关闭时相差多少毫秒？",
+      "support": [],
+      "pointer": "doc:llm/longest-prefix-reuse:c271625609dcae3a41c9",
+      "quote": "当前计数不足以回答生产系统是否更快",
+      "missing": "相同服务与请求分布下，启用与关闭两组各自的首个 token 延迟分位数。"
+    }
+  ]
+}
