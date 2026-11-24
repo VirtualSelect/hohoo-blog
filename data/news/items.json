@@ -1,5 +1,22 @@
 [
   {
+    "id": "fc3293cbc95dfcce40e3",
+    "title": "Google DeepMind 用 Gemini 4 智能体团队与 Lean 形式化验证改进量子算法",
+    "url": "https://aihot.news/items/pjpgapf3mbvmy98cywxhwf07n",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-23T16:59:40.000Z",
+    "collectedAt": "2026-11-24T03:01:34.032Z",
+    "category": "ai-apps",
+    "summary": "Google DeepMind 发布新论文，用多个 Gemini 4 智能体团队结合 Lean 形式化定理证明改进量子算法，生成经数学验证的高效量子电路，并在 GitHub 开源 Lean 库、问题规格和验证解法。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-fdf83f60",
+    "coverage": []
+  },
+  {
     "id": "5ea040a9620c7974538d",
     "title": "ARTEX 开源 AI 黑客框架遭滥用，FBI 发出警告但代码已广泛扩散",
     "url": "https://aihot.news/items/zb8hu8pp2ogojk5081g7z4en7",
@@ -31,6 +48,40 @@
     "feedContentStatus": "summary-only",
     "relevanceReason": "研究主题匹配且包含技术信息",
     "eventId": "event-64385a68",
+    "coverage": []
+  },
+  {
+    "id": "d26b26e4ce8f4727cc2c",
+    "title": "Anthropic 推出 Claude Ship 测试版，自动完成 PR 审查、修复与审批",
+    "url": "https://aihot.news/items/t7jlbaldqf2zcliuva1sofoks",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-23T00:00:00.000Z",
+    "collectedAt": "2026-11-24T03:01:34.032Z",
+    "category": "ai-apps",
+    "summary": "Anthropic 发布 Claude Ship 测试版，由 Code Review（已正式可用）、PR Steward 和 Claude Approvals 两个 beta 智能体组成，可审查 PR、推送修复并按团队写进仓库的策略文件决定能否合并。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://claude.com/blog/introducing-claude-ship",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-8a3bc357",
+    "coverage": []
+  },
+  {
+    "id": "6e21175b90dbf050e55b",
+    "title": "AISI 红队论文：攻击策略选择会让 LLM 监视器评估结果失真",
+    "url": "https://aihot.news/items/tl8v9gto8rd3e4x40xfbljj13",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-22T23:00:00.000Z",
+    "collectedAt": "2026-11-24T03:01:34.032Z",
+    "category": "llm",
+    "summary": "英国 AI Security Institute 发布论文，测试合成攻击生成方式对监视器评估的影响。评估一个 OpenAI 前生产监视器时，同一监视器对不同攻击策略的漏报率从 0.2%（基础提示）到 23%（转录编辑）不等，优化程度也会显著改变结果。作者指出合成转录只是真实有害行为代理，其代表性难以证明，仅凭监视器评估不足以保证部署安全，需辅以能力限制…",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://www.aisi.gov.uk/blog/attack-policy-selection-can-make-monitor-evaluations-misleading",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-6c513fe7",
     "coverage": []
   },
   {
