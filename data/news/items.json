@@ -1,5 +1,74 @@
 [
   {
+    "id": "38457af7643b9f513982",
+    "title": "Anthropic 平台工程负责人 Katelyn Lesse 谈 2026 年如何用 Claude 构建软件",
+    "url": "https://aihot.news/items/rnanzlnaqxdr2icjqw0qwv9la",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-25T17:31:32.000Z",
+    "collectedAt": "2026-11-25T21:57:29.066Z",
+    "category": "ai-apps",
+    "summary": "Pragmatic Engineer 发布对 Anthropic 平台工程负责人 Katelyn Lesse 的播客访谈，她团队负责 Claude API 及 Claude Code 和 Claude Desktop 的基础设施。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://newsletter.pragmaticengineer.com/p/how-anthropic-builds-software-in",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-d9349b6",
+    "coverage": []
+  },
+  {
+    "id": "4160520f72f55b4455e7",
+    "title": "面壁智能等发布 EVIL 基准，测出 GPT-4o 等模型在违法场景下安全率不足",
+    "url": "https://aihot.news/items/ogucsvlqrdr1rvfh5nvx757cx",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-25T13:00:09.000Z",
+    "collectedAt": "2026-11-25T21:57:29.066Z",
+    "category": "llm",
+    "summary": "面壁智能（OpenBMB）团队在 Nature Communications 发表 EVIL 研究，基于中美数千真实判例构建 269 个违法场景 × 50 种违法意图，测试 10 个前沿模型。多数模型安全率低于 75%，GPT-4o 在两种法律语境下均低于 60%，近半违法请求会获得协助；带特定人口身份暗示的请求更易得到协助，用现有安全对齐数据做 SF…",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/OpenBMB/status/2125575267217531181",
+    "feedContentStatus": "full",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-7b6b8174",
+    "coverage": [],
+    "feedContent": {
+      "format": "aihot-rss-text-v1",
+      "language": "zh-CN",
+      "capturedAt": "2026-11-25T21:57:29.066Z",
+      "paragraphs": [
+        "LLM 可能助长非法活动和恶意意图。@NatureComms",
+        "我们构建了 EVIL：269 个非法场景 × 50 个非法意图，从数千个真实的中美法庭案例中合成，并测试了 10 个前沿模型。",
+        "大多数模型的安全率低于 75%。GPT-4o 在两种法律语境下均低于 60%：它对近一半的非法请求提供了帮助。",
+        "相比针对人身或财产的伤害，模型对危害社会利益的犯罪防范更弱，且更愿意协助非暴力、短刑期的犯罪活动。",
+        "附加某些人口身份线索的非法指令更容易获得非法协助，在推理轨迹中体现出与热情和能力相关的刻板印象。",
+        "使用现有安全对齐数据进行 SFT 和 DPO 并不能解决该问题；在某些设置下反而使共谋协助更严重。",
+        "📑论文： nature.com/articles/s41467-02…",
+        "📊数据： huggingface.co/datasets/Tsing…",
+        "— Xing Wang 等",
+        "#LLMSafety #AIEthics #LegalAI #NatureCommunications",
+        "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/ogucsvlqrdr1rvfh5nvx757cx"
+      ]
+    }
+  },
+  {
+    "id": "b588533d9762c40d7677",
+    "title": "Pydantic AI 发布终端编码智能体 Pax 与 Harness beta，迈向 1.0",
+    "url": "https://aihot.news/items/i5qr52169dlque8rb2sl4i5jo",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-25T09:00:00.000Z",
+    "collectedAt": "2026-11-25T21:57:29.066Z",
+    "category": "ai-apps",
+    "summary": "Pydantic AI 发布终端编码智能体 Pax（pydantic-ai-pax），基于 Harness SDK，全部功能以插件形式组织，可 /plugins 开关 coder、sandbox、mcp、Logfire 观测等，并支持 --agent 换成代码库里任意 Pydantic AI Agent。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://pydantic.dev/articles/pax-harness-beta",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-b6815403",
+    "coverage": []
+  },
+  {
     "id": "193f2d01bb69c57a2136",
     "title": "Claude Code 团队发布实用指南讲解 Claude Ship 的 PR 审查与守护用法",
     "url": "https://aihot.news/items/uyodjb16jngloilypsm1d3q0d",
@@ -125,6 +194,23 @@
         "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/d41p6k2h48zm8u2kl5xdzqx5h"
       ]
     }
+  },
+  {
+    "id": "f18e6b1f496dc3848cb0",
+    "title": "Mantic 与 Thinking Machines 训练可扩展预测智能体，成本降 15 倍",
+    "url": "https://aihot.news/items/yh9lmlhqwoc77d1ii1mvr5d6x",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-24T07:00:00.000Z",
+    "collectedAt": "2026-11-25T21:57:29.066Z",
+    "category": "ai-apps",
+    "summary": "Mantic 与 Thinking Machines 在 Tinker 上对 Inkling 2 Small 做后训练，得到一个端到端完成研究与预测的预测智能体，其准确度接近 Fable 5.2 (medium)，单次预测成本降低 15 倍。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://thinkingmachines.ai/news/training-a-scalable-forecasting-agent/",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-44578e60",
+    "coverage": []
   },
   {
     "id": "a45a74be0ab1f4619ff1",
