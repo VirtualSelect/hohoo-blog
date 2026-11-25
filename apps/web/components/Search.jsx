@@ -10,6 +10,7 @@ import { uiLabel } from "@site/src/utils/ui-labels";
 import WritingKind from "@site/src/components/WritingKind";
 import dynamic from "next/dynamic";
 import { readSearchDraft, rememberSearchDraft } from "../lib/search-memory.mjs";
+import { inspectPassageQuery } from "../lib/section-search-scope.mjs";
 const PassageSearch = dynamic(() => import("./PassageSearch"));
 export default function Search({ onClose }) {
   const { searchUrl, globalData, locale } = useSite(),
@@ -70,6 +71,12 @@ export default function Search({ onClose }) {
     updateDraft({ query: "", mode: "titles" });
     ref.current?.querySelector("input")?.focus({ preventScroll: true });
   }
+  const passageScope = mode === "passages" ? inspectPassageQuery(query) : null;
+  const unsupportedTypes = passageScope?.unsupportedTypes ?? [];
+  function removeUnsupportedTypes() {
+    updateDraft({ query: passageScope.queryWithoutUnsupportedTypes });
+    ref.current?.querySelector("input")?.focus({ preventScroll: true });
+  }
   const hasQuery = Boolean(query.trim());
   const results = hasQuery
     ? searchEntries(search, query).slice(0, 18)
@@ -124,7 +131,11 @@ export default function Search({ onClose }) {
               maxLength={180}
               value={query}
               onChange={(e) => updateDraft({ query: e.target.value })}
-              aria-describedby="search-memory-note"
+              aria-describedby={
+                unsupportedTypes.length
+                  ? "search-memory-note search-filter-note"
+                  : "search-memory-note"
+              }
               placeholder={t(
                 "想了解什么？",
                 "What are you looking for?",
@@ -172,8 +183,45 @@ export default function Search({ onClose }) {
               {t("正文段落", "Article passages", "正文段落")}
             </button>
           </div>
-          {mode === "passages" ? (
-            <PassageSearch query={query} onClose={closeSearch} />
+          <p
+            className="search-filter-note"
+            id="search-filter-note"
+            role="status"
+          >
+            {unsupportedTypes.length > 0 && (
+              <>
+                {t(
+                  "正文只收录教程和随笔，以下类型筛选不适用。",
+                  "Passages cover tutorials and essays. These type filters don’t apply.",
+                  "正文只收錄教學與隨筆，以下類型篩選不適用。",
+                )}{" "}
+                <code>
+                  {unsupportedTypes.map((type) => `type:${type}`).join(" · ")}
+                </code>
+              </>
+            )}
+          </p>
+          {unsupportedTypes.length > 0 && (
+            <button
+              className="search-filter-clear"
+              type="button"
+              onClick={removeUnsupportedTypes}
+            >
+              {t(
+                "移除不适用的筛选",
+                "Remove inapplicable filters",
+                "移除不適用的篩選",
+              )}
+            </button>
+          )}
+          {passageScope ? (
+            !passageScope.onlyUnsupportedTypes && (
+              <PassageSearch
+                query={query}
+                hasKeywords={passageScope.hasKeywords}
+                onClose={closeSearch}
+              />
+            )
           ) : (
             <>
               {!hasQuery && (
@@ -198,7 +246,7 @@ export default function Search({ onClose }) {
                 </div>
               )}
               <p className="hh-meta" role="status">
-                {hasQuery
+                {hasQuery && status === "ready"
                   ? t(
                       `显示 ${results.length} 条结果（最多 18 条）`,
                       `Showing ${results.length} results (up to 18)`,

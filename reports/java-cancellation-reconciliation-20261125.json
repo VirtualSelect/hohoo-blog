@@ -1,0 +1,742 @@
+{
+  "study": "java-cancellation-read-only-reconciliation",
+  "version": 1,
+  "date": "2026-11-25",
+  "scope": "One key and a cooperative local receiver journal. Each lookup starts a fresh server and client JVM. No compensation, live in-flight interruption, distributed consistency or retention behavior is inferred.",
+  "baselineCommit": "07bc16aba4fb1b01e00743c21d5db5faf84d8e7c",
+  "baselineSha256LF": {
+    "protocol.json": "37389f71a47b53945167c929299dc9cd714bd048f541dcbe5862b4fc57b171d6",
+    "CancellationStudy.java": "89b8e0fd7059335cc7087517dfe21d20d15e2dcb435dbb1615ea0135e2cc3409",
+    "run.py": "b4f7f576818f51b62ba49c79bd99f3ee1449c4a532f3e23d59bdee32dab1bc03"
+  },
+  "upstream": {
+    "repository": "https://github.com/VirtualSelect/hohoo-ai-lab",
+    "commit": "0d4009cf840052c3111bbfc40dce900326daa3ae",
+    "directory": "demos/13-durable-dispatch",
+    "sha256LF": {
+      "Ledger.java": "a06b28aaad7dd6f22b498ed65ed833380ec96862370a09a4b0383ebc54c12177",
+      "Workflow.java": "d3f44793d63184d8e707941ad40c08b9e9b20c9c80af8846a1dfb89767715b2e",
+      "audit.py": "455f7f27badccb49bb480b9af5a07fa6ee1ddacdef58e42c5c10ba161f0d5852"
+    }
+  },
+  "sourceSha256LF": {
+    "protocol.json": "5e8dd54d07ee87426c14db9b3b020cab2d91a09c2775390598365db17cb80d8f",
+    "run.py": "81decf8b6106072cf9aae7b79ecc614a6e8055627734b4c0a649e6c533181880",
+    "ReconciliationStudy.java": "131dd8813c6e5c91154f1341f5ac21381883a94d7ef01f81854cf5f16a014b34"
+  },
+  "environment": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "java": [
+      "openjdk version \"1.8.0_514\"",
+      "OpenJDK Runtime Environment Corretto-8.514.01.1 (build 1.8.0_514-b01)",
+      "OpenJDK 64-Bit Server VM Corretto-8.514.01.1 (build 25.514-b01, mixed mode)"
+    ],
+    "python": "3.9.6"
+  },
+  "cases": [
+    {
+      "id": "executed-before-receipt",
+      "localStatusBeforeLookup": "CANCELLED_OUTCOME_UNKNOWN",
+      "setupPosts": [
+        {
+          "key": "turn-1",
+          "body": "add-one"
+        }
+      ],
+      "receiverRecordsBeforeFaultInjection": [
+        {
+          "key": "turn-1",
+          "body": "add-one",
+          "ordinal": 1
+        }
+      ],
+      "lookupAdditionalPosts": 0,
+      "journalsAtAllCheckpoints": {
+        "intents": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "bytes": 108,
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "receipts": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "lookups": [
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 200,
+          "snapshot": "complete-v1",
+          "body": "EXECUTED 1\n",
+          "outcome": "RECONCILED_EXECUTED 1",
+          "journalsUnchanged": true
+        },
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 200,
+          "snapshot": "complete-v1",
+          "body": "EXECUTED 1\n",
+          "outcome": "RECONCILED_EXECUTED 1",
+          "journalsUnchanged": true
+        }
+      ],
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recover-cancelled",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        },
+        {
+          "stage": "lookup-1",
+          "exit": 0,
+          "output": "RECONCILED_EXECUTED 1"
+        },
+        {
+          "stage": "lookup-2",
+          "exit": 0,
+          "output": "RECONCILED_EXECUTED 1"
+        }
+      ]
+    },
+    {
+      "id": "healthy-snapshot-with-no-record",
+      "localStatusBeforeLookup": "CANCELLED_OUTCOME_UNKNOWN",
+      "setupPosts": [],
+      "receiverRecordsBeforeFaultInjection": [],
+      "lookupAdditionalPosts": 0,
+      "journalsAtAllCheckpoints": {
+        "intents": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "bytes": 108,
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "receipts": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "lookups": [
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 200,
+          "snapshot": "complete-v1",
+          "body": "NO_RECORD\n",
+          "outcome": "RECONCILED_NO_RECORD",
+          "journalsUnchanged": true
+        },
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 200,
+          "snapshot": "complete-v1",
+          "body": "NO_RECORD\n",
+          "outcome": "RECONCILED_NO_RECORD",
+          "journalsUnchanged": true
+        }
+      ],
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recover-cancelled",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        },
+        {
+          "stage": "lookup-1",
+          "exit": 0,
+          "output": "RECONCILED_NO_RECORD"
+        },
+        {
+          "stage": "lookup-2",
+          "exit": 0,
+          "output": "RECONCILED_NO_RECORD"
+        }
+      ]
+    },
+    {
+      "id": "missing-receiver-snapshot",
+      "localStatusBeforeLookup": "CANCELLED_OUTCOME_UNKNOWN",
+      "setupPosts": [],
+      "receiverRecordsBeforeFaultInjection": [],
+      "lookupAdditionalPosts": 0,
+      "journalsAtAllCheckpoints": {
+        "intents": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "bytes": 108,
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": null,
+        "receipts": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "lookups": [
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 503,
+          "snapshot": null,
+          "body": "UNAVAILABLE\n",
+          "outcome": "RECONCILIATION_UNKNOWN UNAVAILABLE",
+          "journalsUnchanged": true
+        },
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 503,
+          "snapshot": null,
+          "body": "UNAVAILABLE\n",
+          "outcome": "RECONCILIATION_UNKNOWN UNAVAILABLE",
+          "journalsUnchanged": true
+        }
+      ],
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recover-cancelled",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        },
+        {
+          "stage": "lookup-1",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN UNAVAILABLE"
+        },
+        {
+          "stage": "lookup-2",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN UNAVAILABLE"
+        }
+      ]
+    },
+    {
+      "id": "committed-snapshot-with-truncated-tail",
+      "localStatusBeforeLookup": "CANCELLED_OUTCOME_UNKNOWN",
+      "setupPosts": [
+        {
+          "key": "turn-1",
+          "body": "add-one"
+        }
+      ],
+      "receiverRecordsBeforeFaultInjection": [
+        {
+          "key": "turn-1",
+          "body": "add-one",
+          "ordinal": 1
+        }
+      ],
+      "lookupAdditionalPosts": 0,
+      "journalsAtAllCheckpoints": {
+        "intents": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "bytes": 108,
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "bytes": 102,
+          "sha256": "3f54e57aee4bd053e2221885879965bf14ff3ee7b7e54881e47b4436c21c6e78"
+        },
+        "receipts": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "lookups": [
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 503,
+          "snapshot": null,
+          "body": "UNAVAILABLE\n",
+          "outcome": "RECONCILIATION_UNKNOWN UNAVAILABLE",
+          "journalsUnchanged": true
+        },
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 503,
+          "snapshot": null,
+          "body": "UNAVAILABLE\n",
+          "outcome": "RECONCILIATION_UNKNOWN UNAVAILABLE",
+          "journalsUnchanged": true
+        }
+      ],
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recover-cancelled",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        },
+        {
+          "stage": "lookup-1",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN UNAVAILABLE"
+        },
+        {
+          "stage": "lookup-2",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN UNAVAILABLE"
+        }
+      ]
+    },
+    {
+      "id": "same-key-different-request",
+      "localStatusBeforeLookup": "CANCELLED_OUTCOME_UNKNOWN",
+      "setupPosts": [
+        {
+          "key": "turn-1",
+          "body": "other-request"
+        }
+      ],
+      "receiverRecordsBeforeFaultInjection": [
+        {
+          "key": "turn-1",
+          "body": "other-request",
+          "ordinal": 1
+        }
+      ],
+      "lookupAdditionalPosts": 0,
+      "journalsAtAllCheckpoints": {
+        "intents": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "bytes": 108,
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "bytes": 105,
+          "sha256": "3fb1deff4e1ff92943791f5b9b7dd822370ba0de28cd09039fda1fc50e8d3a61"
+        },
+        "receipts": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "lookups": [
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 409,
+          "snapshot": "complete-v1",
+          "body": "CONFLICT\n",
+          "outcome": "RECONCILIATION_UNKNOWN CONFLICT",
+          "journalsUnchanged": true
+        },
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 409,
+          "snapshot": "complete-v1",
+          "body": "CONFLICT\n",
+          "outcome": "RECONCILIATION_UNKNOWN CONFLICT",
+          "journalsUnchanged": true
+        }
+      ],
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recover-cancelled",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        },
+        {
+          "stage": "lookup-1",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN CONFLICT"
+        },
+        {
+          "stage": "lookup-2",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN CONFLICT"
+        }
+      ]
+    },
+    {
+      "id": "lookup-times-out",
+      "localStatusBeforeLookup": "CANCELLED_OUTCOME_UNKNOWN",
+      "setupPosts": [
+        {
+          "key": "turn-1",
+          "body": "add-one"
+        }
+      ],
+      "receiverRecordsBeforeFaultInjection": [
+        {
+          "key": "turn-1",
+          "body": "add-one",
+          "ordinal": 1
+        }
+      ],
+      "lookupAdditionalPosts": 0,
+      "journalsAtAllCheckpoints": {
+        "intents": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "bytes": 108,
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "receipts": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "lookups": [
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": null,
+          "snapshot": null,
+          "body": null,
+          "outcome": "RECONCILIATION_UNKNOWN TIMEOUT",
+          "journalsUnchanged": true
+        },
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": null,
+          "snapshot": null,
+          "body": null,
+          "outcome": "RECONCILIATION_UNKNOWN TIMEOUT",
+          "journalsUnchanged": true
+        }
+      ],
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recover-cancelled",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        },
+        {
+          "stage": "lookup-1",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN TIMEOUT"
+        },
+        {
+          "stage": "lookup-2",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN TIMEOUT"
+        }
+      ]
+    },
+    {
+      "id": "http-success-with-incomplete-proof",
+      "localStatusBeforeLookup": "CANCELLED_OUTCOME_UNKNOWN",
+      "setupPosts": [
+        {
+          "key": "turn-1",
+          "body": "add-one"
+        }
+      ],
+      "receiverRecordsBeforeFaultInjection": [
+        {
+          "key": "turn-1",
+          "body": "add-one",
+          "ordinal": 1
+        }
+      ],
+      "lookupAdditionalPosts": 0,
+      "journalsAtAllCheckpoints": {
+        "intents": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "started": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "cancellations": {
+          "bytes": 108,
+          "sha256": "91d197a2a3715c3615e2a45723a6b71e3609b6dd8d0efd71d4f1fc7afe5da4f5"
+        },
+        "receiver": {
+          "bytes": 99,
+          "sha256": "ebbe030d01429b0c1d673927edbe33385265241d818af1f797dae74d83dde1b0"
+        },
+        "receipts": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "history": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "lookups": [
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 200,
+          "snapshot": "complete-v1",
+          "body": "EXECUTED",
+          "outcome": "RECONCILIATION_UNKNOWN INVALID_RESPONSE",
+          "journalsUnchanged": true
+        },
+        {
+          "method": "GET",
+          "path": "/effect-status",
+          "headers": {
+            "Idempotency-Key": "turn-1",
+            "X-Request-SHA256": "d80d9996ebaf30dcadfe7474518940e842231229efa97f8aa44b5f0a6311ba75"
+          },
+          "httpStatus": 200,
+          "snapshot": "complete-v1",
+          "body": "EXECUTED",
+          "outcome": "RECONCILIATION_UNKNOWN INVALID_RESPONSE",
+          "journalsUnchanged": true
+        }
+      ],
+      "processes": [
+        {
+          "stage": "intent",
+          "exit": 0,
+          "output": "1"
+        },
+        {
+          "stage": "interrupted-dispatch",
+          "exit": 23,
+          "output": ""
+        },
+        {
+          "stage": "cancel",
+          "exit": 0,
+          "output": "CANCELLATION_RECORDED"
+        },
+        {
+          "stage": "recover-cancelled",
+          "exit": 0,
+          "output": "CANCELLED_OUTCOME_UNKNOWN"
+        },
+        {
+          "stage": "lookup-1",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN INVALID_RESPONSE"
+        },
+        {
+          "stage": "lookup-2",
+          "exit": 0,
+          "output": "RECONCILIATION_UNKNOWN INVALID_RESPONSE"
+        }
+      ]
+    }
+  ]
+}

@@ -97,9 +97,11 @@ function Highlight({ text, query }: { text: string; query: string }) {
 
 export default function PassageSearch({
   query,
+  hasKeywords,
   onClose,
 }: {
   query: string;
+  hasKeywords: boolean;
   onClose: () => void;
 }) {
   const { sectionSearchUrl, locale } = useSite();
@@ -181,7 +183,7 @@ export default function PassageSearch({
             )}
           </button>
         </p>
-      ) : !query.trim() ? (
+      ) : !hasKeywords ? (
         <p>
           {t(
             "试试“缓存 更慢”“读取超时”或“MuJoCo 阻尼”。支持 type:doc 和 topic:llm。",

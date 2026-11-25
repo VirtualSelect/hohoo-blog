@@ -89,14 +89,67 @@ Rows three and four have the same local evidence: a dispatch marker, a cancellat
 
 The follow-up used macOS, JDK 8 and a loopback receiver. Cancellation and recovery are serialized, and a cancellation takes effect once it has been recorded under the lock. Interrupting an active request, compensating for a completed effect and reconciling a real service require separate tests.
 
-Run the following from the blog repository root. Use a companion repository that contains the commit listed in the next section and choose a new output directory. The script reads the pinned files from Git, checks their fingerprints and records the evidence for the same key on each recovery. The completed run is in `reports/java-cancellation-recovery-20261125.json` in the blog repository.
+### Inspect the archived run
+
+The report’s `cases` array records HTTP requests, journals and recovery checkpoints for all six cases. Use it to check each row of the table.
+
+[Run report](https://github.com/VirtualSelect/hohoo-blog/blob/07bc16aba4fb1b01e00743c21d5db5faf84d8e7c/reports/java-cancellation-recovery-20261125.json) · [Reproduction script](https://github.com/VirtualSelect/hohoo-blog/blob/07bc16aba4fb1b01e00743c21d5db5faf84d8e7c/scripts/research/java-cancellation/run.py) · [Frozen protocol](https://github.com/VirtualSelect/hohoo-blog/blob/07bc16aba4fb1b01e00743c21d5db5faf84d8e7c/scripts/research/java-cancellation/protocol.json) · [Companion source](https://github.com/VirtualSelect/hohoo-ai-lab/tree/0d4009cf840052c3111bbfc40dce900326daa3ae/demos/13-durable-dispatch)
+
+### Rerun the six cases in a fresh directory
+
+On macOS, install Git, Python 3 and JDK 8. Set `JAVA_HOME` to the JDK 8 directory containing `bin/java` and `bin/javac`. The command fetches both pinned commits and runs the study in a temporary directory. The script checks protocol and source fingerprints, and the experiment sends requests over loopback.
 
 ```bash
-python3 scripts/research/java-cancellation/run.py \
-  --repo /path/to/hohoo-ai-lab-study \
-  --java-home /path/to/jdk8 \
-  --run-dir /tmp/java-cancellation-study
+(
+  set -eu
+  : "${JAVA_HOME:?Set JAVA_HOME to your JDK 8 directory}"
+  study_dir="$(mktemp -d "${TMPDIR:-/tmp}/hohoo-java-cancellation.XXXXXX")"
+
+  git init -q "$study_dir/blog"
+  git -C "$study_dir/blog" fetch --depth 1 \
+    https://github.com/VirtualSelect/hohoo-blog.git \
+    07bc16aba4fb1b01e00743c21d5db5faf84d8e7c
+  git -C "$study_dir/blog" checkout FETCH_HEAD -- scripts/research/java-cancellation
+
+  git init -q "$study_dir/lab"
+  git -C "$study_dir/lab" fetch --depth 1 \
+    https://github.com/VirtualSelect/hohoo-ai-lab.git \
+    0d4009cf840052c3111bbfc40dce900326daa3ae
+
+  python3 "$study_dir/blog/scripts/research/java-cancellation/run.py" \
+    --repo "$study_dir/lab" \
+    --java-home "$JAVA_HOME" \
+    --run-dir "$study_dir/run"
+)
 ```
+
+On success, the terminal prints the new report’s full path and the results of all six cases. The report and raw journals are in the temporary `run` directory for comparison with the archived run.
+
+## How can we reconcile a cancelled intent with a read-only lookup?
+
+The next study starts from the two cases above that both show an unknown outcome locally. A separate loopback service uses HTTP GET to look up the original idempotency key and request digest. It opens the existing journal read-only and validates every record under a shared lock. A truncated tail makes the snapshot unavailable even if an earlier record matches. The client also checks the echoed key, request digest and completeness of the snapshot response.
+
+| Lookup condition | Outcome |
+| --- | --- |
+| The receiver executed the request and the digest matches the key | Execution confirmed |
+| A healthy, complete snapshot contains no matching key | No record at this receiver at query time |
+| The journal is missing or has a truncated tail | Outcome unknown |
+| The key belongs to a request with a different digest | Outcome unknown, with a recorded conflict |
+| The lookup times out or HTTP 200 carries incomplete evidence | Outcome unknown |
+
+Seven cases ran twice, with fresh server and client JVMs for each lookup. The observer recorded 14 GET requests and zero additional business POSTs during reconciliation. The bytes and existence of each of the six types of business journals were identical before and after every lookup. Confirming execution left the receipt and normal conversation history untouched. A no-record result describes only the complete snapshot at the local receiver when queried. Replicas, retention, compensation and interruption of active requests require separate tests.
+
+Run the following from the blog checkout containing this study. The companion repository must contain the pinned commit above, and `JAVA_HOME` must point to JDK 8. The script creates a fresh output directory, reproduces the faults and checks the journals. The seven archived cases are in `reports/java-cancellation-reconciliation-20261125.json`.
+
+```bash
+study_dir="$(mktemp -d "${TMPDIR:-/tmp}/hohoo-java-reconcile.XXXXXX")"
+python3 scripts/research/java-cancellation-reconciliation/run.py \
+  --repo /path/to/hohoo-ai-lab \
+  --java-home "$JAVA_HOME" \
+  --run-dir "$study_dir/run"
+```
+
+The next section reproduces the original Demo13 protocol on Windows.
 
 ## Reproduce the protocol
 

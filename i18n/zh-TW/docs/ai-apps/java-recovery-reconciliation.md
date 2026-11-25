@@ -91,14 +91,67 @@ Demo13 原版依序處理已持久化的意圖，恢復時只檢查意圖、回�
 
 補充實驗使用 macOS、JDK 8 和本機迴路接收端。撤銷與恢復依序執行，撤銷在鎖內寫入後才生效。執行中的請求能否中斷、已發生的效果能否補償，以及真實服務如何對帳，都需要另外驗證。
 
-從部落格儲存庫的根目錄執行下列指令。請準備包含下節所列提交的伴隨儲存庫，並使用尚未存在的輸出目錄。指令會從 Git 讀取固定版本並核對原始碼指紋，輸出每次恢復時同一個鍵的證據。已執行的紀錄存於儲存庫的 `reports/java-cancellation-recovery-20261125.json`。
+### 查看固定封存
+
+執行報告的 `cases` 收錄六種時序的 HTTP 請求、日誌和恢復檢查點，可逐列核對上表。
+
+[執行報告](https://github.com/VirtualSelect/hohoo-blog/blob/07bc16aba4fb1b01e00743c21d5db5faf84d8e7c/reports/java-cancellation-recovery-20261125.json) · [重現指令碼](https://github.com/VirtualSelect/hohoo-blog/blob/07bc16aba4fb1b01e00743c21d5db5faf84d8e7c/scripts/research/java-cancellation/run.py) · [凍結協定](https://github.com/VirtualSelect/hohoo-blog/blob/07bc16aba4fb1b01e00743c21d5db5faf84d8e7c/scripts/research/java-cancellation/protocol.json) · [配套原始碼](https://github.com/VirtualSelect/hohoo-ai-lab/tree/0d4009cf840052c3111bbfc40dce900326daa3ae/demos/13-durable-dispatch)
+
+### 在新目錄重跑六種時序
+
+在 macOS 上準備 Git、Python 3 和 JDK 8，將 `JAVA_HOME` 設為同時包含 `bin/java` 和 `bin/javac` 的 JDK 8 目錄。指令會下載兩個固定提交，並在暫存目錄重跑。程式會核對協定與原始碼指紋，實驗請求透過本機迴路傳送。
 
 ```bash
-python3 scripts/research/java-cancellation/run.py \
-  --repo /path/to/hohoo-ai-lab-study \
-  --java-home /path/to/jdk8 \
-  --run-dir /tmp/java-cancellation-study
+(
+  set -eu
+  : "${JAVA_HOME:?Set JAVA_HOME to your JDK 8 directory}"
+  study_dir="$(mktemp -d "${TMPDIR:-/tmp}/hohoo-java-cancellation.XXXXXX")"
+
+  git init -q "$study_dir/blog"
+  git -C "$study_dir/blog" fetch --depth 1 \
+    https://github.com/VirtualSelect/hohoo-blog.git \
+    07bc16aba4fb1b01e00743c21d5db5faf84d8e7c
+  git -C "$study_dir/blog" checkout FETCH_HEAD -- scripts/research/java-cancellation
+
+  git init -q "$study_dir/lab"
+  git -C "$study_dir/lab" fetch --depth 1 \
+    https://github.com/VirtualSelect/hohoo-ai-lab.git \
+    0d4009cf840052c3111bbfc40dce900326daa3ae
+
+  python3 "$study_dir/blog/scripts/research/java-cancellation/run.py" \
+    --repo "$study_dir/lab" \
+    --java-home "$JAVA_HOME" \
+    --run-dir "$study_dir/run"
+)
 ```
+
+成功後，終端機會輸出新報告的完整路徑與六種結果。新報告及原始日誌皆存放於暫存目錄下的 `run`，可與上方封存內容比較。
+
+## 撤銷後，如何唯讀對帳？
+
+接著檢驗上表中本機都顯示「結果未知」的兩種情形。另啟一個本機查詢服務，透過 HTTP GET 核對原本的冪等鍵與請求摘要。查詢以唯讀模式開啟現有帳本，並在共享鎖內驗證所有紀錄。如果帳本尾端截斷，即使前面已有符合的紀錄，仍會回報證據不可用。用戶端也會檢查回傳的鍵、請求摘要和快照結果是否完整。
+
+| 查詢條件 | 對帳結論 |
+| --- | --- |
+| 接收端已執行，同一個鍵的摘要相符 | 確認已執行 |
+| 健康的完整快照沒有紀錄 | 查詢時該接收端沒有紀錄 |
+| 帳本檔案不存在，或帳本尾端截斷 | 結果未知 |
+| 同一個鍵對應不同的請求摘要 | 結果未知，記錄衝突 |
+| 查詢逾時，或 HTTP 200 缺少完整證據 | 結果未知 |
+
+七種情形各以新的查詢服務和用戶端 JVM 重查兩次，共觀察到 14 次 GET。對帳階段新增的業務 POST 為 0。每次查詢前後，六類業務日誌的位元組內容與檔案存在狀態均一致。確認已執行後也沒有補寫回執或成功問答。查無紀錄只描述本機接收端在查詢當時的完整快照。真實服務的多副本、日誌保留、補償與執行中取消仍需另外驗證。
+
+在包含本節指令碼的部落格工作區根目錄執行以下指令。配套儲存庫需包含上方已固定的提交，並將 `JAVA_HOME` 指向 JDK 8。指令會建立新的輸出目錄，重現故障並核對日誌。七種情形的封存紀錄見 `reports/java-cancellation-reconciliation-20261125.json`。
+
+```bash
+study_dir="$(mktemp -d "${TMPDIR:-/tmp}/hohoo-java-reconcile.XXXXXX")"
+python3 scripts/research/java-cancellation-reconciliation/run.py \
+  --repo /path/to/hohoo-ai-lab \
+  --java-home "$JAVA_HOME" \
+  --run-dir "$study_dir/run"
+```
+
+下節重現 Windows 上的原版 Demo13 協定。
 
 ## 最小重現與排錯
 

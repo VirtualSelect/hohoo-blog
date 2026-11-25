@@ -1,5 +1,6 @@
 import sanitize from "sanitize-html";
 import { createHash } from "node:crypto";
+import { isPassageSearchType } from "./section-search-scope.mjs";
 const hash = (text) => createHash("sha256").update(text).digest("hex");
 
 function plain(html) {
@@ -94,7 +95,7 @@ export function buildSearchSections(documents, entries) {
     entries
       .filter(
         (entry) =>
-          ["doc", "blog"].includes(entry.type) &&
+          isPassageSearchType(entry.type) &&
           entry.status === "published" &&
           entry.translationStatus !== "MISSING",
       )

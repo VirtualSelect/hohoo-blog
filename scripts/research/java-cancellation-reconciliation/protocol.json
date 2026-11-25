@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "date": "2026-11-25",
+  "baselineCommit": "07bc16aba4fb1b01e00743c21d5db5faf84d8e7c",
+  "baselineSha256LF": {
+    "protocol.json": "37389f71a47b53945167c929299dc9cd714bd048f541dcbe5862b4fc57b171d6",
+    "CancellationStudy.java": "89b8e0fd7059335cc7087517dfe21d20d15e2dcb435dbb1615ea0135e2cc3409",
+    "run.py": "b4f7f576818f51b62ba49c79bd99f3ee1449c4a532f3e23d59bdee32dab1bc03"
+  },
+  "input": { "key": "turn-1", "body": "add-one" },
+  "conflictBody": "other-request",
+  "lookupsPerCase": 2,
+  "readTimeoutMs": 3000,
+  "faultReadTimeoutMs": 400,
+  "scope": "One key and a cooperative local receiver journal. Each lookup starts a fresh server and client JVM. No compensation, live in-flight interruption, distributed consistency or retention behavior is inferred.",
+  "cases": [
+    {
+      "id": "executed-before-receipt",
+      "setup": "delivery",
+      "fault": "none",
+      "httpStatus": 200,
+      "output": "RECONCILED_EXECUTED 1"
+    },
+    {
+      "id": "healthy-snapshot-with-no-record",
+      "setup": "start",
+      "fault": "empty-snapshot",
+      "httpStatus": 200,
+      "output": "RECONCILED_NO_RECORD"
+    },
+    {
+      "id": "missing-receiver-snapshot",
+      "setup": "start",
+      "fault": "none",
+      "httpStatus": 503,
+      "output": "RECONCILIATION_UNKNOWN UNAVAILABLE"
+    },
+    {
+      "id": "committed-snapshot-with-truncated-tail",
+      "setup": "delivery",
+      "fault": "truncated-snapshot",
+      "httpStatus": 503,
+      "output": "RECONCILIATION_UNKNOWN UNAVAILABLE"
+    },
+    {
+      "id": "same-key-different-request",
+      "setup": "start",
+      "fault": "conflict",
+      "httpStatus": 409,
+      "output": "RECONCILIATION_UNKNOWN CONFLICT"
+    },
+    {
+      "id": "lookup-times-out",
+      "setup": "delivery",
+      "fault": "timeout",
+      "httpStatus": null,
+      "output": "RECONCILIATION_UNKNOWN TIMEOUT"
+    },
+    {
+      "id": "http-success-with-incomplete-proof",
+      "setup": "delivery",
+      "fault": "incomplete-proof",
+      "httpStatus": 200,
+      "output": "RECONCILIATION_UNKNOWN INVALID_RESPONSE"
+    }
+  ]
+}

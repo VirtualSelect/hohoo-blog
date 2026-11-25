@@ -1045,10 +1045,19 @@ html[data-theme="dark"] .brand-logo .brand-logo-dark {
   gap: 8px;
   margin: 12px 0;
 }
-.search-modes button {
+.search-modes button,
+.search-filter-clear {
   min-height: 44px;
   padding: 8px 12px;
   border: 1px solid var(--hh-border);
+}
+.search-filter-note {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.search-filter-note:not(:empty),
+.search-filter-clear {
+  margin-bottom: 8px;
 }
 .search-modes button[aria-pressed="true"] {
   color: var(--hh-accent);

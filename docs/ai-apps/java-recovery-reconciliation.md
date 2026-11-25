@@ -91,14 +91,67 @@ Demo13 原版串行处理已持久化的意图，恢复时只看意图、回执�
 
 补充实验使用 macOS、JDK 8 和本机回环接收端。撤销与恢复串行；撤销在锁内写入后才生效。运行中的请求能否被中断、已经发生的效果能否补偿，以及真实服务如何对账，都需要另行验证。
 
-从博客仓库根目录运行下列命令。准备一份包含下节所列提交的伴随仓库，并选择一个尚不存在的输出目录。脚本从 Git 读取固定版本并核对源码指纹，输出每次恢复的同键证据。已运行的记录见仓库中的 `reports/java-cancellation-recovery-20261125.json`。
+### 查看固定归档
+
+运行报告里的 `cases` 包含六种时序的 HTTP 请求、日志和每次恢复的检查点，可对照上表逐项核验。
+
+[运行报告](https://github.com/VirtualSelect/hohoo-blog/blob/07bc16aba4fb1b01e00743c21d5db5faf84d8e7c/reports/java-cancellation-recovery-20261125.json) · [复现脚本](https://github.com/VirtualSelect/hohoo-blog/blob/07bc16aba4fb1b01e00743c21d5db5faf84d8e7c/scripts/research/java-cancellation/run.py) · [冻结协议](https://github.com/VirtualSelect/hohoo-blog/blob/07bc16aba4fb1b01e00743c21d5db5faf84d8e7c/scripts/research/java-cancellation/protocol.json) · [配套源码](https://github.com/VirtualSelect/hohoo-ai-lab/tree/0d4009cf840052c3111bbfc40dce900326daa3ae/demos/13-durable-dispatch)
+
+### 在新目录重跑六种时序
+
+在 macOS 上准备 Git、Python 3 和 JDK 8，将 `JAVA_HOME` 设为同时包含 `bin/java` 和 `bin/javac` 的 JDK 8 目录。命令下载两个固定提交，在临时目录重跑。脚本核对协议和源码指纹，实验请求走本机回环。
 
 ```bash
-python3 scripts/research/java-cancellation/run.py \
-  --repo /path/to/hohoo-ai-lab-study \
-  --java-home /path/to/jdk8 \
-  --run-dir /tmp/java-cancellation-study
+(
+  set -eu
+  : "${JAVA_HOME:?Set JAVA_HOME to your JDK 8 directory}"
+  study_dir="$(mktemp -d "${TMPDIR:-/tmp}/hohoo-java-cancellation.XXXXXX")"
+
+  git init -q "$study_dir/blog"
+  git -C "$study_dir/blog" fetch --depth 1 \
+    https://github.com/VirtualSelect/hohoo-blog.git \
+    07bc16aba4fb1b01e00743c21d5db5faf84d8e7c
+  git -C "$study_dir/blog" checkout FETCH_HEAD -- scripts/research/java-cancellation
+
+  git init -q "$study_dir/lab"
+  git -C "$study_dir/lab" fetch --depth 1 \
+    https://github.com/VirtualSelect/hohoo-ai-lab.git \
+    0d4009cf840052c3111bbfc40dce900326daa3ae
+
+  python3 "$study_dir/blog/scripts/research/java-cancellation/run.py" \
+    --repo "$study_dir/lab" \
+    --java-home "$JAVA_HOME" \
+    --run-dir "$study_dir/run"
+)
 ```
+
+成功后终端会输出新报告的完整路径及六种结果。新报告和原始日志保存在临时目录下的 `run`，可与上方归档对照。
+
+## 撤销后，怎样只读对账？
+
+接着检验上表中本地都显示「结果未知」的两种情况。另起一个本机查询服务，通过 HTTP GET 核对原幂等键与请求摘要。查询以只读模式打开现有账本，在共享锁内验证全部记录。遇到截断尾部时，即使前面已有匹配记录，也返回证据不可用。客户端还检查响应是否回显原键和摘要，以及是否提供完整的快照结果。
+
+| 查询条件 | 对账结论 |
+| --- | --- |
+| 接收端已执行，同键摘要匹配 | 确认已执行 |
+| 健康的完整快照没有记录 | 查询时该接收端无记录 |
+| 没有账本文件，或账本尾部截断 | 结果未知 |
+| 同键对应不同的请求摘要 | 结果未知，记录冲突 |
+| 查询超时，或 HTTP 200 缺少完整结果 | 结果未知 |
+
+七种情形各用新的查询服务和客户端 JVM 重查两次，共观察到 14 次 GET。对账阶段新增的业务 POST 为 0。每次查询前后，六类业务日志的字节内容与文件存在状态均一致。确认执行后也没有补写回执或成功问答。查无记录只描述本机接收端在查询时的完整快照。真实服务的多副本、日志保留、补偿与运行中取消仍需另行验证。
+
+在包含本节脚本的博客工作区根目录运行以下命令。配套仓库需包含上方已固定的提交，`JAVA_HOME` 指向 JDK 8。脚本会创建新输出目录，重现故障并核对日志。七种情形的归档记录见 `reports/java-cancellation-reconciliation-20261125.json`。
+
+```bash
+study_dir="$(mktemp -d "${TMPDIR:-/tmp}/hohoo-java-reconcile.XXXXXX")"
+python3 scripts/research/java-cancellation-reconciliation/run.py \
+  --repo /path/to/hohoo-ai-lab \
+  --java-home "$JAVA_HOME" \
+  --run-dir "$study_dir/run"
+```
+
+下节复现 Windows 上的原版 Demo13 协议。
 
 ## 最小复现与排错
 

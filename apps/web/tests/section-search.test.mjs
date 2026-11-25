@@ -5,6 +5,7 @@ import {
   createSectionSearcher,
   passageExcerpt,
 } from "../lib/section-search.mjs";
+import { inspectPassageQuery } from "../lib/section-search-scope.mjs";
 import { buildSearchSections } from "../lib/search-sections-build.mjs";
 
 function prose(html) {
@@ -161,6 +162,77 @@ test("Chinese body terms, English terms, filters and empty matches are handled w
   );
   assert.match(excerpt, /读取超时/);
   assert(excerpt.length < 245);
+});
+
+test("passage scope identifies incompatible types and cleans only those filters", () => {
+  assert.deepEqual(inspectPassageQuery("type:paper"), {
+    unsupportedTypes: ["paper"],
+    onlyUnsupportedTypes: true,
+    queryWithoutUnsupportedTypes: "",
+    hasKeywords: false,
+  });
+  assert.deepEqual(
+    inspectPassageQuery(
+      "  TYPE:PAPER  MuJoCo type:DoC Type:Radar  type:paper type:blog topic:embodied  ",
+    ),
+    {
+      unsupportedTypes: ["paper", "radar"],
+      onlyUnsupportedTypes: false,
+      queryWithoutUnsupportedTypes: "MuJoCo type:DoC type:blog topic:embodied",
+      hasKeywords: true,
+    },
+  );
+  assert.deepEqual(inspectPassageQuery("type:doc topic:llm"), {
+    unsupportedTypes: [],
+    onlyUnsupportedTypes: false,
+    queryWithoutUnsupportedTypes: "type:doc topic:llm",
+    hasKeywords: false,
+  });
+  assert.deepEqual(
+    inspectPassageQuery("topic:embodied TYPE:PAPER type:paper"),
+    {
+      unsupportedTypes: ["paper"],
+      onlyUnsupportedTypes: true,
+      queryWithoutUnsupportedTypes: "topic:embodied",
+      hasKeywords: false,
+    },
+  );
+});
+
+test("removing incompatible types recovers results without changing supported passage matches", () => {
+  for (const locale of ["zh-CN", "zh-TW", "en"]) {
+    const { sectionSearchUrl } = JSON.parse(
+      fs.readFileSync(
+        new URL(`../generated/${locale}.json`, import.meta.url),
+        "utf8",
+      ),
+    );
+    const search = createSectionSearcher(
+      JSON.parse(
+        fs.readFileSync(
+          new URL("../public" + sectionSearchUrl, import.meta.url),
+          "utf8",
+        ),
+      ),
+    );
+    const blocked = "MuJoCo type:paper";
+    assert.deepEqual(search(blocked), [], locale);
+    const recovered = search(
+      inspectPassageQuery(blocked).queryWithoutUnsupportedTypes,
+    );
+    assert(recovered.length > 0, locale);
+
+    const mixed = "MuJoCo type:paper type:doc type:blog topic:embodied";
+    const retained = search(mixed);
+    assert(retained.length > 0, locale);
+    assert.deepEqual(
+      search(inspectPassageQuery(mixed).queryWithoutUnsupportedTypes).map(
+        ({ id }) => id,
+      ),
+      retained.map(({ id }) => id),
+      locale,
+    );
+  }
 });
 
 for (const locale of ["zh-CN", "zh-TW", "en"]) {
