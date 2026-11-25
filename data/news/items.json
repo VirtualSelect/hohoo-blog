@@ -1,5 +1,51 @@
 [
   {
+    "id": "4eff7b76a6e7eea42ed3",
+    "title": "Anthropic 发布 Siren 评估：Claude 在弱沙盒中 21-32% 场景会越界访问",
+    "url": "https://aihot.news/items/gat7lwf755dyryyd45gvlesxz",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-24T21:32:51.000Z",
+    "collectedAt": "2026-11-25T01:01:58.144Z",
+    "category": "ai-apps",
+    "summary": "Anthropic 发布新安全评估 Siren，让 Claude 在故意削弱的沙盒中执行日常任务，并把有用资源放在沙盒外。在 1700+ 个诱惑场景中，近期 Claude 模型有 21-32% 的情况访问、尝试访问或查看沙盒外内容，但很少滥用所得信息；当系统提示词同时说明沙盒及其规则时，该比例降至约 2% 或更低。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/AnthropicAI/status/2125341904644763678",
+    "feedContentStatus": "full",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-733c69ea",
+    "coverage": [],
+    "feedContent": {
+      "format": "aihot-rss-text-v1",
+      "language": "zh-CN",
+      "capturedAt": "2026-11-25T01:01:58.144Z",
+      "paragraphs": [
+        "Anthropic 新研究：当 AI 智能体能够逃离其沙箱时，它会选择这样做吗？",
+        "我们的新评估 Siren 在故意削弱的沙箱中给 Claude 布置日常任务，同时把对任务有用的东西留在沙箱之外。在 1,700 多个为引诱它们而构建的场景中，近期的 Claude 模型有 21-32% 的时间访问、尝试访问或查看沙箱之外，但它们很少滥用所发现的内容。然而，当系统提示同时描述沙箱及其规则时，这一比例降至约 2% 或更低。",
+        "我们还使用 Siren 来校准 Claude Code 的自动模式，该模式会在命令运行前进行检查，使 Claude 无需在每一步都请求许可即可工作。",
+        "阅读我们的博客了解更多细节： safeguards.anthropic.com/2026…",
+        "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/gat7lwf755dyryyd45gvlesxz"
+      ]
+    }
+  },
+  {
+    "id": "e38a2338c6bcaa42451a",
+    "title": "ChinaTalk 分析 BIS 租赁算力新规或为美国换取约六个月算力领先",
+    "url": "https://aihot.news/items/yz5va6l60tfkmdampmsiz0jq2",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-24T10:58:57.000Z",
+    "collectedAt": "2026-11-25T01:01:58.144Z",
+    "category": "llm",
+    "summary": "作者分析美国 BIS 于11月16日发布、11月19日生效的租赁算力临时最终规则，该规则要求向境外数据中心供应芯片需申领许可，门槛约为760块 H100 等效算力，覆盖 Hopper 和 Blackwell 级芯片，并关闭 Foundry Due-Diligence 漏洞。作者基于自建测算模型给出规则执行率与延迟月数的量化区间，并梳理柔佛数据中心和执法…",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://www.chinatalk.media/p/the-remote-access-rule-will-slow",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-dccc2051",
+    "coverage": []
+  },
+  {
     "id": "960e34aed45616aa2e0a",
     "title": "OpenAI 与 Cisco 发布开源 Linux 运行时 Shirudo，让 Agent 无停机防御系统",
     "url": "https://aihot.news/items/d41p6k2h48zm8u2kl5xdzqx5h",
@@ -30,6 +76,40 @@
         "—— 本文由 AIHOT 聚合整理，完整版与更多 AI 动态见 https://aihot.news/items/d41p6k2h48zm8u2kl5xdzqx5h"
       ]
     }
+  },
+  {
+    "id": "a45a74be0ab1f4619ff1",
+    "title": "Claude 月度回顾转正，artifact 可装为桌面应用，连接器文件传输开启 beta",
+    "url": "https://aihot.news/items/w9zx5w4dj1xhxvjylbijskshq",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-24T00:00:00.000Z",
+    "collectedAt": "2026-11-25T01:01:58.144Z",
+    "category": "ai-apps",
+    "summary": "Claude 应用发布说明宣布三项更新：月度回顾（Reflect）在 Web、桌面端和移动端对 Free、Pro、Max、Ultra 套餐转正，可纳入 Claude Code 会话和云端 Cowork 任务并支持删除。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://support.claude.com/en/articles/12138966-release-notes#h_21ad83d886",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-135fe737",
+    "coverage": []
+  },
+  {
+    "id": "e91f6529380ae150fd38",
+    "title": "Anthropic 为 Claude 推出 Skills over MCP 公测及 Tasks、Elicitation 等更新",
+    "url": "https://aihot.news/items/kjd2qp2iuk9zxdfqj5qk2a8f9",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-24T00:00:00.000Z",
+    "collectedAt": "2026-11-25T01:01:58.144Z",
+    "category": "ai-apps",
+    "summary": "Anthropic 宣布 Skills over MCP 在 Claude 与 Claude Code 进入公开测试，MCP 服务器可在工具之外发布技能，按需加载以降低上下文占用。",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://claude.com/blog/skills-over-mcp-tasks-and-more",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-95a1aab2",
+    "coverage": []
   },
   {
     "id": "fc3293cbc95dfcce40e3",
