@@ -1,5 +1,22 @@
 [
   {
+    "id": "b750cc3d48c4131973c4",
+    "title": "Karpathy 用 Claude Code 和 Opus 5.5 把美国真实数据做成文明风格游戏地图",
+    "url": "https://aihot.news/items/gc4qp85ij5qzhu53qzkg8quqj",
+    "sourceId": "aihot",
+    "sourceName": "AIHOT",
+    "publishedAt": "2026-11-26T16:44:47.000Z",
+    "collectedAt": "2026-11-26T23:15:00.963Z",
+    "category": "ai-apps",
+    "summary": "Karpathy 分享用 Claude Code 桌面版加 Opus 5.5（开启 ultracode）构建的美国文明风格游戏地图，7 小时生成 45K 行代码，整合 Census、BEA、BLS、EIA、NOAA 等 31 个真实数据源，统一到 25 km 六边形网格。GDP 映射为金产量、城市按真实产业分化，含 19 个视图、524 个都市的 Ci…",
+    "summaryKind": "source-excerpt",
+    "sourceArticleUrl": "https://x.com/adocomplete/status/2125994186252161315",
+    "feedContentStatus": "summary-only",
+    "relevanceReason": "研究主题匹配且包含技术信息",
+    "eventId": "event-bfb673b6",
+    "coverage": []
+  },
+  {
     "id": "38457af7643b9f513982",
     "title": "Anthropic 平台工程负责人 Katelyn Lesse 谈 2026 年如何用 Claude 构建软件",
     "url": "https://aihot.news/items/rnanzlnaqxdr2icjqw0qwv9la",
