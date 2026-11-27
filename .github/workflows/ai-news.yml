@@ -15,8 +15,8 @@ on:
       - 'apps/web/package.json'
       - 'apps/web/package-lock.json'
   schedule:
-    # Every two hours, at minute 35; daily caps are shared across all runs.
-    - cron: '35 */2 * * *'
+    # Off-hour retry opportunities. Schedule checks keep real collection near two hours apart.
+    - cron: '17,47 * * * *'
   workflow_dispatch:
     inputs:
       window_hours:
@@ -29,8 +29,31 @@ concurrency:
   group: ai-news-collection
   cancel-in-progress: false
 jobs:
+  schedule-check:
+    if: github.event_name == 'schedule' && vars.NEWS_ENABLED != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      should_collect: ${{ steps.check.outputs.should_collect }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+      - name: Check recent successful collection
+        id: check
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: node scripts/news/schedule.mjs
   collect:
-    if: vars.NEWS_ENABLED != 'false'
+    needs: schedule-check
+    if: ${{ !cancelled() && vars.NEWS_ENABLED != 'false' && (github.event_name != 'schedule' || needs.schedule-check.outputs.should_collect != 'false') }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:

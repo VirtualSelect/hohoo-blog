@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { decideScheduledCollection } from "../scripts/news/schedule.mjs";
 import {
   radarSnapshot,
   isRadarSnapshot,
@@ -157,7 +158,9 @@ test("same archive across main/site and zero-new successful run does not become 
     report.siteSnapshot.value.latestCollectedAt,
     "2026-11-11T09:48:49.000Z",
   );
-  assert.match(formatNewsStatus(report), /零新增可能是去重或筛选/);
+  const status = formatNewsStatus(report);
+  assert.match(status, /最近资讯工作流/);
+  assert.match(status, /零新增可能是去重或筛选/);
   assert.ok(
     calls.some((call) =>
       call.url.includes(`/` + sha + `/data/news/items.json`),
@@ -225,4 +228,149 @@ test("origin input rejects credentials, arbitrary paths and non-loopback plainte
   ])
     assert.throws(() => siteOrigin(value));
   assert.equal(siteOrigin("http://127.0.0.1:4216"), "http://127.0.0.1:4216");
+});
+
+const scheduleTime = Date.parse("2026-11-27T08:30:00Z");
+const scheduleRepo = "VirtualSelect/hohoo-blog";
+const workflowPrefix = `/repos/${scheduleRepo}/actions`;
+const scheduledRun = (id, extra = {}) => ({
+  id,
+  conclusion: "success",
+  status: "completed",
+  head_branch: "main",
+  event: "schedule",
+  created_at: "2026-11-27T07:30:00Z",
+  run_started_at: "2026-11-27T07:31:00Z",
+  updated_at: "2026-11-27T07:40:00Z",
+  ...extra,
+});
+
+const collectorJob = (
+  startedAt = "2026-11-27T07:32:00Z",
+  stepConclusion = "success",
+  jobConclusion = "success",
+) => ({
+  name: "collect",
+  status: "completed",
+  conclusion: jobConclusion,
+  started_at: "2026-11-27T07:31:00Z",
+  steps: [
+    {
+      name: "Collect a filtered batch",
+      status: "completed",
+      conclusion: stepConclusion,
+      started_at: startedAt,
+    },
+  ],
+});
+
+function scheduleFixture(runs, jobsByRun = {}, failures = {}) {
+  const calls = [];
+  const fetcher = async (input, options = {}) => {
+    const url = new URL(input);
+    calls.push(url.pathname);
+    assert.equal(url.origin, "https://api.github.com");
+    assert.equal(options.method || "GET", "GET");
+    if (url.pathname === `${workflowPrefix}/workflows/ai-news.yml/runs`) {
+      assert.equal(url.searchParams.get("branch"), "main");
+      if (failures.runs) return new Response(null, { status: failures.runs });
+      return Response.json({ total_count: runs.length, workflow_runs: runs });
+    }
+    const match = url.pathname.match(
+      /\/runs\/(\d+)(?:\/attempts\/\d+)?\/jobs$/,
+    );
+    assert.ok(match, `Unexpected API path ${url.pathname}`);
+    if (failures.jobs) throw Error("Job history unavailable");
+    const jobs = jobsByRun[match[1]] || [];
+    return Response.json({ total_count: jobs.length, jobs });
+  };
+  return {
+    calls,
+    decide: () =>
+      decideScheduledCollection({
+        repository: scheduleRepo,
+        branch: "main",
+        runId: 999,
+        token: "test-token",
+        now: scheduleTime,
+        fetcher,
+      }),
+  };
+}
+
+test("scheduled opportunities count a successful manual collection even with no selected items", async () => {
+  const startedAt = "2026-11-27T07:32:00Z";
+  const { decide } = scheduleFixture(
+    [scheduledRun(31, { event: "workflow_dispatch" })],
+    { 31: [collectorJob(startedAt)] },
+  );
+  const decision = await decide();
+  assert.equal(decision.collect, false);
+  assert.equal(decision.reason, "recent-collection");
+  assert.equal(decision.lastRunId, 31);
+  assert.equal(Date.parse(decision.lastStartedAt), Date.parse(startedAt));
+});
+
+test("scheduled opportunities ignore a skipped collection and still recognize the previous actual success", async () => {
+  const { decide, calls } = scheduleFixture(
+    [scheduledRun(42), scheduledRun(41)],
+    {
+      42: [collectorJob(null, "skipped")],
+      41: [collectorJob("2026-11-27T07:00:00Z")],
+    },
+  );
+  const decision = await decide();
+  assert.equal(decision.collect, false);
+  assert.equal(decision.reason, "recent-collection");
+  assert.equal(decision.lastRunId, 41);
+  assert.ok(calls.some((path) => /\/runs\/42(?:\/|$)/.test(path)));
+});
+
+test("scheduled opportunities recover when only current, skipped or failed runs are available", async () => {
+  const { decide, calls } = scheduleFixture(
+    [
+      scheduledRun(999),
+      scheduledRun(55, { conclusion: "failure" }),
+      scheduledRun(54),
+      scheduledRun(53),
+      scheduledRun(52),
+    ],
+    {
+      999: [collectorJob()],
+      55: [collectorJob()],
+      54: [collectorJob(undefined, "failure")],
+      53: [collectorJob(undefined, "success", "failure")],
+      52: [collectorJob(null, "skipped")],
+    },
+  );
+  assert.deepEqual(await decide(), {
+    collect: true,
+    reason: "no-recent-collection",
+  });
+  assert.ok(calls.every((path) => !/\/runs\/999(?:\/|$)/.test(path)));
+});
+
+test("scheduled freshness is bounded by the actual collector start time", async () => {
+  const run = scheduledRun(61);
+  const beforeLimit = scheduleFixture([run], {
+    61: [collectorJob("2026-11-27T06:35:01Z")],
+  });
+  const afterLimit = scheduleFixture([run], {
+    61: [collectorJob("2026-11-27T06:34:59Z")],
+  });
+  assert.equal((await beforeLimit.decide()).collect, false);
+  assert.deepEqual(await afterLimit.decide(), {
+    collect: true,
+    reason: "no-recent-collection",
+  });
+});
+
+test("scheduled opportunities keep collection available when either history request fails", async () => {
+  for (const failures of [{ runs: 429 }, { jobs: true }]) {
+    const { decide } = scheduleFixture([scheduledRun(71)], {}, failures);
+    assert.deepEqual(await decide(), {
+      collect: true,
+      reason: "history-unavailable",
+    });
+  }
 });

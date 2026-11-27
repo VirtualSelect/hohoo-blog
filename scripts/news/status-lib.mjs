@@ -165,10 +165,11 @@ export function formatNewsStatus(report) {
     `远端 main：${available(report.remote, (r) => snapshotLine(r.snapshot) + "；提交 " + r.commit.slice(0, 12))}`,
     `网站快照：${available(report.siteSnapshot, snapshotLine)}`,
     `网站 RSS：${available(report.rss, (r) => `${r.signalCount} 条聚合信号；最新 feed 日期 ${r.latestFeedPublishedAt || "无"}`)}`,
-    `最近采集任务：${available(report.workflow, (r) => `${r.status} / ${r.conclusion || "尚无结论"}；${r.startedAt}\n${r.url}`)}`,
+    `最近资讯工作流：${available(report.workflow, (r) => `${r.status} / ${r.conclusion || "尚无结论"}；${r.startedAt}\n${r.url}`)}`,
     `数据比对：本地与 main ${names[report.comparisons.localToMain]}；main 与网站 ${names[report.comparisons.mainToSite]}`,
     `网站快照与 RSS 摘要：${{ "same-summary": "条数和最新日期相同", "different-summary": "条数或最新日期不同，需进一步检查", unknown: "无法核实" }[report.comparisons.siteToRss]}`,
     "快照指纹只代表归档数据，不代表代码版本或最近扫描时间。RSS 的条数和日期只是摘要核对，不能证明内容完全一致。",
+    "工作流可能因采集间隔保护跳过。实际读取来源请查看采集步骤和报告。",
     "零新增可能是去重或筛选结果；任务成功不等于有新条目。详情查看该次 Actions 报告。此命令不会拉取合并、补采或发布。",
   ].join("\n");
 }
