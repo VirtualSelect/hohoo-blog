@@ -1,7 +1,8 @@
 // A source excerpt with provenance, never a generated answer or an instruction.
 export function passageCitation(passage, indexUrl, locale = "zh-CN") {
+  const articlePath = /^\/(?:en\/|zh-TW\/)?(?:docs|blog)\/[^?]+$/;
   if (
-    !/^\/(?:en\/|zh-TW\/)?(?:docs|blog)\/[^?]+$/.test(passage.href) ||
+    !articlePath.test(passage.href) ||
     !/^\/search\/(?:zh-CN|zh-TW|en)-[a-f0-9]{16}\.json$/.test(indexUrl) ||
     !/^[a-f0-9]{64}$/.test(passage.contentHash || "")
   )
@@ -9,6 +10,8 @@ export function passageCitation(passage, indexUrl, locale = "zh-CN") {
   const source = new URL(passage.href, "https://huhohoo.com");
   if (source.origin !== "https://huhohoo.com")
     throw new Error("External citation source");
+  if (!articlePath.test(source.pathname))
+    throw new Error("Invalid citation provenance");
   const label =
     locale === "en"
       ? [
